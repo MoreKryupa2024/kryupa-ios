@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.20937026933-ks2bbaqonss1glcivlhbfrg6k3aearku</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>PlusJakartaDisplay-Bold.otf</string>
+		<string>PlusJakartaDisplay-Light.otf</string>
+		<string>PlusJakartaDisplay-Medium.otf</string>
+		<string>PlusJakartaDisplay-Regular.otf</string>
+		<string>Besley-Regular.ttf</string>
+		<string>Besley-Medium.ttf</string>
+		<string>Besley-SemiBold.ttf</string>
+		<string>Besley-Italic..ttf</string>
+		<string>Besley-Bold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+	</array>
+</dict>
+</plist>
