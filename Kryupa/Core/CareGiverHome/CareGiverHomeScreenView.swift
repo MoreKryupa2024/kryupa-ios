@@ -3,8 +3,8 @@
 //  Kryupa
 //
 //  Created by Hemant Singh Rajput on 30/05/24.
-// GIT
-//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
+// 
+//
 
 import SwiftUI
 
