@@ -35,6 +35,7 @@
 		BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */; };
 		BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC072BFDD88C00175566 /* Defaults.swift */; };
 		BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC092BFDDE5600175566 /* APIClient.swift */; };
+		BE5156612C11C23800A22169 /* DropDownWithCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */; };
 		BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E2E2BF495D800A6781F /* KryupaApp.swift */; };
 		BE644E312BF495D800A6781F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E302BF495D800A6781F /* SplashView.swift */; };
 		BE644E332BF495D900A6781F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE644E322BF495D900A6781F /* Assets.xcassets */; };
@@ -59,6 +60,8 @@
 		BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */; };
 		BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */; };
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
+		BE88E9E52C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */; };
+		BE88E9E72C11D63D00BE0A62 /* CareGiverDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */; };
 		BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */; };
 		BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */; };
 		BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */; };
@@ -121,6 +124,7 @@
 		BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginScreenViewModel.swift; sourceTree = "<group>"; };
 		BE50EC072BFDD88C00175566 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		BE50EC092BFDDE5600175566 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownWithCheckBoxView.swift; sourceTree = "<group>"; };
 		BE644E2B2BF495D800A6781F /* Kryupa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kryupa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE644E2E2BF495D800A6781F /* KryupaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KryupaApp.swift; sourceTree = "<group>"; };
 		BE644E302BF495D800A6781F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 		BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverHomeScreenView.swift; sourceTree = "<group>"; };
 		BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationScreenViewModel.swift; sourceTree = "<group>"; };
 		BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPTextFieldView.swift; sourceTree = "<group>"; };
+		BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
+		BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverDetailModel.swift; sourceTree = "<group>"; };
 		BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSeekerHomeScreenView.swift; sourceTree = "<group>"; };
 		BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCaregiverView.swift; sourceTree = "<group>"; };
 		BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingFormScreenView.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */,
+				BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */,
 			);
 			path = RecommendedGiverDetail;
 			sourceTree = "<group>";
@@ -397,6 +404,7 @@
 				BE92FD1F2C09E10800EDF49C /* BookingFormScreenModel.swift */,
 				BEC6B9F72C0F261300744C60 /* BookingRecommendationModel.swift */,
 				BEC6B9FC2C0F2B7000744C60 /* CreateBookingModel.swift */,
+				BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -569,6 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				BE4FBDBA2BFB96CD003442BB /* DropDownView.swift */,
+				BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */,
 				BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */,
 				BE4FBD9D2BFB0FD7003442BB /* PillView.swift */,
 				BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */,
@@ -700,6 +709,8 @@
 				BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */,
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
+				BE5156612C11C23800A22169 /* DropDownWithCheckBoxView.swift in Sources */,
+				BE88E9E52C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
@@ -711,6 +722,7 @@
 				BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
+				BE88E9E72C11D63D00BE0A62 /* CareGiverDetailModel.swift in Sources */,
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
 				BE11780C2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,

@@ -22,13 +22,13 @@ class SocialLoginScreenViewModel: ObservableObject{
         let config = GIDConfiguration(clientID: clientId)
         GIDSignIn.sharedInstance.configuration = config
         
-        GIDSignIn.sharedInstance.signIn(withPresenting: ApplicationUtility.rootViewController) { [weak self] signInResult, error in
+        GIDSignIn.sharedInstance.signIn(withPresenting: ApplicationUtility.rootViewController) { signInResult, error in
             
             if let error {
                 print(error.localizedDescription)
             }
             
-            guard let user = signInResult?.user, let idToken = user.idToken else { return }
+            guard let user = signInResult?.user, let _ = user.idToken else { return }
             
             
             let accessToken = user.accessToken.tokenString

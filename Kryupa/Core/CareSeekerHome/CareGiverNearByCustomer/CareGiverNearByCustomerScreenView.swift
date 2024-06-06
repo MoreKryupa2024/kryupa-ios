@@ -2,12 +2,13 @@
 //  CareGiverNearByCustomerScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 04/06/24.
+//  Created by Nirmal Singh Rajput on 04/06/24.
 //
 
 import SwiftUI
 
 struct CareGiverNearByCustomerScreenView: View {
+    @Environment(\.router) var router
     
     var bookingID: String = "90279ed1-9347-4e3d-a9ae-49e69b6c143b"//String()
     
@@ -27,6 +28,7 @@ struct CareGiverNearByCustomerScreenView: View {
                 .scrollIndicators(.hidden)
             }
         }
+        .modifier(DismissingKeyboard())
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             viewModel.getCareGiverNearByList(bookingID: bookingID)
@@ -41,7 +43,11 @@ struct CareGiverNearByCustomerScreenView: View {
             
             SearchView
             
-            BookingCareGiverListView(careGiverNearByList: viewModel.careGiverNearByList)
+            BookingCareGiverListView(onSelectedValue: { giver in
+                router.showScreen(.push) { rout in
+                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver)
+                }
+            }, careGiverNearByList: viewModel.careGiverNearByList)
                 .padding(.vertical,30)
                 .padding(.horizontal,24)
         }

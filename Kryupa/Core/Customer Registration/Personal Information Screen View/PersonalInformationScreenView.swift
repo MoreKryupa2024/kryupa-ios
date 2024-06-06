@@ -74,6 +74,11 @@ struct PersonalInformationScreenView: View {
                     genderDropdownView
                     
                     textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
+                        .onChange(of: viewModel.personalInfoData.ssn) {
+                            if (viewModel.personalInfoData.ssn?.count ?? 0) > 9{
+                                viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(9) ?? "")
+                            }
+                        }
                     
                     languageDropdownView
                     
@@ -173,6 +178,7 @@ struct PersonalInformationScreenView: View {
                     viewModel.personalInfoData.gender = value
                 }
         })
+        .padding(.bottom,-10)
     }
     
     private var languageDropdownView: some View{

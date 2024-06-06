@@ -19,7 +19,7 @@ struct IntroductionScreenView: View {
                 .resizable()
                 .frame(width: 305,height: 295)
             
-            Text("Personalized Care Solutions: Connect with trusted caregivers and care seekers in your area.")
+            Text("Connect with trusted caregivers and care seekers in your area.")
                 .font(.custom(FontContent.besMedium, size: 25))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal,24)

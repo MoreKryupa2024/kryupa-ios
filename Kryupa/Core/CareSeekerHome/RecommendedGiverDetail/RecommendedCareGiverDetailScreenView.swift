@@ -2,7 +2,7 @@
 //  RecommendedCareGiverDetailScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 05/06/24.
+//  Created by Nirmal Singh Rajput on 05/06/24.
 //
 
 import SwiftUI
@@ -11,9 +11,10 @@ import SwiftfulUI
 struct RecommendedCareGiverDetailScreenView: View {
     
     @Environment(\.router) var router
-    var options: [String] = ["Summary","Review"]
-    @State  var selection: String = "Summary"
+    
+    var careGiverDetail: CareGiverNearByCustomerScreenData?
     @Namespace private var namespace
+    @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -22,7 +23,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                 ScrollView{
                     ProfileView
                     SegmentView
-                    if selection == "Summary"{
+                    if viewModel.selection == "Summary"{
                         Text("Lorem ipsum dolor sit amet consectetur. Convallis a lobortis lectus augue cursus in diam. Vitae non egestas sed nulla sem cras ut. Arcu tellus erat duis integer vitae orci. Faucibus lacus id enim lorem sit. Commodo sed neque neque montes ridiculus.\n\nAdipiscing laoreet volutpat dolor volutpat tempor facilisis. Diam gravida gravida consequat ligula nunc donec semper. A orci enim bibendum lobortis aliquam amet nulla facilisis neque.\n\nEu nisi donec lacinia mi netus. Odio egestas gravida at quis. Faucibus nibh sit.")
                             .font(.custom(FontContent.plusRegular, size: 12))
                             .foregroundStyle(._444446)
@@ -35,8 +36,14 @@ struct RecommendedCareGiverDetailScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear{
+            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "")
+        }
     }
     
     private var ReViewList:some View{
@@ -47,7 +54,7 @@ struct RecommendedCareGiverDetailScreenView: View {
     
    private var SegmentView: some View {
         HStack(alignment: .top,spacing: 0){
-            ForEach(options,id: \.self){ option in
+            ForEach(viewModel.options,id: \.self){ option in
                 VStack(spacing: 8){
                     Text(option)
                         .font(.custom(FontContent.plusRegular, size: 15))
@@ -57,7 +64,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                         RoundedRectangle(cornerRadius: 1)
                             .frame(height: 1)
                             .foregroundStyle(._7_C_7_C_80)
-                        if selection == option{
+                        if viewModel.selection == option{
                             RoundedRectangle(cornerRadius: 1)
                                 .frame(height: 1.5)
                                 .foregroundStyle(.appMain)
@@ -66,15 +73,15 @@ struct RecommendedCareGiverDetailScreenView: View {
                     }
                 }
                 .padding(.top,8)
-                .foregroundStyle(selection == option ? .appMain : ._7_C_7_C_80)
+                .foregroundStyle(viewModel.selection == option ? .appMain : ._7_C_7_C_80)
                 .onTapGesture {
-                    selection = option
+                    viewModel.selection = option
                 }
             }
         }
         .padding(.horizontal,24)
         .padding(.top,31)
-        .animation(.smooth, value: selection)
+        .animation(.smooth, value: viewModel.selection)
     }
     
     private var ProfileView: some View{
@@ -98,10 +105,10 @@ struct RecommendedCareGiverDetailScreenView: View {
                 .frame(width: 138,height: 138)
             
             VStack(alignment:.center, spacing:5){
-                Text("Alexa Chatterjee")
+                Text(viewModel.giverDetail?.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                 
-                Text("5 Years Expirenced")
+                Text(viewModel.giverDetail?.yearOfExperience ?? "")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                 Text("$252")

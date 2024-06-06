@@ -2,18 +2,22 @@
 //  BookingCareGiverListView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 04/06/24.
+//  Created by Nirmal Singh Rajput on 04/06/24.
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct BookingCareGiverListView: View {
-    
+    var onSelectedValue: ((CareGiverNearByCustomerScreenData)->Void)? = nil
     var careGiverNearByList: [CareGiverNearByCustomerScreenData] = [CareGiverNearByCustomerScreenData]()
     var body: some View {
         VStack(spacing:0){
             ForEach(careGiverNearByList,id: \.id){ giver in
                 giverView(giver: giver)
+                    .asButton(.press) {
+                        onSelectedValue?(giver)
+                    }
                     .padding(.top,15)
             }
         }

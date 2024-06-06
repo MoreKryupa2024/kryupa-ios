@@ -2,7 +2,7 @@
 //  ReviewListView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 05/06/24.
+//  Created by Nirmal Singh Rajput on 05/06/24.
 //
 
 import SwiftUI

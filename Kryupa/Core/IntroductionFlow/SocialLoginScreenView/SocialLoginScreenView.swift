@@ -39,7 +39,7 @@ struct SocialLoginScreenView: View {
                 VStack(spacing: 10.0){
                     commonButton(imageName: "appleButton")
                         .asButton(.press) {
-                            navigateToMobileNumberView()
+//                            navigateToMobileNumberView()
                         }
                     commonButton(imageName: "googleButton")
                         .asButton(.press) {

@@ -329,6 +329,51 @@ class NetworkManager{
         task.resume()
     }
     
+    func getCareGiverDetails(giverId: String,completionHandler :  @escaping (Results<CareGiverDetailModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:"\(APIConstant.getCareGiverInCustomerDetails)\(giverId)") else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(CareGiverDetailModel.self, from: data)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getRelativeList(params:[String:Any]? = nil,completionHandler :  @escaping (Results<RelativeModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.getRelativeList) else {
