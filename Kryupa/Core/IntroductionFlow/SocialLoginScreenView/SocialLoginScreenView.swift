@@ -13,6 +13,13 @@ struct SocialLoginScreenView: View {
     @Environment(\.router) var router
     var userType: String = UserDefaults.standard.value(forKey: "user") as? String ?? ""
     @StateObject private var viewModel = SocialLoginScreenViewModel()
+    var title: String{
+        if userType == AppConstants.GiveCare{
+            return "Ready to Provide Care? Join our network of caregivers."
+        }else{
+            return "Your Path for Quality Care Starts Here! Register Now"
+        }
+    }
     
     var body: some View {
         ZStack{
@@ -22,12 +29,12 @@ struct SocialLoginScreenView: View {
                     .resizable()
                     .frame(width: 305,height: 295)
                 
-                Text("Lorem ipsum dolor sit amet consectetur.")
+                Text(title)
                     .font(.custom(FontContent.besMedium, size: 28))
                     .multilineTextAlignment(.center)
-                    .frame(width: 249)
                     .lineSpacing(0)
                     .padding(.top, 66)
+                    .padding(.horizontal, 24)
                 
                 VStack(spacing: 10.0){
                     commonButton(imageName: "appleButton")

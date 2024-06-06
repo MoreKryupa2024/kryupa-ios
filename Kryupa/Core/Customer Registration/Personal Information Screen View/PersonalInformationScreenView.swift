@@ -61,10 +61,11 @@ struct PersonalInformationScreenView: View {
                         title: "Date Of Birth",
                         placeHolder: "Select"
                     )
-                        .onTapGesture {
-                            viewModel.dateOfBirthSelected = true
-                            viewModel.showDatePicker = !viewModel.showDatePicker
-                        }
+                    .background()
+                    .asButton(){
+                        viewModel.dateOfBirthSelected = true
+                        viewModel.showDatePicker = !viewModel.showDatePicker
+                    }
                     
                     if viewModel.showDatePicker{
                         dateOfBirthPicker()
@@ -110,6 +111,7 @@ struct PersonalInformationScreenView: View {
         
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
+        .modifier(DismissingKeyboard())
     }
     
     //MARK: Send Code Button View
@@ -162,7 +164,7 @@ struct PersonalInformationScreenView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,20)
+            .padding(.bottom,10)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
@@ -183,7 +185,7 @@ struct PersonalInformationScreenView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,20)
+            .padding(.bottom,10)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,

@@ -102,12 +102,12 @@ struct ExperienceandSkillsView: View {
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
-            .modifier(DismissingKeyboard())
             
             if viewModel.isLoading{
                 LoadingView()
             }
         }
+        .modifier(DismissingKeyboard())
     }
     
     private var FileView: some View{
@@ -180,7 +180,7 @@ struct ExperienceandSkillsView: View {
             .foregroundStyle(.F_2_F_2_F_7)
             .frame(height: 1)
             .padding([.top,.bottom],15)
-            .padding(.leading,24)
+            .padding(.horizontal,24)
     }
     
     private var certificationDocumentsView: some View{
@@ -216,6 +216,10 @@ struct ExperienceandSkillsView: View {
             .fileImporter(isPresented: $viewModel.showFilePicker, allowedContentTypes: [.pdf]) { result in
                 do{
                     let fileUrl = try result.get()
+                    
+                    guard fileUrl.startAccessingSecurityScopedResource() else { // Notice this line right here
+                         return
+                    }
                     
                     let file = try Data(contentsOf: fileUrl)
                     
@@ -282,22 +286,40 @@ struct ExperienceandSkillsView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Years of Experience")
-            }
-            .font(.custom(FontContent.plusRegular, size: 16))
-            
-            ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 8, items: AppConstants.yearsOfExperienceArray) { experience in
-                    if let experience{
-                        PillView(
-                            isSelected: viewModel.exprienceAndSkillsData.yearsOfExprience == experience,
-                            name: experience
-                        )
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                
+                Spacer()
+                
+                HStack(spacing: 0){
+                    Text("-")
+                        .frame(width: 30,height: 30)
+                        .foregroundStyle(viewModel.yearsOfExprience == 0 ? .D_1_D_1_D_6 : .appMain)
                         .asButton(.press) {
-                            viewModel.exprienceAndSkillsData.yearsOfExprience = experience
+                            if viewModel.yearsOfExprience > 0 {
+                                viewModel.yearsOfExprience -= 1
+                                viewModel.exprienceAndSkillsData.yearsOfExprience = "\(viewModel.yearsOfExprience)"
+                            }
                         }
-                    }else{
-                        EmptyView()
-                    }
+                    TextField("0", text: $viewModel.exprienceAndSkillsData.yearsOfExprience.toUnwrapped(defaultValue: "0").max(2))
+                        .frame(width: 30,height: 30)
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .onChange(of: viewModel.exprienceAndSkillsData.yearsOfExprience) {
+                            viewModel.yearsOfExprience = Int(viewModel.exprienceAndSkillsData.yearsOfExprience ?? "0") ?? 0
+                        }
+                    
+                    Text("+")
+                        .frame(width: 30,height: 30)
+                        .asButton(.press) {
+                            viewModel.yearsOfExprience += 1
+                            viewModel.exprienceAndSkillsData.yearsOfExprience = "\(viewModel.yearsOfExprience)"
+                        }
+                }
+                
+                .background{
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .stroke(lineWidth: 1)
+                        .foregroundStyle(.D_1_D_1_D_6)
                 }
             }
         }

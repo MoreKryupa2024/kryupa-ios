@@ -215,7 +215,9 @@ struct PreferenceCareSeekarView: View {
                                 if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
                                     viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
                                 }else{
-                                    viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    if viewModel.languageSpeakingSelected.count < 5{
+                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    }
                                 }
                             }
                         }
