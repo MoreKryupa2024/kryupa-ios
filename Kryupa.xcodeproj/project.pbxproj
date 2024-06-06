@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36DE7B72C11BEBF002E0ACD /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7B62C11BEBF002E0ACD /* ChatBoxView.swift */; };
+		A3BE6BD32C108BB300E4B605 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BE6BD22C108BB300E4B605 /* ChatView.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -85,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A36DE7B62C11BEBF002E0ACD /* ChatBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
+		A3BE6BD22C108BB300E4B605 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -175,6 +179,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A36DE7B52C11BEB0002E0ACD /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A36DE7B62C11BEBF002E0ACD /* ChatBoxView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A3BE6BD12C108B9300E4B605 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A3BE6BD22C108BB300E4B605 /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +360,7 @@
 			children = (
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
+				A3BE6BD12C108B9300E4B605 /* Chat */,
 				BE92FD152C09A61400EDF49C /* CareSeekerHome */,
 				BE6BA47C2C08A228005361C3 /* CareGiverHome */,
 				BEE28AB92C05A35E00A3CDFF /* BGV Lobby */,
@@ -355,6 +376,7 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A36DE7B52C11BEB0002E0ACD /* Chat */,
 				BE92FD192C09A8E900EDF49C /* CareSeekerHome */,
 				BEE28AC32C05FC5500A3CDFF /* Lobby */,
 				BEE28AC22C05FC3400A3CDFF /* On-Boarding */,
@@ -658,6 +680,7 @@
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
+				A3BE6BD32C108BB300E4B605 /* ChatView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
@@ -670,6 +693,7 @@
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
+				A36DE7B72C11BEBF002E0ACD /* ChatBoxView.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
