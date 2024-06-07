@@ -30,6 +30,8 @@
 		<string>Besley-Italic..ttf</string>
 		<string>Besley-Bold.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Need to access camera for sending message</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

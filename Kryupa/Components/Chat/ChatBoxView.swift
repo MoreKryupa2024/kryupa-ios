@@ -120,22 +120,17 @@ struct Message: Hashable {
     var chatboxType: ChatBoxType
 }
 
-struct DataSource {
+/*struct DataSource {
     
-    static let messages = [
+    static var messages = [
         
-        Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .currentUser),
+        Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
         
-        Message(content: "Hello! How can I assist you today?", chatboxType: .otherUser),
-        Message(content: "How are you doing?", chatboxType: .otherUser),
-        Message(content: "I'm just a computer program, so I don't have feelings, but I'm here and ready to help you with any questions or tasks you have. How can I assist you today?", chatboxType: .currentUserViewService),
-        Message(content: "Tell me a joke.", chatboxType: .otherUser),
-        Message(content: "Certainly! Here's one for you: Why don't scientists trust atoms? Because they make up everything!", chatboxType: .currentUser),
-        Message(content: "How far away is the Moon from the Earth?", chatboxType: .otherUserViewService),
-        Message(content: "The average distance from the Moon to the Earth is about 238,855 miles (384,400 kilometers). This distance can vary slightly because the Moon follows an elliptical orbit around the Earth, but the figure I mentioned is the average distance.", chatboxType: .currentUser)
-        
+        Message(content: "Scheduled a call for 9:40 AM", chatboxType: .otherUser),
+        Message(content: "Booking confirmed by user!", chatboxType: .otherUser)
+
     ]
-}
+}*/
 
 enum ChatBoxType {
     case currentUser

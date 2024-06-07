@@ -6,69 +6,90 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChatView: View {
-
-    @Environment(\.router) var router
-
+    
+    @State var sendMsgText: String = ""
+    @State private var messages = [
+        Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
+        
+        Message(content: "Scheduled a call for 9:40 AM", chatboxType: .otherUser),
+        Message(content: "Booking confirmed by user!", chatboxType: .otherUser)
+        ]
+    
     var body: some View {
+        
         VStack(spacing:20){
-            HeaderView
-            usernameView
-            requestView
+            //HeaderView
+                usernameView
+                requestView
             
-            ScrollViewReader { proxy in
-                ScrollView {
-                    ForEach(DataSource.messages, id:\.self) {
+            ScrollView(.vertical) {
+                LazyVStack {
+                    ForEach(messages.reversed(), id:\.self) {
                         msg in
                         
                         ChatBoxView(msg: msg)
+                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                     }
                 }
             }
-            .padding(.horizontal, 22)
-            
-            
+            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+            .padding(.horizontal, 10)
+            .scrollIndicators(.hidden)
             sendMessageView
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+
     }
     
     private var sendMessageView: some View{
         
-        @State var yourText: String = ""
-
-
         return HStack {
-            Image("camera")
-                .resizable()
-                .frame(width: 39,height: 29)
-                .asButton(.press) {
-                }
+            //            Image("camera")
+            //                .resizable()
+            //                .frame(width: 39,height: 29)
+            //                .asButton(.press) {
+            //                    print("Camera")
+            //            }
             
             HStack {
-                TextField("Hello!", text: $yourText)
-                    .padding()
+                TextField("Hello!", text:$sendMsgText, axis: .vertical)
+                    .lineLimit(3)
+                    .padding(.leading, 15)
+                    .padding(.vertical, 4)
                     .foregroundStyle(.gray)
                     .font(.custom(FontContent.plusRegular, size: 17))
-                    .frame(height: 36)
-                    
-
-                Spacer()
+                    .frame(minHeight: 36)
                 
-                Image("audio")
-                    .dynamicTypeSize(.medium)
-                    .frame(width: 44,height: 44)
-                    .asButton(.press) {
-                    }
+                
+                HStack(spacing:5) {
+                    
+                    //Image("audio")
+                    //.dynamicTypeSize(.medium)
+                    //.frame(width: 28,height: 28)
+                    //.asButton(.press) {
+                    //}
+                    
+                    Image("sendbutton")
+                        .dynamicTypeSize(.medium)
+                        .frame(width: 28,height: 28)
+                        .asButton(.press) {
+                            messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
+                            sendMsgText = ""
+                        }
+                }
+                .padding(.trailing, 5)
+                
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 18)
                     .inset(by: 1)
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
-
+            
         }
-        .frame(height: 44)
         .padding(.horizontal, 20)
     }
     
@@ -78,7 +99,7 @@ struct ChatView: View {
             Text("Would you like to give service to Alexa?")
                 .font(.custom(FontContent.besRegular, size: 15))
                 .padding(.horizontal, 20)
-
+            
             HStack(spacing: 10) {
                 Text("Accept")
                     .font(.custom(FontContent.plusRegular, size: 16))
@@ -91,10 +112,10 @@ struct ChatView: View {
                     .asButton(.press) {
                         
                     }
-                            
+                
                 Text("Decline")
                     .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.red)
+                    .foregroundStyle(._242426)
                     .frame(height: 32)
                     .frame(width: 99)
                     .asButton(.press) {
@@ -103,7 +124,7 @@ struct ChatView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .inset(by: 1)
-                            .stroke(.red, lineWidth: 1)
+                            .stroke(._242426, lineWidth: 1)
                     )
             }
         }
@@ -117,11 +138,17 @@ struct ChatView: View {
     
     private var usernameView: some View{
         
-        HStack(spacing: 20) {
+        HStack(spacing: 10) {
+            
+            Image("navBack")
+                .resizable()
+                .frame(width: 30,height: 30)
+                .asButton(.press) {
+                }
             
             Text("Alexa Chatterjee")
                 .font(.custom(FontContent.besRegular, size: 20))
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
                 Image("phone-call")
@@ -153,7 +180,6 @@ struct ChatView: View {
                     .resizable()
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
-                        router.dismissScreen()
                     }
                 Spacer()
                 Image("NotificationBellIcon")
