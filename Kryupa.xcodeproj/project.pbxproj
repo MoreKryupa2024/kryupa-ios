@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
+		A3F06DC32C0F37CD00B1A14E /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */; };
 		BE11780C2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */; };
 		BE11780E2C10613D00B8CF65 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11780D2C10613D00B8CF65 /* ReviewListView.swift */; };
-
-		A3F06DC32C0F37CD00B1A14E /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */; };
-
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -100,10 +97,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-
+		A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenView.swift; sourceTree = "<group>"; };
 		BE11780D2C10613D00B8CF65 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
-		A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -203,7 +199,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-
+		A3F06DC12C0F37A800B1A14E /* CareGiverHome */ = {
+			isa = PBXGroup;
+			children = (
+				A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */,
+			);
+			path = CareGiverHome;
+			sourceTree = "<group>";
+		};
 		BE11780A2C10458B00B8CF65 /* RecommendedGiverDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,14 +214,6 @@
 				BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */,
 			);
 			path = RecommendedGiverDetail;
-               sourceTree = "<group>";
-                       };
-		A3F06DC12C0F37A800B1A14E /* CareGiverHome */ = {
-			isa = PBXGroup;
-			children = (
-				A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */,
-			);
-			path = CareGiverHome;
 			sourceTree = "<group>";
 		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
@@ -680,7 +675,6 @@
 				BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				BEC6B9F92C0F2A0000744C60 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
