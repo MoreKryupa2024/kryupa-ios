@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A3F06DC32C0F37CD00B1A14E /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */; };
+		BE11780C2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */; };
+		BE11780E2C10613D00B8CF65 /* ReviewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11780D2C10613D00B8CF65 /* ReviewListView.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -15,6 +17,8 @@
 		BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */; };
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
+		BE1D114C2C106B6F0071FA92 /* CareGiverNearByCustomerScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D114B2C106B6F0071FA92 /* CareGiverNearByCustomerScreenViewModel.swift */; };
+		BE1D114E2C10726A0071FA92 /* CareGiverNearByCustomerScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D114D2C10726A0071FA92 /* CareGiverNearByCustomerScreenModel.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
 		BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */; };
 		BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9D2BFB0FD7003442BB /* PillView.swift */; };
@@ -32,6 +36,7 @@
 		BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */; };
 		BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC072BFDD88C00175566 /* Defaults.swift */; };
 		BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC092BFDDE5600175566 /* APIClient.swift */; };
+		BE5156612C11C23800A22169 /* DropDownWithCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */; };
 		BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E2E2BF495D800A6781F /* KryupaApp.swift */; };
 		BE644E312BF495D800A6781F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E302BF495D800A6781F /* SplashView.swift */; };
 		BE644E332BF495D900A6781F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE644E322BF495D900A6781F /* Assets.xcassets */; };
@@ -56,6 +61,8 @@
 		BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */; };
 		BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */; };
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
+		BE88E9E52C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */; };
+		BE88E9E72C11D63D00BE0A62 /* CareGiverDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */; };
 		BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */; };
 		BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */; };
 		BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */; };
@@ -74,6 +81,11 @@
 		BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */; };
 		BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */; };
 		BEC365922BFCC400005AC4A0 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEC365912BFCC400005AC4A0 /* Success.gif */; };
+		BEC6B9F82C0F261300744C60 /* BookingRecommendationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC6B9F72C0F261300744C60 /* BookingRecommendationModel.swift */; };
+		BEC6B9FD2C0F2B7000744C60 /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC6B9FC2C0F2B7000744C60 /* CreateBookingModel.swift */; };
+		BEC6B9FF2C0F2C3D00744C60 /* CareSeekerHomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC6B9FE2C0F2C3D00744C60 /* CareSeekerHomeScreenViewModel.swift */; };
+		BEC6BA022C0F41B300744C60 /* CareGiverNearByCustomerScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC6BA012C0F41B300744C60 /* CareGiverNearByCustomerScreenView.swift */; };
+		BEC6BA042C0F460D00744C60 /* BookingCareGiverListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC6BA032C0F460D00744C60 /* BookingCareGiverListView.swift */; };
 		BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */; };
 		BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */; };
 		BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */; };
@@ -86,6 +98,8 @@
 
 /* Begin PBXFileReference section */
 		A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
+		BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenView.swift; sourceTree = "<group>"; };
+		BE11780D2C10613D00B8CF65 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -93,6 +107,8 @@
 		BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNumberScreenView.swift; sourceTree = "<group>"; };
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		BE1D114B2C106B6F0071FA92 /* CareGiverNearByCustomerScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverNearByCustomerScreenViewModel.swift; sourceTree = "<group>"; };
+		BE1D114D2C10726A0071FA92 /* CareGiverNearByCustomerScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverNearByCustomerScreenModel.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
 		BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsView.swift; sourceTree = "<group>"; };
 		BE4FBD9D2BFB0FD7003442BB /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
@@ -110,6 +126,7 @@
 		BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginScreenViewModel.swift; sourceTree = "<group>"; };
 		BE50EC072BFDD88C00175566 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		BE50EC092BFDDE5600175566 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownWithCheckBoxView.swift; sourceTree = "<group>"; };
 		BE644E2B2BF495D800A6781F /* Kryupa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kryupa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE644E2E2BF495D800A6781F /* KryupaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KryupaApp.swift; sourceTree = "<group>"; };
 		BE644E302BF495D800A6781F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -134,6 +151,8 @@
 		BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverHomeScreenView.swift; sourceTree = "<group>"; };
 		BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationScreenViewModel.swift; sourceTree = "<group>"; };
 		BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPTextFieldView.swift; sourceTree = "<group>"; };
+		BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
+		BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverDetailModel.swift; sourceTree = "<group>"; };
 		BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSeekerHomeScreenView.swift; sourceTree = "<group>"; };
 		BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCaregiverView.swift; sourceTree = "<group>"; };
 		BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingFormScreenView.swift; sourceTree = "<group>"; };
@@ -148,6 +167,11 @@
 		BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulScreeenView.swift; sourceTree = "<group>"; };
 		BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFExtention.swift; sourceTree = "<group>"; };
 		BEC365912BFCC400005AC4A0 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Success.gif; sourceTree = "<group>"; };
+		BEC6B9F72C0F261300744C60 /* BookingRecommendationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRecommendationModel.swift; sourceTree = "<group>"; };
+		BEC6B9FC2C0F2B7000744C60 /* CreateBookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
+		BEC6B9FE2C0F2C3D00744C60 /* CareSeekerHomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSeekerHomeScreenViewModel.swift; sourceTree = "<group>"; };
+		BEC6BA012C0F41B300744C60 /* CareGiverNearByCustomerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverNearByCustomerScreenView.swift; sourceTree = "<group>"; };
+		BEC6BA032C0F460D00744C60 /* BookingCareGiverListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingCareGiverListView.swift; sourceTree = "<group>"; };
 		BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LobbyScreenView.swift; path = "Kryupa/Core/BGV Lobby/LobbyScreenView.swift"; sourceTree = SOURCE_ROOT; };
@@ -181,6 +205,15 @@
 				A3F06DC22C0F37CD00B1A14E /* CareGiverPortfolioView.swift */,
 			);
 			path = CareGiverHome;
+			sourceTree = "<group>";
+		};
+		BE11780A2C10458B00B8CF65 /* RecommendedGiverDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BE11780B2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift */,
+				BE88E9E42C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift */,
+			);
+			path = RecommendedGiverDetail;
 			sourceTree = "<group>";
 		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
@@ -377,8 +410,12 @@
 			children = (
 				BE644E442BF4BC8700A6781F /* GoogleSignupModel.swift */,
 				BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */,
+				BE1D114D2C10726A0071FA92 /* CareGiverNearByCustomerScreenModel.swift */,
 				BE6BA4782C086DEF005361C3 /* BGVInterviewSlotsListModel.swift */,
 				BE92FD1F2C09E10800EDF49C /* BookingFormScreenModel.swift */,
+				BEC6B9F72C0F261300744C60 /* BookingRecommendationModel.swift */,
+				BEC6B9FC2C0F2B7000744C60 /* CreateBookingModel.swift */,
+				BE88E9E62C11D63D00BE0A62 /* CareGiverDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -464,6 +501,8 @@
 		BE92FD152C09A61400EDF49C /* CareSeekerHome */ = {
 			isa = PBXGroup;
 			children = (
+				BE11780A2C10458B00B8CF65 /* RecommendedGiverDetail */,
+				BEC6BA002C0F373500744C60 /* CareGiverNearByCustomer */,
 				BE92FD1C2C09B2FD00EDF49C /* BookingFormScreen */,
 				BE92FD162C09A67B00EDF49C /* CareSeekerHomeView */,
 			);
@@ -474,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */,
+				BEC6B9FE2C0F2C3D00744C60 /* CareSeekerHomeScreenViewModel.swift */,
 			);
 			path = CareSeekerHomeView;
 			sourceTree = "<group>";
@@ -482,6 +522,8 @@
 			isa = PBXGroup;
 			children = (
 				BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */,
+				BEC6BA032C0F460D00744C60 /* BookingCareGiverListView.swift */,
+				BE11780D2C10613D00B8CF65 /* ReviewListView.swift */,
 			);
 			path = CareSeekerHome;
 			sourceTree = "<group>";
@@ -502,6 +544,15 @@
 				BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */,
 			);
 			path = SelectProfile;
+			sourceTree = "<group>";
+		};
+		BEC6BA002C0F373500744C60 /* CareGiverNearByCustomer */ = {
+			isa = PBXGroup;
+			children = (
+				BEC6BA012C0F41B300744C60 /* CareGiverNearByCustomerScreenView.swift */,
+				BE1D114B2C106B6F0071FA92 /* CareGiverNearByCustomerScreenViewModel.swift */,
+			);
+			path = CareGiverNearByCustomer;
 			sourceTree = "<group>";
 		};
 		BEE28AB92C05A35E00A3CDFF /* BGV Lobby */ = {
@@ -537,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				BE4FBDBA2BFB96CD003442BB /* DropDownView.swift */,
+				BE5156602C11C23800A22169 /* DropDownWithCheckBoxView.swift */,
 				BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */,
 				BE4FBD9D2BFB0FD7003442BB /* PillView.swift */,
 				BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */,
@@ -661,9 +713,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE11780E2C10613D00B8CF65 /* ReviewListView.swift in Sources */,
+				BEC6B9FD2C0F2B7000744C60 /* CreateBookingModel.swift in Sources */,
 				BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */,
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
+				BE5156612C11C23800A22169 /* DropDownWithCheckBoxView.swift in Sources */,
+				BE88E9E52C11D01900BE0A62 /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
@@ -671,15 +727,19 @@
 				BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */,
 				BE4FBDB72BFB8406003442BB /* SelectProfileImageView.swift in Sources */,
 				BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */,
+				BEC6B9FF2C0F2C3D00744C60 /* CareSeekerHomeScreenViewModel.swift in Sources */,
 				BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
+				BE88E9E72C11D63D00BE0A62 /* CareGiverDetailModel.swift in Sources */,
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
+				BE11780C2C1045B100B8CF65 /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
+				BEC6BA022C0F41B300744C60 /* CareGiverNearByCustomerScreenView.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
@@ -687,13 +747,16 @@
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				BE4FBDB12BFB7F5F003442BB /* PersonalInformationSeekerView.swift in Sources */,
+				BE1D114E2C10726A0071FA92 /* CareGiverNearByCustomerScreenModel.swift in Sources */,
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
+				BEC6B9F82C0F261300744C60 /* BookingRecommendationModel.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */,
 				BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */,
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
+				BEC6BA042C0F460D00744C60 /* BookingCareGiverListView.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
@@ -717,6 +780,7 @@
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
+				BE1D114C2C106B6F0071FA92 /* CareGiverNearByCustomerScreenViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
