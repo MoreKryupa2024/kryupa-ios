@@ -26,8 +26,11 @@ class APIConstant{
     static let getSlotList = "\(baseURL)/apis/user/caregivers/lobby/slot_list"
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
+    
     static let getRecommandationList = "\(baseURL)/apis/user/home/getAllCustomerHomeData"
+    
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
+    
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
 }
 
@@ -54,6 +57,7 @@ class AppConstants{
     static let GiveCare = "caregiver"
     
     static let medicalConditionArray = ["Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","None","Other"]
+    
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","3-4 Years","5-10 Years","10+ Years"]
