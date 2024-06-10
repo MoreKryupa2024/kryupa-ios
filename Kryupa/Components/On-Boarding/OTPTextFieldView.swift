@@ -63,6 +63,7 @@ struct OTPTextFieldView: View {
                 Text("0")
                     .foregroundStyle(._7_C_7_C_80)
             }
+            .autocorrectionDisabled()
             .multilineTextAlignment(.center)
             .keyboardType(.numberPad)
             .frame(height: 48)

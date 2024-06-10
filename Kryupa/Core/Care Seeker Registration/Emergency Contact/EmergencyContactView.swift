@@ -216,7 +216,7 @@ struct EmergencyContactView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,20)
+            .padding(.bottom,10)
             
             DropDownView(
                 selectedValue: viewModel.relation,

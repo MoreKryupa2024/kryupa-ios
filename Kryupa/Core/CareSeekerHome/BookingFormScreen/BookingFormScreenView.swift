@@ -2,7 +2,7 @@
 //  BookingFormScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 31/05/24.
+//  Created by Nirmal Singh Rajput on 31/05/24.
 //
 
 import SwiftUI
@@ -41,6 +41,35 @@ struct BookingFormScreenView: View {
                         
                         DateTimeView
                         
+                        if viewModel.showDatePicker{
+                            switch viewModel.dateState{
+                            case 1:
+                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "HH:mm:ss", valueStr: { str in
+                                    print(str)
+                                    viewModel.startTime = str
+                                }, displayedComponents: .hourAndMinute)
+                            case 2:
+                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "HH:mm:ss", valueStr: { str in
+                                    print(str)
+                                    viewModel.endTime = str
+                                }, displayedComponents: .hourAndMinute)
+                                
+                            case 3:
+                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "yyyy-MM-dd'T'HH:mm:ssZ", valueStr: { str in
+                                    print(str)
+                                    viewModel.startDate = str
+                                }, displayedComponents: .date)
+                                
+                            case 4:
+                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "yyyy-MM-dd'T'HH:mm:ssZ", valueStr: { str in
+                                    print(str)
+                                    viewModel.endDate = str
+                                }, displayedComponents: .date)
+                            default:
+                                EmptyView()
+                            }
+                        }
+                        
                         sepratorView
                         
                         genderView
@@ -77,6 +106,28 @@ struct BookingFormScreenView: View {
         }
     }
     
+    private func dateOfBirthPicker(givenDate:Binding<Date>,formate:String,valueStr:(@escaping(String)-> Void),displayedComponents: DatePickerComponents)-> some View{
+        VStack{
+            HStack{
+                Spacer()
+                Text("Done")
+                    .padding(10)
+                    .foregroundStyle(.white)
+                    .background{
+                        Color.blue
+                    }
+                    .cornerRadius(5)
+                    
+            }
+            .asButton(.press) {
+                valueStr(dateFormatChange(dateFormat: formate, dates: givenDate.wrappedValue))
+                viewModel.showDatePicker = false
+            }
+            DatePicker("Calender", selection: givenDate, in: givenDate.wrappedValue..., displayedComponents: displayedComponents )
+                .datePickerStyle(.graphical)
+        }
+    }
+    
     private var DateTimeView: some View{
         
         VStack{
@@ -89,15 +140,17 @@ struct BookingFormScreenView: View {
                 RecurringContentView
             }
             HStack(spacing:29){
-                Text("8:00 am")
+                Text(viewModel.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))
                     .asButton(.press) {
-                        
+                        viewModel.dateState = 1
+                        viewModel.showDatePicker = true
                     }
                     
                 Text("-")
-                Text("9:00 pm")
+                Text(viewModel.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))
                     .asButton(.press) {
-                        
+                        viewModel.dateState = 2
+                        viewModel.showDatePicker = true
                     }
                     
             }
@@ -117,12 +170,12 @@ struct BookingFormScreenView: View {
     private var RecurringContentView: some View{
         HStack(spacing:0){
             VStack(spacing:0){
-                Text("18")
+                Text(viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(.E_5_E_5_EA)
                     .font(.custom(FontContent.besSemiBold, size: 34))
                 
-                Text("January")
+                Text(viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "MMMM"))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical,4)
                     .background(.appMain)
@@ -131,23 +184,24 @@ struct BookingFormScreenView: View {
             }
             .frame(width: 105,height: 79)
             .asButton(.press) {
-                
+                viewModel.dateState = 3
+                viewModel.showDatePicker = true
             }
             
             
-            Capsule()
+            RoundedRectangle(cornerRadius: 5)
+                .foregroundStyle(._7_C_7_C_80)
                 .frame(width: 35,height: 5)
-                .background()
                 .frame(maxWidth: .infinity,maxHeight: .infinity)
                 
             
             VStack(spacing:0){
-                Text("19")
+                Text(viewModel.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .background(.E_5_E_5_EA)
                     .font(.custom(FontContent.besSemiBold, size: 34))
                 
-                Text("January")
+                Text(viewModel.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "MMMM"))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical,4)
                     .background(.appMain)
@@ -156,7 +210,8 @@ struct BookingFormScreenView: View {
             }
             .frame(width: 105,height: 79)
             .asButton(.press) {
-                
+                viewModel.dateState = 4
+                viewModel.showDatePicker = true
             }
             
         }
@@ -244,7 +299,9 @@ struct BookingFormScreenView: View {
                                 if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
                                     viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
                                 }else{
-                                    viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    if viewModel.languageSpeakingSelected.count < 5{
+                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    }
                                 }
                             }
                         }
@@ -448,7 +505,11 @@ struct BookingFormScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
-                    
+                    viewModel.createBooking { bookingId in
+                        router.showScreen(.push) { rout in
+                            CareGiverNearByCustomerScreenView(bookingID: bookingId)
+                        }
+                    }
                 }
             
             Text("Reset")

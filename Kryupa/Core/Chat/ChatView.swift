@@ -115,13 +115,13 @@ struct ChatView: View {
                 
                 Text("Decline")
                     .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(._242426)
+                    .foregroundStyle(.appMain)
                     .frame(height: 32)
                     .frame(width: 99)
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .inset(by: 1)
-                            .stroke(._242426, lineWidth: 1)
+                            .stroke(.appMain, lineWidth: 1)
                     )
                     .asButton(.press) {
                         

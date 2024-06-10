@@ -22,6 +22,23 @@ extension String{
         let result = emailTest.evaluate(with: self)
         return result
     }
+    
+    func convertDateFormater(beforeFormat: String, afterFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = beforeFormat
+
+        guard let date = dateFormatter.date(from: self) else {
+//            assert(false, "no date from string")
+            dateFormatter.dateFormat = afterFormat
+            let timeStamp = dateFormatter.string(from: Date())
+            return timeStamp
+        }
+
+        dateFormatter.dateFormat = afterFormat
+        let timeStamp = dateFormatter.string(from: date)
+
+        return timeStamp
+    }
 }
 
 extension Binding {
@@ -34,4 +51,15 @@ extension UIScreen{
    static let screenWidth = UIScreen.main.bounds.size.width
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
+}
+
+extension Binding where Value == String {
+    func max(_ limit: Int) -> Self {
+        if self.wrappedValue.count > limit {
+            DispatchQueue.main.async {
+                self.wrappedValue = String(self.wrappedValue.prefix(limit))
+            }
+        }
+        return self
+    }
 }

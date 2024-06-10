@@ -11,14 +11,16 @@ import SwiftUI
 class HealthInformationSeekerViewModel: ObservableObject{
     
     @Published var medicalConditionSelected: String = String()
-    @Published var medicalConditionDropDownSelected: String = String()
+    @Published var medicalConditionDropDownSelected: [String] = [String]()
     @Published var mobilityLevel: String = String()
     @Published var allergiesValue: String = String()
     
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
-        if medicalConditionSelected.isEmpty {
+        if medicalConditionDropDownSelected.isEmpty {
             return alert("Please Select Medical Condition")
+        }else if medicalConditionDropDownSelected.contains("Other"){
+            return alert("Please Enter Other Medical Condition")
         }else if mobilityLevel.isEmpty{
             return alert("Please Select Mobility Level")
         }else{
@@ -26,7 +28,8 @@ class HealthInformationSeekerViewModel: ObservableObject{
              param = [
                  "allergies": allergiesValue,
                  "mobility_level": mobilityLevel,
-                 "disease_type": [medicalConditionSelected,medicalConditionDropDownSelected]
+                 "other_disease_type": medicalConditionSelected,
+                 "disease_type": [medicalConditionDropDownSelected]
              ]
             next(param)
         }

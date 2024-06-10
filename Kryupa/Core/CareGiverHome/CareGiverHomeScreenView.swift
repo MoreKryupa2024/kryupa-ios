@@ -2,7 +2,7 @@
 //  CareGiverHomeScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 30/05/24.
+//  Created by Nirmal Singh Rajput on 30/05/24.
 //
 
 import SwiftUI
@@ -13,14 +13,20 @@ struct CareGiverHomeScreenView: View {
             HeaderView
             ScrollView{
                 VStack(spacing:0){
-                    BannerView(showIndecator: false,bannerHeight: 104)
-                        .padding([.horizontal,.vertical],24)
-                    noCotentView
+                    completeProfileView
+                    jobsNearYouView
+//                    BannerView(showIndecator: false,bannerHeight: 104)
+//                        .padding([.horizontal,.vertical],24)
+//                    noCotentView
                 }
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
         }
+        .task {
+            
+        }
+        
     }
     
     private var noCotentView: some View{
