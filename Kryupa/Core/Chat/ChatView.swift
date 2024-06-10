@@ -118,14 +118,14 @@ struct ChatView: View {
                     .foregroundStyle(._242426)
                     .frame(height: 32)
                     .frame(width: 99)
-                    .asButton(.press) {
-                        
-                    }
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .inset(by: 1)
                             .stroke(._242426, lineWidth: 1)
                     )
+                    .asButton(.press) {
+                        
+                    }
             }
         }
         .frame(height: 86)
