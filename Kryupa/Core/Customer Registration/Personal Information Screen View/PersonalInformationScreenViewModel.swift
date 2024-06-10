@@ -13,7 +13,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
     var date: Date = Date()
     @Published var showDatePicker: Bool = Bool()
     var dateOfBirthSelected: Bool = Bool()
-    @Published var personalInfoData: PersonalInfo = PersonalInfo()
+    var personalInfoData: PersonalInfo = PersonalInfo()
 
     func dateFormatter(formate:String? = nil)-> String{
         let formatter = DateFormatter()

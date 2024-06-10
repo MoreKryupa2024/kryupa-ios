@@ -10,7 +10,6 @@ import SwiftUI
 
 class PreferenceViewModel: ObservableObject{
     
-    @Published var languageSpeakingSelected: [String] = [String]()
     @Published var preferenceListData: PreferenceList = PreferenceList()
     @Published var isLoading:Bool = false
     
@@ -21,8 +20,8 @@ class PreferenceViewModel: ObservableObject{
             return alert("Please Select Mobility Level")
         }
         
-        if languageSpeakingSelected.isEmpty{
-            return alert("Please Select Speaking Language")
+        guard let language = preferenceListData.language, language != "" else {
+            return alert("Please Select Language")
         }
         guard let distance = preferenceListData.distance, distance != "" else {
             return alert("Please Select Distance")
@@ -32,7 +31,7 @@ class PreferenceViewModel: ObservableObject{
         var param = parameters
         param["preferenceList"] = [
             "mobility_level": mobilityLevel,
-            "language": languageSpeakingSelected,
+            "language": language,
             "distance": distance
         ]
         

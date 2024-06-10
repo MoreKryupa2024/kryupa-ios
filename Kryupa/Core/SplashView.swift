@@ -55,9 +55,6 @@ struct ContentView: View {
             
             NotificationCenter.default.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
                                 using: self.setCareGiverHomeScreen)
-            
-            NotificationCenter.default.addObserver(forName: .setCareSeekerHomeScreen, object: nil, queue: nil,
-                                using: self.setCareSeekerHomeScreen)
         }
     }
     
@@ -69,15 +66,9 @@ struct ContentView: View {
         showScreen = 3
     }
     
-    func setCareSeekerHomeScreen(_ notification: Notification) {
-        showScreen = 4
-    }
-    
     private func delayText() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-
-            showScreen = 1
-
+            showScreen = 5
         }
     }
 }
