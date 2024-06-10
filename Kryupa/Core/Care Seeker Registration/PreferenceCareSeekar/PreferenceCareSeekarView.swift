@@ -34,9 +34,6 @@ struct PreferenceCareSeekarView: View {
                         Text("Preference")
                             .font(.custom(FontContent.besMedium, size: 22))
                         Image("infoIcone")
-                            .asButton(.press) {
-                                
-                            }
                     }
                     .frame(height: 28)
                     .padding(.top,30)
@@ -80,7 +77,7 @@ struct PreferenceCareSeekarView: View {
                                 }
                         }
                         .padding(.top,30)
-                        .padding(.horizontal,24)
+                        .padding(.trailing,24)
                     })
                     .padding(.top,30)
                     
@@ -136,7 +133,7 @@ struct PreferenceCareSeekarView: View {
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Gender Preference")
+                Text("Gender")
             }
             .font(.custom(FontContent.plusRegular, size: 16))
             
@@ -198,7 +195,7 @@ struct PreferenceCareSeekarView: View {
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Language Preference")
+                Text("Language Speaking")
             }
             .font(.custom(FontContent.plusRegular, size: 16))
             
@@ -218,9 +215,7 @@ struct PreferenceCareSeekarView: View {
                                 if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
                                     viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
                                 }else{
-                                    if viewModel.languageSpeakingSelected.count < 5{
-                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
-                                    }
+                                    viewModel.languageSpeakingSelected.append(languageSpeakingArray)
                                 }
                             }
                         }

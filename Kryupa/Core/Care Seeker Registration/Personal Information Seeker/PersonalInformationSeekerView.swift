@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftfulUI
 
 struct PersonalInformationSeekerView: View {
     
@@ -42,11 +41,10 @@ struct PersonalInformationSeekerView: View {
                         title: "Date Of Birth",
                         placeHolder: "Select"
                     )
-                    .background()
-                    .asButton{
-                        viewModel.dateOfBirthSelected = true
-                        viewModel.showDatePicker = !viewModel.showDatePicker
-                    }
+                        .onTapGesture {
+                            viewModel.dateOfBirthSelected = true
+                            viewModel.showDatePicker = !viewModel.showDatePicker
+                        }
                     
                     if viewModel.showDatePicker{
                         dateOfBirthPicker()
@@ -110,7 +108,7 @@ struct PersonalInformationSeekerView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,10)
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
@@ -131,7 +129,7 @@ struct PersonalInformationSeekerView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,10)
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,

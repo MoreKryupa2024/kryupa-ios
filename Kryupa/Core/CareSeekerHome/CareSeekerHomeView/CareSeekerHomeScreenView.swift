@@ -2,7 +2,7 @@
 //  CareSeekerHomeScreenView.swift
 //  Kryupa
 //
-//  Created by Nirmal Singh Rajput on 31/05/24.
+//  Created by Hemant Singh Rajput on 31/05/24.
 //
 
 import SwiftUI
@@ -11,35 +11,25 @@ import SwiftfulUI
 struct CareSeekerHomeScreenView: View {
     
     @Environment(\.router) var router
-    @StateObject private var viewModel = CareSeekerHomeScreenViewModel()
     
     var body: some View {
-        ZStack{
-            VStack(spacing:0){
-                HeaderView
-                ScrollView {
-                    Image("careSeekerHomeBannerSmall")
-                        .resizable()
-                        .frame(height: 58)
-                        .padding(.horizontal,24)
-                        .padding(.top,15)
+        VStack(spacing:0){
+            HeaderView
+            ScrollView {
+                Image("careSeekerHomeBannerSmall")
+                    .resizable()
+                    .frame(height: 58)
+                    .padding(.horizontal,24)
+                    .padding(.top,15)
+                
+                BookFirstServiceView
+                
+                RecommendedGiverView
+                    .padding(.top,30)
                     
-                    BookFirstServiceView
-                    
-                    RecommendedGiverView
-                        .padding(.top,30)
-                        
-                }
-                .scrollIndicators(.hidden)
-                .toolbar(.hidden, for: .navigationBar)
             }
-            if viewModel.isloading{
-                LoadingView()
-            }
-            
-        }
-        .onAppear{
-            viewModel.getRecommandationList()
+            .scrollIndicators(.hidden)
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
     
@@ -55,8 +45,7 @@ struct CareSeekerHomeScreenView: View {
                         .foregroundStyle(._7_C_7_C_80)
             }
             .padding(.horizontal,24)
-            RecommendedCaregiverView(recommendedCaregiver: viewModel.recommendedCaregiver)
-            
+            RecommendedCaregiverView()
         }
     }
     

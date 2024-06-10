@@ -37,12 +37,12 @@ struct PreferenceView: View {
                         .frame(height: 28)
                         .padding(.top,30)
                         
-                        VStack(spacing: 20,
+                        VStack(spacing: 25,
                                content: {
                             
                             mobilityLevelView
                             
-                            languageSpeakingView
+                            languageView
                             
                             distanceView
                             
@@ -124,8 +124,8 @@ struct PreferenceView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
-            .padding(.bottom,10)
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.preferenceListData.mobilityLevel,
@@ -136,42 +136,23 @@ struct PreferenceView: View {
         })
     }
     
-    private var languageSpeakingView: some View{
-        
-        VStack(alignment: .leading){
+    private var languageView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
             HStack(spacing:0){
-                Text("Language Preference")
+                Text("Language")
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .padding(.bottom,20)
             
-            
-            ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
-                    
-                    if let languageSpeakingArray{
-                        HStack(spacing:0){
-                            CheckBoxView(
-                                isSelected: !viewModel.languageSpeakingSelected.contains(languageSpeakingArray),
-                                name: languageSpeakingArray
-                            )
-                            .opacity(AppConstants.languageSpeakingArray.last == languageSpeakingArray ? 0 : 1)
-                            .frame(maxWidth: .infinity,alignment: .leading)
-                            .asButton(.press) {
-                                if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
-                                    viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
-                                }else{
-                                    if viewModel.languageSpeakingSelected.count < 5{
-                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
-                                    }
-                                }
-                            }
-                        }
-                    }else{
-                        EmptyView()
-                    }
+            DropDownView(
+                selectedValue: viewModel.preferenceListData.language,
+                placeHolder: "Select",
+                values: AppConstants.languageSpeakingArray) { value in
+                    viewModel.preferenceListData.language = value
                 }
-            }
-        }
+        })
     }
     private var distanceView: some View{
         VStack(alignment: .leading, spacing:0,
@@ -180,8 +161,8 @@ struct PreferenceView: View {
                 Text("Distance")
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
-            .padding(.bottom,10)
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.preferenceListData.distance,

@@ -13,9 +13,6 @@ import AVFoundation
 struct SelectProfileImageView: View {
     
     @Environment(\.router) var router
-    @State var camera = CameraModal()
-    @State var isTaken = Bool()
-    
     @StateObject private var viewModel = SelectProfileImageViewModel()
     
     var body: some View {
@@ -50,7 +47,7 @@ struct SelectProfileImageView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .onAppear {
-                camera.requestCameraPermission()
+                viewModel.camera.requestCameraPermission()
             }
             if viewModel.isLoading{
                 LoadingView()
@@ -81,18 +78,18 @@ struct SelectProfileImageView: View {
                 .asButton(.press) {
                     switch viewModel.cameraAuthStatus {
                     case .notDetermined:
-                        camera.requestCameraPermission()
+                        viewModel.camera.requestCameraPermission()
                     case .authorized:
-                        isTaken = true
+                        viewModel.camera.isTaken.toggle()
                         
                     case .restricted, .denied:
-                        camera.requestCameraPermission()
+                        viewModel.camera.requestCameraPermission()
                     @unknown default:
                         fatalError()
                     }
                     
                 }
-                .fullScreenCover(isPresented: $isTaken) {
+                .fullScreenCover(isPresented: $viewModel.camera.isTaken) {
                     CameraPickerView() { image in
                         viewModel.profilePicture = image
                     }

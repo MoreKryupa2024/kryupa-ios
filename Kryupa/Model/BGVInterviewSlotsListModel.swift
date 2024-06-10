@@ -2,7 +2,7 @@
 //  BGVInterviewSlotsListModel.swift
 //  Kryupa
 //
-//  Created by Nirmal Singh Rajput on 30/05/24.
+//  Created by Hemant Singh Rajput on 30/05/24.
 //
 
 import Foundation

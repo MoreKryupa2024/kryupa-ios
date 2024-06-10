@@ -61,11 +61,10 @@ struct PersonalInformationScreenView: View {
                         title: "Date Of Birth",
                         placeHolder: "Select"
                     )
-                    .background()
-                    .asButton(){
-                        viewModel.dateOfBirthSelected = true
-                        viewModel.showDatePicker = !viewModel.showDatePicker
-                    }
+                        .onTapGesture {
+                            viewModel.dateOfBirthSelected = true
+                            viewModel.showDatePicker = !viewModel.showDatePicker
+                        }
                     
                     if viewModel.showDatePicker{
                         dateOfBirthPicker()
@@ -74,11 +73,6 @@ struct PersonalInformationScreenView: View {
                     genderDropdownView
                     
                     textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
-                        .onChange(of: viewModel.personalInfoData.ssn) {
-                            if (viewModel.personalInfoData.ssn?.count ?? 0) > 9{
-                                viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(9) ?? "")
-                            }
-                        }
                     
                     languageDropdownView
                     
@@ -116,7 +110,6 @@ struct PersonalInformationScreenView: View {
         
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
-        .modifier(DismissingKeyboard())
     }
     
     //MARK: Send Code Button View
@@ -169,7 +162,7 @@ struct PersonalInformationScreenView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,10)
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
@@ -178,7 +171,6 @@ struct PersonalInformationScreenView: View {
                     viewModel.personalInfoData.gender = value
                 }
         })
-        .padding(.bottom,-10)
     }
     
     private var languageDropdownView: some View{
@@ -191,7 +183,7 @@ struct PersonalInformationScreenView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,10)
+            .padding(.bottom,20)
             
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,
