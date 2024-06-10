@@ -63,9 +63,9 @@ struct SuccessfulScreeenView: View {
                                                                                 object: nil, userInfo: nil)
                                 router.dismissScreenStack()
                             }else{
-                                NotificationCenter.default.post(name: .setCareSeekerHomeScreen,
-                                                                                object: nil, userInfo: nil)
-                                router.dismissScreenStack()
+                                router.showScreen(.push) { _ in
+                                    LobbyScreenView()
+                                }
                             }
                         }
                     }

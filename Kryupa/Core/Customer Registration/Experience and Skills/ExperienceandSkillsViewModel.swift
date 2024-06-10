@@ -14,7 +14,6 @@ class ExperienceandSkillsViewModel: ObservableObject{
     @Published var showFilePicker: Bool = false
     @Published var areaOfExpertiseSelected: [String] = [String]()
     @Published var isLoading:Bool = false
-    var yearsOfExprience: Int = Int()
     
     func dataChecks(filesArray:[FileData],alert:((String)->Void),next:(([String:Any])->Void)){
         
@@ -29,7 +28,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
             return alert("Please Enter Bio")
         }
         
-        if yearsOfExprience == 0 {
+        guard let yearsOfExprience = exprienceAndSkillsData.yearsOfExprience, yearsOfExprience != "" else {
             return alert("Please Select Years Of Exprience")
         }
         guard let areaOfExpertise = exprienceAndSkillsData.areaOfExpertise, areaOfExpertise.count != 0 else {

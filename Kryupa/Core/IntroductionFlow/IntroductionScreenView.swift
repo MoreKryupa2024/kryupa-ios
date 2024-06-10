@@ -19,12 +19,20 @@ struct IntroductionScreenView: View {
                 .resizable()
                 .frame(width: 305,height: 295)
             
-            Text("Connect with trusted caregivers and care seekers in your area.")
-                .font(.custom(FontContent.besMedium, size: 25))
+            Text("Lorem ipsum dolor sit amet consectetur.")
+                .font(.custom(FontContent.besMedium, size: 34))
                 .multilineTextAlignment(.center)
-                .padding(.horizontal,24)
+                .frame(width: 249)
+                .lineSpacing(0)
                 .padding(.top, 66)
-                .padding(.bottom, 30)
+            
+            
+            Text("Lorem ipsum dolor sit amet consectetur.")
+                .font(.custom(FontContent.plusRegular, size: 13))
+                .foregroundStyle(._7_C_7_C_80)
+                .multilineTextAlignment(.center)
+                .frame(width: 223, height: 36)
+                .padding([.top,.bottom], 15)
             
             nextButton
                 .padding(.bottom, 34)
