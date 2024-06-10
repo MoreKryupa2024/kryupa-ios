@@ -2,26 +2,29 @@
 //  RecommendedCaregiverView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 31/05/24.
+//  Created by Nirmal Singh Rajput on 31/05/24.
 //
 
 import SwiftUI
 
 struct RecommendedCaregiverView: View {
+    var recommendedCaregiver: [RecommendedCaregiver] = [RecommendedCaregiver]()
     
     let profileWidth:CGFloat = CGFloat((UIScreen.screenWidth - (68))/2.2)
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:10){
-                ForEach(1...10) { index in
+//                ForEach(recommendedCaregiver,id: \.id) { index in
+                ForEach(recommendedCaregiver, id: \.id) { careData in
+                    
                     VStack(spacing:0){
                         Image("profile")
                             .resizable()
                             .frame(width: profileWidth,height: 97)
                         
                         HStack(spacing:0){
-                            Text("Ryan Saris")
+                            Text(careData.name)
                                 .font(.custom(FontContent.plusMedium, size: 13))
                             Spacer()
                             Image(systemName: "star.fill")

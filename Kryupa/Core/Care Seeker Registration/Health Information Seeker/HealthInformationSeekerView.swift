@@ -45,7 +45,14 @@ struct HealthInformationSeekerView: View {
                     
                     medicalConditionDropdownView
                     
-                    
+                    if viewModel.medicalConditionDropDownSelected.contains("Other"){
+                        textFieldViewWithHeader(
+                            title: "Other",
+                            placeHolder: "(Max 100 words)",
+                            value: $viewModel.medicalConditionSelected,
+                            keyboard: .asciiCapable
+                        )
+                    }
                     
                     textFieldViewWithHeader(
                         title: "Allergies",
@@ -53,9 +60,6 @@ struct HealthInformationSeekerView: View {
                         value: $viewModel.allergiesValue,
                         keyboard: .asciiCapable
                     )
-                    .onTapGesture {
-                        
-                    }
                     
                     mobilityLevelView
                     
@@ -81,8 +85,6 @@ struct HealthInformationSeekerView: View {
                 })
                 .padding(.top,10)
                 .padding([.leading,.trailing],24)
-                
-                
             }
         }
         .scrollIndicators(.hidden)
@@ -96,24 +98,11 @@ struct HealthInformationSeekerView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Medical Condition")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusRegular, size: 17))
             
-            ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.medicalConditionArray) { condition in
-                    if let condition{
-                        PillView(
-                            isSelected: viewModel.medicalConditionSelected == condition,
-                            name: condition
-                        )
-                        .asButton(.press) {
-                            viewModel.medicalConditionSelected = condition
-                        }
-                    }else{
-                        EmptyView()
-                    }
-                }
-            }
         }
     }
     
@@ -189,7 +178,7 @@ struct HealthInformationSeekerView: View {
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 16))
-            .padding(.bottom,20)
+            .padding(.bottom,10)
             
             DropDownView(
                 selectedValue: viewModel.mobilityLevel,
@@ -203,7 +192,7 @@ struct HealthInformationSeekerView: View {
     private var medicalConditionDropdownView: some View{
         VStack(alignment: .leading, spacing:0,
                content: {
-            DropDownView(
+            DropDownWithCheckBoxView(
                 selectedValue: viewModel.medicalConditionDropDownSelected,
                 placeHolder: "View More",
                 values: AppConstants.medicalConditionArray) { value in
@@ -211,7 +200,8 @@ struct HealthInformationSeekerView: View {
                 }
                 
         })
-        .padding(.top,10)
+        .padding(.bottom,-10)
+//        .padding(.top,10)
     }
 }
 
