@@ -12,7 +12,7 @@ struct DropDownView: View {
     @State var selectedValue: String? = nil
     var placeHolder: String = "Select"
     @State private var showDropDown: Bool = false
-    var values: [String] = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden"]
+    var values: [String] = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","Bedridden"]
     
     var onSelectedValue: ((String)->Void)? = nil
     
@@ -31,12 +31,14 @@ struct DropDownView: View {
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .foregroundStyle(._7_C_7_C_80)
                 }
+                    
                 
                 Image("PersonalInfoDropDown")
                     .padding(.trailing,12)
                     .frame(width: 24,height: 24)
                 
             }
+            .frame(height: 48)
             .font(.custom(FontContent.plusRegular, size: 15))
             .padding([.leading,.trailing],10)
             .background {
@@ -52,19 +54,22 @@ struct DropDownView: View {
             
             
             if showDropDown{
-                VStack(spacing: 15){
-                    ForEach(values, id: \.self) { value in
-                        dropDownView(value: value)
-                            .frame(maxWidth: .infinity,alignment: .leading)
-                            .padding(.horizontal,10)
-                            .onTapGesture {
-                                onSelectedValue?(value)
-                                selectedValue = value
-                                showDropDown = false
-                            }
+                ScrollView{
+                    VStack(spacing: 15){
+                        ForEach(values, id: \.self) { value in
+                            dropDownView(value: value)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                                .padding(.horizontal,10)
+                                .onTapGesture {
+                                    onSelectedValue?(value)
+                                    selectedValue = value
+                                    showDropDown = false
+                                }
+                        }
                     }
+                    .padding([.top,.bottom],15)
                 }
-                .padding([.top,.bottom],20)
+                .frame(height: values.count > 4 ? 200 : .infinity)
             }
         }
         .background{

@@ -29,6 +29,7 @@ func makeUIView(context: Context) -> WKWebView {
 extension Notification.Name {
     static let setLobbyScreen = Notification.Name("SetLobbyScreen")
     static let setCareGiverHomeScreen = Notification.Name("setCareGiverHomeScreen")
+    static let setCareSeekerHomeScreen = Notification.Name("setCareSeekerHomeScreen")
 }
 
 

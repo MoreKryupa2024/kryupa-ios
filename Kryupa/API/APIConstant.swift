@@ -45,7 +45,6 @@ class FontContent{
     static let besMedium = "Besley-Medium"
     static let besSemiBold = "Besley-SemiBold"
     static let besBold = "Besley-Bold"
-    
 }
 
 class AppConstants{
@@ -62,7 +61,7 @@ class AppConstants{
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","3-4 Years","5-10 Years","10+ Years"]
-    static let languageSpeakingArray = ["English","Spanish","French","Hindi","Portuguese",""]
+    static let languageSpeakingArray = ["English","Spanish","French","Hindi","German","Russian","Korean","Arabic","Vietnamese","Tagalog","Cantonese and Mandarin",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden"]
     static let distanceArray = ["Within 1 mile","1-5 miles","5-10 miles"]
     static let relationArray = ["Spouse/Partner","Parent","Child","Sibling"]

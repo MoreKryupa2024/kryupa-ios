@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 
 class SelectProfileImageViewModel: ObservableObject{
-    @Published var camera = CameraModal()
+//    @Published var camera = CameraModal()
     let cameraAuthStatus = AVCaptureDevice.authorizationStatus(for: .video)
     @Published var profileSelected: Bool = false
     @Published var profilePicture: UIImage? = nil
