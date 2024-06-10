@@ -84,6 +84,8 @@
 		BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798A2C05FD32005C12AB /* WeakDayView.swift */; };
 		BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798C2C05FDD8005C12AB /* BannerView.swift */; };
 		BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */; };
+		BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */; };
+		BEFB67102C170938003ED6DF /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670F2C170938003ED6DF /* ChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +161,8 @@
 		BEEB798A2C05FD32005C12AB /* WeakDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakDayView.swift; sourceTree = "<group>"; };
 		BEEB798C2C05FDD8005C12AB /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeSlotsView.swift; sourceTree = "<group>"; };
+		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
+		BEFB670F2C170938003ED6DF /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatView.swift; path = Kryupa/Core/ChatView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,7 +364,7 @@
 			children = (
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
-				A3BE6BD12C108B9300E4B605 /* Chat */,
+				BEFB670E2C1708DA003ED6DF /* Chat */,
 				BE92FD152C09A61400EDF49C /* CareSeekerHome */,
 				BE6BA47C2C08A228005361C3 /* CareGiverHome */,
 				BEE28AB92C05A35E00A3CDFF /* BGV Lobby */,
@@ -376,7 +380,8 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A36DE7B52C11BEB0002E0ACD /* Chat */,
+				BEFB670B2C1708AC003ED6DF /* ChatComponent */,
+				A3F06DC12C0F37A800B1A14E /* CareGiverHome */,
 				BE92FD192C09A8E900EDF49C /* CareSeekerHome */,
 				BEE28AC32C05FC5500A3CDFF /* Lobby */,
 				BEE28AC22C05FC3400A3CDFF /* On-Boarding */,
@@ -578,6 +583,23 @@
 			path = "Customer Registration";
 			sourceTree = "<group>";
 		};
+		BEFB670B2C1708AC003ED6DF /* ChatComponent */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */,
+			);
+			path = ChatComponent;
+			sourceTree = "<group>";
+		};
+		BEFB670E2C1708DA003ED6DF /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB670F2C170938003ED6DF /* ChatView.swift */,
+			);
+			name = Chat;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -680,7 +702,7 @@
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
-				A3BE6BD32C108BB300E4B605 /* ChatView.swift in Sources */,
+				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
@@ -701,6 +723,7 @@
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
+				BEFB67102C170938003ED6DF /* ChatView.swift in Sources */,
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				BE4FBDB12BFB7F5F003442BB /* PersonalInformationSeekerView.swift in Sources */,
