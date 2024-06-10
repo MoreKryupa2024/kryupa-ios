@@ -22,12 +22,12 @@ struct CareGiverPortfolioView: View {
                 VStack(spacing: 2) {
                     Text("Alex Chatterjee")
                         .font(.custom(FontContent.besMedium, size: 16))
-                        .foregroundStyle(._242426)
+                        .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text("$40.00")
                         .font(.custom(FontContent.plusRegular, size: 13))
-                        .foregroundStyle(._242426)
+                        .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -104,7 +104,7 @@ struct CareGiverPortfolioView: View {
                     .padding(.top, 10)
                     .padding(.horizontal, 22)
                     .font(.custom(FontContent.plusRegular, size: 11))
-                    .foregroundStyle(._242426)
+                    .foregroundStyle(.appMain)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
 
@@ -129,7 +129,7 @@ struct CareGiverPortfolioView: View {
             HStack {
                 Text("View")
                     .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(._242426)
+                    .foregroundStyle(.appMain)
                     .frame(height: 32)
                     .frame(width: 78)
                     .asButton(.press) {
@@ -138,7 +138,7 @@ struct CareGiverPortfolioView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .inset(by: 1)
-                            .stroke(._242426, lineWidth: 1)
+                            .stroke(.appMain, lineWidth: 1)
                     )
 
                 

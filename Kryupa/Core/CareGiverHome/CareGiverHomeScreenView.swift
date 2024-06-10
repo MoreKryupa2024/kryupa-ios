@@ -107,7 +107,7 @@ struct CareGiverHomeScreenView: View {
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .minimumScaleFactor(0.01)
                 .frame(height: 20)
-                .withBackground(color: ._242426,cornerRadius: 30)
+                .withBackground(color: .appMain,cornerRadius: 30)
                 .foregroundStyle(.white)
                 .padding(.trailing, 15.0)
         }
