@@ -21,6 +21,8 @@
 		A3BB87AF2C1718A500C604DD /* BookingCareGiverListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87AD2C1718A500C604DD /* BookingCareGiverListView.swift */; };
 		A3BB87B32C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B02C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift */; };
 		A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */; };
+		A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B62C17225000C604DD /* PersonalDetailView.swift */; };
+		A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -114,6 +116,8 @@
 		A3BB87AD2C1718A500C604DD /* BookingCareGiverListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCareGiverListView.swift; sourceTree = "<group>"; };
 		A3BB87B02C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenView.swift; sourceTree = "<group>"; };
 		A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
+		A3BB87B62C17225000C604DD /* PersonalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailView.swift; sourceTree = "<group>"; };
+		A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailViewModel.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -245,6 +249,15 @@
 				A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */,
 			);
 			path = RecommendedGiverDetail;
+			sourceTree = "<group>";
+		};
+		A3BB87B52C17223C00C604DD /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
+				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
@@ -411,6 +424,7 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A3BB87B52C17223C00C604DD /* Accounts */,
 				A36DE7C52C171261002E0ACD /* Chat */,
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
@@ -751,6 +765,7 @@
 				BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */,
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
+				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
@@ -769,6 +784,7 @@
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */,
+				A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
