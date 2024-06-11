@@ -16,9 +16,8 @@ struct ContentView: View {
             switch showScreen {
             case 1: IntroductionScreenView()
             case 2: LobbyScreenView()
-            case 3: CareGiverHomeScreenView()
-            case 4: CareSeekerHomeScreenView()
-            case 5: RecommendedCareGiverDetailScreenView()
+            case 3: CareGiverHomeScreenView()//Giver Tab View Controller
+            case 4: CareSeekerHomeScreenView()//seeker Tab View Controller
             default:
                 splashView
             }
@@ -51,7 +50,7 @@ struct ContentView: View {
         .onAppear {
             
             NotificationCenter.default.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
-                                using: self.VPNDidChangeStatus)
+                                using: self.setCareGiverLobbyScreen)
             
             NotificationCenter.default.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
                                 using: self.setCareGiverHomeScreen)
@@ -61,7 +60,7 @@ struct ContentView: View {
         }
     }
     
-    func VPNDidChangeStatus(_ notification: Notification) {
+    func setCareGiverLobbyScreen(_ notification: Notification) {
         showScreen = 2
     }
     
