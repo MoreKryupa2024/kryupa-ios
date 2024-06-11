@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
+		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
+		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -86,12 +89,6 @@
 		BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA42BFDC73A00B6A7B0 /* FirebaseAuth */; };
 		BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */; };
 		BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */; };
-		BEB108462C17282300FDC55C /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108432C17282300FDC55C /* ZoomVideoSDK.xcframework */; };
-		BEB108472C17282300FDC55C /* ZoomVideoSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108432C17282300FDC55C /* ZoomVideoSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BEB108482C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108442C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework */; };
-		BEB108492C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108442C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BEB1084A2C17282300FDC55C /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108452C17282300FDC55C /* zoomcml.xcframework */; };
-		BEB1084B2C17282300FDC55C /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEB108452C17282300FDC55C /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */; };
 		BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */; };
 		BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */; };
@@ -115,9 +112,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BEB108492C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */,
-				BEB1084B2C17282300FDC55C /* zoomcml.xcframework in Embed Frameworks */,
-				BEB108472C17282300FDC55C /* ZoomVideoSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +119,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A36BC3702C185163005616A5 /* zoomcml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = zoomcml.xcframework; path = Kryupa/Frameworks/zoomcml.xcframework; sourceTree = "<group>"; };
+		A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDK.xcframework; path = Kryupa/Frameworks/ZoomVideoSDK.xcframework; sourceTree = "<group>"; };
+		A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDKUIToolkit.xcframework; path = Kryupa/Frameworks/ZoomVideoSDKUIToolkit.xcframework; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -200,9 +197,6 @@
 		BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInformationSeekerViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCareSeekarViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileImageViewModel.swift; sourceTree = "<group>"; };
-		BEB108432C17282300FDC55C /* ZoomVideoSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDK.xcframework; path = "../../Downloads/videosdk-ui-toolkit-ios-sample-main/ZoomVideoSDK.xcframework"; sourceTree = "<group>"; };
-		BEB108442C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDKUIToolkit.xcframework; path = "../../Downloads/videosdk-ui-toolkit-ios-sample-main/ZoomVideoSDKUIToolkit.xcframework"; sourceTree = "<group>"; };
-		BEB108452C17282300FDC55C /* zoomcml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = zoomcml.xcframework; path = "../../Downloads/videosdk-ui-toolkit-ios-sample-main/zoomcml.xcframework"; sourceTree = "<group>"; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
 		BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewModel.swift; sourceTree = "<group>"; };
 		BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulScreeenView.swift; sourceTree = "<group>"; };
@@ -229,10 +223,10 @@
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
-				BEB108462C17282300FDC55C /* ZoomVideoSDK.xcframework in Frameworks */,
-				BEB108482C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
-				BEB1084A2C17282300FDC55C /* zoomcml.xcframework in Frameworks */,
+				A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */,
+				A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
 				BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */,
+				A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,9 +631,9 @@
 		BEB108422C17282300FDC55C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BEB108452C17282300FDC55C /* zoomcml.xcframework */,
-				BEB108432C17282300FDC55C /* ZoomVideoSDK.xcframework */,
-				BEB108442C17282300FDC55C /* ZoomVideoSDKUIToolkit.xcframework */,
+				A36BC3702C185163005616A5 /* zoomcml.xcframework */,
+				A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */,
+				A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
