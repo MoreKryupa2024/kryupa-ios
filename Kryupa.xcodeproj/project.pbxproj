@@ -10,6 +10,8 @@
 		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
 		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
 		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
+		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
+		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -122,6 +124,8 @@
 		A36BC3702C185163005616A5 /* zoomcml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = zoomcml.xcframework; path = Kryupa/Frameworks/zoomcml.xcframework; sourceTree = "<group>"; };
 		A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDK.xcframework; path = Kryupa/Frameworks/ZoomVideoSDK.xcframework; sourceTree = "<group>"; };
 		A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDKUIToolkit.xcframework; path = Kryupa/Frameworks/ZoomVideoSDKUIToolkit.xcframework; sourceTree = "<group>"; };
+		A36BC3762C18527A005616A5 /* MyServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServicesView.swift; sourceTree = "<group>"; };
+		A36BC3782C185396005616A5 /* MyServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceViewModel.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 			children = (
 				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
 				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
+				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
+				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -857,6 +863,7 @@
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
 				A3BB87A42C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift in Sources */,
+				A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */,
 				BE644E432BF4BB7C00A6781F /* NetworkManager.swift in Sources */,
 				BE1573B32BF5F06E00A6137D /* SocialLoginScreenView.swift in Sources */,
 				BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */,
@@ -866,6 +873,7 @@
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
+				A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */,
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
