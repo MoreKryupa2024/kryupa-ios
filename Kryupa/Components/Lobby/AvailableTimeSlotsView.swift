@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct AvailableTimeSlotsView: View {
-    
-    var slotData: BGVInterviewSlotsListDataModel?
+    var isSelected: Bool = false
     var availablity: String = "Available"
     var availablityTime: String = "10:00am - 10:30am"
     
@@ -35,7 +34,8 @@ struct AvailableTimeSlotsView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(lineWidth: 1)
                 .frame(height: 64)
-                .background(.white)
+                .background(isSelected ? .D_1_D_1_D_6 : .white)
+                .clipShape(.rect(cornerRadius: 10))
                 .foregroundStyle(.E_5_E_5_EA)
         }
         .padding(.bottom,40)

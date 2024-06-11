@@ -20,8 +20,15 @@ struct BGVTimeSlotScreenView: View {
                 
                 ScrollView {
                     VStack(spacing:0){
-                        ForEach(viewModel.availableSlotsList) { _ in
-                            AvailableTimeSlotsView()
+                        ForEach(viewModel.availableSlotsList, id: \.id) { slot in
+                            
+                            AvailableTimeSlotsView(
+                                isSelected: viewModel.selectedSlotID == slot.id,
+                                availablityTime: "\(slot.startingTime.convertDateFormater(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a")) - \(slot.endTime.convertDateFormater(beforeFormat: "HH:mm:ss.SSSs", afterFormat: "h:mm a"))"
+                            )
+                            .asButton {
+                                viewModel.selectedSlotID = slot.id
+                            }
                         }
                     }
                     .padding(.top,20)
@@ -34,7 +41,7 @@ struct BGVTimeSlotScreenView: View {
                     .padding(.vertical,27)
                     .asButton(.press) {
                         router.showScreen(.push) { _ in
-                            InterviewScheduledScreenView()
+                            InterviewScheduledScreenView(selectedSlotID: viewModel.selectedSlotID)
                         }
                     }
             }

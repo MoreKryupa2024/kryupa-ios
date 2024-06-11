@@ -7,30 +7,52 @@
 
 import SwiftUI
 import SwiftfulUI
+import ZoomVideoSDKUIToolkit
 
 struct LobbyScreenView: View {
     @Environment(\.router) var router
     
+    @State var isPresented = false
+    @StateObject private var viewModel = LobbyScreenViewModel()
+    
     var body: some View {
         
-        VStack(spacing:0) {
-            HeaderView
-            ScrollView {
-                ScheduleInterview
-                ReferView
-                    .asButton(.press) {
-                        router.showScreen(.push) { _ in
-                            ReferAndEarnScreenView()
+        ZStack{
+            VStack(spacing:0) {
+                HeaderView
+                ScrollView {
+                    ScheduleInterview
+                    ReferView
+                        .asButton(.press) {
+                            router.showScreen(.push) { _ in
+                                ReferAndEarnScreenView()
+                            }
                         }
-                    }
-                VerificationStatus
-                    .padding(.horizontal,24)
-                    .padding(.vertical,20)
-                BannerContentView
+                    VerificationStatus
+                        .padding(.horizontal,24)
+                        .padding(.vertical,20)
+                    BannerContentView
+                }
+            }
+            if isPresented {
+                ZoomScreenView { error in
+                    print("error :- \(error.description)")
+                } onViewLoadedAction: {
+                    print("loaded")
+                } onViewDismissedAction: {
+                    isPresented = false
+                }
+            }
+            
+            if viewModel.isloading{
+                LoadingView()
             }
         }
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear(perform: {
+            viewModel.getLobbyStatus()
+        })
     }
     
     private var BannerContentView: some View{
@@ -107,6 +129,9 @@ struct LobbyScreenView: View {
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
+                    .asButton {
+                        isPresented = true
+                    }   
             }
             .padding(.horizontal,24)
         }

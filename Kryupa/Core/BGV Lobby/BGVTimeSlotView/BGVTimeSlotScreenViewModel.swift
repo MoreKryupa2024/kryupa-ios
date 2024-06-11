@@ -9,6 +9,7 @@ import Foundation
 
 class BGVTimeSlotScreenViewModel: ObservableObject{
     var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
+    @Published var selectedSlotID: String = String()
     var availableSlotsList: [BGVInterviewSlotsListDataModel] = [BGVInterviewSlotsListDataModel]()
     @Published var isloading: Bool = Bool()
     

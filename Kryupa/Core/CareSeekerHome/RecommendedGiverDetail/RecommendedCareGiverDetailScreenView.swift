@@ -136,6 +136,11 @@ struct RecommendedCareGiverDetailScreenView: View {
             .padding(.vertical,30)
          
             MessageButton
+                .asButton(.press){
+                    router.showScreen(.push) { route in
+                        ChatView()
+                    }
+                }
         }
     }
     

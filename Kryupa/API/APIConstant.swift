@@ -23,7 +23,9 @@ class APIConstant{
     static let uploadProfile = "\(baseURL)/apis/user/file/uploadFile"
     static let careGiverCreateProfile = "\(baseURL)/apis/user/caregiver/create_profile"
     static let customerCreateProfile = "\(baseURL)/apis/user/customer/create_profile"
-    static let getSlotList = "\(baseURL)/apis/user/caregivers/lobby/slot_list"
+    static let getSlotList = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/slot_list"//CP
+    static let bookSlot = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/book_slot"//CP
+    static let lobbyStatus = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/lobby_status"//CP
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
     static let getRecommandationList = "\(baseURL)/apis/user/home/getAllCustomerHomeData"

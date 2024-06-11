@@ -12,8 +12,14 @@ struct BGVInterviewSlotsListModel: Codable {
     let data: [BGVInterviewSlotsListDataModel]
 }
 
+// MARK: - Empty
+struct BGVInterviewSlotStatusModel: Codable {
+    let success: Bool
+    let message: String
+}
+
 // MARK: - Datum
-struct BGVInterviewSlotsListDataModel: Codable,Identifiable {
-    let id, startingTime, endTime, avabilityDate, timeZone: String
+struct BGVInterviewSlotsListDataModel: Codable {
+    let id, startingTime, endTime, availabilityDate, timezone: String
     
 }

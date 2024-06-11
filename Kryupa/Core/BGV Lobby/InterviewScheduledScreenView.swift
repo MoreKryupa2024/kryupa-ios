@@ -11,6 +11,8 @@ import SwiftfulRouting
 struct InterviewScheduledScreenView: View {
     
     @Environment(\.router) var router
+    var selectedSlotID: String = "cfbbe5bc-d016-447b-8336-d12a6a0ebca6"
+    @StateObject private var viewModel = LobbyScreenViewModel()
     
     var body: some View {
         ScrollView{
@@ -35,8 +37,6 @@ struct InterviewScheduledScreenView: View {
                 
                     .onAppear{
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-//                            NotificationCenter.default.post(name: .setCareGiverHomeScreen,
-//                                                                            object: nil, userInfo: nil)
                             router.dismissScreenStack()
                         }
                     }
@@ -44,6 +44,9 @@ struct InterviewScheduledScreenView: View {
         }
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
+        .task {
+            viewModel.bookSlot(id: selectedSlotID)
+        }
     }
 }
 
