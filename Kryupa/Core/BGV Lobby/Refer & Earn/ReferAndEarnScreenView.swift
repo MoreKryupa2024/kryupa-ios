@@ -11,6 +11,8 @@ import SwiftfulUI
 struct ReferAndEarnScreenView: View {
     @Environment(\.router) var router
     
+    private let imageToShare = Image("mainLogo")
+    
     var body: some View {
         VStack{
             HeaderView
@@ -22,8 +24,12 @@ struct ReferAndEarnScreenView: View {
                 }
                 .padding(.horizontal,24)
                 ReferPointsView
-                nextButton
-                    .padding(.top,25)
+                
+                ShareLink(item: imageToShare,
+                          preview: SharePreview("Kryupa", image: imageToShare)) {
+                    nextButton
+                        .padding(.top,25)
+                }
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)

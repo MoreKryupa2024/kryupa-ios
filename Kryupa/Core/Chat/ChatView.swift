@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct ChatView: View {
-    
+    @Environment(\.router) var router
     @State var sendMsgText: String = ""
     @State private var messages = [
         Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
@@ -41,7 +41,7 @@ struct ChatView: View {
             sendMessageView
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var sendMessageView: some View{
@@ -144,6 +144,7 @@ struct ChatView: View {
                 .resizable()
                 .frame(width: 30,height: 30)
                 .asButton(.press) {
+                    router.dismissScreen()
                 }
             
             Text("Alexa Chatterjee")

@@ -52,7 +52,6 @@ extension Date {
                                       serverTime: dateFormatChange(dateFormat: "HH:mm:ss", dates: date))
             arrDates.append(weakDay)
         }
-        print(arrDates)
         return arrDates
     }
 }
