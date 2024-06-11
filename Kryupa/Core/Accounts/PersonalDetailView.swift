@@ -30,6 +30,9 @@ struct PersonalDetailView: View {
             AdditionalInfoView
             line
             QualificationView
+            line
+            EducationDropdownView
+            languageDropdownView
         }
         .overlay(alignment: .top) {
                 Color.clear
@@ -41,6 +44,54 @@ struct PersonalDetailView: View {
             UIScrollView.appearance().bounces = false
         }
         
+    }
+    
+    private var languageDropdownView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Language")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusRegular, size: 16))
+            .padding(.bottom,10)
+            
+            DropDownWithCheckBoxView(
+                selectedValue: viewModel.languageDropDownSelected,
+                placeHolder: "Select Language",
+                values: viewModel.languageList) { value in
+                    viewModel.languageDropDownSelected = value
+                }
+
+        })
+        .padding(.horizontal,24)
+        .padding(.top, 10)
+        .padding(.bottom,-10)
+    }
+    
+    private var EducationDropdownView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Education")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusRegular, size: 16))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.education,
+                placeHolder: "College Degree",
+                values: viewModel.educationList) { value in
+                    viewModel.education = value
+                }
+        })
+        .padding(.horizontal,24)
+        .padding(.top, 10)
     }
     
     private var QualificationView: some View{
@@ -66,7 +117,7 @@ struct PersonalDetailView: View {
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._242426)
                 Spacer()
-                Text("Chinese, English, French")
+                Text( viewModel.languageDropDownSelected.isEmpty ? "-" : "\(viewModel.languageDropDownSelected.joined(separator: ","))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._242426)
             }
