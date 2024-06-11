@@ -146,7 +146,7 @@ struct PreferenceView: View {
             
             
             ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
                     
                     if let languageSpeakingArray{
                         HStack(spacing:0){

@@ -55,7 +55,7 @@ class AppConstants{
     static let SeekCare = "customer"
     static let GiveCare = "caregiver"
     
-    static let medicalConditionArray = ["Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","None","Other"]
+    static let medicalConditionArray = ["None","Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","Other"]
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","3-4 Years","5-10 Years","10+ Years"]

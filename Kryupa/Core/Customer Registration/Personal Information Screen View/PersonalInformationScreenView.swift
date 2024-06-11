@@ -116,7 +116,7 @@ struct PersonalInformationScreenView: View {
         
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
-        .modifier(DismissingKeyboard())
+//        .modifier(DismissingKeyboard())
     }
     
     //MARK: Send Code Button View

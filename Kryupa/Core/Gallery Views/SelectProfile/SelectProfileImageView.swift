@@ -72,7 +72,7 @@ struct SelectProfileImageView: View {
             
             Text("Please take a clear photo of yourself for\nyour profile.")
                 .multilineTextAlignment(.center)
-                .font(.custom(FontContent.plusRegular, size: 13))
+                .font(.custom(FontContent.plusRegular, size: 14))
                 .foregroundStyle(._444446)
                 .padding(.top,35)
             
@@ -147,7 +147,7 @@ struct SelectProfileImageView: View {
             .padding(.top,50)
             
             Text("Picture added successfully!")
-                .font(.custom(FontContent.plusRegular, size: 13))
+                .font(.custom(FontContent.plusRegular, size: 14))
                 .foregroundStyle(._444446)
                 .padding(.top,35)
         }

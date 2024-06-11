@@ -19,7 +19,7 @@ struct CheckBoxView: View {
                 .frame(width: 18,height: 18)
             Text(name)
         }
-        .font(.custom(FontContent.plusRegular, size: 12))
+        .font(.custom(FontContent.plusRegular, size: 15))
         .foregroundStyle(.appMain)
     }
 }

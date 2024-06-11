@@ -55,7 +55,7 @@ struct PersonalDetailView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             .padding(.bottom,10)
             
             DropDownWithCheckBoxView(
@@ -132,7 +132,7 @@ struct PersonalDetailView: View {
             HStack(spacing:0){
                 Text("Additional info")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             
             ZStack{

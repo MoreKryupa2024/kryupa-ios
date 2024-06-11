@@ -102,7 +102,7 @@ struct PreferenceCareSeekarView: View {
             HStack(spacing:0){
                 Text("Years of Experience")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             ZStack{
                 NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.yearsOfExperienceArray) { experience in
@@ -138,7 +138,7 @@ struct PreferenceCareSeekarView: View {
             HStack(spacing:0){
                 Text("Gender Preference")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             
             ZStack{
@@ -167,7 +167,7 @@ struct PreferenceCareSeekarView: View {
             HStack(spacing:0){
                 Text("Need Service In")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             
             ZStack{
@@ -200,11 +200,11 @@ struct PreferenceCareSeekarView: View {
             HStack(spacing:0){
                 Text("Language Preference")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             
             ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
                     
                     if let languageSpeakingArray{
                         HStack(spacing:0){

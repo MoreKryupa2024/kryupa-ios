@@ -254,7 +254,7 @@ struct ExperienceandSkillsView: View {
             HStack(spacing:0){
                 Text("Area Of Expertise")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusRegular, size: 17))
             
             
             ZStack{

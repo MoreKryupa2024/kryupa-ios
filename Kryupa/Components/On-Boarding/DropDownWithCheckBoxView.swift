@@ -61,13 +61,22 @@ struct DropDownWithCheckBoxView: View {
                             dropDownView(value: value)
                                 .frame(maxWidth: .infinity,alignment: .leading)
                                 .padding(.horizontal,10)
+                                .background()
                                 .onTapGesture {
-                                    if selectedValue.contains(value){
-                                        selectedValue = selectedValue.filter{$0 != value}
+                                    
+                                    if value == "None"{
+                                        showDropDown = false
+                                        selectedValue = [value]
                                     }else{
-                                        selectedValue.append(value)
+                                        if selectedValue.contains(value){
+                                            selectedValue = selectedValue.filter{$0 != value}
+                                        }else{
+                                            if selectedValue.contains("None"){
+                                                selectedValue = []
+                                            }
+                                            selectedValue.append(value)
+                                        }
                                     }
-//                                    showDropDown = false
                                     onSelectedValue?(selectedValue)
                                 }
                         }
@@ -96,11 +105,11 @@ struct DropDownWithCheckBoxView: View {
                         size: 15
                     )
                 )
-            
-            
-            Image(!(selectedValue.contains(value)) ? "checkboxUnselected" : "checkboxSelected")
-                .padding(.trailing,12)
-                .frame(width: 24,height: 24)
+            if value != "None"{
+                Image(!(selectedValue.contains(value)) ? "checkboxUnselected" : "checkboxSelected")
+                    .padding(.trailing,12)
+                    .frame(width: 24,height: 24)
+            }
         }
     }
 }
