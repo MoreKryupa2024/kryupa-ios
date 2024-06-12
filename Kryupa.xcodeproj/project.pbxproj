@@ -18,6 +18,8 @@
 		A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */; };
 		A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */; };
 		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
+		A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38F2C19A508005616A5 /* CareGiverHomeScreenViewModel.swift */; };
+		A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3912C19A6B2005616A5 /* JobsModel.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -138,6 +140,8 @@
 		A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewModel.swift; sourceTree = "<group>"; };
 		A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListView.swift; sourceTree = "<group>"; };
 		A36BC38D2C19976A005616A5 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		A36BC38F2C19A508005616A5 /* CareGiverHomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverHomeScreenViewModel.swift; sourceTree = "<group>"; };
+		A36BC3912C19A6B2005616A5 /* JobsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 				BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */,
 				BE6BA4782C086DEF005361C3 /* BGVInterviewSlotsListModel.swift */,
 				BE92FD1F2C09E10800EDF49C /* BookingFormScreenModel.swift */,
+				A36BC3912C19A6B2005616A5 /* JobsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -590,6 +595,7 @@
 		BE6BA47C2C08A228005361C3 /* CareGiverHome */ = {
 			isa = PBXGroup;
 			children = (
+				A36BC38F2C19A508005616A5 /* CareGiverHomeScreenViewModel.swift */,
 				BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */,
 			);
 			path = CareGiverHome;
@@ -868,12 +874,14 @@
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
+				A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
+				A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				BE4FBDB12BFB7F5F003442BB /* PersonalInformationSeekerView.swift in Sources */,
 				A3BB87A22C1717B500C604DD /* BookingRecommendationModel.swift in Sources */,

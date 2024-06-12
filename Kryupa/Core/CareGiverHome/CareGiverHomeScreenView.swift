@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CareGiverHomeScreenView: View {
+    @StateObject private var viewModel = CareGiverHomeScreenViewModel()
+
     var body: some View {
         VStack(spacing:0){
             HeaderView
@@ -22,9 +24,13 @@ struct CareGiverHomeScreenView: View {
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
-        }
-        .task {
             
+            if viewModel.isloading{
+                LoadingView()
+            }
+        }
+        .onAppear{
+            viewModel.getJobsNearYouList()
         }
         
     }
@@ -144,8 +150,10 @@ struct CareGiverHomeScreenView: View {
                 
         ScrollView(.horizontal) {
             HStack(spacing:1){
-                ForEach(1...3) { index in
-                    CareGiverPortfolioView()
+                ForEach(viewModel.jobsNearYou, id: \.customerInfo.name) { jobPost in
+
+//                ForEach(1...3) { index in
+                    CareGiverPortfolioView(job: jobPost)
                         .scrollTransition(.interactive, axis: .horizontal) { view, phase in
                             view.scaleEffect(phase.isIdentity ? 1 : 0.85)
                         }
