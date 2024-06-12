@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
+		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
+		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
+		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
+		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
+		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
+		A36BC3842C186961005616A5 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3832C186961005616A5 /* PaymentMethodCell.swift */; };
+		A36BC3882C1879CC005616A5 /* PaymentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3872C1879CC005616A5 /* PaymentListView.swift */; };
+		A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */; };
+		A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */; };
+		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -130,6 +141,14 @@
 		A36BC3702C185163005616A5 /* zoomcml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = zoomcml.xcframework; path = Kryupa/Frameworks/zoomcml.xcframework; sourceTree = "<group>"; };
 		A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDK.xcframework; path = Kryupa/Frameworks/ZoomVideoSDK.xcframework; sourceTree = "<group>"; };
 		A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDKUIToolkit.xcframework; path = Kryupa/Frameworks/ZoomVideoSDKUIToolkit.xcframework; sourceTree = "<group>"; };
+		A36BC3762C18527A005616A5 /* MyServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServicesView.swift; sourceTree = "<group>"; };
+		A36BC3782C185396005616A5 /* MyServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceViewModel.swift; sourceTree = "<group>"; };
+		A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryCell.swift; sourceTree = "<group>"; };
+		A36BC3832C186961005616A5 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
+		A36BC3872C1879CC005616A5 /* PaymentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListView.swift; sourceTree = "<group>"; };
+		A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewModel.swift; sourceTree = "<group>"; };
+		A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListView.swift; sourceTree = "<group>"; };
+		A36BC38D2C19976A005616A5 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -243,6 +262,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A36BC37C2C186285005616A5 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */,
+				A36BC3832C186961005616A5 /* PaymentMethodCell.swift */,
+				A36BC38D2C19976A005616A5 /* ReviewCell.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
 		A36DE7C02C171063002E0ACD /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +319,11 @@
 			children = (
 				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
 				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
+				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
+				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
+				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
+				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
+				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -488,6 +522,7 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A36BC37C2C186285005616A5 /* Accounts */,
 				A36DE7C22C171241002E0ACD /* CareGiverHome */,
 				BEFB670B2C1708AC003ED6DF /* ChatComponent */,
 				BE92FD192C09A8E900EDF49C /* CareSeekerHome */,
@@ -828,12 +863,14 @@
 			files = (
 				BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */,
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
+				A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
+				A36BC3842C186961005616A5 /* PaymentMethodCell.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
 				A3BB87AA2C17186400C604DD /* CareGiverNearByCustomerScreenView.swift in Sources */,
@@ -865,18 +902,22 @@
 				A3BB87A22C1717B500C604DD /* BookingRecommendationModel.swift in Sources */,
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
+				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */,
 				A3BB87B32C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				A3BB87A62C17180900C604DD /* DropDownWithCheckBoxView.swift in Sources */,
 				A3BB87AB2C17186400C604DD /* CareGiverNearByCustomerScreenViewModel.swift in Sources */,
+				A36BC3882C1879CC005616A5 /* PaymentListView.swift in Sources */,
 				BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */,
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
 				A3BB87A42C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift in Sources */,
+				A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */,
+				A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */,
 				BE644E432BF4BB7C00A6781F /* NetworkManager.swift in Sources */,
 				BE1573B32BF5F06E00A6137D /* SocialLoginScreenView.swift in Sources */,
 				BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */,
@@ -885,7 +926,9 @@
 				BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */,
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
+				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
+				A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */,
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
