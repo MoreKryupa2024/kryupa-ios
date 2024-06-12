@@ -55,7 +55,7 @@ struct PersonalDetailView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownWithCheckBoxView(
@@ -80,7 +80,7 @@ struct PersonalDetailView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -98,7 +98,7 @@ struct PersonalDetailView: View {
         
         VStack(alignment: .leading, spacing: 10) {
             Text("Qualifications")
-                .font(.custom(FontContent.plusRegular, size: 17))
+                .font(.custom(FontContent.plusMedium, size: 17))
                 .foregroundStyle(._242426)
             
             
@@ -132,7 +132,7 @@ struct PersonalDetailView: View {
             HStack(spacing:0){
                 Text("Additional info")
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -164,8 +164,7 @@ struct PersonalDetailView: View {
         
         return HStack {
             Text("Years of experience")
-                .font(.custom(FontContent.plusRegular, size: 13))
-                .foregroundStyle(._7_C_7_C_80)
+                .font(.custom(FontContent.plusMedium, size: 17))
             
             Spacer()
             
@@ -217,7 +216,7 @@ struct PersonalDetailView: View {
                 HStack(spacing:0){
                     Text(title)
                 }
-                .font(.custom(FontContent.plusRegular, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value, axis: .vertical) {
                 Text(placeHolder)

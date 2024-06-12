@@ -57,11 +57,11 @@ struct MobileNumberScreenView: View {
     private var mobileNumberHeaderTitleView: some View{
         HStack(spacing:0){
             Text("Enter Phone No.")
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.appMain)
             Text("*")
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.red)
                 Spacer()

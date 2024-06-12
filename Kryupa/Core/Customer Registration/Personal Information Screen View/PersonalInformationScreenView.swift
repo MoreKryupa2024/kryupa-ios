@@ -168,7 +168,7 @@ struct PersonalInformationScreenView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -190,7 +190,7 @@ struct PersonalInformationScreenView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -210,7 +210,7 @@ struct PersonalInformationScreenView: View {
                     Text("*")
                         .foregroundStyle(.red)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             
             HStack(spacing:0){
@@ -258,7 +258,7 @@ struct PersonalInformationScreenView: View {
                     Text("*")
                         .foregroundStyle(.red)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value.toUnwrapped(defaultValue: "")) {
                 Text(placeHolder)

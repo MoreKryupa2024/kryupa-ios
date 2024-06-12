@@ -97,7 +97,7 @@ struct PersonalInformationSeekerView: View {
         
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
-        .modifier(DismissingKeyboard())
+//        .modifier(DismissingKeyboard())
     }
     
     private var genderDropdownView: some View{
@@ -109,7 +109,7 @@ struct PersonalInformationSeekerView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -130,7 +130,7 @@ struct PersonalInformationSeekerView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -192,7 +192,7 @@ struct PersonalInformationSeekerView: View {
                     Text("*")
                         .foregroundStyle(.red)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             
             HStack(spacing:0){
@@ -239,7 +239,7 @@ struct PersonalInformationSeekerView: View {
                     Text("*")
                         .foregroundStyle(.red)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value.toUnwrapped(defaultValue: "")) {
                 Text(placeHolder)

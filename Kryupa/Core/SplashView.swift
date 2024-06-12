@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulRouting
 
 struct ContentView: View {
-    @State var showScreen : Int = Int()
+    @State var showScreen : Int = Defaults().showScreen
     
     var body: some View {
         RouterView() { _ in
@@ -21,6 +21,21 @@ struct ContentView: View {
             default:
                 splashView
             }
+        }
+        .onAppear {
+            delayText()
+            
+            NotificationCenter.default.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
+                                using: self.setCareGiverLobbyScreen)
+            
+            NotificationCenter.default.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
+                                using: self.setCareGiverHomeScreen)
+            
+            NotificationCenter.default.addObserver(forName: .setCareSeekerHomeScreen, object: nil, queue: nil,
+                                using: self.setCareSeekerHomeScreen)
+            
+            NotificationCenter.default.addObserver(forName: .logout, object: nil, queue: nil,
+                                using: self.logout)
         }
     }
     
@@ -44,37 +59,32 @@ struct ContentView: View {
                     .foregroundStyle(._444446)
             }
         }
-        .task {
-            delayText()
-        }
-        .onAppear {
-            
-            NotificationCenter.default.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
-                                using: self.setCareGiverLobbyScreen)
-            
-            NotificationCenter.default.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
-                                using: self.setCareGiverHomeScreen)
-            
-            NotificationCenter.default.addObserver(forName: .setCareSeekerHomeScreen, object: nil, queue: nil,
-                                using: self.setCareSeekerHomeScreen)
-        }
     }
     
-    func setCareGiverLobbyScreen(_ notification: Notification) {
+    private func setCareGiverLobbyScreen(_ notification: Notification) {
         showScreen = 2
+        Defaults().showScreen = 2
     }
     
-    func setCareGiverHomeScreen(_ notification: Notification) {
+    private func setCareGiverHomeScreen(_ notification: Notification) {
         showScreen = 3
+        Defaults().showScreen = 3
     }
     
-    func setCareSeekerHomeScreen(_ notification: Notification) {
+    private func setCareSeekerHomeScreen(_ notification: Notification) {
         showScreen = 4
+        Defaults().showScreen = 4
+    }
+    
+    private func logout(_ notification: Notification) {
+        Defaults().showScreen = 1
+        delayText()
     }
     
     private func delayText() {
+        showScreen = 0
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            showScreen = 1
+            showScreen = Defaults().showScreen == 0 ? 1 : Defaults().showScreen
         }
     }
 }

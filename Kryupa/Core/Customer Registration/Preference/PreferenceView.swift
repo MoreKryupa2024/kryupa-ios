@@ -124,7 +124,7 @@ struct PreferenceView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -142,7 +142,7 @@ struct PreferenceView: View {
             HStack(spacing:0){
                 Text("Language Preference")
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -180,7 +180,7 @@ struct PreferenceView: View {
                 Text("Distance")
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(

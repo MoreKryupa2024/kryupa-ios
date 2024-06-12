@@ -94,15 +94,14 @@ struct EmergencyContactView: View {
     private var mobileNumberHeaderTitleView: some View{
         HStack(spacing:0){
             Text("Enter Phone No.")
-                .font(.custom(FontContent.plusMedium, size: 16))
-                .multilineTextAlignment(.center)
                 .foregroundStyle(.appMain)
+            
             Text("*")
-                .font(.custom(FontContent.plusMedium, size: 16))
-                .multilineTextAlignment(.center)
                 .foregroundStyle(.red)
             Spacer()
         }
+        .font(.custom(FontContent.plusMedium, size: 17))
+        .multilineTextAlignment(.center)
     }
     
     //MARK: Mobile Number Field View
@@ -149,7 +148,7 @@ struct EmergencyContactView: View {
                     Text("*")
                         .foregroundStyle(.red)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value) {
                 Text(placeHolder)
@@ -215,7 +214,7 @@ struct EmergencyContactView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(

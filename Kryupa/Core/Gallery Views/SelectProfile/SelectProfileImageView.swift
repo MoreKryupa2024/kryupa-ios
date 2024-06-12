@@ -79,18 +79,11 @@ struct SelectProfileImageView: View {
             nextButton
                 .padding(.top,55)
                 .asButton(.press) {
-                    switch viewModel.cameraAuthStatus {
-                    case .notDetermined:
-                        camera.requestCameraPermission()
-                    case .authorized:
+                    if camera.isTaken{
                         isTaken = true
-                        
-                    case .restricted, .denied:
-                        camera.requestCameraPermission()
-                    @unknown default:
-                        fatalError()
+                    }else{
+                        presentAlert(title: "Kryupa", subTitle: "Please Allow Camera Access to our app.")
                     }
-                    
                 }
                 .fullScreenCover(isPresented: $isTaken) {
                     CameraPickerView() { image in
