@@ -75,7 +75,7 @@ struct ContentView: View {
     
     private func delayText() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            showScreen = 5
+            showScreen = 1
         }
     }
 }
