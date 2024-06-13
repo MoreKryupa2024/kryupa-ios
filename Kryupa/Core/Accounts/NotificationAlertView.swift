@@ -18,7 +18,7 @@ struct NotificationAlertView: View {
 
     var body: some View {
         VStack {
-            HeaderView
+            HeaderView(title: "Notification Alert")
             LazyVStack(spacing: 15) {
                 ForEach(Array(arrNotificationAlert.enumerated()), id: \.offset) { index, model in
 
@@ -31,33 +31,6 @@ struct NotificationAlertView: View {
             }
             Spacer()
         }
-    }
-    
-    private var HeaderView: some View{
-        
-        VStack(spacing: 24) {
-            ZStack{
-                Image("KryupaLobby")
-                    .resizable()
-                    .frame(width: 124,height: 20)
-                
-                HStack{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                        }
-                    Spacer()
-                    Image("NotificationBellIcon")
-                        .frame(width: 25,height: 25)
-                }
-                .padding(.horizontal,24)
-            }
-            Text("Notification Alert")
-                .font(.custom(FontContent.besMedium, size: 20))
-                .foregroundStyle(.appMain)
-        }
-        
     }
     
     private func getNotificationCellView(title: String, toggleState: Bool, index: Int)-> some View{

@@ -10,39 +10,12 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         VStack {
-            HeaderView
+            HeaderView(title: "Settings")
             getSettingsCellView(imgName: "setting_notification", title: "Notifications & Alert", withLine: true)
             getSettingsCellView(imgName: "setting_delete_account", title: "Delete or deactivate account", withLine: true)
             getSettingsCellView(imgName: "setting_language", title: "Language", withLine: false)
             Spacer()
         }
-    }
-    
-    private var HeaderView: some View{
-        
-        VStack(spacing: 24) {
-            ZStack{
-                Image("KryupaLobby")
-                    .resizable()
-                    .frame(width: 124,height: 20)
-                
-                HStack{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                        }
-                    Spacer()
-                    Image("NotificationBellIcon")
-                        .frame(width: 25,height: 25)
-                }
-                .padding(.horizontal,24)
-            }
-            Text("Settings")
-                .font(.custom(FontContent.besMedium, size: 20))
-                .foregroundStyle(.appMain)
-        }
-        
     }
     
     private var line: some View {
