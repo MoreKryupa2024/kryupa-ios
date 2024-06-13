@@ -22,6 +22,7 @@
 		A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */; };
 		A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A22C1B0828005616A5 /* AboutUsView.swift */; };
 		A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A42C1B0864005616A5 /* HeaderView.swift */; };
+		A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -161,6 +162,7 @@
 		A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivateAccountView.swift; sourceTree = "<group>"; };
 		A36BC3A22C1B0828005616A5 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		A36BC3A42C1B0864005616A5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
 				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
 				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
@@ -921,6 +924,7 @@
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
+				A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,

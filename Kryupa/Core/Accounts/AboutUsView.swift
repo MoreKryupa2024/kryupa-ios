@@ -29,14 +29,12 @@ struct AboutUsView: View {
         VStack {
             HeaderView(title: "About Caregiver")
             ScrollView {
-//                LazyVStack(spacing: 20) {
                     ForEach(Array(arrAboutUs.enumerated()), id: \.offset) { index, model in
                         getParaView(title: model.title, desc: model.desc)
                     }
                     ForEach(Array(arrBulletList.enumerated()), id: \.offset) { index, model in
                         getBulletPointList(text: model.title)
                     }
-//                }
             }
             .scrollIndicators(.hidden)
             .padding(.horizontal, 25)
