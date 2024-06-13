@@ -7,8 +7,16 @@
 
 import SwiftUI
 import Combine
+import SocketIO
 
 struct ChatView: View {
+    
+    // Create a Socket.IO manager instance
+    let socketManager = SocketManager(socketURL: URL(string: "https://test-rn-social-sockets.herokuapp.com")!, config: [.log(true), .compress])
+
+    // Create a Socket.IO client
+//    let socket = socketManager.defaultSocket
+
     @Environment(\.router) var router
     @State var sendMsgText: String = ""
     @State private var messages = [
@@ -42,6 +50,28 @@ struct ChatView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .toolbar(.hidden, for: .navigationBar)
+        .task {
+            connectSocket()
+        }
+        .onAppear() {
+            socketManager.defaultSocket.on("new message") { data, ack in
+                if let message = data.first as? String {
+                    print("New message received: \(message)")
+                    messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
+                }
+            }
+        }
+        .onDisappear() {
+            socketManager.defaultSocket.disconnect()
+        }
+    }
+    
+    func connectSocket() {
+        socketManager.defaultSocket.on(clientEvent: .connect) { data, ack in
+            print("Socket connected")
+        }
+
+        socketManager.defaultSocket.connect()
     }
     
     private var sendMessageView: some View{
@@ -76,7 +106,8 @@ struct ChatView: View {
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
+                            socketManager.defaultSocket.emit("chat message", sendMsgText)
+//                            messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
                             sendMsgText = ""
                         }
                 }

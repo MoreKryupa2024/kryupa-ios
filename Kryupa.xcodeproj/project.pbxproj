@@ -18,6 +18,7 @@
 		A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */; };
 		A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */; };
 		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
+		A36BC3952C19C574005616A5 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A36BC3942C19C574005616A5 /* SocketIO */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -237,6 +238,7 @@
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
+				A36BC3952C19C574005616A5 /* SocketIO in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
 				A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */,
@@ -765,6 +767,7 @@
 				BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */,
 				BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */,
 				BE95D5CB2C0449D400881B3C /* IQKeyboardManagerSwift */,
+				A36BC3942C19C574005616A5 /* SocketIO */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -801,6 +804,7 @@
 				BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				A36BC3932C19C574005616A5 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
@@ -1148,6 +1152,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A36BC3932C19C574005616A5 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulRouting.git";
@@ -1199,6 +1211,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A36BC3942C19C574005616A5 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A36BC3932C19C574005616A5 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
 		BE644E482BF4CBC900A6781F /* SwiftfulRouting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */;

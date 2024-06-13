@@ -19,6 +19,7 @@ struct ContentView: View {
             case 3: CareGiverHomeScreenView()//Giver Tab View Controller
             case 4: CareSeekerHomeScreenView()//seeker Tab View Controller
             case 5: PaymentListView(selectedPaymentMethod: 0)
+            case 6: ChatView()
             default:
                 splashView
             }
@@ -75,7 +76,7 @@ struct ContentView: View {
     
     private func delayText() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            showScreen = 3
+            showScreen = 6
         }
     }
 }
