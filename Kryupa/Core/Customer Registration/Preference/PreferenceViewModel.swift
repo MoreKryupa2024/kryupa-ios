@@ -15,7 +15,7 @@ class PreferenceViewModel: ObservableObject{
     @Published var isLoading:Bool = false
     
     func dataChecks(parameters:[String:Any],alert:@escaping((String)->Void),next:@escaping(()->Void)){
-        isLoading = true
+        
         
         guard let mobilityLevel = preferenceListData.mobilityLevel, mobilityLevel != "" else {
             return alert("Please Select Mobility Level")
@@ -28,7 +28,7 @@ class PreferenceViewModel: ObservableObject{
             return alert("Please Select Distance")
         }
         
-       
+        isLoading = true
         var param = parameters
         param["preferenceList"] = [
             "mobility_level": mobilityLevel,
