@@ -11,6 +11,10 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             HeaderView
+            getSettingsCellView(imgName: "setting_notification", title: "Notifications & Alert", withLine: true)
+            getSettingsCellView(imgName: "setting_delete_account", title: "Delete or deactivate account", withLine: true)
+            getSettingsCellView(imgName: "setting_language", title: "Language", withLine: false)
+            Spacer()
         }
     }
     
@@ -37,10 +41,6 @@ struct SettingsView: View {
             Text("Settings")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
-            getSettingsCellView(imgName: "setting_notification", title: "Notifications & Alert", withLine: true)
-            getSettingsCellView(imgName: "setting_delete_account", title: "Delete or deactivate account", withLine: true)
-            getSettingsCellView(imgName: "setting_language", title: "Language", withLine: false)
-            Spacer()
         }
         
     }
@@ -50,8 +50,8 @@ struct SettingsView: View {
             .background(.F_2_F_2_F_7)
             .padding(.trailing, 30)
             .padding(.leading, 0)
-            .padding(.top, 10)
-        }
+            .padding(.vertical, 10)
+    }
     
     private func getSettingsCellView(imgName: String, title: String, withLine: Bool)-> some View{
         VStack {

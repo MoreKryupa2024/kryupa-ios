@@ -18,6 +18,7 @@
 		A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3962C1AC689005616A5 /* FAQView.swift */; };
 		A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */; };
 		A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39C2C1AE906005616A5 /* SettingsView.swift */; };
+		A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -153,6 +154,7 @@
 		A36BC3962C1AC689005616A5 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQExpandView.swift; sourceTree = "<group>"; };
 		A36BC39C2C1AE906005616A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
 				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
+				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
+				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
 				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
