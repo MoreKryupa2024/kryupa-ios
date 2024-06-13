@@ -17,7 +17,7 @@ struct DeactivateAccountView: View {
 
     var body: some View {
         VStack {
-            HeaderView
+            HeaderView(title: "Deactivate / Delete account")
             DeleteView
             Spacer()
         }
@@ -79,33 +79,6 @@ struct DeactivateAccountView: View {
             
         }
 
-    }
-    
-    private var HeaderView: some View{
-        
-        VStack(spacing: 24) {
-            ZStack{
-                Image("KryupaLobby")
-                    .resizable()
-                    .frame(width: 124,height: 20)
-                
-                HStack{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                        }
-                    Spacer()
-                    Image("NotificationBellIcon")
-                        .frame(width: 25,height: 25)
-                }
-                .padding(.horizontal,24)
-            }
-            Text("Deactivate / Delete account")
-                .font(.custom(FontContent.besMedium, size: 20))
-                .foregroundStyle(.appMain)
-        }
-        
     }
 }
 
