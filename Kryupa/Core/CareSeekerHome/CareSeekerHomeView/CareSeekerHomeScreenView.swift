@@ -23,6 +23,12 @@ struct CareSeekerHomeScreenView: View {
                         .frame(height: 58)
                         .padding(.horizontal,24)
                         .padding(.top,15)
+                        .asButton(.press) {
+                            router.showScreen(.push) { router in
+                                BookingFormScreenView()
+                            }
+                        }
+                    
                     
                     BookFirstServiceView
                     

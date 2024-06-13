@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
-		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
-		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
 		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
 		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
@@ -50,6 +47,7 @@
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
+		BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */; };
 		BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */; };
 		BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9D2BFB0FD7003442BB /* PillView.swift */; };
 		BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */; };
@@ -175,6 +173,7 @@
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
+		BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerTabBarScreenView.swift; sourceTree = "<group>"; };
 		BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsView.swift; sourceTree = "<group>"; };
 		BE4FBD9D2BFB0FD7003442BB /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
 		BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
@@ -372,6 +371,14 @@
 			path = Extention;
 			sourceTree = "<group>";
 		};
+		BE484DCF2C1AE258001E3901 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		BE4FBD9A2BFB04B9003442BB /* Experience and Skills */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +508,7 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE484DCF2C1AE258001E3901 /* Tabbar */,
 				BE0948752C19BE5100FC2DE0 /* ServiceCancelled */,
 				A3BB87B52C17223C00C604DD /* Accounts */,
 				A36DE7C52C171261002E0ACD /* Chat */,
@@ -941,6 +949,7 @@
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
+				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
