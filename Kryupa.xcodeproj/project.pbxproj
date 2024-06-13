@@ -15,6 +15,9 @@
 		A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */; };
 		A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */; };
 		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
+		A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3962C1AC689005616A5 /* FAQView.swift */; };
+		A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */; };
+		A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39C2C1AE906005616A5 /* SettingsView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -147,6 +150,9 @@
 		A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewModel.swift; sourceTree = "<group>"; };
 		A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsListView.swift; sourceTree = "<group>"; };
 		A36BC38D2C19976A005616A5 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		A36BC3962C1AC689005616A5 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQExpandView.swift; sourceTree = "<group>"; };
+		A36BC39C2C1AE906005616A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -267,6 +273,7 @@
 				A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */,
 				A36BC3832C186961005616A5 /* PaymentMethodCell.swift */,
 				A36BC38D2C19976A005616A5 /* ReviewCell.swift */,
+				A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -323,6 +330,8 @@
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -874,6 +883,7 @@
 				A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
+				A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
@@ -911,6 +921,7 @@
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
+				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */,
@@ -935,6 +946,7 @@
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
+				A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
 				A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */,
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
