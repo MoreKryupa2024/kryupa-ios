@@ -19,7 +19,7 @@ struct ContentView: View {
             case 3: CareGiverHomeScreenView()//Giver Tab View Controller
             case 4: CareSeekerHomeScreenView()//seeker Tab View Controller
             case 5: PaymentListView(selectedPaymentMethod: 0)
-            case 6: FAQView()
+            case 6: SettingsView()
             default:
                 splashView
             }

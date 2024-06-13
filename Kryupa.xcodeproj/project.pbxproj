@@ -20,6 +20,7 @@
 		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
 		A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3962C1AC689005616A5 /* FAQView.swift */; };
 		A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */; };
+		A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39C2C1AE906005616A5 /* SettingsView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -142,6 +143,7 @@
 		A36BC38D2C19976A005616A5 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		A36BC3962C1AC689005616A5 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQExpandView.swift; sourceTree = "<group>"; };
+		A36BC39C2C1AE906005616A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
+				A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
