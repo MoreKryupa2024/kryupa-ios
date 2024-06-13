@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     
     var title = ""
+    var showBackButton = false
     
     var body: some View {
         
@@ -20,11 +21,14 @@ struct HeaderView: View {
                     .frame(width: 124,height: 20)
                 
                 HStack{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                        }
+                    if showBackButton {
+                        Image("navBack")
+                            .resizable()
+                            .frame(width: 30,height: 30)
+                            .asButton(.press) {
+                            }
+                    }
+                    
                     Spacer()
                     Image("NotificationBellIcon")
                         .frame(width: 25,height: 25)
