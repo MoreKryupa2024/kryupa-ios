@@ -23,6 +23,7 @@
 		A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A22C1B0828005616A5 /* AboutUsView.swift */; };
 		A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A42C1B0864005616A5 /* HeaderView.swift */; };
 		A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */; };
+		A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A82C1B1EA9005616A5 /* AccountView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -163,6 +164,7 @@
 		A36BC3A22C1B0828005616A5 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		A36BC3A42C1B0864005616A5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
+		A36BC3A82C1B1EA9005616A5 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
 				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
 				A36BC3A22C1B0828005616A5 /* AboutUsView.swift */,
+				A36BC3A82C1B1EA9005616A5 /* AccountView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -961,6 +964,7 @@
 				BE4FBDA92BFB5EFB003442BB /* EmergencyContactView.swift in Sources */,
 				BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */,
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
+				A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */,
 				A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
