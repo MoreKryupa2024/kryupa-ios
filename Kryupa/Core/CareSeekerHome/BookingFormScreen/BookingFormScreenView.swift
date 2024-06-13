@@ -133,7 +133,7 @@ struct BookingFormScreenView: View {
         VStack{
             Text("Pick Date & Time")
                 .frame(maxWidth: .infinity,alignment: .leading)
-                .font(.custom(FontContent.plusRegular, size: 17))
+                .font(.custom(FontContent.plusMedium, size: 17))
             if viewModel.segSelected == "One Time"{
                 WeakDayContentView
             }else{
@@ -252,7 +252,7 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Years of Experience")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             ZStack{
                 NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.yearsOfExperienceArray) { experience in
@@ -281,11 +281,11 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Language Speaking")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
                     
                     if let languageSpeakingArray{
                         HStack(spacing:0){
@@ -320,7 +320,7 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Gender")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -352,7 +352,7 @@ struct BookingFormScreenView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,20)
             
             DropDownView(
@@ -400,7 +400,7 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Need Service In")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -433,7 +433,7 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Additional Skills")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -466,7 +466,7 @@ struct BookingFormScreenView: View {
             HStack(spacing:0){
                 Text("Additional info")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{

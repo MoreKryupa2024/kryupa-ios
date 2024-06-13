@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
-		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
-		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
 		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
 		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
@@ -38,6 +35,14 @@
 		A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */; };
 		A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B62C17225000C604DD /* PersonalDetailView.swift */; };
 		A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */; };
+		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
+		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
+		BE09486F2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE0948702C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
+		BE0948712C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */; };
+		BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -46,6 +51,7 @@
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
+		BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */; };
 		BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */; };
 		BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9D2BFB0FD7003442BB /* PillView.swift */; };
 		BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */; };
@@ -124,6 +130,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BE0948712C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */,
+				BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */,
+				BE09486F2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +171,8 @@
 		A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		A3BB87B62C17225000C604DD /* PersonalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailView.swift; sourceTree = "<group>"; };
 		A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailViewModel.swift; sourceTree = "<group>"; };
+		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -170,6 +181,7 @@
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
+		BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerTabBarScreenView.swift; sourceTree = "<group>"; };
 		BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsView.swift; sourceTree = "<group>"; };
 		BE4FBD9D2BFB0FD7003442BB /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
 		BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
@@ -244,13 +256,13 @@
 			files = (
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
+				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
-				A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */,
-				A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
+				BE0948702C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
+				BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */,
 				BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */,
-				A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +339,14 @@
 			path = Accounts;
 			sourceTree = "<group>";
 		};
+		BE0948752C19BE5100FC2DE0 /* ServiceCancelled */ = {
+			isa = PBXGroup;
+			children = (
+				BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */,
+			);
+			path = ServiceCancelled;
+			sourceTree = "<group>";
+		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +381,14 @@
 				BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		BE484DCF2C1AE258001E3901 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		BE4FBD9A2BFB04B9003442BB /* Experience and Skills */ = {
@@ -492,6 +520,8 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE484DCF2C1AE258001E3901 /* Tabbar */,
+				BE0948752C19BE5100FC2DE0 /* ServiceCancelled */,
 				A3BB87B52C17223C00C604DD /* Accounts */,
 				A36DE7C52C171261002E0ACD /* Chat */,
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
@@ -650,6 +680,7 @@
 				A3BB87AD2C1718A500C604DD /* BookingCareGiverListView.swift */,
 				A3BB87AC2C1718A500C604DD /* ReviewListView.swift */,
 				BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */,
+				BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */,
 			);
 			path = CareSeekerHome;
 			sourceTree = "<group>";
@@ -809,7 +840,6 @@
 			packageReferences = (
 				BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */,
 				BE644E892BF4D86D00A6781F /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
-				BEC3658C2BFCB864005AC4A0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
@@ -883,6 +913,7 @@
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
+				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
@@ -924,6 +955,7 @@
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
+				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
@@ -933,6 +965,7 @@
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
 				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
+				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
@@ -1194,14 +1227,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.1.0;
-			};
-		};
-		BEC3658C2BFCB864005AC4A0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.4.3;
 			};
 		};
 		BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {

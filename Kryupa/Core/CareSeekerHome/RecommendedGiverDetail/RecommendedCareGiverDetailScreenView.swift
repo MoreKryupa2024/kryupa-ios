@@ -46,12 +46,6 @@ struct RecommendedCareGiverDetailScreenView: View {
         }
     }
     
-    private var ReViewList:some View{
-        ForEach(1...5){ index in
-            
-        }
-    }
-    
    private var SegmentView: some View {
         HStack(alignment: .top,spacing: 0){
             ForEach(viewModel.options,id: \.self){ option in

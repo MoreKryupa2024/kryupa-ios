@@ -130,8 +130,20 @@ struct LobbyScreenView: View {
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
                     .asButton {
-                        isPresented = true
-                    }   
+                        //                        isPresented = true
+                        
+                        let primaryAction = UIAlertAction(title: "OK", style: .default) { action in
+                            let domain = Bundle.main.bundleIdentifier!
+                            UserDefaults.standard.removePersistentDomain(forName: domain)
+                            UserDefaults.standard.synchronize()
+                            NotificationCenter.default.post(name: .logout,
+                                                                            object: nil, userInfo: nil)
+                        }
+                        
+                        let secondaryAction = UIAlertAction(title: "Cancel", style: .cancel)
+                        
+                        presentAlert(title: "Kryupa", subTitle: "Log Out",primaryAction: primaryAction,secondaryAction: secondaryAction)
+                    }
             }
             .padding(.horizontal,24)
         }
