@@ -23,7 +23,10 @@ struct NotificationAlertView: View {
                 ForEach(Array(arrNotificationAlert.enumerated()), id: \.offset) { index, model in
 
                     getNotificationCellView(title: model.title, toggleState: model.toggleState,index: index)
-                    line
+                    if index != arrNotificationAlert.count - 1 {
+                        line
+                    }
+                    
                 }
             }
             Spacer()
