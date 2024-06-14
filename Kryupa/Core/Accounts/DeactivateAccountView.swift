@@ -17,10 +17,11 @@ struct DeactivateAccountView: View {
 
     var body: some View {
         VStack {
-            HeaderView(title: "Deactivate / Delete account")
+            HeaderView(title: "Deactivate / Delete account",showBackButton: true)
             DeleteView
             Spacer()
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func getCheckboxCell(title: String, toggleState: Bool, index: Int)-> some View{

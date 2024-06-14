@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct HeaderView: View {
+    
+    @Environment(\.router) var router
     
     var title = ""
     var showBackButton = false
@@ -26,6 +29,7 @@ struct HeaderView: View {
                             .resizable()
                             .frame(width: 30,height: 30)
                             .asButton(.press) {
+                                router.dismissScreen()
                             }
                     }
                     

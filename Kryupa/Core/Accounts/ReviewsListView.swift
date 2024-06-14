@@ -13,7 +13,7 @@ struct ReviewsListView: View {
     var body: some View {
         
         ScrollView {
-            HeaderView()
+            HeaderView(showBackButton: true)
             SegmentView
             
             if selectedSection == 0 {
@@ -37,6 +37,8 @@ struct ReviewsListView: View {
                 .padding(.top, 20)
             }
         }
+        .scrollIndicators(.hidden)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var SegmentView: some View{

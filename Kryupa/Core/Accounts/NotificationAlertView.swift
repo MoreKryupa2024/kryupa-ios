@@ -18,7 +18,7 @@ struct NotificationAlertView: View {
 
     var body: some View {
         VStack {
-            HeaderView(title: "Notification Alert")
+            HeaderView(title: "Notification Alert",showBackButton: true)
             LazyVStack(spacing: 15) {
                 ForEach(Array(arrNotificationAlert.enumerated()), id: \.offset) { index, model in
 
@@ -31,6 +31,7 @@ struct NotificationAlertView: View {
             }
             Spacer()
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func getNotificationCellView(title: String, toggleState: Bool, index: Int)-> some View{

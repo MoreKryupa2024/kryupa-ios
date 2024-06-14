@@ -16,7 +16,7 @@ struct ContentView: View {
             switch showScreen {
             case 1: IntroductionScreenView()
             case 2: LobbyScreenView()
-            case 3: CareGiverHomeScreenView()//Giver Tab View Controller
+            case 3: GiverTabbarScreenView()//Giver Tab View Controller
             case 4: ConsumerTabBarScreenView()//seeker Tab View Controller
             case 5: PaymentListView(selectedPaymentMethod: 0)
             case 6: NotificationAlertView()
@@ -79,8 +79,8 @@ struct ContentView: View {
     }
     
     private func logout(_ notification: Notification) {
-        Defaults().showScreen = 1
-        delayText()
+        showScreen = 1
+        Defaults().showScreen = 0
     }
     
     private func delayText() {

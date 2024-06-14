@@ -80,7 +80,7 @@ struct EmergencyContactView: View {
                     }
                 })
                 .padding(.top,30)
-                .padding([.leading,.trailing],24)
+                .padding(.horizontal,24)
                 
                 
             }
