@@ -84,7 +84,7 @@ struct HealthInformationSeekerView: View {
                     }
                 })
                 .padding(.top,10)
-                .padding([.leading,.trailing],24)
+                .padding(.horizontal,24)
             }
         }
         .scrollIndicators(.hidden)

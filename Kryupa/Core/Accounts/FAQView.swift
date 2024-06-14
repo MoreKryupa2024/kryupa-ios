@@ -18,7 +18,7 @@ struct FAQView: View {
     
     var body: some View {
         VStack {
-            HeaderView()
+            HeaderView(showBackButton: true)
             SegmentView
             
             if selectedSection == 0 {
@@ -61,9 +61,9 @@ struct FAQView: View {
                 
                 
                 sendMessageView
-                //                .toolbar(.hidden, for: .navigationBar)
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var sendMessageView: some View{

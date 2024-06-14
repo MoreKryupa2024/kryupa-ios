@@ -24,13 +24,13 @@ struct CareSeekerHomeScreenView: View {
                         .padding(.horizontal,24)
                         .padding(.top,15)
                         .asButton(.press) {
-                            router.showScreen(.push) { router in
-                                BookingFormScreenView()
-                            }
+                            NotificationCenter.default.post(name: .showBookingScreen,
+                                                                            object: nil, userInfo: nil)
+
                         }
                     
                     
-                    BookFirstServiceView
+//                    BookFirstServiceView
                     
                     UpcomingAppointmentsView
                         .padding(.top,30)
@@ -125,9 +125,8 @@ struct CareSeekerHomeScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
-                    router.showScreen(.push) { router in
-                        BookingFormScreenView()
-                    }
+                    NotificationCenter.default.post(name: .showBookingScreen,
+                                                                    object: nil, userInfo: nil)
                 }
         }
     }

@@ -6,16 +6,36 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct SettingsView: View {
+    
+    @Environment(\.router) var router
+    
     var body: some View {
         VStack {
-            HeaderView(title: "Settings")
+            HeaderView(title: "Settings",showBackButton: true)
             getSettingsCellView(imgName: "setting_notification", title: "Notifications & Alert", withLine: true)
+                .asButton(.press) {
+                    router.showScreen(.push) { rout in
+                        NotificationAlertView()
+                    }
+                }
             getSettingsCellView(imgName: "setting_delete_account", title: "Delete or deactivate account", withLine: true)
+                .asButton(.press) {
+                    router.showScreen(.push) { rout in
+                        DeactivateAccountView()
+                    }
+                }
             getSettingsCellView(imgName: "setting_language", title: "Language", withLine: false)
+                .asButton(.press) {
+//                    router.showScreen(.push) { rout in
+//                        <#code#>
+//                    }
+                }
             Spacer()
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var line: some View {

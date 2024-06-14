@@ -18,7 +18,7 @@ struct PaymentListView: View {
 
     var body: some View {
         ScrollView {
-            HeaderView()
+            HeaderView(showBackButton: true)
             SegmentView
             
             if selectedSection == 0 {
@@ -72,6 +72,8 @@ struct PaymentListView: View {
                 }
             }
         }
+        .scrollIndicators(.hidden)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var BankView: some View{

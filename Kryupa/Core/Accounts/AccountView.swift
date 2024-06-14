@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct AccountView: View {
-    @State var arrAccountList: [AccountListData] = [
-        AccountListData(title: "Personal Details", image: "personalDetail"),
-        AccountListData(title: "My Services", image: "myservice"),
-        AccountListData(title: "Payments", image: "payments"),
-        AccountListData(title: "Reviews", image: "reviews"),
-        AccountListData(title: "Help & FAQ", image: "help"),
-        AccountListData(title: "Settings", image: "settings"),
-        AccountListData(title: "About app", image: "aboutUs"),
-        AccountListData(title: "Logout", image: "logout")
-    ]
+    
+    @State var arrAccountList: [AccountListData] = {
+        if Defaults().userType == AppConstants.GiveCare{
+            return AppConstants.giverAccountSectionItems
+        }else{
+            return AppConstants.seekerAccountSectionItems
+        }
+    }()
+    
+    @Environment(\.router) var router
 
     var body: some View {
         
@@ -26,9 +27,19 @@ struct AccountView: View {
             LazyVStack(alignment:.leading, spacing: 20) {
                 ForEach(Array(arrAccountList.enumerated()), id: \.offset) { index, model in
                     getAccountCellView(model: model, index: index)
-                    if index == 4 || index == 6 {
-                        line
+                        .asButton(.press) {
+                            navigationLink(screen: model.title)
+                        }
+                    if Defaults().userType == AppConstants.GiveCare{
+                        if index == 4 || index == 6 {
+                            line
+                        }
+                    }else{
+                        if index == 3 || index == 5 {
+                            line
+                        }
                     }
+                    
                 }
             }
             .padding(.top, 20)
@@ -42,6 +53,47 @@ struct AccountView: View {
         .onAppear() {
             UIScrollView.appearance().bounces = false
         }
+    }
+
+    private func navigationLink(screen:String){
+        switch screen{
+        case "Personal Details":
+            router.showScreen(.push) { rout in
+                if Defaults().userType == AppConstants.GiveCare{
+                    PersonalDetailView()
+                }else{
+                    ProfileDetailScreenView()
+                }
+            }
+            
+        case "My Services": break
+            
+        case "Payments & Refunds","Payments":
+            router.showScreen(.push) { rout in
+                PaymentListView(selectedPaymentMethod: 0)
+            }
+            
+        case "Reviews":
+            router.showScreen(.push) { rout in
+                ReviewsListView()
+            }
+        case "Help & FAQ":
+            router.showScreen(.push) { rout in
+                FAQView()
+            }
+        case "Settings":
+            router.showScreen(.push) { rout in
+                SettingsView()
+            }
+        case "About app":
+            break
+        case "Logout":
+            break
+           
+        default:
+            break
+        }
+        
     }
     
     private var line: some View {
@@ -90,10 +142,9 @@ struct AccountView: View {
             }
             .frame(height: 74)
             .padding(.vertical, 20)
-            
+            .padding(.horizontal, 24)
             Spacer()
         }
-        .padding(.horizontal, 24)
         .background(.F_2_F_2_F_7)
         .clipShape(
             .rect (

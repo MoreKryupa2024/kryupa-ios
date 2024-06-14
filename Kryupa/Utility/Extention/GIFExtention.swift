@@ -31,6 +31,7 @@ extension Notification.Name {
     static let setCareGiverHomeScreen = Notification.Name("setCareGiverHomeScreen")
     static let setCareSeekerHomeScreen = Notification.Name("setCareSeekerHomeScreen")
     static let logout = Notification.Name("logout")
+    static let showBookingScreen = Notification.Name("ShowBookingScreen")
 }
 
 

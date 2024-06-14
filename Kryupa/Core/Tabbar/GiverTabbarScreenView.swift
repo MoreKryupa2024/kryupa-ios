@@ -1,33 +1,28 @@
 //
-//  ConsumerTabBarScreenView.swift
+//  GiverTabbarScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 13/06/24.
+//  Created by Hemant Singh Rajput on 14/06/24.
 //
 
 import SwiftUI
-import SwiftfulUI
 
-struct ConsumerTabBarScreenView: View {
+struct GiverTabbarScreenView: View {
     @State var selectedIndex: Int = 0
     
     var body: some View {
         VStack{
             switch selectedIndex{
             case 1: BookingScreenView()
-            case 2: BookingFormScreenView()
+            case 2: EmptyView()
             case 3: InboxScreenView()
             case 4: AccountView()
             default:
-                CareSeekerHomeScreenView()
+                CareGiverHomeScreenView()
             }
             
             Spacer()
             TabView
-        }
-        .onAppear{
-            NotificationCenter.default.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
-                                using: self.showBookingScreen)
         }
     }
     
@@ -66,7 +61,7 @@ struct ConsumerTabBarScreenView: View {
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 24,height: 24)
-                Text("Book now")
+                Text("Jobs")
                     .font(.custom(FontContent.plusRegular, size: 12))
             }
             .foregroundStyle(selectedIndex == 2 ? .appMain : ._7_C_7_C_80)
@@ -110,12 +105,8 @@ struct ConsumerTabBarScreenView: View {
         )
 //        .ignoresSafeArea()
     }
-    
-    private func showBookingScreen(_ notification: Notification) {
-        selectedIndex = 2
-    }
 }
 
 #Preview {
-    ConsumerTabBarScreenView()
+    GiverTabbarScreenView()
 }

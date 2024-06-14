@@ -117,7 +117,7 @@ struct SelectProfileImageView: View {
             Image(uiImage: image)
                 .resizable()
                 .frame(height: 250)
-                .clipShape(Circle())
+                .clipShape(.rect(cornerRadius: 125))
                 .padding(.top,40)
                 .padding([.leading,.trailing],52)
             

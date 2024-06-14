@@ -65,7 +65,27 @@ class AppConstants{
     static let relationArray = ["Spouse/Partner","Parent","Child","Sibling"]
     static let additionalSkillsAraay = ["Respite Care","Medical Transportation","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Heavy lifting"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
+    
+    static let giverAccountSectionItems = [
+        AccountListData(title: "Personal Details", image: "personalDetail"),
+        AccountListData(title: "My Services", image: "myservice"),
+        AccountListData(title: "Payments", image: "payments"),
+        AccountListData(title: "Reviews", image: "reviews"),
+        AccountListData(title: "Help & FAQ", image: "help"),
+        AccountListData(title: "Settings", image: "settings"),
+        AccountListData(title: "About app", image: "aboutUs"),
+        AccountListData(title: "Logout", image: "logout")
+    ]
 
+    static let seekerAccountSectionItems = [
+        AccountListData(title: "Personal Details", image: "personalDetail"),
+        AccountListData(title: "Payments & Refunds", image: "payments"),
+        AccountListData(title: "Reviews", image: "reviews"),
+        AccountListData(title: "Help & FAQ", image: "help"),
+        AccountListData(title: "Settings", image: "settings"),
+        AccountListData(title: "About app", image: "aboutUs"),
+        AccountListData(title: "Logout", image: "logout")
+    ]
     
     static let timeZones = ["CEST": "Europe/Paris", "WEST": "Europe/Lisbon", "CDT": "America/Chicago", "EET": "Europe/Istanbul", "BRST": "America/Sao Paulo", "EEST": "Europe/Istanbul", "CET": "Europe/Paris", "MSD": "Europe/Moscow", "MST": "America/Denver", "KST": "Asia/Seoul", "PET": "America/Lima", "NZDT": "Pacific/Auckland", "CLT": "America/Santiago", "HST": "Pacific/Honolulu", "MDT": "America/Denver", "NZST": "Pacific/Auckland", "COT": "America/Bogota", "CST": "America/Chicago", "SGT": "Asia/Singapore", "CAT": "Africa/Harare", "BRT": "America/Sao Paulo", "WET": "Europe/Lisbon", "IST": "Asia/Calcutta", "HKT": "Asia/Hong Kong", "GST": "Asia/Dubai", "EDT": "America/New York", "WIT": "Asia/Jakarta", "UTC": "UTC", "JST": "Asia/Tokyo", "IRST": "Asia/Tehran", "PHT": "Asia/Manila", "AKDT": "America/Juneau", "BST": "Europe/London", "PST": "America/Los Angeles", "ART": "America/Argentina/Buenos Aires", "PDT": "America/Los Angeles", "WAT": "Africa/Lagos", "EST": "America/New York", "BDT": "Asia/Dhaka", "CLST": "America/Santiago", "AKST": "America/Juneau", "ADT": "America/Halifax", "AST": "America/Halifax", "PKT": "Asia/Karachi", "GMT": "GMT", "ICT": "Asia/Bangkok", "MSK": "Europe/Moscow", "EAT": "Africa/Addis Ababa"]
 

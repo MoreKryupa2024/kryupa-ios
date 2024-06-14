@@ -372,12 +372,12 @@ struct BookingFormScreenView: View {
                 .frame(width: 124,height: 20)
             
             HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        router.dismissScreen()
-                    }
+//                Image("navBack")
+//                    .resizable()
+//                    .frame(width: 30,height: 30)
+//                    .asButton(.press) {
+//                        router.dismissScreen()
+//                    }
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
