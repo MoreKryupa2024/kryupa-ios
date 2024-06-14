@@ -56,6 +56,7 @@
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
+		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
 		BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */; };
 		BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */; };
 		BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9D2BFB0FD7003442BB /* PillView.swift */; };
@@ -191,6 +192,7 @@
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
+		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
 		BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerTabBarScreenView.swift; sourceTree = "<group>"; };
 		BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsView.swift; sourceTree = "<group>"; };
 		BE4FBD9D2BFB0FD7003442BB /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */,
+				BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */,
 			);
 			path = ServiceCancelled;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */,
+				BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */,
 				A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,

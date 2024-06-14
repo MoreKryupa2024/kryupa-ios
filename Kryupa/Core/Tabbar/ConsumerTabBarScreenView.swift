@@ -17,7 +17,7 @@ struct ConsumerTabBarScreenView: View {
             case 1: EmptyView()
             case 2: BookingFormScreenView()
             case 3: EmptyView()
-            case 4: EmptyView()
+            case 4: AccountView()
             default:
                 CareSeekerHomeScreenView()
             }

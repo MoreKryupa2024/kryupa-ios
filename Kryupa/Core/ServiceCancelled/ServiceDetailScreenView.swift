@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulUI
 
 struct ServiceDetailScreenView: View {
-    
+    @Environment(\.router) var router
     @State var review: String = "Nice and polite"
     
     var body: some View {
@@ -206,9 +206,9 @@ struct ServiceDetailScreenView: View {
             CancelButton
                 .padding(.top,30)
                 .asButton(.press){
-//                    router.showScreen(.push) { route in
-//                        ChatView()
-//                    }
+                    router.showScreen(.push) { route in
+                        ServiceCancelScreenView()
+                    }
                 }
         }
     }
@@ -256,7 +256,7 @@ struct ServiceDetailScreenView: View {
                     .resizable()
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
-//                        router.dismissScreen()
+                        router.dismissScreen()
                     }
                 Spacer()
                 Image("NotificationBellIcon")
