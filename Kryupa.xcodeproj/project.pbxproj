@@ -18,6 +18,12 @@
 		A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3962C1AC689005616A5 /* FAQView.swift */; };
 		A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */; };
 		A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39C2C1AE906005616A5 /* SettingsView.swift */; };
+		A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */; };
+		A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */; };
+		A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A22C1B0828005616A5 /* AboutUsView.swift */; };
+		A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A42C1B0864005616A5 /* HeaderView.swift */; };
+		A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */; };
+		A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A82C1B1EA9005616A5 /* AccountView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -154,6 +160,12 @@
 		A36BC3962C1AC689005616A5 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQExpandView.swift; sourceTree = "<group>"; };
 		A36BC39C2C1AE906005616A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertView.swift; sourceTree = "<group>"; };
+		A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivateAccountView.swift; sourceTree = "<group>"; };
+		A36BC3A22C1B0828005616A5 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
+		A36BC3A42C1B0864005616A5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
+		A36BC3A82C1B1EA9005616A5 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -332,8 +344,13 @@
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
 				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
+				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
+				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
+				A36BC3A22C1B0828005616A5 /* AboutUsView.swift */,
+				A36BC3A82C1B1EA9005616A5 /* AccountView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -549,6 +566,7 @@
 				BEE28AC32C05FC5500A3CDFF /* Lobby */,
 				BEE28AC22C05FC3400A3CDFF /* On-Boarding */,
 				BE1573B82BF631A400A6137D /* LoginFlow */,
+				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -913,6 +931,7 @@
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
+				A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
@@ -928,6 +947,7 @@
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
+				A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */,
 				BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */,
 				A3BB87B32C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				A3BB87A62C17180900C604DD /* DropDownWithCheckBoxView.swift in Sources */,
@@ -948,6 +968,8 @@
 				BE4FBDA92BFB5EFB003442BB /* EmergencyContactView.swift in Sources */,
 				BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */,
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
+				A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */,
+				A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
 				A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */,
@@ -957,6 +979,7 @@
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
 				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
+				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
@@ -964,6 +987,7 @@
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
+				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
 				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,

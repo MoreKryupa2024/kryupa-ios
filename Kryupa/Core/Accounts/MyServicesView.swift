@@ -15,7 +15,7 @@ struct MyServicesView: View {
     var body: some View {
         
         ScrollView {
-            HeaderView
+            HeaderView(title: "My Services")
             AreaOfExpertiseView
             line
             MySkillsView
@@ -134,33 +134,6 @@ struct MyServicesView: View {
         .padding(.top,10)
     }
     
-    private var HeaderView: some View{
-        
-        VStack(spacing: 24) {
-            ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                    }
-                Spacer()
-                Image("NotificationBellIcon")
-                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
-        
-        Text("My Services")
-            .font(.custom(FontContent.besMedium, size: 20))
-            .foregroundStyle(.appMain)
-    }
-        
-    }
 }
 
 #Preview {

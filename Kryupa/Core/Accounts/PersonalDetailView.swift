@@ -17,7 +17,7 @@ struct PersonalDetailView: View {
     var body: some View {
         
         ScrollView(showsIndicators: false){
-            HeaderView
+            HeaderTopView
             textFieldViewWithHeader(
                 title: "Bio",
                 placeHolder: "Input text",
@@ -238,35 +238,11 @@ struct PersonalDetailView: View {
 
     }
     
-    private var HeaderView: some View{
+    private var HeaderTopView: some View{
         VStack {
             
-            VStack(spacing: 24) {
-                
-                ZStack{
-                    Image("KryupaLobby")
-                        .resizable()
-                        .frame(width: 124,height: 20)
-                    
-                    HStack{
-                        Image("navBack")
-                            .resizable()
-                            .frame(width: 30,height: 30)
-                            .asButton(.press) {
-                            }
-                        Spacer()
-                        Image("NotificationBellIcon")
-                            .frame(width: 25,height: 25)
-                    }
-                    .padding(.horizontal,24)
-                }
-                
-                Text("Personal Details")
-                    .font(.custom(FontContent.besMedium, size: 20))
-                    .foregroundStyle(._242426)
-                
-            }
-            
+            HeaderView(title: "Personal Details")
+                        
             HStack {
                 
                 ZStack {
