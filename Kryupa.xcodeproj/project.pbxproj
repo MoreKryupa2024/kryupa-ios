@@ -43,6 +43,9 @@
 		A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */; };
 		A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B62C17225000C604DD /* PersonalDetailView.swift */; };
 		A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */; };
+		A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */; };
+		A3FEF6032C201C4100EFC3C2 /* JobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6022C201C4100EFC3C2 /* JobCell.swift */; };
+		A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */; };
 		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
 		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
@@ -195,6 +198,9 @@
 		A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		A3BB87B62C17225000C604DD /* PersonalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailView.swift; sourceTree = "<group>"; };
 		A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailViewModel.swift; sourceTree = "<group>"; };
+		A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
+		A3FEF6022C201C4100EFC3C2 /* JobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCell.swift; sourceTree = "<group>"; };
+		A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailView.swift; sourceTree = "<group>"; };
 		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
@@ -385,6 +391,23 @@
 				A36BC3A82C1B1EA9005616A5 /* AccountView.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		A3FEF5FE2C201C2300EFC3C2 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */,
+				A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		A3FEF6012C201C3200EFC3C2 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEF6022C201C4100EFC3C2 /* JobCell.swift */,
+			);
+			path = Jobs;
 			sourceTree = "<group>";
 		};
 		BE0948752C19BE5100FC2DE0 /* ServiceCancelled */ = {
@@ -612,6 +635,7 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A3FEF5FE2C201C2300EFC3C2 /* Jobs */,
 				BE484DCF2C1AE258001E3901 /* Tabbar */,
 				BE0948752C19BE5100FC2DE0 /* ServiceCancelled */,
 				A3BB87B52C17223C00C604DD /* Accounts */,
@@ -636,6 +660,7 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A3FEF6012C201C3200EFC3C2 /* Jobs */,
 				A36BC37C2C186285005616A5 /* Accounts */,
 				A36DE7C22C171241002E0ACD /* CareGiverHome */,
 				BEFB670B2C1708AC003ED6DF /* ChatComponent */,
@@ -992,8 +1017,10 @@
 				BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
 				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
+				A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
 				BE3C7F302C1C3EE7000848A6 /* ProfileDetailScreenView.swift in Sources */,
+				A3FEF6032C201C4100EFC3C2 /* JobCell.swift in Sources */,
 				BE3C7F322C1C4917000848A6 /* AddNewProfileScreenView.swift in Sources */,
 				A3BB87AA2C17186400C604DD /* CareGiverNearByCustomerScreenView.swift in Sources */,
 				BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */,
@@ -1001,6 +1028,7 @@
 				BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */,
 				BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */,
 				A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
+				A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */,
 				BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
