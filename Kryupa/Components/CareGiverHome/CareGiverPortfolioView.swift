@@ -172,6 +172,6 @@ struct CareGiverPortfolioView: View {
     }
 }
 
-#Preview {
-    CareGiverPortfolioView(job: JobPost(customerInfo: CustomerInfoData(name: "Alex Chatterjee", gender: "Male", price: "$40.00", diseaseType: ["Diabetes", "Heart Conditions"]), bookingDetails: BookingDetailsData(areaOfExpertise: ["Nursing", "Physical Tharapy"], bookingType: "One Time", startDate: "2024-06-04", endDate: "2024-06-04", startTime: "15:44:05", endTime: "15:56:00"), jobId: "abc"))
-}
+//#Preview {
+//    CareGiverPortfolioView(job: JobPost(customerInfo: CustomerInfoData(name: "Alex Chatterjee", gender: "Male", price: "$40.00", diseaseType: ["Diabetes", "Heart Conditions"]), bookingDetails: BookingDetailsData(areaOfExpertise: ["Nursing", "Physical Tharapy"], bookingType: "One Time", startDate: "2024-06-04", endDate: "2024-06-04", startTime: "15:44:05", endTime: "15:56:00"), jobId: "abc"))
+//}

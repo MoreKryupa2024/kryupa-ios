@@ -605,7 +605,7 @@ class NetworkManager{
             
             do {
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let apiData = try decoder.decode(JobsModel.self, from: data)
                 if apiData.success{
                     print(apiData)
