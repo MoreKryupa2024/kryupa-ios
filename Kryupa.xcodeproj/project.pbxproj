@@ -24,6 +24,9 @@
 		A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A42C1B0864005616A5 /* HeaderView.swift */; };
 		A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */; };
 		A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A82C1B1EA9005616A5 /* AccountView.swift */; };
+		A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */; };
+		A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */; };
+		A36BC3B12C1F782B005616A5 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3B02C1F782B005616A5 /* RatingView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -173,6 +176,9 @@
 		A36BC3A42C1B0864005616A5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		A36BC3A82C1B1EA9005616A5 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveReviewView.swift; sourceTree = "<group>"; };
+		A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHoursView.swift; sourceTree = "<group>"; };
+		A36BC3B02C1F782B005616A5 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -302,8 +308,20 @@
 				A36BC3832C186961005616A5 /* PaymentMethodCell.swift */,
 				A36BC38D2C19976A005616A5 /* ReviewCell.swift */,
 				A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */,
+				A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */,
+				A36BC3B02C1F782B005616A5 /* RatingView.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		A36BC3AB2C1F660D005616A5 /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
+				A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */,
+			);
+			path = Reviews;
 			sourceTree = "<group>";
 		};
 		A36DE7C02C171063002E0ACD /* Recovered References */ = {
@@ -352,14 +370,13 @@
 		A3BB87B52C17223C00C604DD /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				A36BC3AB2C1F660D005616A5 /* Reviews */,
 				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
 				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
 				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
 				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
-				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
-				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
 				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
 				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
@@ -974,6 +991,7 @@
 				A36BC3842C186961005616A5 /* PaymentMethodCell.swift in Sources */,
 				BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
+				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
 				BE3C7F302C1C3EE7000848A6 /* ProfileDetailScreenView.swift in Sources */,
 				BE3C7F322C1C4917000848A6 /* AddNewProfileScreenView.swift in Sources */,
@@ -1007,6 +1025,7 @@
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */,
 				BE4FBDB12BFB7F5F003442BB /* PersonalInformationSeekerView.swift in Sources */,
+				A36BC3B12C1F782B005616A5 /* RatingView.swift in Sources */,
 				A3BB87A22C1717B500C604DD /* BookingRecommendationModel.swift in Sources */,
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
@@ -1024,6 +1043,7 @@
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
+				A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
 				A3BB87A42C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift in Sources */,
 				A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */,
