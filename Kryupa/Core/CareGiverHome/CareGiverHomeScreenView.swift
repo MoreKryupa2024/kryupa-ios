@@ -150,7 +150,7 @@ struct CareGiverHomeScreenView: View {
                 
         ScrollView(.horizontal) {
             HStack(spacing:1){
-                ForEach(viewModel.jobsNearYou, id: \.customerInfo.name) { jobPost in
+                ForEach(viewModel.jobsNearYou, id: \.jobId) { jobPost in
 
 //                ForEach(1...3) { index in
                     CareGiverPortfolioView(job: jobPost)

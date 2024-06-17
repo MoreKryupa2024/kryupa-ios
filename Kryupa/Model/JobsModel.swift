@@ -23,7 +23,7 @@ struct JobsData: Codable {
 struct JobPost: Codable {
     let customerInfo: CustomerInfoData
     let bookingDetails: BookingDetailsData
-    
+    let jobId: String
 }
 
 struct CustomerInfoData: Codable {

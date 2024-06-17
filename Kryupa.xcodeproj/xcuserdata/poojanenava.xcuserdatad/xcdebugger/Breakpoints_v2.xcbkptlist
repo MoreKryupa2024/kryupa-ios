@@ -23,33 +23,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B60D7241-E922-4025-8EC8-B4D6401C505D"
+            uuid = "745168D6-7D16-4E8E-969D-1C8DEF13D374"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/CareGiverHome/CareGiverHomeScreenView.swift"
+            filePath = "Kryupa/Core/CareGiverHome/CareGiverHomeScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "jobsNearYouView"
-            landmarkType = "24">
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "getJobsNearYouList()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "34D7BED8-2503-4F81-978B-BA99597AD663"
+            uuid = "4C6E7B6C-CA31-4F1B-BF96-CBA51027DF97"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/CareGiverHome/CareGiverHomeScreenView.swift"
+            filePath = "Kryupa/API/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "jobsNearYouGridView"
-            landmarkType = "24">
+            startingLineNumber = "609"
+            endingLineNumber = "609"
+            landmarkName = "getJobsNearYouList(params:completionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
