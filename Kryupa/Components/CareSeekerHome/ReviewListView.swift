@@ -24,8 +24,8 @@ struct ReviewListView: View {
                 
                 Image("profile")
                     .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 63,height: 63)
+                    .frame(width: 64,height: 64)
+                    .clipShape(.rect(cornerRadius: 32))
                 
                 VStack(alignment:.leading, spacing:5){
                     Text("Alexa Chatterjee")

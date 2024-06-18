@@ -13,7 +13,7 @@ struct ReviewsListView: View {
     var body: some View {
         
         ScrollView {
-            HeaderView
+            HeaderView(showBackButton: true)
             SegmentView
             
             if selectedSection == 0 {
@@ -37,6 +37,8 @@ struct ReviewsListView: View {
                 .padding(.top, 20)
             }
         }
+        .scrollIndicators(.hidden)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var SegmentView: some View{
@@ -53,30 +55,6 @@ struct ReviewsListView: View {
         .pickerStyle(.segmented)
         .padding(.horizontal, 24)
         .padding(.top, 20)
-        
-    }
-    
-    private var HeaderView: some View{
-        
-        VStack(spacing: 24) {
-            ZStack{
-                Image("KryupaLobby")
-                    .resizable()
-                    .frame(width: 124,height: 20)
-                
-                HStack{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                        }
-                    Spacer()
-                    Image("NotificationBellIcon")
-                        .frame(width: 25,height: 25)
-                }
-                .padding(.horizontal,24)
-            }
-        }
         
     }
 }

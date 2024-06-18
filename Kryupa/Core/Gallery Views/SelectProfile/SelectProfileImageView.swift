@@ -72,25 +72,18 @@ struct SelectProfileImageView: View {
             
             Text("Please take a clear photo of yourself for\nyour profile.")
                 .multilineTextAlignment(.center)
-                .font(.custom(FontContent.plusRegular, size: 13))
+                .font(.custom(FontContent.plusRegular, size: 14))
                 .foregroundStyle(._444446)
                 .padding(.top,35)
             
             nextButton
                 .padding(.top,55)
                 .asButton(.press) {
-                    switch viewModel.cameraAuthStatus {
-                    case .notDetermined:
-                        camera.requestCameraPermission()
-                    case .authorized:
+                    if camera.isTaken{
                         isTaken = true
-                        
-                    case .restricted, .denied:
-                        camera.requestCameraPermission()
-                    @unknown default:
-                        fatalError()
+                    }else{
+                        presentAlert(title: "Kryupa", subTitle: "Please Allow Camera Access to our app.")
                     }
-                    
                 }
                 .fullScreenCover(isPresented: $isTaken) {
                     CameraPickerView() { image in
@@ -124,7 +117,7 @@ struct SelectProfileImageView: View {
             Image(uiImage: image)
                 .resizable()
                 .frame(height: 250)
-                .clipShape(Circle())
+                .clipShape(.rect(cornerRadius: 125))
                 .padding(.top,40)
                 .padding([.leading,.trailing],52)
             
@@ -147,7 +140,7 @@ struct SelectProfileImageView: View {
             .padding(.top,50)
             
             Text("Picture added successfully!")
-                .font(.custom(FontContent.plusRegular, size: 13))
+                .font(.custom(FontContent.plusRegular, size: 14))
                 .foregroundStyle(._444446)
                 .padding(.top,35)
         }

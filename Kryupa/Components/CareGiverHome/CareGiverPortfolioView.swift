@@ -34,71 +34,7 @@ struct CareGiverPortfolioView: View {
                 }
             }
 
-            HStack(spacing:5){
-                Image("calender")
-                    .resizable()
-                    .frame(width: 18,height: 18)
-                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM YYYY"))
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._444446)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-
-            
-            HStack(spacing:5){
-                Image("clock")
-                    .resizable()
-                    .frame(width: 18,height: 18)
-                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._444446)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-
-            HStack {
-                
-                HStack(spacing:2){
-                    Image("account")
-                        .resizable()
-                        .frame(width: 18,height: 18)
-                    Text(job.customerInfo.gender)
-                        .minimumScaleFactor(0.01)
-                        .font(.custom(FontContent.plusRegular, size: 12))
-                        .foregroundStyle(._444446)
-                }
-//                .frame(maxWidth: .infinity)
-//                HStack(spacing:2){
-//                    Image("weight")
-//                        .resizable()
-//                        .frame(width: 18,height: 18)
-//                    Text("100 kg")
-//                        .font(.custom(FontContent.plusRegular, size: 12))
-//                        .foregroundStyle(._444446)
-//                }
-//                .frame(maxWidth: .infinity)
-
-                HStack(spacing:2){
-                    Image("Location")
-                        .resizable()
-                        .frame(width: 18,height: 18)
-                    Text("5 mil")
-                        .font(.custom(FontContent.plusRegular, size: 12))
-                        .foregroundStyle(._444446)
-                }
-//                .frame(maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-
-            HStack(spacing:5){
-                Image("heartbeat")
-                    .resizable()
-                    .frame(width: 18,height: 18)
-                Text(job.customerInfo.diseaseType.map{String($0)}.joined(separator: ","))
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._444446)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
+            JobDescView()
 
             VStack(spacing: 2) {
                 Text("Service Required:")
@@ -169,6 +105,79 @@ struct CareGiverPortfolioView: View {
         )
         .frame(width: profileWidth)
 
+    }
+}
+struct JobDescView: View {
+    var body: some View {
+        VStack {
+            
+            HStack(spacing:5){
+                Image("calender")
+                    .resizable()
+                    .frame(width: 18,height: 18)
+                Text("3rd March 2024")
+                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .foregroundStyle(._444446)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            
+            
+            HStack(spacing:5){
+                Image("clock")
+                    .resizable()
+                    .frame(width: 18,height: 18)
+                Text("03:00 PM - 04:00 PM")
+                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .foregroundStyle(._444446)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            
+            HStack {
+                
+                HStack(spacing:2){
+                    Image("account")
+                        .resizable()
+                        .frame(width: 18,height: 18)
+                    Text("Female")
+                        .minimumScaleFactor(0.01)
+                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .foregroundStyle(._444446)
+                }
+                //                .frame(maxWidth: .infinity)
+                
+                HStack(spacing:2){
+                    Image("weight")
+                        .resizable()
+                        .frame(width: 18,height: 18)
+                    Text("100 kg")
+                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .foregroundStyle(._444446)
+                }
+                //                .frame(maxWidth: .infinity)
+                
+                HStack(spacing:2){
+                    Image("Location")
+                        .resizable()
+                        .frame(width: 18,height: 18)
+                    Text("5 mil")
+                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .foregroundStyle(._444446)
+                }
+                //                .frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            
+            HStack(spacing:5){
+                Image("heartbeat")
+                    .resizable()
+                    .frame(width: 18,height: 18)
+                Text("Diabetes, Kidney Stone")
+                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .foregroundStyle(._444446)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
     }
 }
 

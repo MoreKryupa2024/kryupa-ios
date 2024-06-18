@@ -84,7 +84,7 @@ struct HealthInformationSeekerView: View {
                     }
                 })
                 .padding(.top,10)
-                .padding([.leading,.trailing],24)
+                .padding(.horizontal,24)
             }
         }
         .scrollIndicators(.hidden)
@@ -101,7 +101,7 @@ struct HealthInformationSeekerView: View {
                 Text("*")
                     .foregroundStyle(.red)
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
         }
     }
@@ -112,7 +112,7 @@ struct HealthInformationSeekerView: View {
                 HStack(spacing:0){
                     Text(title)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value) {
                 Text(placeHolder)
@@ -177,7 +177,7 @@ struct HealthInformationSeekerView: View {
                 Text("Mobility Level")
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(

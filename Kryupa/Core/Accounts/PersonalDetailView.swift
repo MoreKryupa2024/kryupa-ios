@@ -17,7 +17,7 @@ struct PersonalDetailView: View {
     var body: some View {
         
         ScrollView(showsIndicators: false){
-            HeaderView
+            HeaderTopView
             textFieldViewWithHeader(
                 title: "Bio",
                 placeHolder: "Input text",
@@ -55,7 +55,7 @@ struct PersonalDetailView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownWithCheckBoxView(
@@ -80,7 +80,7 @@ struct PersonalDetailView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -98,7 +98,7 @@ struct PersonalDetailView: View {
         
         VStack(alignment: .leading, spacing: 10) {
             Text("Qualifications")
-                .font(.custom(FontContent.plusRegular, size: 17))
+                .font(.custom(FontContent.plusMedium, size: 17))
                 .foregroundStyle(._242426)
             
             
@@ -132,7 +132,7 @@ struct PersonalDetailView: View {
             HStack(spacing:0){
                 Text("Additional info")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -164,8 +164,7 @@ struct PersonalDetailView: View {
         
         return HStack {
             Text("Years of experience")
-                .font(.custom(FontContent.plusRegular, size: 13))
-                .foregroundStyle(._7_C_7_C_80)
+                .font(.custom(FontContent.plusMedium, size: 17))
             
             Spacer()
             
@@ -217,7 +216,7 @@ struct PersonalDetailView: View {
                 HStack(spacing:0){
                     Text(title)
                 }
-                .font(.custom(FontContent.plusRegular, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextField(text: value, axis: .vertical) {
                 Text(placeHolder)
@@ -239,35 +238,11 @@ struct PersonalDetailView: View {
 
     }
     
-    private var HeaderView: some View{
+    private var HeaderTopView: some View{
         VStack {
             
-            VStack(spacing: 24) {
-                
-                ZStack{
-                    Image("KryupaLobby")
-                        .resizable()
-                        .frame(width: 124,height: 20)
-                    
-                    HStack{
-                        Image("navBack")
-                            .resizable()
-                            .frame(width: 30,height: 30)
-                            .asButton(.press) {
-                            }
-                        Spacer()
-                        Image("NotificationBellIcon")
-                            .frame(width: 25,height: 25)
-                    }
-                    .padding(.horizontal,24)
-                }
-                
-                Text("Personal Details")
-                    .font(.custom(FontContent.besMedium, size: 20))
-                    .foregroundStyle(._242426)
-                
-            }
-            
+            HeaderView(title: "Personal Details")
+                        
             HStack {
                 
                 ZStack {

@@ -19,7 +19,7 @@ class HealthInformationSeekerViewModel: ObservableObject{
         
         if medicalConditionDropDownSelected.isEmpty {
             return alert("Please Select Medical Condition")
-        }else if medicalConditionDropDownSelected.contains("Other"){
+        }else if medicalConditionDropDownSelected.contains("Other") && medicalConditionSelected.isEmpty{
             return alert("Please Enter Other Medical Condition")
         }else if mobilityLevel.isEmpty{
             return alert("Please Select Mobility Level")

@@ -124,7 +124,7 @@ struct PreferenceView: View {
                     .foregroundStyle(.red)
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(
@@ -142,11 +142,11 @@ struct PreferenceView: View {
             HStack(spacing:0){
                 Text("Language Preference")
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
-                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
                     
                     if let languageSpeakingArray{
                         HStack(spacing:0){
@@ -180,7 +180,7 @@ struct PreferenceView: View {
                 Text("Distance")
             }
             .frame(height: 21)
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
             DropDownView(

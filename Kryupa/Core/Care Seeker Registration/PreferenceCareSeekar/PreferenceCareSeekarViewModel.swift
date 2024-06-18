@@ -17,7 +17,7 @@ class PreferenceCareSeekarViewModel: ObservableObject{
     @Published var isLoading:Bool = false
     
     func dataChecks(parameters:[String:Any],alert: @escaping ((String)->Void),next: @escaping (()->Void)){
-        isLoading = true
+        
         if yearsOfExperienceSelected.isEmpty {
             return alert("Please Select Years Of Experience")
         }else if genderSelected.isEmpty{
@@ -27,6 +27,7 @@ class PreferenceCareSeekarViewModel: ObservableObject{
         }else if languageSpeakingSelected.isEmpty{
             return alert("Please Select Speaking Language")
         }else{
+            isLoading = true
             var param = parameters
             param["preferences"] = [
                 "preferredLanguageType": languageSpeakingSelected,

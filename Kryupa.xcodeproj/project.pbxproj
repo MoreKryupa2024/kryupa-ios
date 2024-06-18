@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
-		A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
-		A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
 		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
 		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
@@ -20,6 +17,18 @@
 		A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38D2C19976A005616A5 /* ReviewCell.swift */; };
 		A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC38F2C19A508005616A5 /* CareGiverHomeScreenViewModel.swift */; };
 		A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3912C19A6B2005616A5 /* JobsModel.swift */; };
+		A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3962C1AC689005616A5 /* FAQView.swift */; };
+		A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */; };
+		A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39C2C1AE906005616A5 /* SettingsView.swift */; };
+		A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */; };
+		A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */; };
+		A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A22C1B0828005616A5 /* AboutUsView.swift */; };
+		A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A42C1B0864005616A5 /* HeaderView.swift */; };
+		A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */; };
+		A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3A82C1B1EA9005616A5 /* AccountView.swift */; };
+		A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */; };
+		A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */; };
+		A36BC3B12C1F782B005616A5 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3B02C1F782B005616A5 /* RatingView.swift */; };
 		A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */; };
 		A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DE7C42C171261002E0ACD /* ChatView.swift */; };
 		A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */; };
@@ -36,6 +45,17 @@
 		A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */; };
 		A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B62C17225000C604DD /* PersonalDetailView.swift */; };
 		A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */; };
+		A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */; };
+		A3FEF6032C201C4100EFC3C2 /* JobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6022C201C4100EFC3C2 /* JobCell.swift */; };
+		A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */; };
+		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
+		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
+		BE09486F2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE0948702C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; };
+		BE0948712C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */; };
+		BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -44,6 +64,15 @@
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
+		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
+		BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */; };
+		BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */; };
+		BE3C7F2B2C1C2438000848A6 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F2A2C1C2438000848A6 /* BookingView.swift */; };
+		BE3C7F2D2C1C2E2D000848A6 /* GiverTabbarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F2C2C1C2E2D000848A6 /* GiverTabbarScreenView.swift */; };
+		BE3C7F302C1C3EE7000848A6 /* ProfileDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F2F2C1C3EE7000848A6 /* ProfileDetailScreenView.swift */; };
+		BE3C7F322C1C4917000848A6 /* AddNewProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F312C1C4917000848A6 /* AddNewProfileScreenView.swift */; };
+		BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F342C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift */; };
+		BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */; };
 		BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */; };
 		BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9D2BFB0FD7003442BB /* PillView.swift */; };
 		BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */; };
@@ -122,6 +151,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BE0948712C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */,
+				BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */,
+				BE09486F2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +174,18 @@
 		A36BC38D2C19976A005616A5 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		A36BC38F2C19A508005616A5 /* CareGiverHomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverHomeScreenViewModel.swift; sourceTree = "<group>"; };
 		A36BC3912C19A6B2005616A5 /* JobsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
+		A36BC3962C1AC689005616A5 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQExpandView.swift; sourceTree = "<group>"; };
+		A36BC39C2C1AE906005616A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertView.swift; sourceTree = "<group>"; };
+		A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivateAccountView.swift; sourceTree = "<group>"; };
+		A36BC3A22C1B0828005616A5 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
+		A36BC3A42C1B0864005616A5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
+		A36BC3A82C1B1EA9005616A5 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveReviewView.swift; sourceTree = "<group>"; };
+		A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHoursView.swift; sourceTree = "<group>"; };
+		A36BC3B02C1F782B005616A5 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		A36DE7C12C171241002E0ACD /* CareGiverPortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareGiverPortfolioView.swift; sourceTree = "<group>"; };
 		A36DE7C42C171261002E0ACD /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBookingModel.swift; sourceTree = "<group>"; };
@@ -158,6 +202,11 @@
 		A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedCareGiverDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		A3BB87B62C17225000C604DD /* PersonalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailView.swift; sourceTree = "<group>"; };
 		A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailViewModel.swift; sourceTree = "<group>"; };
+		A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
+		A3FEF6022C201C4100EFC3C2 /* JobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCell.swift; sourceTree = "<group>"; };
+		A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailView.swift; sourceTree = "<group>"; };
+		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -166,6 +215,15 @@
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
+		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F2A2C1C2438000848A6 /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
+		BE3C7F2C2C1C2E2D000848A6 /* GiverTabbarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiverTabbarScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F2F2C1C3EE7000848A6 /* ProfileDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F312C1C4917000848A6 /* AddNewProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProfileScreenView.swift; sourceTree = "<group>"; };
+		BE3C7F342C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProfileScreenViewModel.swift; sourceTree = "<group>"; };
+		BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerTabBarScreenView.swift; sourceTree = "<group>"; };
 		BE4FBD9B2BFB04DE003442BB /* ExperienceandSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsView.swift; sourceTree = "<group>"; };
 		BE4FBD9D2BFB0FD7003442BB /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
 		BE4FBD9F2BFB1E76003442BB /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
@@ -240,13 +298,13 @@
 			files = (
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
+				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
-				A36BC3742C185163005616A5 /* ZoomVideoSDK.xcframework in Frameworks */,
-				A36BC3752C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
+				BE0948702C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
+				BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */,
 				BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */,
-				A36BC3732C185163005616A5 /* zoomcml.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +317,21 @@
 				A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */,
 				A36BC3832C186961005616A5 /* PaymentMethodCell.swift */,
 				A36BC38D2C19976A005616A5 /* ReviewCell.swift */,
+				A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */,
+				A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */,
+				A36BC3B02C1F782B005616A5 /* RatingView.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		A36BC3AB2C1F660D005616A5 /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
+				A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */,
+			);
+			path = Reviews;
 			sourceTree = "<group>";
 		};
 		A36DE7C02C171063002E0ACD /* Recovered References */ = {
@@ -282,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				A36DE7C42C171261002E0ACD /* ChatView.swift */,
+				BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -308,15 +380,47 @@
 		A3BB87B52C17223C00C604DD /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				A36BC3AB2C1F660D005616A5 /* Reviews */,
 				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
 				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
 				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
 				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
-				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
+				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
+				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
+				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
+				A36BC3A22C1B0828005616A5 /* AboutUsView.swift */,
+				A36BC3A82C1B1EA9005616A5 /* AccountView.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		A3FEF5FE2C201C2300EFC3C2 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEF5FF2C201C2D00EFC3C2 /* JobListView.swift */,
+				A3FEF6042C202F0D00EFC3C2 /* JobDetailView.swift */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		A3FEF6012C201C3200EFC3C2 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEF6022C201C4100EFC3C2 /* JobCell.swift */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		BE0948752C19BE5100FC2DE0 /* ServiceCancelled */ = {
+			isa = PBXGroup;
+			children = (
+				BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */,
+				BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */,
+			);
+			path = ServiceCancelled;
 			sourceTree = "<group>";
 		};
 		BE1191AC2C07068F0076AFB4 /* Refer & Earn */ = {
@@ -353,6 +457,57 @@
 				BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		BE3C7F252C1C1F0D000848A6 /* Booking */ = {
+			isa = PBXGroup;
+			children = (
+				BE3C7F262C1C1F28000848A6 /* BookingScreen */,
+			);
+			path = Booking;
+			sourceTree = "<group>";
+		};
+		BE3C7F262C1C1F28000848A6 /* BookingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */,
+			);
+			path = BookingScreen;
+			sourceTree = "<group>";
+		};
+		BE3C7F292C1C2425000848A6 /* Booking */ = {
+			isa = PBXGroup;
+			children = (
+				BE3C7F2A2C1C2438000848A6 /* BookingView.swift */,
+			);
+			path = Booking;
+			sourceTree = "<group>";
+		};
+		BE3C7F2E2C1C3EAB000848A6 /* UserProfileSection */ = {
+			isa = PBXGroup;
+			children = (
+				BE3C7F2F2C1C3EE7000848A6 /* ProfileDetailScreenView.swift */,
+				BE3C7F332C1C4C45000848A6 /* AddNewProfileScreen */,
+			);
+			path = UserProfileSection;
+			sourceTree = "<group>";
+		};
+		BE3C7F332C1C4C45000848A6 /* AddNewProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BE3C7F312C1C4917000848A6 /* AddNewProfileScreenView.swift */,
+				BE3C7F342C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift */,
+			);
+			path = AddNewProfileScreen;
+			sourceTree = "<group>";
+		};
+		BE484DCF2C1AE258001E3901 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				BE484DD02C1AE273001E3901 /* ConsumerTabBarScreenView.swift */,
+				BE3C7F2C2C1C2E2D000848A6 /* GiverTabbarScreenView.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		BE4FBD9A2BFB04B9003442BB /* Experience and Skills */ = {
@@ -484,10 +639,15 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A3FEF5FE2C201C2300EFC3C2 /* Jobs */,
+				BE484DCF2C1AE258001E3901 /* Tabbar */,
+				BE0948752C19BE5100FC2DE0 /* ServiceCancelled */,
 				A3BB87B52C17223C00C604DD /* Accounts */,
 				A36DE7C52C171261002E0ACD /* Chat */,
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
+				BE3C7F2E2C1C3EAB000848A6 /* UserProfileSection */,
+				BE3C7F252C1C1F0D000848A6 /* Booking */,
 				BE7DDDAC2C181CE800A71632 /* ZoomScreenView */,
 				BE92FD152C09A61400EDF49C /* CareSeekerHome */,
 				BE6BA47C2C08A228005361C3 /* CareGiverHome */,
@@ -504,6 +664,7 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A3FEF6012C201C3200EFC3C2 /* Jobs */,
 				A36BC37C2C186285005616A5 /* Accounts */,
 				A36DE7C22C171241002E0ACD /* CareGiverHome */,
 				BEFB670B2C1708AC003ED6DF /* ChatComponent */,
@@ -511,6 +672,8 @@
 				BEE28AC32C05FC5500A3CDFF /* Lobby */,
 				BEE28AC22C05FC3400A3CDFF /* On-Boarding */,
 				BE1573B82BF631A400A6137D /* LoginFlow */,
+				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
+				BE3C7F292C1C2425000848A6 /* Booking */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -644,6 +807,7 @@
 				A3BB87AD2C1718A500C604DD /* BookingCareGiverListView.swift */,
 				A3BB87AC2C1718A500C604DD /* ReviewListView.swift */,
 				BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */,
+				BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */,
 			);
 			path = CareSeekerHome;
 			sourceTree = "<group>";
@@ -803,7 +967,6 @@
 			packageReferences = (
 				BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */,
 				BE644E892BF4D86D00A6781F /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
-				BEC3658C2BFCB864005AC4A0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
@@ -847,28 +1010,39 @@
 			files = (
 				BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */,
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
+				BE3C7F2B2C1C2438000848A6 /* BookingView.swift in Sources */,
 				A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
+				A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
 				BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */,
 				A36BC3842C186961005616A5 /* PaymentMethodCell.swift in Sources */,
+				BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
+				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
+				A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
+				BE3C7F302C1C3EE7000848A6 /* ProfileDetailScreenView.swift in Sources */,
+				A3FEF6032C201C4100EFC3C2 /* JobCell.swift in Sources */,
+				BE3C7F322C1C4917000848A6 /* AddNewProfileScreenView.swift in Sources */,
 				A3BB87AA2C17186400C604DD /* CareGiverNearByCustomerScreenView.swift in Sources */,
 				BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */,
 				BE4FBDB72BFB8406003442BB /* SelectProfileImageView.swift in Sources */,
 				BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */,
 				BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */,
 				A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
+				A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */,
+				BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */,
+				BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */,
 				A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
@@ -876,20 +1050,26 @@
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
+				A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
+				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
 				A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
+				BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */,
 				BE4FBDB12BFB7F5F003442BB /* PersonalInformationSeekerView.swift in Sources */,
+				A36BC3B12C1F782B005616A5 /* RatingView.swift in Sources */,
 				A3BB87A22C1717B500C604DD /* BookingRecommendationModel.swift in Sources */,
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
+				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
+				A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */,
 				BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */,
 				A3BB87B32C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				A3BB87A62C17180900C604DD /* DropDownWithCheckBoxView.swift in Sources */,
@@ -899,6 +1079,7 @@
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
+				A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
 				A3BB87A42C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift in Sources */,
 				A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */,
@@ -907,16 +1088,22 @@
 				BE1573B32BF5F06E00A6137D /* SocialLoginScreenView.swift in Sources */,
 				BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */,
 				A3BB87AF2C1718A500C604DD /* BookingCareGiverListView.swift in Sources */,
+				BE3C7F2D2C1C2E2D000848A6 /* GiverTabbarScreenView.swift in Sources */,
 				BE4FBDA92BFB5EFB003442BB /* EmergencyContactView.swift in Sources */,
 				BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */,
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
+				A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */,
+				A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
+				A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
 				A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */,
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
+				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
+				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
@@ -924,7 +1111,9 @@
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
+				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
+				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
@@ -1186,14 +1375,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.1.0;
-			};
-		};
-		BEC3658C2BFCB864005AC4A0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.4.3;
 			};
 		};
 		BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {

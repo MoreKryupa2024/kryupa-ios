@@ -192,7 +192,7 @@ struct ExperienceandSkillsView: View {
                 Spacer()
             }
             
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             HStack(spacing: 4){
@@ -254,7 +254,7 @@ struct ExperienceandSkillsView: View {
             HStack(spacing:0){
                 Text("Area Of Expertise")
             }
-            .font(.custom(FontContent.plusRegular, size: 16))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -286,7 +286,7 @@ struct ExperienceandSkillsView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Years of Experience")
-                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                 
                 Spacer()
                 
@@ -332,7 +332,7 @@ struct ExperienceandSkillsView: View {
                 HStack(spacing:0){
                     Text(title)
                 }
-                .font(.custom(FontContent.plusMedium, size: 16))
+                .font(.custom(FontContent.plusMedium, size: 17))
             }
             TextEditor(text: value.toUnwrapped(defaultValue: ""))
             .frame(height: 120)

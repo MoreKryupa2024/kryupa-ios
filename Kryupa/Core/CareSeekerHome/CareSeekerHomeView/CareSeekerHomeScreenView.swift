@@ -23,8 +23,20 @@ struct CareSeekerHomeScreenView: View {
                         .frame(height: 58)
                         .padding(.horizontal,24)
                         .padding(.top,15)
+                        .asButton(.press) {
+                            NotificationCenter.default.post(name: .showBookingScreen,
+                                                                            object: nil, userInfo: nil)
+
+                        }
                     
-                    BookFirstServiceView
+                    
+//                    BookFirstServiceView
+                    
+                    UpcomingAppointmentsView
+                        .padding(.top,30)
+                    
+                    PastAppointmentsView
+                        .padding(.top,30)
                     
                     RecommendedGiverView
                         .padding(.top,30)
@@ -60,6 +72,40 @@ struct CareSeekerHomeScreenView: View {
         }
     }
     
+    private var UpcomingAppointmentsView:some View{
+        VStack(spacing:10){
+            HStack{
+                Text("Upcoming Appointments")
+                    .font(.custom(FontContent.plusMedium, size: 15))
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                
+                    Text("See All")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .foregroundStyle(._7_C_7_C_80)
+            }
+            .padding(.horizontal,24)
+            AppointmentsView()
+            
+        }
+    }
+    
+    private var PastAppointmentsView:some View{
+        VStack(spacing:10){
+            HStack{
+                Text("Past Appointments")
+                    .font(.custom(FontContent.plusMedium, size: 15))
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                
+                    Text("See All")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .foregroundStyle(._7_C_7_C_80)
+            }
+            .padding(.horizontal,24)
+            AppointmentsView()
+            
+        }
+    }
+    
     private var BookFirstServiceView: some View{
         VStack(spacing:0){
             Image("bookingFirstIcone")
@@ -79,9 +125,8 @@ struct CareSeekerHomeScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
-                    router.showScreen(.push) { router in
-                        BookingFormScreenView()
-                    }
+                    NotificationCenter.default.post(name: .showBookingScreen,
+                                                                    object: nil, userInfo: nil)
                 }
         }
     }
@@ -96,6 +141,20 @@ struct CareSeekerHomeScreenView: View {
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
+                    .asButton {
+                        
+                        let primaryAction = UIAlertAction(title: "OK", style: .default) { action in
+                            let domain = Bundle.main.bundleIdentifier!
+                            UserDefaults.standard.removePersistentDomain(forName: domain)
+                            UserDefaults.standard.synchronize()
+                            NotificationCenter.default.post(name: .logout,
+                                                                            object: nil, userInfo: nil)
+                        }
+                        
+                        let secondaryAction = UIAlertAction(title: "Cancel", style: .cancel)
+                        
+                        presentAlert(title: "Kryupa", subTitle: "Log Out",primaryAction: primaryAction,secondaryAction: secondaryAction)
+                    }
             }
             .padding(.horizontal,24)
         }

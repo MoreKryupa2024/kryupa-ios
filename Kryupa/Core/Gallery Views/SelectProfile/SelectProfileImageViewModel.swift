@@ -11,7 +11,7 @@ import AVFoundation
 
 class SelectProfileImageViewModel: ObservableObject{
 //    @Published var camera = CameraModal()
-    let cameraAuthStatus = AVCaptureDevice.authorizationStatus(for: .video)
+    @Published var cameraAuthStatus = AVCaptureDevice.authorizationStatus(for: .video)
     @Published var profileSelected: Bool = false
     @Published var profilePicture: UIImage? = nil
     @Published var isLoading:Bool = false
@@ -37,7 +37,7 @@ class CameraModal: ObservableObject{
     func requestCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video, completionHandler: {accessGranted in
             guard accessGranted == true else { return }
-            
+            self.isTaken = true
         })
     }
 }
