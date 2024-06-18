@@ -10,13 +10,15 @@ import SwiftfulUI
 
 struct JobDetailView: View {
 
+    var job: JobPost
+    
     var body: some View {
         ScrollView {
             HeaderView(showBackButton: true)
             UserView
             ServiceRequiredView
             line
-            JobDescView()
+            JobDescView(job: job)
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
             OtherMedicalConditionView
@@ -211,5 +213,5 @@ struct SkillData {
 }
 
 #Preview {
-    JobDetailView()
+    JobDetailView(job: JobPost(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1"))
 }

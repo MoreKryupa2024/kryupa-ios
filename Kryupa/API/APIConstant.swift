@@ -31,6 +31,7 @@ class APIConstant{
     static let getRecommandationList = "\(baseURL)/apis/user/home/getAllCustomerHomeData"
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
+    static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
 }
 
 class FontContent{
