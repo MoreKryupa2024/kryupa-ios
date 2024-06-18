@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class ExperienceandSkillsViewModel: ObservableObject{
     
     @Published var exprienceAndSkillsData: ExprienceAndSkills = ExprienceAndSkills()
@@ -54,13 +54,15 @@ class ExperienceandSkillsViewModel: ObservableObject{
     func uploadCertificateAndDocuments(file:Data, fileName: String, certificateUrl: @escaping((String)->Void)){
         isLoading = true
         NetworkManager.shared.uploadPDFFile(file: file, fileName: fileName) {[weak self] result in
-            switch result{
-            case .success(let data):
-                self?.isLoading = false
-                certificateUrl(data.data.first ?? "")
-            case .failure(let error):
-                self?.isLoading = false
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.isLoading = false
+                    certificateUrl(data.data.first ?? "")
+                case .failure(let error):
+                    self?.isLoading = false
+                    print(error)
+                }
             }
         }
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class CareSeekerHomeScreenViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
     
@@ -20,13 +21,15 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
         ]
         isloading = true
         NetworkManager.shared.getRecommandationList(params: param) { [weak self] result in
-            switch result{
-            case .success(let data):
-                self?.isloading = false
-                self?.recommendedCaregiver = data.data.recommendedCaregiver
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.recommendedCaregiver = data.data.recommendedCaregiver
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
         }
     }

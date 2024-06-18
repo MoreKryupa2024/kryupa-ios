@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct CareGiverNearByCustomerScreenView: View {
     @Environment(\.router) var router
@@ -31,7 +32,9 @@ struct CareGiverNearByCustomerScreenView: View {
         .modifier(DismissingKeyboard())
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
-            viewModel.getCareGiverNearByList(bookingID: bookingID)
+            viewModel.getCareGiverNearByList(bookingID: bookingID) { alertStr in
+                presentAlert(title: "Kryupa", subTitle: alertStr)
+            }
         }
     }
     
@@ -60,7 +63,7 @@ struct CareGiverNearByCustomerScreenView: View {
                 .padding(.leading,8)
             TextField("Search Caregiver", text: $viewModel.serachGiver)
                 .onChange(of: viewModel.serachGiver) {
-                    viewModel.getCareGiverNearByList(bookingID: bookingID)
+                    viewModel.getCareGiverNearByList(bookingID: bookingID, alert: nil)
                 }
                 .autocorrectionDisabled()
             
@@ -98,12 +101,12 @@ struct CareGiverNearByCustomerScreenView: View {
                 .frame(width: 124,height: 20)
             
             HStack{
-//                Image("navBack")
-//                    .resizable()
-//                    .frame(width: 30,height: 30)
-//                    .asButton(.press) {
-//                        router.dismissScreen()
-//                    }
+                Image("navBack")
+                    .resizable()
+                    .frame(width: 30,height: 30)
+                    .asButton(.press) {
+                        router.dismissScreen()
+                    }
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)

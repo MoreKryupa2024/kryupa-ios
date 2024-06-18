@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 @MainActor
 class BookingFormScreenViewModel: ObservableObject{
     @Published var showDatePicker: Bool = Bool()
@@ -35,13 +36,15 @@ class BookingFormScreenViewModel: ObservableObject{
     func getBookingForRelativeList(){
         isloading = true
         NetworkManager.shared.getRelativeList { [weak self] result in
-            switch result{
-            case .success(let data):
-                self?.isloading = false
-                self?.bookingForList = data.data
-            case .failure(let error):
-                print(error)
-                self?.isloading = false
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.bookingForList = data.data
+                case .failure(let error):
+                    print(error)
+                    self?.isloading = false
+                }
             }
         }
     }
@@ -65,14 +68,16 @@ class BookingFormScreenViewModel: ObservableObject{
         print(param)
         isloading = true
         NetworkManager.shared.createBooking(params:param) { [weak self] result in
-            switch result{
-            case .success(let data):
-                print(data)
-                self?.isloading = false
-                action(data.data.id)
-            case .failure(let error):
-                print(error)
-                self?.isloading = false
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    print(data)
+                    self?.isloading = false
+                    action(data.data.id)
+                case .failure(let error):
+                    print(error)
+                    self?.isloading = false
+                }
             }
         }
     }

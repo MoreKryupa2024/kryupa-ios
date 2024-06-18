@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class AddNewProfileScreenViewModel: ObservableObject{
     
     @Published var name: String = String()

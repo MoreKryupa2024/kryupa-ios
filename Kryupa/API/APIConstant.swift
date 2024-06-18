@@ -64,7 +64,7 @@ class AppConstants{
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden"]
     static let distanceArray = ["Within 1 mile","1-5 miles","5-10 miles"]
     static let relationArray = ["Spouse/Partner","Parent","Child","Sibling"]
-    static let additionalSkillsAraay = ["Respite Care","Medical Transportation","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Heavy lifting"]
+    static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
     
     static let giverAccountSectionItems = [

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 class BGVTimeSlotScreenViewModel: ObservableObject{
     var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
     @Published var selectedSlotID: String = String()
@@ -17,13 +17,15 @@ class BGVTimeSlotScreenViewModel: ObservableObject{
         isloading = true
         let param = ["date":selectedDay.serverDate]
         NetworkManager.shared.getSlotList(params: param) { [weak self] result in
-            switch result{
-            case.failure(let error):
-                print(error)
-                self?.isloading = false
-            case .success(let data):
-                self?.availableSlotsList = data.data
-                self?.isloading = false
+            DispatchQueue.main.async {
+                switch result{
+                case.failure(let error):
+                    print(error)
+                    self?.isloading = false
+                case .success(let data):
+                    self?.availableSlotsList = data.data
+                    self?.isloading = false
+                }
             }
         }
     }

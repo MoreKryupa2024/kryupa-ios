@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class HealthInformationSeekerViewModel: ObservableObject{
     
     @Published var medicalConditionSelected: String = String()
