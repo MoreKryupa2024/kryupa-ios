@@ -6,13 +6,13 @@
 //
 
 import Foundation
-
+@MainActor
 class CareGiverNearByCustomerScreenViewModel: ObservableObject{
     @Published var serachGiver: String = String()
     @Published var isloading: Bool = true
     @Published var careGiverNearByList: [CareGiverNearByCustomerScreenData] = [CareGiverNearByCustomerScreenData]()
     
-    func getCareGiverNearByList(bookingID:String){
+    func getCareGiverNearByList(bookingID:String,alert: ((String)->Void)?){
         let param: [String:Any] = [
             "pageNumber":1,
             "pageSize":10,
@@ -21,13 +21,21 @@ class CareGiverNearByCustomerScreenViewModel: ObservableObject{
             "searchTerm":serachGiver
         ]
         NetworkManager.shared.findCareGiverBookingID(params: param) {[weak self] result in
-            switch result{
-            case .success(let data):
-                self?.careGiverNearByList = data.data
-                self?.isloading = false
-            case .failure(let error):
-                print(error)
-                self?.isloading = false
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.careGiverNearByList = data.data
+                    self?.isloading = false
+                    if self?.careGiverNearByList.count == 0{
+                        alert?("Currently, no caregivers are available nearby")
+                    }
+                case .failure(let error):
+                    print(error)
+                    self?.isloading = false
+                    if self?.careGiverNearByList.count == 0{
+                        alert?("Currently, no caregivers are available nearby")
+                    }
+                }
             }
         }
     }

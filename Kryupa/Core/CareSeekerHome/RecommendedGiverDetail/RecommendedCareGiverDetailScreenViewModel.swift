@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
     var options: [String] = ["Summary","Review"]
@@ -18,13 +18,15 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     func getCareGiverDetails(giverId:String){
         isloading = true
         NetworkManager.shared.getCareGiverDetails(giverId: giverId) { [weak self] result in
-            switch result{
-            case .success(let data):
-                self?.giverDetail = data.data
-                self?.isloading = false
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.giverDetail = data.data
+                    self?.isloading = false
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
         }
     }
