@@ -14,7 +14,7 @@ struct GiverTabbarScreenView: View {
         VStack{
             switch selectedIndex{
             case 1: BookingScreenView()
-            case 2: EmptyView()
+            case 2: JobListView()
             case 3: InboxScreenView()
             case 4: AccountView()
             default:

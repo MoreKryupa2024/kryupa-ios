@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct BookingScreenView: View {
     
     @State var selectedSection = 0
+    @Environment(\.router) var router
     
     var body: some View {
         ZStack{
@@ -26,6 +28,11 @@ struct BookingScreenView: View {
                     case 1:
                         ForEach(1...3) { index in
                             BookingView(status: "Completed")
+                                .asButton(.press) {
+                                    router.showScreen(.push) { rout in
+                                        GiveReviewView()
+                                    }
+                                }
                         }
                     case 2:
                         ForEach(1...1) { index in

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct ProfileDetailScreenView: View {
+    @Environment(\.router) var router
+    
     var body: some View {
         ZStack{
             VStack{
@@ -16,6 +19,11 @@ struct ProfileDetailScreenView: View {
                     HStack(alignment:.top){
                         DropDownView(values: AppConstants.relationArray)
                         AddNewButton
+                            .asButton(.press) {
+                                router.showScreen(.push) { rout in
+                                    AddNewProfileScreenView()
+                                }
+                            }
                             .padding(.top,5)
                     }
                     .padding(.horizontal,24)

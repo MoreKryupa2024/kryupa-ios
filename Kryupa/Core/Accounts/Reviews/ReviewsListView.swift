@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct ReviewsListView: View {
     @State var selectedSection = 0
+    @Environment(\.router) var router
     
     var body: some View {
         
@@ -22,6 +24,11 @@ struct ReviewsListView: View {
                         msg in
                         
                         ReviewCell()
+                            .asButton(.press) {
+                                router.showScreen(.push) { rout in
+                                    ReviewDetailView()
+                                }
+                            }
                     }
                 }
                 .padding(.top, 20)
@@ -32,6 +39,11 @@ struct ReviewsListView: View {
                         msg in
                         
                         ReviewCell()
+                            .asButton(.press) {
+                                router.showScreen(.push) { rout in
+                                    ReviewDetailView()
+                                }
+                            }
                     }
                 }
                 .padding(.top, 20)

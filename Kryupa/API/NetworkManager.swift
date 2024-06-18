@@ -67,7 +67,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             
             do {
                 let decoder = JSONDecoder()
@@ -108,7 +108,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             
             do {
                 let decoder = JSONDecoder()
@@ -135,6 +135,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -159,7 +160,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -188,6 +189,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -212,7 +214,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -237,6 +239,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -261,7 +264,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -306,7 +309,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -357,7 +360,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -408,7 +411,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -453,7 +456,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -479,6 +482,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -503,7 +507,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -528,6 +532,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -552,7 +557,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -578,6 +583,7 @@ class NetworkManager{
         var request = URLRequest(url: urlStr)
     
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -602,7 +608,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -625,8 +631,8 @@ class NetworkManager{
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
-        print(params)
         if let parameters = params{
+            print(parameters)
             let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             request.httpBody = jsonData
         }
@@ -651,7 +657,7 @@ class NetworkManager{
                 completionHandler(.failure(.invalidResponse))
                 return
             }
-            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase

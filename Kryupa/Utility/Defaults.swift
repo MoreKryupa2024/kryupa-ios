@@ -16,6 +16,7 @@ enum DefaultKeys: String {
     case apiKey
     case firstName
     case lastName
+    case fullName
     case email
     case mobile
     case showScreen
@@ -61,6 +62,14 @@ class Defaults {
             return getStringBannerValue(key: .userType)
         } set {
             set(value: newValue, key: .userType)
+        }
+    }
+    
+    var fullName: String {
+        get {
+            return getStringBannerValue(key: .fullName)
+        } set {
+            set(value: newValue, key: .fullName)
         }
     }
     

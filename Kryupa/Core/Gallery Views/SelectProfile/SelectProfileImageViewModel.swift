@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
+@MainActor
 class SelectProfileImageViewModel: ObservableObject{
 //    @Published var camera = CameraModal()
     @Published var cameraAuthStatus = AVCaptureDevice.authorizationStatus(for: .video)

@@ -50,6 +50,13 @@ struct SelectProfileImageView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .onAppear {
+                
+                #if DEBUG && targetEnvironment(simulator)
+                self.viewModel.profilePicture = UIImage(named: "personal")
+                #else
+                //
+                #endif
+                //
                 camera.requestCameraPermission()
             }
             if viewModel.isLoading{
@@ -116,10 +123,9 @@ struct SelectProfileImageView: View {
         VStack(spacing:0){
             Image(uiImage: image)
                 .resizable()
-                .frame(height: 250)
+                .frame(width: 250,height: 250)
                 .clipShape(.rect(cornerRadius: 125))
                 .padding(.top,40)
-                .padding([.leading,.trailing],52)
             
             HStack(content: {
                 Image("profileCancel")
@@ -129,7 +135,7 @@ struct SelectProfileImageView: View {
                 Image("profileApprove")
                     .asButton(.press) {
                         if let imageData = viewModel.profilePicture?.jpegData(compressionQuality: 0){
-                            viewModel.uploadProfilePic(file: imageData, fileName: "user_image") {
+                            viewModel.uploadProfilePic(file: imageData, fileName: "user_image.png") {
                                 router.showScreen(.push) { _ in
                                     SuccessfulScreeenView()
                                 }

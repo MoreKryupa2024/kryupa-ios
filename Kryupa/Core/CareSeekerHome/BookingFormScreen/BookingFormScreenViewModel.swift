@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 class BookingFormScreenViewModel: ObservableObject{
     @Published var showDatePicker: Bool = Bool()
     var dateState: Int = Int()

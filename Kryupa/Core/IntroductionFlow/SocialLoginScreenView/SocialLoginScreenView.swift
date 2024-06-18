@@ -39,7 +39,7 @@ struct SocialLoginScreenView: View {
                 VStack(spacing: 10.0){
                     commonButton(imageName: "appleButton")
                         .asButton(.press) {
-//                            navigateToMobileNumberView()
+                            //                            navigateToMobileNumberView()
                         }
                     commonButton(imageName: "googleButton")
                         .asButton(.press) {
@@ -62,14 +62,45 @@ struct SocialLoginScreenView: View {
     }
     
     //MARK: Navigate To Mobile Number Screen
-    private func navigateToMobileNumberView(userInfo: UserInfo? = nil){
-        router.showScreen(.push) { _ in
-            if userType == AppConstants.GiveCare{
-                MobileNumberScreenView()
-            }else{
-                PersonalInformationSeekerView()
+    private func navigateToMobileNumberView(userInfo: DataClass? = nil){
+        Defaults().fullName = userInfo?.userInfo.name ?? ""
+        switch userInfo?.verificationStatus{
+        case "Personal information":
+            router.showScreen(.push) { _ in
+                if userType == AppConstants.GiveCare{
+                    PersonalInformationScreenView()
+                }else{
+                    PersonalInformationSeekerView()
+                }
             }
+        case "Take photo":
+            router.showScreen(.push) { _ in
+                SelectProfileImageView()
+            }
+        case "Onboarding done":
+            if userType == AppConstants.GiveCare{
+                NotificationCenter.default.post(name: .setCareGiverHomeScreen,
+                                                object: nil, userInfo: nil)
+                router.dismissScreenStack()
+            }else{
+                NotificationCenter.default.post(name: .setCareSeekerHomeScreen,
+                                                object: nil, userInfo: nil)
+                router.dismissScreenStack()
+            }
+        case "Mobile Verification":
+            router.showScreen(.push) { _ in
+                MobileNumberScreenView()
+            }
+        case "Waitting at lobby":
+            
+            NotificationCenter.default.post(name: .setLobbyScreen,
+                                            object: nil, userInfo: nil)
+            router.dismissScreenStack()
+            
+        default:
+            break
         }
+        
     }
     
     //MARK: Common Button View

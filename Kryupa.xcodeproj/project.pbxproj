@@ -650,7 +650,7 @@
 				BEE28AB92C05A35E00A3CDFF /* BGV Lobby */,
 				BE4FBDB52BFB838C003442BB /* Gallery Views */,
 				BE4FBDA62BFB5EB1003442BB /* Care Seeker Registration */,
-				BEEA72002BF73647004E7DED /* Customer Registration */,
+				BEEA72002BF73647004E7DED /* Care Giver Registration */,
 				BE644E4A2BF4CF1700A6781F /* IntroductionFlow */,
 				BE644E462BF4CB4000A6781F /* Login&SignupFlow */,
 			);
@@ -887,14 +887,14 @@
 			path = Lobby;
 			sourceTree = "<group>";
 		};
-		BEEA72002BF73647004E7DED /* Customer Registration */ = {
+		BEEA72002BF73647004E7DED /* Care Giver Registration */ = {
 			isa = PBXGroup;
 			children = (
 				BE4FBDA32BFB522B003442BB /* Preference */,
 				BE4FBD9A2BFB04B9003442BB /* Experience and Skills */,
 				BE7B2C512BF79F03005CFD66 /* Personal Information Screen View */,
 			);
-			path = "Customer Registration";
+			path = "Care Giver Registration";
 			sourceTree = "<group>";
 		};
 		BEFB670B2C1708AC003ED6DF /* ChatComponent */ = {

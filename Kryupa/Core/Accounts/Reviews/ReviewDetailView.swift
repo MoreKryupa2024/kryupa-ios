@@ -10,7 +10,7 @@ import SwiftUI
 struct ReviewDetailView: View {
     var body: some View {
         ScrollView {
-            HeaderView()
+            HeaderView(showBackButton: true)
             VStack {
                 
                 UserView
@@ -20,6 +20,7 @@ struct ReviewDetailView: View {
                 ReviewView
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var ReviewView: some View{

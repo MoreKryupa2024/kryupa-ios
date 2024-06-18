@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import GoogleSignIn
 
-
+@MainActor
 class SocialLoginScreenViewModel: ObservableObject{
     
     @Published var isLogin: Bool = false
@@ -47,13 +47,13 @@ class SocialLoginScreenViewModel: ObservableObject{
     }
     
     
-    func signCall(param:[String:Any],completionHandler :  @escaping (UserInfo) -> Void){
+    func signCall(param:[String:Any],completionHandler :  @escaping (DataClass) -> Void){
         isLoading = true
         NetworkManager.shared.postGoogleSignup(params: param) { [weak self]result in
             switch result{
             case.success(let data):
                 self?.isLoading = false
-                completionHandler(data.data.userInfo)
+                completionHandler(data.data)
             case .failure(let error):
                 self?.isLoading = false
                 print(error)

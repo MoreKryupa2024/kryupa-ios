@@ -25,6 +25,7 @@ struct GiveReviewView: View {
             line
             WriteReview
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var WriteReview: some View {
