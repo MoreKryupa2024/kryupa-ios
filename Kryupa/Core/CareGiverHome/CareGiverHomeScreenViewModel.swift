@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Combine
 
+@MainActor
 class CareGiverHomeScreenViewModel: ObservableObject
 {
     @Published var jobsNearYou: [JobPost] = [JobPost]()
@@ -20,14 +22,18 @@ class CareGiverHomeScreenViewModel: ObservableObject
         ]
         isloading = true
         NetworkManager.shared.getJobsNearYouList(params: param) { [weak self] result in
-            switch result{
-            case .success(let data):
-                self?.isloading = false
-                self?.jobsNearYou = data.data.jobPost
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.jobsNearYou = data.data.jobPost
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
+            
         }
     }
 }

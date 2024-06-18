@@ -27,7 +27,7 @@ struct CareGiverPortfolioView: View {
                         .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(job.customerInfo.price)
+                    Text("$\(job.customerInfo.price)")
                         .font(.custom(FontContent.plusRegular, size: 13))
                         .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -49,7 +49,7 @@ struct CareGiverPortfolioView: View {
                 Image("clock")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "hh:mm a", afterFormat: "HH:mm:ss")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "hh:mm a", afterFormat: "HH:mm:ss"))")
+                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -603,6 +603,8 @@ class NetworkManager{
                 return
             }
             
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
             do {
                 let decoder = JSONDecoder()
 //                decoder.keyDecodingStrategy = .convertFromSnakeCase
