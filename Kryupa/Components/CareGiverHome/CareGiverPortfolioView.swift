@@ -34,7 +34,7 @@ struct CareGiverPortfolioView: View {
                 }
             }
 
-            JobDescView()
+            JobDescView(job: job)
 
             VStack(spacing: 2) {
                 Text("Service Required:")
@@ -108,6 +108,9 @@ struct CareGiverPortfolioView: View {
     }
 }
 struct JobDescView: View {
+    
+    var job: JobPost
+
     var body: some View {
         VStack {
             
@@ -115,7 +118,7 @@ struct JobDescView: View {
                 Image("calender")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text("3rd March 2024")
+                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -126,7 +129,7 @@ struct JobDescView: View {
                 Image("clock")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text("03:00 PM - 04:00 PM")
+                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -138,21 +141,21 @@ struct JobDescView: View {
                     Image("account")
                         .resizable()
                         .frame(width: 18,height: 18)
-                    Text("Female")
+                    Text(job.customerInfo.gender)
                         .minimumScaleFactor(0.01)
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .foregroundStyle(._444446)
                 }
                 //                .frame(maxWidth: .infinity)
                 
-                HStack(spacing:2){
-                    Image("weight")
-                        .resizable()
-                        .frame(width: 18,height: 18)
-                    Text("100 kg")
-                        .font(.custom(FontContent.plusRegular, size: 12))
-                        .foregroundStyle(._444446)
-                }
+//                HStack(spacing:2){
+//                    Image("weight")
+//                        .resizable()
+//                        .frame(width: 18,height: 18)
+//                    Text("100 kg")
+//                        .font(.custom(FontContent.plusRegular, size: 12))
+//                        .foregroundStyle(._444446)
+//                }
                 //                .frame(maxWidth: .infinity)
                 
                 HStack(spacing:2){
@@ -172,7 +175,7 @@ struct JobDescView: View {
                 Image("heartbeat")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text("Diabetes, Kidney Stone")
+                Text(job.customerInfo.diseaseType.map{String($0)}.joined(separator: ","))
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -181,6 +184,6 @@ struct JobDescView: View {
     }
 }
 
-//#Preview {
-//    CareGiverPortfolioView(job: JobPost(customerInfo: CustomerInfoData(name: "Alex Chatterjee", gender: "Male", price: "$40.00", diseaseType: ["Diabetes", "Heart Conditions"]), bookingDetails: BookingDetailsData(areaOfExpertise: ["Nursing", "Physical Tharapy"], bookingType: "One Time", startDate: "2024-06-04", endDate: "2024-06-04", startTime: "15:44:05", endTime: "15:56:00"), jobId: "abc"))
-//}
+#Preview {
+    CareGiverPortfolioView(job: JobPost(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1"))
+}
