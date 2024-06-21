@@ -10,6 +10,8 @@ import SwiftfulUI
 
 struct AccountView: View {
     
+    @StateObject private var viewModel = AccountsViewModel()
+
     @State var arrAccountList: [AccountListData] = {
         if Defaults().userType == AppConstants.GiveCare{
             return AppConstants.giverAccountSectionItems
@@ -52,6 +54,7 @@ struct AccountView: View {
             }
         .onAppear() {
             UIScrollView.appearance().bounces = false
+            viewModel.getProfile()
         }
     }
 
@@ -60,9 +63,11 @@ struct AccountView: View {
         case "Personal Details":
             router.showScreen(.push) { rout in
                 if Defaults().userType == AppConstants.GiveCare{
-                    PersonalDetailView()
+//                    PersonalDetailView()
+                    ProfileDetailScreenView(selecedProfile: viewModel.profile?.customerName ?? "")
+
                 }else{
-                    ProfileDetailScreenView()
+                    ProfileDetailScreenView(selecedProfile: viewModel.profile?.customerName ?? "")
                 }
             }
             
@@ -145,7 +150,7 @@ struct AccountView: View {
                         .stroke(.AEAEB_2, lineWidth: 1)
                 )
                 
-                Text("John Smith")
+                Text(viewModel.profile?.customerName ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                     .foregroundStyle(.appMain)
 

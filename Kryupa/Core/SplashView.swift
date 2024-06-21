@@ -19,7 +19,7 @@ struct ContentView: View {
             case 3: GiverTabbarScreenView()//Giver Tab View Controller
             case 4: ConsumerTabBarScreenView()//seeker Tab View Controller
             case 5: PaymentListView(selectedPaymentMethod: 0)
-            case 6: NotificationAlertView()
+            case 6: AccountView()
             default:
                 splashView
             }
