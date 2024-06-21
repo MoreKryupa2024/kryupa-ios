@@ -93,7 +93,7 @@ struct SelectProfileImageView: View {
                     }
                 }
                 .fullScreenCover(isPresented: $isTaken) {
-                    CameraPickerView() { image in
+                    CameraPickerView(isCam: true) { image in
                         viewModel.profilePicture = image
                     }
                 }

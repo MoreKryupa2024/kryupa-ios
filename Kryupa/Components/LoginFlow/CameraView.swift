@@ -9,17 +9,26 @@ import SwiftUI
 
 struct CameraPickerView: UIViewControllerRepresentable {
     
+    var isCam: Bool = true
     private var sourceType: UIImagePickerController.SourceType = .camera
     private let onImagePicked: (UIImage) -> Void
     @Environment(\.presentationMode) private var presentationMode
     
-    public init(onImagePicked: @escaping (UIImage) -> Void) {
+    public init(isCam: Bool, onImagePicked: @escaping (UIImage) -> Void) {
         self.onImagePicked = onImagePicked
+        self.isCam = isCam
     }
     
     public func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
-        picker.sourceType = self.sourceType
+        
+        if isCam {
+            picker.sourceType = .camera
+        }
+        else {
+            picker.sourceType = .photoLibrary
+        }
+        
         picker.delegate = context.coordinator
         return picker
     }

@@ -151,7 +151,7 @@ fileprivate extension Defaults {
     }
     
     func getStringBannerValue(key: DefaultKeys) -> String {
-        return (userDefaults.value(forKey: key.rawValue) as? String) ?? "NO_EMAIL_LINKED"
+        return (userDefaults.value(forKey: key.rawValue) as? String) ?? ""
     }
     
     func getValues(key: DefaultKeys) -> [String] {

@@ -85,6 +85,78 @@ class NetworkManager{
         }).resume()
     }
     
+    func uploadProfilePicSeeker(profileID: String, file:Data, fileName: String,completionHandler :  @escaping (Results<EmptyRegister, NetworkError>) -> Void){
+        let url = URL(string: APIConstant.updateProfilePicSeeker)!
+        
+        // Create the URLRequest
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Set authorization header if needed
+        request.setValue("Bearer \(defaults.accessToken)", forHTTPHeaderField: "Authorization")
+        
+        // Prepare the multipart form data
+        let parameters = ["key": "value", "profileId": profileID] // Updated parameters
+        
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var data = Data()
+        
+        // Add parameters
+        for (key, value) in parameters {
+            data.append("--\(boundary)\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+            data.append("\(value)\r\n".data(using: .utf8)!)
+        }
+        
+        // Add image data
+        data.append("--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        data.append(file)
+        data.append("\r\n".data(using: .utf8)!)
+        
+        data.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        // Set the request body
+        request.httpBody = data
+        
+        // Create URLSession task
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            // Handle response if needed
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Status code: \(httpResponse.statusCode)")
+                // Handle success or failure based on status code
+            }
+            
+            if let data = data {
+                // Handle response data if needed
+                let responseString = String(data: data, encoding: .utf8)
+                print("Response: \(responseString ?? "")")
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let apiData = try decoder.decode(EmptyRegister.self, from: data)
+                    if apiData.success{
+                        completionHandler(.success(apiData))
+                    }else{
+                        completionHandler(.failure(.custom(apiData.message)))
+                    }
+                    
+                }catch{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+            }
+        }.resume()
+        
+    }
+        
     func uploadProfile(file:Data, fileName: String,completionHandler :  @escaping (Results<EmptyRegister, NetworkError>) -> Void){
         let mimeType = "image/png"
         
@@ -616,6 +688,315 @@ class NetworkManager{
                 let apiData = try decoder.decode(JobsModel.self, from: data)
                 if apiData.success{
                     print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getPersonalDetails(params:[String:Any]? = nil,completionHandler :  @escaping (Results<PersonalModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getPersonalDetails) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(PersonalModel.self, from: data)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message ?? "")))
+
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getProfile(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ProfileModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getProfile) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(ProfileModel.self, from: data)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message ?? "")))
+
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getProfileList(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ProfileListModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.profileList) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(ProfileListModel.self, from: data)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message ?? "")))
+
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteProfile(params:[String:Any]? = nil,completionHandler :  @escaping (Results<EmptyRegister, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.deleteProfile) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(EmptyRegister.self, from: data)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func addNewProfile(params:[String:Any]? = nil,completionHandler :  @escaping (Results<EmptyRegister, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.createProfile) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(EmptyRegister.self, from: data)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func updateProfile(params:[String:Any]? = nil,completionHandler :  @escaping (Results<EmptyRegister, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.updateProfile) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(EmptyRegister.self, from: data)
+                if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
                     completionHandler(.failure(.custom(apiData.message)))
