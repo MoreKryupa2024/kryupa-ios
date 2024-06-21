@@ -20,13 +20,15 @@ class SelectProfileImageViewModel: ObservableObject{
     func uploadProfilePic(file:Data, fileName: String, certificateUrl: @escaping(()->Void)){
         isLoading = true
         NetworkManager.shared.uploadProfile(file: file, fileName: fileName) {[weak self] result in
-            switch result{
-            case .success(_):
-                self?.isLoading = false
-                certificateUrl()
-            case .failure(let error):
-                self?.isLoading = false
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(_):
+                    self?.isLoading = false
+                    certificateUrl()
+                case .failure(let error):
+                    self?.isLoading = false
+                    print(error)
+                }
             }
         }
     }

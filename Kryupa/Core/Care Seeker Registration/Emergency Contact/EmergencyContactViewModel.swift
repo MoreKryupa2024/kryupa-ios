@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class EmergencyContactViewModel: ObservableObject{
     
     @Published var name: String = String()

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 class LobbyScreenViewModel: ObservableObject{
  
     @Published var isloading: Bool = Bool()
@@ -14,12 +14,14 @@ class LobbyScreenViewModel: ObservableObject{
     func getLobbyStatus(){
         isloading = true
         NetworkManager.shared.getLobbyStatus() { [weak self] result in
-            switch result{
-            case.failure(let error):
-                print(error)
-                self?.isloading = false
-            case .success(let data):
-                self?.isloading = false
+            DispatchQueue.main.async {
+                switch result{
+                case.failure(let error):
+                    print(error)
+                    self?.isloading = false
+                case .success(_):
+                    self?.isloading = false
+                }
             }
         }
     }

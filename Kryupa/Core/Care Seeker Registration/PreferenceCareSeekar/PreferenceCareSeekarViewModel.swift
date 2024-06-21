@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class PreferenceCareSeekarViewModel: ObservableObject{
     
     @Published var yearsOfExperienceSelected: String = String()
@@ -37,13 +37,15 @@ class PreferenceCareSeekarViewModel: ObservableObject{
             ]
             
             NetworkManager.shared.postCareSeekerCreateProfile(params: param) { [weak self] result in
-                switch result{
-                case .success(_):
-                    self?.isLoading = false
-                    next()
-                case .failure(let error):
-                    self?.isLoading = false
-                    print(error)
+                DispatchQueue.main.async {
+                    switch result{
+                    case .success(_):
+                        self?.isLoading = false
+                        next()
+                    case .failure(let error):
+                        self?.isLoading = false
+                        print(error)
+                    }
                 }
             }
         }

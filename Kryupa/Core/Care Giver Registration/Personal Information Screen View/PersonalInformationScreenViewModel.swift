@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+@MainActor
 class PersonalInformationScreenViewModel: ObservableObject{
     
     var date: Date = Date()

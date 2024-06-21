@@ -69,6 +69,7 @@
 		BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */; };
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
+		BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
 		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
 		BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */; };
@@ -147,6 +148,7 @@
 		BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798A2C05FD32005C12AB /* WeakDayView.swift */; };
 		BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798C2C05FDD8005C12AB /* BannerView.swift */; };
 		BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */; };
+		BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */; };
 		BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +228,7 @@
 		BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNumberScreenView.swift; sourceTree = "<group>"; };
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
 		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenView.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 		BEEB798A2C05FD32005C12AB /* WeakDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakDayView.swift; sourceTree = "<group>"; };
 		BEEB798C2C05FDD8005C12AB /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeSlotsView.swift; sourceTree = "<group>"; };
+		BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerScreenView.swift; sourceTree = "<group>"; };
 		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -485,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */,
+				BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */,
 			);
 			path = BookingScreen;
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 				BEE28AC22C05FC3400A3CDFF /* On-Boarding */,
 				BE1573B82BF631A400A6137D /* LoginFlow */,
 				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
+				BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */,
 				BE3C7F292C1C2425000848A6 /* Booking */,
 			);
 			path = Components;
@@ -1044,6 +1050,7 @@
 				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
 				A3FEF60A2C219FD200EFC3C2 /* ProfileModel.swift in Sources */,
 				A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */,
+				BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */,
 				BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */,
 				BE3C7F302C1C3EE7000848A6 /* ProfileDetailScreenView.swift in Sources */,
 				A3FEF6032C201C4100EFC3C2 /* JobCell.swift in Sources */,
@@ -1061,6 +1068,7 @@
 				BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
+				BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */,
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,

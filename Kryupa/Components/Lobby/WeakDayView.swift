@@ -53,6 +53,9 @@ struct WeakDayView: View {
             }
         }
     }
+    func dropDownView(value: WeakDayData){
+        selectedValue = value
+    }
     
     private func dropDownView(value: String)-> some View{
         Text(value)

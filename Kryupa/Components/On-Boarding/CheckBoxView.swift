@@ -13,10 +13,11 @@ struct CheckBoxView: View {
     
     
     var body: some View {
-        HStack(spacing: 5){
+        HStack(alignment:.top,spacing: 5){
             Image(isSelected ? "checkboxUnselected" : "checkboxSelected")
                 .resizable()
                 .frame(width: 18,height: 18)
+                .padding(.top,1.5)
             Text(name)
         }
         .font(.custom(FontContent.plusRegular, size: 15))
