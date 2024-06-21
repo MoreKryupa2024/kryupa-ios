@@ -44,6 +44,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 0 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                Defaults().bookingId = ""
                 selectedIndex = 0
             }
             
@@ -58,6 +59,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 1 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                Defaults().bookingId = ""
                 selectedIndex = 1
             }
             Spacer()
@@ -71,6 +73,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 2 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                Defaults().bookingId = ""
                 selectedIndex = 2
             }
             Spacer()
@@ -84,6 +87,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 3 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                Defaults().bookingId = ""
                 selectedIndex = 3
             }
             
@@ -98,6 +102,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 4 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                Defaults().bookingId = ""
                 selectedIndex = 4
             }
             Spacer()
@@ -108,7 +113,6 @@ struct ConsumerTabBarScreenView: View {
                 .shadow(color: ._444446.opacity(0.2), radius: 10, x: 0, y: 0)
                 .mask(Rectangle().padding(.top, -20)) /// here!
         )
-//        .ignoresSafeArea()
     }
     
     private func showBookingScreen(_ notification: Notification) {

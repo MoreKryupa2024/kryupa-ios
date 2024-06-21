@@ -32,7 +32,11 @@ class APIConstant{
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
-}
+    static let getBookings = "\(baseURL)/apis/booking/customerNavigation"
+    static let getCareGiverBookings = "\(baseURL)/apis/booking/caregiverNavigation"
+    static let getBookingDetailsById = "\(baseURL)/apis/booking/getBookingById?booking_id="
+    
+ }
 
 class FontContent{
     static let plusRegular = "PlusJakartaDisplay-Regular"

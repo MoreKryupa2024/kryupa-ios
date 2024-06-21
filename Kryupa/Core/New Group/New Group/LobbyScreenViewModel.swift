@@ -19,7 +19,7 @@ class LobbyScreenViewModel: ObservableObject{
                 case.failure(let error):
                     print(error)
                     self?.isloading = false
-                case .success(let data):
+                case .success(_):
                     self?.isloading = false
                 }
             }
