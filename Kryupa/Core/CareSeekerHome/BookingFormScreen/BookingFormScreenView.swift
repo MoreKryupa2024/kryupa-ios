@@ -41,35 +41,6 @@ struct BookingFormScreenView: View {
                         
                         DateTimeView
                         
-                        if viewModel.showDatePicker{
-                            switch viewModel.dateState{
-                            case 1:
-                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "HH:mm:ss", valueStr: { str in
-                                    print(str)
-                                    viewModel.startTime = str
-                                }, displayedComponents: .hourAndMinute)
-                            case 2:
-                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "HH:mm:ss", valueStr: { str in
-                                    print(str)
-                                    viewModel.endTime = str
-                                }, displayedComponents: .hourAndMinute)
-                                
-                            case 3:
-                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "yyyy-MM-dd'T'HH:mm:ssZ", valueStr: { str in
-                                    print(str)
-                                    viewModel.startDate = str
-                                }, displayedComponents: .date)
-                                
-                            case 4:
-                                dateOfBirthPicker(givenDate: $viewModel.dateValue, formate: "yyyy-MM-dd'T'HH:mm:ssZ", valueStr: { str in
-                                    print(str)
-                                    viewModel.endDate = str
-                                }, displayedComponents: .date)
-                            default:
-                                EmptyView()
-                            }
-                        }
-                        
                         sepratorView
                         
                         genderView
@@ -97,36 +68,127 @@ struct BookingFormScreenView: View {
                 
                 BottomButtonView
             }
+            .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            
             if viewModel.isloading{
                 LoadingView()
             }
+            
+            if viewModel.showDatePicker{
+                switch viewModel.dateState{
+                case 1:
+                    
+                    DateTimePickerScreenView(
+                        formate: "HH:mm:ss",
+                        range: range(),
+                        valueStr: { value in
+                            viewModel.startTime = value
+                            viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
+                            viewModel.showDatePicker = false
+                        },
+                        displayedComponents: .hourAndMinute) { value in
+                            
+                            guard let incrementedDate = Calendar.current.date(byAdding: .hour, value: 1, to: value) else {
+                                return
+                            }
+                            viewModel.startTimeValue = incrementedDate
+                        }
+
+                case 2:
+                    DateTimePickerScreenView(
+                        formate: "HH:mm:ss",
+                        range: viewModel.startTimeValue...,
+                        valueStr: { value in
+                            viewModel.endTime = value
+                            viewModel.showDatePicker = false
+                        },
+                        displayedComponents: .hourAndMinute
+                    )
+                    
+                case 3:
+                    DateTimePickerScreenView(
+                        formate: "yyyy-MM-dd'T'HH:mm:ssZ",
+                        range: range(),
+                        valueStr: { value in
+                            viewModel.startDate = value
+                            viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
+                            viewModel.showDatePicker = false
+                        },
+                        displayedComponents: .date){ value in
+                            guard let incrementedDate = Calendar.current.date(byAdding: .day, value: 1, to: value) else {
+                                return
+                            }
+                            viewModel.startDateValue = incrementedDate
+                    }
+                    
+                case 4:
+                    DateTimePickerScreenView(
+                        formate: "yyyy-MM-dd'T'HH:mm:ssZ",
+                        range: viewModel.startDateValue...,
+                        valueStr: { value in
+                            viewModel.endDate = value
+                            viewModel.showDatePicker = false
+                        },
+                        displayedComponents: .date
+                    )
+                default:
+                    EmptyView()
+                }
+            }
         }
         .onAppear{
+            viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
+            viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
             viewModel.getBookingForRelativeList()
         }
     }
     
-    private func dateOfBirthPicker(givenDate:Binding<Date>,formate:String,valueStr:(@escaping(String)-> Void),displayedComponents: DatePickerComponents)-> some View{
-        VStack{
-            HStack{
-                Spacer()
-                Text("Done")
-                    .padding(10)
-                    .foregroundStyle(.white)
-                    .background{
-                        Color.blue
-                    }
-                    .cornerRadius(5)
-                    
+    private func range()-> (PartialRangeFrom<Date>)?{
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let day = "\(calendar.component(.day, from: date))"
+        if viewModel.segSelected == "One Time"{
+            let startDay = (viewModel.selectedDay.numDay)
+            if startDay == day{
+                return Date()...
+            }else{
+                return nil
             }
-            .asButton(.press) {
-                valueStr(dateFormatChange(dateFormat: formate, dates: givenDate.wrappedValue))
-                viewModel.showDatePicker = false
+            
+        }else{
+            let startDay = (viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
+            
+            if startDay == day{
+                return Date()...
+            }else{
+                return nil
             }
-            DatePicker("Calender", selection: givenDate, in: givenDate.wrappedValue..., displayedComponents: displayedComponents )
-                .datePickerStyle(.graphical)
         }
     }
+    
+    private func setFutureDate(value: String , currFormate: String, givenFormate: String, incrementValue: Int, component:Calendar.Component)-> String{
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = currFormate
+        guard let date = dateFormatter.date(from: value) else {
+            return ""
+        }
+        
+        guard let incrementedDate = Calendar.current.date(byAdding: component, value: incrementValue, to: date) else {
+            return ""
+        }
+        
+        dateFormatter.dateFormat = givenFormate
+        let strDate = dateFormatter.string(from: incrementedDate)
+        
+        return strDate
+    }
+    
+    private func addOrSubtractMonth(value: Int, date: Date, component:Calendar.Component) -> Date {
+        Calendar.current.date(byAdding: component, value: value, to: date)!
+    }
+
     
     private var DateTimeView: some View{
         
@@ -163,7 +225,6 @@ struct BookingFormScreenView: View {
     private var WeakDayContentView: some View{
         WeakDayView(selectionCount: 8,selectedValue: viewModel.selectedDay){ selectedWeak in
             viewModel.selectedDay = selectedWeak
-//            viewModel.getSlotList()
         }
     }
     
