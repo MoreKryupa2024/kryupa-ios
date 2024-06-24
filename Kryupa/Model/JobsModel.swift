@@ -7,48 +7,24 @@
 
 import Foundation
 
-// MARK: - Empty
-/*struct JobsModel: Codable {
+struct JobsModel {
     let data: JobsData
     let message: String
     let success: Bool
-}
-
-// MARK: - DataClass
-struct JobsData: Codable {
-    let jobPost: [JobPost]
-}
-
-// MARK: - JobsNearYou
-struct JobPost: Codable {
-    let customerInfo: CustomerInfoData
-    let bookingDetails: BookingDetailsData
-    let jobId: String
-}
-
-struct CustomerInfoData: Codable {
-    let name, gender, price: String
-    let diseaseType: [String]
-}
-
-struct BookingDetailsData: Codable {
-    let areaOfExpertise: [String]
-    let bookingType, startDate, endDate, startTime, endTime: String
-}
-*/
-
-struct JobsModel: Codable {
-    let data: JobsData
-    let message: String
-    let success: Bool
+    
+    init(jsonData:[String:Any]){
+        data = JobsData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+        message = jsonData["message"] as? String ?? ""
+        success = jsonData["success"] as? Bool ?? false
+    }
 }
 
 // MARK: - DataClass
 struct JobsData: Codable {
     let jobPost: [JobPost]
 
-    enum CodingKeys: String, CodingKey {
-        case jobPost = "job_post"
+    init(jsonData:[String:Any]){
+        jobPost = (jsonData["job_post"] as? [[String:Any]] ?? [[String:Any]]()).map{JobPost(jsonData: $0)}
     }
 }
 
@@ -58,9 +34,10 @@ struct JobPost: Codable {
     let bookingDetails: BookingDetails
     let jobID: String
 
-    enum CodingKeys: String, CodingKey {
-        case customerInfo, bookingDetails
-        case jobID = "job_id"
+    init(jsonData:[String:Any]){
+        customerInfo = CustomerInfo(jsonData: jsonData["customerInfo"] as? [String:Any] ?? [String:Any]())
+        bookingDetails = BookingDetails(jsonData: jsonData["bookingDetails"] as? [String:Any] ?? [String:Any]())
+        jobID = jsonData["job_id"] as? String ?? ""
     }
 }
 
@@ -70,13 +47,13 @@ struct BookingDetails: Codable {
     let bookingType, startDate, endDate, startTime: String
     let endTime: String
 
-    enum CodingKeys: String, CodingKey {
-        case areaOfExpertise = "area_of_expertise"
-        case bookingType = "booking_type"
-        case startDate = "start_date"
-        case endDate = "end_date"
-        case startTime = "start_time"
-        case endTime = "end_time"
+    init(jsonData:[String:Any]){
+        areaOfExpertise = jsonData["area_of_expertise"] as? [String] ?? []
+        bookingType = jsonData["booking_type"] as? String ?? ""
+        startDate = jsonData["start_date"] as? String ?? ""
+        endDate = jsonData["end_date"] as? String ?? ""
+        startTime = jsonData["start_time"] as? String ?? ""
+        endTime = jsonData["end_time"] as? String ?? ""
     }
 }
 
@@ -85,8 +62,10 @@ struct CustomerInfo: Codable {
     let name, gender, price: String
     let diseaseType: [String]
 
-    enum CodingKeys: String, CodingKey {
-        case name, gender, price
-        case diseaseType = "disease_type"
+    init(jsonData:[String:Any]){
+        name = jsonData["name"] as? String ?? ""
+        gender = jsonData["gender"] as? String ?? ""
+        price = jsonData["price"] as? String ?? ""
+        diseaseType = jsonData["disease_type"] as? [String] ?? []
     }
 }

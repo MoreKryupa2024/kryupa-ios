@@ -13,6 +13,7 @@ struct RecommendedCareGiverDetailScreenView: View {
     @Environment(\.router) var router
     
     var careGiverDetail: CareGiverNearByCustomerScreenData?
+    var bookingID: String = "90279ed1-9347-4e3d-a9ae-49e69b6c143b"//String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
     
@@ -135,9 +136,15 @@ struct RecommendedCareGiverDetailScreenView: View {
          
             MessageButton
                 .asButton(.press){
-                    router.showScreen(.push) { route in
-                        ChatView()
+                    viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                        presentAlert(title: "Kryupa", subTitle: "Appointment Booked")
+                        router.showScreen(.push) { route in
+                            ChatView()
+                        }
+                    } alert: { strMsg in
+                        presentAlert(title: "Kryupa", subTitle: strMsg)
                     }
+
                 }
         }
     }

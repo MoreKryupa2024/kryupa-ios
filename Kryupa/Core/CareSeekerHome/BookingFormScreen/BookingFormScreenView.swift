@@ -82,6 +82,7 @@ struct BookingFormScreenView: View {
                     DateTimePickerScreenView(
                         formate: "HH:mm:ss",
                         range: range(),
+                        rangeThrough: nil,
                         valueStr: { value in
                             viewModel.startTime = value
                             viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
@@ -99,6 +100,7 @@ struct BookingFormScreenView: View {
                     DateTimePickerScreenView(
                         formate: "HH:mm:ss",
                         range: viewModel.startTimeValue...,
+                        rangeThrough: nil,
                         valueStr: { value in
                             viewModel.endTime = value
                             viewModel.showDatePicker = false
@@ -109,7 +111,8 @@ struct BookingFormScreenView: View {
                 case 3:
                     DateTimePickerScreenView(
                         formate: "yyyy-MM-dd'T'HH:mm:ssZ",
-                        range: range(),
+                        range: Date()...,
+                        rangeThrough: nil,
                         valueStr: { value in
                             viewModel.startDate = value
                             viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
@@ -126,6 +129,7 @@ struct BookingFormScreenView: View {
                     DateTimePickerScreenView(
                         formate: "yyyy-MM-dd'T'HH:mm:ssZ",
                         range: viewModel.startDateValue...,
+                        rangeThrough: nil,
                         valueStr: { value in
                             viewModel.endDate = value
                             viewModel.showDatePicker = false

@@ -545,6 +545,57 @@ class NetworkManager{
         task.resume()
     }
     
+    func sendRequestForBookCaregiver(params:[String:Any]?,completionHandler :  @escaping (Results<CareGiverDetailModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:"\(APIConstant.sendRequestForBookCaregiver)") else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = CareGiverDetailModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getRelativeList(params:[String:Any]? = nil,completionHandler :  @escaping (Results<RelativeModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.getRelativeList) else {
@@ -630,9 +681,8 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(BookingRecommendationModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = BookingRecommendationModel(jsonData: parsedData)
                 if apiData.success{
                     print(apiData)
                     completionHandler(.success(apiData))
@@ -682,9 +732,8 @@ class NetworkManager{
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             
             do {
-                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(JobsModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = JobsModel(jsonData: parsedData)
                 if apiData.success{
                     print(apiData)
                     completionHandler(.success(apiData))
