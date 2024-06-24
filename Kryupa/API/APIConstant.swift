@@ -18,6 +18,7 @@ class APIConstant{
     
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
     static let baseURLCP = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+
     
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
     static let uploadPDFFiles = "\(baseURL)/apis/user/file/multifileUpload"
