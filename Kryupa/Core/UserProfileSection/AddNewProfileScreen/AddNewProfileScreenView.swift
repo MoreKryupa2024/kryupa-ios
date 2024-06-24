@@ -9,9 +9,10 @@ import SwiftUI
 
 struct AddNewProfileScreenView: View {
     
+    @Environment(\.router) var router
     @State var selectedSection = 0
     
-    @StateObject private var viewModel = AddNewProfileScreenViewModel()
+    @StateObject var viewModel = AddNewProfileScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -38,8 +39,14 @@ struct AddNewProfileScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
+            
+            if viewModel.isLoading{
+                LoadingView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
+        
+        
     }
     
     private var medicalConditionView: some View{
@@ -123,9 +130,32 @@ struct AddNewProfileScreenView: View {
                         viewModel.dataMedicalChecks { alertStr in
                             presentAlert(title: "Kryupa", subTitle: alertStr)
                         } next: { param in
-                            var params = [String:Any]()
-                            params["medicalInfo"] = param
                             
+                            if viewModel.profileID == "" {
+                                viewModel.param["mediaclInfo"] = param
+
+                                viewModel.createProfile {
+                                    router.showScreen(.push) { rout in
+                                        AccountView()
+                                    }
+                                } errorMsg: { msg in
+                                    presentAlert(title: "Kryupa", subTitle: msg)
+                                }
+
+                            }
+                            else {
+                                var newParam = param
+                                newParam["medicalInfoId"] = viewModel.medicalID
+                                viewModel.param["mediaclInfo"] = newParam
+
+                                viewModel.updateProfile {
+                                    router.showScreen(.push) { rout in
+                                        AccountView()
+                                    }
+                                }
+                            }
+                            
+
                         }
                     }
             }
@@ -267,6 +297,27 @@ struct AddNewProfileScreenView: View {
         .frame(height: 44)
     }
     
+    private var relationPersonalDropdownView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Relation")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 17))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.relationPersonal,
+                placeHolder: "Select",
+                values: AppConstants.relationArray) { value in
+                    viewModel.relationPersonal = value
+                }
+        })
+    }
+    
     private var relationDropdownView: some View{
         VStack(alignment: .leading, spacing:0,
                content: {
@@ -324,9 +375,8 @@ struct AddNewProfileScreenView: View {
                         viewModel.dataEmergancyChecks(alert: {alertStr in
                             presentAlert(title: "Kryupa", subTitle: alertStr)
                         }, next: { param in
-                            var parameter = [String:Any]()
-                            parameter["emergencyContact"] = param
-                            
+                            viewModel.param["emergencyContact"] = param
+                            selectedSection = selectedSection + 1
                         })
                     }
             }
@@ -336,7 +386,10 @@ struct AddNewProfileScreenView: View {
     private var PersonalInfoView:some View{
         VStack(spacing: 25,
                content: {
-            textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
+            
+            relationPersonalDropdownView
+            
+            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
             
             selectionViewWithHeader(
                 leftIcone: nil,
@@ -377,6 +430,9 @@ struct AddNewProfileScreenView: View {
                         viewModel.customerDataChecks { alertStr in
                             presentAlert(title: "Kryupa", subTitle: alertStr)
                         } next: { param in
+                            
+                            viewModel.param["personalInfo"] = param
+                            selectedSection = selectedSection + 1
 //                            router.showScreen(.push) { rout in
 //                                ExperienceandSkillsView(parameters: param)
 //                            }

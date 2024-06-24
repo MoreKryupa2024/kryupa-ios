@@ -7,14 +7,20 @@
 
 import Foundation
 import SwiftUI
+
 @MainActor
 class AddNewProfileScreenViewModel: ObservableObject{
     
+    @Published var isLoading:Bool = false
+
     @Published var name: String = String()
     @Published var email: String = String()
     @Published var relation: String = String()
     @Published var number: String = String()
-    
+    @Published var relationPersonal: String = String()
+    @Published var profileID: String = String()
+    @Published var medicalID: String = String()
+
     var date: Date = Date()
     @Published var showDatePicker: Bool = Bool()
     var dateOfBirthSelected: Bool = Bool()
@@ -25,6 +31,8 @@ class AddNewProfileScreenViewModel: ObservableObject{
     @Published var medicalConditionDropDownSelected: [String] = [String]()
     @Published var mobilityLevel: String = String()
     @Published var allergiesValue: String = String()
+    
+    @Published var param = [String:Any]()
     
     func dataMedicalChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
@@ -40,7 +48,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
                  "allergies": allergiesValue,
                  "mobility_level": mobilityLevel,
                  "other_disease_type": medicalConditionSelected,
-                 "disease_type": [medicalConditionDropDownSelected]
+                 "disease_type": medicalConditionDropDownSelected
              ]
             next(param)
         }
@@ -58,8 +66,6 @@ class AddNewProfileScreenViewModel: ObservableObject{
             from: self.date
         )
     }
-    
-    
     
     func dataEmergancyChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
@@ -85,8 +91,12 @@ class AddNewProfileScreenViewModel: ObservableObject{
     
     func customerDataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
+        if relationPersonal.isEmpty{
+            return alert("Please Select Your Relation")
+        }
+        
         guard let name = personalInfoData.name, name != "" else {
-            return alert("Please Enter Legal Name")
+            return alert("Please Enter Full Legal Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -112,17 +122,49 @@ class AddNewProfileScreenViewModel: ObservableObject{
             return alert("Please Enter Country")
         }
         var param = [String:Any]()
-        param["personalInfo"] = ["name": name,
-                                 "language": language,
-                                 "dob": dob,
-                                 "gender": gender,
-                                 "latitude": personalInfoData.latitude ?? 0.0,
-                                 "longitude": personalInfoData.latitude ?? 0.0,
-                                 "address": address,
-                                 "city": city,
-                                 "state": state,
-                                 "country": country]
+        param = ["name": name,
+                 "language": language,
+                 "dob": dob,
+                 "gender": gender,
+                 "latitude": personalInfoData.latitude ?? 0.0,
+                 "longitude": personalInfoData.latitude ?? 0.0,
+                 "address": address,
+                 "city": city,
+                 "state": state,
+                 "country": country,
+                 "relation": relationPersonal]
         
         next(param)
+    }
+    
+    func createProfile(next: @escaping (()->Void), errorMsg: @escaping ((String)->Void)){
+        isLoading = true
+        NetworkManager.shared.addNewProfile(params: param) { [weak self] result in
+            switch result{
+            case .success(_):
+                self?.isLoading = false
+                next()
+            case .failure(let error):
+                self?.isLoading = false
+                errorMsg(error.getMessage())
+                print(error)
+            }
+        }
+    }
+    
+    func updateProfile(next: @escaping (()->Void)){
+        
+        param["profileId"] = profileID
+        isLoading = true
+        NetworkManager.shared.updateProfile(params: param) { [weak self] result in
+            switch result{
+            case .success(_):
+                self?.isLoading = false
+                next()
+            case .failure(let error):
+                self?.isLoading = false
+                print(error)
+            }
+        }
     }
 }
