@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecommendedCaregiverView: View {
-    var recommendedCaregiver: [RecommendedCaregiver] = [RecommendedCaregiver]()
+    var recommendedCaregiver: [RecommendedCaregiverData] = [RecommendedCaregiverData]()
     
     let profileWidth:CGFloat = CGFloat((UIScreen.screenWidth - (68))/2.2)
     
@@ -19,8 +19,12 @@ struct RecommendedCaregiverView: View {
                 ForEach(recommendedCaregiver, id: \.id) { careData in
                     
                     VStack(spacing:0){
-                        Image("profile")
-                            .resizable()
+                        AsyncImage(url: URL(string: careData.profileURL),content: { image in
+                            image
+                                .resizable()
+                        },placeholder: {
+                            ProgressView()
+                        })
                             .frame(width: profileWidth,height: 97)
                         
                         HStack(spacing:0){

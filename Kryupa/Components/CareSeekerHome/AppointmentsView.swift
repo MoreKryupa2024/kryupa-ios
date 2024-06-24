@@ -8,30 +8,37 @@
 import SwiftUI
 
 struct AppointmentsView: View {
+    
+    var appointmentList: [AppointmentData] = [AppointmentData]()
     let viewWidth:CGFloat = CGFloat((UIScreen.screenWidth - (80)))
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:10){
-//                ForEach(recommendedCaregiver,id: \.id) { index in
-                ForEach(1...10) { _ in
+                ForEach(appointmentList,id: \.id) { data in
                     
                     VStack(spacing:0){
                         HStack(spacing:15){
-                            Image("profile")
-                                .resizable()
+                            AsyncImage(url: URL(string: data.profilePictureURL),content: { image in
+                                image
+                                    .resizable()
+                            },placeholder: {
+                                ProgressView()
+                            })
                                 .frame(width: 50,height: 50)
                                 .clipShape(.rect(cornerRadius: 25))
                             
                             VStack(alignment:.leading, spacing:0){
-                                Text("Anika Saris")
+                                Text(data.name)
                                     .font(.custom(FontContent.besMedium, size: 17))
+                                    .frame(maxWidth:.infinity,alignment: .leading)
                                 Text("For Myself")
                                     .font(.custom(FontContent.plusRegular, size: 11))
                                     .foregroundStyle(._7_C_7_C_80)
                             }
-                            Spacer()
-                            Text("$542")
+                            .lineLimit(1)
+                            
+                            Text("$\(data.price.removeZerosFromEnd())")
                                 .font(.custom(FontContent.plusMedium, size: 11))
                                 .foregroundStyle(.green)
                                 .padding(.vertical,5)

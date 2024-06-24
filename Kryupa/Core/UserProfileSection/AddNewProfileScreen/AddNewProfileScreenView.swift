@@ -39,9 +39,14 @@ struct AddNewProfileScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
+            .blur(radius: viewModel.showDatePicker ? 30 : 0)
             
             if viewModel.isLoading{
                 LoadingView()
+            }
+            
+            if viewModel.showDatePicker{
+                dateOfBirthPicker()
             }
         }
         .toolbar(.hidden, for: .navigationBar)
@@ -182,25 +187,16 @@ struct AddNewProfileScreenView: View {
     }
     
     private func dateOfBirthPicker()-> some View{
-        VStack{
-            HStack{
-                Spacer()
-                Text("Done")
-                    .padding(10)
-                    .foregroundStyle(.white)
-                    .background{
-                        Color.blue
-                    }
-                    .cornerRadius(5)
-                    
-            }
-            .asButton(.press) {
-                viewModel.personalInfoData.dob = viewModel.dateFormatter(formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        DateTimePickerScreenView(
+            formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            range: nil,
+            rangeThrough: ...Date(),
+            valueStr: { value in
+                viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker
-            }
-            DatePicker("Birthdate", selection: $viewModel.date, in: ...Date(), displayedComponents: .date)
-                .datePickerStyle(.graphical)
-        }
+            },
+            displayedComponents: .date
+        )
     }
     
     private var languageDropdownView: some View{
@@ -402,10 +398,6 @@ struct AddNewProfileScreenView: View {
             .asButton(){
                 viewModel.dateOfBirthSelected = true
                 viewModel.showDatePicker = !viewModel.showDatePicker
-            }
-            
-            if viewModel.showDatePicker{
-                dateOfBirthPicker()
             }
             
             genderDropdownView

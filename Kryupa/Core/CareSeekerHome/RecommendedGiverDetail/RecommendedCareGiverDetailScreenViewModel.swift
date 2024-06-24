@@ -19,13 +19,29 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
         isloading = true
         NetworkManager.shared.getCareGiverDetails(giverId: giverId) { [weak self] result in
             DispatchQueue.main.async {
+                self?.isloading = false
                 switch result{
                 case .success(let data):
                     self?.giverDetail = data.data
-                    self?.isloading = false
                 case .failure(let error):
-                    self?.isloading = false
                     print(error)
+                }
+            }
+        }
+    }
+    
+    func sendRequestForBookCaregiver(giverId:String,bookingId:String,action:(@escaping()->Void),alert: ((String)->Void)?){
+        let param = ["caregiver_id":giverId,
+                     "booking_id":bookingId]
+        isloading = true
+        NetworkManager.shared.sendRequestForBookCaregiver(params:param) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    action()
+                case .failure(let error):
+                    alert?(error.getMessage())
                 }
             }
         }

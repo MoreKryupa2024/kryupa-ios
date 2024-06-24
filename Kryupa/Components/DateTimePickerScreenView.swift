@@ -13,6 +13,7 @@ struct DateTimePickerScreenView: View {
     @State private var givenDate:Date = Date()
     var formate:String = ""
     var range: PartialRangeFrom? = Date()...
+    var rangeThrough: PartialRangeThrough? = ...Date()
     var valueStr: ((String)->Void)? = nil
     var displayedComponents: DatePickerComponents = .date
     var valueDate: ((Date)->Void)? = nil
@@ -22,6 +23,9 @@ struct DateTimePickerScreenView: View {
             VStack{
                 if let range {
                     DatePicker("Calender", selection: $givenDate, in: range, displayedComponents: displayedComponents )
+                        .datePickerStyle(.graphical)
+                }else if let rangeThrough {
+                    DatePicker("Calender", selection: $givenDate, in: rangeThrough, displayedComponents: displayedComponents )
                         .datePickerStyle(.graphical)
                 }else{
                     DatePicker("Calender", selection: $givenDate, displayedComponents: displayedComponents )

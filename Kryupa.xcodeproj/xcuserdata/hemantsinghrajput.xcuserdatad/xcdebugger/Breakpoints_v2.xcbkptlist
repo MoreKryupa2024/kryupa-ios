@@ -3,4 +3,52 @@
    uuid = "9DB50E3A-5266-4A79-AA21-59FB298B50B4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36DDA6E6-1541-480D-9E21-A7FC47E54F59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/API/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "565"
+            endingLineNumber = "565"
+            landmarkName = "sendRequestForBookCaregiver(params:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "36DDA6E6-1541-480D-9E21-A7FC47E54F59 - 7c2589d8ba714d4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kryupa.NetworkManager.sendRequestForBookCaregiver(params: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, completionHandler: (Kryupa.Results&lt;Kryupa.CareGiverDetailModel, Kryupa.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hemantsinghrajput/Desktop/MoreYeahsKryupaApp/Kryupa/API/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "565"
+                  endingLineNumber = "565">
+               </Location>
+               <Location
+                  uuid = "36DDA6E6-1541-480D-9E21-A7FC47E54F59 - 6efdf491cc69f031"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Kryupa.NetworkManager.sendRequestForBookCaregiver(params: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, completionHandler: (Kryupa.Results&lt;Kryupa.CareGiverDetailModel, Kryupa.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hemantsinghrajput/Desktop/MoreYeahsKryupaApp/Kryupa/API/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "567"
+                  endingLineNumber = "567">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

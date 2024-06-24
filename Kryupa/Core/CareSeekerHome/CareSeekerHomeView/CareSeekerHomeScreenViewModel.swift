@@ -11,7 +11,9 @@ import Foundation
 class CareSeekerHomeScreenViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
     
-    @Published var recommendedCaregiver: [RecommendedCaregiver] = [RecommendedCaregiver]()
+    @Published var recommendedCaregiver: [RecommendedCaregiverData] = [RecommendedCaregiverData]()
+    @Published var upcommingAppointments: [AppointmentData] = [AppointmentData]()
+    @Published var pastAppointments: [AppointmentData] = [AppointmentData]()
     
     func getRecommandationList(){
         
@@ -26,6 +28,8 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 case .success(let data):
                     self?.isloading = false
                     self?.recommendedCaregiver = data.data.recommendedCaregiver
+                    self?.upcommingAppointments = data.data.upcommingAppointments
+                    self?.pastAppointments = data.data.pastAppointments
                 case .failure(let error):
                     self?.isloading = false
                     print(error)
