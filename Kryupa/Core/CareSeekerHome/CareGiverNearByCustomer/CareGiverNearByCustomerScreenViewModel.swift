@@ -21,7 +21,7 @@ class CareGiverNearByCustomerScreenViewModel: ObservableObject{
             "searchTerm":serachGiver
         ]
         NetworkManager.shared.findCareGiverBookingID(params: param) {[weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 switch result{
                 case .success(let data):
                     self?.careGiverNearByList = data.data

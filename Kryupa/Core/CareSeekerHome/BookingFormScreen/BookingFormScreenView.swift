@@ -29,6 +29,7 @@ struct BookingFormScreenView: View {
                         
                         BookingForDropdownView
                             .padding(.top,20)
+                            .id(viewModel.bookingFor)
                         
                         sepratorView
                             .padding(.top,15)
@@ -198,6 +199,7 @@ struct BookingFormScreenView: View {
                 .font(.custom(FontContent.plusMedium, size: 17))
             if viewModel.segSelected == "One Time"{
                 WeakDayContentView
+                    .id(viewModel.selectedDay.numDay)
             }else{
                 RecurringContentView
             }

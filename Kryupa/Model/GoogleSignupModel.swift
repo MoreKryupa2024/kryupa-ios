@@ -53,6 +53,44 @@ struct UserInfo: Codable {
     }
 }
 
+// MARK: - Empty
+struct UserStatusModel {
+    let data: UserStatusData
+    let success: Bool
+    let message: String
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = UserStatusData(jsonData: (jsonData["data"] as? [String:Any] ?? [String:Any]()))
+    }
+    
+}
+
+// MARK: - DataClass
+struct UserStatusData {
+    let id, email: String
+    let zoomID: String
+    let isActive: Bool
+    let providertype, role, status, fcmToken: String
+    let updatedBy: String
+    let createdAt, updatedAt, identificationID: String
+
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        email = jsonData["email"] as? String ?? ""
+        zoomID = jsonData["zoom_id"] as? String ?? ""
+        isActive = jsonData["is_active"] as? Bool ?? false
+        providertype = jsonData["providertype"] as? String ?? ""
+        role = jsonData["role"] as? String ?? ""
+        status = jsonData["status"] as? String ?? ""
+        fcmToken = jsonData["fcm_token"] as? String ?? ""
+        updatedBy = jsonData["updated_by"] as? String ?? ""
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+        identificationID = jsonData["identification_id"] as? String ?? ""
+    }
+}
+
 
 // MARK: - Empty
 struct UploadDocumentModel: Codable {

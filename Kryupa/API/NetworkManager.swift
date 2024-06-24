@@ -530,9 +530,8 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(CareGiverDetailModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = CareGiverDetailModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -1092,9 +1091,8 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(CareGiverNearByCustomerScreenModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = CareGiverNearByCustomerScreenModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -1249,6 +1247,50 @@ class NetworkManager{
         task.resume()
     }
     
+    func getUserStatus(completionHandler :  @escaping (Results<UserStatusModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getUserStatus) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"//"POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+
+                let apiData = UserStatusModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
 }
 
 enum Results<T, F> {

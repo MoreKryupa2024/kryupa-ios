@@ -26,8 +26,12 @@ struct BookingCareGiverListView: View {
     private func giverView(giver:CareGiverNearByCustomerScreenData)-> some View{
         HStack(spacing:0){
             
-            Image("profile")
-                .resizable()
+            AsyncImage(url: URL(string: giver.profile),content: { image in
+                image
+                    .resizable()
+            },placeholder: {
+                ProgressView()
+            })
                 .frame(width: 64,height: 64)
                 .clipShape(.rect(cornerRadius: 32))
             
@@ -36,13 +40,11 @@ struct BookingCareGiverListView: View {
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.besMedium, size: 17))
                 
-                Text("5 Years Expirenced")
+                Text("\(giver.yearsOfExprience) Years Expirenced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                 
                 HStack{
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
+                    StarsView(rating: 3.5, maxRating: 5, size: 12)
                     
                     Text("(100)")
                         .font(.custom(FontContent.plusRegular, size: 11))
@@ -51,7 +53,7 @@ struct BookingCareGiverListView: View {
             .frame(maxWidth: .infinity)
             .padding(.leading,23)
             
-            Text("$252")
+            Text("$\(giver.price)")
                 .font(.custom(FontContent.plusMedium, size: 12))
                 .frame(maxHeight: .infinity,alignment: .top)
         }

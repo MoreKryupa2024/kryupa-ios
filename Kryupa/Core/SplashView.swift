@@ -18,8 +18,10 @@ struct ContentView: View {
             case 2: LobbyScreenView()
             case 3: GiverTabbarScreenView()//Giver Tab View Controller
             case 4: ConsumerTabBarScreenView()//seeker Tab View Controller
-            case 5: PaymentListView(selectedPaymentMethod: 0)
-            case 6: AccountView()
+            case 5: PersonalInformationSeekerView()
+            case 6: PersonalInformationScreenView()
+            case 7: MobileNumberScreenView()
+            case 8: SelectProfileImageView()
             default:
                 splashView
             }
@@ -85,8 +87,67 @@ struct ContentView: View {
     
     private func delayText() {
         showScreen = 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            showScreen = Defaults().showScreen == 0 ? 1 : Defaults().showScreen
+        getUserStatus()
+    }
+    
+    func getUserStatus(){
+        if Defaults().accessToken != ""{
+            NetworkManager.shared.getUserStatus { result in
+                switch result{
+                case .success(let data):
+                    if data.data.role == AppConstants.SeekCare{
+                        switch data.data.status{
+                        case "Personal information":
+                            showScreen = 5
+                            Defaults().showScreen = 5
+                            
+                        case "Take photo":
+                            showScreen = 8
+                            Defaults().showScreen = 8
+                            
+                        case "Onboarding done":
+                            showScreen = 4
+                            Defaults().showScreen = 4
+                        default:
+                            showScreen = 1
+                            Defaults().showScreen = 1
+                        }
+                        
+                    }else{
+                        switch data.data.status{
+                        case "Mobile Verification":
+                            break
+                            
+                        case "Personal information":
+                            showScreen = 6
+                            Defaults().showScreen = 6
+                            
+                        case "Take photo":
+                            showScreen = 8
+                            Defaults().showScreen = 8
+                            
+                        case "Waitting at lobby":
+                            showScreen = 2
+                            Defaults().showScreen = 2
+                            
+                        case "Onboarding done":
+                            showScreen = 3
+                            Defaults().showScreen = 3
+                        default:
+                            showScreen = 1
+                            Defaults().showScreen = 1
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        showScreen = Defaults().showScreen == 0 ? 1 : Defaults().showScreen
+                    }
+                }
+            }
+        }else{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                showScreen = Defaults().showScreen == 0 ? 1 : Defaults().showScreen
+            }
         }
     }
 }

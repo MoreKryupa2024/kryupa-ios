@@ -16,8 +16,8 @@ struct APIConstants {
 
 class APIConstant{
     
-//    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
+//    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
     
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
     static let uploadPDFFiles = "\(baseURL)/apis/user/file/multifileUpload"
@@ -33,6 +33,9 @@ class APIConstant{
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
+
+    static let getUserStatus = "\(baseURL)/apis/user/CurrentStatus"
+    static let sendRequestForBookCaregiver = "\(baseURL)apis/booking/caregiver_approch"
     static let getProfile = "\(baseURL)/apis/user/customer/account/get_profile"
     static let profileList = "\(baseURL)/apis/user/customer/account/profile_list"
     static let createProfile = "\(baseURL)/apis/user/customer/account/create_profile"
@@ -43,7 +46,6 @@ class APIConstant{
     static let getBookings = "\(baseURL)/apis/booking/customerNavigation"
     static let getCareGiverBookings = "\(baseURL)/apis/booking/caregiverNavigation"
     static let getBookingDetailsById = "\(baseURL)/apis/booking/getBookingById?booking_id="
-    
  }
 
 class FontContent{

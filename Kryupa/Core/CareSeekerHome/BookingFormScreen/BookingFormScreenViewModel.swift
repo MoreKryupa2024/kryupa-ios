@@ -105,8 +105,8 @@ class BookingFormScreenViewModel: ObservableObject{
     
     
     func createBooking(action:(@escaping(String)->Void)){
-        let param: [String: Any] = [
-            "booking_id":bookingID,
+        
+        var param: [String: Any] = [
             "profile_id":bookingForList.filter{$0.name == bookingFor}.first?.id ?? "",
             "area_of_expertise":needServiceInSelected,
             "booking_type":segSelected,
@@ -120,7 +120,11 @@ class BookingFormScreenViewModel: ObservableObject{
             "additional_skills":additionalSkillsSelected,
             "additional_info":additionalInfoSelected
         ]
-        print(param)
+        
+        if bookingID != ""{
+            param["booking_id"] = bookingID
+        }
+        
         isloading = true
         NetworkManager.shared.createBooking(params:param) { [weak self] result in
             DispatchQueue.main.async {
