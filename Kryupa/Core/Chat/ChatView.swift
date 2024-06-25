@@ -23,7 +23,7 @@ struct ChatView: View {
         VStack(spacing:20){
             //HeaderView
                 usernameView
-                requestView
+//                requestView
             
             ScrollView(.vertical) {
                 LazyVStack {

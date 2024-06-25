@@ -76,7 +76,10 @@ struct AccountView: View {
                 }
             }
             
-        case "My Services": break
+        case "My Services":
+            router.showScreen(.push) { rout in
+                MyServicesView()
+            }
             
         case "Payments & Refunds","Payments":
             router.showScreen(.push) { rout in
@@ -96,7 +99,9 @@ struct AccountView: View {
                 SettingsView()
             }
         case "About app":
-            break
+            router.showScreen(.push) { rout in
+                AboutUsView()
+            }
         case "Logout":
             
             let primaryAction = UIAlertAction(title: "OK", style: .default) { action in

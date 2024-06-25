@@ -27,7 +27,7 @@ struct AboutUsView: View {
 
     var body: some View {
         VStack {
-            HeaderView(title: "About Caregiver")
+            HeaderView(title: "About Caregiver",showBackButton: true)
             ScrollView {
                     ForEach(Array(arrAboutUs.enumerated()), id: \.offset) { index, model in
                         getParaView(title: model.title, desc: model.desc)
@@ -38,6 +38,7 @@ struct AboutUsView: View {
             }
             .scrollIndicators(.hidden)
             .padding(.horizontal, 25)
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
     

@@ -15,12 +15,13 @@ struct MyServicesView: View {
     var body: some View {
         
         ScrollView {
-            HeaderView(title: "My Services")
+            HeaderView(title: "My Services",showBackButton: true)
             AreaOfExpertiseView
             line
             MySkillsView
             BottomButtonView
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var BottomButtonView: some View{
