@@ -9,14 +9,16 @@ import SwiftUI
 
 struct CareGiverHomeScreenView: View {
     @StateObject private var viewModel = CareGiverHomeScreenViewModel()
-    
+    @State var showNoContent: Bool = false
+    @State private var isSelectedView = 4
+
     var body: some View {
         VStack(spacing:0){
             HeaderView
             ScrollView{
                 VStack(spacing:0){
                     
-                    if viewModel.jobsNearYou.count > 0 {
+                    if !showNoContent {
                         completeProfileView
                         jobsNearYouView
                     }
@@ -30,13 +32,21 @@ struct CareGiverHomeScreenView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
         .onAppear{
-            viewModel.getJobsNearYouList()
+            viewModel.getJobsNearYouList() {
+                if viewModel.jobsNearYou.count == 0 {
+                    showNoContent = true
+                }
+                else {
+                    showNoContent = false
+                }
+            }
         }
-        if viewModel.isloading{
-            LoadingView()
-        }
+        
     }
     
     private var noCotentView: some View{
@@ -100,6 +110,7 @@ struct CareGiverHomeScreenView: View {
             }
             .padding(.horizontal,24)
         }
+        .padding(.top, 10)
     }
     
     private var completeProfileView: some View{
@@ -116,12 +127,12 @@ struct CareGiverHomeScreenView: View {
                 .padding(.horizontal, 5)
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .minimumScaleFactor(0.01)
-                .frame(height: 20)
+                .frame(height: 25)
                 .withBackground(color: .appMain,cornerRadius: 30)
                 .foregroundStyle(.white)
                 .padding(.trailing, 15.0)
         }
-        .frame(height: 40)
+        .frame(height: 50)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 1)
@@ -142,11 +153,18 @@ struct CareGiverHomeScreenView: View {
                 Text("See All")
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
+                    .asButton(.press) {
+                        NotificationCenter.default.post(name: .showJobsScreen,
+                                                                        object: nil, userInfo: nil)
+                    }
             }
             .padding(.horizontal,24)
             jobsNearYouGridView
+            BannerView(showIndecator: false,bannerHeight: 104)
+                .padding([.horizontal,.vertical],24)
+
         }
-        .padding(.top, 21)
+        .padding(.top, 30)
         
     }
     

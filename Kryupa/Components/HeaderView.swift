@@ -46,6 +46,7 @@ struct HeaderView: View {
                     .foregroundStyle(.appMain)
             }
         }
+        .padding(.top, 10)
         
     }
 }

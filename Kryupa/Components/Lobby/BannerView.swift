@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BannerView: View {
     
-    var colors:[Color] = [.red,.yellow,.blue,.purple,.black]
+    var colors:[Color] = [.D_1_D_1_D_6,.D_1_D_1_D_6,.gray,.D_1_D_1_D_6,.gray]
     @State private var isSelectedView = 0
     var showIndecator: Bool = true
     var bannerHeight: CGFloat = 180
@@ -18,9 +18,11 @@ struct BannerView: View {
         VStack{
             TabView(selection:$isSelectedView){
                 ForEach(colors.indices, id: \.self) { index in
-                    VStack{
+                    ZStack{
                         colors[index.id]
                             .cornerRadius(10)
+                        Text("Slider\nBanner")
+                            .font(.custom(FontContent.plusMedium, size: 20))
                     }
                 }
             }
