@@ -54,7 +54,13 @@ struct AccountView: View {
             }
         .onAppear() {
             UIScrollView.appearance().bounces = false
-            viewModel.getProfile()
+            
+            if Defaults().userType == AppConstants.GiveCare{
+                viewModel.getProfileGiver()
+
+            }else{
+                viewModel.getProfile()
+            }
         }
     }
 
@@ -63,8 +69,7 @@ struct AccountView: View {
         case "Personal Details":
             router.showScreen(.push) { rout in
                 if Defaults().userType == AppConstants.GiveCare{
-//                    PersonalDetailView()
-                    ProfileDetailScreenView(selecedProfile: viewModel.profile?.customerName ?? "")
+                    PersonalDetailView()
 
                 }else{
                     ProfileDetailScreenView(selecedProfile: viewModel.profile?.customerName ?? "")
@@ -138,9 +143,19 @@ struct AccountView: View {
             HeaderView(showBackButton: false)
             HStack{
                 HStack {
-                    Image("personal")
-                        .resizable()
-                        .frame(width: 68, height: 68)
+                    AsyncImage(url: URL(string: Defaults().userType == AppConstants.GiveCare ? viewModel.profileGiver?.profileURL ?? "" : viewModel.profile?.profilePic ?? ""),content: { image in
+                        image
+                            .resizable()
+                    },placeholder: {
+                        if (Defaults().userType == AppConstants.GiveCare && viewModel.profileGiver?.profileURL != "") || (Defaults().userType == AppConstants.SeekCare && viewModel.profile?.profilePic != ""){
+                            ProgressView()
+                        }
+                        else {
+                            Image("personal")
+                        }
+                        
+                    })
+                    .frame(width: 68, height: 68)
                         .cornerRadius(34)
                 }
                 .frame(width: 74, height: 74)
@@ -150,9 +165,17 @@ struct AccountView: View {
                         .stroke(.AEAEB_2, lineWidth: 1)
                 )
                 
-                Text(viewModel.profile?.customerName ?? "")
-                    .font(.custom(FontContent.besMedium, size: 20))
-                    .foregroundStyle(.appMain)
+                if Defaults().userType == AppConstants.GiveCare{
+                    Text(viewModel.profileGiver?.name ?? "")
+                        .font(.custom(FontContent.besMedium, size: 20))
+                        .foregroundStyle(.appMain)
+
+                }else{
+                    Text(viewModel.profile?.customerName ?? "")
+                        .font(.custom(FontContent.besMedium, size: 20))
+                        .foregroundStyle(.appMain)
+                }
+                
 
                 Spacer()
             }

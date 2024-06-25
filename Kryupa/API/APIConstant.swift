@@ -47,6 +47,11 @@ class APIConstant{
     static let getBookings = "\(baseURL)/apis/booking/customerNavigation"
     static let getCareGiverBookings = "\(baseURL)/apis/booking/caregiverNavigation"
     static let getBookingDetailsById = "\(baseURL)/apis/booking/getBookingById?booking_id="
+    static let updateProfilePicGiver = "\(baseURL)/apis/user/caregiver/account/update_profile_pic"
+    static let getProfileGiver = "\(baseURL)/apis/user/caregiver/account/get_profile"
+    static let personalDetailsGiver = "\(baseURL)/apis/user/caregiver/account/personal_details"
+    static let updateProfileGiver = "\(baseURL)/apis/user/caregiver/account/update_profile"
+
  }
 
 class FontContent{
