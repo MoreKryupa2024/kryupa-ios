@@ -15,108 +15,111 @@ struct PersonalInformationScreenView: View {
     @StateObject private var viewModel = PersonalInformationScreenViewModel()
     
     var body: some View {
-        ScrollView {
-            VStack(spacing:0){
-                ZStack(alignment:.leading){
-                    RoundedRectangle(cornerRadius: 4)
-                        .foregroundStyle(.E_5_E_5_EA)
-                        .frame(height: 4)
-                    RoundedRectangle(cornerRadius: 4)
-                        .foregroundStyle(.appMain)
-                        .frame(width: 130,height: 4)
-                }
-                
-                Text("Personal Information")
-                    .font(.custom(FontContent.besMedium, size: 22))
-                    .frame(height: 28)
-                    .padding(.top,30)
-                
-                
-                RoundedRectangle(cornerRadius: 5)
-                    .overlay(content: {
-                        Text("Background checks are on us, No charges involved!")
-                            .font(.custom(FontContent.plusMedium, size: 12))
-                            .multilineTextAlignment(.center)
+        ZStack{
+            ScrollView {
+                VStack(spacing:0){
+                    ZStack(alignment:.leading){
+                        RoundedRectangle(cornerRadius: 4)
+                            .foregroundStyle(.E_5_E_5_EA)
+                            .frame(height: 4)
+                        RoundedRectangle(cornerRadius: 4)
                             .foregroundStyle(.appMain)
-                    })
-                    .frame(height: 35)
-                    .foregroundStyle(.FAE_9_A_2)
-                    .padding(.top,30)
-                
-                HStack(content: {
-                    Image("PersonalInformationMagic")
-                    Spacer()
-                })
-                .padding(.top,-92)
-                .padding(.leading,-24)
-                
-                VStack(spacing: 25,
-                       content: {
-                    textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
-                    
-                    selectionViewWithHeader(
-                        leftIcone: nil,
-                        rightIcon: "PersonalInfoCalender",
-                        value: viewModel.dateOfBirthSelected ? viewModel.dateFormatter() : "",
-                        title: "Date Of Birth",
-                        placeHolder: "Select"
-                    )
-                    .background()
-                    .asButton(){
-                        viewModel.dateOfBirthSelected = true
-                        viewModel.showDatePicker = !viewModel.showDatePicker
+                            .frame(width: 130,height: 4)
                     }
                     
-                    if viewModel.showDatePicker{
-                        dateOfBirthPicker()
-                    }
-                    
-                    genderDropdownView
-                    
-                    textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
-                        .onChange(of: viewModel.personalInfoData.ssn) {
-                            if (viewModel.personalInfoData.ssn?.count ?? 0) > 9{
-                                viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(9) ?? "")
-                            }
-                        }
-                    
-                    languageDropdownView
-                    
-                    selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
-                    
-                    HStack{
-                        textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                        textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
-                        
-                    }
-                    
-                    textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
+                    Text("Personal Information")
+                        .font(.custom(FontContent.besMedium, size: 22))
+                        .frame(height: 28)
+                        .padding(.top,30)
                     
                     
-                    HStack{
+                    RoundedRectangle(cornerRadius: 5)
+                        .overlay(content: {
+                            Text("Background checks are on us, No charges involved!")
+                                .font(.custom(FontContent.plusMedium, size: 12))
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.appMain)
+                        })
+                        .frame(height: 35)
+                        .foregroundStyle(.FAE_9_A_2)
+                        .padding(.top,30)
+                    
+                    HStack(content: {
+                        Image("PersonalInformationMagic")
                         Spacer()
-                        nextButton
-                            .asButton(.press) {
-                                viewModel.dataChecks { alertStr in
-                                    presentAlert(title: "Kryupa", subTitle: alertStr)
-                                } next: { param in
-                                    router.showScreen(.push) { rout in
-                                        ExperienceandSkillsView(parameters: param)
-                                    }
+                    })
+                    .padding(.top,-92)
+                    .padding(.leading,-24)
+                    
+                    VStack(spacing: 25,
+                           content: {
+                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        
+                        selectionViewWithHeader(
+                            leftIcone: nil,
+                            rightIcon: "PersonalInfoCalender",
+                            value: viewModel.dateOfBirthSelected ? viewModel.dateFormatter() : "",
+                            title: "Date Of Birth",
+                            placeHolder: "Select"
+                        )
+                        .background()
+                        .asButton(){
+                            viewModel.dateOfBirthSelected = true
+                            viewModel.showDatePicker = !viewModel.showDatePicker
+                        }
+                        
+                        
+                        genderDropdownView
+                        
+                        textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
+                            .onChange(of: viewModel.personalInfoData.ssn) {
+                                if (viewModel.personalInfoData.ssn?.count ?? 0) > 9{
+                                    viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(9) ?? "")
                                 }
                             }
-                    }
+                        
+                        languageDropdownView
+                        
+                        selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
+                        
+                        HStack{
+                            textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
+                            textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
+                            
+                        }
+                        
+                        textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
+                        
+                        
+                        HStack{
+                            Spacer()
+                            nextButton
+                                .asButton(.press) {
+                                    viewModel.dataChecks { alertStr in
+                                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                                    } next: { param in
+                                        router.showScreen(.push) { rout in
+                                            ExperienceandSkillsView(parameters: param)
+                                        }
+                                    }
+                                }
+                        }
+                        
+                    })
+                    .padding(.top,25)
                     
-                })
-                .padding(.top,25)
+                }
+                .padding([.leading,.trailing],24)
+            }
+            .scrollIndicators(.hidden)
+            .toolbar(.hidden, for: .navigationBar)
+            .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            
+            if viewModel.showDatePicker{
+                dateOfBirthPicker()
                 
             }
-            .padding([.leading,.trailing],24)
         }
-        
-        .scrollIndicators(.hidden)
-        .toolbar(.hidden, for: .navigationBar)
-//        .modifier(DismissingKeyboard())
     }
     
     //MARK: Send Code Button View
@@ -138,25 +141,16 @@ struct PersonalInformationScreenView: View {
     }
     
     private func dateOfBirthPicker()-> some View{
-        VStack{
-            HStack{
-                Spacer()
-                Text("Done")
-                    .padding(10)
-                    .foregroundStyle(.white)
-                    .background{
-                        Color.blue
-                    }
-                    .cornerRadius(5)
-                    
-            }
-            .asButton(.press) {
-                viewModel.personalInfoData.dob = viewModel.dateFormatter(formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        DateTimePickerScreenView(
+            formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            range: nil,
+            rangeThrough: ...Date(),
+            valueStr: { value in
+                viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker
-            }
-            DatePicker("Birthdate", selection: $viewModel.date, in: ...Date(), displayedComponents: .date)
-                .datePickerStyle(.graphical)
-        }
+            },
+            displayedComponents: .date
+        )
     }
     
     private var genderDropdownView: some View{

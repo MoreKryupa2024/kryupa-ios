@@ -151,6 +151,7 @@
 		BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798C2C05FDD8005C12AB /* BannerView.swift */; };
 		BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */; };
 		BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */; };
+		BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB52C25B4410008108C /* StarsView.swift */; };
 		BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */; };
 /* End PBXBuildFile section */
 
@@ -308,6 +309,7 @@
 		BEEB798C2C05FDD8005C12AB /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeSlotsView.swift; sourceTree = "<group>"; };
 		BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerScreenView.swift; sourceTree = "<group>"; };
+		BEF2EDB52C25B4410008108C /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -698,6 +700,7 @@
 				BE1573B82BF631A400A6137D /* LoginFlow */,
 				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
 				BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */,
+				BEF2EDB52C25B4410008108C /* StarsView.swift */,
 				BE3C7F292C1C2425000848A6 /* Booking */,
 			);
 			path = Components;
@@ -1145,6 +1148,7 @@
 				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
 				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
+				BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
 				BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */,

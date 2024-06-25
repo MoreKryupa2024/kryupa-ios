@@ -26,21 +26,22 @@ struct CareSeekerHomeScreenView: View {
                         .asButton(.press) {
                             NotificationCenter.default.post(name: .showBookingScreen,
                                                                             object: nil, userInfo: nil)
-
                         }
-                    
-                    
-//                    BookFirstServiceView
-                    
-                    UpcomingAppointmentsView
-                        .padding(.top,30)
-                    
-                    PastAppointmentsView
-                        .padding(.top,30)
-                    
-                    RecommendedGiverView
-                        .padding(.top,30)
-                        
+                    if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
+                        BookFirstServiceView
+                    }
+                    if viewModel.upcommingAppointments.count != 0{
+                        UpcomingAppointmentsView
+                            .padding(.top,30)
+                    }
+                    if viewModel.pastAppointments.count != 0{
+                        PastAppointmentsView
+                            .padding(.top,30)
+                    }
+                    if viewModel.recommendedCaregiver.count != 0{
+                        RecommendedGiverView
+                            .padding(.top,30)
+                    }
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
@@ -84,7 +85,7 @@ struct CareSeekerHomeScreenView: View {
                         .foregroundStyle(._7_C_7_C_80)
             }
             .padding(.horizontal,24)
-            AppointmentsView()
+            AppointmentsView(appointmentList: viewModel.upcommingAppointments)
             
         }
     }
@@ -101,7 +102,7 @@ struct CareSeekerHomeScreenView: View {
                         .foregroundStyle(._7_C_7_C_80)
             }
             .padding(.horizontal,24)
-            AppointmentsView()
+            AppointmentsView(appointmentList: viewModel.pastAppointments)
             
         }
     }
@@ -110,7 +111,8 @@ struct CareSeekerHomeScreenView: View {
         VStack(spacing:0){
             Image("bookingFirstIcone")
                 .resizable()
-                .frame(width: 180,height: 147)
+                .padding(.horizontal,40)
+                .aspectRatio(contentMode: .fit)
                 .padding(.top,30)
             
             Text("Your Booking list Looks Empty")

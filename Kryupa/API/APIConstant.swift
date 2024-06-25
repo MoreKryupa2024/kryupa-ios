@@ -16,30 +16,34 @@ struct APIConstants {
 
 class APIConstant{
     
-//    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
+//    static let baseURLCP = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+
     
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
     static let uploadPDFFiles = "\(baseURL)/apis/user/file/multifileUpload"
     static let uploadProfile = "\(baseURL)/apis/user/file/uploadFile"
     static let careGiverCreateProfile = "\(baseURL)/apis/user/caregiver/create_profile"
-    static let customerCreateProfile = "\(baseURL)/apis/user/customer/create_profile"
-    static let getSlotList = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/slot_list"//CP
-    static let bookSlot = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/book_slot"//CP
-    static let lobbyStatus = "https://w7dvnjx5-3050.inc1.devtunnels.ms/apis/user/caregivers/lobby/lobby_status"//CP
+    static let customerCreateProfile = "\(baseURL)/apis/user/customer/create_profile"//-CP
+    static let getSlotList = "\(baseURL)/apis/user/caregivers/lobby/slot_list"//CP
+    static let bookSlot = "\(baseURL)/apis/user/caregivers/lobby/book_slot"//CP
+    static let lobbyStatus = "\(baseURL)/apis/user/caregivers/lobby/lobby_status"//CP
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
     static let getRecommandationList = "\(baseURL)/apis/user/home/getAllCustomerHomeData"
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
-    static let getProfile = "\(baseURL)/apis/user/customer/account/get_profile"
-    static let profileList = "\(baseURL)/apis/user/customer/account/profile_list"
-    static let createProfile = "\(baseURL)/apis/user/customer/account/create_profile"
-    static let getPersonalDetails = "\(baseURL)/apis/user/customer/account/get_personal_details"
-    static let updateProfile = "\(baseURL)/apis/user/customer/account/update_profile"
-    static let deleteProfile = "\(baseURL)/apis/user/customer/account/delete_profile"
-    static let updateProfilePicSeeker = "\(baseURL)/apis/user/customer/account/update_profile_pic"
+
+    static let getUserStatus = "\(baseURL)/apis/user/CurrentStatus"
+    static let sendRequestForBookCaregiver = "\(baseURL)/apis/booking/caregiver_approch"
+    static let getProfile = "\(baseURL)/apis/user/customer/account/get_profile"//-CP
+    static let profileList = "\(baseURL)/apis/user/customer/account/profile_list"//-CP
+    static let createProfile = "\(baseURL)/apis/user/customer/account/create_profile"//-CP
+    static let getPersonalDetails = "\(baseURL)/apis/user/customer/account/get_personal_details"//-CP
+    static let updateProfile = "\(baseURL)/apis/user/customer/account/update_profile"//-CP
+    static let deleteProfile = "\(baseURL)/apis/user/customer/account/delete_profile"//-CP
+    static let updateProfilePicSeeker = "\(baseURL)/apis/user/customer/account/update_profile_pic"//-CP
     static let getBookings = "\(baseURL)/apis/booking/customerNavigation"
     static let getCareGiverBookings = "\(baseURL)/apis/booking/caregiverNavigation"
     static let getBookingDetailsById = "\(baseURL)/apis/booking/getBookingById?booking_id="

@@ -13,6 +13,7 @@ struct RecommendedCareGiverDetailScreenView: View {
     @Environment(\.router) var router
     
     var careGiverDetail: CareGiverNearByCustomerScreenData?
+    var bookingID: String = "90279ed1-9347-4e3d-a9ae-49e69b6c143b"//String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
     
@@ -24,9 +25,10 @@ struct RecommendedCareGiverDetailScreenView: View {
                     ProfileView
                     SegmentView
                     if viewModel.selection == "Summary"{
-                        Text("Lorem ipsum dolor sit amet consectetur. Convallis a lobortis lectus augue cursus in diam. Vitae non egestas sed nulla sem cras ut. Arcu tellus erat duis integer vitae orci. Faucibus lacus id enim lorem sit. Commodo sed neque neque montes ridiculus.\n\nAdipiscing laoreet volutpat dolor volutpat tempor facilisis. Diam gravida gravida consequat ligula nunc donec semper. A orci enim bibendum lobortis aliquam amet nulla facilisis neque.\n\nEu nisi donec lacinia mi netus. Odio egestas gravida at quis. Faucibus nibh sit.")
+                        Text(viewModel.giverDetail?.bio ?? "")
                             .font(.custom(FontContent.plusRegular, size: 12))
                             .foregroundStyle(._444446)
+                            .frame(maxWidth: .infinity,alignment: .leading)
                             .padding(.horizontal,24)
                             .padding(.top,15)
                     }else{
@@ -90,8 +92,12 @@ struct RecommendedCareGiverDetailScreenView: View {
                 .stroke(lineWidth: 1)
                 .foregroundStyle(.E_5_E_5_EA)
                 .overlay(content: {
-                    Image("profile")
-                        .resizable()
+                    AsyncImage(url: URL(string: viewModel.giverDetail?.profileURL ?? ""),content: { image in
+                        image
+                            .resizable()
+                    },placeholder: {
+                        ProgressView()
+                    })
                         .frame(width: 126,height: 126)
                         .clipShape(.rect(cornerRadius: 63))
                 })
@@ -102,18 +108,16 @@ struct RecommendedCareGiverDetailScreenView: View {
                 Text(viewModel.giverDetail?.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                 
-                Text(viewModel.giverDetail?.yearOfExperience ?? "")
+                Text("\(viewModel.giverDetail?.yearOfExperience ?? 0) years experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
-                Text("$252")
+                Text("$\(viewModel.giverDetail?.pricePerHour ?? 0)")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                 HStack{
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
+                    StarsView(rating: (viewModel.giverDetail?.avgRating ?? 0.0), maxRating: 5,size: 12)
                     
-                    Text("(100)")
+                    Text("(\(viewModel.giverDetail?.totalReviewer ?? 0))")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(._444446)
                 }
@@ -124,16 +128,23 @@ struct RecommendedCareGiverDetailScreenView: View {
                 Text("Languages:")
                     .font(.custom(FontContent.plusMedium, size: 12))
                 
-                Text(" English, Korean, Hindi, Germany")
+                Text(" \(viewModel.giverDetail?.language.joined(separator: ",") ?? "")")
+                    .lineLimit(1)
                     .font(.custom(FontContent.plusRegular, size: 12))
             }
-            .padding(.vertical,30)
+            .padding([.vertical,.horizontal],30)
          
             MessageButton
                 .asButton(.press){
-                    router.showScreen(.push) { route in
-                        ChatView()
+                    viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                        presentAlert(title: "Kryupa", subTitle: "Appointment Booked")
+                        router.showScreen(.push) { route in
+                            ChatView()
+                        }
+                    } alert: { strMsg in
+                        presentAlert(title: "Kryupa", subTitle: strMsg)
                     }
+
                 }
         }
     }
