@@ -7,12 +7,20 @@
 
 import SwiftUI
 import SwiftfulUI
+import PhotosUI
 
 struct PersonalDetailView: View {
 
     @State var strBio: String = ""
     @State private var intExp = 0
     @StateObject private var viewModel = PersonalDetailViewModel()
+    @State var showsAlertForImageUpload = false
+    @State private var selectedItem: PhotosPickerItem?
+    @State var showPicker = Bool()
+    @State var isCam = Bool()
+    @State var selectedImage: UIImage = UIImage(imageLiteralResourceName: "personal")
+    @State var didImageSelected: Bool = false
+    @State var editProfile: Bool = false
 
     var body: some View {
         
@@ -23,16 +31,16 @@ struct PersonalDetailView: View {
                 placeHolder: "Input text",
                 value: $strBio,
                 keyboard: .asciiCapable
-            )
+            ).disabled(!editProfile)
             line
-            yearOfExpView
+            yearOfExpView.disabled(!editProfile)
             line
-            AdditionalInfoView
+            AdditionalInfoView.disabled(!editProfile)
             line
-            QualificationView
-            line
-            EducationDropdownView
-            languageDropdownView
+//            QualificationView
+//            line
+//            EducationDropdownView
+            languageDropdownView.disabled(!editProfile)
         }
         .overlay(alignment: .top) {
                 Color.clear
@@ -40,9 +48,20 @@ struct PersonalDetailView: View {
                     .ignoresSafeArea(edges: .top)
                     .frame(height: 0)
             }
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
             UIScrollView.appearance().bounces = false
+            viewModel.getPersonalDetails() {
+                strBio = viewModel.personalDetail?.expertise.bio ?? ""
+                intExp = viewModel.personalDetail?.expertise.exprience ?? 0
+                viewModel.additionalInfoSelected = viewModel.personalDetail?.additionalRequirements ?? []
+            }
         }
+        
+        if viewModel.isloading{
+            LoadingView()
+        }
+
         
     }
     
@@ -61,9 +80,10 @@ struct PersonalDetailView: View {
             DropDownWithCheckBoxView(
                 selectedValue: viewModel.languageDropDownSelected,
                 placeHolder: "Select Language",
-                values: viewModel.languageList) { value in
+                values: AppConstants.languageSpeakingArray) { value in
                     viewModel.languageDropDownSelected = value
-                }
+                }.id(viewModel.languageDropDownSelected.first)
+            
 
         })
         .padding(.horizontal,24)
@@ -241,15 +261,30 @@ struct PersonalDetailView: View {
     private var HeaderTopView: some View{
         VStack {
             
-            HeaderView(title: "Personal Details")
+            HeaderView(title: "Personal Details", showBackButton: true)
                         
             HStack {
                 
                 ZStack {
-                    Image("personal")
-                        .resizable()
+                    
+                    if didImageSelected {
+                        Image(uiImage: selectedImage)
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(30)
+
+                    }
+                    else {
+                        AsyncImage(url: URL(string: viewModel.personalDetail?.profilePictureUrl ?? ""),content: { image in
+                            image
+                                .resizable()
+                        },placeholder: {
+                            ProgressView()
+                        })
                         .frame(width: 60, height: 60)
                         .cornerRadius(30)
+                    }
+                    
                     HStack {
                         
                         Spacer()
@@ -271,14 +306,45 @@ struct PersonalDetailView: View {
                         .inset(by: 1)
                         .stroke(.AEAEB_2, lineWidth: 1)
                 )
+                .onTapGesture {
+                    showsAlertForImageUpload.toggle()
+                }
+                .actionSheet(isPresented: $showsAlertForImageUpload) {
+                    ActionSheet(title: Text("Select"), message: Text(""), buttons: [
+                    .default(Text("Camera")) {
+                        isCam = true
+                        showPicker.toggle()
+                    },
+                    .default(Text("Gallery")) {
+                        isCam = false
+                        showPicker.toggle()
+                    },
+                    .destructive(Text("Cancel")){       // << keep as last
+                            // just nop - will be just closed
+                        }
+                    ])
+                }
+                .fullScreenCover(isPresented: $showPicker) {
+                    CameraPickerView(isCam: isCam) { image in
+                        print(image)
+                        
+                        if let imageData = image.jpegData(compressionQuality: 0){
+                            viewModel.uploadProfilePic(file: imageData, fileName: "giver_image.png") {
+                                print("success")
+                                selectedImage = image
+                                didImageSelected = true
+                            }
+                        }
+                    }
+                }
                 
                 
                 VStack(alignment: .leading) {
-                    Text("John Smith")
+                    Text(viewModel.personalDetail?.name ?? "")
                         .font(.custom(FontContent.besMedium, size: 17))
                         .foregroundStyle(._242426)
                     
-                    Text("Male")
+                    Text(viewModel.personalDetail?.gender ?? "")
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .foregroundStyle(._242426)
                     
@@ -293,17 +359,46 @@ struct PersonalDetailView: View {
                 Spacer()
                 
                 VStack() {
-                    HStack {
-                        Image("edit-two")
-                            .frame(width: 13, height: 13)
-                        
-                        Text("Edit Profile")
+                    if editProfile {
+                        Text("Save")
+                            .frame(width: 62 ,height: 23)
                             .font(.custom(FontContent.plusRegular, size: 11))
-                            .foregroundStyle(._7_C_7_C_80)
+                            .foregroundStyle(.white)
+                            .background(.appMain)
+                            .clipShape(Capsule())
+                            .asButton(.press) {
+                                viewModel.personalDetail?.expertise.bio = strBio
+                                viewModel.personalDetail?.expertise.exprience = intExp
+                                viewModel.validateData { alertStr in
+                                    presentAlert(title: "Kryupa", subTitle: alertStr)
+                                } next: { param in
+                                    viewModel.updateProfile(param: param) {
+                                        editProfile = false
+                                    }
+                                }
+                            }
+                        
+                        Spacer()
                     }
-                    Spacer()
+                    else {
+                        HStack {
+                            Image("edit-two")
+                                .frame(width: 13, height: 13)
+                            
+                            Text("Edit Profile")
+                                .font(.custom(FontContent.plusRegular, size: 11))
+                                .foregroundStyle(._7_C_7_C_80)
+                        }
+                        .asButton(.press) {
+                            editProfile = true
+                        }
+                        
+                        Spacer()
+                    }
+                    
                 }
                 .padding()
+                
             }
             .padding(.horizontal, 30)
         }

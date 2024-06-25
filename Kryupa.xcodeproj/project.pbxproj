@@ -54,6 +54,8 @@
 		A3FEF60E2C21CE1400EFC3C2 /* ProfileDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF60D2C21CE1400EFC3C2 /* ProfileDetailScreenViewModel.swift */; };
 		A3FEF6102C22D67F00EFC3C2 /* PersonalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF60F2C22D67F00EFC3C2 /* PersonalModel.swift */; };
 		A3FEF6162C25882F00EFC3C2 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6152C25882F00EFC3C2 /* GalleryView.swift */; };
+		A3FEF6182C2AAA1F00EFC3C2 /* ProfileGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */; };
+		A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */; };
 		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
 		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
@@ -219,6 +221,8 @@
 		A3FEF60D2C21CE1400EFC3C2 /* ProfileDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		A3FEF60F2C22D67F00EFC3C2 /* PersonalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalModel.swift; sourceTree = "<group>"; };
 		A3FEF6152C25882F00EFC3C2 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGiverModel.swift; sourceTree = "<group>"; };
+		A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalGiverModel.swift; sourceTree = "<group>"; };
 		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
@@ -714,6 +718,8 @@
 				A3FEF6092C219FD200EFC3C2 /* ProfileModel.swift */,
 				A3FEF60B2C21CCA600EFC3C2 /* ProfileListModel.swift */,
 				A3FEF60F2C22D67F00EFC3C2 /* PersonalModel.swift */,
+				A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */,
+				A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1085,6 +1091,7 @@
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
+				A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
@@ -1134,6 +1141,7 @@
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
 				BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */,
+				A3FEF6182C2AAA1F00EFC3C2 /* ProfileGiverModel.swift in Sources */,
 				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
 				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
