@@ -59,13 +59,14 @@ struct BookingDetails: Codable {
 
 // MARK: - CustomerInfo
 struct CustomerInfo: Codable {
-    let name, gender, price: String
+    let name, gender: String
+    let price: Int
     let diseaseType: [String]
 
     init(jsonData:[String:Any]){
         name = jsonData["name"] as? String ?? ""
         gender = jsonData["gender"] as? String ?? ""
-        price = jsonData["price"] as? String ?? ""
+        price = jsonData["price"] as? Int ?? 0
         diseaseType = jsonData["disease_type"] as? [String] ?? []
     }
 }

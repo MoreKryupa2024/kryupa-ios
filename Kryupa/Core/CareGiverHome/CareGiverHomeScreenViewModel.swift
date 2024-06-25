@@ -14,7 +14,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
     @Published var jobsNearYou: [JobPost] = [JobPost]()
     @Published var isloading: Bool = Bool()
 
-    func getJobsNearYouList(){
+    func getJobsNearYouList(completion: @escaping (()->Void)){
         
         let param = [
             "pageNumber":1,
@@ -28,6 +28,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
                 case .success(let data):
                     self?.isloading = false
                     self?.jobsNearYou = data.data.jobPost
+                    completion()
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

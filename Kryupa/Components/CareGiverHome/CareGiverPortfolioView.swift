@@ -20,6 +20,8 @@ struct CareGiverPortfolioView: View {
                 Image("jobProfile")
                     .resizable()
                     .frame(width: 58,height: 58)
+                    .cornerRadius(29)
+
                 
                 VStack(spacing: 2) {
                     Text(job.customerInfo.name)
@@ -45,7 +47,7 @@ struct CareGiverPortfolioView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
 
-                Text(job.bookingDetails.areaOfExpertise.map{String($0)}.joined(separator: ","))
+                Text(job.bookingDetails.areaOfExpertise.joined(separator: ","))
                     .padding(.bottom, 10)
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(._7_C_7_C_80)
@@ -60,7 +62,7 @@ struct CareGiverPortfolioView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             .padding(.top, 10)
-            .padding(.horizontal, 21)
+//            .padding(.horizontal, 21)
 
 
             HStack {
@@ -175,12 +177,13 @@ struct JobDescView: View {
                 Image("heartbeat")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text(job.customerInfo.diseaseType.map{String($0)}.joined(separator: ","))
+                Text(job.customerInfo.diseaseType.joined(separator: ","))
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .padding(.top, 10)
     }
 }
 

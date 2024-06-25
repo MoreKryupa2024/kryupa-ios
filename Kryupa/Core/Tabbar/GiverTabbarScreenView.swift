@@ -24,6 +24,10 @@ struct GiverTabbarScreenView: View {
             Spacer()
             TabView
         }
+        .onAppear{
+            NotificationCenter.default.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
+                                using: self.showJobsScreen)
+        }
     }
     
     private var TabView: some View{
@@ -104,6 +108,10 @@ struct GiverTabbarScreenView: View {
                 .mask(Rectangle().padding(.top, -20)) /// here!
         )
 //        .ignoresSafeArea()
+    }
+    
+    private func showJobsScreen(_ notification: Notification) {
+        selectedIndex = 2
     }
 }
 
