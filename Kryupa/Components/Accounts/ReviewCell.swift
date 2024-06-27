@@ -8,37 +8,65 @@
 import SwiftUI
 
 struct ReviewCell: View {
+    @State var reviewData: ReviewSeekerData?
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack(spacing: 15) {
-                Image("reviewUser")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(30)
-
+                
+                AsyncImage(url: URL(string: reviewData?.profilePictureUrl ?? ""),content: { image in
+                    image
+                        .resizable()
+                },placeholder: {
+                    if reviewData?.profilePictureUrl != "" && reviewData?.profilePictureUrl != nil{
+                        ProgressView()
+                    }
+                    else {
+                        Image("personal")
+                            .resizable()
+                    }
+                })
+                .frame(width: 60, height: 60)
+                .cornerRadius(30)
+                
                 VStack(alignment: .leading) {
-                    Text("Carla Carder")
+                    Text(reviewData?.name ?? "")
                         .font(.custom(FontContent.besMedium, size: 15))
                         .foregroundStyle(.appMain)
-                    Text("3rd March ")
+                    let createdDate = reviewData?.createdAt.split(separator: " ").first ?? ""
+                    Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM"))
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .foregroundStyle(._444446)
                     HStack {
-                        ForEach (0...3) {_ in 
+                        
+                        ForEach (0...(reviewData?.rating.getFullRateVal() ?? 0)) {_ in
                             Image("star")
                                 .frame(width: 12, height: 12)
                         }
+                        
+                        if ((reviewData?.rating.addHalfRateVal()) != nil) {
+                            Image("star_half")
+                                .frame(width: 12, height: 12)
+                        }
+                        
+                        if reviewData?.rating.getNoRateValue() ?? 0 > 0 {
+                            ForEach (0...(reviewData?.rating.getNoRateValue() ?? 0)) {_ in
+                                Image("star_unselected")
+                                    .frame(width: 12, height: 12)
+                            }
+                        }
+                        
                     }
                 }
                 
                 Spacer()
             }
             
-            Text("Lorem ipsum dolor sit amet consectetur. Tempus commodo cursus libero nullam vitae. Tempus neque duis enim tellus tortor elit eu commodo netus.")
+            Text(reviewData?.review ?? "")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(._444446)
                 .padding(.top, 5)
-
+            
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 11)

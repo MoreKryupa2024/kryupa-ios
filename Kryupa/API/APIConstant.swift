@@ -51,8 +51,10 @@ class APIConstant{
     static let getProfileGiver = "\(baseURL)/apis/user/caregiver/account/get_profile"
     static let personalDetailsGiver = "\(baseURL)/apis/user/caregiver/account/personal_details"
     static let updateProfileGiver = "\(baseURL)/apis/user/caregiver/account/update_profile"
-
- }
+    static let reviewsSeeker = "\(baseURL)/apis/user/customer/reviews/my_reviews"
+    static let givenReviewsSeeker = "\(baseURL)/apis/user/customer/reviews/given_reviews"
+    static let viewReviewSeeker = "\(baseURL)/apis/user/customer/reviews/view_review"
+}
 
 class FontContent{
     static let plusRegular = "PlusJakartaDisplay-Regular"

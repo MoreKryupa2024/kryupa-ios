@@ -11,7 +11,8 @@ import SwiftfulUI
 struct ReviewsListView: View {
     @State var selectedSection = 0
     @Environment(\.router) var router
-    
+    @StateObject private var viewModel = ReviewsViewModel()
+
     var body: some View {
         
         ScrollView {
@@ -20,13 +21,12 @@ struct ReviewsListView: View {
             
             if selectedSection == 0 {
                 LazyVStack(spacing: 15) {
-                    ForEach(0...3) {
-                        msg in
+                    ForEach(Array(viewModel.myReviewsSeekerList.enumerated()), id: \.offset) { index, model in
                         
-                        ReviewCell()
+                        ReviewCell(reviewData: model)
                             .asButton(.press) {
                                 router.showScreen(.push) { rout in
-                                    ReviewDetailView()
+                                    ReviewDetailView(reviewID: model.reviewid)
                                 }
                             }
                     }
@@ -35,13 +35,12 @@ struct ReviewsListView: View {
             }
             else {
                 LazyVStack(spacing: 15) {
-                    ForEach(0...1) {
-                        msg in
+                    ForEach(Array(viewModel.givenReviewsSeekerList.enumerated()), id: \.offset) { index, model in
                         
-                        ReviewCell()
+                        ReviewCell(reviewData: model)
                             .asButton(.press) {
                                 router.showScreen(.push) { rout in
-                                    ReviewDetailView()
+                                    ReviewDetailView(reviewID: model.reviewid)
                                 }
                             }
                     }
@@ -51,6 +50,9 @@ struct ReviewsListView: View {
         }
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear() {
+            viewModel.getReviewsSeeker(myReviews: true)
+        }
     }
     
     private var SegmentView: some View{
@@ -67,6 +69,16 @@ struct ReviewsListView: View {
         .pickerStyle(.segmented)
         .padding(.horizontal, 24)
         .padding(.top, 20)
+        .onChange(of: selectedSection, { oldValue, newValue in
+            print("Old Value:\(oldValue)")
+            print("New Value:\(newValue)")
+            if newValue == 0 {
+                viewModel.getReviewsSeeker(myReviews: true)
+            }
+            else {
+                viewModel.getReviewsSeeker(myReviews: false)
+            }
+        })
         
     }
 }
