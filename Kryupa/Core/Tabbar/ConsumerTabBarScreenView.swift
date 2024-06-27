@@ -93,7 +93,7 @@ struct ConsumerTabBarScreenView: View {
             
             Spacer()
             VStack{
-                Image("Account")
+                Image("account")
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 24,height: 24)
