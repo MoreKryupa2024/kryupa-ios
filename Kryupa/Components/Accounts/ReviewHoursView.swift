@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ReviewHoursView: View {
+    var ratePerHr = "$20.23"
+    var noOfHrs = 6
+    var total = 121.38
+
     var body: some View {
         VStack(spacing: 10) {
             HStack {
@@ -17,7 +21,7 @@ struct ReviewHoursView: View {
                 
                 Spacer()
                 
-                Text("$20.23")
+                Text("$\(ratePerHr)")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
             }
@@ -29,7 +33,7 @@ struct ReviewHoursView: View {
                 
                 Spacer()
                 
-                Text("6")
+                Text("\(noOfHrs)")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
             }
@@ -41,7 +45,7 @@ struct ReviewHoursView: View {
                 
                 Spacer()
                 
-                Text("$121.38")
+                Text("$\(String(format: "%.2f", total))")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
             }

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ReviewDetailView: View {
+    
+    @StateObject private var viewModel = ReviewsViewModel()
+    @State var reviewID = ""
+    
     var body: some View {
         ScrollView {
             HeaderView(showBackButton: true)
@@ -15,42 +19,85 @@ struct ReviewDetailView: View {
                 
                 UserView
                 line
-                ReviewHoursView()
+                ReviewHoursView(ratePerHr: viewModel.reviewDetail?.ratePerHours ?? "0", noOfHrs: viewModel.reviewDetail?.totalHours ?? 0, total: viewModel.reviewDetail?.bookingPricingForCustomer ?? 0)
                 line
                 ReviewView
             }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear() {
+            viewModel.getReviewDetailSeeker(reviewID: reviewID)
+        }
     }
     
     private var ReviewView: some View{
+        //        HStack {
         VStack(alignment: .leading, spacing: 10) {
             Text("Review:")
                 .font(.custom(FontContent.plusMedium, size: 13))
                 .foregroundStyle(._7_C_7_C_80)
             
-            HStack(spacing: 1) {
-                ForEach (0...3) {_ in
+//            HStack(spacing: 1) {
+//                ForEach (0...3) {_ in
+//                    Image("star")
+//                        .resizable()
+//                        .frame(width: 20, height: 20)
+//                }
+//            }
+  
+            HStack {
+                
+                ForEach (0...(viewModel.reviewDetail?.rating.getFullRateVal() ?? 0)) {_ in
                     Image("star")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 12, height: 12)
                 }
+                
+                if ((viewModel.reviewDetail?.rating.addHalfRateVal()) != nil) {
+                    Image("star_half")
+                        .frame(width: 12, height: 12)
+                }
+                
+                if viewModel.reviewDetail?.rating.getNoRateValue() ?? 0 > 0 {
+                    ForEach (0...(viewModel.reviewDetail?.rating.getNoRateValue() ?? 0)) {_ in
+                        Image("star_unselected")
+                            .frame(width: 12, height: 12)
+                    }
+                }
+                
             }
             
-            Text("Lorem ipsum dolor sit amet consectetur. Dui in parturient odio pellentesque metus. Et rutrum mauris nunc ipsum eros vulputate tortor. Sagittis enim feugiat mauris ultricies vitae facilisis diam. Enim quis diam porttitor praesent eget gravida. Eget sit dictum nunc in. Egestas odio varius morbi enim placerat sed mi mauris pellentesque. Blandit est etiam tincidunt euismod nibh diam tempus arcu nulla.")
-                .font(.custom(FontContent.plusRegular, size: 12))
-                .foregroundStyle(._444446)
+            
+            HStack {
+                Text(viewModel.reviewDetail?.review ?? "")
+                    .multilineTextAlignment(.leading)
+                
+                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .foregroundStyle(._444446)
+                
+                Spacer()
+            }
         }
-        .padding([.horizontal, .top], 24)
+        .padding([.top, .horizontal], 24)
     }
     
     private var UserView: some View{
         VStack(spacing: 5) {
             HStack{
-                Image("reviewUser")
-                    .resizable()
-                    .frame(width: 126, height: 126)
-                    .cornerRadius(63)
+                
+                AsyncImage(url: URL(string: viewModel.reviewDetail?.profilePictureURL ?? ""),content: { image in
+                    image
+                        .resizable()
+                },placeholder: {
+                    if viewModel.reviewDetail?.profilePictureURL != "" && viewModel.reviewDetail?.profilePictureURL != nil{
+                        ProgressView()
+                    }
+                    else {
+                        Image("reviewUser")
+                            .resizable()
+                    }
+                })
+                .frame(width: 126, height: 126)
+                .cornerRadius(63)
                 
             }
             .frame(width: 138, height: 138)
@@ -60,24 +107,45 @@ struct ReviewDetailView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             
-            Text("Alexa Chatterjee")
+            Text(viewModel.reviewDetail?.name ?? "Alex")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
             
             HStack {
-                ForEach (0...3) {_ in
-                    Image("star")
-                        .resizable()
-                        .frame(width: 12, height: 12)
-                }
-                Text("(100)")
+//                ForEach (0...3) {_ in
+//                    Image("star")
+//                        .resizable()
+//                        .frame(width: 12, height: 12)
+//                }
+                
+                    
+                    ForEach (0...(viewModel.reviewDetail?.averageRating.getFullRateVal() ?? 0)) {_ in
+                        Image("star")
+                            .frame(width: 12, height: 12)
+                    }
+                    
+                    if ((viewModel.reviewDetail?.averageRating.addHalfRateVal()) != nil) {
+                        Image("star_half")
+                            .frame(width: 12, height: 12)
+                    }
+                    
+                    if viewModel.reviewDetail?.averageRating.getNoRateValue() ?? 0 > 0 {
+                        ForEach (0...(viewModel.reviewDetail?.averageRating.getNoRateValue() ?? 0)) {_ in
+                            Image("star_unselected")
+                                .frame(width: 12, height: 12)
+                        }
+                    }
+                    
+                
+                
+                Text("(\(viewModel.reviewDetail?.averageRating ?? "0"))")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)
             }
         }
         .padding(.top, 20)
     }
-        
+    
     private var line: some View {
         Divider()
             .background(.F_2_F_2_F_7)

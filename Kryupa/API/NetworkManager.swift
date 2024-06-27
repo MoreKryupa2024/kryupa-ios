@@ -38,7 +38,6 @@ class NetworkManager{
         
         if !self.defaults.accessToken.isEmpty {
             headerField["Authorization"] = "Bearer \(defaults.accessToken)"
-            
             print("Bearer: \(defaults.accessToken)")
         }
         return headerField
@@ -1513,6 +1512,121 @@ class NetworkManager{
                     completionHandler(.success(apiData))
                 }else{
                     completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getMyReviewsSeeker(myReviews: Bool, params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewSeekerModel, NetworkError>) -> Void){
+        
+        var url = ""
+        
+        if myReviews {
+            url = APIConstant.reviewsSeeker
+        }
+        else {
+            url = APIConstant.givenReviewsSeeker
+        }
+        
+        guard let urlStr = URL(string:url) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(ReviewSeekerModel.self, from: data)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message ?? "")))
+
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func viewReviewsSeeker(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewDetailModel, NetworkError>) -> Void){
+                
+        guard let urlStr = URL(string:APIConstant.viewReviewSeeker) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let apiData = try decoder.decode(ReviewDetailModel.self, from: data)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message ?? "")))
+
                 }
             }catch{
                 completionHandler(.failure(.somethingWentWrong))

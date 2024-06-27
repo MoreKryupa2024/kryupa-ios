@@ -39,6 +39,44 @@ extension String{
 
         return timeStamp
     }
+    
+    func getFullRateVal() -> Int {
+        
+        var value = Int("\(self.split(separator: ".").first ?? "0")") ?? 0
+        
+        if value > 0 {
+            value = value - 1
+        }
+        
+        return value
+    }
+
+    func addHalfRateVal() -> Bool {
+        
+        let arrRate = self.split(separator: ".")
+        
+        if arrRate.count == 2 {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    func getNoRateValue() -> Int {
+        var totalRatingStar = getFullRateVal() + (addHalfRateVal() ? 1 : 0) + 1
+        
+        if totalRatingStar == 5 {
+            return 0
+        }
+        
+        if totalRatingStar > 0 {
+            totalRatingStar = totalRatingStar - 1
+        }
+        
+        return (5 - totalRatingStar)
+    }
+
 }
 
 extension Double {

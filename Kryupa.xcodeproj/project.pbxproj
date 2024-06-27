@@ -56,6 +56,9 @@
 		A3FEF6162C25882F00EFC3C2 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6152C25882F00EFC3C2 /* GalleryView.swift */; };
 		A3FEF6182C2AAA1F00EFC3C2 /* ProfileGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */; };
 		A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */; };
+		A3FEF61E2C2AF79900EFC3C2 /* ReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF61D2C2AF79900EFC3C2 /* ReviewsViewModel.swift */; };
+		A3FEF6202C2AF8B800EFC3C2 /* ReviewSeekerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */; };
+		A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */; };
 		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
 		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
@@ -224,6 +227,9 @@
 		A3FEF6152C25882F00EFC3C2 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGiverModel.swift; sourceTree = "<group>"; };
 		A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalGiverModel.swift; sourceTree = "<group>"; };
+		A3FEF61D2C2AF79900EFC3C2 /* ReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewModel.swift; sourceTree = "<group>"; };
+		A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSeekerModel.swift; sourceTree = "<group>"; };
+		A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailModel.swift; sourceTree = "<group>"; };
 		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
@@ -353,6 +359,7 @@
 				A36BC38B2C1996B3005616A5 /* ReviewsListView.swift */,
 				A36BC3A62C1B1627005616A5 /* ReviewDetailView.swift */,
 				A36BC3AC2C1F6734005616A5 /* GiveReviewView.swift */,
+				A3FEF61D2C2AF79900EFC3C2 /* ReviewsViewModel.swift */,
 			);
 			path = Reviews;
 			sourceTree = "<group>";
@@ -723,6 +730,8 @@
 				A3FEF60F2C22D67F00EFC3C2 /* PersonalModel.swift */,
 				A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */,
 				A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */,
+				A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */,
+				A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1048,6 +1057,7 @@
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
 				A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */,
+				A3FEF61E2C2AF79900EFC3C2 /* ReviewsViewModel.swift in Sources */,
 				BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */,
 				BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */,
 				BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */,
@@ -1108,6 +1118,7 @@
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
+				A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */,
@@ -1161,6 +1172,7 @@
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
+				A3FEF6202C2AF8B800EFC3C2 /* ReviewSeekerModel.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
