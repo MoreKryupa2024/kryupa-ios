@@ -34,15 +34,16 @@ struct JobDetailView: View {
             getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
             bottomButtonView
             
+            if viewModel.isloading{
+                LoadingView()
+            }
+
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
             viewModel.getJobsDetail(approachID: jobID) {}
         }
         
-        if viewModel.isloading{
-            LoadingView()
-        }
 
     }
     
@@ -187,7 +188,7 @@ struct JobDetailView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             
-            Text(viewModel.jobDetailModel?.name ?? "Tiana Gouse")
+            Text(viewModel.jobDetailModel?.name ?? "")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
 
@@ -206,7 +207,7 @@ struct JobDetailView: View {
                     .font(.custom(FontContent.plusMedium, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
 
-                Text(viewModel.jobDetailModel?.areasOfExpertise?.joined(separator: ",") ?? "Nursing, Physical Therapy, Occupational Therapy")
+                Text(viewModel.jobDetailModel?.areasOfExpertise?.joined(separator: ",") ?? "")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(.appMain)
             }
@@ -221,7 +222,7 @@ struct JobDetailView: View {
         var arr = [SkillData]()
         
         for value in (viewModel.jobDetailModel?.additionalSkills ?? []) {
-            arr.append(SkillData(image: "injection", title: value))
+            arr.append(SkillData(image: value.replacingOccurrences(of: "/", with: ""), title: value))
         }
         
         return arr
@@ -232,7 +233,7 @@ struct JobDetailView: View {
         var arr = [SkillData]()
         
         for value in (viewModel.jobDetailModel?.additionalInfo ?? []) {
-            arr.append(SkillData(image: "injection", title: value))
+            arr.append(SkillData(image: value.replacingOccurrences(of: "/", with: ""), title: value))
         }
         
         return arr
