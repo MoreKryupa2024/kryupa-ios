@@ -77,25 +77,7 @@ struct ProfileDetailScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(.appMain)
                 Spacer()
-                HStack {
-                    Image("edit-two")
-                        .resizable()
-                        .frame(width: 17, height: 17)
-                        .font(.custom(FontContent.plusRegular, size: 17))
-                    
-                    Text("Edit")
-                        .font(.custom(FontContent.plusRegular, size: 16))
-                        .foregroundStyle(._7_C_7_C_80)
-                }
-                .asButton(.press) {
-                    
-                    let viewModelAddNewProfile = convertPersonalDetailModelToAddNewProfileModel()
 
-                    router.showScreen(.push) { rout in
-                
-                        AddNewProfileScreenView(viewModel: viewModelAddNewProfile)
-                    }
-                }
             }
             .padding(.bottom,5)
             
@@ -246,10 +228,31 @@ struct ProfileDetailScreenView: View {
                 Text(viewModel.personalDetail?.profileName ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                     .foregroundStyle(.appMain)
-                HStack(spacing:5){
-                    Image("bin")
-                    Text("Delete")
-                        .foregroundStyle(.FF_3_A_3_A)
+                HStack(spacing:30){
+                    HStack {
+                        Image("bin")
+                        Text("Delete")
+                            .foregroundStyle(.FF_3_A_3_A)
+                    }
+                    HStack {
+                        Image("edit-two")
+                            .resizable()
+                            .frame(width: 17, height: 17)
+                            .font(.custom(FontContent.plusRegular, size: 17))
+                        
+                        Text("Edit")
+                            .font(.custom(FontContent.plusRegular, size: 16))
+                            .foregroundStyle(._7_C_7_C_80)
+                    }
+                    .asButton(.press) {
+                        
+                        let viewModelAddNewProfile = convertPersonalDetailModelToAddNewProfileModel()
+
+                        router.showScreen(.push) { rout in
+                    
+                            AddNewProfileScreenView(viewModel: viewModelAddNewProfile)
+                        }
+                    }
                 }
                 .asButton(.press) {
                     showingAlert = true
