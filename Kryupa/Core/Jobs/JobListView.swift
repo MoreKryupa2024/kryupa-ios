@@ -20,7 +20,7 @@ struct JobListView: View {
                     JobCell()
                         .asButton(.press) {
                             router.showScreen(.push) { rout in
-                                JobDetailView(job: JobPost(jsonData: [String : Any]()))
+                                JobDetailView(job: JobPost(jsonData: [String : Any]()), jobID: "")
                             }
                         }
                 }

@@ -10,7 +10,8 @@ import SwiftUI
 struct CareGiverPortfolioView: View {
     
     var job: JobPost
-
+    var accept:(()->Void)
+    var view:(()->Void)
     let profileWidth:CGFloat = CGFloat((UIScreen.screenWidth - 106))
 
     var body: some View {
@@ -36,7 +37,7 @@ struct CareGiverPortfolioView: View {
                 }
             }
 
-            JobDescView(job: job)
+            JobDescView(startDate: job.bookingDetails.startDate, startTime: job.bookingDetails.startTime, endTime: job.bookingDetails.endTime, gender: job.customerInfo.gender, diseaseType: job.customerInfo.diseaseType)
 
             VStack(spacing: 2) {
                 Text("Service Required:")
@@ -72,13 +73,16 @@ struct CareGiverPortfolioView: View {
                     .frame(height: 32)
                     .frame(width: 78)
                     .asButton(.press) {
-                        
+                        view()
                     }
                     .overlay(
                         RoundedRectangle(cornerRadius: 48)
                             .inset(by: 1)
                             .stroke(.appMain, lineWidth: 1)
                     )
+                    .asButton(.press) {
+                        view()
+                    }
 
                 
                 Spacer()
@@ -92,7 +96,7 @@ struct CareGiverPortfolioView: View {
                         RoundedRectangle(cornerRadius: 48)
                     }
                     .asButton(.press) {
-                        
+                        accept()
                     }
             }
             .frame(maxWidth: .infinity)
@@ -111,7 +115,12 @@ struct CareGiverPortfolioView: View {
 }
 struct JobDescView: View {
     
-    var job: JobPost
+//    var job: JobPost
+    var startDate: String
+    var startTime: String
+    var endTime: String
+    var gender: String
+    var diseaseType: [String]
 
     var body: some View {
         VStack {
@@ -120,7 +129,8 @@ struct JobDescView: View {
                 Image("calender")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))
+//                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))
+                Text(startDate)
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -131,7 +141,8 @@ struct JobDescView: View {
                 Image("clock")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
+//                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
+                Text("\(startTime) - \(endTime)")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -143,7 +154,8 @@ struct JobDescView: View {
                     Image("account")
                         .resizable()
                         .frame(width: 18,height: 18)
-                    Text(job.customerInfo.gender)
+//                    Text(job.customerInfo.gender)
+                    Text(gender)
                         .minimumScaleFactor(0.01)
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .foregroundStyle(._444446)
@@ -177,7 +189,8 @@ struct JobDescView: View {
                 Image("heartbeat")
                     .resizable()
                     .frame(width: 18,height: 18)
-                Text(job.customerInfo.diseaseType.joined(separator: ","))
+//                Text(job.customerInfo.diseaseType.joined(separator: ","))
+                Text(diseaseType.joined(separator: ","))
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -188,6 +201,6 @@ struct JobDescView: View {
 }
 
 #Preview {
-    CareGiverPortfolioView(job: JobPost(jsonData: [String : Any]()))
+    CareGiverPortfolioView(job: JobPost(jsonData: [String : Any]()), accept: {}, view: {})
 }
 //(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1")

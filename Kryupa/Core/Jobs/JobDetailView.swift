@@ -10,39 +10,40 @@ import SwiftfulUI
 
 struct JobDetailView: View {
 
+    @StateObject private var viewModel = JobsViewModel()
+    @StateObject private var viewModelHome = CareGiverHomeScreenViewModel()
     var job: JobPost
-    
+    var jobID: String
+    @Environment(\.router) var router
+
     var body: some View {
+        HeaderView(showBackButton: true)
         ScrollView {
-            HeaderView(showBackButton: true)
             UserView
             ServiceRequiredView
             line
-            JobDescView(job: job)
+            JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
                 .padding(.horizontal, 24)
-                .padding(.top, 24)
+                .padding(.top, 18)
             OtherMedicalConditionView
             line
-            JobScheduleView
+//            JobScheduleView
+//            line
+            getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
             line
-            getGridView(heading: "Skills Required", skillsList: [
-                SkillData(image: "smoking", title: "Feeding"),
-                SkillData(image: "car", title: "Transportation"),
-                SkillData(image: "shower-head", title: "Bathing / dressing"),
-                SkillData(image: "shopping", title: "Errands / Shopping"),
-                SkillData(image: "tools-kitchen-2", title: "Meal Preparation"),
-                SkillData(image: "vacuum-cleaner", title: "Light Housekeeping")
-            ])
-            line
-            getGridView(heading: "Personal Preferences", skillsList: [
-                SkillData(image: "injection", title: "Covid Vaccinated"),
-                SkillData(image: "smoking", title: "Non Smoker"),
-                SkillData(image: "First_Aid", title: "CRP First Aid Trained"),
-                SkillData(image: "car", title: "Own Transportation")
-            ])
+            getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
             bottomButtonView
+            
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear() {
+            viewModel.getJobsDetail(approachID: jobID) {}
+        }
+        
+        if viewModel.isloading{
+            LoadingView()
+        }
+
     }
     
     func getGridView(heading: String, skillsList: [SkillData]) -> some View{
@@ -84,7 +85,9 @@ struct JobDetailView: View {
                 .frame(height: 35)
                 .frame(width: 99)
                 .asButton(.press) {
-                    
+                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
+                        router.dismissScreen()
+                    }
                 }
                 .overlay(
                     RoundedRectangle(cornerRadius: 48)
@@ -101,7 +104,11 @@ struct JobDetailView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    
+                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Job Acceptance") {
+                        router.showScreen(.push) { rout in
+                            ChatView(userName: viewModel.jobDetailModel?.name ?? "")
+                        }
+                    }
                 }
         }
         .padding(.top , 24)
@@ -141,7 +148,7 @@ struct JobDetailView: View {
                     .font(.custom(FontContent.plusMedium, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
 
-                Text("BP, Depression, Bipolar, Borderline")
+                Text(viewModel.otherDiseaseType)
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(.appMain)
             }
@@ -165,9 +172,12 @@ struct JobDetailView: View {
     private var UserView: some View{
         VStack {
             HStack {
-                Image("giveReview")
-                    .resizable()
-                    .frame(width: 126, height: 126)
+                AsyncImage(url: URL(string: viewModel.jobDetailModel?.profilePictureUrl ?? ""),content: { image in
+                    image
+                        .resizable()
+                },placeholder: {
+                    ProgressView()
+                })                    .frame(width: 126, height: 126)
                     .cornerRadius(63)
             }
             .frame(width: 138, height: 138)
@@ -177,11 +187,11 @@ struct JobDetailView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             
-            Text("Tiana Gouse")
+            Text(viewModel.jobDetailModel?.name ?? "Tiana Gouse")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
 
-            Text("$214.21")
+            Text("$\(viewModel.jobDetailModel?.bookingPricing ?? 0)")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(.appMain)
 
@@ -196,7 +206,7 @@ struct JobDetailView: View {
                     .font(.custom(FontContent.plusMedium, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
 
-                Text("Nursing, Physical Therapy, Occupational Therapy")
+                Text(viewModel.jobDetailModel?.areasOfExpertise?.joined(separator: ",") ?? "Nursing, Physical Therapy, Occupational Therapy")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(.appMain)
             }
@@ -205,6 +215,29 @@ struct JobDetailView: View {
         .padding([.top, .horizontal], 24)
 
     }
+    
+    func getArrayOfSkillsRequired() -> [SkillData] {
+        
+        var arr = [SkillData]()
+        
+        for value in (viewModel.jobDetailModel?.additionalSkills ?? []) {
+            arr.append(SkillData(image: "injection", title: value))
+        }
+        
+        return arr
+    }
+    
+    func getArrayOfPersonalPrefernces() -> [SkillData] {
+        
+        var arr = [SkillData]()
+        
+        for value in (viewModel.jobDetailModel?.additionalInfo ?? []) {
+            arr.append(SkillData(image: "injection", title: value))
+        }
+        
+        return arr
+    }
+
 }
 
 struct SkillData {
@@ -213,6 +246,6 @@ struct SkillData {
 }
 
 #Preview {
-    JobDetailView(job: JobPost(jsonData: [String : Any]()))
+    JobDetailView(job: JobPost(jsonData: [String : Any]()), jobID: "")
 }
 //(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1")

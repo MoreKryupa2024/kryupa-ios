@@ -54,6 +54,9 @@ class APIConstant{
     static let reviewsSeeker = "\(baseURL)/apis/user/customer/reviews/my_reviews"
     static let givenReviewsSeeker = "\(baseURL)/apis/user/customer/reviews/given_reviews"
     static let viewReviewSeeker = "\(baseURL)/apis/user/customer/reviews/view_review"
+    static let updateApprochStatus = "\(baseURL)/apis/booking/update_approch_status"
+    static let bookingDetailsForCaregiver = "\(baseURL)/apis/booking/BookingDetailsForCaregiver"
+
 }
 
 class FontContent{
