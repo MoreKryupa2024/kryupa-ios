@@ -37,10 +37,14 @@ struct PersonalDetailView: View {
             line
             AdditionalInfoView.disabled(!editProfile)
             line
-//            QualificationView
+            QualificationView
 //            line
 //            EducationDropdownView
-            languageDropdownView.disabled(!editProfile)
+            
+            if editProfile {
+                languageDropdownView.disabled(!editProfile)
+                bottomButtonView
+            }
         }
         .overlay(alignment: .top) {
                 Color.clear
@@ -68,14 +72,14 @@ struct PersonalDetailView: View {
     private var languageDropdownView: some View{
         VStack(alignment: .leading, spacing:0,
                content: {
-            HStack(spacing:0){
-                Text("Language")
-                Text("*")
-                    .foregroundStyle(.red)
-            }
-            .frame(height: 21)
-            .font(.custom(FontContent.plusMedium, size: 17))
-            .padding(.bottom,10)
+//            HStack(spacing:0){
+//                Text("Language")
+//                Text("*")
+//                    .foregroundStyle(.red)
+//            }
+//            .frame(height: 21)
+//            .font(.custom(FontContent.plusMedium, size: 17))
+//            .padding(.bottom,10)
             
             DropDownWithCheckBoxView(
                 selectedValue: viewModel.languageDropDownSelected,
@@ -89,6 +93,51 @@ struct PersonalDetailView: View {
         .padding(.horizontal,24)
         .padding(.top, 10)
         .padding(.bottom,-10)
+    }
+    
+    private var bottomButtonView: some View {
+        HStack(spacing: 30) {
+            
+            Text("Save")
+                .font(.custom(FontContent.plusRegular, size: 16))
+                .foregroundStyle(.white)
+                .frame(height: 53)
+                .frame(width: 135)
+                .background{
+                    RoundedRectangle(cornerRadius: 48)
+                }
+                .asButton(.press) {
+                    viewModel.personalDetail?.expertise.bio = strBio
+                    viewModel.personalDetail?.expertise.exprience = intExp
+                    viewModel.validateData { alertStr in
+                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                    } next: { param in
+                        viewModel.updateProfile(param: param) {
+                            editProfile = false
+                        }
+                    }
+                }
+
+            Spacer()
+            
+            Text("Cancel")
+                .font(.custom(FontContent.plusRegular, size: 16))
+                .foregroundStyle(.appMain)
+                .frame(height: 53)
+                .frame(width: 135)
+                .asButton(.press) {
+                    editProfile = !editProfile
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 48)
+                        .inset(by: 1)
+                        .stroke(.appMain, lineWidth: 1)
+                )
+
+        }
+        .padding(.horizontal , 24)
+        .padding(.top , 50)
+
     }
     
     private var EducationDropdownView: some View{
@@ -117,29 +166,34 @@ struct PersonalDetailView: View {
     private var QualificationView: some View{
         
         VStack(alignment: .leading, spacing: 10) {
-            Text("Qualifications")
+//            Text("Qualifications")
+//                .font(.custom(FontContent.plusMedium, size: 17))
+//                .foregroundStyle(._242426)
+//            
+//            
+//            HStack {
+//                Text("Education:")
+//                    .font(.custom(FontContent.plusRegular, size: 12))
+//                    .foregroundStyle(._242426)
+//                Spacer()
+//                Text("College Degree")
+//                    .font(.custom(FontContent.plusRegular, size: 12))
+//                    .foregroundStyle(._242426)
+//            }
+            
+            Text("Language")
                 .font(.custom(FontContent.plusMedium, size: 17))
                 .foregroundStyle(._242426)
-            
-            
+
             HStack {
-                Text("Education:")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._242426)
-                Spacer()
-                Text("College Degree")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._242426)
-            }
-            
-            HStack {
-                Text("Languages:")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._242426)
-                Spacer()
+//                Text("Languages:")
+//                    .font(.custom(FontContent.plusRegular, size: 12))
+//                    .foregroundStyle(._242426)
+//                Spacer()
                 Text( viewModel.languageDropDownSelected.isEmpty ? "-" : "\(viewModel.languageDropDownSelected.joined(separator: ","))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._242426)
+                Spacer()
             }
         }
         .padding(.horizontal,24)
@@ -360,7 +414,7 @@ struct PersonalDetailView: View {
                 
                 VStack() {
                     if editProfile {
-                        Text("Save")
+                       /* Text("Save")
                             .frame(width: 62 ,height: 23)
                             .font(.custom(FontContent.plusRegular, size: 11))
                             .foregroundStyle(.white)
@@ -378,7 +432,22 @@ struct PersonalDetailView: View {
                                 }
                             }
                         
+                        Spacer()*/
+                        
+                        HStack {
+                            Image("edit-two")
+                                .frame(width: 13, height: 13)
+                                .hidden()
+                            
+                            Text("Edit Profile")
+                                .font(.custom(FontContent.plusRegular, size: 11))
+                                .foregroundStyle(._7_C_7_C_80)
+                                .hidden()
+
+                        }
+                        
                         Spacer()
+
                     }
                     else {
                         HStack {
@@ -400,10 +469,10 @@ struct PersonalDetailView: View {
                 .padding()
                 
             }
-            .padding(.horizontal, 30)
+            .padding(.horizontal, 20)
         }
         .background(.F_2_F_2_F_7)
-        .frame(height: 202)
+        .frame(height: 205)
         .clipShape(
             .rect (
                 bottomLeadingRadius: 20,

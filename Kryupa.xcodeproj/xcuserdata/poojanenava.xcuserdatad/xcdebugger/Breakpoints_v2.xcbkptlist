@@ -26,8 +26,8 @@
             filePath = "Kryupa/Core/UserProfileSection/ProfileDetailScreenView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "ImageViewSection"
             landmarkType = "24">
          </BreakpointContent>
@@ -58,8 +58,8 @@
             filePath = "Kryupa/Core/Accounts/PersonalDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "HeaderTopView"
             landmarkType = "24">
          </BreakpointContent>
@@ -122,8 +122,8 @@
             filePath = "Kryupa/Core/Accounts/PersonalDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
