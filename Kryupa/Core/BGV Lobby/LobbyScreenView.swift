@@ -35,7 +35,11 @@ struct LobbyScreenView: View {
                 }
             }
             if isPresented {
-                ZoomScreenView { error in
+                ZoomScreenView(
+                    jwt:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfa2V5IjoicUs0QU9mNmFUaDI1ZjFROFdoTGNXdyIsInRwYyI6ImtyeXVwYV8wMSIsInJvbGVfdHlwZSI6MCwic2Vzc2lvbl9rZXkiOiJxd2VydHkiLCJ1c2VyX2lkZW50aXR5IjoibmlyYW1hbF9kYWRhIiwidmVyc2lvbiI6MSwiaWF0IjoxNzE5NDAyNDU4LCJleHAiOjE3MTk0ODg4NTh9.dstLO6haO4bCTB61DHNkhiBvBWCeMlNWxU7s4WfSENQ" ,
+                    sessionName: "kryupa_01",
+                    username: "niramal_dada"
+                ) { error in
                     print("error :- \(error.description)")
                 } onViewLoadedAction: {
                     print("loaded")
@@ -130,19 +134,7 @@ struct LobbyScreenView: View {
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
                     .asButton {
-                        //                        isPresented = true
-                        
-                        let primaryAction = UIAlertAction(title: "OK", style: .default) { action in
-                            let domain = Bundle.main.bundleIdentifier!
-                            UserDefaults.standard.removePersistentDomain(forName: domain)
-                            UserDefaults.standard.synchronize()
-                            NotificationCenter.default.post(name: .logout,
-                                                                            object: nil, userInfo: nil)
-                        }
-                        
-                        let secondaryAction = UIAlertAction(title: "Cancel", style: .cancel)
-                        
-                        presentAlert(title: "Kryupa", subTitle: "Log Out",primaryAction: primaryAction,secondaryAction: secondaryAction)
+                        isPresented = true
                     }
             }
             .padding(.horizontal,24)

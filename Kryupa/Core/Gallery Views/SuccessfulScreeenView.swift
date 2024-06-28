@@ -59,10 +59,10 @@ struct SuccessfulScreeenView: View {
                     .onAppear{
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                             if userType == AppConstants.GiveCare{
-//                                NotificationCenter.default.post(name: .setLobbyScreen,
-//                                                                                object: nil, userInfo: nil)
-                                NotificationCenter.default.post(name: .setCareGiverHomeScreen,
+                                NotificationCenter.default.post(name: .setLobbyScreen,
                                                                                 object: nil, userInfo: nil)
+//                                NotificationCenter.default.post(name: .setCareGiverHomeScreen,
+//                                                                                object: nil, userInfo: nil)
                                 router.dismissScreenStack()
                             }else{
                                 NotificationCenter.default.post(name: .setCareSeekerHomeScreen,

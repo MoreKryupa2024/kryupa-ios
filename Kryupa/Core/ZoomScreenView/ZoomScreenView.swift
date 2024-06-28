@@ -12,7 +12,9 @@ import ZoomVideoSDKUIToolkit
 struct ZoomScreenView: UIViewControllerRepresentable {
     
     var vc = ViewController()
-    
+    var jwt = "JWT"
+    var sessionName = ""
+    var username = ""
     var toolkitErrorAction: (UIToolkitError) -> Void
     var onViewLoadedAction: () -> Void
     var onViewDismissedAction: () -> Void
@@ -26,9 +28,9 @@ struct ZoomScreenView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         // Updates the state of the specified view controller with new information from SwiftUI.
-        vc.jwt = "JWT token"
-        vc.sessionName = "sessionName"
-        vc.username = "username"
+        vc.jwt = jwt
+        vc.sessionName = sessionName
+        vc.username = username
         vc.present()
     }
     
