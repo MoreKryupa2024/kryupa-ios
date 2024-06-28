@@ -26,7 +26,7 @@ struct ReviewDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
-            viewModel.getReviewDetailSeeker(reviewID: reviewID)
+            viewModel.getReviewDetail(reviewID: reviewID, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
         }
     }
     

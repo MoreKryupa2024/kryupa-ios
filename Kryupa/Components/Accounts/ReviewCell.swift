@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReviewCell: View {
-    @State var reviewData: ReviewSeekerData?
+    @State var reviewData: ReviewData?
     
     var body: some View {
         VStack(alignment: .leading) {

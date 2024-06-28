@@ -38,6 +38,7 @@ class NetworkManager{
         
         if !self.defaults.accessToken.isEmpty {
             headerField["Authorization"] = "Bearer \(defaults.accessToken)"
+            
             print("Bearer: \(defaults.accessToken)")
         }
         return headerField
@@ -1520,15 +1521,21 @@ class NetworkManager{
         task.resume()
     }
     
-    func getMyReviewsSeeker(myReviews: Bool, params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewSeekerModel, NetworkError>) -> Void){
+    func getMyReviews(myReviews: Bool, careGiver: Bool, params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewModel, NetworkError>) -> Void){
         
         var url = ""
         
         if myReviews {
             url = APIConstant.reviewsSeeker
+            if careGiver {
+                url = APIConstant.reviewsGiver
+            }
         }
         else {
             url = APIConstant.givenReviewsSeeker
+            if careGiver {
+                url = APIConstant.givenReviewsGiver
+            }
         }
         
         guard let urlStr = URL(string:url) else {
@@ -1567,7 +1574,7 @@ class NetworkManager{
             do {
                 let decoder = JSONDecoder()
 //                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(ReviewSeekerModel.self, from: data)
+                let apiData = try decoder.decode(ReviewModel.self, from: data)
                 if apiData.success{
                     print(apiData)
                     completionHandler(.success(apiData))
@@ -1582,9 +1589,14 @@ class NetworkManager{
         task.resume()
     }
     
-    func viewReviewsSeeker(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewDetailModel, NetworkError>) -> Void){
+    func viewReviews(careGiver: Bool, params:[String:Any]? = nil,completionHandler :  @escaping (Results<ReviewDetailModel, NetworkError>) -> Void){
                 
-        guard let urlStr = URL(string:APIConstant.viewReviewSeeker) else {
+        var urlStr = APIConstant.viewReviewSeeker
+        if careGiver {
+            urlStr = APIConstant.viewReviewGiver
+        }
+        
+        guard let urlStr = URL(string:urlStr) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)

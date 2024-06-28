@@ -17,7 +17,7 @@ struct APIConstants {
 class APIConstant{
     
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-//    static let baseURLCP = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+//    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
 
     
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
@@ -56,6 +56,9 @@ class APIConstant{
     static let viewReviewSeeker = "\(baseURL)/apis/user/customer/reviews/view_review"
     static let updateApprochStatus = "\(baseURL)/apis/booking/update_approch_status"
     static let bookingDetailsForCaregiver = "\(baseURL)/apis/booking/BookingDetailsForCaregiver"
+    static let reviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/my_reviews"
+    static let givenReviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/given_reviews"
+    static let viewReviewGiver = "\(baseURL)/apis/user/caregiver/reviews/view_review"
 
 }
 

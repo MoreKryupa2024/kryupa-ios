@@ -21,7 +21,7 @@ struct ReviewsListView: View {
             
             if selectedSection == 0 {
                 LazyVStack(spacing: 15) {
-                    ForEach(Array(viewModel.myReviewsSeekerList.enumerated()), id: \.offset) { index, model in
+                    ForEach(Array(viewModel.myReviewsList.enumerated()), id: \.offset) { index, model in
                         
                         ReviewCell(reviewData: model)
                             .asButton(.press) {
@@ -35,7 +35,7 @@ struct ReviewsListView: View {
             }
             else {
                 LazyVStack(spacing: 15) {
-                    ForEach(Array(viewModel.givenReviewsSeekerList.enumerated()), id: \.offset) { index, model in
+                    ForEach(Array(viewModel.givenReviewsList.enumerated()), id: \.offset) { index, model in
                         
                         ReviewCell(reviewData: model)
                             .asButton(.press) {
@@ -51,7 +51,7 @@ struct ReviewsListView: View {
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
-            viewModel.getReviewsSeeker(myReviews: true)
+            viewModel.getReviews(myReviews: true, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
         }
     }
     
@@ -73,10 +73,10 @@ struct ReviewsListView: View {
             print("Old Value:\(oldValue)")
             print("New Value:\(newValue)")
             if newValue == 0 {
-                viewModel.getReviewsSeeker(myReviews: true)
+                viewModel.getReviews(myReviews: true, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
             }
             else {
-                viewModel.getReviewsSeeker(myReviews: false)
+                viewModel.getReviews(myReviews: false, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
             }
         })
         
