@@ -11,6 +11,7 @@ struct CareGiverHomeScreenView: View {
     @StateObject private var viewModel = CareGiverHomeScreenViewModel()
     @State var showNoContent: Bool = false
     @State private var isSelectedView = 4
+    @Environment(\.router) var router
 
     var body: some View {
         VStack(spacing:0){
@@ -32,9 +33,6 @@ struct CareGiverHomeScreenView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             
-            if viewModel.isloading{
-                LoadingView()
-            }
         }
         .onAppear{
             viewModel.getJobsNearYouList() {
@@ -47,6 +45,10 @@ struct CareGiverHomeScreenView: View {
             }
         }
         
+        if viewModel.isloading{
+            LoadingView()
+        }
+
     }
     
     private var noCotentView: some View{
@@ -173,7 +175,17 @@ struct CareGiverHomeScreenView: View {
         ScrollView(.horizontal) {
             HStack(spacing:1){
                 ForEach(viewModel.jobsNearYou, id: \.jobID) { jobPost in
-                    CareGiverPortfolioView(job: jobPost)
+                    CareGiverPortfolioView(job: jobPost, accept: {
+                        viewModel.acceptRejectJob(approchID: jobPost.jobID, status: "Job Acceptance") {
+                            router.showScreen(.push) { rout in
+                                ChatView(userName: jobPost.customerInfo.name)
+                            }
+                        }
+                    }, view: {
+                        router.showScreen(.push) { rout in
+                            JobDetailView(job: jobPost, jobID: jobPost.jobID)
+                        }
+                    })
                         .scrollTransition(.interactive, axis: .horizontal) { view, phase in
                             view.scaleEffect(phase.isIdentity ? 1 : 0.85)
                         }

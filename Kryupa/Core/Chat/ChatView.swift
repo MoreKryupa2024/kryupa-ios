@@ -10,6 +10,7 @@ import Combine
 
 struct ChatView: View {
     @Environment(\.router) var router
+    @State var userName: String = ""
     @State var sendMsgText: String = ""
     @State private var messages = [
         Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
@@ -147,7 +148,7 @@ struct ChatView: View {
                     router.dismissScreen()
                 }
             
-            Text("Alexa Chatterjee")
+            Text(userName)
                 .font(.custom(FontContent.besRegular, size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
