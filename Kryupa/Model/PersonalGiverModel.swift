@@ -17,7 +17,7 @@ struct PersonalGiverModel: Codable {
 // MARK: - DataClass
 struct PersonalGiverData: Codable {
     let id, caregiverID, profileID, name: String
-    let gender, ssnVerificationStatus, interviewStatus, bgvStatus, profilePictureUrl: String
+    let gender, ssnVerificationStatus, interviewStatus, bgvStatus, profilePictureUrl: String?
     var expertise: Expertise
     let additionalRequirements, preferredLanguages: [String]
 
