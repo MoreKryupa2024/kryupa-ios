@@ -57,7 +57,7 @@
 		A3FEF6182C2AAA1F00EFC3C2 /* ProfileGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */; };
 		A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */; };
 		A3FEF61E2C2AF79900EFC3C2 /* ReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF61D2C2AF79900EFC3C2 /* ReviewsViewModel.swift */; };
-		A3FEF6202C2AF8B800EFC3C2 /* ReviewSeekerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */; };
+		A3FEF6202C2AF8B800EFC3C2 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF61F2C2AF8B800EFC3C2 /* ReviewModel.swift */; };
 		A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */; };
 		A3FEF6242C2D89C300EFC3C2 /* JobAcceptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */; };
 		A3FEF6262C2D967A00EFC3C2 /* JobDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */; };
@@ -231,7 +231,7 @@
 		A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGiverModel.swift; sourceTree = "<group>"; };
 		A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalGiverModel.swift; sourceTree = "<group>"; };
 		A3FEF61D2C2AF79900EFC3C2 /* ReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewModel.swift; sourceTree = "<group>"; };
-		A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSeekerModel.swift; sourceTree = "<group>"; };
+		A3FEF61F2C2AF8B800EFC3C2 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailModel.swift; sourceTree = "<group>"; };
 		A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAcceptModel.swift; sourceTree = "<group>"; };
 		A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailModel.swift; sourceTree = "<group>"; };
@@ -737,7 +737,7 @@
 				A3FEF60F2C22D67F00EFC3C2 /* PersonalModel.swift */,
 				A3FEF6172C2AAA1F00EFC3C2 /* ProfileGiverModel.swift */,
 				A3FEF6192C2ABC2100EFC3C2 /* PersonalGiverModel.swift */,
-				A3FEF61F2C2AF8B800EFC3C2 /* ReviewSeekerModel.swift */,
+				A3FEF61F2C2AF8B800EFC3C2 /* ReviewModel.swift */,
 				A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */,
 				A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */,
 				A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */,
@@ -1184,7 +1184,7 @@
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
-				A3FEF6202C2AF8B800EFC3C2 /* ReviewSeekerModel.swift in Sources */,
+				A3FEF6202C2AF8B800EFC3C2 /* ReviewModel.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

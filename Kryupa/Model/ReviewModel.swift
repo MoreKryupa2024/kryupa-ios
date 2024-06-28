@@ -8,17 +8,17 @@
 import Foundation
 
 // MARK: - Welcome
-struct ReviewSeekerModel: Codable {
+struct ReviewModel: Codable {
     let success: Bool
     let message: String?
-    let data: [ReviewSeekerData]
-    let pageNumber: Int
+    let data: [ReviewData]
+    let pageNumber, pageLimit: Int?
 }
 
 // MARK: - Datum
-struct ReviewSeekerData: Codable {
+struct ReviewData: Codable {
     let reviewid, createdAt, review, rating: String
-    let approchID, caregiverID, name: String
+    let approchID, customerId, caregiverID, name, relation: String?
     let profilePictureUrl: String?
 
     enum CodingKeys: String, CodingKey {
@@ -26,8 +26,9 @@ struct ReviewSeekerData: Codable {
         case createdAt = "created_at"
         case review, rating
         case approchID = "approch_id"
+        case customerId = "customer_id"
         case caregiverID = "caregiver_id"
-        case name
+        case name, relation
         case profilePictureUrl = "profile_picture_url"
     }
 }
