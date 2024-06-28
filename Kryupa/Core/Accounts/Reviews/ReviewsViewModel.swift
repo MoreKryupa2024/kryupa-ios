@@ -9,23 +9,23 @@ import Foundation
 
 class ReviewsViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
-    @Published var myReviewsSeekerList = [ReviewSeekerData]()
-    @Published var givenReviewsSeekerList = [ReviewSeekerData]()
+    @Published var myReviewsList = [ReviewData]()
+    @Published var givenReviewsList = [ReviewData]()
     @Published var reviewDetail: ReviewDetailData?
 
-    func getReviewsSeeker(myReviews: Bool){
+    func getReviews(myReviews: Bool, careGiver: Bool){
         isloading = true
-        NetworkManager.shared.getMyReviewsSeeker(myReviews: myReviews) { [weak self] result in
+        NetworkManager.shared.getMyReviews(myReviews: myReviews, careGiver: careGiver) { [weak self] result in
             
             DispatchQueue.main.async() {
                 switch result{
                 case .success(let data):
                     self?.isloading = false
                     if myReviews {
-                        self?.myReviewsSeekerList = data.data
+                        self?.myReviewsList = data.data
                     }
                     else{
-                        self?.givenReviewsSeekerList = data.data
+                        self?.givenReviewsList = data.data
                     }
                 case .failure(let error):
                     self?.isloading = false
@@ -36,12 +36,12 @@ class ReviewsViewModel: ObservableObject{
         }
     }
     
-    func getReviewDetailSeeker(reviewID: String){
+    func getReviewDetail(reviewID: String, careGiver: Bool){
         
         let param = ["reviewId": reviewID]
         
         isloading = true
-        NetworkManager.shared.viewReviewsSeeker(params: param) { [weak self] result in
+        NetworkManager.shared.viewReviews(careGiver: careGiver, params: param) { [weak self] result in
             
             DispatchQueue.main.async() {
                 switch result{

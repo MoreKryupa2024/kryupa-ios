@@ -19,11 +19,11 @@ struct ReviewDetailData: Codable {
     let reviewid, rating, averageRating, review: String
     let approchID, reviewTo, reviwedBy, approchid: String
     let bookingPricingForCustomer: Double
-    let status, caregiverID, bookingid, startDate: String
-    let endDate, startTime, endTime, name: String
+    let status, customerID, caregiverID, bookingid, startDate: String?
+    let endDate, startTime, endTime, name, relation: String?
     let profilePictureURL: String?
     let yearsOfExprience: String?
-    let cid, ratePerHours: String
+    let cid, ratePerHours: String?
     let totalHours: Int
 
     enum CodingKeys: String, CodingKey {
@@ -36,13 +36,14 @@ struct ReviewDetailData: Codable {
         case approchid
         case bookingPricingForCustomer = "booking_pricing_for_customer"
         case status
+        case customerID = "customer_id"
         case caregiverID = "caregiver_id"
         case bookingid
         case startDate = "start_date"
         case endDate = "end_date"
         case startTime = "start_time"
         case endTime = "end_time"
-        case name
+        case name, relation
         case profilePictureURL = "profile_picture_url"
         case yearsOfExprience = "years_of_exprience"
         case cid
