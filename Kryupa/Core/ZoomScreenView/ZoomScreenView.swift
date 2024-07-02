@@ -14,6 +14,7 @@ struct ZoomScreenView: UIViewControllerRepresentable {
     var vc = ViewController()
     var jwt = "JWT"
     var sessionName = ""
+    var sessionPassword = ""
     var username = ""
     var toolkitErrorAction: (UIToolkitError) -> Void
     var onViewLoadedAction: () -> Void
@@ -31,7 +32,7 @@ struct ZoomScreenView: UIViewControllerRepresentable {
         vc.jwt = jwt
         vc.sessionName = sessionName
         vc.username = username
-        vc.present()
+        vc.sessionPassword = sessionPassword
     }
     
     func makeCoordinator() -> Coordinator {
@@ -72,21 +73,20 @@ class ViewController: UIViewController {
     var jwt = "JWT"
     var sessionName = ""
     var username = ""
+    var sessionPassword = ""
     var delegate: UIToolkitDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(jwt,sessionName,username)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(jwt,sessionName,username)
         present()
     }
     
     func present(){
-        let vc = UIToolkitVC(sessionContext: SessionContext(jwt: jwt, sessionName: sessionName, username: username))
+        let vc = UIToolkitVC(sessionContext: SessionContext(jwt: jwt, sessionName: sessionName, sessionPassword: sessionPassword, username: username))
         vc.delegate = self.delegate
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)

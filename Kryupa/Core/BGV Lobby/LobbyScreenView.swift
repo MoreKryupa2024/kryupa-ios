@@ -36,9 +36,10 @@ struct LobbyScreenView: View {
             }
             if isPresented {
                 ZoomScreenView(
-                    jwt:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfa2V5IjoicUs0QU9mNmFUaDI1ZjFROFdoTGNXdyIsInRwYyI6ImtyeXVwYV8wMSIsInJvbGVfdHlwZSI6MCwic2Vzc2lvbl9rZXkiOiJxd2VydHkiLCJ1c2VyX2lkZW50aXR5IjoibmlyYW1hbF9kYWRhIiwidmVyc2lvbiI6MSwiaWF0IjoxNzE5NDAyNDU4LCJleHAiOjE3MTk0ODg4NTh9.dstLO6haO4bCTB61DHNkhiBvBWCeMlNWxU7s4WfSENQ" ,
-                    sessionName: "kryupa_01",
-                    username: "niramal_dada"
+                    jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
+                    sessionName: viewModel.meetingTokenData?.topic ?? "",
+                    sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
+                    username: viewModel.meetingTokenData?.userIdentity ?? ""
                 ) { error in
                     print("error :- \(error.description)")
                 } onViewLoadedAction: {
@@ -133,9 +134,6 @@ struct LobbyScreenView: View {
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
-                    .asButton {
-                        isPresented = true
-                    }
             }
             .padding(.horizontal,24)
         }
@@ -144,26 +142,33 @@ struct LobbyScreenView: View {
     private var ScheduleInterview: some View{
         HStack{
             VStack(alignment:.leading, spacing:5){
-                VStack(alignment:.leading,spacing:-5){
-                    Text("Schedule Your")
-                    Text("BGV Interview!")
-                }
-                .font(.custom(FontContent.besMedium, size: 16))
-                .foregroundStyle(.appMain)
                 
-                Text("Complete Interview & begin\nyour caregiving services")
+                Text(viewModel.slotTitle)
+                    .font(.custom(FontContent.besMedium, size: 16))
+                    .foregroundStyle(.appMain)
+                
+                Text(viewModel.slotTime)
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(._7_C_7_C_80)
                 
-                Text("Schedule Now")
+                Text(viewModel.slotButton)
                     .font(.custom(FontContent.plusMedium, size: 11))
                     .foregroundStyle(.white)
                     .padding(.vertical,8)
                     .padding(.horizontal,20)
                     .background(Capsule())
                     .asButton(.press) {
-                        router.showScreen(.push) { router in
-                            BGVTimeSlotScreenView()
+                        if viewModel.slotButton == "Join Now"{
+                            viewModel.getMeetingToken { strError in
+                                presentAlert(title: "Kryupa", subTitle: strError)
+                            } next: {
+                                isPresented = true
+                            }
+
+                        }else{
+                            router.showScreen(.push) { router in
+                                BGVTimeSlotScreenView()
+                            }
                         }
                     }
             }

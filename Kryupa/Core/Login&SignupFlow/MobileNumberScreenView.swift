@@ -11,46 +11,66 @@ import SwiftfulUI
 struct MobileNumberScreenView: View {
     
     @Environment(\.router) var router
-    @State private var mobileNumner: String = String()
-    @State private var mobileIsFocused: Bool = false
     
+    @StateObject private var viewModel = MobileScreenViewModel()
     
     var body: some View {
-        
-        VStack(spacing:0,content: {
-            Text("Phone Number")
-                .font(.custom(FontContent.besMedium, size: 28))
-                .multilineTextAlignment(.center)
-                .padding(.top, 43)
+        ZStack{
             
-            Text("Please enter your phone number")
-                .font(.custom(FontContent.plusRegular, size: 13))
-                .multilineTextAlignment(.center)
-                .padding(.top, 20)
-                .foregroundStyle(._444446)
-            
-            VStack{
-                mobileNumberHeaderTitleView
+            VStack(spacing:0,content: {
+                Text("Phone Number")
+                    .font(.custom(FontContent.besMedium, size: 28))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 43)
                 
-                mobileNumberFieldView
-
-                sendCodeButton
-                    .padding(.top,50)
-                    .asButton(.press) {
-                        if "+1\(mobileNumner)".validateMobile(){
-                            router.showScreen(.push) { _ in
-                                OTPVerificationScreenView(mobileNumber: self.mobileNumner)
+                Text("Please enter your phone number")
+                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+                    .foregroundStyle(._444446)
+                
+                VStack{
+                    mobileNumberHeaderTitleView
+                    
+                    mobileNumberFieldView
+                    
+                    sendCodeButton
+                        .padding(.top,50)
+                        .asButton(.press) {
+                            if "+1\(viewModel.mobileNumner)".validateMobile(){
+                                viewModel.sendOTP {
+                                    router.showScreen(.push) { _ in
+                                        OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner,requestId: viewModel.sendOTPdata?.requestID ?? "")
+                                    }
+                                } errorAction: { error in
+//                                    router.showScreen(.push) { _ in
+//                                        OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner,requestId: viewModel.sendOTPdata?.requestID ?? "")
+//                                    }
+                                    presentAlert(title: "Kruypa", subTitle: error)
+                                }
                             }
                         }
-                    }
-                
-                Spacer()
+                    
+                    Spacer()
+                }
+                .padding(.top, 30)
+                .padding([.leading, .trailing],24)
+                .toolbar(.hidden, for: .navigationBar)
+            })
+            .onAppear(perform: {
+#if DEBUG && targetEnvironment(simulator)
+                self.viewModel.mobileNumner = "6466124295"
+#else
+                //
+#endif
+                //
+            })
+            .modifier(DismissingKeyboard())
+            
+            if viewModel.isLoading{
+                LoadingView()
             }
-            .padding(.top, 30)
-            .padding([.leading, .trailing],24)
-            .toolbar(.hidden, for: .navigationBar)
-        })
-        .modifier(DismissingKeyboard())
+        }
     }
     
     //MARK: Mobile Number Header Title View
@@ -84,7 +104,7 @@ struct MobileNumberScreenView: View {
                 .resizable()
                 .frame(width: 16,height: 16)
             
-            TextField(text: $mobileNumner) {
+            TextField(text: $viewModel.mobileNumner) {
                 Text("123454321")
                     .foregroundStyle(._7_C_7_C_80)
             }

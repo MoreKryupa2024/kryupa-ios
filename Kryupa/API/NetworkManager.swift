@@ -418,7 +418,57 @@ class NetworkManager{
         task.resume()
     }
     
-    func getLobbyStatus(completionHandler :  @escaping (Results<BGVInterviewSlotStatusModel, NetworkError>) -> Void){
+    func sendOTP(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.sendOTP) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = SendOTPModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getLobbyStatus(completionHandler :  @escaping (Results<BGVInterviewSlotBookedStatusModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.lobbyStatus) else {
             return completionHandler(.failure(NetworkError.invalidURL))
@@ -447,9 +497,52 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(BGVInterviewSlotStatusModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = BGVInterviewSlotBookedStatusModel(jsondata: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getMeetingToken(completionHandler :  @escaping (Results<BGVInterviewMeetingTokenModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getMeetingToken) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = BGVInterviewMeetingTokenModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -549,9 +642,8 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(BGVInterviewSlotsListModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = BGVInterviewSlotsListModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{

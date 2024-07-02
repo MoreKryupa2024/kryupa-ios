@@ -138,6 +138,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                 .asButton(.press){
                     viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
                         presentAlert(title: "Kryupa", subTitle: "Appointment Booked")
+                        ChatScreenViewModel.shared.connect()
                         router.showScreen(.push) { route in
                             ChatView()
                         }
@@ -176,6 +177,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .resizable()
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
+                        ChatScreenViewModel.shared.disconnect()
                         router.dismissScreen()
                     }
                 Spacer()

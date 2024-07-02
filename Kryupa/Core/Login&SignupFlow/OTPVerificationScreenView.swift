@@ -12,45 +12,70 @@ struct OTPVerificationScreenView: View {
     
     @Environment(\.router) var router
     var mobileNumber: String = String()
+    @State var otp: String = String()
+    var requestId: String = String()
+    
+    @StateObject private var viewModel = MobileScreenViewModel()
     
     var body: some View {
-        
-        VStack(spacing:0,content: {
-            Text("Phone verification")
-                .font(.custom(FontContent.besMedium, size: 28))
-                .multilineTextAlignment(.center)
-                .padding(.top, 43)
+        ZStack{
             
-            Text("An authentication code has been sent to you on your number ending with \(String(mobileNumber.suffix(4)))")
-                .frame(width: 270)
-                .font(.custom(FontContent.plusRegular, size: 13))
-                .multilineTextAlignment(.center)
-                .padding(.top, 20)
-                .foregroundStyle(._444446)
-            
-            VStack{
-                OTPTextFieldView(numberOfFields: 5) { otpArray in
-                    print(otpArray)
-                }
+            VStack(spacing:0,content: {
+                Text("Phone verification")
+                    .font(.custom(FontContent.besMedium, size: 28))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 43)
                 
-                resendOTPView
-
-                verifyCodeButton
-                    .padding(.top,30)
-                    .asButton(.press) {
-                        router.showScreen(.push) { rout in
-                            PersonalInformationScreenView()
-                        }
+                Text("An authentication code has been sent to you on your number ending with \(String(mobileNumber.suffix(4)))")
+                    .frame(width: 270)
+                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+                    .foregroundStyle(._444446)
+                
+                VStack{
+                    OTPTextFieldView(numberOfFields: 5) { otpArray in
+                        otp = otpArray.joined(separator: "")
                     }
+                    
+                    resendOTPView
+                    
+                    verifyCodeButton
+                        .padding(.top,30)
+                        .asButton(.press) {
+                            if otp.count != 5{
+                                presentAlert(title: "Kryupa", subTitle: "Please Enter OTP")
+                            }else{
+                                let param = ["mobileNo":mobileNumber,
+                                             "countryCode":"+1",
+                                             "otp":otp,
+                                             "request_id": requestId]
+                                self.viewModel.verifyOTP(param:param) {
+                                    router.showScreen(.push) { _ in
+                                        PersonalInformationScreenView()
+                                    }
+                                } errorAction: { error in
+//                                    router.showScreen(.push) { _ in
+//                                        PersonalInformationScreenView()
+//                                    }
+                                    presentAlert(title: "Kryupa", subTitle: error)
+                                }
+                            }
+                        }
+                    
+                    Spacer()
+                }
+                .padding(.top, 30)
+                .padding([.leading, .trailing],24)
+                .toolbar(.hidden, for: .navigationBar)
                 
-                Spacer()
-            }
-            .padding(.top, 30)
-            .padding([.leading, .trailing],24)
-            .toolbar(.hidden, for: .navigationBar)
+            })
+            .modifier(DismissingKeyboard())
             
-        })
-        .modifier(DismissingKeyboard())
+            if viewModel.isLoading{
+                LoadingView()
+            }
+        }
     }
     
     //MARK: Resend Code View
@@ -60,7 +85,8 @@ struct OTPVerificationScreenView: View {
             Text("Resend it")
                 .underline()
                 .asButton(.press) {
-                    
+                    self.viewModel.mobileNumner = self.mobileNumber
+                    self.viewModel.sendOTP {} errorAction: { _ in }
                 }
         }
         .font(.custom(FontContent.plusRegular, size: 13))

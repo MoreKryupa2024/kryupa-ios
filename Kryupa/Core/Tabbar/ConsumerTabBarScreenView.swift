@@ -44,6 +44,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 0 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                ChatScreenViewModel.shared.disconnect()
                 Defaults().bookingId = ""
                 selectedIndex = 0
             }
@@ -59,6 +60,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 1 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                ChatScreenViewModel.shared.disconnect()
                 Defaults().bookingId = ""
                 selectedIndex = 1
             }
@@ -73,6 +75,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 2 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                ChatScreenViewModel.shared.disconnect()
                 Defaults().bookingId = ""
                 selectedIndex = 2
             }
@@ -87,6 +90,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 3 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                ChatScreenViewModel.shared.connect()
                 Defaults().bookingId = ""
                 selectedIndex = 3
             }
@@ -102,6 +106,7 @@ struct ConsumerTabBarScreenView: View {
             }
             .foregroundStyle(selectedIndex == 4 ? .appMain : ._7_C_7_C_80)
             .asButton(.press) {
+                ChatScreenViewModel.shared.disconnect()
                 Defaults().bookingId = ""
                 selectedIndex = 4
             }

@@ -45,3 +45,28 @@ struct MedicalInfo {
     let allergies, mobilityLevel: String?
     let diseaseType: [String]?
 }
+
+
+// MARK: - Empty
+struct SendOTPModel {
+    let success: Bool
+    let message: String
+    let data: SendOTPData
+    
+    init(jsonData: [String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = SendOTPData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+
+// MARK: - Send OTP Data
+struct SendOTPData {
+    let requestID, type: String
+
+    init(jsonData: [String:Any]){
+        requestID = jsonData["request_id"] as? String ?? ""
+        type = jsonData["type"] as? String ?? ""
+    }
+}

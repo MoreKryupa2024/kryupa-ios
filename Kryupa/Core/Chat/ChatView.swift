@@ -12,6 +12,8 @@ struct ChatView: View {
     @Environment(\.router) var router
     @State var userName: String = ""
     @State var sendMsgText: String = ""
+    
+    @StateObject private var viewModel = ChatScreenViewModel()
     @State private var messages = [
         Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
         
@@ -43,6 +45,12 @@ struct ChatView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear{
+            viewModel.connect()
+            viewModel.receiveMessage { str, str, str in
+                print(str)
+            }
+        }
     }
     
     private var sendMessageView: some View{
@@ -78,6 +86,7 @@ struct ChatView: View {
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
                             messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
+                            viewModel.sendMessage(sendMsgText)
                             sendMsgText = ""
                         }
                 }
