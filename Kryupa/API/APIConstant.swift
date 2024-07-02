@@ -19,6 +19,8 @@ class APIConstant{
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
 //    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
 
+    static let sendOTP = "\(baseURL)/apis/auth/send_otp"
+    static let verifyOTP = "\(baseURL)/apis/user/caregiver/updateMobile"
     
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
     static let uploadPDFFiles = "\(baseURL)/apis/user/file/multifileUpload"
@@ -26,7 +28,7 @@ class APIConstant{
     static let careGiverCreateProfile = "\(baseURL)/apis/user/caregiver/create_profile"
     static let customerCreateProfile = "\(baseURL)/apis/user/customer/create_profile"//-CP
     static let getSlotList = "\(baseURL)/apis/user/caregivers/lobby/slot_list"//CP
-    static let bookSlot = "\(baseURL)/apis/user/caregivers/lobby/book_slot"//CP
+    static let bookSlot = "\(baseURL)/apis/communication/meeting/book_slot"//CP
     static let lobbyStatus = "\(baseURL)/apis/user/caregivers/lobby/lobby_status"//CP
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
@@ -44,6 +46,7 @@ class APIConstant{
     static let updateProfile = "\(baseURL)/apis/user/customer/account/update_profile"//-CP
     static let deleteProfile = "\(baseURL)/apis/user/customer/account/delete_profile"//-CP
     static let updateProfilePicSeeker = "\(baseURL)/apis/user/customer/account/update_profile_pic"//-CP
+    static let getMeetingToken = "\(baseURL)/apis/communication/meeting/zoom_session_token"
     static let getBookings = "\(baseURL)/apis/booking/customerNavigation"
     static let getCareGiverBookings = "\(baseURL)/apis/booking/caregiverNavigation"
     static let getBookingDetailsById = "\(baseURL)/apis/booking/getBookingById?booking_id="

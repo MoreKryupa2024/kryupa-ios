@@ -70,6 +70,9 @@
 		BE0948712C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */; };
 		BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */; };
+		BE0983AC2C33D1E700FBAECC /* MobileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0983AB2C33D1E700FBAECC /* MobileScreenViewModel.swift */; };
+		BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = BE0983AE2C33F20E00FBAECC /* SocketIO */; };
+		BE0983B12C33F23000FBAECC /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
@@ -238,6 +241,8 @@
 		A3FEF6272C2D976D00EFC3C2 /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
 		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
+		BE0983AB2C33D1E700FBAECC /* MobileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileScreenViewModel.swift; sourceTree = "<group>"; };
+		BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
@@ -333,6 +338,7 @@
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
 				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
+				BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
@@ -389,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				A36DE7C42C171261002E0ACD /* ChatView.swift */,
+				BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */,
 				BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */,
 			);
 			path = Chat;
@@ -760,6 +767,7 @@
 			children = (
 				BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */,
 				BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */,
+				BE0983AB2C33D1E700FBAECC /* MobileScreenViewModel.swift */,
 			);
 			path = "Login&SignupFlow";
 			sourceTree = "<group>";
@@ -986,6 +994,7 @@
 				BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */,
 				BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */,
 				BE95D5CB2C0449D400881B3C /* IQKeyboardManagerSwift */,
+				BE0983AE2C33F20E00FBAECC /* SocketIO */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1021,6 +1030,7 @@
 				BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
@@ -1117,6 +1127,7 @@
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
+				BE0983AC2C33D1E700FBAECC /* MobileScreenViewModel.swift in Sources */,
 				A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				A3FEF6262C2D967A00EFC3C2 /* JobDetailModel.swift in Sources */,
@@ -1178,6 +1189,7 @@
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
+				BE0983B12C33F23000FBAECC /* ChatScreenViewModel.swift in Sources */,
 				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
 				A3BB87A12C1717B500C604DD /* CareGiverNearByCustomerScreenModel.swift in Sources */,
 				BE484DD12C1AE273001E3901 /* ConsumerTabBarScreenView.swift in Sources */,
@@ -1323,9 +1335,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kryupa/Info.plist;
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Need Bluetooth Permission to use for Zoom Meeting";
 				INFOPLIST_KEY_NSCameraUsageDescription = "You can take photos to Upload your profile Picture.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "always permissions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in use permissions";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need Microphone Permission to use for Zoom Meeting";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1362,9 +1376,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kryupa/Info.plist;
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Need Bluetooth Permission to use for Zoom Meeting";
 				INFOPLIST_KEY_NSCameraUsageDescription = "You can take photos to Upload your profile Picture.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "always permissions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in use permissions";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need Microphone Permission to use for Zoom Meeting";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1413,6 +1429,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulRouting.git";
@@ -1456,6 +1480,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BE0983AE2C33F20E00FBAECC /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
 		BE644E482BF4CBC900A6781F /* SwiftfulRouting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */;

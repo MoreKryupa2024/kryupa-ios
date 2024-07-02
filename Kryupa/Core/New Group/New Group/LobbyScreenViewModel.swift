@@ -10,17 +10,49 @@ import Foundation
 class LobbyScreenViewModel: ObservableObject{
  
     @Published var isloading: Bool = Bool()
+    @Published var slotTitle: String = "Schedule Your\nBGV Interview!"
+    @Published var slotTime: String = "Complete Interview & begin\nyour caregiving services"
+    @Published var slotButton: String = "Schedule Now"
+    var meetingTokenData: BGVInterviewMeetingTokenData?
+    
     
     func getLobbyStatus(){
         isloading = true
         NetworkManager.shared.getLobbyStatus() { [weak self] result in
             DispatchQueue.main.async {
+                self?.isloading = false
                 switch result{
+                case .success(let data):
+                    if data.data.interviewStatus == "pending"{
+                        self?.slotTitle = "Schedule Your\nBGV Interview!"
+                        self?.slotButton = "Schedule Now"
+                        self?.slotTime = "Complete Interview & begin\nyour caregiving services"
+                    }else{
+                        self?.slotTitle = "Your BGV Interview\nhas been scheduled!"
+                        self?.slotButton = "Join Now"
+                        self?.slotTime = "Meeting will begin in\n\(data.data.interviewDateTime)"
+                    }
+                case.failure(let error):
+                    self?.slotTitle = "Schedule Your\nBGV Interview!"
+                    self?.slotButton = "Schedule Now"
+                    self?.slotTime = "Complete Interview & begin\nyour caregiving services"
+                }
+            }
+        }
+    }
+    
+    func getMeetingToken(alert:@escaping((String)->Void),next:@escaping(()->Void)){
+        isloading = true
+        NetworkManager.shared.getMeetingToken() { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.meetingTokenData = data.data
+                    next()
                 case.failure(let error):
                     print(error)
-                    self?.isloading = false
-                case .success(_):
-                    self?.isloading = false
+                    alert(error.localizedDescription)
                 }
             }
         }
