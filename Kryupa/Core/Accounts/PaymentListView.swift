@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import SwiftfulUI
+import CorePayments
+import PayPalWebPayments
 
 struct PaymentListView: View {
     
@@ -15,65 +18,104 @@ struct PaymentListView: View {
     @State var bankName: String = ""
     @State var fullName: String = ""
     @State var accountNumber: String = ""
+    @State var orderId: String = ""
+    @State var showPaypal: Bool = false
+    @State var isloading: Bool = false
 
     var body: some View {
-        ScrollView {
-            HeaderView(showBackButton: true)
-            SegmentView
-            
-            if selectedSection == 0 {
-                LazyVStack(spacing: 15) {
-                    ForEach(0...2) {
-                        msg in
-
-                        PaymentHistoryCell()
-                    }
-                }
-                .padding(.top, 20)
-            }
-            else {
+        ZStack{
+            ScrollView {
+                HeaderView(showBackButton: true)
+                SegmentView
                 
-                if showAddBankView {
-                    BankView
-                }
-                else {
+                if selectedSection == 0 {
                     LazyVStack(spacing: 15) {
                         ForEach(0...2) {
-                            item in
-
-                            PaymentMethodCell(tag: item, selectedPaymentMethod: self.$selectedPaymentMethod)
+                            msg in
+                            
+                            PaymentHistoryCell()
                         }
                     }
                     .padding(.top, 20)
+                }
+                else {
                     
-                    HStack {
-                        Text("Add new bank account")
-                            .font(.custom(FontContent.plusRegular, size: 15))
-                            .foregroundStyle(._444446)
-                        
-                        
-                        Spacer()
-                        
-                        Image("chevron-right")
-                            .frame(width: 30, height: 30)
-
+                    if showAddBankView {
+                        BankView
                     }
-                    .padding(.horizontal, 23)
-                    .frame(height: 48)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 50)
-                            .inset(by: 1)
-                            .stroke(.E_5_E_5_EA, lineWidth: 1)
-                    )
-                    .padding([.top, .horizontal], 24)
-                    .asButton(.press) {
-                        self.showAddBankView = true
+                    else {
+                        LazyVStack(spacing: 15) {
+                            ForEach(0...2) {
+                                item in
+                                
+                                PaymentMethodCell(tag: item, selectedPaymentMethod: self.$selectedPaymentMethod)
+                            }
+                        }
+                        .padding(.top, 20)
+                        
+                        HStack {
+                            Text("Add new bank account")
+                                .font(.custom(FontContent.plusRegular, size: 15))
+                                .foregroundStyle(._444446)
+                            
+                            
+                            Spacer()
+                            
+                            Image("chevron-right")
+                                .frame(width: 30, height: 30)
+                            
+                        }
+                        .padding(.horizontal, 23)
+                        .frame(height: 48)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 50)
+                                .inset(by: 1)
+                                .stroke(.E_5_E_5_EA, lineWidth: 1)
+                        )
+                        .padding([.top, .horizontal], 24)
+                        .asButton(.press) {
+                            //                        self.showAddBankView = true
+                            let param = ["approch_id":"9d7c028a-f8dd-4c02-96b9-ad9af1e55a07"]
+                            isloading = true
+                            NetworkManager.shared.getPaypalOrderID(params: param) { result in
+                                isloading = false
+                                switch result{
+                                case .success(let data):
+                                    self.orderId = data.data.paymentOrderID
+                                    self.showPaypal = true
+                                    
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
                     }
                 }
             }
+            .scrollIndicators(.hidden)
+            .toolbar(.hidden, for: .navigationBar)
+            if isloading {
+                LoadingView()
+            }
+            
+            if showPaypal {
+                PaypalScreenView(orderId: self.orderId) { payPalClient, result in
+                    print("Paypal Payment Success")
+                    showPaypal = false
+                    print(payPalClient)
+                    print(result)
+                } payPalError: { payPalClient, error in
+                    print(payPalClient)
+                    print(error)
+                    showPaypal = false
+                    print("Paypal Payment Send Error")
+                } payPalDidCancel: { payPalClient in
+                    showPaypal = false
+                    print("Paypal Payment Cancel")
+                }
+
+            }
         }
-        .scrollIndicators(.hidden)
-        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var BankView: some View{

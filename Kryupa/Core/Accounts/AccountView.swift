@@ -114,7 +114,7 @@ struct AccountView: View {
             
             let secondaryAction = UIAlertAction(title: "Cancel", style: .cancel)
             
-            presentAlert(title: "Kryupa", subTitle: "Log Out",primaryAction: primaryAction,secondaryAction: secondaryAction)
+            presentAlert(title: "Kryupa", subTitle: "LogOut",primaryAction: primaryAction,secondaryAction: secondaryAction)
             
         default:
             break

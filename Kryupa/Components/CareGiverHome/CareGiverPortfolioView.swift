@@ -67,11 +67,11 @@ struct CareGiverPortfolioView: View {
 
 
             HStack {
-                Text("View")
+                Text("View Profile")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
-                    .frame(height: 32)
-                    .frame(width: 78)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 20)
                     .asButton(.press) {
                         view()
                     }
@@ -83,21 +83,20 @@ struct CareGiverPortfolioView: View {
                     .asButton(.press) {
                         view()
                     }
-
-                
-                Spacer()
-                
-                Text("Accept")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(height: 32)
-                    .frame(width: 97)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
-                    .asButton(.press) {
-                        accept()
-                    }
+//                
+//                Spacer()
+//                
+//                Text("Accept")
+//                    .font(.custom(FontContent.plusRegular, size: 16))
+//                    .foregroundStyle(.white)
+//                    .frame(height: 32)
+//                    .frame(width: 97)
+//                    .background{
+//                        RoundedRectangle(cornerRadius: 48)
+//                    }
+//                    .asButton(.press) {
+//                        accept()
+//                    }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 21)

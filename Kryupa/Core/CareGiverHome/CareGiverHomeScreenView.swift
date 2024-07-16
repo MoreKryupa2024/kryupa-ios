@@ -14,41 +14,43 @@ struct CareGiverHomeScreenView: View {
     @Environment(\.router) var router
 
     var body: some View {
-        VStack(spacing:0){
-            HeaderView
-            ScrollView{
-                VStack(spacing:0){
-                    
-                    if !showNoContent {
-                        completeProfileView
-                        jobsNearYouView
+        ZStack{
+            VStack(spacing:0){
+                HeaderView
+                ScrollView{
+                    VStack(spacing:0){
+                        
+                        if !showNoContent {
+                            completeProfileView
+                            jobsNearYouView
+                        }
+                        else {
+                            BannerView(showIndecator: false,bannerHeight: 104)
+                                .padding([.horizontal,.vertical],24)
+                            noCotentView
+                        }
+                    }
+                }
+                .scrollIndicators(.hidden)
+                .toolbar(.hidden, for: .navigationBar)
+                
+            }
+            .onAppear{
+                viewModel.getJobsNearYouList() {
+                    if viewModel.jobsNearYou.count == 0 {
+                        showNoContent = true
                     }
                     else {
-                        BannerView(showIndecator: false,bannerHeight: 104)
-                            .padding([.horizontal,.vertical],24)
-                        noCotentView
+                        showNoContent = false
                     }
                 }
             }
-            .scrollIndicators(.hidden)
-            .toolbar(.hidden, for: .navigationBar)
+            
+            if viewModel.isloading{
+                LoadingView()
+            }
             
         }
-        .onAppear{
-            viewModel.getJobsNearYouList() {
-                if viewModel.jobsNearYou.count == 0 {
-                    showNoContent = true
-                }
-                else {
-                    showNoContent = false
-                }
-            }
-        }
-        
-        if viewModel.isloading{
-            LoadingView()
-        }
-
     }
     
     private var noCotentView: some View{
@@ -80,6 +82,7 @@ struct CareGiverHomeScreenView: View {
             
             nextButton
                 .padding(.vertical,30)
+
         }
     }
     
@@ -183,7 +186,7 @@ struct CareGiverHomeScreenView: View {
                         }
                     }, view: {
                         router.showScreen(.push) { rout in
-                            JobDetailView(job: jobPost, jobID: jobPost.jobID)
+                            JobDetailView(jobID: jobPost.jobID)
                         }
                     })
                         .scrollTransition(.interactive, axis: .horizontal) { view, phase in

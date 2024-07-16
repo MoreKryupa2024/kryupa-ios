@@ -19,12 +19,8 @@ struct RecommendedCaregiverView: View {
                 ForEach(recommendedCaregiver, id: \.id) { careData in
                     
                     VStack(spacing:0){
-                        AsyncImage(url: URL(string: careData.profileURL),content: { image in
-                            image
-                                .resizable()
-                        },placeholder: {
-                            ProgressView()
-                        })
+                        
+                        ImageLoadingView(imageURL: careData.profileURL)
                             .frame(width: profileWidth,height: 97)
                         
                         HStack(spacing:0){

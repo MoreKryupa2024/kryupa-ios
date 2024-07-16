@@ -81,6 +81,13 @@
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
 		BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */; };
+		BE2B58A62C3EA777002EC297 /* CardPayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A52C3EA777002EC297 /* CardPayments */; };
+		BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A72C3EA777002EC297 /* CorePayments */; };
+		BE2B58AA2C3EA777002EC297 /* PayPalNativePayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A92C3EA777002EC297 /* PayPalNativePayments */; };
+		BE2B58AC2C3EA777002EC297 /* PaymentButtons in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58AB2C3EA777002EC297 /* PaymentButtons */; };
+		BE2B58AE2C3EA9B6002EC297 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */; };
+		BE2D337A2C3FCFD700192323 /* PayPalWebPayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2D33792C3FCFD700192323 /* PayPalWebPayments */; };
+		BE2D337C2C3FD07A00192323 /* PayPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2D337B2C3FD07A00192323 /* PayPalView.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
 		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
 		BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */; };
@@ -151,6 +158,9 @@
 		BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */; };
 		BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */; };
 		BEC365922BFCC400005AC4A0 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEC365912BFCC400005AC4A0 /* Success.gif */; };
+		BEC5E9D42C352F42000BC2A1 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */; };
+		BEC5E9D62C355653000BC2A1 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D52C355653000BC2A1 /* HapticManager.swift */; };
+		BEC5E9D82C357ABB000BC2A1 /* ImageLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */; };
 		BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */; };
 		BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */; };
 		BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */; };
@@ -251,6 +261,8 @@
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
+		BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
+		BE2D337B2C3FD07A00192323 /* PayPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalView.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
 		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenView.swift; sourceTree = "<group>"; };
@@ -317,6 +329,9 @@
 		BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulScreeenView.swift; sourceTree = "<group>"; };
 		BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFExtention.swift; sourceTree = "<group>"; };
 		BEC365912BFCC400005AC4A0 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Success.gif; sourceTree = "<group>"; };
+		BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		BEC5E9D52C355653000BC2A1 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingView.swift; sourceTree = "<group>"; };
 		BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LobbyScreenView.swift; path = "Kryupa/Core/BGV Lobby/LobbyScreenView.swift"; sourceTree = SOURCE_ROOT; };
@@ -325,6 +340,7 @@
 		BEEB798A2C05FD32005C12AB /* WeakDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakDayView.swift; sourceTree = "<group>"; };
 		BEEB798C2C05FDD8005C12AB /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		BEEB798E2C060223005C12AB /* AvailableTimeSlotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeSlotsView.swift; sourceTree = "<group>"; };
+		BEEF2E5D2C44DFCD0020A892 /* Kryupa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kryupa.entitlements; sourceTree = "<group>"; };
 		BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerScreenView.swift; sourceTree = "<group>"; };
 		BEF2EDB52C25B4410008108C /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
@@ -337,13 +353,18 @@
 			files = (
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
+				BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */,
 				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
 				BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
+				BE2B58A62C3EA777002EC297 /* CardPayments in Frameworks */,
+				BE2D337A2C3FCFD700192323 /* PayPalWebPayments in Frameworks */,
 				BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */,
 				BE644E492BF4CBC900A6781F /* SwiftfulRouting in Frameworks */,
+				BE2B58AC2C3EA777002EC297 /* PaymentButtons in Frameworks */,
 				BE0948702C196E1000FC2DE0 /* ZoomVideoSDKUIToolkit.xcframework in Frameworks */,
 				BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */,
+				BE2B58AA2C3EA777002EC297 /* PayPalNativePayments in Frameworks */,
 				BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +511,7 @@
 				BE1573BC2BF64C8100A6137D /* Extention */,
 				BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */,
 				BE50EC072BFDD88C00175566 /* Defaults.swift */,
+				BEC5E9D52C355653000BC2A1 /* HapticManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -502,6 +524,14 @@
 				BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		BE2D337D2C3FD08400192323 /* Paypal */ = {
+			isa = PBXGroup;
+			children = (
+				BE2D337B2C3FD07A00192323 /* PayPalView.swift */,
+			);
+			path = Paypal;
 			sourceTree = "<group>";
 		};
 		BE3C7F252C1C1F0D000848A6 /* Booking */ = {
@@ -660,6 +690,7 @@
 		BE644E2D2BF495D800A6781F /* Kryupa */ = {
 			isa = PBXGroup;
 			children = (
+				BEEF2E5D2C44DFCD0020A892 /* Kryupa.entitlements */,
 				BE644E882BF4D4F400A6781F /* Info.plist */,
 				BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */,
 				BEC365912BFCC400005AC4A0 /* Success.gif */,
@@ -686,6 +717,7 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE2D337D2C3FD08400192323 /* Paypal */,
 				A3FEF5FE2C201C2300EFC3C2 /* Jobs */,
 				BE484DCF2C1AE258001E3901 /* Tabbar */,
 				BE0948752C19BE5100FC2DE0 /* ServiceCancelled */,
@@ -722,6 +754,7 @@
 				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
 				BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */,
 				BEF2EDB52C25B4410008108C /* StarsView.swift */,
+				BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */,
 				BE3C7F292C1C2425000848A6 /* Booking */,
 			);
 			path = Components;
@@ -736,6 +769,7 @@
 				A3BB879B2C1717B500C604DD /* CreateBookingModel.swift */,
 				BE644E442BF4BC8700A6781F /* GoogleSignupModel.swift */,
 				BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */,
+				BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */,
 				BE6BA4782C086DEF005361C3 /* BGVInterviewSlotsListModel.swift */,
 				BE92FD1F2C09E10800EDF49C /* BookingFormScreenModel.swift */,
 				A36BC3912C19A6B2005616A5 /* JobsModel.swift */,
@@ -748,6 +782,7 @@
 				A3FEF6212C2C480C00EFC3C2 /* ReviewDetailModel.swift */,
 				A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */,
 				A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */,
+				BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -995,6 +1030,11 @@
 				BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */,
 				BE95D5CB2C0449D400881B3C /* IQKeyboardManagerSwift */,
 				BE0983AE2C33F20E00FBAECC /* SocketIO */,
+				BE2B58A52C3EA777002EC297 /* CardPayments */,
+				BE2B58A72C3EA777002EC297 /* CorePayments */,
+				BE2B58A92C3EA777002EC297 /* PayPalNativePayments */,
+				BE2B58AB2C3EA777002EC297 /* PaymentButtons */,
+				BE2D33792C3FCFD700192323 /* PayPalWebPayments */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1031,6 +1071,7 @@
 				BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
@@ -1073,6 +1114,7 @@
 				BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */,
 				BE3C7F2B2C1C2438000848A6 /* BookingView.swift in Sources */,
 				A36BC38C2C1996B3005616A5 /* ReviewsListView.swift in Sources */,
+				BE2B58AE2C3EA9B6002EC297 /* PaymentModel.swift in Sources */,
 				BE4FBDA22BFB4521003442BB /* URLExtention.swift in Sources */,
 				A3BB87B92C173C1100C604DD /* PersonalDetailViewModel.swift in Sources */,
 				A36BC39D2C1AE906005616A5 /* SettingsView.swift in Sources */,
@@ -1129,6 +1171,7 @@
 				BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */,
 				BE0983AC2C33D1E700FBAECC /* MobileScreenViewModel.swift in Sources */,
 				A36BC3902C19A508005616A5 /* CareGiverHomeScreenViewModel.swift in Sources */,
+				BE2D337C2C3FD07A00192323 /* PayPalView.swift in Sources */,
 				BE4FBD9E2BFB0FD7003442BB /* PillView.swift in Sources */,
 				A3FEF6262C2D967A00EFC3C2 /* JobDetailModel.swift in Sources */,
 				BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */,
@@ -1160,6 +1203,7 @@
 				A3FEF6082C219F0700EFC3C2 /* AccountsViewModel.swift in Sources */,
 				BE644E432BF4BB7C00A6781F /* NetworkManager.swift in Sources */,
 				BE1573B32BF5F06E00A6137D /* SocialLoginScreenView.swift in Sources */,
+				BEC5E9D62C355653000BC2A1 /* HapticManager.swift in Sources */,
 				BE4FBD9C2BFB04DE003442BB /* ExperienceandSkillsView.swift in Sources */,
 				A3BB87AF2C1718A500C604DD /* BookingCareGiverListView.swift in Sources */,
 				A3FEF6282C2D976D00EFC3C2 /* JobsViewModel.swift in Sources */,
@@ -1173,6 +1217,7 @@
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
 				A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
+				BEC5E9D82C357ABB000BC2A1 /* ImageLoadingView.swift in Sources */,
 				A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */,
 				BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */,
 				BE95D5CE2C044F5400881B3C /* EmergencyContactViewModel.swift in Sources */,
@@ -1184,6 +1229,7 @@
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
+				BEC5E9D42C352F42000BC2A1 /* ChatModel.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
 				BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */,
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
@@ -1328,6 +1374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kryupa/Kryupa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kryupa/Preview Content\"";
@@ -1369,6 +1416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kryupa/Kryupa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kryupa/Preview Content\"";
@@ -1437,6 +1485,14 @@
 				kind = branch;
 			};
 		};
+		BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paypal/paypal-ios/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 		BE644E472BF4CBC900A6781F /* XCRemoteSwiftPackageReference "SwiftfulRouting" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulRouting.git";
@@ -1484,6 +1540,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
+		};
+		BE2B58A52C3EA777002EC297 /* CardPayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = CardPayments;
+		};
+		BE2B58A72C3EA777002EC297 /* CorePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = CorePayments;
+		};
+		BE2B58A92C3EA777002EC297 /* PayPalNativePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = PayPalNativePayments;
+		};
+		BE2B58AB2C3EA777002EC297 /* PaymentButtons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = PaymentButtons;
+		};
+		BE2D33792C3FCFD700192323 /* PayPalWebPayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = PayPalWebPayments;
 		};
 		BE644E482BF4CBC900A6781F /* SwiftfulRouting */ = {
 			isa = XCSwiftPackageProductDependency;

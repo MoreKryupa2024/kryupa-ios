@@ -9,136 +9,192 @@ import SwiftUI
 
 struct ChatBoxView: View {
     
-    var msg: Message
-
+    var msgData: MessageData?
+    var selectedChat: ChatListData?
+    var onSelectedValue: ((SpecialMessageData)->Void)? = nil
+    
     var body: some View {
+        if let msgData {
+            
+            if Defaults().userType == AppConstants.GiveCare && selectedChat?.giverId == msgData.sender{
+                
+                if msgData.isActionBtn{
+                    senderUserViewService(message: msgData.message)
+                }else{
+                    senderMsg(msg: msgData.message)
+                }
+            }else if Defaults().userType == AppConstants.SeekCare && selectedChat?.seekerId == msgData.sender{
+                if msgData.isActionBtn{
+//                    senderUserViewService(message: msgData.message)
+                }else{
+                    senderMsg(msg: msgData.message)
+                }
+            }else{
+                if msgData.isActionBtn{
+                    otherUserViewService(message: msgData.message)
+                }else{
+                    reciverMsg(msg: msgData.message)
+                }
+            }
+        }else{
+            EmptyView()
+        }
+    }
+    
+    func otherUserViewService(message:String)-> some View{
         
-        switch msg.chatboxType {
-        case .currentUser:
-            HStack {
-                Spacer()
-                
-                Text("\(msg.content)")
-                    .frame(alignment: .trailing)
-                    .font(.custom(FontContent.plusRegular, size: 13))
-                    .foregroundColor(Color.white)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .background {
-                        Image("MessageBubbleCurrentUser")
-                            .resizable()
-                    }
-            }
-            .padding(.horizontal, 20)
-            
-        case .otherUser:
-            HStack {
-                Text("\(msg.content)")
+        let SpecialMessageData = SpecialMessageData(jsonData: (message.toJSON() as? [String : Any] ?? [String : Any]()))
+        return HStack {
+            VStack(alignment: .leading) {
+                Text(SpecialMessageData.content)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(.appMain)
                     .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .background {
-                        Image("MessageBubbleOtherUser")
-                            .resizable()
-                    }
-                
-                Spacer()
-
-            }
-            .padding(.horizontal, 20)
-            
-        case .currentUserViewService:
-            
-            HStack {
-                Spacer()
-                
-            VStack(alignment: .leading) {
-                Text("\(msg.content)")
-                    .font(.custom(FontContent.plusRegular, size: 13))
-                    .foregroundColor(Color.white)
-                    .padding(.horizontal, 20)
-
-                Text("View Service")
+                Text(SpecialMessageData.btnTitle)
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.white)
-                    .frame(width: 138, height: 32)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
                     .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
-                    .asButton(.press) {
-                        
+                        RoundedRectangle(cornerRadius: 24)
                     }
                     .padding(.horizontal, 20)
+                    .asButton(.press) {
+                        
+                        if SpecialMessageData.type == "view_service"{
+                            onSelectedValue?(SpecialMessageData)
+                        }else{
+                            presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
+                        }
+                    }
             }
+            
             .padding(.vertical, 15)
             .background {
-                Image("MessageBubbleCurrentUser")
-                    .resizable()
-            }
-            }
-            .padding(.horizontal, 20)
-            
-        case .otherUserViewService:
-            HStack {
-            VStack(alignment: .leading) {
-                Text("\(msg.content)")
-                    .font(.custom(FontContent.plusRegular, size: 13))
-                    .foregroundStyle(.appMain)
-                    .padding(.horizontal, 20)
-                
-                Text("View Service")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(width: 138, height: 32)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
-                    .asButton(.press) {
-                        
-                    }
-                    .padding(.horizontal, 20)
-
+                ZStack(alignment:.topLeading){
+                    RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(.E_5_E_5_EA)
                     
+                    Image("revicerIcon")
+                        .resizable()
+                        .frame(width: 9,height: 15)
+                        .offset(x: -7,y: 12)
+                }
             }
-            .padding(.vertical, 15)
-            .background {
-                Image("MessageBubbleOtherUser")
-                    .resizable()
-            }
-                Spacer()
-
+            Spacer()
+            
         }
         .padding(.horizontal, 20)
+    }
+    
+    
+    func senderUserViewService(message:String)-> some View{
+        
+        let SpecialMessageData = SpecialMessageData(jsonData: (message.toJSON() as? [String : Any] ?? [String : Any]()))
+        return HStack {
+            Spacer()
+            VStack(alignment: .leading) {
+                Text(SpecialMessageData.content)
+                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .foregroundStyle(.appMain)
+                    .padding(.horizontal, 20)
+                
+                Text(SpecialMessageData.btnTitle)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background{
+                        RoundedRectangle(cornerRadius: 24)
+                    }
+                    .padding(.horizontal, 20)
+                    .asButton(.press) {
+                        if SpecialMessageData.type == "view_service"{
+                            onSelectedValue?(SpecialMessageData)
+                        }else{
+                            presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
+                        }
+                    }
+            }
+            
+            .padding(.vertical, 15)
+            .background {
+                ZStack(alignment:.topTrailing){
+                    RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(.AEAEB_2)
+                    
+                    Image("senderIcon")
+                        .resizable()
+                        .frame(width: 9,height: 15)
+                        .offset(x: 7,y: 12)
+                }
+            }
         }
+        .padding(.horizontal, 20)
+    }
+    
+    func senderMsg(msg:String)-> some View{
+        HStack {
+            Spacer()
+            
+            Text("\(msg)")
+                .frame(alignment: .trailing)
+                .font(.custom(FontContent.plusRegular, size: 13))
+                .foregroundColor(Color.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background {
+                    ZStack(alignment:.topTrailing){
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(.AEAEB_2)
+                        
+                        Image("senderIcon")
+                            .resizable()
+                            .frame(width: 9,height: 15)
+                            .offset(x: 7,y: 12)
+                    }
+                }
+        }
+        .padding(.horizontal, 20)
+    }
+    
+    func reciverMsg(msg: String)-> some View{
+        HStack {
+            Text("\(msg)")
+                .font(.custom(FontContent.plusRegular, size: 13))
+                .foregroundStyle(.appMain)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background {
+                    ZStack(alignment:.topLeading){
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(.E_5_E_5_EA)
+                        
+                        Image("revicerIcon")
+                            .resizable()
+                            .frame(width: 9,height: 15)
+                            .offset(x: -7,y: 12)
+                    }
+                }
+            
+            Spacer()
+            
+        }
+        .padding(.horizontal, 20)
     }
 }
 
-struct Message: Hashable {
-    var id = UUID()
-    var content: String
-    var chatboxType: ChatBoxType
-}
-
-/*struct DataSource {
-    
-    static var messages = [
-        
-        Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
-        
-        Message(content: "Scheduled a call for 9:40 AM", chatboxType: .otherUser),
-        Message(content: "Booking confirmed by user!", chatboxType: .otherUser)
-
-    ]
-}*/
-
-enum ChatBoxType {
-    case currentUser
-    case otherUser
-    case currentUserViewService
-    case otherUserViewService
-}
 
 #Preview {
-    ChatBoxView(msg: Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .currentUserViewService))
+    ChatBoxView(msgData: MessageData(jsonData: [
+        "id": "a3e0f943-3abc-4a29-b3bb-cecd63ce591a",
+        "contact_list_id": "a0a0174f-2352-48ca-bd77-ed7db7aaf325",
+        "sender": "9ef06372-9292-439f-aff3-5648cf6fc54a",
+        "recipient": "b63914e3-a02a-4956-8b01-8cbcd13f5a3e",
+        "message": "hi",
+        "status": "delivered",
+        "created_at": "2024-07-11 14:28:26.549131",
+        "updated_at": "2024-07-11 14:28:26.549131",
+        "is_action_btn": false
+    ]))
 }

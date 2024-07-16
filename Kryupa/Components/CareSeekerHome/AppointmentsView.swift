@@ -2,7 +2,7 @@
 //  AppointmentsView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 12/06/24.
+//  Created by Nirmal Singh Rajput on 12/06/24.
 //
 
 import SwiftUI
@@ -19,12 +19,8 @@ struct AppointmentsView: View {
                     
                     VStack(spacing:0){
                         HStack(spacing:15){
-                            AsyncImage(url: URL(string: data.profilePictureURL),content: { image in
-                                image
-                                    .resizable()
-                            },placeholder: {
-                                ProgressView()
-                            })
+                            
+                            ImageLoadingView(imageURL: data.profilePictureURL)
                                 .frame(width: 50,height: 50)
                                 .clipShape(.rect(cornerRadius: 25))
                             

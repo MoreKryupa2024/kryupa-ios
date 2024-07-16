@@ -2,7 +2,7 @@
 //  InboxScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 14/06/24.
+//  Created by Nirmal Singh Rajput on 14/06/24.
 //
 
 import SwiftUI
@@ -12,6 +12,7 @@ struct InboxScreenView: View {
     
     var arrayCount: Int = 6
     @Environment(\.router) var router
+    @StateObject var viewModel = ChatScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -19,11 +20,12 @@ struct InboxScreenView: View {
                 HeaderView(title: "Messages")
                 
                 ScrollView{
-                    ForEach(1...arrayCount) { index in
-                        SenderView
+                    ForEach(viewModel.inboxList,id: \.id) { profileData in
+                        SenderView(profile: profileData)
                             .asButton(.press) {
+                                viewModel.selectedChat = profileData
                                 router.showScreen(.push) { rout in
-                                    ChatView()
+                                    ChatView(userName: profileData.name,viewModel: viewModel)
                                 }
                             }
                             SepratorView
@@ -31,29 +33,35 @@ struct InboxScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
+            
+            if viewModel.isLoading{
+                LoadingView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear{
+            viewModel.getInboxList()
+        }
     }
     
     private var SepratorView: some View{
         Rectangle()
             .frame(height: 1)
             .foregroundStyle(.F_2_F_2_F_7)
-            .padding(.vertical,10)
+            .padding(.vertical,7)
             .padding(.horizontal,24)
         
     }
     
-    private var SenderView: some View{
+    private func SenderView(profile:ChatListData)-> some View{
         HStack(spacing:0){
             
-            Image("profile")
-                .resizable()
+            ImageLoadingView(imageURL: profile.profilePictureURL)
                 .clipShape(Circle())
                 .frame(width: 45,height: 45)
             
             VStack(alignment:.leading, spacing:0){
-                Text("John Bush")
+                Text(profile.name)
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.plusRegular, size: 16))
                 

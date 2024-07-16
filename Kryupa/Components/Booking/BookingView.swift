@@ -2,7 +2,7 @@
 //  BookingView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 14/06/24.
+//  Created by Nirmal Singh Rajput on 14/06/24.
 //
 
 import SwiftUI
@@ -33,14 +33,9 @@ struct BookingView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 20){
-            AsyncImage(url: URL(string: bookingData?.profilePictureURL ?? ""),content: { image in
-                image
-                    .resizable()
-            },placeholder: {
-                ProgressView()
-            })
-            .frame(width: 60, height: 60)
-            .cornerRadius(30)
+            ImageLoadingView(imageURL: bookingData?.profilePictureURL ?? "")
+                .frame(width: 60, height: 60)
+                .cornerRadius(30)
             
             VStack(alignment: .leading, spacing: 3) {
                 HStack {

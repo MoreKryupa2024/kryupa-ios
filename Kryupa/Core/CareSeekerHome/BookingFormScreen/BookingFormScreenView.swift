@@ -366,9 +366,7 @@ struct BookingFormScreenView: View {
                                 if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
                                     viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
                                 }else{
-                                    if viewModel.languageSpeakingSelected.count < 5{
-                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
-                                    }
+                                    viewModel.languageSpeakingSelected.append(languageSpeakingArray)
                                 }
                             }
                         }

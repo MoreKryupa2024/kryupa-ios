@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftfulUI
+import AuthenticationServices
 
 struct SocialLoginScreenView: View {
     
@@ -36,11 +37,8 @@ struct SocialLoginScreenView: View {
                     .padding(.top, 66)
                     .padding(.horizontal, 24)
                 
-                VStack(spacing: 10.0){
-                    commonButton(imageName: "appleButton")
-                        .asButton(.press) {
-                            //                            navigateToMobileNumberView()
-                        }
+                VStack(alignment:.center, spacing: 10.0){
+                    AppleButton
                     commonButton(imageName: "googleButton")
                         .asButton(.press) {
                             viewModel.signUpWithGoogle { param in
@@ -50,7 +48,6 @@ struct SocialLoginScreenView: View {
                             }
                         }
                 }
-                .padding([.leading,.trailing],52)
                 .padding(.top,24)
                 .padding(.bottom,63)
                 .toolbar(.hidden, for: .navigationBar)
@@ -59,6 +56,45 @@ struct SocialLoginScreenView: View {
                 LoadingView()
             }
         }
+    }
+    
+    private var AppleButton: some View{
+        return SignInWithAppleButton(.signUp) { request in
+            request.requestedScopes = [.fullName, .email]
+        } onCompletion: { result in
+            switch result {
+            case .success(let authorization):
+                handleSuccessfulLogin(with: authorization)
+            case .failure(let error):
+                handleLoginError(with: error)
+            }
+        }
+        .clipShape(.rect(cornerRadius: 24))
+        .frame(width: 270,height: 48)
+    }
+    
+    private func handleSuccessfulLogin(with authorization: ASAuthorization) {
+        if let userCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let userId = userCredential.user
+            print(userId)
+            print(userCredential)
+            if userCredential.authorizedScopes.contains(.fullName) {
+                print(userCredential.fullName?.givenName ?? "No given name")
+            }
+            
+            if userCredential.authorizedScopes.contains(.fullName) {
+                print(userCredential.fullName?.familyName ?? "No family name")
+            }
+            
+            if userCredential.authorizedScopes.contains(.email) {
+                print(userCredential.email ?? "No email")
+            }
+        }
+    }
+    
+    private func handleLoginError(with error: Error) {
+        
+        print("Could not authenticate: \\(error.localizedDescription)")
     }
     
     //MARK: Navigate To Mobile Number Screen
@@ -108,7 +144,7 @@ struct SocialLoginScreenView: View {
         HStack{
             Image(imageName)
                 .resizable()
-                .frame(height: 48)
+                .frame(width: 270,height: 48)
         }
     }
 }

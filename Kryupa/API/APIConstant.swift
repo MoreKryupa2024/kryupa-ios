@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CorePayments
 
 struct APIConstants {
   static let success: String = "status"
@@ -36,6 +37,10 @@ class APIConstant{
     static let findCareGiverBookingID = "\(baseURL)/apis/booking/find_caregiver"
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
+    
+    static let getInboxList = "\(baseURL)/apis/communication/chat/contact_list"
+    
+    static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order"
 
     static let getUserStatus = "\(baseURL)/apis/user/CurrentStatus"
     static let sendRequestForBookCaregiver = "\(baseURL)/apis/booking/caregiver_approch"
@@ -62,6 +67,7 @@ class APIConstant{
     static let reviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/my_reviews"
     static let givenReviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/given_reviews"
     static let viewReviewGiver = "\(baseURL)/apis/user/caregiver/reviews/view_review"
+    static let getChatHistory = "\(baseURL)/apis/communication/chat/get_conversation"
 
 }
 
@@ -79,6 +85,7 @@ class FontContent{
 }
 
 class AppConstants{
+    static let config = CoreConfig(clientID: "AQ1QAtervs-V5ceHUV8k0VQzEryWLh6jNrx5vlAmDF9_yes49PeyUP6vCDbeBTlk2Qdx4SdLXWq9bInU", environment: .sandbox)
     static let DeviceType = "IOS"
     
     static let SocialApple = "APPLE"

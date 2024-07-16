@@ -2,7 +2,7 @@
 //  MobileScreenViewModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 02/07/24.
+//  Created by Nirmal Singh Rajput on 02/07/24.
 //
 
 import Foundation
@@ -28,7 +28,7 @@ class MobileScreenViewModel: ObservableObject{
                     self?.sendOTPdata = data.data
                     action()
                 case .failure(let error):
-                    errorAction(error.localizedDescription)
+                    errorAction(error.getMessage())
                 }
             }
             
@@ -37,14 +37,14 @@ class MobileScreenViewModel: ObservableObject{
     
     func verifyOTP(param:[String:Any],action :  @escaping() -> Void,errorAction :  @escaping (String) -> Void){
         isLoading = true
-        NetworkManager.shared.sendOTP(params: param) { [weak self] result in
+        NetworkManager.shared.verifyOTP(params: param) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
                 case .success(let data):
                     action()
                 case .failure(let error):
-                    errorAction(error.localizedDescription)
+                    errorAction(error.getMessage())
                 }
             }
             

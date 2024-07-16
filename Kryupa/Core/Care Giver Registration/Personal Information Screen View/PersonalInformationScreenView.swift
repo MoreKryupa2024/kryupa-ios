@@ -58,7 +58,7 @@ struct PersonalInformationScreenView: View {
                         selectionViewWithHeader(
                             leftIcone: nil,
                             rightIcon: "PersonalInfoCalender",
-                            value: viewModel.dateOfBirthSelected ? viewModel.dateFormatter() : "",
+                            value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "dd-MM-yyyy") : "",
                             title: "Date Of Birth",
                             placeHolder: "Select"
                         )
@@ -73,8 +73,17 @@ struct PersonalInformationScreenView: View {
                         
                         textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
                             .onChange(of: viewModel.personalInfoData.ssn) {
-                                if (viewModel.personalInfoData.ssn?.count ?? 0) > 9{
-                                    viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(9) ?? "")
+                                
+                                if (viewModel.personalInfoData.ssn?.count ?? 0) > 11{
+                                    viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(11) ?? "")
+                                }else if (viewModel.personalInfoData.ssn?.count ?? 0) == 4 && (viewModel.personalInfoData.ssn?.suffix(1) ?? "") != "-"{
+                                    viewModel.personalInfoData.ssn = "\(String(viewModel.personalInfoData.ssn?.prefix(3) ?? ""))-\(String(viewModel.personalInfoData.ssn?.suffix(1) ?? ""))"
+                                }else if (viewModel.personalInfoData.ssn?.count ?? 0) == 7 && (viewModel.personalInfoData.ssn?.suffix(1) ?? "") != "-"{
+                                    viewModel.personalInfoData.ssn = "\(String(viewModel.personalInfoData.ssn?.prefix(6) ?? ""))-\(String(viewModel.personalInfoData.ssn?.suffix(1) ?? ""))"
+                                }else if (viewModel.personalInfoData.ssn?.count ?? 0) == 4 && (viewModel.personalInfoData.ssn?.suffix(1) ?? "") == "-"{
+                                    viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(3) ?? "")
+                                }else if (viewModel.personalInfoData.ssn?.count ?? 0) == 7 && (viewModel.personalInfoData.ssn?.suffix(1) ?? "") == "-"{
+                                    viewModel.personalInfoData.ssn = String(viewModel.personalInfoData.ssn?.prefix(6) ?? "")
                                 }
                             }
                         

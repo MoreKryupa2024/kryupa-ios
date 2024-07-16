@@ -2,7 +2,7 @@
 //  AddNewProfileScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 14/06/24.
+//  Created by Nirmal Singh Rajput on 14/06/24.
 //
 
 import SwiftUI
@@ -390,7 +390,7 @@ struct AddNewProfileScreenView: View {
             selectionViewWithHeader(
                 leftIcone: nil,
                 rightIcon: "PersonalInfoCalender",
-                value: viewModel.dateOfBirthSelected ? viewModel.dateFormatter() : "",
+                value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "dd-MM-yyyy") : "",
                 title: "Date Of Birth",
                 placeHolder: "Select"
             )

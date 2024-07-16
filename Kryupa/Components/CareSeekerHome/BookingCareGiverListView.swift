@@ -26,12 +26,7 @@ struct BookingCareGiverListView: View {
     private func giverView(giver:CareGiverNearByCustomerScreenData)-> some View{
         HStack(spacing:0){
             
-            AsyncImage(url: URL(string: giver.profile),content: { image in
-                image
-                    .resizable()
-            },placeholder: {
-                ProgressView()
-            })
+            ImageLoadingView(imageURL:giver.profile)
                 .frame(width: 64,height: 64)
                 .clipShape(.rect(cornerRadius: 32))
             

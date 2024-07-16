@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulRouting
 
 struct ContentView: View {
-    @State var showScreen : Int = Defaults().showScreen
+    @State var showScreen : Int = 0//Defaults().showScreen
     
     var body: some View {
         RouterView() { _ in
@@ -26,7 +26,7 @@ struct ContentView: View {
                 splashView
             }
         }
-        .onAppear {
+        .task {
             delayText()
             
             NotificationCenter.default.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
@@ -97,13 +97,13 @@ struct ContentView: View {
                 case .success(let data):
                     if data.data.role == AppConstants.SeekCare{
                         switch data.data.status{
-                        case "Personal information":
-                            showScreen = 5
-                            Defaults().showScreen = 5
-                            
-                        case "Take photo":
-                            showScreen = 8
-                            Defaults().showScreen = 8
+//                        case "Personal information":
+//                            showScreen = 5
+//                            Defaults().showScreen = 5
+//                            
+//                        case "Take photo":
+//                            showScreen = 8
+//                            Defaults().showScreen = 8
                             
                         case "Onboarding done":
                             showScreen = 4
@@ -115,16 +115,17 @@ struct ContentView: View {
                         
                     }else{
                         switch data.data.status{
-                        case "Mobile Verification":
-                            break
-                            
-                        case "Personal information":
-                            showScreen = 6
-                            Defaults().showScreen = 6
-                            
-                        case "Take photo":
-                            showScreen = 8
-                            Defaults().showScreen = 8
+//                        case "Mobile Verification":
+//                            showScreen = 7
+//                            Defaults().showScreen = 7
+//                            
+//                        case "Personal information":
+//                            showScreen = 6
+//                            Defaults().showScreen = 6
+//                            
+//                        case "Take photo":
+//                            showScreen = 8
+//                            Defaults().showScreen = 8
                             
                         case "Waitting at lobby":
                             showScreen = 2

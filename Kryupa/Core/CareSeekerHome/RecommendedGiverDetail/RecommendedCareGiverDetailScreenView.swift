@@ -92,12 +92,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                 .stroke(lineWidth: 1)
                 .foregroundStyle(.E_5_E_5_EA)
                 .overlay(content: {
-                    AsyncImage(url: URL(string: viewModel.giverDetail?.profileURL ?? ""),content: { image in
-                        image
-                            .resizable()
-                    },placeholder: {
-                        ProgressView()
-                    })
+                    ImageLoadingView(imageURL: viewModel.giverDetail?.profileURL ?? "")
                         .frame(width: 126,height: 126)
                         .clipShape(.rect(cornerRadius: 63))
                 })
@@ -137,10 +132,11 @@ struct RecommendedCareGiverDetailScreenView: View {
             MessageButton
                 .asButton(.press){
                     viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                        let chatViewModel = ChatScreenViewModel()
+                        chatViewModel.selectedChat = viewModel.chatData
                         presentAlert(title: "Kryupa", subTitle: "Appointment Booked")
-                        ChatScreenViewModel.shared.connect()
                         router.showScreen(.push) { route in
-                            ChatView()
+                            ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)
                         }
                     } alert: { strMsg in
                         presentAlert(title: "Kryupa", subTitle: strMsg)

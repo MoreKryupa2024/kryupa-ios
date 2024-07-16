@@ -468,6 +468,56 @@ class NetworkManager{
         task.resume()
     }
     
+    func verifyOTP(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.verifyOTP) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = SendOTPModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getLobbyStatus(completionHandler :  @escaping (Results<BGVInterviewSlotBookedStatusModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.lobbyStatus) else {
@@ -499,6 +549,50 @@ class NetworkManager{
             do {
                 let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
                 let apiData = BGVInterviewSlotBookedStatusModel(jsondata: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getInboxList(completionHandler :  @escaping (Results<ChatListModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getInboxList) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ChatListModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -657,6 +751,106 @@ class NetworkManager{
         task.resume()
     }
     
+    func getChatHistory(params:[String:Any]?,completionHandler :  @escaping (Results<MessageModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getChatHistory) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = MessageModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getPaypalOrderID(params:[String:Any]?,completionHandler :  @escaping (Results<PaymentModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getPaypalOrderID) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = PaymentModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getCareGiverDetails(giverId: String,completionHandler :  @escaping (Results<CareGiverDetailModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:"\(APIConstant.getCareGiverInCustomerDetails)\(giverId)") else {
@@ -701,7 +895,7 @@ class NetworkManager{
         task.resume()
     }
     
-    func sendRequestForBookCaregiver(params:[String:Any]?,completionHandler :  @escaping (Results<CareGiverDetailModel, NetworkError>) -> Void){
+    func sendRequestForBookCaregiver(params:[String:Any]?,completionHandler :  @escaping (Results<RecommendGiverModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:"\(APIConstant.sendRequestForBookCaregiver)") else {
             return completionHandler(.failure(NetworkError.invalidURL))
@@ -738,7 +932,7 @@ class NetworkManager{
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
-                let apiData = CareGiverDetailModel(jsonData: parsedData)
+                let apiData = RecommendGiverModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{

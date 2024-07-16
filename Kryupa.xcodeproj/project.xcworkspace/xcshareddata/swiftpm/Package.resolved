@@ -1,5 +1,5 @@
 {
-  "originHash" : "88b95186b3f223ce3a651d05fdf43a9ffd550a04237cb9bb9cc005e88ae65574",
+  "originHash" : "194e2e64f0980d1d98d64bdb761e4a6e03b0238e15f9e2d5bf2994d53605df9a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -134,6 +134,15 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
+      }
+    },
+    {
+      "identity" : "paypal-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/paypal/paypal-ios/",
+      "state" : {
+        "revision" : "99ed704bd640c480dacd8be01f023c977d244132",
+        "version" : "1.4.0"
       }
     },
     {

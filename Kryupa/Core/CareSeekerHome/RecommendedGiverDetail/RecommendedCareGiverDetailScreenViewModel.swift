@@ -13,6 +13,7 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var selection: String = "Summary"
     @Published var isloading: Bool = true
     @Published var giverDetail: CareGiverDetailData?
+    @Published var chatData: ChatListData?
     
     
     func getCareGiverDetails(giverId:String){
@@ -39,6 +40,7 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
                 self?.isloading = false
                 switch result{
                 case .success(let data):
+                    self?.chatData = data.data
                     action()
                 case .failure(let error):
                     alert?(error.getMessage())

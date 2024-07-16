@@ -13,44 +13,96 @@ struct ChatView: View {
     @State var userName: String = ""
     @State var sendMsgText: String = ""
     
-    @StateObject private var viewModel = ChatScreenViewModel()
-    @State private var messages = [
-        Message(content: "Hello [User's Name],\nI am interested in your profile.", chatboxType: .otherUser),
-        
-        Message(content: "Scheduled a call for 9:40 AM", chatboxType: .otherUser),
-        Message(content: "Booking confirmed by user!", chatboxType: .otherUser)
-        ]
+    @StateObject var viewModel = ChatScreenViewModel()
     
     var body: some View {
-        
-        VStack(spacing:20){
-            //HeaderView
-                usernameView
-//                requestView
+        ZStack{
             
-            ScrollView(.vertical) {
-                LazyVStack {
-                    ForEach(messages.reversed(), id:\.self) {
-                        msg in
-                        
-                        ChatBoxView(msg: msg)
-                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+            VStack(spacing:20){
+                //HeaderView
+                usernameView
+                if viewModel.showVideoCallView{
+                    videoCallView
+                }
+                
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        ForEach(viewModel.messageList.reversed(), id:\.id) {
+                            msg in
+                            
+                            ChatBoxView(msgData: msg, selectedChat: viewModel.selectedChat,onSelectedValue: { SpecialMessageData in
+                                router.showScreen(.push) { rout in
+                                    JobDetailView(jobID: SpecialMessageData.approchId)
+                                }
+                            })
+                                .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                        }
                     }
                 }
+                .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                .padding(.horizontal, 10)
+                .scrollIndicators(.hidden)
+                sendMessageView
             }
-            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-            .padding(.horizontal, 10)
-            .scrollIndicators(.hidden)
-            sendMessageView
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
-        .toolbar(.hidden, for: .navigationBar)
-        .onAppear{
-            viewModel.connect()
-            viewModel.receiveMessage { str, str, str in
-                print(str)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+            .toolbar(.hidden, for: .navigationBar)
+            .onAppear{
+                viewModel.connect()
+                viewModel.receiveMessage { msgData, str in
+                    DispatchQueue.main.async {
+                        viewModel.messageList.append(msgData)
+                        print(viewModel.messageList)
+                    }
+                }
+                viewModel.getChatHistory()
+            }
+            
+            if viewModel.isLoading{
+                LoadingView()
             }
         }
+    }
+    
+    private var videoCallView: some View{
+        
+        return ZStack(alignment:.top){
+            
+            Image("circle-x")
+                .resizable()
+                .frame(width: 18,height: 18)
+                .offset(x: 130,y:3)
+                .asButton(.press) {
+                    viewModel.showVideoCallView = false
+                }
+                
+            VStack {
+                
+                Text("Why discuss it on messages?\nVideo Call Now!")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(._7_C_7_C_80)
+                
+                
+                Text("Start Video Call")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 32)
+                    .padding(.horizontal,15)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        
+                    }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical,12)
+        .overlay( /// apply a rounded border
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(.E_5_E_5_EA, lineWidth: 1)
+        )
+        .padding(.horizontal,25)
     }
     
     private var sendMessageView: some View{
@@ -85,9 +137,11 @@ struct ChatView: View {
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            messages.append(Message(content: sendMsgText, chatboxType: .currentUser))
-                            viewModel.sendMessage(sendMsgText)
-                            sendMsgText = ""
+                            let text = sendMsgText.trimmingCharacters(in: .whitespaces)
+                            if !text.isEmpty{
+                                viewModel.sendMessage(text)
+                                sendMsgText = ""
+                            }
                         }
                 }
                 .padding(.trailing, 5)
@@ -154,6 +208,7 @@ struct ChatView: View {
                 .resizable()
                 .frame(width: 30,height: 30)
                 .asButton(.press) {
+                    viewModel.disconnect()
                     router.dismissScreen()
                 }
             

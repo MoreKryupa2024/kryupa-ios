@@ -2,7 +2,7 @@
 //  LobbyScreenViewModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 11/06/24.
+//  Created by Nirmal Singh Rajput on 11/06/24.
 //
 
 import Foundation
@@ -52,7 +52,7 @@ class LobbyScreenViewModel: ObservableObject{
                     next()
                 case.failure(let error):
                     print(error)
-                    alert(error.localizedDescription)
+                    alert(error.getMessage())
                 }
             }
         }

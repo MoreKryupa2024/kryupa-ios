@@ -23,50 +23,49 @@ struct PersonalDetailView: View {
     @State var editProfile: Bool = false
 
     var body: some View {
-        
-        ScrollView(showsIndicators: false){
-            HeaderTopView
-            textFieldViewWithHeader(
-                title: "Bio",
-                placeHolder: "Input text",
-                value: $strBio,
-                keyboard: .asciiCapable
-            ).disabled(!editProfile)
-            line
-            yearOfExpView.disabled(!editProfile)
-            line
-            AdditionalInfoView.disabled(!editProfile)
-            line
-            QualificationView
-//            line
-//            EducationDropdownView
+        ZStack{
             
-            if editProfile {
-                languageDropdownView.disabled(!editProfile)
-                bottomButtonView
+            ScrollView(showsIndicators: false){
+                HeaderTopView
+                textFieldViewWithHeader(
+                    title: "Bio",
+                    placeHolder: "Input text",
+                    value: $strBio,
+                    keyboard: .asciiCapable
+                ).disabled(!editProfile)
+                line
+                yearOfExpView.disabled(!editProfile)
+                line
+                AdditionalInfoView.disabled(!editProfile)
+                line
+                QualificationView
+                //            line
+                //            EducationDropdownView
+                
+                if editProfile {
+                    languageDropdownView.disabled(!editProfile)
+                    bottomButtonView
+                }
             }
-        }
-        .overlay(alignment: .top) {
+            .overlay(alignment: .top) {
                 Color.clear
                     .background(.regularMaterial)
                     .ignoresSafeArea(edges: .top)
                     .frame(height: 0)
             }
-        .toolbar(.hidden, for: .navigationBar)
-        .onAppear() {
-            UIScrollView.appearance().bounces = false
-            viewModel.getPersonalDetails() {
-                strBio = viewModel.personalDetail?.expertise.bio ?? ""
-                intExp = viewModel.personalDetail?.expertise.exprience ?? 0
-                viewModel.additionalInfoSelected = viewModel.personalDetail?.additionalRequirements ?? []
+            .toolbar(.hidden, for: .navigationBar)
+            .onAppear() {
+                UIScrollView.appearance().bounces = false
+                viewModel.getPersonalDetails() {
+                    strBio = viewModel.personalDetail?.expertise.bio ?? ""
+                    intExp = viewModel.personalDetail?.expertise.exprience ?? 0
+                    viewModel.additionalInfoSelected = viewModel.personalDetail?.additionalRequirements ?? []
+                }
+            }
+            if viewModel.isloading{
+                LoadingView()
             }
         }
-        
-        if viewModel.isloading{
-            LoadingView()
-        }
-
-        
     }
     
     private var languageDropdownView: some View{
@@ -329,14 +328,9 @@ struct PersonalDetailView: View {
 
                     }
                     else {
-                        AsyncImage(url: URL(string: viewModel.personalDetail?.profilePictureUrl ?? ""),content: { image in
-                            image
-                                .resizable()
-                        },placeholder: {
-                            ProgressView()
-                        })
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(30)
+                        ImageLoadingView(imageURL: viewModel.personalDetail?.profilePictureUrl ?? "")
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(30)
                     }
                     
                     HStack {

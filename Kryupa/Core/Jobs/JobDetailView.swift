@@ -12,39 +12,39 @@ struct JobDetailView: View {
 
     @StateObject private var viewModel = JobsViewModel()
     @StateObject private var viewModelHome = CareGiverHomeScreenViewModel()
-    var job: JobPost
     var jobID: String
     @Environment(\.router) var router
 
     var body: some View {
-        HeaderView(showBackButton: true)
-        ScrollView {
-            UserView
-            ServiceRequiredView
-            line
-            JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
-                .padding(.horizontal, 24)
-                .padding(.top, 18)
-            OtherMedicalConditionView
-            line
-//            JobScheduleView
-//            line
-            getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
-            line
-            getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
-            bottomButtonView
-            
+        ZStack{
+            VStack(spacing:0){
+                HeaderView(showBackButton: true)
+                ScrollView {
+                    UserView
+                    ServiceRequiredView
+                    line
+                    JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
+                        .padding(.horizontal, 24)
+                        .padding(.top, 18)
+                    OtherMedicalConditionView
+                    line
+                    //            JobScheduleView
+                    //            line
+                    getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
+                    line
+                    getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
+                    bottomButtonView
+                }
+                .toolbar(.hidden, for: .navigationBar)
+                .onAppear() {
+                    viewModel.getJobsDetail(approachID: jobID) {}
+                }
+                
+            }
             if viewModel.isloading{
                 LoadingView()
             }
-
         }
-        .toolbar(.hidden, for: .navigationBar)
-        .onAppear() {
-            viewModel.getJobsDetail(approachID: jobID) {}
-        }
-        
-
     }
     
     func getGridView(heading: String, skillsList: [SkillData]) -> some View{
@@ -61,11 +61,11 @@ struct JobDetailView: View {
                 NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: skillsList) { skill in
 
                     HStack {
-                        Image(skill!.image)
+                        Image(skill?.image ?? "")
                             .resizable()
                             .frame(width: 20, height: 20)
                         
-                        Text(skill!.title)
+                        Text(skill?.title ?? "")
                             .font(.custom(FontContent.plusRegular, size: 12))
                             .foregroundStyle(.appMain)
                         
@@ -79,37 +79,53 @@ struct JobDetailView: View {
     }
     
     private var bottomButtonView: some View {
-        HStack(spacing: 30) {
-            Text("Decline")
-                .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle(.appMain)
-                .frame(height: 35)
-                .frame(width: 99)
-                .asButton(.press) {
-                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
-                        router.dismissScreen()
-                    }
-                }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 48)
-                        .inset(by: 1)
-                        .stroke(.appMain, lineWidth: 1)
-                )
-
-            Text("Accept")
-                .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle(.white)
-                .frame(height: 35)
-                .frame(width: 97)
-                .background{
-                    RoundedRectangle(cornerRadius: 48)
-                }
-                .asButton(.press) {
-                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Job Acceptance") {
-                        router.showScreen(.push) { rout in
-                            ChatView(userName: viewModel.jobDetailModel?.name ?? "")
+        VStack(spacing: 30){
+            HStack(spacing: 30) {
+                Text("Decline")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.appMain)
+                    .frame(height: 35)
+                    .frame(width: 99)
+                    .asButton(.press) {
+                        viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
+                            router.dismissScreen()
                         }
                     }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 48)
+                            .inset(by: 1)
+                            .stroke(.appMain, lineWidth: 1)
+                    )
+
+                Text("Accept")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 35)
+                    .frame(width: 97)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        viewModelHome.acceptRejectJob(approchID: jobID, status: "Job Acceptance") {
+                            router.showScreen(.push) { rout in
+                                ChatView(userName: viewModel.jobDetailModel?.name ?? "")
+                            }
+                        }
+                    }
+            }
+            
+            Text("Message")
+                .font(.custom(FontContent.plusMedium, size: 16))
+                .foregroundStyle(.white)
+                .padding(.vertical,16)
+                .padding(.horizontal,40)
+                .asButton(.press) {
+//                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
+//                        router.dismissScreen()
+//                    }
+                }
+                .background{
+                    RoundedRectangle(cornerRadius: 48)
                 }
         }
         .padding(.top , 24)
@@ -173,12 +189,8 @@ struct JobDetailView: View {
     private var UserView: some View{
         VStack {
             HStack {
-                AsyncImage(url: URL(string: viewModel.jobDetailModel?.profilePictureUrl ?? ""),content: { image in
-                    image
-                        .resizable()
-                },placeholder: {
-                    ProgressView()
-                })                    .frame(width: 126, height: 126)
+                ImageLoadingView(imageURL: viewModel.jobDetailModel?.profilePictureUrl ?? "")
+                    .frame(width: 126, height: 126)
                     .cornerRadius(63)
             }
             .frame(width: 138, height: 138)
@@ -247,6 +259,6 @@ struct SkillData {
 }
 
 #Preview {
-    JobDetailView(job: JobPost(jsonData: [String : Any]()), jobID: "")
+    JobDetailView(jobID: "")
 }
 //(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1")

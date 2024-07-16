@@ -2,7 +2,7 @@
 //  DateTimePickerScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 21/06/24.
+//  Created by Nirmal Singh Rajput on 21/06/24.
 //
 
 import SwiftUI

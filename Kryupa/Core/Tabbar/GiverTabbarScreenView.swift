@@ -2,7 +2,7 @@
 //  GiverTabbarScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 14/06/24.
+//  Created by Nirmal Singh Rajput on 14/06/24.
 //
 
 import SwiftUI
@@ -26,79 +26,59 @@ struct GiverTabbarScreenView: View {
         }
         .onAppear{
             NotificationCenter.default.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
-                                using: self.showJobsScreen)
+                                                   using: self.showJobsScreen)
         }
+    }
+    
+    private func tabbarItem(image: String,text: String,selected: Bool)-> some View{
+        return VStack{
+            Image(image)
+                .resizable()
+                .renderingMode(.template)
+                .frame(width: 24,height: 24)
+            Text(text)
+                .font(.custom(FontContent.plusRegular, size: 12))
+        }
+        .foregroundStyle(selected ? .appMain : ._7_C_7_C_80)
     }
     
     private var TabView: some View{
         HStack(){
             Spacer()
-            VStack(){
-                Image("Home")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 24,height: 24)
-                Text("Home")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-            }
-            .foregroundStyle(selectedIndex == 0 ? .appMain : ._7_C_7_C_80)
-            .asButton(.press) {
-                selectedIndex = 0
-            }
+            tabbarItem(image: "Home", text: "Home", selected: selectedIndex == 0)
+                .asButton(.press) {
+                    ChatScreenViewModel.shared.disconnect()
+                    selectedIndex = 0
+                }
             
             Spacer()
-            VStack{
-                Image("Bookings")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 24,height: 24)
-                Text("Bookings")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-            }
-            .foregroundStyle(selectedIndex == 1 ? .appMain : ._7_C_7_C_80)
-            .asButton(.press) {
-                selectedIndex = 1
-            }
+            
+            tabbarItem(image: "Bookings", text: "Bookings", selected: selectedIndex == 1)
+                .asButton(.press) {
+                    ChatScreenViewModel.shared.disconnect()
+                    selectedIndex = 1
+                }
             Spacer()
-            VStack{
-                Image("Jobs")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 24,height: 24)
-                Text("Jobs")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-            }
-            .foregroundStyle(selectedIndex == 2 ? .appMain : ._7_C_7_C_80)
-            .asButton(.press) {
-                selectedIndex = 2
-            }
+            
+            tabbarItem(image: "Jobs", text: "Jobs", selected: selectedIndex == 2)
+                .asButton(.press) {
+                    ChatScreenViewModel.shared.disconnect()
+                    selectedIndex = 2
+                }
             Spacer()
-            VStack{
-                Image("Inbox")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 24,height: 24)
-                Text("Inbox")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-            }
-            .foregroundStyle(selectedIndex == 3 ? .appMain : ._7_C_7_C_80)
-            .asButton(.press) {
-                selectedIndex = 3
-            }
+            
+            tabbarItem(image: "Inbox", text: "Inbox", selected: selectedIndex == 3)
+                .asButton(.press) {
+                    selectedIndex = 3
+                }
             
             Spacer()
-            VStack{
-                Image("account")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 24,height: 24)
-                Text("Account")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-            }
-            .foregroundStyle(selectedIndex == 4 ? .appMain : ._7_C_7_C_80)
-            .asButton(.press) {
-                selectedIndex = 4
-            }
+            
+            tabbarItem(image: "Account", text: "Account", selected: selectedIndex == 4)
+                .asButton(.press) {
+                    ChatScreenViewModel.shared.disconnect()
+                    selectedIndex = 4
+                }
             Spacer()
         }
         .padding(.top,10)
@@ -107,7 +87,7 @@ struct GiverTabbarScreenView: View {
                 .shadow(color: ._444446.opacity(0.2), radius: 10, x: 0, y: 0)
                 .mask(Rectangle().padding(.top, -20)) /// here!
         )
-//        .ignoresSafeArea()
+        //        .ignoresSafeArea()
     }
     
     private func showJobsScreen(_ notification: Notification) {
