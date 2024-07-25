@@ -15,7 +15,6 @@ struct EmergencyContactView: View {
     @StateObject private var viewModel = EmergencyContactViewModel()
     
     var body: some View {
-        ScrollView{
             VStack(spacing:0){
                 ZStack(alignment:.leading){
                     RoundedRectangle(cornerRadius: 4)
@@ -32,7 +31,7 @@ struct EmergencyContactView: View {
                     .font(.custom(FontContent.besMedium, size: 22))
                     .frame(height: 28)
                     .padding(.top,30)
-                
+                ScrollView{
                 VStack(spacing: 25,
                        content: {
                     

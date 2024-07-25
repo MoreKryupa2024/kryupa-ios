@@ -16,9 +16,11 @@ struct PreferenceView: View {
     
     var body: some View {
         ZStack{
-            VStack{
-                ScrollView{
+            VStack(spacing:0){
+                ZStack(alignment:.top){
                     VStack(spacing:0){
+                        
+                        
                         ZStack(alignment:.leading){
                             RoundedRectangle(cornerRadius: 4)
                                 .foregroundStyle(.E_5_E_5_EA)
@@ -33,44 +35,59 @@ struct PreferenceView: View {
                             Text("Preference")
                                 .font(.custom(FontContent.besMedium, size: 22))
                             Image("infoIcone")
+                                .asButton(.press) {
+                                    viewModel.showPreference = !viewModel.showPreference
+                                }
                         }
                         .frame(height: 28)
                         .padding(.top,30)
                         
-                        VStack(spacing: 20,
-                               content: {
-                            
-                            mobilityLevelView
-                            
-                            languageSpeakingView
-                            
-                            distanceView
-                            
-                            HStack{
-                                previousButton
-                                    .asButton(.press) {
-                                        router.dismissScreen()
-                                    }
-                                Spacer()
-                                nextButton
-                                    .asButton(.press) {
-                                        viewModel.dataChecks (parameters: parameters){ alertStr in
-                                            presentAlert(title: "Kryupa", subTitle: alertStr)
-                                        } next: {
-                                            router.showScreen(.push) { rout in
-                                                SelectProfileImageView()
+                        ScrollView{
+                            VStack(spacing:0){
+                                
+                                
+                                VStack(spacing: 20,
+                                       content: {
+                                    
+                                    mobilityLevelView
+                                    
+                                    languageSpeakingView
+                                    
+                                    distanceView
+                                    
+                                    HStack{
+                                        previousButton
+                                            .asButton(.press) {
+                                                router.dismissScreen()
                                             }
-                                        }
+                                        Spacer()
+                                        nextButton
+                                            .asButton(.press) {
+                                                viewModel.dataChecks (parameters: parameters){ alertStr in
+                                                    presentAlert(title: "Kryupa", subTitle: alertStr)
+                                                } next: {
+                                                    router.showScreen(.push) { rout in
+                                                        SelectProfileImageView()
+                                                    }
+                                                }
+                                            }
                                     }
+                                    .padding(.top,30)
+                                })
+                                .padding(.top,30)
+                                .padding([.leading,.trailing],24)
                             }
-                            .padding(.top,30)
-                        })
-                        .padding(.top,30)
-                        .padding([.leading,.trailing],24)
+                        }
+                        .scrollIndicators(.hidden)
+                        .toolbar(.hidden, for: .navigationBar)
+                    }
+                    if viewModel.showPreference{
+                        Image("GiverInfoDetails")
+                            .resizable()
+                            .frame(width: 300,height: 55)
+                            .offset(x: 5,y:55)
                     }
                 }
-                .scrollIndicators(.hidden)
-                .toolbar(.hidden, for: .navigationBar)
             }
             if viewModel.isLoading{
                 LoadingView()

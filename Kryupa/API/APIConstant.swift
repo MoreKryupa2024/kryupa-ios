@@ -41,6 +41,10 @@ class APIConstant{
     static let getInboxList = "\(baseURL)/apis/communication/chat/contact_list"
     
     static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order"
+    
+    static let getCustomerRequirements = "\(baseURL)/apis/booking/get_customer_requirements"
+    static let createConversation = "\(baseURL)/apis/communication/chat/create_conversation"
+    static let getOrderInvoice = "\(baseURL)/apis/payment/paypal/order_invoice"
 
     static let getUserStatus = "\(baseURL)/apis/user/CurrentStatus"
     static let sendRequestForBookCaregiver = "\(baseURL)/apis/booking/caregiver_approch"
@@ -119,6 +123,7 @@ class AppConstants{
     static let seekerAccountSectionItems = [
         AccountListData(title: "Personal Details", image: "personalDetail"),
         AccountListData(title: "Payments & Refunds", image: "payments"),
+        AccountListData(title: "Wallet", image: "wallet"),
         AccountListData(title: "Reviews", image: "reviews"),
         AccountListData(title: "Help & FAQ", image: "help"),
         AccountListData(title: "Settings", image: "settings"),

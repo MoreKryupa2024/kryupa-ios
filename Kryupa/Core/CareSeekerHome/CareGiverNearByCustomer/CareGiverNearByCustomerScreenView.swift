@@ -47,8 +47,10 @@ struct CareGiverNearByCustomerScreenView: View {
             SearchView
             
             BookingCareGiverListView(onSelectedValue: { giver in
+                let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
+                RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
                 router.showScreen(.push) { rout in
-                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID)
+                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
                 }
             }, careGiverNearByList: viewModel.careGiverNearByList)
                 .padding(.vertical,30)

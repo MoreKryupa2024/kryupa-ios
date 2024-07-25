@@ -15,6 +15,7 @@ class PreferenceCareSeekarViewModel: ObservableObject{
     @Published var needServiceInSelected: [String] = [String]()
     @Published var languageSpeakingSelected: [String] = [String]()
     @Published var isLoading:Bool = false
+    @Published var showPreference:Bool = false
     
     func dataChecks(parameters:[String:Any],alert: @escaping ((String)->Void),next: @escaping (()->Void)){
         

@@ -12,7 +12,7 @@ struct BookingFormScreenView: View {
     
     @Environment(\.router) var router
     
-    @StateObject private var viewModel = BookingFormScreenViewModel()
+    @StateObject var viewModel = BookingFormScreenViewModel()
     
     
     var body: some View {
@@ -141,7 +141,10 @@ struct BookingFormScreenView: View {
                 }
             }
         }
-        .onAppear{
+        .task{
+            if viewModel.isRecommended {
+                viewModel.getCustomerRequirements()
+            }
             viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
             viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
             viewModel.getBookingForRelativeList()
@@ -329,8 +332,7 @@ struct BookingFormScreenView: View {
                             name: experience
                         )
                         .asButton(.press) {
-                            
-                            viewModel.yearsOfExperienceSelected = experience
+                                viewModel.yearsOfExperienceSelected = experience
                         }
                     }else{
                         EmptyView()
@@ -363,11 +365,12 @@ struct BookingFormScreenView: View {
                             .opacity(AppConstants.languageSpeakingArray.last == languageSpeakingArray ? 0 : 1)
                             .frame(maxWidth: .infinity,alignment: .leading)
                             .asButton(.press) {
-                                if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
-                                    viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
-                                }else{
-                                    viewModel.languageSpeakingSelected.append(languageSpeakingArray)
-                                }
+                                    if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
+                                        viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
+                                    }else{
+                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    }
+                                viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.sorted(by: { $0 < $1 })
                             }
                         }
                     }else{
@@ -397,7 +400,7 @@ struct BookingFormScreenView: View {
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
-                            viewModel.genderSelected = gender
+                                viewModel.genderSelected = gender
                         }
                     }else{
                         EmptyView()
@@ -437,12 +440,15 @@ struct BookingFormScreenView: View {
                 .frame(width: 124,height: 20)
             
             HStack{
-//                Image("navBack")
-//                    .resizable()
-//                    .frame(width: 30,height: 30)
-//                    .asButton(.press) {
-//                        router.dismissScreen()
-//                    }
+                if viewModel.isRecommended{
+                    Image("navBack")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                        .asButton(.press) {
+                            router.dismissScreen()
+                        }
+                }
+
                 Spacer()
                 Image("NotificationBellIcon")
                     .frame(width: 25,height: 25)
@@ -477,11 +483,12 @@ struct BookingFormScreenView: View {
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
-                            if viewModel.needServiceInSelected.contains(service){
-                                viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != service}
-                            }else{
-                                viewModel.needServiceInSelected.append(service)
-                            }
+                                if viewModel.needServiceInSelected.contains(service){
+                                    viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.needServiceInSelected.append(service)
+                                }
+                            viewModel.needServiceInSelected = viewModel.needServiceInSelected.sorted(by: { $0 < $1 })
                         }
                     }else{
                         EmptyView()
@@ -510,11 +517,12 @@ struct BookingFormScreenView: View {
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
-                            if viewModel.additionalSkillsSelected.contains(service){
-                                viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.filter{ $0 != service}
-                            }else{
-                                viewModel.additionalSkillsSelected.append(service)
-                            }
+                                if viewModel.additionalSkillsSelected.contains(service){
+                                    viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.additionalSkillsSelected.append(service)
+                                }
+                            viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.sorted(by: { $0 < $1 })
                         }
                     }else{
                         EmptyView()
@@ -543,11 +551,13 @@ struct BookingFormScreenView: View {
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
-                            if viewModel.additionalInfoSelected.contains(service){
-                                viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
-                            }else{
-                                viewModel.additionalInfoSelected.append(service)
-                            }
+                                if viewModel.additionalInfoSelected.contains(service){
+                                    viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.additionalInfoSelected.append(service)
+                                }
+                            
+                            viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.sorted(by: { $0 < $1 })
                         }
                     }else{
                         EmptyView()
@@ -556,6 +566,25 @@ struct BookingFormScreenView: View {
             }
         }
         .padding(.horizontal,24)
+    }
+    
+    private func recommnededCheck()-> Bool{
+        guard let recommendedUserBookingData = viewModel.recommendedUserBookingData else{
+            return false
+        }
+        
+        if viewModel.genderSelected != recommendedUserBookingData.gender{
+            return false
+        }else if viewModel.yearsOfExperienceSelected != recommendedUserBookingData.yearOfExperience{
+            return false
+        }else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
+            return false
+        }else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
+            return false
+        }else{
+            return true
+        }
+     
     }
     
     private var BottomButtonView: some View{
@@ -571,8 +600,15 @@ struct BookingFormScreenView: View {
                 .padding(.top,5)
                 .asButton(.press) {
                     viewModel.createBooking { bookingId in
-                        router.showScreen(.push) { rout in
-                            CareGiverNearByCustomerScreenView(bookingID: bookingId)
+                        if viewModel.isRecommended && recommnededCheck() {
+                            let bookingDict:[String: String] = ["bookingId": bookingId]
+                            NotificationCenter.default.post(name: .setBookingId,
+                                                                            object: nil, userInfo: bookingDict)
+                            router.dismissScreen()
+                        }else{
+                            router.showScreen(.push) { rout in
+                                CareGiverNearByCustomerScreenView(bookingID: bookingId)
+                            }
                         }
                     }
                 }

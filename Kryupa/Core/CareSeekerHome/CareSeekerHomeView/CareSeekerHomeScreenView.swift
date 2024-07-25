@@ -68,7 +68,19 @@ struct CareSeekerHomeScreenView: View {
                         .foregroundStyle(._7_C_7_C_80)
             }
             .padding(.horizontal,24)
-            RecommendedCaregiverView(recommendedCaregiver: viewModel.recommendedCaregiver)
+            RecommendedCaregiverView(recommendedCaregiver: viewModel.recommendedCaregiver) { giverData in
+                let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
+                RecommendedCareGiverDetailScreenViewModel.isRecommended = true
+                
+                let careGiverDetails = CareGiverNearByCustomerScreenData(jsonData: [
+                    "id":giverData.id,
+                    "profile_picture_url":giverData.profileURL,
+                    "name": giverData.name])
+                
+                router.showScreen(.push) { rout in
+                    RecommendedCareGiverDetailScreenView(careGiverDetail: careGiverDetails,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                }
+            }
             
         }
     }
@@ -111,8 +123,8 @@ struct CareSeekerHomeScreenView: View {
         VStack(spacing:0){
             Image("bookingFirstIcone")
                 .resizable()
-                .padding(.horizontal,40)
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
+                .padding(.horizontal,80)
                 .padding(.top,30)
             
             Text("Your Booking list Looks Empty")

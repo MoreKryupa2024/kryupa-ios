@@ -40,6 +40,12 @@ struct ChatListData {
     let createdAt, updatedAt, giverId, seekerId: String
     let cpID, name: String
     let profilePictureURL: String
+    let lastActionAt: String
+    let sessionKey, sessionTopic: String
+    let caregiverID, caregiverName: String
+    let caregiverPic: String
+    let customerID, customerName: String
+    let customerPic: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -51,6 +57,15 @@ struct ChatListData {
         cpID = jsonData["cp_id"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
+        lastActionAt = jsonData["last_action_at"] as? String ?? ""
+        sessionKey = jsonData["session_key"] as? String ?? ""
+        sessionTopic = jsonData["session_topic"] as? String ?? ""
+        caregiverID = jsonData["caregiver_id"] as? String ?? ""
+        caregiverName = jsonData["caregiver_name"] as? String ?? ""
+        caregiverPic = jsonData["caregiver_pic"] as? String ?? ""
+        customerID = jsonData["customer_id"] as? String ?? ""
+        customerName = jsonData["customer_name"] as? String ?? ""
+        customerPic = jsonData["customer_pic"] as? String ?? ""
     }
 }
 

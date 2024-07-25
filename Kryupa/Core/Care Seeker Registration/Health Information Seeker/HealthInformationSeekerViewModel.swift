@@ -29,7 +29,7 @@ class HealthInformationSeekerViewModel: ObservableObject{
                  "allergies": allergiesValue,
                  "mobility_level": mobilityLevel,
                  "other_disease_type": medicalConditionSelected,
-                 "disease_type": [medicalConditionDropDownSelected]
+                 "disease_type": medicalConditionDropDownSelected
              ]
             next(param)
         }

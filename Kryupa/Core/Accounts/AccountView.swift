@@ -37,7 +37,7 @@ struct AccountView: View {
                             line
                         }
                     }else{
-                        if index == 3 || index == 5 {
+                        if index == 4 || index == 6 {
                             line
                         }
                     }
@@ -86,6 +86,10 @@ struct AccountView: View {
                 PaymentListView(selectedPaymentMethod: 0)
             }
             
+        case "Wallet":
+            router.showScreen(.push) { rout in
+                WalletScreenView()
+            }
         case "Reviews":
             router.showScreen(.push) { rout in
                 ReviewsListView()

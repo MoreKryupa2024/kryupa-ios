@@ -86,9 +86,19 @@
 		BE2B58AA2C3EA777002EC297 /* PayPalNativePayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A92C3EA777002EC297 /* PayPalNativePayments */; };
 		BE2B58AC2C3EA777002EC297 /* PaymentButtons in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58AB2C3EA777002EC297 /* PaymentButtons */; };
 		BE2B58AE2C3EA9B6002EC297 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */; };
+		BE2CA3BF2C5103DF007F1059 /* AddMoneyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CA3BE2C5103DF007F1059 /* AddMoneyScreenView.swift */; };
+		BE2CA3C12C510826007F1059 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CA3C02C510826007F1059 /* PaymentViewModel.swift */; };
+		BE2CA3C32C510B3B007F1059 /* PaymentOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */; };
 		BE2D337A2C3FCFD700192323 /* PayPalWebPayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2D33792C3FCFD700192323 /* PayPalWebPayments */; };
 		BE2D337C2C3FD07A00192323 /* PayPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2D337B2C3FD07A00192323 /* PayPalView.swift */; };
 		BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */; };
+		BE32E02C2C4641C1003C7C90 /* PaymentOrderScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E02B2C4641C1003C7C90 /* PaymentOrderScreenView.swift */; };
+		BE32E02E2C46552B003C7C90 /* PaymentMethodsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E02D2C46552B003C7C90 /* PaymentMethodsScreenView.swift */; };
+		BE32E0302C465BFF003C7C90 /* PaymentConfirmScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E02F2C465BFF003C7C90 /* PaymentConfirmScreenView.swift */; };
+		BE32E0322C465CF7003C7C90 /* MoneyAddedScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0312C465CF7003C7C90 /* MoneyAddedScreenView.swift */; };
+		BE32E0352C4689BF003C7C90 /* WalletScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0342C4689BF003C7C90 /* WalletScreenView.swift */; };
+		BE32E0382C468E0F003C7C90 /* WalletHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0372C468E0F003C7C90 /* WalletHistoryView.swift */; };
+		BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0392C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift */; };
 		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
 		BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */; };
 		BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */; };
@@ -262,8 +272,18 @@
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
+		BE2CA3BE2C5103DF007F1059 /* AddMoneyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyScreenView.swift; sourceTree = "<group>"; };
+		BE2CA3C02C510826007F1059 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOrderModel.swift; sourceTree = "<group>"; };
 		BE2D337B2C3FD07A00192323 /* PayPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalView.swift; sourceTree = "<group>"; };
 		BE2DE0CB2BFF6BFF00B14C13 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
+		BE32E02B2C4641C1003C7C90 /* PaymentOrderScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOrderScreenView.swift; sourceTree = "<group>"; };
+		BE32E02D2C46552B003C7C90 /* PaymentMethodsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodsScreenView.swift; sourceTree = "<group>"; };
+		BE32E02F2C465BFF003C7C90 /* PaymentConfirmScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmScreenView.swift; sourceTree = "<group>"; };
+		BE32E0312C465CF7003C7C90 /* MoneyAddedScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyAddedScreenView.swift; sourceTree = "<group>"; };
+		BE32E0342C4689BF003C7C90 /* WalletScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreenView.swift; sourceTree = "<group>"; };
+		BE32E0372C468E0F003C7C90 /* WalletHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHistoryView.swift; sourceTree = "<group>"; };
+		BE32E0392C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransectionHistoryScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingScreenView.swift; sourceTree = "<group>"; };
@@ -449,9 +469,9 @@
 				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
 				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
 				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
-				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
-				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
+				BE32E0292C46406A003C7C90 /* PaymentFlow */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				BE32E02A2C464197003C7C90 /* PaymentOrderFlow */,
 				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
 				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
 				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
@@ -532,6 +552,45 @@
 				BE2D337B2C3FD07A00192323 /* PayPalView.swift */,
 			);
 			path = Paypal;
+			sourceTree = "<group>";
+		};
+		BE32E0292C46406A003C7C90 /* PaymentFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
+				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
+			);
+			path = PaymentFlow;
+			sourceTree = "<group>";
+		};
+		BE32E02A2C464197003C7C90 /* PaymentOrderFlow */ = {
+			isa = PBXGroup;
+			children = (
+				BE32E02B2C4641C1003C7C90 /* PaymentOrderScreenView.swift */,
+				BE32E02D2C46552B003C7C90 /* PaymentMethodsScreenView.swift */,
+				BE32E02F2C465BFF003C7C90 /* PaymentConfirmScreenView.swift */,
+				BE32E0312C465CF7003C7C90 /* MoneyAddedScreenView.swift */,
+				BE2CA3BE2C5103DF007F1059 /* AddMoneyScreenView.swift */,
+				BE2CA3C02C510826007F1059 /* PaymentViewModel.swift */,
+			);
+			path = PaymentOrderFlow;
+			sourceTree = "<group>";
+		};
+		BE32E0332C4689A3003C7C90 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				BE32E0342C4689BF003C7C90 /* WalletScreenView.swift */,
+				BE32E0392C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		BE32E0362C468DF8003C7C90 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				BE32E0372C468E0F003C7C90 /* WalletHistoryView.swift */,
+			);
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		BE3C7F252C1C1F0D000848A6 /* Booking */ = {
@@ -717,6 +776,7 @@
 		BE644E3C2BF49C8100A6781F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BE32E0332C4689A3003C7C90 /* Wallet */,
 				BE2D337D2C3FD08400192323 /* Paypal */,
 				A3FEF5FE2C201C2300EFC3C2 /* Jobs */,
 				BE484DCF2C1AE258001E3901 /* Tabbar */,
@@ -753,6 +813,7 @@
 				BE1573B82BF631A400A6137D /* LoginFlow */,
 				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
 				BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */,
+				BE32E0362C468DF8003C7C90 /* Wallet */,
 				BEF2EDB52C25B4410008108C /* StarsView.swift */,
 				BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */,
 				BE3C7F292C1C2425000848A6 /* Booking */,
@@ -783,6 +844,7 @@
 				A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */,
 				A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */,
 				BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */,
+				BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1150,6 +1212,7 @@
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
 				BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */,
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
+				BE32E0382C468E0F003C7C90 /* WalletHistoryView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */,
@@ -1198,6 +1261,7 @@
 				A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */,
 				BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */,
 				A3BB87A42C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift in Sources */,
+				BE2CA3BF2C5103DF007F1059 /* AddMoneyScreenView.swift in Sources */,
 				A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */,
 				A36BC38E2C19976A005616A5 /* ReviewCell.swift in Sources */,
 				A3FEF6082C219F0700EFC3C2 /* AccountsViewModel.swift in Sources */,
@@ -1212,9 +1276,12 @@
 				BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */,
 				BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */,
 				A36BC3A92C1B1EA9005616A5 /* AccountView.swift in Sources */,
+				BE32E0322C465CF7003C7C90 /* MoneyAddedScreenView.swift in Sources */,
+				BE32E02E2C46552B003C7C90 /* PaymentMethodsScreenView.swift in Sources */,
 				A36BC3A52C1B0864005616A5 /* HeaderView.swift in Sources */,
 				BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */,
 				A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */,
+				BE2CA3C12C510826007F1059 /* PaymentViewModel.swift in Sources */,
 				A36BC3972C1AC689005616A5 /* FAQView.swift in Sources */,
 				BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */,
 				BEC5E9D82C357ABB000BC2A1 /* ImageLoadingView.swift in Sources */,
@@ -1228,7 +1295,10 @@
 				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */,
+				BE32E0352C4689BF003C7C90 /* WalletScreenView.swift in Sources */,
 				BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */,
+				BE2CA3C32C510B3B007F1059 /* PaymentOrderModel.swift in Sources */,
+				BE32E02C2C4641C1003C7C90 /* PaymentOrderScreenView.swift in Sources */,
 				BEC5E9D42C352F42000BC2A1 /* ChatModel.swift in Sources */,
 				A36DE7C62C171261002E0ACD /* ChatView.swift in Sources */,
 				BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */,
@@ -1243,7 +1313,9 @@
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
 				A3FEF6202C2AF8B800EFC3C2 /* ReviewModel.swift in Sources */,
+				BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
+				BE32E0302C465BFF003C7C90 /* PaymentConfirmScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

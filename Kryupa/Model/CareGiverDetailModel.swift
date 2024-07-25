@@ -31,7 +31,7 @@ struct CareGiverDetailData {
     let totalReviewer: Int
     let pricePerHour: Int
     let avgRating: Double
-    let reviewList: [String]
+    let reviewList: [ReviewListData]
     
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -43,7 +43,25 @@ struct CareGiverDetailData {
         totalReviewer = jsonData["total_reviewer"] as? Int ?? 0
         pricePerHour = jsonData["price_per_hour"] as? Int ?? 0
         avgRating = jsonData["avg_rating"] as? Double ?? 0.0
-        reviewList = jsonData["reviewList"] as? [String] ?? []
+        reviewList = (jsonData["reviewList"] as? [[String:Any]] ?? [[String:Any]]()).map{ ReviewListData(jsonData:$0)}
     }
+}
 
+// MARK: - ReviewList
+struct ReviewListData {
+    let reviewID, reviewedBy, reviewedByName: String
+    let reviewedByProfilePictureURL: String
+    let rating: Double
+    let review, createdAt, updatedAt: String
+
+    init(jsonData:[String:Any]){
+        reviewID = jsonData["review_id"] as? String ?? ""
+        reviewedBy = jsonData["reviewed_by"] as? String ?? ""
+        reviewedByName = jsonData["reviewed_by_name"] as? String ?? ""
+        reviewedByProfilePictureURL = jsonData["reviewed_by_profile_picture_url"] as? String ?? ""
+        rating = jsonData["rating"] as? Double ?? 0.0
+        review = jsonData["review"] as? String ?? ""
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+    }
 }

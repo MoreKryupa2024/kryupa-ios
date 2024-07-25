@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct RecommendedCaregiverView: View {
     var recommendedCaregiver: [RecommendedCaregiverData] = [RecommendedCaregiverData]()
-    
+    var selectedGiver: ((RecommendedCaregiverData)-> Void)? = nil
     let profileWidth:CGFloat = CGFloat((UIScreen.screenWidth - (68))/2.2)
     
     var body: some View {
@@ -41,7 +42,7 @@ struct RecommendedCaregiverView: View {
                             .foregroundStyle(._444446)
                             .padding(.top,10)
                         
-                        Text("Message")
+                        Text("View Profile")
                             .font(.custom(FontContent.plusRegular, size: 13))
                             .foregroundStyle(.white)
                             .padding(.horizontal,20)
@@ -50,14 +51,15 @@ struct RecommendedCaregiverView: View {
                                 RoundedRectangle(cornerRadius: 16)
                             }
                             .padding(.top,10)
-                            .asButton(.press) {
-                                
-                            }
                     }
                     .padding([.vertical,.horizontal],9)
                     .background{
                         RoundedRectangle(cornerRadius: 5)
                             .foregroundStyle(.F_2_F_2_F_7)
+                    }
+                    .overlay {}
+                    .asButton(.press) {
+                        selectedGiver?(careData)
                     }
                 }
             }

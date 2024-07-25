@@ -18,78 +18,91 @@ struct PreferenceCareSeekarView: View {
     
     var body: some View {
         ZStack{
-            ScrollView{
-                VStack(spacing:0){
-                    ZStack(alignment:.leading){
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.E_5_E_5_EA)
-                            .frame(height: 4)
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.appMain)
-                            .frame(width: 236,height: 4)
-                    }
-                    .padding([.leading,.trailing],24)
-                    
-                    HStack{
-                        Text("Preference")
-                            .font(.custom(FontContent.besMedium, size: 22))
-                        Image("infoIcone")
-                            .asButton(.press) {
-                                
-                            }
-                    }
-                    .frame(height: 28)
-                    .padding(.top,30)
-                    
-                    VStack(spacing: 0,
-                           content: {
-                        needService
-                            .padding([.leading,.trailing],24)
-                        
-                        sepratorView
-                        
-                        yearsofExperienceView
-                            .padding([.leading,.trailing],24)
-                            .frame(maxWidth: .infinity,alignment: .leading)
-                        
-                        sepratorView
-                        
-                        genderView
-                            .padding([.leading,.trailing],24)
-                        
-                        sepratorView
-                        
-                        languageSpeakingView
-                            .padding([.leading,.trailing],24)
+            VStack(spacing:0){
+                ZStack(alignment:.top){
+                    VStack(spacing:0){
+                        ZStack(alignment:.leading){
+                            RoundedRectangle(cornerRadius: 4)
+                                .foregroundStyle(.E_5_E_5_EA)
+                                .frame(height: 4)
+                            RoundedRectangle(cornerRadius: 4)
+                                .foregroundStyle(.appMain)
+                                .frame(width: 236,height: 4)
+                        }
+                        .padding([.leading,.trailing],24)
                         
                         HStack{
-                            previousButton
+                            Text("Preference")
+                                .font(.custom(FontContent.besMedium, size: 22))
+                            Image("infoIcone")
                                 .asButton(.press) {
-                                    router.dismissScreen()
-                                }
-                            Spacer()
-                            nextButton
-                                .asButton(.press) {
-                                    viewModel.dataChecks(parameters: parameters) { alertStr in
-                                        presentAlert(title: "Kryupa", subTitle: alertStr)
-                                    } next: {
-                                        router.showScreen(.push) { rout in
-                                            SelectProfileImageView()
-                                        }
-                                    }
+                                    viewModel.showPreference = !viewModel.showPreference
                                 }
                         }
+                        .frame(height: 28)
                         .padding(.top,30)
-                        .padding(.horizontal,24)
-                    })
-                    .padding(.top,30)
-                    
-                    
-                    
+                        
+                        ScrollView{
+                            VStack(spacing:0){
+                                
+                                VStack(spacing: 0,
+                                       content: {
+                                    needService
+                                        .padding([.leading,.trailing],24)
+                                    
+                                    sepratorView
+                                    
+                                    yearsofExperienceView
+                                        .padding([.leading,.trailing],24)
+                                        .frame(maxWidth: .infinity,alignment: .leading)
+                                    
+                                    sepratorView
+                                    
+                                    genderView
+                                        .padding([.leading,.trailing],24)
+                                    
+                                    sepratorView
+                                    
+                                    languageSpeakingView
+                                        .padding([.leading,.trailing],24)
+                                    
+                                    HStack{
+                                        previousButton
+                                            .asButton(.press) {
+                                                router.dismissScreen()
+                                            }
+                                        Spacer()
+                                        nextButton
+                                            .asButton(.press) {
+                                                viewModel.dataChecks(parameters: parameters) { alertStr in
+                                                    presentAlert(title: "Kryupa", subTitle: alertStr)
+                                                } next: {
+                                                    router.showScreen(.push) { rout in
+                                                        SelectProfileImageView()
+                                                    }
+                                                }
+                                            }
+                                    }
+                                    .padding(.top,30)
+                                    .padding(.horizontal,24)
+                                })
+                                .padding(.top,30)
+                                
+                                
+                                
+                            }
+                        }
+                        .scrollIndicators(.hidden)
+                        .toolbar(.hidden, for: .navigationBar)
+                    }
+                    if viewModel.showPreference{
+                        Image("SeekerInfoDetails")
+                            .resizable()
+                            .frame(width: 300,height: 55)
+                            .offset(x: 5,y:55)
+                    }
                 }
             }
-            .scrollIndicators(.hidden)
-            .toolbar(.hidden, for: .navigationBar)
             if viewModel.isLoading{
                 LoadingView()
             }
@@ -232,24 +245,24 @@ struct PreferenceCareSeekarView: View {
         }
         
     }
-        
-        //MARK: Send Code Button View
-        private var nextButton: some View {
-            HStack{
-                Text("Next")
-                    .font(.custom(FontContent.plusMedium, size: 16))
-                    .padding([.top,.bottom], 16)
-                    .padding([.leading,.trailing], 40)
-            }
-            .background(
-                ZStack{
-                    Capsule(style: .circular)
-                        .fill(.appMain)
-                }
-            )
-            .foregroundColor(.white)
-            
+    
+    //MARK: Send Code Button View
+    private var nextButton: some View {
+        HStack{
+            Text("Next")
+                .font(.custom(FontContent.plusMedium, size: 16))
+                .padding([.top,.bottom], 16)
+                .padding([.leading,.trailing], 40)
         }
+        .background(
+            ZStack{
+                Capsule(style: .circular)
+                    .fill(.appMain)
+            }
+        )
+        .foregroundColor(.white)
+        
+    }
     
     //MARK: Send Code Button View
     private var previousButton: some View {

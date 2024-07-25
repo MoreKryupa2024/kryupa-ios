@@ -19,7 +19,7 @@ struct ChatBoxView: View {
             if Defaults().userType == AppConstants.GiveCare && selectedChat?.giverId == msgData.sender{
                 
                 if msgData.isActionBtn{
-                    senderUserViewService(message: msgData.message)
+//                    senderUserViewService(message: msgData.message)
                 }else{
                     senderMsg(msg: msgData.message)
                 }
@@ -31,7 +31,10 @@ struct ChatBoxView: View {
                 }
             }else{
                 if msgData.isActionBtn{
-                    otherUserViewService(message: msgData.message)
+                    let SpecialMessageData = SpecialMessageData(jsonData: (msgData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+                    if SpecialMessageData.type == "view_service"{
+                        otherUserViewService(message: SpecialMessageData)
+                    }
                 }else{
                     reciverMsg(msg: msgData.message)
                 }
@@ -41,16 +44,15 @@ struct ChatBoxView: View {
         }
     }
     
-    func otherUserViewService(message:String)-> some View{
+    func otherUserViewService(message:SpecialMessageData)-> some View{
         
-        let SpecialMessageData = SpecialMessageData(jsonData: (message.toJSON() as? [String : Any] ?? [String : Any]()))
         return HStack {
             VStack(alignment: .leading) {
-                Text(SpecialMessageData.content)
+                Text(message.content)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(.appMain)
                     .padding(.horizontal, 20)
-                Text(SpecialMessageData.btnTitle)
+                Text(message.btnTitle)
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 20)
@@ -61,8 +63,8 @@ struct ChatBoxView: View {
                     .padding(.horizontal, 20)
                     .asButton(.press) {
                         
-                        if SpecialMessageData.type == "view_service"{
-                            onSelectedValue?(SpecialMessageData)
+                        if message.type == "view_service"{
+                            onSelectedValue?(message)
                         }else{
                             presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
                         }

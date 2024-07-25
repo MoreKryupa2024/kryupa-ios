@@ -29,79 +29,83 @@ struct ExperienceandSkillsView: View {
     
     var body: some View {
         ZStack{
-            ScrollView {
-                VStack(spacing:0){
-                    ZStack(alignment:.leading){
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.E_5_E_5_EA)
-                            .frame(height: 4)
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.appMain)
-                            .frame(width: 196,height: 4)
-                    }
-                    .padding([.leading,.trailing],24)
-                    
-                    Text("Experience and Skills")
-                        .font(.custom(FontContent.besMedium, size: 22))
-                        .frame(height: 28)
-                        .padding(.top,30)
-                    
-                    textFieldViewWithHeader(
-                        title: "Bio",
-                        placeHolder: "About You",
-                        value: $viewModel.exprienceAndSkillsData.bio,
-                        keyboard: .asciiCapable
-                    )
-                    .padding([.leading,.trailing],24)
-                    
-                    sepratorView
-                    
-                    yearsofExperienceView
-                        .padding([.leading,.trailing],24)
-                        .frame(maxWidth: .infinity,alignment: .leading)
-                    
-                    sepratorView
-                    
-                    areaOfExpertise
-                        .padding([.leading,.trailing],24)
-                        .frame(maxWidth: .infinity,alignment: .leading)
-                    
-                    sepratorView
-                    
+            VStack(spacing:0){
+                ZStack(alignment:.leading){
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.E_5_E_5_EA)
+                        .frame(height: 4)
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.appMain)
+                        .frame(width: 196,height: 4)
+                }
+                .padding([.leading,.trailing],24)
+                
+                Text("Experience and Skills")
+                    .font(.custom(FontContent.besMedium, size: 22))
+                    .frame(height: 28)
+                    .padding(.top,30)
+                
+                ScrollView {
                     VStack(spacing:0){
-                        certificationDocumentsView
-                            .padding(.bottom,10)
+                        
+                        textFieldViewWithHeader(
+                            title: "Bio",
+                            placeHolder: "About You",
+                            value: $viewModel.exprienceAndSkillsData.bio,
+                            keyboard: .asciiCapable
+                        )
+                        .padding([.leading,.trailing],24)
+                        .padding(.top,20)
+                        
+                        sepratorView
+                        
+                        yearsofExperienceView
                             .padding([.leading,.trailing],24)
-                        FileView
-                    }
-                    
-                    HStack{
-                        previousButton
-                            .padding(.leading,24)
-                            .asButton(.press) {
-                                router.dismissScreen()
-                            }
-                        Spacer()
-                        nextButton
-                            .padding(.trailing,24)
-                            .asButton(.press) {
-                                viewModel.dataChecks(filesArray: fileArray) { alertStr in
-                                    presentAlert(title: "Kryupa", subTitle: alertStr)
-                                } next: { param in
-                                    var params = parameters
-                                    params["exprienceAndSkills"] = param
-                                    router.showScreen(.push) { rout in
-                                        PreferenceView(parameters:params)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                        
+                        sepratorView
+                        
+                        areaOfExpertise
+                            .padding([.leading,.trailing],24)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                        
+                        sepratorView
+                        
+                        VStack(spacing:0){
+                            certificationDocumentsView
+                                .padding(.bottom,10)
+                                .padding([.leading,.trailing],24)
+                            FileView
+                        }
+                        
+                        HStack{
+                            previousButton
+                                .padding(.leading,24)
+                                .asButton(.press) {
+                                    router.dismissScreen()
+                                }
+                            Spacer()
+                            nextButton
+                                .padding(.trailing,24)
+                                .asButton(.press) {
+                                    viewModel.dataChecks(filesArray: fileArray) { alertStr in
+                                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                                    } next: { param in
+                                        var params = parameters
+                                        params["exprienceAndSkills"] = param
+                                        router.showScreen(.push) { rout in
+                                            PreferenceView(parameters:params)
+                                        }
                                     }
                                 }
-                            }
+                        }
+                        .padding(.top,30)
+                        
                     }
-                    .padding(.top,30)
-                    
                 }
+                .scrollIndicators(.hidden)
+                .toolbar(.hidden, for: .navigationBar)
             }
-            .scrollIndicators(.hidden)
-            .toolbar(.hidden, for: .navigationBar)
             
             if viewModel.isLoading{
                 LoadingView()

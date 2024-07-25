@@ -10,7 +10,7 @@ import SwiftfulUI
 
 struct JobDetailView: View {
 
-    @StateObject private var viewModel = JobsViewModel()
+    @StateObject var viewModel = JobsViewModel()
     @StateObject private var viewModelHome = CareGiverHomeScreenViewModel()
     var jobID: String
     @Environment(\.router) var router
@@ -107,26 +107,29 @@ struct JobDetailView: View {
                     }
                     .asButton(.press) {
                         viewModelHome.acceptRejectJob(approchID: jobID, status: "Job Acceptance") {
-                            router.showScreen(.push) { rout in
-                                ChatView(userName: viewModel.jobDetailModel?.name ?? "")
+                            if viewModel.isComingfromChat{
+                                router.dismissScreen()
+                            }else{
+                                let ChatScreenViewModel = ChatScreenViewModel()
+                                guard let jobDetailModel = viewModel.jobDetailModel else {
+                                    return
+                                }
+                                let selectedChat = ChatListData(jsonData: [
+                                    "id":jobDetailModel.contactID,
+                                    "user2_id":jobDetailModel.caregiversID,
+                                    "user1_id":jobDetailModel.customerID,
+                                    "name":jobDetailModel.name,
+                                    "profile_picture_url":jobDetailModel.profilePictureURL
+                                ])
+                                
+                                ChatScreenViewModel.selectedChat = selectedChat
+                                router.showScreen(.push) { rout in
+                                        ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+                                }
                             }
                         }
                     }
             }
-            
-            Text("Message")
-                .font(.custom(FontContent.plusMedium, size: 16))
-                .foregroundStyle(.white)
-                .padding(.vertical,16)
-                .padding(.horizontal,40)
-                .asButton(.press) {
-//                    viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
-//                        router.dismissScreen()
-//                    }
-                }
-                .background{
-                    RoundedRectangle(cornerRadius: 48)
-                }
         }
         .padding(.top , 24)
     }
@@ -189,7 +192,7 @@ struct JobDetailView: View {
     private var UserView: some View{
         VStack {
             HStack {
-                ImageLoadingView(imageURL: viewModel.jobDetailModel?.profilePictureUrl ?? "")
+                ImageLoadingView(imageURL: viewModel.jobDetailModel?.profilePictureURL ?? "")
                     .frame(width: 126, height: 126)
                     .cornerRadius(63)
             }
@@ -203,11 +206,40 @@ struct JobDetailView: View {
             Text(viewModel.jobDetailModel?.name ?? "")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
+            
 
             Text("$\(viewModel.jobDetailModel?.bookingPricing ?? 0)")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(.appMain)
-
+            if !viewModel.isComingfromChat{
+                Text("Message")
+                    .font(.custom(FontContent.plusMedium, size: 16))
+                    .foregroundStyle(.white)
+                    .padding(.vertical,10)
+                    .padding(.horizontal,20)
+                    .asButton(.press) {
+                        var ChatScreenViewModel = ChatScreenViewModel()
+                        guard let jobDetailModel = viewModel.jobDetailModel else {
+                            return
+                        }
+                        var selectedChat = ChatListData(jsonData: [
+                            "id":jobDetailModel.contactID,
+                            "user2_id":jobDetailModel.caregiversID,
+                            "user1_id":jobDetailModel.customerID,
+                            "name":jobDetailModel.name,
+                            "profile_picture_url":jobDetailModel.profilePictureURL
+                        ])
+                        
+                        ChatScreenViewModel.selectedChat = selectedChat
+                        router.showScreen(.push) { rout in
+                                ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+                        }
+                    }
+                    .background{
+                        RoundedRectangle(cornerRadius: 24)
+                    }
+                    .padding(.top,10)
+            }
         }
         .padding(.top, 24)
     }
@@ -219,7 +251,7 @@ struct JobDetailView: View {
                     .font(.custom(FontContent.plusMedium, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
 
-                Text(viewModel.jobDetailModel?.areasOfExpertise?.joined(separator: ",") ?? "")
+                Text(viewModel.jobDetailModel?.areasOfExpertise.joined(separator: ",") ?? "")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(.appMain)
             }

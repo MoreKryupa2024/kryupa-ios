@@ -16,7 +16,7 @@ struct PersonalInformationScreenView: View {
     
     var body: some View {
         ZStack{
-            ScrollView {
+            
                 VStack(spacing:0){
                     ZStack(alignment:.leading){
                         RoundedRectangle(cornerRadius: 4)
@@ -50,7 +50,7 @@ struct PersonalInformationScreenView: View {
                     })
                     .padding(.top,-92)
                     .padding(.leading,-24)
-                    
+                    ScrollView {
                     VStack(spacing: 25,
                            content: {
                         textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
@@ -118,8 +118,9 @@ struct PersonalInformationScreenView: View {
                     .padding(.top,25)
                     
                 }
-                .padding([.leading,.trailing],24)
+                
             }
+                .padding([.leading,.trailing],24)
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 30 : 0)

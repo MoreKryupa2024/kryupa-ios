@@ -8,42 +8,42 @@
 import SwiftUI
 
 struct ReviewListView: View {
+    var reviewList: [ReviewListData] = [ReviewListData]()
     
     var body: some View {
         VStack(spacing:0){
-            ForEach(1...10){ index in
-                ReviewView
+            
+            ForEach(reviewList, id: \.reviewID){ data in
+                ReviewView(reviewData: data)
                     .padding(.top,15)
             }
         }
     }
     
-    private var ReviewView: some View{
+    private func ReviewView(reviewData:ReviewListData)-> some View{
         VStack{
             HStack(spacing:0){
                 
-                Image("profile")
-                    .resizable()
+                ImageLoadingView(imageURL: reviewData.reviewedByProfilePictureURL)
                     .frame(width: 64,height: 64)
                     .clipShape(.rect(cornerRadius: 32))
                 
                 VStack(alignment:.leading, spacing:5){
-                    Text("Alexa Chatterjee")
+                    Text(reviewData.reviewedByName)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 17))
                     
                     Text("5 Years Expirenced")
                         .font(.custom(FontContent.plusRegular, size: 12))
                     
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
+                    StarsView(rating: reviewData.rating, maxRating: 5, size: 12)
+                        
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading,23)
             }
             
-            Text("Lorem ipsum dolor sit amet consectetur. Tempus commodo cursus libero nullam vitae. Tempus neque duis enim tellus tortor elit eu commodo netus.")
+            Text(reviewData.review)
                 .font(.custom(FontContent.plusRegular, size: 11))
         }
         .padding(.vertical,9)

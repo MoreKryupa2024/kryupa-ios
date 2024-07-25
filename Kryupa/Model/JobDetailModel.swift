@@ -8,49 +8,60 @@
 import Foundation
 
 // MARK: - Welcome
-struct JobDetailModel: Codable {
+struct JobDetailModel {
     let message: String
     let success: Bool
     let data: JobDetailData
+    
+    init(jsonData:[String:Any]){
+        message = jsonData["message"] as? String ?? ""
+        success = jsonData["success"] as? Bool ?? false
+        data = JobDetailData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
 }
 
 // MARK: - DataClass
-struct JobDetailData: Codable {
+struct JobDetailData {
     let id, bookingType, startDate, endDate: String
     let startTime, endTime, gender, updatedBy: String
     let isActive, isDeleted: Bool
     let createdAt, updatedAt, profileID, customerID: String
-    let status, name, profilePictureUrl: String
+    let status, name: String
+    let profilePictureURL: String
     let bookingPricing: Int
-    let allergies, mobilityLevel, otherDiseaseType: String
-    let diseaseType, areasOfExpertise, additionalSkills, additionalInfo: [String]?
+    let allergies, mobilityLevel, otherDiseaseType, contactID: String
+    let caregiversID: String
+    let diseaseType, areasOfExpertise, additionalSkills, additionalInfo: [String]
     let languages: [String]
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case bookingType = "booking_type"
-        case startDate = "start_date"
-        case endDate = "end_date"
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case gender
-        case updatedBy = "updated_by"
-        case isActive = "is_active"
-        case isDeleted = "is_deleted"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case profileID = "profile_id"
-        case customerID = "customer_id"
-        case status, name
-        case profilePictureUrl = "profile_picture_url"
-        case bookingPricing = "booking_pricing"
-        case allergies
-        case mobilityLevel = "mobility_level"
-        case otherDiseaseType = "other_disease_type"
-        case diseaseType = "disease_type"
-        case areasOfExpertise = "areas_of_expertise"
-        case additionalSkills = "additional_skills"
-        case additionalInfo = "additional_info"
-        case languages
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        bookingType = jsonData["booking_type"] as? String ?? ""
+        startDate = jsonData["start_date"] as? String ?? ""
+        endDate = jsonData["end_date"] as? String ?? ""
+        startTime = jsonData["start_time"] as? String ?? ""
+        endTime = jsonData["end_time"] as? String ?? ""
+        gender = jsonData["gender"] as? String ?? ""
+        updatedBy = jsonData["updated_by"] as? String ?? ""
+        isActive = jsonData["is_active"] as? Bool ?? false
+        isDeleted = jsonData["is_deleted"] as? Bool ?? false
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+        profileID = jsonData["profile_id"] as? String ?? ""
+        customerID = jsonData["customer_id"] as? String ?? ""
+        status = jsonData["status"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
+        profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
+        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
+        allergies = jsonData["allergies"] as? String ?? ""
+        mobilityLevel = jsonData["mobility_level"] as? String ?? ""
+        otherDiseaseType = jsonData["other_disease_type"] as? String ?? ""
+        contactID = jsonData["contact_id"] as? String ?? ""
+        caregiversID = jsonData["caregivers_id"] as? String ?? ""
+        diseaseType = jsonData["disease_type"] as? [String] ?? []
+        areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []
+        additionalSkills = jsonData["additional_skills"] as? [String] ?? []
+        additionalInfo = jsonData["additional_info"] as? [String] ?? []
+        languages = jsonData["languages"] as? [String] ?? []
     }
 }

@@ -13,7 +13,8 @@ class PreferenceViewModel: ObservableObject{
     @Published var languageSpeakingSelected: [String] = [String]()
     @Published var preferenceListData: PreferenceList = PreferenceList()
     @Published var isLoading:Bool = false
-    
+    @Published var showPreference:Bool = false
+   
     func dataChecks(parameters:[String:Any],alert:@escaping((String)->Void),next:@escaping(()->Void)){
         
         

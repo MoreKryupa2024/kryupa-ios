@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 import Combine
 
 struct ChatView: View {
     @Environment(\.router) var router
     @State var userName: String = ""
     @State var sendMsgText: String = ""
+    var notificatioSsetBookingId = NotificationCenter.default
     
     @StateObject var viewModel = ChatScreenViewModel()
     
@@ -21,8 +23,22 @@ struct ChatView: View {
             VStack(spacing:20){
                 //HeaderView
                 usernameView
-                if viewModel.showVideoCallView{
-                    videoCallView
+                if Defaults().userType == AppConstants.SeekCare{
+                    if viewModel.showVideoCallView{
+                        videoCallView
+                    }
+                    
+                    if viewModel.bookingDeclineView{
+                        bookingDeclineView
+                    }
+                    
+                    if (viewModel.normalBooking || viewModel.isRecommended){
+                        bookNowView
+                    }
+                    
+                    if viewModel.showPayViewView{
+                        acceptedRequestView
+                    }
                 }
                 
                 ScrollView(.vertical) {
@@ -31,8 +47,10 @@ struct ChatView: View {
                             msg in
                             
                             ChatBoxView(msgData: msg, selectedChat: viewModel.selectedChat,onSelectedValue: { SpecialMessageData in
+                                let viewModelJob = JobsViewModel()
+                                viewModelJob.isComingfromChat = true
                                 router.showScreen(.push) { rout in
-                                    JobDetailView(jobID: SpecialMessageData.approchId)
+                                    JobDetailView(viewModel:viewModelJob,jobID: SpecialMessageData.approchId)
                                 }
                             })
                                 .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
@@ -46,7 +64,7 @@ struct ChatView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
-            .onAppear{
+            .task{
                 viewModel.connect()
                 viewModel.receiveMessage { msgData, str in
                     DispatchQueue.main.async {
@@ -55,6 +73,8 @@ struct ChatView: View {
                     }
                 }
                 viewModel.getChatHistory()
+                notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
+                                                             using: self.setBookingIds)
             }
             
             if viewModel.isLoading{
@@ -63,20 +83,18 @@ struct ChatView: View {
         }
     }
     
+    private func setBookingIds(_ notification: Notification){
+        if let bookingid = notification.userInfo?["bookingId"] as? String {
+            viewModel.bookingId = bookingid
+            viewModel.isRecommended = false
+            viewModel.sendRequestForBookCaregiver()
+        }
+    }
+    
     private var videoCallView: some View{
         
         return ZStack(alignment:.top){
-            
-            Image("circle-x")
-                .resizable()
-                .frame(width: 18,height: 18)
-                .offset(x: 130,y:3)
-                .asButton(.press) {
-                    viewModel.showVideoCallView = false
-                }
-                
             VStack {
-                
                 Text("Why discuss it on messages?\nVideo Call Now!")
                     .multilineTextAlignment(.center)
                     .font(.custom(FontContent.plusRegular, size: 16))
@@ -92,16 +110,135 @@ struct ChatView: View {
                         RoundedRectangle(cornerRadius: 48)
                     }
                     .asButton(.press) {
-                        
+                        presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
                     }
             }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.E_5_E_5_EA, lineWidth: 1)
+            )
+            
+            Image("circle-x")
+                .resizable()
+                .frame(width: 18,height: 18)
+                .asButton(.press) {
+                    viewModel.showVideoCallView = false
+                }
+                .offset(x: 130,y:15)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical,12)
-        .overlay( /// apply a rounded border
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(.E_5_E_5_EA, lineWidth: 1)
-        )
+        .padding(.horizontal,25)
+        
+    }
+    
+    private var bookingDeclineView: some View{
+        
+        return ZStack(alignment:.top){
+            VStack {
+                Text("The caregiver has declined the\nrequest for service.")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(._7_C_7_C_80)
+                
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.E_5_E_5_EA, lineWidth: 1)
+            )
+            
+            Image("circle-x")
+                .resizable()
+                .frame(width: 18,height: 18)
+                .asButton(.press) {
+                    viewModel.bookingDeclineView = false
+                }
+                .offset(x: 130,y:15)
+        }
+        .padding(.horizontal,25)
+        
+    }
+    
+    private var acceptedRequestView: some View{
+        
+        return ZStack(alignment:.top){
+            VStack {
+                Text("Congratulations!\nThe caregiver has accepted the request")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(._7_C_7_C_80)
+                
+                
+                Text("Pay Now")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 32)
+                    .padding(.horizontal,15)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        let paymentViewModel = PaymentViewModel()
+                        paymentViewModel.paySpecialMessageData = viewModel.paySpecialMessageData
+                        router.showScreen(.push) { rout in
+                            PaymentOrderScreenView(viewModel: paymentViewModel)
+                        }
+                    }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.E_5_E_5_EA, lineWidth: 1)
+            )
+        }
+        .padding(.horizontal,25)
+        
+    }
+    
+    private var bookNowView: some View{
+        
+        return ZStack(alignment:.top){
+            VStack {
+                Text("Found your ideal caregiver?")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(._7_C_7_C_80)
+                
+                
+                Text("Book Now")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 32)
+                    .padding(.horizontal,15)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        if viewModel.isRecommended{
+                            let bookingViewModel = BookingFormScreenViewModel()
+                            bookingViewModel.isRecommended = true
+                            bookingViewModel.giverId = viewModel.selectedChat?.giverId ?? ""
+                            bookingViewModel.giverName = viewModel.selectedChat?.caregiverName ?? ""
+                            
+                            router.showScreen(.push) { route in
+                                BookingFormScreenView(viewModel: bookingViewModel)
+                            }
+                        }else{
+                            viewModel.normalBooking = false
+                            viewModel.sendRequestForBookCaregiver()
+                        }
+                    }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.E_5_E_5_EA, lineWidth: 1)
+            )
+        }
         .padding(.horizontal,25)
     }
     
@@ -142,6 +279,7 @@ struct ChatView: View {
                                 viewModel.sendMessage(text)
                                 sendMsgText = ""
                             }
+                            sendMsgText = ""
                         }
                 }
                 .padding(.trailing, 5)
@@ -213,20 +351,16 @@ struct ChatView: View {
                 }
             
             Text(userName)
+                .lineLimit(1)
                 .font(.custom(FontContent.besRegular, size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                Image("phone-call")
-                    .resizable()
-                    .frame(width: 24,height: 24)
-                    .asButton(.press) {
-                    }
-                
                 Image("video")
                     .resizable()
                     .frame(width: 24,height: 24)
                     .asButton(.press) {
+                        
                     }
             }
         }

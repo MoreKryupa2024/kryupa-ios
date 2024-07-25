@@ -189,7 +189,7 @@ struct JobDescView: View {
                     .resizable()
                     .frame(width: 18,height: 18)
 //                Text(job.customerInfo.diseaseType.joined(separator: ","))
-                Text(diseaseType.joined(separator: ","))
+                Text(diseaseType.joined(separator:","))
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -17,7 +17,7 @@ struct HealthInformationSeekerView: View {
     
     
     var body: some View {
-        ScrollView{
+        
             VStack(spacing:0){
                 ZStack(alignment:.leading){
                     RoundedRectangle(cornerRadius: 4)
@@ -35,7 +35,7 @@ struct HealthInformationSeekerView: View {
                     .frame(height: 28)
                     .padding(.top,30)
                 
-                    
+                ScrollView{
                     medicalConditionView
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading,.trailing,.top],24)
@@ -175,6 +175,8 @@ struct HealthInformationSeekerView: View {
                content: {
             HStack(spacing:0){
                 Text("Mobility Level")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))

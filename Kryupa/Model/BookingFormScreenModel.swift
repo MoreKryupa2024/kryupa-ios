@@ -105,3 +105,40 @@ struct BookingIDData {
         languages = jsondata["languages"] as? [String] ?? []
     }
 }
+
+
+struct RecommendedBookingModel {
+    let data: RecommendedBookingData
+    let success: Bool
+    let message: String
+    
+    init(jsonData:[String:Any]){
+        message = jsonData["message"] as? String ?? ""
+        success = jsonData["success"] as? Bool ?? false
+        data = RecommendedBookingData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+// MARK: - DataClass
+struct RecommendedBookingData {
+    let customerID: String
+    let preference: RecommendedUserBookingData
+
+    init(jsonData:[String:Any]){
+        customerID = jsonData["customer_id"] as? String ?? ""
+        preference = RecommendedUserBookingData(jsonData: jsonData["preference"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+// MARK: - Preference
+struct RecommendedUserBookingData {
+    let yearOfExperience, gender: String
+    let preferredLang, preferredServiceType: [String]
+
+    init(jsonData:[String:Any]){
+        yearOfExperience = jsonData["year_of_experience"] as? String ?? ""
+        gender = jsonData["gender"] as? String ?? ""
+        preferredLang = (jsonData["preferred_lang"] as? [String] ?? []).sorted(by: { $0 < $1 })
+        preferredServiceType = (jsonData["preferred_service_type"] as? [String] ?? []).sorted(by: { $0 < $1 })
+    }
+}

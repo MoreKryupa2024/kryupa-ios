@@ -9,6 +9,7 @@ import Foundation
 
 class JobsViewModel: ObservableObject {
     @Published var isloading: Bool = Bool()
+    @Published var isComingfromChat: Bool = false
     @Published var jobDetailModel: JobDetailData?
     @Published var startDate = String()
     @Published var otherDiseaseType = String()

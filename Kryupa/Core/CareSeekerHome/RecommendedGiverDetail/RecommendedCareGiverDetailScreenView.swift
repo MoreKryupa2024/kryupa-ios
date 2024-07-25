@@ -13,7 +13,7 @@ struct RecommendedCareGiverDetailScreenView: View {
     @Environment(\.router) var router
     
     var careGiverDetail: CareGiverNearByCustomerScreenData?
-    var bookingID: String = "90279ed1-9347-4e3d-a9ae-49e69b6c143b"//String()
+    @State var bookingID: String = String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
     
@@ -32,7 +32,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                             .padding(.horizontal,24)
                             .padding(.top,15)
                     }else{
-                        ReviewListView()
+                        ReviewListView(reviewList:viewModel.giverDetail?.reviewList ?? [])
                             .padding(.horizontal,24)
                     }
                 }
@@ -43,11 +43,11 @@ struct RecommendedCareGiverDetailScreenView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
-        .onAppear{
+        .task{
             viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "")
         }
     }
-    
+
    private var SegmentView: some View {
         HStack(alignment: .top,spacing: 0){
             ForEach(viewModel.options,id: \.self){ option in
@@ -128,38 +128,41 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 12))
             }
             .padding([.vertical,.horizontal],30)
-         
+            
             MessageButton
                 .asButton(.press){
-                    viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                    
+                    
+                    //                            viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                    viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
                         let chatViewModel = ChatScreenViewModel()
                         chatViewModel.selectedChat = viewModel.chatData
-                        presentAlert(title: "Kryupa", subTitle: "Appointment Booked")
+                        chatViewModel.isRecommended = viewModel.isRecommended
+                        chatViewModel.normalBooking = viewModel.isNormalBooking
+                        chatViewModel.bookingId = bookingID
                         router.showScreen(.push) { route in
                             ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)
                         }
                     } alert: { strMsg in
                         presentAlert(title: "Kryupa", subTitle: strMsg)
                     }
-
+                    
                 }
         }
     }
     
     private var MessageButton: some View {
-        HStack{
-            Text("Message")
-                .font(.custom(FontContent.plusMedium, size: 16))
-                .padding(.vertical, 8)
-                .padding(.horizontal, 20)
-        }
-        .background(
-            ZStack{
-                Capsule(style: .circular)
-                    .fill(.appMain)
+        
+        Text("Message")
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .foregroundStyle(.appMain)
+            .padding(.horizontal,20)
+            .padding(.vertical,8)
+            .background{
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(lineWidth: 1)
             }
-        )
-        .foregroundColor(.white)
+            .padding(.top,5)
     }
     
     private var HeaderView: some View{

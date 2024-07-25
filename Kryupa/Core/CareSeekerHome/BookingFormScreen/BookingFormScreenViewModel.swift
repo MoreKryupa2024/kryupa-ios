@@ -22,6 +22,8 @@ class BookingFormScreenViewModel: ObservableObject{
     
     var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
     @Published var bookingFor: String = String()
+    @Published var giverName: String = String()
+    @Published var giverId: String = String()
     @Published var segSelected: String = "One Time"
     @Published var bookingForList: [RelativeDataModel] = [RelativeDataModel]()
     
@@ -36,6 +38,26 @@ class BookingFormScreenViewModel: ObservableObject{
     @Published var additionalSkillsSelected: [String] = [String]()
     @Published var yearsOfExperienceSelected: String = String()
     @Published var isloading: Bool = Bool()
+    @Published var isRecommended: Bool = false
+    @Published var recommendedUserBookingData: RecommendedUserBookingData?
+    func getCustomerRequirements(){
+        isloading = true
+        NetworkManager.shared.getCustomerRequirements() { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.recommendedUserBookingData = data.data.preference
+                    self?.genderSelected = data.data.preference.gender
+                    self?.yearsOfExperienceSelected = data.data.preference.yearOfExperience
+                    self?.needServiceInSelected = data.data.preference.preferredServiceType
+                    self?.languageSpeakingSelected = data.data.preference.preferredLang
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
     
     func setPrefieldBookingData(){
         guard let bookingIDData else {
