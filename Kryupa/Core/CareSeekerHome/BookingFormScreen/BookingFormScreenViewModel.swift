@@ -133,7 +133,7 @@ class BookingFormScreenViewModel: ObservableObject{
             "area_of_expertise":needServiceInSelected,
             "booking_type":segSelected,
             "start_date":segSelected == "One Time" ? selectedDay.serverDate : startDate,
-            "end_date":endDate,
+            "end_date":segSelected == "One Time" ? selectedDay.serverDate : endDate,
             "start_time":startTime,
             "end_time":endTime,
             "gender":genderSelected,

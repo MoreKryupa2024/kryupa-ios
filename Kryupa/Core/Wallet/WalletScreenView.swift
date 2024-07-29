@@ -12,6 +12,8 @@ struct WalletScreenView: View {
     
     @Environment(\.router) var router
     
+    @StateObject var viewModel = PaymentViewModel()
+    
     var body: some View {
         ZStack {
             VStack(spacing:0){
@@ -24,7 +26,7 @@ struct WalletScreenView: View {
                             .foregroundStyle(._7_C_7_C_80)
                             .padding(.top,30)
                         
-                        Text("$125.00")
+                        Text("$\(Double(viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
                             .font(.custom(FontContent.besSemiBold, size: 34))
                             .foregroundStyle(._018_ABE)
                             .padding(.top,5)
@@ -62,8 +64,8 @@ struct WalletScreenView: View {
                             .padding(.bottom,15)
                             .padding(.top,30)
                             
-                            ForEach(0...10) { data in
-                                WalletHistoryView()
+                            ForEach(viewModel.transectionListData, id: \.id) { data in
+                                WalletHistoryView(transectionListData: data)
                                     .padding(.horizontal,24)
                                     .padding(.bottom,15)
                             }
@@ -79,10 +81,19 @@ struct WalletScreenView: View {
                                         topTrailingRadius: 30
                                     )
                                 )
+                                
                         }
                         .padding(.top,30)
                     }
                 }
+            }
+            .onAppear{
+                viewModel.getWalletBalance()
+                viewModel.getTransectionList()
+            }
+            
+            if viewModel.isloading{
+                LoadingView()
             }
         }
         .background(.gray.opacity(0.20))

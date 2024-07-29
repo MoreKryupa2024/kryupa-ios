@@ -118,6 +118,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                 }
             }
             .padding(.top,10)
+            .padding(.horizontal,24)
             
             HStack(spacing:0){
                 Text("Languages:")

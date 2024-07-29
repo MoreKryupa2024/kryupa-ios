@@ -9,16 +9,17 @@ import SwiftUI
 
 struct AddMoneyScreenView: View {
     
-    @State var amount: String = String()
+    @StateObject var viewModel = PaymentViewModel()
     @Environment(\.router) var router
     
     var body: some View {
         VStack(spacing:0){
             HeaderView(showBackButton: true)
-            TextField(text: $amount) {
+            TextField(text: $viewModel.amount) {
                 Text("0.00")
                     .foregroundStyle(._018_ABE)
             }
+            .foregroundStyle(._018_ABE)
             .multilineTextAlignment(.center)
             .keyboardType(.numberPad)
             .font(.custom(FontContent.besMedium, size: 30))
@@ -34,9 +35,14 @@ struct AddMoneyScreenView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    router.showScreen(.push) { rout in
-                        PaymentMethodsScreenView()
+                    if (Int(viewModel.amount) ?? 0 ) > 0{
+                        router.showScreen(.push) { rout in
+                            PaymentMethodsScreenView(viewModel: viewModel)
+                        }
+                    }else{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Amount")
                     }
+                    
                 }
                 .padding(.top,90)
             Spacer()

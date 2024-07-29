@@ -124,6 +124,9 @@ struct PersonalInformationScreenView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            .onTapGesture {
+                print("No access!")
+            }
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()

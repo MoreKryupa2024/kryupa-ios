@@ -32,6 +32,7 @@ struct BookingCareGiverListView: View {
             
             VStack(alignment:.leading, spacing:0){
                 Text(giver.name)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.besMedium, size: 17))
                 

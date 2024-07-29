@@ -12,15 +12,7 @@ import PayPalWebPayments
 
 struct PaymentListView: View {
     
-    @State var selectedPaymentMethod: Int
-    @State var selectedSection = 0
-    @State var showAddBankView = false
-    @State var bankName: String = ""
-    @State var fullName: String = ""
-    @State var accountNumber: String = ""
-    @State var orderId: String = ""
-    @State var showPaypal: Bool = false
-    @State var isloading: Bool = false
+    @StateObject var viewModel = PaymentListViewModel()
 
     var body: some View {
         ZStack{
@@ -28,7 +20,7 @@ struct PaymentListView: View {
                 HeaderView(showBackButton: true)
                 SegmentView
                 
-                if selectedSection == 0 {
+                if viewModel.selectedSection == 0 {
                     LazyVStack(spacing: 15) {
                         ForEach(0...2) {
                             msg in
@@ -40,15 +32,12 @@ struct PaymentListView: View {
                 }
                 else {
                     
-                    if showAddBankView {
+                    if viewModel.showAddBankView {
                         BankView
-                    }
-                    else {
+                    } else {
                         LazyVStack(spacing: 15) {
-                            ForEach(0...2) {
-                                item in
-                                
-                                PaymentMethodCell(tag: item, selectedPaymentMethod: self.$selectedPaymentMethod)
+                            ForEach(viewModel.bankListData,id: \.id) { item in
+                                PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
                             }
                         }
                         .padding(.top, 20)
@@ -57,7 +46,6 @@ struct PaymentListView: View {
                             Text("Add new bank account")
                                 .font(.custom(FontContent.plusRegular, size: 15))
                                 .foregroundStyle(._444446)
-                            
                             
                             Spacer()
                             
@@ -74,53 +62,26 @@ struct PaymentListView: View {
                         )
                         .padding([.top, .horizontal], 24)
                         .asButton(.press) {
-                            //                        self.showAddBankView = true
-                            let param = ["approch_id":"9d7c028a-f8dd-4c02-96b9-ad9af1e55a07"]
-                            isloading = true
-                            NetworkManager.shared.getPaypalOrderID(params: param) { result in
-                                isloading = false
-                                switch result{
-                                case .success(let data):
-                                    self.orderId = data.data.paymentOrderID
-                                    self.showPaypal = true
-                                    
-                                case .failure(let error):
-                                    print(error.localizedDescription)
-                                }
-                            }
+                            self.viewModel.showAddBankView = true
                         }
                     }
                 }
             }
+            .onAppear{
+                viewModel.getBankList()
+            }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
-            if isloading {
-                LoadingView()
-            }
             
-            if showPaypal {
-                PaypalScreenView(orderId: self.orderId) { payPalClient, result in
-                    print("Paypal Payment Success")
-                    showPaypal = false
-                    print(payPalClient)
-                    print(result)
-                } payPalError: { payPalClient, error in
-                    print(payPalClient)
-                    print(error)
-                    showPaypal = false
-                    print("Paypal Payment Send Error")
-                } payPalDidCancel: { payPalClient in
-                    showPaypal = false
-                    print("Paypal Payment Cancel")
-                }
-
+            if viewModel.isloading {
+                LoadingView()
             }
         }
     }
     
     private var BankView: some View{
         VStack (spacing: 15){
-            TextField("Bank Name", text: $bankName)
+            TextField("Bank Name", text: $viewModel.bankName)
                 .frame(height: 48)
                 .padding(.horizontal, 10)
                 .overlay(
@@ -129,8 +90,9 @@ struct PaymentListView: View {
                         .stroke(.D_1_D_1_D_6, lineWidth: 1)
                 )
                 .padding(.horizontal, 24)
+                .keyboardType(.asciiCapable)
             
-            TextField("Full Name", text: $fullName)
+            TextField("Routing Number", text: $viewModel.routingNumber)
                 .frame(height: 48)
                 .padding(.horizontal, 10)
                 .overlay(
@@ -139,8 +101,9 @@ struct PaymentListView: View {
                         .stroke(.D_1_D_1_D_6, lineWidth: 1)
                 )
                 .padding(.horizontal, 24)
+                .keyboardType(.numberPad)
             
-            TextField("Account Number", text: $accountNumber)
+            TextField("Account Number", text: $viewModel.accountNumber)
                 .frame(height: 48)
                 .padding(.horizontal, 10)
                 .overlay(
@@ -149,6 +112,7 @@ struct PaymentListView: View {
                         .stroke(.D_1_D_1_D_6, lineWidth: 1)
                 )
                 .padding(.horizontal, 24)
+                .keyboardType(.numberPad)
             
             Text("Add Bank Account")
                 .font(.custom(FontContent.plusRegular, size: 16))
@@ -159,6 +123,17 @@ struct PaymentListView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .padding(.top, 15)
+                .asButton(.press) {
+                    if viewModel.bankName.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Bank Name")
+                    }else if viewModel.routingNumber.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Routing Number")
+                    }else if viewModel.accountNumber.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Account Number")
+                    }else{
+                        self.viewModel.AddBankAccount()
+                    }
+                }
             
             Text("Cancel")
                 .font(.custom(FontContent.plusRegular, size: 16))
@@ -171,7 +146,7 @@ struct PaymentListView: View {
                         .stroke(.appMain, lineWidth: 1)
                 )
                 .asButton(.press) {
-                    self.showAddBankView = false
+                    self.viewModel.showAddBankView = false
                 }
             
         }
@@ -180,7 +155,7 @@ struct PaymentListView: View {
     
     private var SegmentView: some View{
         
-        Picker("Payment", selection: $selectedSection) {
+        Picker("Payment", selection: $viewModel.selectedSection) {
             Text("Payment History")
                 .tag(0)
                 .font(.custom(FontContent.plusRegular, size: 12))
@@ -192,12 +167,9 @@ struct PaymentListView: View {
         .pickerStyle(.segmented)
         .padding(.horizontal, 24)
         .padding(.top, 20)
-        
     }
-    
-
 }
 
 #Preview {
-    PaymentListView(selectedPaymentMethod: 0)
+    PaymentListView()
 }

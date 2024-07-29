@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WalletTransectionHistoryScreenView: View {
+    @StateObject var viewModel = PaymentViewModel()
+    
     var body: some View {
         ZStack {
             VStack(spacing:0){
@@ -18,8 +20,8 @@ struct WalletTransectionHistoryScreenView: View {
                             .padding(.vertical,24)
                             .font(.custom(FontContent.besMedium, size: 20))
                         
-                        ForEach(0...10) { data in
-                            WalletHistoryView()
+                        ForEach(viewModel.transectionListData, id: \.id) { data in
+                            WalletHistoryView(transectionListData: data)
                                 .padding(.horizontal,24)
                                 .padding(.bottom,15)
                         }
@@ -27,6 +29,9 @@ struct WalletTransectionHistoryScreenView: View {
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
+            }
+            .task {
+                viewModel.getTransectionList()
             }
         }
     }

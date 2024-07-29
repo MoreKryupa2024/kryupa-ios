@@ -11,31 +11,66 @@ import SwiftfulUI
 struct PaymentMethodsScreenView: View {
     
     @Environment(\.router) var router
+    @StateObject var viewModel = PaymentViewModel()
     
     var body: some View {
         ZStack{
             VStack{
                 HeaderView(title: "Payment", showBackButton: true)
                 VStack(spacing:15){
-                    ZelleView
-                        .asButton(.press) {
-                            router.showScreen(.push) { rout in
-                                MoneyAddedScreenView()
-                            }
-                        }
+//                    ZelleView
+//                        .asButton(.press) {
+//                            router.showScreen(.push) { rout in
+//                                MoneyAddedScreenView(viewModel: viewModel)
+//                            }
+//                        }
                     PaypalView
                         .asButton(.press) {
-                            router.showScreen(.push) { rout in
-                                MoneyAddedScreenView()
-                            }
+                            
+                            viewModel.getPaypalOrderID()
+//                            router.showScreen(.push) { rout in
+//                                MoneyAddedScreenView()
+//                            }
                         }
-                    VenmoView
-                        .asButton(.press) {
-                            router.showScreen(.push) { rout in
-                                MoneyAddedScreenView()
-                            }
-                        }
+//                    VenmoView
+//                        .asButton(.press) {
+//                            router.showScreen(.push) { rout in
+//                                MoneyAddedScreenView(viewModel: viewModel)
+//                            }
+//                        }
                     Spacer()
+                }
+            }
+            
+            if viewModel.isloading {
+                LoadingView()
+            }
+            
+            if viewModel.showPaypal {
+                PaypalScreenView(orderId: self.viewModel.orderId) { payPalClient, result in
+                    print("Paypal Payment Success")
+                    viewModel.showPaypal = false
+                    print(payPalClient)
+                    print(result)
+                    viewModel.confirmPaypalOrderID() {
+                        if viewModel.fromPaymentFlow{
+                            router.showScreen(.push) { rout in
+                                PaymentConfirmScreenView(viewModel: viewModel)
+                            }
+                        }else{
+                            router.showScreen(.push) { rout in
+                                MoneyAddedScreenView(viewModel: viewModel)
+                            }
+                        }
+                    }
+                } payPalError: { payPalClient, error in
+                    print(payPalClient)
+                    print(error)
+                    viewModel.showPaypal = false
+                    print("Paypal Payment Send Error")
+                } payPalDidCancel: { payPalClient in
+                    viewModel.showPaypal = false
+                    print("Paypal Payment Cancel")
                 }
             }
         }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentMethodCell: View {
+    let bankListData: BankListData
     let tag: Int
     @Binding var selectedPaymentMethod: Int
     @State private var showingAlert = false
@@ -21,7 +22,7 @@ struct PaymentMethodCell: View {
 
                 Spacer()
                 
-                Text("Wells Fargo")
+                Text(bankListData.bankName)
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._7_C_7_C_80)
             }
@@ -35,7 +36,7 @@ struct PaymentMethodCell: View {
 
                 Spacer()
                 
-                Text("********5486")
+                Text("********\(bankListData.accountNumber.suffix(4))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._7_C_7_C_80)
             }            
@@ -43,13 +44,13 @@ struct PaymentMethodCell: View {
 
             
             HStack {
-                Text("Location:")
+                Text("Routing Number:")
                     .font(.custom(FontContent.besMedium, size: 16))
                     .foregroundStyle(.appMain)
 
                 Spacer()
                 
-                Text("California")
+                Text(bankListData.routingNumber)
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._7_C_7_C_80)
             }
@@ -98,9 +99,4 @@ struct PaymentMethodCell: View {
 //            }
 //        }
     }
-}
-
-#Preview {
-    @State var number = 10
-    return PaymentMethodCell(tag: 0, selectedPaymentMethod: $number)
 }

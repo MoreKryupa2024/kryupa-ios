@@ -70,6 +70,9 @@ struct BookingFormScreenView: View {
                 BottomButtonView
             }
             .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            .onTapGesture {
+                print("No access!")
+            }
             
             if viewModel.isloading{
                 LoadingView()

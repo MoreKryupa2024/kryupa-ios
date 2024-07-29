@@ -32,7 +32,7 @@ struct ChatView: View {
                         bookingDeclineView
                     }
                     
-                    if (viewModel.normalBooking || viewModel.isRecommended){
+                    if (viewModel.normalBooking || viewModel.isRecommended) && !viewModel.showPayViewView{
                         bookNowView
                     }
                     

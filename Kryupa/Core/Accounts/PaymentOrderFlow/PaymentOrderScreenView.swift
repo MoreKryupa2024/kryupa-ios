@@ -25,7 +25,7 @@ struct PaymentOrderScreenView: View {
                             Image("warningRed")
                                 .resizable()
                                 .frame(width: 24,height: 24)
-                            Text("Your current wallet balance is $12.45")
+                            Text("Your current wallet balance is $\((viewModel.paymentOrderData?.walletBalance ?? 0).removeZerosFromEnd(num: 2))")
                                 .font(.custom(FontContent.plusMedium, size: 13))
                         }
                         .padding(.top,15)
@@ -78,27 +78,6 @@ struct PaymentOrderScreenView: View {
             if viewModel.isloading{
                 LoadingView()
             }
-            
-            if viewModel.showPaypal {
-                PaypalScreenView(orderId: viewModel.orderId) { payPalClient, result in
-                    print("Paypal Payment Success")
-                    viewModel.showPaypal = false
-                    print(payPalClient)
-                    print(result)
-                    router.showScreen(.push) { rout in
-                        PaymentConfirmScreenView()
-                    }
-                } payPalError: { payPalClient, error in
-                    print(payPalClient)
-                    print(error)
-                    viewModel.showPaypal = false
-                    print("Paypal Payment Send Error")
-                } payPalDidCancel: { payPalClient in
-                    viewModel.showPaypal = false
-                    print("Paypal Payment Cancel")
-                }
-
-            }
         }
         .task{
             viewModel.getPaymentOrderDetails()
@@ -109,16 +88,28 @@ struct PaymentOrderScreenView: View {
     
     private var buttonView: some View{
         HStack(spacing: 40) {
-            Text("Confirm")
+            Text(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? "Add & Pay" : "Confirm")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .foregroundStyle(.white)
                 .frame(height: 32)
-                .frame(width: 97)
+                .padding(.horizontal,8)
                 .background{
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    viewModel.getPaypalOrderID()
+                    if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
+                        viewModel.amount = "\(viewModel.paymentOrderData?.diffrenceAmount ?? 0.0)"
+                        viewModel.fromPaymentFlow = true
+                        router.showScreen(.push) { rout in
+                            PaymentMethodsScreenView(viewModel: viewModel)
+                        }
+                    }else{
+                        viewModel.confrimGiverPayment {
+                            router.showScreen(.push) { rout in
+                                PaymentConfirmScreenView(viewModel: viewModel)
+                            }
+                        }
+                    }
                 }
             
             Text("Cancel")
@@ -144,27 +135,28 @@ struct PaymentOrderScreenView: View {
                 Text("Rate per hour:")
                     .font(.custom(FontContent.plusLight, size: 15))
                 Spacer()
-                Text("$\(viewModel.paymentOrderData?.pricePerHour ?? 0)")
+                Text("$\((viewModel.paymentOrderData?.pricePerHour ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 16))
             }
             HStack{
                 Text("Number of hours:")
                     .font(.custom(FontContent.plusLight, size: 15))
                 Spacer()
-                Text((viewModel.paymentOrderData?.hours ?? ""))
+                Text((viewModel.paymentOrderData?.hours ?? 0).removeZerosFromEnd(num: 2))
                     .font(.custom(FontContent.plusRegular, size: 16))
             }
             HStack{
                 Text("Total:")
                     .font(.custom(FontContent.plusLight, size: 15))
                 Spacer()
-                Text("$\(viewModel.paymentOrderData?.bookingPricing ?? 0)")
+                Text("$\((viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 16))
+                
             }
-            if 2+2 == 4{
+            if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
                 HStack{
                     Spacer()
-                    Text("Add $100 more to complete trasnaction")
+                    Text("Add $\((viewModel.paymentOrderData?.diffrenceAmount ?? 0).removeZerosFromEnd(num: 2)) more to complete trasnaction")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(.red)
                 }
@@ -181,7 +173,7 @@ struct PaymentOrderScreenView: View {
                 Spacer()
             }
             
-            Text("Nursing, Physical Therapy, Occupational Therapy")
+            Text(viewModel.paymentOrderData?.areasOfExpertise.joined(separator: ", ") ?? "None")
                 .foregroundStyle(._242426)
                 .font(.custom(FontContent.plusRegular, size: 12))
         }

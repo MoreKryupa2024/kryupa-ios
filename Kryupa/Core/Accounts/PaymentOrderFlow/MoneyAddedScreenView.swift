@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MoneyAddedScreenView: View {
     @Environment(\.router) var router
+    @StateObject var viewModel = PaymentViewModel()
     var body: some View {
         ZStack{
             VStack{

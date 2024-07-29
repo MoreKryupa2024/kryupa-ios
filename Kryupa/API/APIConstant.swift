@@ -40,7 +40,13 @@ class APIConstant{
     
     static let getInboxList = "\(baseURL)/apis/communication/chat/contact_list"
     
-    static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order"
+    static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order_for_wallet"
+    static let confirmPaypalOrderID = "\(baseURL)/apis/payment/paypal/capture_order"
+    static let getAllTransaction = "\(baseURL)/apis/payment/transaction/get_all_transaction"
+    static let getWalletById = "\(baseURL)/apis/payment/wallet/getWalletById"
+    static let payCaregiverBooking = "\(baseURL)/apis/payment/wallet/pay_for_caregiver_booking"
+    static let getBankList = "\(baseURL)/apis/payment/bank/get_bank_list"
+    static let addBank = "\(baseURL)/apis/payment/bank/add_bank"
     
     static let getCustomerRequirements = "\(baseURL)/apis/booking/get_customer_requirements"
     static let createConversation = "\(baseURL)/apis/communication/chat/create_conversation"
@@ -89,7 +95,7 @@ class FontContent{
 }
 
 class AppConstants{
-    static let config = CoreConfig(clientID: "AQ1QAtervs-V5ceHUV8k0VQzEryWLh6jNrx5vlAmDF9_yes49PeyUP6vCDbeBTlk2Qdx4SdLXWq9bInU", environment: .sandbox)
+    static let config = CoreConfig(clientID: "Acsfr2dcilBLBuXe5FYHkJ68qi2w8JXQMPlWuD-qNjMVrTUPIOYPutpHRquOPZ_rv67J1YgAkDOQ8zP4", environment: .sandbox)
     static let DeviceType = "IOS"
     
     static let SocialApple = "APPLE"

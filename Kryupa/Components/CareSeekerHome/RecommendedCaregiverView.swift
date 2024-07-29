@@ -27,6 +27,8 @@ struct RecommendedCaregiverView: View {
                         HStack(spacing:0){
                             Text(careData.name)
                                 .font(.custom(FontContent.plusMedium, size: 13))
+                                .lineLimit(1)
+                                .frame(width: 110)
                             Spacer()
                             Image(systemName: "star.fill")
                                 .resizable()

@@ -62,6 +62,7 @@ struct InboxScreenView: View {
             
             VStack(alignment:.leading, spacing:0){
                 Text(profile.name)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.plusRegular, size: 16))
                 

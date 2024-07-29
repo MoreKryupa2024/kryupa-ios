@@ -83,7 +83,7 @@ struct AccountView: View {
             
         case "Payments & Refunds","Payments":
             router.showScreen(.push) { rout in
-                PaymentListView(selectedPaymentMethod: 0)
+                PaymentListView()
             }
             
         case "Wallet":

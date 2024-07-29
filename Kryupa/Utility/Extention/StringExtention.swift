@@ -91,6 +91,14 @@ extension Double {
         formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
         return String(formatter.string(from: number) ?? "")
     }
+    
+    func removeZerosFromEnd(num:Int) -> String {
+        let formatter = NumberFormatter()
+        let number = NSNumber(value: self)
+        formatter.minimumFractionDigits = num
+        formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
+        return String(formatter.string(from: number) ?? "")
+    }
 }
 
 extension Binding {
