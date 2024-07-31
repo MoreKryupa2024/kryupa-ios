@@ -518,6 +518,106 @@ class NetworkManager{
         task.resume()
     }
     
+    func updateNotification(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.updateNotification) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = SendOTPModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteAccount(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.deleteAccount) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = SendOTPModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getLobbyStatus(completionHandler :  @escaping (Results<BGVInterviewSlotBookedStatusModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.lobbyStatus) else {
@@ -681,6 +781,50 @@ class NetworkManager{
             do {
                 let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
                 let apiData = WalletAmountModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getNotification(completionHandler :  @escaping (Results<SettingNotificationModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getNotification) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = SettingNotificationModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -1481,6 +1625,198 @@ class NetworkManager{
         task.resume()
     }
     
+    func customerSvcAct(completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.customerSvcAct) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ServiceStartModel(jsonData: parsedData)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func caregiverSvcAct(completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.caregiverSvcAct) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ServiceStartModel(jsonData: parsedData)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func customerConfirmStartService(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.customerConfirmStartService) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        print(params)
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ServiceStartModel(jsonData: parsedData)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func giverConfirmStartService(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.giverConfirmStartService) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        print(params)
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ServiceStartModel(jsonData: parsedData)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getJobsNearYouList(params:[String:Any]? = nil,completionHandler :  @escaping (Results<JobsModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.getJobsNearYouList) else {
@@ -2091,6 +2427,55 @@ class NetworkManager{
             do {
                 let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
                 let apiData = BookingsListModel(jsondata: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func getJobList(params:[String:Any]? = nil,completionHandler :  @escaping (Results<JobsModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.getJobList) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = JobsModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{

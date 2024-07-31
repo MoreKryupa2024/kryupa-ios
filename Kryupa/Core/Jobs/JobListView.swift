@@ -9,23 +9,32 @@ import SwiftUI
 
 struct JobListView: View {
     @Environment(\.router) var router
-
+    @StateObject var viewModel = JobsViewModel()
+    
     var body: some View {
-        ScrollView {
-            HeaderView()
-            LazyVStack(spacing: 15) {
-                ForEach(0...5) {
-                    _ in
-                    
-                    JobCell()
-                        .asButton(.press) {
-                            router.showScreen(.push) { rout in
-                                JobDetailView(jobID: "")
+        ZStack{
+            ScrollView {
+                HeaderView()
+                LazyVStack(spacing: 15) {
+                    ForEach(viewModel.jobPost,id: \.jobID) {
+                        data in
+                        JobCell(jobPostData: data)
+                            .asButton(.press) {
+                                router.showScreen(.push) { rout in
+                                    JobDetailView(viewModel:viewModel, jobID: data.jobID)
+                                }
                             }
-                        }
+                    }
                 }
+                .padding(.top, 24)
             }
-            .padding(.top, 24)
+            .onAppear{
+                viewModel.getJobsList()
+            }
+            
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
     }
 }

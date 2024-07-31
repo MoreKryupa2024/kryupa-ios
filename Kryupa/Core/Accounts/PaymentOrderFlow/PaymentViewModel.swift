@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+@MainActor
 class PaymentViewModel: ObservableObject{
     
     @Published var paySpecialMessageData: SpecialMessageData?
@@ -115,6 +115,7 @@ class PaymentViewModel: ObservableObject{
                     return
                 }
                 self.isloading = false
+                self.getTransectionList()
                 switch result{
                 case .success(let data):
                     self.walletAmountData = data.data

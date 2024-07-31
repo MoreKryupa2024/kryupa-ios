@@ -14,6 +14,7 @@ struct ChatView: View {
     @State var userName: String = ""
     @State var sendMsgText: String = ""
     var notificatioSsetBookingId = NotificationCenter.default
+    var notificatioSsetInboxId = NotificationCenter.default
     
     @StateObject var viewModel = ChatScreenViewModel()
     
@@ -24,21 +25,20 @@ struct ChatView: View {
                 //HeaderView
                 usernameView
                 if Defaults().userType == AppConstants.SeekCare{
-                    if viewModel.showVideoCallView{
-                        videoCallView
-                    }
-                    
-                    if viewModel.bookingDeclineView{
-                        bookingDeclineView
-                    }
-                    
-                    if (viewModel.normalBooking || viewModel.isRecommended) && !viewModel.showPayViewView{
+//                    if viewModel.showVideoCallView{
+//                        videoCallView
+//                    }
+//                    
+//                    if viewModel.bookingDeclineView{
+//                        bookingDeclineView
+//                    }
+                    if (viewModel.normalBooking || viewModel.isRecommended){
                         bookNowView
                     }
                     
-                    if viewModel.showPayViewView{
-                        acceptedRequestView
-                    }
+//                    if viewModel.showPayViewView{
+//                        acceptedRequestView
+//                    }
                 }
                 
                 ScrollView(.vertical) {
@@ -52,6 +52,14 @@ struct ChatView: View {
                                 router.showScreen(.push) { rout in
                                     JobDetailView(viewModel:viewModelJob,jobID: SpecialMessageData.approchId)
                                 }
+                            },onPaySelectedValue: { SpecialMessageData in
+                                
+                                let paymentViewModel = PaymentViewModel()
+                                paymentViewModel.paySpecialMessageData = SpecialMessageData
+                                router.showScreen(.push) { rout in
+                                    PaymentOrderScreenView(viewModel: paymentViewModel)
+                                }
+                                
                             })
                                 .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         }
@@ -75,6 +83,7 @@ struct ChatView: View {
                 viewModel.getChatHistory()
                 notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
                                                              using: self.setBookingIds)
+                
             }
             
             if viewModel.isLoading{
@@ -347,7 +356,8 @@ struct ChatView: View {
                 .frame(width: 30,height: 30)
                 .asButton(.press) {
                     viewModel.disconnect()
-                    router.dismissScreen()
+                    router.dismissScreenStack()
+                    notificatioSsetInboxId.post(name: .showInboxScreen, object: nil)
                 }
             
             Text(userName)

@@ -36,3 +36,26 @@ struct JobAcceptData: Codable {
         case bookingPricingForCustomer = "booking_pricing_for_customer"
     }
 }
+
+// MARK: - Welcome
+struct ServiceStartModel {
+    let success: Bool
+    let message: String
+    let data: ServiceStartData
+    
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = ServiceStartData(jsonData: jsonData["data"] as? [String : Any] ?? [String : Any]())
+    }
+}
+
+// MARK: - DataClass
+struct ServiceStartData {
+    let id, serviceStatus: String
+
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        serviceStatus = jsonData["service_status"] as? String ?? ""
+    }
+}

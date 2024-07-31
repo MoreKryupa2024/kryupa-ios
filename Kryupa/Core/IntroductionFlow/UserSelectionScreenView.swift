@@ -14,18 +14,6 @@ struct UserSelectionScreenView: View {
     
     var body: some View {
         VStack(spacing: 0.0){
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        router.dismissScreen()
-                    }
-                Spacer()
-            }
-            .padding(.horizontal,24)
-            .padding(.top,10)
-            
             Spacer()
             Image("UserTypeScreenIcon")
                 .resizable()

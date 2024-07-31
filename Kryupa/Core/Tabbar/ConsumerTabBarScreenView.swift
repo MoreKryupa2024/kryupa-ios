@@ -28,6 +28,9 @@ struct ConsumerTabBarScreenView: View {
         .onAppear{
             NotificationCenter.default.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
                                                    using: self.showBookingScreen)
+            
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                   using: self.showInboxScreen)
         }
     }
     
@@ -95,6 +98,10 @@ struct ConsumerTabBarScreenView: View {
     
     private func showBookingScreen(_ notification: Notification) {
         selectedIndex = 2
+    }
+    
+    private func showInboxScreen(_ notification: Notification) {
+        selectedIndex = 3
     }
 }
 

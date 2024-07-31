@@ -324,6 +324,8 @@ struct BookingFormScreenView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Years of Experience")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -352,6 +354,8 @@ struct BookingFormScreenView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Language Speaking")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -390,6 +394,8 @@ struct BookingFormScreenView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Gender")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -473,6 +479,8 @@ struct BookingFormScreenView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Need Service In")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -613,7 +621,10 @@ struct BookingFormScreenView: View {
                                 CareGiverNearByCustomerScreenView(bookingID: bookingId)
                             }
                         }
+                    } alert: { error in
+                        presentAlert(title: "Kryupa", subTitle: error)
                     }
+
                 }
             
             Text("Reset")

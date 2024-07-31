@@ -14,6 +14,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
     @Published var jobsNearYou: [JobPost] = [JobPost]()
     @Published var isloading: Bool = Bool()
     @Published var jobAcceptModel: [JobAcceptData] = [JobAcceptData]()
+    @Published var serviceStartData: ServiceStartData?
 
     func getJobsNearYouList(completion: @escaping (()->Void)){
         
@@ -32,6 +33,26 @@ class CareGiverHomeScreenViewModel: ObservableObject
                     completion()
                 case .failure(let error):
                     self?.isloading = false
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    func giverConfirmStartService(){
+        guard let approch_id = serviceStartData?.id else {return}
+        let param = [
+            "approch_id": approch_id
+        ]
+        isloading = true
+        NetworkManager.shared.giverConfirmStartService(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.serviceStartData = nil
+                case .failure(let error):
                     print(error)
                 }
             }
@@ -58,6 +79,21 @@ class CareGiverHomeScreenViewModel: ObservableObject
                 }
             }
             
+        }
+    }
+    
+    func caregiverSvcAct(){
+        isloading = true
+        NetworkManager.shared.caregiverSvcAct() { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.serviceStartData = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
     }
 }

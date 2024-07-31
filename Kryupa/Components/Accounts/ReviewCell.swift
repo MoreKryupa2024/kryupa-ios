@@ -11,7 +11,7 @@ struct ReviewCell: View {
     @State var reviewData: ReviewData?
     
     var body: some View {
-        VStack(alignment: .leading) {
+        LazyVStack(alignment: .leading) {
             HStack(spacing: 15) {
                 
                 AsyncImage(url: URL(string: reviewData?.profilePictureUrl ?? ""),content: { image in

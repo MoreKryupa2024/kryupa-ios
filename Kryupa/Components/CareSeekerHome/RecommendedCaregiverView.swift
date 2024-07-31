@@ -15,7 +15,7 @@ struct RecommendedCaregiverView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing:10){
+            LazyHStack(spacing:10){
 //                ForEach(recommendedCaregiver,id: \.id) { index in
                 ForEach(recommendedCaregiver, id: \.id) { careData in
                     

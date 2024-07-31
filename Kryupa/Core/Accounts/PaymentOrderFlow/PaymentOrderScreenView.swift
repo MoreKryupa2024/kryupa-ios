@@ -104,10 +104,8 @@ struct PaymentOrderScreenView: View {
                             PaymentMethodsScreenView(viewModel: viewModel)
                         }
                     }else{
-                        viewModel.confrimGiverPayment {
-                            router.showScreen(.push) { rout in
-                                PaymentConfirmScreenView(viewModel: viewModel)
-                            }
+                        router.showScreen(.push) { rout in
+                            PaymentConfirmScreenView(viewModel: viewModel)
                         }
                     }
                 }

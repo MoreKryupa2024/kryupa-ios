@@ -126,7 +126,19 @@ class BookingFormScreenViewModel: ObservableObject{
     }
     
     
-    func createBooking(action:(@escaping(String)->Void)){
+    func createBooking(action:(@escaping(String)->Void),alert:(@escaping(String)->Void)){
+        
+        if bookingFor.isEmpty{
+         return alert("Please Select Person for this Booking.")
+        }else if needServiceInSelected.count == 0{
+            return alert("Please Select at list One Service.")
+        }else if genderSelected.isEmpty{
+            return alert("Please Select Preferred Service Provider Gender.")
+        }else if languageSpeakingSelected.count == 0{
+            return alert("Please Select Preferred Language.")
+        }else if yearsOfExperienceSelected.isEmpty{
+            return alert("Please Select Year of Experience.")
+        }
         
         var param: [String: Any] = [
             "profile_id":bookingForList.filter{$0.name == bookingFor}.first?.id ?? "",

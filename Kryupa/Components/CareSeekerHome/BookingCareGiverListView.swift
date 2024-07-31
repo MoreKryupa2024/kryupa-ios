@@ -12,7 +12,7 @@ struct BookingCareGiverListView: View {
     var onSelectedValue: ((CareGiverNearByCustomerScreenData)->Void)? = nil
     var careGiverNearByList: [CareGiverNearByCustomerScreenData] = [CareGiverNearByCustomerScreenData]()
     var body: some View {
-        VStack(spacing:0){
+        LazyVStack(spacing:0){
             ForEach(careGiverNearByList,id: \.id){ giver in
                 giverView(giver: giver)
                     .asButton(.press) {

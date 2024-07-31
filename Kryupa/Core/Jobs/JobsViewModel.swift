@@ -13,6 +13,7 @@ class JobsViewModel: ObservableObject {
     @Published var jobDetailModel: JobDetailData?
     @Published var startDate = String()
     @Published var otherDiseaseType = String()
+    @Published var jobPost = [JobPost]()
 
     func getJobsDetail(approachID: String, completion: @escaping (()->Void)){
         
@@ -28,6 +29,24 @@ class JobsViewModel: ObservableObject {
                     completion()
                 case .failure(let error):
                     self?.isloading = false
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getJobsList(){
+        let param = ["pageNumber":1,
+                     "pageSize":20]
+        
+        isloading = true
+        NetworkManager.shared.getJobList(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.jobPost = data.data.jobPost
+                case .failure(let error):
                     print(error)
                 }
             }

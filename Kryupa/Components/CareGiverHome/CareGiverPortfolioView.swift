@@ -18,8 +18,7 @@ struct CareGiverPortfolioView: View {
         VStack(spacing:10){
             
             HStack {
-                Image("jobProfile")
-                    .resizable()
+                ImageLoadingView(imageURL: job.customerInfo.profilePictureUrl)
                     .frame(width: 58,height: 58)
                     .cornerRadius(29)
 

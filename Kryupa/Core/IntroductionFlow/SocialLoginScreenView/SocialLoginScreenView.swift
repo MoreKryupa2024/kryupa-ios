@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftfulUI
+import FirebaseMessaging
 import AuthenticationServices
 
 struct SocialLoginScreenView: View {
@@ -25,6 +26,18 @@ struct SocialLoginScreenView: View {
     var body: some View {
         ZStack{
             VStack(spacing: 0.0){
+                HStack{
+                    Image("navBack")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                        .asButton(.press) {
+                            router.dismissScreen()
+                        }
+                    Spacer()
+                }
+                .padding(.horizontal,24)
+                .padding(.top,10)
+                
                 Spacer()
                 Image("socialScreenIcon")
                     .resizable()
@@ -75,19 +88,21 @@ struct SocialLoginScreenView: View {
     
     private func handleSuccessfulLogin(with authorization: ASAuthorization) {
         if let userCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            let userId = userCredential.user
-            print(userId)
-            print(userCredential)
-            if userCredential.authorizedScopes.contains(.fullName) {
-                print(userCredential.fullName?.givenName ?? "No given name")
-            }
+            let userIdentifier = userCredential.user
+            let fullName = userCredential.fullName
+            let email = userCredential.email
             
-            if userCredential.authorizedScopes.contains(.fullName) {
-                print(userCredential.fullName?.familyName ?? "No family name")
-            }
+            let param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
+                         "deviceType": AppConstants.DeviceType,
+                         "socialAccessToken": userIdentifier,
+                         "fcmToken": "asdfasdfadsf",
+                         "referralCode": "",
+                         "userType": Defaults().userType,
+                         "providerType": AppConstants.SocialApple
+            ]
             
-            if userCredential.authorizedScopes.contains(.email) {
-                print(userCredential.email ?? "No email")
+            viewModel.signCall(param: param){ userInfo in
+                navigateToMobileNumberView(userInfo: userInfo)
             }
         }
     }

@@ -14,7 +14,7 @@ struct AppointmentsView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing:10){
+            LazyHStack(spacing:10){
                 ForEach(appointmentList,id: \.id) { data in
                     
                     VStack(spacing:0){

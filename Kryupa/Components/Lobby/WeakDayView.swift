@@ -22,7 +22,7 @@ struct WeakDayView: View {
     var onSelectedValue: ((WeakDayData)->Void)? = nil
     
     var body: some View {
-        HStack(){
+        LazyHStack(){
             ForEach(values,id: \.serverDate) { value in
                 VStack(spacing:6){
                     dropDownView(value: value.day)

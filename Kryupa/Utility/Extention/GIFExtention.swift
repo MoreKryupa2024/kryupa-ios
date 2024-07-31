@@ -32,6 +32,7 @@ extension Notification.Name {
     static let setCareSeekerHomeScreen = Notification.Name("setCareSeekerHomeScreen")
     static let logout = Notification.Name("logout")
     static let showBookingScreen = Notification.Name("ShowBookingScreen")
+    static let showInboxScreen = Notification.Name("ShowInboxScreen")
     static let showJobsScreen = Notification.Name("ShowJobsScreen")
     static let setBookingId = Notification.Name("SetBookingId")
 
@@ -82,4 +83,14 @@ func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,
     let timeStamp = dateFormatter.string(from: date)
 
     return timeStamp
+}
+
+extension UIView {
+// This is the function to convert UIView to UIImage
+    public func asUIImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
 }

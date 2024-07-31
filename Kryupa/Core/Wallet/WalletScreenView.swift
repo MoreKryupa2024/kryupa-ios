@@ -46,7 +46,7 @@ struct WalletScreenView: View {
                             }
                             .padding(.top,30)
                         
-                        VStack(spacing:0){
+                        LazyVStack(spacing:0){
                             HStack(content: {
                                 Text("Transactions")
                                 Spacer()
@@ -89,9 +89,7 @@ struct WalletScreenView: View {
             }
             .onAppear{
                 viewModel.getWalletBalance()
-                viewModel.getTransectionList()
             }
-            
             if viewModel.isloading{
                 LoadingView()
             }

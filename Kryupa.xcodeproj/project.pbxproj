@@ -75,6 +75,8 @@
 		BE0983B12C33F23000FBAECC /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */; };
 		BE1191AE2C0706B70076AFB4 /* ReferAndEarnScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */; };
 		BE1191B02C074BDB0076AFB4 /* InterviewScheduledScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */; };
+		BE11D51A2C5A5076004FCC34 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11D5192C5A5076004FCC34 /* SettingViewModel.swift */; };
+		BE11D51C2C5A5262004FCC34 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11D51B2C5A5262004FCC34 /* SettingModel.swift */; };
 		BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */; };
 		BE1573B32BF5F06E00A6137D /* SocialLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B22BF5F06E00A6137D /* SocialLoginScreenView.swift */; };
 		BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */; };
@@ -150,6 +152,7 @@
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
 		BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */; };
 		BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAF2C18317000A71632 /* LobbyScreenViewModel.swift */; };
+		BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BE9007292C58C4AA003B6038 /* FirebaseMessaging */; };
 		BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */; };
 		BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */; };
 		BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */; };
@@ -265,6 +268,8 @@
 		BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarnScreenView.swift; sourceTree = "<group>"; };
 		BE1191AF2C074BDB0076AFB4 /* InterviewScheduledScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduledScreenView.swift; sourceTree = "<group>"; };
+		BE11D5192C5A5076004FCC34 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		BE11D51B2C5A5262004FCC34 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		BE1573B02BF5D1CD00A6137D /* UserSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionScreenView.swift; sourceTree = "<group>"; };
 		BE1573B22BF5F06E00A6137D /* SocialLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginScreenView.swift; sourceTree = "<group>"; };
 		BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNumberScreenView.swift; sourceTree = "<group>"; };
@@ -371,6 +376,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */,
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
 				BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */,
@@ -465,16 +471,12 @@
 			isa = PBXGroup;
 			children = (
 				A36BC3AB2C1F660D005616A5 /* Reviews */,
-				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
-				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
-				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
-				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
+				BE11D5162C5A4D36004FCC34 /* PersonalView */,
+				BE11D5172C5A4D49004FCC34 /* MyService */,
 				BE32E0292C46406A003C7C90 /* PaymentFlow */,
 				A36BC3962C1AC689005616A5 /* FAQView.swift */,
 				BE32E02A2C464197003C7C90 /* PaymentOrderFlow */,
-				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
-				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
-				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
+				BE11D5182C5A4D82004FCC34 /* Setting */,
 				A36BC3A22C1B0828005616A5 /* AboutUsView.swift */,
 				A36BC3A82C1B1EA9005616A5 /* AccountView.swift */,
 				A3FEF6072C219F0700EFC3C2 /* AccountsViewModel.swift */,
@@ -515,6 +517,35 @@
 				BE1191AD2C0706B70076AFB4 /* ReferAndEarnScreenView.swift */,
 			);
 			path = "Refer & Earn";
+			sourceTree = "<group>";
+		};
+		BE11D5162C5A4D36004FCC34 /* PersonalView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB87B62C17225000C604DD /* PersonalDetailView.swift */,
+				A3BB87B82C173C1100C604DD /* PersonalDetailViewModel.swift */,
+			);
+			path = PersonalView;
+			sourceTree = "<group>";
+		};
+		BE11D5172C5A4D49004FCC34 /* MyService */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC3762C18527A005616A5 /* MyServicesView.swift */,
+				A36BC3782C185396005616A5 /* MyServiceViewModel.swift */,
+			);
+			path = MyService;
+			sourceTree = "<group>";
+		};
+		BE11D5182C5A4D82004FCC34 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC39C2C1AE906005616A5 /* SettingsView.swift */,
+				A36BC39E2C1AEE92005616A5 /* NotificationAlertView.swift */,
+				A36BC3A02C1B0194005616A5 /* DeactivateAccountView.swift */,
+				BE11D5192C5A5076004FCC34 /* SettingViewModel.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		BE1573B82BF631A400A6137D /* LoginFlow */ = {
@@ -845,6 +876,7 @@
 				A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */,
 				BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */,
 				BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */,
+				BE11D51B2C5A5262004FCC34 /* SettingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1097,6 +1129,7 @@
 				BE2B58A92C3EA777002EC297 /* PayPalNativePayments */,
 				BE2B58AB2C3EA777002EC297 /* PaymentButtons */,
 				BE2D33792C3FCFD700192323 /* PayPalWebPayments */,
+				BE9007292C58C4AA003B6038 /* FirebaseMessaging */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1220,6 +1253,7 @@
 				A3BB87B72C17225000C604DD /* PersonalDetailView.swift in Sources */,
 				BE644E312BF495D800A6781F /* SplashView.swift in Sources */,
 				BE92FD222C09E19300EDF49C /* BookingFormScreenViewModel.swift in Sources */,
+				BE11D51C2C5A5262004FCC34 /* SettingModel.swift in Sources */,
 				BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */,
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */,
@@ -1242,6 +1276,7 @@
 				A36BC3B12C1F782B005616A5 /* RatingView.swift in Sources */,
 				A3BB87A22C1717B500C604DD /* BookingRecommendationModel.swift in Sources */,
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
+				BE11D51A2C5A5076004FCC34 /* SettingViewModel.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
@@ -1647,6 +1682,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE644E892BF4D86D00A6781F /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;
+		};
+		BE9007292C58C4AA003B6038 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		BE95D5CB2C0449D400881B3C /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

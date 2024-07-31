@@ -18,15 +18,22 @@ struct CareSeekerHomeScreenView: View {
             VStack(spacing:0){
                 HeaderView
                 ScrollView {
-                    Image("careSeekerHomeBannerSmall")
-                        .resizable()
-                        .frame(height: 58)
-                        .padding(.horizontal,24)
-                        .padding(.top,15)
-                        .asButton(.press) {
-                            NotificationCenter.default.post(name: .showBookingScreen,
-                                                                            object: nil, userInfo: nil)
+                    if let serviceStartData = viewModel.serviceStartData{
+                        if serviceStartData.serviceStatus == "start_by_caregiver" {
+                            serviceView(serviceStartData: serviceStartData)
                         }
+                    }else{
+                        Image("careSeekerHomeBannerSmall")
+                            .resizable()
+                            .frame(height: 58)
+                            .padding(.horizontal,24)
+                            .padding(.top,15)
+                            .asButton(.press) {
+                                NotificationCenter.default.post(name: .showBookingScreen,
+                                                                                object: nil, userInfo: nil)
+                            }
+                    }
+                    
                     if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
                         BookFirstServiceView
                     }
@@ -53,7 +60,39 @@ struct CareSeekerHomeScreenView: View {
         }
         .onAppear{
             viewModel.getRecommandationList()
+            viewModel.customerSvcAct()
         }
+    }
+    
+    private func serviceView(serviceStartData: ServiceStartData)-> some View{
+        
+        return ZStack(alignment:.top){
+            VStack {
+                Text("Has caregiver arrived\nto your location?")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.besMedium, size: 16))
+                
+                Text("Confirm")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 32)
+                    .padding(.horizontal,15)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        viewModel.customerConfirmStartService()
+                    }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .background( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(.F_2_F_2_F_7)
+            )
+        }
+        .padding(.horizontal,25)
+        .padding(.vertical,25)
     }
     
     private var RecommendedGiverView:some View{

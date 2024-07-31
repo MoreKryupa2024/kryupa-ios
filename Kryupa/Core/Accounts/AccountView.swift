@@ -37,7 +37,7 @@ struct AccountView: View {
                             line
                         }
                     }else{
-                        if index == 4 || index == 6 {
+                        if index == 3 || index == 5 {
                             line
                         }
                     }

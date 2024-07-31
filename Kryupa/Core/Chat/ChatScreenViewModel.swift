@@ -83,10 +83,10 @@ class ChatScreenViewModel: ObservableObject{
                         if MessageData.message.contains("video_call"){
                             self.showVideoCallView = false
                             return false
-                        }else if MessageData.message.contains("pay_now"){
-                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-                            self.showPayViewView = true
-                            return false
+//                        }else if MessageData.message.contains("pay_now"){
+//                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+//                            self.showPayViewView = true
+//                            return false
                         }else{
                             return true
                         }

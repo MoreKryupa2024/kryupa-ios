@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct CareGiverHomeScreenView: View {
     @StateObject private var viewModel = CareGiverHomeScreenViewModel()
-    @State var showNoContent: Bool = false
+    @State var showNoContent: Bool = true
     @State private var isSelectedView = 4
     @Environment(\.router) var router
 
@@ -18,22 +19,31 @@ struct CareGiverHomeScreenView: View {
             VStack(spacing:0){
                 HeaderView
                 ScrollView{
-                    VStack(spacing:0){
-                        
-                        if !showNoContent {
-                            completeProfileView
-                            jobsNearYouView
-                        }
-                        else {
-                            BannerView(showIndecator: false,bannerHeight: 104)
-                                .padding([.horizontal,.vertical],24)
+                    VStack(spacing:0) {
+                        if showNoContent {
+                            if let serviceStartData = viewModel.serviceStartData{
+                                if serviceStartData.serviceStatus == "active" {
+                                    serviceView(serviceStartData: serviceStartData)
+                                }
+                            }else{
+                                BannerView(showIndecator: false,bannerHeight: 104)
+                                    .padding([.horizontal,.vertical],24)
+                            }
                             noCotentView
+                        } else {
+                            if let serviceStartData = viewModel.serviceStartData{
+                                if serviceStartData.serviceStatus == "active" {
+                                    serviceView(serviceStartData: serviceStartData)
+                                }
+                            }else{
+                                completeProfileView
+                            }
+                            jobsNearYouView
                         }
                     }
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
-                
             }
             .onAppear{
                 viewModel.getJobsNearYouList() {
@@ -44,13 +54,43 @@ struct CareGiverHomeScreenView: View {
                         showNoContent = false
                     }
                 }
+                viewModel.caregiverSvcAct()
             }
-            
             if viewModel.isloading{
                 LoadingView()
             }
-            
         }
+    }
+    
+    private func serviceView(serviceStartData: ServiceStartData)-> some View{
+        
+        return ZStack(alignment:.top){
+            VStack {
+                Text("Reached the location?\nBegin the service")
+                    .multilineTextAlignment(.center)
+                    .font(.custom(FontContent.besMedium, size: 16))
+                
+                Text("Start Service")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 32)
+                    .padding(.horizontal,15)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
+                    }
+                    .asButton(.press) {
+                        viewModel.giverConfirmStartService()
+                    }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical,12)
+            .background( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(.F_2_F_2_F_7)
+            )
+        }
+        .padding(.horizontal,25)
+        .padding(.vertical,25)
     }
     
     private var noCotentView: some View{
@@ -176,7 +216,7 @@ struct CareGiverHomeScreenView: View {
     private var jobsNearYouGridView: some View{
         
         ScrollView(.horizontal) {
-            HStack(spacing:1){
+            LazyHStack(spacing:1){
                 ForEach(viewModel.jobsNearYou, id: \.jobID) { jobPost in
                     CareGiverPortfolioView(job: jobPost, accept: {
                         viewModel.acceptRejectJob(approchID: jobPost.jobID, status: "Job Acceptance") {

@@ -6,22 +6,26 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct DeactivateAccountView: View {
     
-    @State var state = true
-    @State var arrcheckList: [NotificationAlertData] = [
-        NotificationAlertData(title: "Yes, I am sure", toggleState: false),
-        NotificationAlertData(title: "No, Deactivate my account till next login", toggleState: false)
-    ]
-
+    @StateObject var viewModel = SettingViewModel()
+    @Environment(\.router) var router
+    
     var body: some View {
-        VStack {
-            HeaderView(title: "Deactivate / Delete account",showBackButton: true)
-            DeleteView
-            Spacer()
+        ZStack{
+            VStack {
+                HeaderView(title: "Deactivate / Delete account",showBackButton: true)
+                DeleteView
+                Spacer()
+            }
+            .toolbar(.hidden, for: .navigationBar)
+            
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func getCheckboxCell(title: String, toggleState: Bool, index: Int)-> some View{
@@ -35,10 +39,7 @@ struct DeactivateAccountView: View {
                     }
                 }
                 .onTapGesture {
-                    let newData = NotificationAlertData(title: title, toggleState: state)
-                    arrcheckList.remove(at: index)
-                    arrcheckList.insert(newData, at: index)
-                    state.toggle()
+                    viewModel.selectedOption = title
                 }
                         
             Text(title)
@@ -57,8 +58,8 @@ struct DeactivateAccountView: View {
                     .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._444446)
                 
-                ForEach(Array(arrcheckList.enumerated()), id: \.offset) { index, model in
-                    getCheckboxCell(title: model.title, toggleState: model.toggleState,index: index)
+                ForEach(Array(viewModel.arrcheckList.enumerated()), id: \.offset) { index, model in
+                    getCheckboxCell(title: model.title, toggleState: viewModel.selectedOption == model.title,index: index)
                 }
                 
             }
@@ -74,7 +75,8 @@ struct DeactivateAccountView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    
+                    viewModel.deleteAccount()
+                    router.dismissScreenStack()
                 }
                 .padding(.top, 20)
             

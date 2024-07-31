@@ -12,6 +12,7 @@ struct ChatBoxView: View {
     var msgData: MessageData?
     var selectedChat: ChatListData?
     var onSelectedValue: ((SpecialMessageData)->Void)? = nil
+    var onPaySelectedValue: ((SpecialMessageData)->Void)? = nil
     
     var body: some View {
         if let msgData {
@@ -33,6 +34,8 @@ struct ChatBoxView: View {
                 if msgData.isActionBtn{
                     let SpecialMessageData = SpecialMessageData(jsonData: (msgData.message.toJSON() as? [String : Any] ?? [String : Any]()))
                     if SpecialMessageData.type == "view_service"{
+                        otherUserViewService(message: SpecialMessageData)
+                    }else if SpecialMessageData.type == "pay_now"{
                         otherUserViewService(message: SpecialMessageData)
                     }
                 }else{
@@ -65,6 +68,8 @@ struct ChatBoxView: View {
                         
                         if message.type == "view_service"{
                             onSelectedValue?(message)
+                        }else if message.type == "pay_now"{
+                            onPaySelectedValue?(message)
                         }else{
                             presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
                         }

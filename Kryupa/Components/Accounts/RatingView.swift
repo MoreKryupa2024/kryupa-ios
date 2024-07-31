@@ -13,7 +13,7 @@ struct RatingView: View {
     @State var selected = false
 
     var body: some View {
-        HStack {
+        LazyHStack {
             ForEach(Array(starList.enumerated()), id: \.offset) { index, model in
                 Image(model ? "star" : "star_unselected")
                     .resizable()
