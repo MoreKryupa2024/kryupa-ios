@@ -47,8 +47,10 @@ struct BookingScreenView: View {
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
+                            let viewModelReview = ReviewsViewModel()
+                            viewModelReview.bookingsListData = data
                             router.showScreen(.push) { rout in
-                                GiveReviewView()
+                                GiveReviewView(viewModel:viewModelReview)
                             }
                         }
                 }
@@ -85,8 +87,10 @@ struct BookingScreenView: View {
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
+                            let viewModelReview = ReviewsViewModel()
+                            viewModelReview.bookingsListData = data
                             router.showScreen(.push) { rout in
-                                GiveReviewView()
+                                GiveReviewView(viewModel:viewModelReview)
                             }
                         }
                 }

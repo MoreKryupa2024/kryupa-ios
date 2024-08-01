@@ -9,23 +9,34 @@ import SwiftUI
 
 struct GiveReviewView: View {
     
-    @State var isEditAddress = false
-    @State var isEditReview = false
-    @State var txtReview = ""
-
+    @StateObject var viewModel = ReviewsViewModel()
+    
     var body: some View {
-        ScrollView {
-            HeaderView(showBackButton: true)
-            UserView
-            DateTimeView
-            line
-            AddressView
-            line
-            ReviewHoursView()
-            line
-            WriteReview
+        ZStack{
+            VStack(spacing:0){
+                HeaderView(showBackButton: true)
+                ScrollView {
+                    UserView
+                    DateTimeView
+                    line
+                    AddressView
+                    line
+                    if let reviewDetailData = viewModel.reviewDetailData {
+                        ReviewHoursView(ratePerHr: reviewDetailData.ratePerHours, noOfHrs: reviewDetailData.totalHours, total: reviewDetailData.bookingPricingForCustomer)
+                    }
+                    line
+                    WriteReview
+                }
+                .toolbar(.hidden, for: .navigationBar)
+                .onAppear{
+                    viewModel.getReview()
+                }
+            }
+            
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var WriteReview: some View {
@@ -36,10 +47,10 @@ struct GiveReviewView: View {
                     Text("Review:")
                         .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(.appMain)
-
+                    
                     Spacer()
                     
-                    if !isEditReview {
+                    if !viewModel.isEditReview {
                         Image("edit-two")
                             .frame(width: 17, height: 17)
                         
@@ -50,18 +61,20 @@ struct GiveReviewView: View {
                     
                 }
                 .asButton(.press) {
-                    isEditReview = true
+                    viewModel.isEditReview = true
                 }
             }
-
-            RatingView()
-                .disabled(isEditReview ? false : true)
-
             
-            TextEditorWithPlaceholder(text: $txtReview)
-                .disabled(isEditReview ? false : true)
-
-            if isEditReview {
+            RatingView(action: { rating in
+                viewModel.ratingValue = (rating + 1)
+            })
+            .disabled(viewModel.isEditReview ? false : true)
+            
+            
+            TextEditorWithPlaceholder(text: $viewModel.txtReview)
+                .disabled(viewModel.isEditReview ? false : true)
+            
+            if viewModel.isEditReview {
                 Text("Submit")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.white)
@@ -71,13 +84,19 @@ struct GiveReviewView: View {
                         RoundedRectangle(cornerRadius: 48)
                     }
                     .asButton(.press) {
-                        isEditReview = false
+                        if viewModel.ratingValue == 0{
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
+                        }else if viewModel.txtReview.isEmpty{
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
+                        }else{
+                            viewModel.addReview()
+                        }
                     }
             }
-
+            
         }
         .padding([.horizontal,.top], 24)
-
+        
     }
     
     private var AddressView: some View{
@@ -86,28 +105,28 @@ struct GiveReviewView: View {
                 Text("Address:")
                     .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(.appMain)
-                    .disabled(isEditAddress ? false : true)
-
-
+                    .disabled(viewModel.isEditAddress ? false : true)
+                
+                
                 Spacer()
                 
-                HStack {
-                    Image("edit-two")
-                        .frame(width: 17, height: 17)
-                    
-                    Text("Edit")
-                        .font(.custom(FontContent.plusRegular, size: 16))
-                        .foregroundStyle(._7_C_7_C_80)
-                }
-                .asButton(.press) {
-                    isEditAddress = true
-                }
+                //                HStack {
+                //                    Image("edit-two")
+                //                        .frame(width: 17, height: 17)
+                //
+                //                    Text("Edit")
+                //                        .font(.custom(FontContent.plusRegular, size: 16))
+                //                        .foregroundStyle(._7_C_7_C_80)
+                //                }
+                //                .asButton(.press) {
+                //                    viewModel.isEditAddress = true
+                //                }
             }
             
             Text("FG 20, Sector 54, New York\nUSA, 541236")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(.appMain)
-
+            
         }
         .padding(.horizontal, 24)
         .padding(.top, 24)
@@ -117,25 +136,27 @@ struct GiveReviewView: View {
     private var DateTimeView: some View{
         VStack(alignment: .leading) {
             HStack {
-                Text("Monday, 07 March 2024")
-                    .font(.custom(FontContent.besMedium, size: 16))
-                    .foregroundStyle(.appMain)
-                    .padding(.horizontal, 24)
-
+                if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                        .font(.custom(FontContent.besMedium, size: 16))
+                        .foregroundStyle(.appMain)
+                        .padding(.horizontal, 24)
+                }
                 Spacer()
             }
             .padding(.top, 5)
-
+            
             HStack {
-                Text("02:00 PM - 05:00PM")
-                    .font(.custom(FontContent.plusRegular, size: 11))
-                    .foregroundStyle(._444446)
-                    .padding(.horizontal, 24)
-
+                if let startTime = viewModel.bookingsListData?.startTime, let endTime = viewModel.bookingsListData?.endTime{
+                    Text("\(startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mma")) - \(endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mma"))")
+                        .font(.custom(FontContent.plusRegular, size: 11))
+                        .foregroundStyle(._444446)
+                        .padding(.horizontal, 24)
+                }
                 Spacer()
             }
             .padding(.bottom, 5)
-
+            
         }
         .frame(height: 60)
         .overlay(
@@ -145,7 +166,7 @@ struct GiveReviewView: View {
         )
         .padding(.horizontal, 24)
         .padding(.top, 30)
-
+        
     }
     
     private var line: some View {
@@ -164,19 +185,18 @@ struct GiveReviewView: View {
                     .font(.custom(FontContent.besMedium, size: 20))
                     .foregroundStyle(.appMain)
                 
-                HStack {
-                    Spacer()
-                    Text("Download invoice")
-                        .font(.custom(FontContent.plusRegular, size: 10))
-                        .foregroundStyle(._7_C_7_C_80)
-                        .underline()
-                }
-                .padding(.trailing, 24)
+                //                HStack {
+                //                    Spacer()
+                //                    Text("Download invoice")
+                //                        .font(.custom(FontContent.plusRegular, size: 10))
+                //                        .foregroundStyle(._7_C_7_C_80)
+                //                        .underline()
+                //                }
+                //                .padding(.trailing, 24)
             }
             
             HStack {
-                Image("giveReview")
-                    .resizable()
+                ImageLoadingView(imageURL: viewModel.bookingsListData?.profilePictureURL ?? "")
                     .frame(width: 126, height: 126)
                     .cornerRadius(63)
             }
@@ -188,20 +208,16 @@ struct GiveReviewView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             
-            Text("Alexa Chatterjee")
+            Text(viewModel.bookingsListData?.name ?? "")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
             
-            Text("$214")
+            Text("$\(viewModel.bookingsListData?.price ?? 0)")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(._444446)
-
+            
             HStack {
-                ForEach (0...3) {_ in
-                    Image("star")
-                        .resizable()
-                        .frame(width: 12, height: 12)
-                }
+                StarsView(rating: Double(viewModel.reviewDetail?.rating ?? "") ?? 0, maxRating: 5, size: 12)
                 Text("(100)")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)
@@ -223,30 +239,31 @@ struct GiveReviewView: View {
 }
 
 struct TextEditorWithPlaceholder: View {
-     @Binding var text: String
-     
-     var body: some View {
-         ZStack(alignment: .leading) {
-             if text.isEmpty {
+    @Binding var text: String
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty {
                 VStack {
-                     Text("Write a review")
-                         .padding(.top, 10)
-                         .padding(.leading, 6)
-                         .opacity(0.6)
-                     Spacer()
-                 }
-             }
-             
-             VStack {
-                 TextEditor(text: $text)
-                     .font(.custom(FontContent.plusRegular, size: 12))
-                     .frame(minHeight: 150, maxHeight: 300)
-                     .opacity(text.isEmpty ? 0.85 : 1)
-                 Spacer()
-             }
-         }
-     }
- }
+                    Text("Write a review")
+                        .padding(.top, 10)
+                        .padding(.leading, 6)
+                        .opacity(0.6)
+                    Spacer()
+                }
+            }
+            
+            VStack {
+                TextEditor(text: $text)
+                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .frame(minHeight: 150, maxHeight: 300)
+                    .opacity(text.isEmpty ? 0.85 : 1)
+                Spacer()
+            }
+        }
+        .id(text)
+    }
+}
 
 
 #Preview {

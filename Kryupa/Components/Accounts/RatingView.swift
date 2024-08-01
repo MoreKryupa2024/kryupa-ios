@@ -11,7 +11,7 @@ struct RatingView: View {
     
     @State var starList = [false, false, false, false, false]
     @State var selected = false
-
+    var action:((Int)->Void)? = nil
     var body: some View {
         LazyHStack {
             ForEach(Array(starList.enumerated()), id: \.offset) { index, model in
@@ -29,6 +29,7 @@ struct RatingView: View {
                                 starList.insert(false, at: indexS)
                             }
                         }
+                        action?(index)
                         selected.toggle()
                     }
             }

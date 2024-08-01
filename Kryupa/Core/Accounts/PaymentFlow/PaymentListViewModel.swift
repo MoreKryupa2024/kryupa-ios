@@ -53,7 +53,7 @@ class PaymentListViewModel: ObservableObject{
                 }
                 self.isloading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
                     self.showAddBankView = false
                     self.getBankList()
                 case .failure(let error):

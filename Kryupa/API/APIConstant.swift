@@ -18,7 +18,7 @@ struct APIConstants {
 class APIConstant{
     
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-//    static let baseURL = "https://w7dvnjx5-3.inc1.devtunnels.ms"//CP
+//    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
 
     static let sendOTP = "\(baseURL)/apis/auth/send_otp"
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
@@ -56,6 +56,20 @@ class APIConstant{
     static let getCareGiverInCustomerDetails = "\(baseURL)/apis/user/getCaregiverById?id="
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
     static let deleteAccount = "\(baseURL)/apis/user/account/delete"
+    static let addReview = "\(baseURL)/apis/user/customer/reviews/add_review"
+    
+    
+    static let bookingReviews = "\(baseURL)/apis/user/customer/reviews/booking_reviews"
+    /* {
+     "approchId":"01b3679f-8dec-4b86-835b-33e488b8d736"
+ }*/
+    
+    static let addReviewGiver = "\(baseURL)/apis/user/caregiver/reviews/add_review"
+    
+    static let bookingReviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/booking_reviews"
+    /* {
+     "approchId":"01b3679f-8dec-4b86-835b-33e488b8d736"
+ }*/
     
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"

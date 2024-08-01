@@ -12,6 +12,12 @@ class ReviewsViewModel: ObservableObject{
     @Published var myReviewsList = [ReviewData]()
     @Published var givenReviewsList = [ReviewData]()
     @Published var reviewDetail: ReviewDetailData?
+    @Published var bookingsListData: BookingsListData?
+    @Published var reviewDetailData: ReviewDetailData?
+    @Published var isEditAddress = false
+    @Published var isEditReview = false
+    @Published var txtReview = ""
+    var ratingValue = Int()
 
     func getReviews(myReviews: Bool, careGiver: Bool){
         isloading = true
@@ -48,6 +54,51 @@ class ReviewsViewModel: ObservableObject{
                 case .success(let data):
                     self?.isloading = false
                     self?.reviewDetail = data.data
+                    self?.txtReview = data.data.review
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    func addReview(){
+        
+        let param: [String : Any] = ["approchId":bookingsListData?.id ?? "",
+                     "review":txtReview,
+                     "rating":ratingValue]
+        
+        isloading = true
+        NetworkManager.shared.addReview(params: param) { [weak self] result in
+            
+            DispatchQueue.main.async() {
+                self?.isEditReview = false
+                switch result{
+                case .success(_):
+                    self?.isloading = false
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    func getReview(){
+        
+        let param: [String : Any] = ["approchId":bookingsListData?.id ?? ""]
+        
+        isloading = true
+        NetworkManager.shared.getBookingReview(params: param) { [weak self] result in
+            
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.reviewDetailData = data.data
                 case .failure(let error):
                     self?.isloading = false
                     print(error)
