@@ -41,7 +41,7 @@ class MobileScreenViewModel: ObservableObject{
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
                     action()
                 case .failure(let error):
                     errorAction(error.getMessage())

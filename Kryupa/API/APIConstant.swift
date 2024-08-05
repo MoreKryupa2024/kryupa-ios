@@ -20,8 +20,10 @@ class APIConstant{
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
 //    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
 
+    
     static let sendOTP = "\(baseURL)/apis/auth/send_otp"
     static let googleSignup = "\(baseURL)/apis/auth/authenticate"
+    
     
     static let caregiverSvcAct = "\(baseURL)/apis/user/home/caregiverSvcAct"
     static let customerSvcAct = "\(baseURL)/apis/user/home/customerSvcAct"
@@ -57,19 +59,10 @@ class APIConstant{
     static let getJobsNearYouList = "\(baseURL)/apis/user/home/getAllCaregiverHomeData"
     static let deleteAccount = "\(baseURL)/apis/user/account/delete"
     static let addReview = "\(baseURL)/apis/user/customer/reviews/add_review"
-    
-    
     static let bookingReviews = "\(baseURL)/apis/user/customer/reviews/booking_reviews"
-    /* {
-     "approchId":"01b3679f-8dec-4b86-835b-33e488b8d736"
- }*/
-    
     static let addReviewGiver = "\(baseURL)/apis/user/caregiver/reviews/add_review"
-    
     static let bookingReviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/booking_reviews"
-    /* {
-     "approchId":"01b3679f-8dec-4b86-835b-33e488b8d736"
- }*/
+    
     
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
@@ -85,6 +78,7 @@ class APIConstant{
     static let giverConfirmStartService = "\(baseURL)/apis/booking/confirm-booking"
     static let customerConfirmStartService = "\(baseURL)/apis/booking/confirm-booking-customer"
     
+    
     static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(baseURL)/apis/payment/paypal/capture_order"
     static let getAllTransaction = "\(baseURL)/apis/payment/transaction/get_all_transaction"
@@ -94,12 +88,13 @@ class APIConstant{
     static let addBank = "\(baseURL)/apis/payment/bank/add_bank"
     static let getOrderInvoice = "\(baseURL)/apis/payment/paypal/order_invoice"
     
+    
     static let getMeetingToken = "\(baseURL)/apis/communication/meeting/zoom_session_token"
     static let getChatHistory = "\(baseURL)/apis/communication/chat/get_conversation"
     static let createConversation = "\(baseURL)/apis/communication/chat/create_conversation"
     static let getInboxList = "\(baseURL)/apis/communication/chat/contact_list"
-    static let bookSlot = "\(baseURL)/apis/communication/meeting/book_slot"//CP
-
+    static let bookSlot = "\(baseURL)/apis/communication/meeting/book_slot"
+    static let conversationWithAdmin = "\(baseURL)/apis/communication/chat/conversationWithAdmin"
 }
 
 class FontContent{
@@ -149,6 +144,7 @@ class AppConstants{
 
     static let seekerAccountSectionItems = [
         AccountListData(title: "Personal Details", image: "personalDetail"),
+        AccountListData(title: "Payments & Refunds", image: "payments"),
         AccountListData(title: "Wallet", image: "wallet"),
         AccountListData(title: "Reviews", image: "reviews"),
         AccountListData(title: "Help & FAQ", image: "help"),
@@ -158,5 +154,4 @@ class AppConstants{
     ]
     
     static let timeZones = ["CEST": "Europe/Paris", "WEST": "Europe/Lisbon", "CDT": "America/Chicago", "EET": "Europe/Istanbul", "BRST": "America/Sao Paulo", "EEST": "Europe/Istanbul", "CET": "Europe/Paris", "MSD": "Europe/Moscow", "MST": "America/Denver", "KST": "Asia/Seoul", "PET": "America/Lima", "NZDT": "Pacific/Auckland", "CLT": "America/Santiago", "HST": "Pacific/Honolulu", "MDT": "America/Denver", "NZST": "Pacific/Auckland", "COT": "America/Bogota", "CST": "America/Chicago", "SGT": "Asia/Singapore", "CAT": "Africa/Harare", "BRT": "America/Sao Paulo", "WET": "Europe/Lisbon", "IST": "Asia/Calcutta", "HKT": "Asia/Hong Kong", "GST": "Asia/Dubai", "EDT": "America/New York", "WIT": "Asia/Jakarta", "UTC": "UTC", "JST": "Asia/Tokyo", "IRST": "Asia/Tehran", "PHT": "Asia/Manila", "AKDT": "America/Juneau", "BST": "Europe/London", "PST": "America/Los Angeles", "ART": "America/Argentina/Buenos Aires", "PDT": "America/Los Angeles", "WAT": "Africa/Lagos", "EST": "America/New York", "BDT": "Asia/Dhaka", "CLST": "America/Santiago", "AKST": "America/Juneau", "ADT": "America/Halifax", "AST": "America/Halifax", "PKT": "Asia/Karachi", "GMT": "GMT", "ICT": "Asia/Bangkok", "MSK": "Europe/Moscow", "EAT": "Africa/Addis Ababa"]
-
 }

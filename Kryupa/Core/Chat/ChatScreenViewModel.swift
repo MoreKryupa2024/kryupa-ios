@@ -11,8 +11,8 @@ import SocketIO
 
 class ChatScreenViewModel: ObservableObject{
     
-    var manager: SocketManager!
-    var socket: SocketIOClient!
+    private var manager: SocketManager!
+    private var socket: SocketIOClient!
     var selectedChat: ChatListData?
     @Published var inboxList = [ChatListData]()
     @Published var messageList = [MessageData]()
@@ -39,7 +39,7 @@ class ChatScreenViewModel: ObservableObject{
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
 //                    self?.selectedChat = data.data
                     self?.getChatHistory()
                 case .failure(let error):

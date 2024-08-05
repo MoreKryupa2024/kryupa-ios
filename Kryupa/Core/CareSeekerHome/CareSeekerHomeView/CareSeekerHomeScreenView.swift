@@ -19,7 +19,7 @@ struct CareSeekerHomeScreenView: View {
                 HeaderView
                 ScrollView {
                     if let serviceStartData = viewModel.serviceStartData{
-                        if serviceStartData.serviceStatus == "start_by_caregiver" {
+                        if serviceStartData.serviceStatus == "active" {
                             serviceView(serviceStartData: serviceStartData)
                         }
                     }else{

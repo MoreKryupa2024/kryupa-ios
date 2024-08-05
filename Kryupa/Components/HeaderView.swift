@@ -14,6 +14,7 @@ struct HeaderView: View {
     
     var title = ""
     var showBackButton = false
+    var closeAction:(()->Void)? = nil
     
     var body: some View {
         
@@ -30,6 +31,7 @@ struct HeaderView: View {
                             .frame(width: 30,height: 30)
                             .asButton(.press) {
                                 router.dismissScreen()
+                                closeAction?()
                             }
                     }
                     

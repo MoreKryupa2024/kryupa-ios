@@ -32,7 +32,7 @@ class LobbyScreenViewModel: ObservableObject{
                         self?.slotButton = "Join Now"
                         self?.slotTime = "Meeting will begin in\n\(data.data.interviewDateTime)"
                     }
-                case.failure(let error):
+                case.failure(_):
                     self?.slotTitle = "Schedule Your\nBGV Interview!"
                     self?.slotButton = "Schedule Now"
                     self?.slotTime = "Complete Interview & begin\nyour caregiving services"

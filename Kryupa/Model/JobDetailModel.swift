@@ -31,6 +31,7 @@ struct JobDetailData {
     let bookingPricing: Int
     let allergies, mobilityLevel, otherDiseaseType, contactID: String
     let caregiversID: String
+    let approchStatus: String
     let diseaseType, areasOfExpertise, additionalSkills, additionalInfo: [String]
     let languages: [String]
 
@@ -58,6 +59,7 @@ struct JobDetailData {
         otherDiseaseType = jsonData["other_disease_type"] as? String ?? ""
         contactID = jsonData["contact_id"] as? String ?? ""
         caregiversID = jsonData["caregivers_id"] as? String ?? ""
+        approchStatus = jsonData["approch_status"] as? String ?? ""
         diseaseType = jsonData["disease_type"] as? [String] ?? []
         areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []
         additionalSkills = jsonData["additional_skills"] as? [String] ?? []

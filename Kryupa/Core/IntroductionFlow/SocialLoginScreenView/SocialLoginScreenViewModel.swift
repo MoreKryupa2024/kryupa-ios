@@ -36,7 +36,7 @@ class SocialLoginScreenViewModel: ObservableObject{
             let param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
                          "deviceType": AppConstants.DeviceType,
                          "socialAccessToken": accessToken,
-                         "fcmToken": "asdfasdfadsf",
+                         "fcmToken": Messaging.messaging().fcmToken ?? "safasfasf",
                          "referralCode": "",
                          "userType": Defaults().userType,
                          "providerType": AppConstants.SocialGoogle

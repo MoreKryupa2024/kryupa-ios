@@ -33,7 +33,11 @@ struct JobDetailView: View {
                     getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
                     line
                     getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
-                    bottomButtonView
+                    if let approchStatus = viewModel.jobDetailModel?.approchStatus{
+                        if approchStatus == "Connecting Request"{
+                            bottomButtonView
+                        }
+                    }
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .onAppear() {
@@ -54,8 +58,8 @@ struct JobDetailView: View {
                 Text(heading)
                     .font(.custom(FontContent.plusMedium, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
+                    .frame(maxWidth: .infinity,alignment: .leading)
             }
-            
             
             ZStack{
                 NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: skillsList) { skill in
@@ -218,11 +222,11 @@ struct JobDetailView: View {
                     .padding(.vertical,10)
                     .padding(.horizontal,20)
                     .asButton(.press) {
-                        var ChatScreenViewModel = ChatScreenViewModel()
+                        let ChatScreenViewModel = ChatScreenViewModel()
                         guard let jobDetailModel = viewModel.jobDetailModel else {
                             return
                         }
-                        var selectedChat = ChatListData(jsonData: [
+                        let selectedChat = ChatListData(jsonData: [
                             "id":jobDetailModel.contactID,
                             "user2_id":jobDetailModel.caregiversID,
                             "user1_id":jobDetailModel.customerID,

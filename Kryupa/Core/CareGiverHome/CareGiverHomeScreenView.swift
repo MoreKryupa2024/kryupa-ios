@@ -22,7 +22,7 @@ struct CareGiverHomeScreenView: View {
                     VStack(spacing:0) {
                         if showNoContent {
                             if let serviceStartData = viewModel.serviceStartData{
-                                if serviceStartData.serviceStatus == "active" {
+                                if serviceStartData.serviceStatus == "confirm_by_customer" {
                                     serviceView(serviceStartData: serviceStartData)
                                 }
                             }else{

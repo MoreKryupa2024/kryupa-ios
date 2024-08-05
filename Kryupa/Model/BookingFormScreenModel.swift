@@ -20,8 +20,6 @@ struct RelativeDataModel: Codable {
     let id, name: String
 }
 
-
-
 // MARK: - Empty
 struct BookingsListModel {
     let success: Bool

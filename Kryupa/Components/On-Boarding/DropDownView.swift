@@ -52,24 +52,41 @@ struct DropDownView: View {
                 showDropDown.toggle()
             }
             
-            
             if showDropDown{
-                ScrollView{
-                    LazyVStack(spacing: 15){
-                        ForEach(values, id: \.self) { value in
-                            dropDownView(value: value)
-                                .frame(maxWidth: .infinity,alignment: .leading)
-                                .padding(.horizontal,10)
-                                .onTapGesture {
-                                    onSelectedValue?(value)
-                                    selectedValue = value
-                                    showDropDown = false
-                                }
+                if values.count > 4{
+                    ScrollView{
+                        LazyVStack(spacing: 15){
+                            ForEach(values, id: \.self) { value in
+                                dropDownView(value: value)
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                    .padding(.horizontal,10)
+                                    .onTapGesture {
+                                        onSelectedValue?(value)
+                                        selectedValue = value
+                                        showDropDown = false
+                                    }
+                            }
                         }
+                        .padding([.top,.bottom],15)
                     }
-                    .padding([.top,.bottom],15)
+                    .frame(height: 200)
+                }else{
+                    ScrollView{
+                        LazyVStack(spacing: 15){
+                            ForEach(values, id: \.self) { value in
+                                dropDownView(value: value)
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                    .padding(.horizontal,10)
+                                    .onTapGesture {
+                                        onSelectedValue?(value)
+                                        selectedValue = value
+                                        showDropDown = false
+                                    }
+                            }
+                        }
+                        .padding([.top,.bottom],15)
+                    }
                 }
-                .frame(height: values.count > 4 ? 200 : .infinity)
             }
         }
         .background{

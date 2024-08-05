@@ -19,7 +19,7 @@ struct RatingView: View {
                     .resizable()
                     .frame(width: 20, height: 20)
                     .asButton(.press) {
-                        for (indexS,value) in starList.enumerated() {
+                        for (indexS,_) in starList.enumerated() {
                             if indexS <= index {
                                 starList.remove(at: indexS)
                                 starList.insert(true, at: indexS)

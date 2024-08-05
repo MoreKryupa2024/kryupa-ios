@@ -95,7 +95,7 @@ struct SocialLoginScreenView: View {
             let param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
                          "deviceType": AppConstants.DeviceType,
                          "socialAccessToken": userIdentifier,
-                         "fcmToken": "asdfasdfadsf",
+                         "fcmToken": Messaging.messaging().fcmToken ?? "safasfasf",
                          "referralCode": "",
                          "userType": Defaults().userType,
                          "providerType": AppConstants.SocialApple

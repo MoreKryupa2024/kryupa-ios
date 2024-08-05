@@ -176,6 +176,9 @@
 		BEC5E9D82C357ABB000BC2A1 /* ImageLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */; };
 		BEC8F92D2BFDBD4A00A9CC7F /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */; };
 		BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */; };
+		BECD50982C5CE1FF004DD43D /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD50972C5CE1FF004DD43D /* FAQViewModel.swift */; };
+		BECD509A2C5CE4BF004DD43D /* FAQModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD50992C5CE4BF004DD43D /* FAQModel.swift */; };
+		BECD509C2C5CE667004DD43D /* FAQChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD509B2C5CE667004DD43D /* FAQChatView.swift */; };
 		BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */; };
 		BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28AC02C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift */; };
 		BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEA72012BF7366A004E7DED /* PersonalInformationScreenView.swift */; };
@@ -359,6 +362,9 @@
 		BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingView.swift; sourceTree = "<group>"; };
 		BEC8F92C2BFDBD4A00A9CC7F /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BECD50972C5CE1FF004DD43D /* FAQViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
+		BECD50992C5CE4BF004DD43D /* FAQModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModel.swift; sourceTree = "<group>"; };
+		BECD509B2C5CE667004DD43D /* FAQChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQChatView.swift; sourceTree = "<group>"; };
 		BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LobbyScreenView.swift; path = "Kryupa/Core/BGV Lobby/LobbyScreenView.swift"; sourceTree = SOURCE_ROOT; };
 		BEE28AC02C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGVTimeSlotScreenView.swift; sourceTree = "<group>"; };
 		BEEA72012BF7366A004E7DED /* PersonalInformationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationScreenView.swift; sourceTree = "<group>"; };
@@ -474,7 +480,7 @@
 				BE11D5162C5A4D36004FCC34 /* PersonalView */,
 				BE11D5172C5A4D49004FCC34 /* MyService */,
 				BE32E0292C46406A003C7C90 /* PaymentFlow */,
-				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				BECD50962C5CE1EC004DD43D /* FAQ */,
 				BE32E02A2C464197003C7C90 /* PaymentOrderFlow */,
 				BE11D5182C5A4D82004FCC34 /* Setting */,
 				A36BC3A22C1B0828005616A5 /* AboutUsView.swift */,
@@ -877,6 +883,7 @@
 				BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */,
 				BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */,
 				BE11D51B2C5A5262004FCC34 /* SettingModel.swift */,
+				BECD50992C5CE4BF004DD43D /* FAQModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1028,6 +1035,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BECD50962C5CE1EC004DD43D /* FAQ */ = {
+			isa = PBXGroup;
+			children = (
+				A36BC3962C1AC689005616A5 /* FAQView.swift */,
+				BECD50972C5CE1FF004DD43D /* FAQViewModel.swift */,
+			);
+			path = FAQ;
+			sourceTree = "<group>";
+		};
 		BEE28AB92C05A35E00A3CDFF /* BGV Lobby */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,6 +1111,7 @@
 			isa = PBXGroup;
 			children = (
 				BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */,
+				BECD509B2C5CE667004DD43D /* FAQChatView.swift */,
 			);
 			path = ChatComponent;
 			sourceTree = "<group>";
@@ -1223,6 +1240,7 @@
 				A3FEF60E2C21CE1400EFC3C2 /* ProfileDetailScreenViewModel.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
 				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
+				BECD50982C5CE1FF004DD43D /* FAQViewModel.swift in Sources */,
 				A3FEF60A2C219FD200EFC3C2 /* ProfileModel.swift in Sources */,
 				A3FEF6052C202F0D00EFC3C2 /* JobDetailView.swift in Sources */,
 				BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */,
@@ -1262,6 +1280,7 @@
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
+				BECD509A2C5CE4BF004DD43D /* FAQModel.swift in Sources */,
 				A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
 				BEEB798F2C060223005C12AB /* AvailableTimeSlotsView.swift in Sources */,
@@ -1339,6 +1358,7 @@
 				BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */,
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
+				BECD509C2C5CE667004DD43D /* FAQChatView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
 				BE0983B12C33F23000FBAECC /* ChatScreenViewModel.swift in Sources */,
 				A36BC39F2C1AEE92005616A5 /* NotificationAlertView.swift in Sources */,
@@ -1482,6 +1502,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kryupa/Kryupa.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Kryupa/Preview Content\"";
@@ -1508,6 +1529,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Moreyeahs.com.Kryupa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1524,6 +1546,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kryupa/Kryupa.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Kryupa/Preview Content\"";
@@ -1550,6 +1573,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Moreyeahs.com.Kryupa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

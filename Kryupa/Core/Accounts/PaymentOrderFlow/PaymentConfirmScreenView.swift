@@ -38,9 +38,10 @@ struct PaymentConfirmScreenView: View {
         }
         .task{
             viewModel.confrimGiverPayment {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                    router.dismissScreenStack()
-                }
+                
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                router.dismissScreenStack()
             }
         }
         .toolbar(.hidden, for: .navigationBar)

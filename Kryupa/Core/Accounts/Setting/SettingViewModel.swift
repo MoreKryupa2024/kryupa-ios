@@ -54,7 +54,7 @@ class SettingViewModel: ObservableObject{
             DispatchQueue.main.async() {
                 self?.isloading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
                     print()
                 case .failure(let error):
                     print(error)
@@ -72,7 +72,7 @@ class SettingViewModel: ObservableObject{
             DispatchQueue.main.async() {
                 self?.isloading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
                     let domain = Bundle.main.bundleIdentifier!
                     UserDefaults.standard.removePersistentDomain(forName: domain)
                     UserDefaults.standard.synchronize()

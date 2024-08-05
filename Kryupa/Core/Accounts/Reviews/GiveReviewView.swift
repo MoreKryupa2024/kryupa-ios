@@ -217,7 +217,11 @@ struct GiveReviewView: View {
                 .foregroundStyle(._444446)
             
             HStack {
-                StarsView(rating: Double(viewModel.reviewDetail?.rating ?? "") ?? 0, maxRating: 5, size: 12)
+                
+                StarsView(rating: Double(viewModel.reviewDetail?.rating.getFullRateVal() ?? 0), maxRating: 5, size: 12)
+                    .onChange(of: viewModel.reviewDetail?.rating, { oldValue, newValue in
+                        print(viewModel.reviewDetail?.rating)
+                    })
                 Text("(100)")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)

@@ -64,7 +64,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
             DispatchQueue.main.async() {
                 self?.isloading = false
                 switch result{
-                case .success(let data):
+                case .success(_):
                     self?.serviceStartData = nil
                 case .failure(let error):
                     self?.isloading = false

@@ -39,7 +39,7 @@ class ProfileDetailScreenViewModel: ObservableObject
         NetworkManager.shared.deleteProfile(params: ["profileId": personalDetail?.profileid ?? ""]) { [weak self] result in
             DispatchQueue.main.async() {
                 switch result{
-                case .success(let data):
+                case .success(_):
                     self?.isloading = false
                     next()
                 case .failure(let error):
