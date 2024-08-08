@@ -10,7 +10,7 @@ import SwiftfulUI
 
 struct BookingScreenView: View {
     
-    @StateObject private var viewModel = BookingViewModel()
+    @StateObject var viewModel = BookingViewModel()
     @Environment(\.router) var router
     
     var body: some View {
@@ -31,7 +31,7 @@ struct BookingScreenView: View {
                 LoadingView()
             }
         }
-        .onAppear{
+        .task{
             viewModel.getBookings()
         }
     }
@@ -40,8 +40,14 @@ struct BookingScreenView: View {
             switch viewModel.selectedSection{
             case 1:
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in
-                    BookingView(status: "Active",bookingData: data)
-                        
+                    BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
+                        .asButton(.press) {
+                            let viewModelReview = ServiceDetailScreenViewModel()
+                            viewModelReview.bookingsListData = data
+                            router.showScreen(.push) { rout in
+                                ServiceDetailScreenView(viewModel:viewModelReview)
+                            }
+                        }
                 }
             case 2:
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in
@@ -81,7 +87,7 @@ struct BookingScreenView: View {
             switch viewModel.selectedSection{
             case 0:
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in
-                    BookingView(status: "Active",bookingData: data)
+                    BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
                 }
             case 1:
                 ForEach(viewModel.bookingList,id: \.bookingID) { data in

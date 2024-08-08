@@ -28,7 +28,7 @@ struct AppointmentsView: View {
                                 Text(data.name)
                                     .font(.custom(FontContent.besMedium, size: 17))
                                     .frame(maxWidth:.infinity,alignment: .leading)
-                                Text("For Myself")
+                                Text("For \(data.relation)")
                                     .font(.custom(FontContent.plusRegular, size: 11))
                                     .foregroundStyle(._7_C_7_C_80)
                             }
@@ -54,7 +54,7 @@ struct AppointmentsView: View {
                             Image("clock")
                                 .resizable()
                                 .frame(width: 18,height: 18)
-                            Text("03:00 PM - 04:00 PM")
+                            Text("\(data.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(data.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
                                 .font(.custom(FontContent.plusRegular, size: 12))
                                 .foregroundStyle(._444446)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,7 +64,8 @@ struct AppointmentsView: View {
                             Image("calender")
                                 .resizable()
                                 .frame(width: 18,height: 18)
-                            Text("3rd March 2024")
+                            
+                            Text("\(data.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))")
                                 .font(.custom(FontContent.plusRegular, size: 12))
                                 .foregroundStyle(._444446)
                                 .frame(maxWidth: .infinity, alignment: .leading)

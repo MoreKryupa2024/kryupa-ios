@@ -20,6 +20,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Hi, we need user notificaition for update.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>PlusJakartaDisplay-Bold.otf</string>

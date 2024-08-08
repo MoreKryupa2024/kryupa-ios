@@ -17,7 +17,7 @@ class BookingViewModel: ObservableObject{
         bookingList = []
         isLoading = true
         var param : [String : Any] = ["pageNumber":1,
-                                      "pageSize":10]
+                                      "pageSize":20]
        
         
         if Defaults().userType == AppConstants.SeekCare{

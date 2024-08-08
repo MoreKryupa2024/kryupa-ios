@@ -22,27 +22,27 @@ struct RecommendedCaregiverView: View {
                     VStack(spacing:0){
                         
                         ImageLoadingView(imageURL: careData.profileURL)
-                            .frame(width: profileWidth,height: 97)
+                            .frame(height: 97)
                         
-                        HStack(spacing:0){
+                        HStack(spacing:2){
                             Text(careData.name)
                                 .font(.custom(FontContent.plusMedium, size: 13))
                                 .lineLimit(1)
-                                .frame(width: 110)
                             Spacer()
                             Image(systemName: "star.fill")
                                 .resizable()
                                 .frame(width: 11,height: 11)
-                            Text("4.9")
+                            Text(careData.rating)
                                 .font(.custom(FontContent.plusRegular, size: 11))
                         }
                         .padding(.top,5)
                         
-                        Text("(PT, OT, companionship)")
+                        Text("(\(careData.arrayAgg.joined(separator: ", "))")
                             .font(.custom(FontContent.plusRegular, size: 11))
                             .multilineTextAlignment(.center)
                             .foregroundStyle(._444446)
                             .padding(.top,10)
+                            .lineLimit(1)
                         
                         Text("View Profile")
                             .font(.custom(FontContent.plusRegular, size: 13))
@@ -54,6 +54,7 @@ struct RecommendedCaregiverView: View {
                             }
                             .padding(.top,10)
                     }
+                    .frame(width: profileWidth)
                     .padding([.vertical,.horizontal],9)
                     .background{
                         RoundedRectangle(cornerRadius: 5)

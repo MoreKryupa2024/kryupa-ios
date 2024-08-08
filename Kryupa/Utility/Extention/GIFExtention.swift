@@ -33,6 +33,7 @@ extension Notification.Name {
     static let logout = Notification.Name("logout")
     static let showBookingScreen = Notification.Name("ShowBookingScreen")
     static let showInboxScreen = Notification.Name("ShowInboxScreen")
+    static let showBookingsHistoryScreen = Notification.Name("ShowBookingsHistoryScreen")
     static let showJobsScreen = Notification.Name("ShowJobsScreen")
     static let setBookingId = Notification.Name("SetBookingId")
 

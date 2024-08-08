@@ -11,10 +11,19 @@ import SwiftfulUI
 struct ConsumerTabBarScreenView: View {
     @State var selectedIndex: Int = 0
     
+    @StateObject var bookingViewModel = BookingViewModel()
+    var showBookingScreen = NotificationCenter.default
+    var showInboxScreen = NotificationCenter.default
+    var showBookingsHistoryScreen = NotificationCenter.default
+    
     var body: some View {
         VStack{
             switch selectedIndex{
-            case 1: BookingScreenView()
+                
+            case 1: 
+//                let bookingViewModel = BookingViewModel()
+//                bookingViewModel.selectedSection = selectedIndexBooking
+                BookingScreenView(viewModel: bookingViewModel)
             case 2: BookingFormScreenView()
             case 3: InboxScreenView()
             case 4: AccountView()
@@ -26,11 +35,14 @@ struct ConsumerTabBarScreenView: View {
             TabView
         }
         .onAppear{
-            NotificationCenter.default.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
+            showBookingScreen.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
                                                    using: self.showBookingScreen)
             
-            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+            showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                    using: self.showInboxScreen)
+            
+            showBookingsHistoryScreen.addObserver(forName: .showBookingsHistoryScreen, object: nil, queue: nil,
+                                                   using: self.showBookingsHistoryScreen)
         }
     }
     
@@ -40,6 +52,7 @@ struct ConsumerTabBarScreenView: View {
             
             tabbarItem(image: "Home", text: "Home", selected: selectedIndex == 0)
                 .asButton(.press) {
+                    bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
                     selectedIndex = 0
@@ -48,6 +61,7 @@ struct ConsumerTabBarScreenView: View {
             Spacer()
             tabbarItem(image: "Bookings", text: "Bookings", selected: selectedIndex == 1)
                 .asButton(.press) {
+                    bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
                     selectedIndex = 1
@@ -56,6 +70,7 @@ struct ConsumerTabBarScreenView: View {
             
             tabbarItem(image: "Jobs", text: "Book now", selected: selectedIndex == 2)
                 .asButton(.press) {
+                    bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
                     selectedIndex = 2
@@ -63,6 +78,7 @@ struct ConsumerTabBarScreenView: View {
             Spacer()
             tabbarItem(image: "Inbox", text: "Inbox", selected: selectedIndex == 3)
                 .asButton(.press) {
+                    bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
                     selectedIndex = 3
                 }
@@ -70,9 +86,11 @@ struct ConsumerTabBarScreenView: View {
             Spacer()
             tabbarItem(image: "account", text: "Account", selected: selectedIndex == 4)
                 .asButton(.press) {
+                    bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
                     selectedIndex = 4
+                    
                 }
             Spacer()
         }
@@ -102,6 +120,13 @@ struct ConsumerTabBarScreenView: View {
     
     private func showInboxScreen(_ notification: Notification) {
         selectedIndex = 3
+    }
+    
+    private func showBookingsHistoryScreen(_ notification: Notification) {
+        if let selectedIndexBooking = notification.userInfo?["selectedIndexBookingScreen"] as? Int {
+            self.bookingViewModel.selectedSection = selectedIndexBooking
+        }
+        selectedIndex = 1
     }
 }
 

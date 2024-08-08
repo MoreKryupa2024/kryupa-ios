@@ -88,13 +88,19 @@ struct SocialLoginScreenView: View {
     
     private func handleSuccessfulLogin(with authorization: ASAuthorization) {
         if let userCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let identityToken = (userCredential.identityToken?.base64EncodedString() ?? "Identity token not available")
+            let authorizationCode = (userCredential.authorizationCode?.base64EncodedString() ?? "Authorization code not available")
             let userIdentifier = userCredential.user
             let fullName = userCredential.fullName
             let email = userCredential.email
             
+            print("identityToken:- \(identityToken)")
+            print("authorizationCode:- \(authorizationCode)")
+            print("userIdentifier:- \(userIdentifier)")
+            
             let param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
                          "deviceType": AppConstants.DeviceType,
-                         "socialAccessToken": userIdentifier,
+                         "socialAccessToken": identityToken,
                          "fcmToken": Messaging.messaging().fcmToken ?? "safasfasf",
                          "referralCode": "",
                          "userType": Defaults().userType,

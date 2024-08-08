@@ -77,7 +77,7 @@ class APIConstant{
     static let sendRequestForBookCaregiver = "\(baseURL)/apis/booking/caregiver_approch"
     static let giverConfirmStartService = "\(baseURL)/apis/booking/confirm-booking"
     static let customerConfirmStartService = "\(baseURL)/apis/booking/confirm-booking-customer"
-    
+    static let cancelBookingData = "\(baseURL)/apis/booking/booking_status"
     
     static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(baseURL)/apis/payment/paypal/capture_order"

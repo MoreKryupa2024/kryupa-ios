@@ -74,10 +74,9 @@ struct ChatView: View {
             .toolbar(.hidden, for: .navigationBar)
             .task{
                 viewModel.connect()
-                viewModel.receiveMessage { msgData, str in
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    viewModel.receiveMessage { msgData, str in
                         viewModel.messageList.append(msgData)
-                        print(viewModel.messageList)
                     }
                 }
                 viewModel.getChatHistory()
@@ -285,7 +284,9 @@ struct ChatView: View {
                         .asButton(.press) {
                             let text = sendMsgText.trimmingCharacters(in: .whitespaces)
                             if !text.isEmpty{
-                                viewModel.sendMessage(text)
+                                DispatchQueue.main.async {
+                                    viewModel.sendMessage(text)
+                                }
                                 sendMsgText = ""
                             }
                             sendMsgText = ""

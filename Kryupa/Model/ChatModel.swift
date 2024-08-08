@@ -41,6 +41,7 @@ struct ChatListData {
     let cpID, name: String
     let profilePictureURL: String
     let lastActionAt: String
+    let lastMessage: String
     let sessionKey, sessionTopic: String
     let caregiverID, caregiverName: String
     let caregiverPic: String
@@ -58,6 +59,7 @@ struct ChatListData {
         name = jsonData["name"] as? String ?? ""
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
         lastActionAt = jsonData["last_action_at"] as? String ?? ""
+        lastMessage = jsonData["last_message"] as? String ?? ""
         sessionKey = jsonData["session_key"] as? String ?? ""
         sessionTopic = jsonData["session_topic"] as? String ?? ""
         caregiverID = jsonData["caregiver_id"] as? String ?? ""

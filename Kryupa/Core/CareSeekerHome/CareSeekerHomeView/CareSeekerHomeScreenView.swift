@@ -12,6 +12,7 @@ struct CareSeekerHomeScreenView: View {
     
     @Environment(\.router) var router
     @StateObject private var viewModel = CareSeekerHomeScreenViewModel()
+    var showBookingsHistoryScreen = NotificationCenter.default
     
     var body: some View {
         ZStack{
@@ -134,6 +135,10 @@ struct CareSeekerHomeScreenView: View {
                     Text("See All")
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._7_C_7_C_80)
+                        .asButton(.press) {
+                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 1]
+                            showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
+                        }
             }
             .padding(.horizontal,24)
             AppointmentsView(appointmentList: viewModel.upcommingAppointments)
@@ -151,6 +156,10 @@ struct CareSeekerHomeScreenView: View {
                     Text("See All")
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._7_C_7_C_80)
+                        .asButton(.press) {
+                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 2]
+                            showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
+                        }
             }
             .padding(.horizontal,24)
             AppointmentsView(appointmentList: viewModel.pastAppointments)

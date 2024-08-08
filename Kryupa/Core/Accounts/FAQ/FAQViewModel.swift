@@ -41,8 +41,8 @@ class FAQViewModel: ObservableObject{
         let msgData = AllConversationData(jsonData: [
             "id": "\(UUID())",
             "message": message,
-            "sender":faqModelData?.adminId ?? "",
-            "recipient":faqModelData?.userId ?? ""
+            "sender":faqModelData?.userId ?? "",
+            "recipient":faqModelData?.adminId ?? ""
         ])
         let param = ["contact_Id":faqModelData?.contactID ?? "",
                      "sender_id":faqModelData?.userId ?? "",

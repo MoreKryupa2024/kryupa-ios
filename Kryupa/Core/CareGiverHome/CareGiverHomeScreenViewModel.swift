@@ -20,7 +20,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
         
         let param = [
             "pageNumber":1,
-            "pageSize":5
+            "pageSize":20
         ]
         isloading = true
         NetworkManager.shared.getJobsNearYouList(params: param) { [weak self] result in

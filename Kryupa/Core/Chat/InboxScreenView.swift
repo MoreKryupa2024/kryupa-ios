@@ -66,15 +66,15 @@ struct InboxScreenView: View {
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.plusRegular, size: 16))
                 
-                Text("New Service Request!")
+                Text(profile.lastMessage)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
                 
             }
             .frame(maxWidth: .infinity)
             .padding(.leading,12)
-            
-            Text("9:41 AM")
+//            Text(\((profile.lastActionAt.components(separatedBy: " ").first ?? "").convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd-MM"))
+                 Text("\((profile.lastActionAt.components(separatedBy: " ").last ?? "").convertDateFormater(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
                 .font(.custom(FontContent.plusRegular, size: 13))
                 .padding(.top,10)
                 .frame(maxHeight: .infinity,alignment: .top)

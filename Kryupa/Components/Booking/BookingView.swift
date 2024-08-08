@@ -42,6 +42,7 @@ struct BookingView: View {
                     Text(bookingData?.name ?? "")
                         .font(.custom(FontContent.besMedium, size: 15))
                         .foregroundStyle(.appMain)
+                        .lineLimit(1)
                     
                     Spacer()
                     
@@ -54,18 +55,22 @@ struct BookingView: View {
                             RoundedRectangle(cornerRadius: 12).fill(statusBackColor)
                         )
                 }
-
-                Text("$\(bookingData?.price ?? 0)")
-                    .font(.custom(FontContent.plusMedium, size: 12))
-                    .foregroundStyle(._444446)
+                if status != "Draft"{
+                    Text("$\(bookingData?.price ?? 0)")
+                        .font(.custom(FontContent.plusMedium, size: 12))
+                        .foregroundStyle(._444446)
+                        .lineLimit(1)
+                }
+                
                 if let startDate = bookingData?.startDate, let endDate = bookingData?.endDate{
                     Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .foregroundStyle(._444446)
+                        .lineLimit(1)
                 }
                 
                 Text("\((bookingData?.arrayAgg ?? []).joined(separator: ","))")
-                    .lineLimit(1)
+                    .lineLimit(status == "Draft" ? 2 : 1)
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
             }

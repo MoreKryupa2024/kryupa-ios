@@ -62,6 +62,7 @@
 		A3FEF6242C2D89C300EFC3C2 /* JobAcceptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */; };
 		A3FEF6262C2D967A00EFC3C2 /* JobDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */; };
 		A3FEF6282C2D976D00EFC3C2 /* JobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEF6272C2D976D00EFC3C2 /* JobsViewModel.swift */; };
+		BE004D5D2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE004D5C2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift */; };
 		BE09486C2C196E0D00FC2DE0 /* zoomcml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; };
 		BE09486D2C196E0D00FC2DE0 /* zoomcml.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3702C185163005616A5 /* zoomcml.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */; };
@@ -265,6 +266,7 @@
 		A3FEF6232C2D89C300EFC3C2 /* JobAcceptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAcceptModel.swift; sourceTree = "<group>"; };
 		A3FEF6252C2D967A00EFC3C2 /* JobDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailModel.swift; sourceTree = "<group>"; };
 		A3FEF6272C2D976D00EFC3C2 /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
+		BE004D5C2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		BE0948732C199B2300FC2DE0 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailScreenView.swift; sourceTree = "<group>"; };
 		BE0983AB2C33D1E700FBAECC /* MobileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileScreenViewModel.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 			children = (
 				BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */,
 				BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */,
+				BE004D5C2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift */,
 			);
 			path = ServiceCancelled;
 			sourceTree = "<group>";
@@ -1367,6 +1370,7 @@
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
+				BE004D5D2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift in Sources */,
 				A3FEF6202C2AF8B800EFC3C2 /* ReviewModel.swift in Sources */,
 				BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
@@ -1518,7 +1522,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -1562,7 +1566,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

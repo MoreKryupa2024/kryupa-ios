@@ -32,11 +32,12 @@ struct CareGiverHomeScreenView: View {
                             noCotentView
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
-                                if serviceStartData.serviceStatus == "active" {
+                                if serviceStartData.serviceStatus == "confirm_by_customer" {
                                     serviceView(serviceStartData: serviceStartData)
                                 }
                             }else{
-                                completeProfileView
+                                BannerView(showIndecator: false,bannerHeight: 104)
+                                    .padding([.horizontal,.vertical],24)
                             }
                             jobsNearYouView
                         }
@@ -205,8 +206,7 @@ struct CareGiverHomeScreenView: View {
             }
             .padding(.horizontal,24)
             jobsNearYouGridView
-            BannerView(showIndecator: false,bannerHeight: 104)
-                .padding([.horizontal,.vertical],24)
+            completeProfileView
 
         }
         .padding(.top, 30)

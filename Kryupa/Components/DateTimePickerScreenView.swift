@@ -22,14 +22,14 @@ struct DateTimePickerScreenView: View {
         ZStack{
             VStack{
                 if let range {
-                    DatePicker("Calender", selection: $givenDate, in: range, displayedComponents: displayedComponents )
-                        .datePickerStyle(.graphical)
+                    DatePicker("", selection: $givenDate, in: range, displayedComponents: displayedComponents )
+                        .datePickerStyle(.wheel)
                 }else if let rangeThrough {
-                    DatePicker("Calender", selection: $givenDate, in: rangeThrough, displayedComponents: displayedComponents )
-                        .datePickerStyle(.graphical)
+                    DatePicker("", selection: $givenDate, in: rangeThrough, displayedComponents: displayedComponents )
+                        .datePickerStyle(.wheel)
                 }else{
-                    DatePicker("Calender", selection: $givenDate, displayedComponents: displayedComponents )
-                        .datePickerStyle(.graphical)
+                    DatePicker("", selection: $givenDate, displayedComponents: displayedComponents )
+                        .datePickerStyle(.wheel)
                 }
                 HStack{
                     Spacer()

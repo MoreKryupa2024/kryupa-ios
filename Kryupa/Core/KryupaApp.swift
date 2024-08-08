@@ -31,7 +31,7 @@ class AppDelegate: NSObject, UIApplicationDelegate{
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         
-        let authOptions: UNAuthorizationOptions = [.alert,.badge,.sound]
+        let authOptions: UNAuthorizationOptions = [.alert,.badge,.sound,.criticalAlert]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
         application.registerForRemoteNotifications()
         
@@ -73,11 +73,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Notifications----------------------user Notification Center willPresent")
-        completionHandler([[.badge,.sound]])
+        //        completionHandler([.alert, .sound, .badge])
+        if #available(iOS 14.0, *) {
+            completionHandler([.list, .banner, .sound])
+        } else {
+            completionHandler([.alert, .banner, .sound])
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
+        print("Notifications----------------------user Notification Center didReceive")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Notifications----------------------user Notification Center didReceive")
     }
 }

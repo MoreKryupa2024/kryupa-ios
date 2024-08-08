@@ -20,7 +20,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
         
         let param = [
             "pageNumber":1,
-            "pageSize":10
+            "pageSize":20
         ]
         isloading = true
         NetworkManager.shared.getRecommandationList(params: param) { [weak self] result in
@@ -28,7 +28,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 switch result{
                 case .success(let data):
                     self?.isloading = false
-                    self?.recommendedCaregiver = data.data.recommendedCaregiver
+                    self?.recommendedCaregiver = data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
                     self?.upcommingAppointments = data.data.upcommingAppointments
                     self?.pastAppointments = data.data.pastAppointments
                 case .failure(let error):

@@ -122,9 +122,7 @@ class ChatScreenViewModel: ObservableObject{
                      "message":message]
         
         socket.emit("message_send", with: [param]) {
-            DispatchQueue.main.async {
-                self.messageList.append(msgData)
-            }
+            self.messageList.append(msgData)
         }
     }
 
@@ -158,7 +156,9 @@ class ChatScreenViewModel: ObservableObject{
     
     func getInboxList(){
         isLoading = true
-        NetworkManager.shared.getInboxList { [weak self] result in
+        let param = ["pageNumber":1,
+                     "pageSize":20]
+        NetworkManager.shared.getInboxList(params: param) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result {

@@ -38,6 +38,7 @@ struct AppointmentData {
     let startTime, endTime, bookingID, status: String
     let name: String
     let profilePictureURL: String
+    let relation: String
     let price: Double
     let arrayAgg: [String]
 
@@ -52,6 +53,7 @@ struct AppointmentData {
         status = jsonData["status"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
+        relation = jsonData["relation"] as? String ?? ""
         price = jsonData["price"] as? Double ?? 0.0
         arrayAgg = jsonData["array_agg"] as? [String] ?? []
     }
@@ -59,13 +61,15 @@ struct AppointmentData {
 
 // MARK: - RecommendedCaregiver
 struct RecommendedCaregiverData {
-    let id, name: String
+    let id, name, rating, reviewCount: String
     let profileURL: String
     let arrayAgg: [String]
 
     init(jsonData:[String:Any]) {
         id = jsonData["id"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
+        rating = jsonData["rating"] as? String ?? ""
+        reviewCount = jsonData["review_count"] as? String ?? ""
         profileURL = jsonData["profile_url"] as? String ?? ""
         arrayAgg = jsonData["array_agg"] as? [String] ?? []
     }

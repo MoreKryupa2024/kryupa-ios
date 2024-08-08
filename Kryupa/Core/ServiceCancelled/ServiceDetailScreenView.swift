@@ -11,6 +11,7 @@ import SwiftfulUI
 struct ServiceDetailScreenView: View {
     @Environment(\.router) var router
     @State var review: String = "Nice and polite"
+    @StateObject var viewModel = ServiceDetailScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -22,26 +23,29 @@ struct ServiceDetailScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
-//            if viewModel.isloading{
-//                LoadingView()
-//            }
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
-//        .onAppear{
-//            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "")
-//        }
+        .task{
+            viewModel.cancelBookingData()
+        }
     }
     
     private var DetailView: some View{
         VStack(spacing:0){
             VStack(alignment:.leading, spacing:5){
-                Text("Monday, 07 March 2024")
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                    .font(.custom(FontContent.besMedium, size: 16))
-                
-                Text("02:00 PM - 05:00PM")
-                    .font(.custom(FontContent.plusRegular, size: 11))
-                    .foregroundStyle(._444446)
+                if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .font(.custom(FontContent.besMedium, size: 16))
+                }
+                if let startTime = viewModel.bookingsListData?.startTime, let endTime = viewModel.bookingsListData?.endTime{
+                    Text("\(startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mma")) - \(endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mma"))")
+                        .font(.custom(FontContent.plusRegular, size: 11))
+                        .foregroundStyle(._444446)
+                }
             }
             .padding(.vertical,10)
             .padding(.horizontal,26)
@@ -61,8 +65,8 @@ struct ServiceDetailScreenView: View {
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.plusRegular, size: 17))
                         .padding(.leading,24)
-                    Image("editAddress")
-                        .padding(.trailing,18)
+//                    Image("editAddress")
+//                        .padding(.trailing,18)
                 }
                 
                 Text("FG 20, Sector 54, New York USA, 541236")
@@ -81,6 +85,7 @@ struct ServiceDetailScreenView: View {
                     
                     
                     Text("$20.23")
+                    //Text("$\((Double(viewModel.reviewDetailData?.ratePerHours ?? "") ?? 0).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
                 
@@ -91,6 +96,7 @@ struct ServiceDetailScreenView: View {
                     
                     
                     Text("6")
+                    //Text(((Double(viewModel.reviewDetailData?.totalHours ?? 0)).removeZerosFromEnd(num: 2)))
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
                 
@@ -101,6 +107,7 @@ struct ServiceDetailScreenView: View {
                     
                     
                     Text("$121.38")
+//                    Text("$\((viewModel.reviewDetailData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
             }
@@ -173,8 +180,7 @@ struct ServiceDetailScreenView: View {
                 .stroke(lineWidth: 1)
                 .foregroundStyle(.E_5_E_5_EA)
                 .overlay(content: {
-                    Image("profile")
-                        .resizable()
+                    ImageLoadingView(imageURL: (viewModel.bookingsListData?.profilePictureURL ?? ""))
                         .frame(width: 126,height: 126)
                         .clipShape(.rect(cornerRadius: 63))
                 })
@@ -182,13 +188,14 @@ struct ServiceDetailScreenView: View {
                 .frame(width: 138,height: 138)
             
             VStack(alignment:.center, spacing:5){
-                Text("Alexa Chatterjee")
+                Text(viewModel.bookingsListData?.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                 
-                Text("5 years experienced")
+//                Text("5 years experienced")
+                //Text("\(viewModel.reviewDetailData?.yearsOfExprience ?? "") years experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
-                Text("$252")
+                Text("$\(viewModel.bookingsListData?.price ?? 0)")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                 HStack{
@@ -196,7 +203,7 @@ struct ServiceDetailScreenView: View {
                         .resizable()
                         .frame(width: 12,height: 12)
                     
-                    Text("(100)")
+                    Text("(0)")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(._444446)
                 }

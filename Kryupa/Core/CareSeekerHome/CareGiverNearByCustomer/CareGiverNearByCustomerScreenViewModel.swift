@@ -15,7 +15,7 @@ class CareGiverNearByCustomerScreenViewModel: ObservableObject{
     func getCareGiverNearByList(bookingID:String,alert: ((String)->Void)?){
         let param: [String:Any] = [
             "pageNumber":1,
-            "pageSize":10,
+            "pageSize":20,
             "booking_id":bookingID,
             "profile_id":"",
             "searchTerm":serachGiver
