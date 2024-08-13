@@ -16,19 +16,26 @@ struct JobListView: View {
             ScrollView {
                 HeaderView()
                 LazyVStack(spacing: 15) {
-                    ForEach(viewModel.jobPost,id: \.jobID) {
-                        data in
+                    ForEach(Array(viewModel.jobPost.enumerated()),id: \.element.jobID) {
+                        (index,data) in
                         JobCell(jobPostData: data)
                             .asButton(.press) {
                                 router.showScreen(.push) { rout in
                                     JobDetailView(viewModel:viewModel, jobID: data.jobID)
                                 }
                             }
+//                            .onAppear{
+//                                if (viewModel.jobPost.count - 1) == index && viewModel.pagination{
+//                                    viewModel.pageNumber += 1
+//                                    viewModel.getJobsList()
+//                                }
+//                            }
                     }
                 }
                 .padding(.top, 24)
             }
             .onAppear{
+                viewModel.pageNumber = 1
                 viewModel.getJobsList()
             }
             

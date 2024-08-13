@@ -9,11 +9,16 @@ import Foundation
 
 class ReviewsViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
+    //MARK: for review section
     @Published var myReviewsList = [ReviewData]()
     @Published var givenReviewsList = [ReviewData]()
     @Published var reviewDetail: ReviewDetailData?
+    
     @Published var bookingsListData: BookingsListData?
+    
     @Published var reviewDetailData: ReviewDetailData?
+    @Published var cancelSeriveDetailData: CancelSeriveDetailData?
+    
     @Published var isEditAddress = false
     @Published var isEditReview = false
     @Published var txtReview = ""
@@ -98,6 +103,8 @@ class ReviewsViewModel: ObservableObject{
                 switch result{
                 case .success(let data):
                     self?.isloading = false
+                    self?.ratingValue = data.data.rating
+                    self?.txtReview = data.data.review
                     self?.reviewDetailData = data.data
                 case .failure(let error):
                     self?.isloading = false
@@ -105,6 +112,25 @@ class ReviewsViewModel: ObservableObject{
                 }
             }
             
+        }
+    }
+    
+    func cancelBookingData(){
+        
+        let param: [String : Any] = ["approch_id":bookingsListData?.id ?? ""]
+        
+        isloading = true
+        NetworkManager.shared.cancelBookingData(params: param) { [weak self] result in
+            
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.cancelSeriveDetailData = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
     }
     

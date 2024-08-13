@@ -15,6 +15,8 @@ struct ConsumerTabBarScreenView: View {
     var showBookingScreen = NotificationCenter.default
     var showInboxScreen = NotificationCenter.default
     var showBookingsHistoryScreen = NotificationCenter.default
+    var notificatioSetChatScreen = NotificationCenter.default
+    @Environment(\.router) var router
     
     var body: some View {
         VStack{
@@ -43,6 +45,20 @@ struct ConsumerTabBarScreenView: View {
             
             showBookingsHistoryScreen.addObserver(forName: .showBookingsHistoryScreen, object: nil, queue: nil,
                                                    using: self.showBookingsHistoryScreen)
+            
+            notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
+                                                         using: self.setChatScreen)
+        }
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        print(notification.userInfo)
+        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+            let chatScreenviewModel = ChatScreenViewModel()
+            chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
+            router.showScreen(.push) { rout in
+                ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
+            }
         }
     }
     

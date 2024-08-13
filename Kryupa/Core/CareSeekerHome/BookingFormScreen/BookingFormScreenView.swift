@@ -13,7 +13,7 @@ struct BookingFormScreenView: View {
     @Environment(\.router) var router
     
     @StateObject var viewModel = BookingFormScreenViewModel()
-    
+    var notificatioSsetBookingId = NotificationCenter.default
     
     var body: some View {
         ZStack{
@@ -613,9 +613,9 @@ struct BookingFormScreenView: View {
                     viewModel.createBooking { bookingId in
                         if viewModel.isRecommended && recommnededCheck() {
                             let bookingDict:[String: String] = ["bookingId": bookingId]
-                            NotificationCenter.default.post(name: .setBookingId,
-                                                                            object: nil, userInfo: bookingDict)
                             router.dismissScreen()
+                            notificatioSsetBookingId.post(name: .setBookingId,
+                                                                            object: nil, userInfo: bookingDict)
                         }else{
                             router.showScreen(.push) { rout in
                                 CareGiverNearByCustomerScreenView(bookingID: bookingId)

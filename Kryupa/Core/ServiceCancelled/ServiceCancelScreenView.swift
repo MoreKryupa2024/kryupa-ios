@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct ServiceCancelScreenView: View {
     @Environment(\.router) var router
-    @State var selectedReason: String = String()
-    @State var reasonDescription: String = String()
+    @StateObject var viewModel = ServiceDetailScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -27,14 +27,11 @@ struct ServiceCancelScreenView: View {
                         .padding(.horizontal,24)
                         .padding(.top,30)
                     
-                    DropDownView(
-                        selectedValue: selectedReason,
-                        placeHolder: "Select",
-                        values: AppConstants.genderArray) { value in
-                            selectedReason = value
-                        }
-                        .padding(.top,15)
-                        .padding(.horizontal,24)
+                    if viewModel.selectedReason == "Other"{
+                        otherFieldView
+                            .padding(.horizontal,24)
+                            .padding(.top,15)
+                    }
                     
                     DescriptionView
                         .padding(.top,15)
@@ -42,15 +39,41 @@ struct ServiceCancelScreenView: View {
                     
                     CancelButton
                         .padding(.top,60)
-                    
+                        .asButton(.press) {
+                            viewModel.bookingCancel { error in
+                                presentAlert(title: "Kryupa", subTitle: error)
+                            } action: {
+                                router.showScreen(.push) { route in
+                                    CancelSuccessScreen()
+                                }
+                            }
+                        }
                 }
                 .scrollIndicators(.hidden)
             }
-//            if viewModel.isloading{
-//                LoadingView()
-//            }
+            if viewModel.isloading{
+                LoadingView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
+    }
+    
+    private var otherFieldView: some View{
+        
+        TextField(text: $viewModel.selectedReasonTwo) {
+            Text("Other Reason")
+                .foregroundStyle(._7_C_7_C_80)
+        }
+        .keyboardType(.asciiCapable)
+        .font(.custom(FontContent.plusRegular, size: 15))
+        .padding([.leading,.trailing],10)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 1)
+                .foregroundStyle(.D_1_D_1_D_6)
+                .frame(height: 48)
+        }
+        .padding(.top,10)
     }
     
     private var DescriptionView: some View{
@@ -59,7 +82,7 @@ struct ServiceCancelScreenView: View {
             Text("Description")
                 .font(.custom(FontContent.plusMedium, size: 17))
             
-            TextEditor(text: $reasonDescription)
+            TextEditor(text: $viewModel.reasonDescription)
                 .frame(height: 120)
                 .keyboardType(.asciiCapable)
                 .font(.custom(FontContent.plusRegular, size: 15))
@@ -87,10 +110,10 @@ struct ServiceCancelScreenView: View {
             .padding(.bottom,15)
             
             DropDownView(
-                selectedValue: selectedReason,
+                selectedValue: viewModel.selectedReason,
                 placeHolder: "Select",
-                values: AppConstants.genderArray) { value in
-                    selectedReason = value
+                values: Defaults().userType == AppConstants.GiveCare ? AppConstants.cancelGiverReasons : AppConstants.cancelSeekerReasons) { value in
+                    viewModel.selectedReason = value
                 }
         })
         .padding(.bottom,-10)

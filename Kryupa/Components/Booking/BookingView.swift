@@ -56,7 +56,7 @@ struct BookingView: View {
                         )
                 }
                 if status != "Draft"{
-                    Text("$\(bookingData?.price ?? 0)")
+                    Text("$\((bookingData?.price ?? 0).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusMedium, size: 12))
                         .foregroundStyle(._444446)
                         .lineLimit(1)

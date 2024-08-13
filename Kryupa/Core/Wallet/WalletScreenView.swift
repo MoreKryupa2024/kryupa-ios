@@ -64,10 +64,16 @@ struct WalletScreenView: View {
                             .padding(.bottom,15)
                             .padding(.top,30)
                             
-                            ForEach(viewModel.transectionListData, id: \.id) { data in
+                            ForEach(Array(viewModel.transectionListData.enumerated()), id: \.offset) { (index,data) in
                                 WalletHistoryView(transectionListData: data)
                                     .padding(.horizontal,24)
                                     .padding(.bottom,15)
+//                                    .onAppear{
+//                                        if (viewModel.transectionListData.count - 1) == index && viewModel.pagination{
+//                                            viewModel.pageNumber += 1
+//                                            viewModel.getWalletBalance()
+//                                        }
+//                                    }
                             }
                         }
                         .background {
@@ -88,8 +94,10 @@ struct WalletScreenView: View {
                 }
             }
             .onAppear{
+                viewModel.pageNumber = 1
                 viewModel.getWalletBalance()
             }
+            
             if viewModel.isloading{
                 LoadingView()
             }

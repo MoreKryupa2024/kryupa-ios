@@ -60,6 +60,7 @@ struct CareSeekerHomeScreenView: View {
             
         }
         .onAppear{
+            viewModel.pageNumber = 1
             viewModel.getRecommandationList()
             viewModel.customerSvcAct()
         }

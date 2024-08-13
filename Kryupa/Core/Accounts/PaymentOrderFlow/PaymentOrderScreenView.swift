@@ -97,6 +97,9 @@ struct PaymentOrderScreenView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
+                    if (viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0) == 0{
+                        return
+                    }
                     if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
                         viewModel.amount = "\(viewModel.paymentOrderData?.diffrenceAmount ?? 0.0)"
                         viewModel.fromPaymentFlow = true

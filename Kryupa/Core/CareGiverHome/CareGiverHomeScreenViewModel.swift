@@ -15,11 +15,14 @@ class CareGiverHomeScreenViewModel: ObservableObject
     @Published var isloading: Bool = Bool()
     @Published var jobAcceptModel: [JobAcceptData] = [JobAcceptData]()
     @Published var serviceStartData: ServiceStartData?
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
 
     func getJobsNearYouList(completion: @escaping (()->Void)){
         
         let param = [
             "pageNumber":1,
+            //"pageNumber":pageNumber,
             "pageSize":20
         ]
         isloading = true
@@ -31,6 +34,12 @@ class CareGiverHomeScreenViewModel: ObservableObject
                     self?.isloading = false
                     self?.jobsNearYou = data.data.jobPost
                     completion()
+                    /*  if self!.pageNumber > 1{
+                     self?.jobsNearYou += data.data.jobPost
+                 }else{
+                     self?.jobsNearYou = data.data.jobPost
+                 }
+                 self?.pagination = data.data.jobPost.count != 0*/
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

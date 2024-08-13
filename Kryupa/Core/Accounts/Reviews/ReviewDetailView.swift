@@ -46,24 +46,7 @@ struct ReviewDetailView: View {
 //            }
   
             HStack {
-                
-                ForEach (0...(viewModel.reviewDetail?.rating.getFullRateVal() ?? 0)) {_ in
-                    Image("star")
-                        .frame(width: 12, height: 12)
-                }
-                
-                if ((viewModel.reviewDetail?.rating.addHalfRateVal()) != nil) {
-                    Image("star_half")
-                        .frame(width: 12, height: 12)
-                }
-                
-                if viewModel.reviewDetail?.rating.getNoRateValue() ?? 0 > 0 {
-                    ForEach (0...(viewModel.reviewDetail?.rating.getNoRateValue() ?? 0)) {_ in
-                        Image("star_unselected")
-                            .frame(width: 12, height: 12)
-                    }
-                }
-                
+                StarsView(rating: Double(viewModel.reviewDetail?.rating ?? 0), maxRating: 5, size: 12)
             }
             
             
@@ -83,22 +66,9 @@ struct ReviewDetailView: View {
     private var UserView: some View{
         VStack(spacing: 5) {
             HStack{
-                
-                AsyncImage(url: URL(string: viewModel.reviewDetail?.profilePictureURL ?? ""),content: { image in
-                    image
-                        .resizable()
-                },placeholder: {
-                    if viewModel.reviewDetail?.profilePictureURL != "" && viewModel.reviewDetail?.profilePictureURL != nil{
-                        ProgressView()
-                    }
-                    else {
-                        Image("reviewUser")
-                            .resizable()
-                    }
-                })
-                .frame(width: 126, height: 126)
-                .cornerRadius(63)
-                
+                ImageLoadingView(imageURL: viewModel.reviewDetail?.profilePictureURL ?? "")
+                    .frame(width: 126, height: 126)
+                    .cornerRadius(63)
             }
             .frame(width: 138, height: 138)
             .overlay(
@@ -112,31 +82,7 @@ struct ReviewDetailView: View {
                 .foregroundStyle(.appMain)
             
             HStack {
-//                ForEach (0...3) {_ in
-//                    Image("star")
-//                        .resizable()
-//                        .frame(width: 12, height: 12)
-//                }
-                
-                    
-                    ForEach (0...(viewModel.reviewDetail?.averageRating.getFullRateVal() ?? 0)) {_ in
-                        Image("star")
-                            .frame(width: 12, height: 12)
-                    }
-                    
-                    if ((viewModel.reviewDetail?.averageRating.addHalfRateVal()) != nil) {
-                        Image("star_half")
-                            .frame(width: 12, height: 12)
-                    }
-                    
-                    if viewModel.reviewDetail?.averageRating.getNoRateValue() ?? 0 > 0 {
-                        ForEach (0...(viewModel.reviewDetail?.averageRating.getNoRateValue() ?? 0)) {_ in
-                            Image("star_unselected")
-                                .frame(width: 12, height: 12)
-                        }
-                    }
-                    
-                
+                StarsView(rating: Double(viewModel.reviewDetail?.averageRating.getFullRateVal() ?? 0), maxRating: 5, size: 12)
                 
                 Text("(\(viewModel.reviewDetail?.averageRating ?? "0"))")
                     .font(.custom(FontContent.plusRegular, size: 11))

@@ -41,6 +41,12 @@ struct FAQView: View {
                                 ForEach(faqModelData.allConversation.reversed(), id:\.id) { data in
                                     FAQChatView(conversationData: data,senderId: faqModelData.userId)
                                         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+//                                        .onAppear{
+//                                            if (faqModelData.allConversation.count - 1) == index && viewModel.pagination{
+//                                                viewModel.pageNumber += 1
+//                                                viewModel.conversationWithAdmin()
+//                                            }
+//                                        }
                                  }
                             }
                         }
@@ -54,6 +60,7 @@ struct FAQView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .task{
+                viewModel.pageNumber = 1
                 viewModel.conversationWithAdmin()
                 viewModel.receiveMessage()
             }

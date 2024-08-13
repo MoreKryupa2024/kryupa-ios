@@ -12,10 +12,13 @@ class BookingViewModel: ObservableObject{
     @Published var bookingList = [BookingsListData]()
     @Published var selectedSection = 0
     @Published var isLoading = Bool()
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     
     func getBookings(){
         bookingList = []
         isLoading = true
+        //var param : [String : Any] = ["pageNumber":pageNumber,
         var param : [String : Any] = ["pageNumber":1,
                                       "pageSize":20]
        
@@ -40,6 +43,12 @@ class BookingViewModel: ObservableObject{
                     switch result{
                     case .success(let data):
                         self?.bookingList = data.data
+                        /* if self!.pageNumber > 1{
+                         self?.bookingList += data.data
+                     }else{
+                         self?.bookingList = data.data
+                     }
+                     self?.pagination = data.data.count != 0*/
                     case .failure(let error):
                         print(error)
                     }
@@ -62,6 +71,12 @@ class BookingViewModel: ObservableObject{
                     switch result{
                     case .success(let data):
                         self?.bookingList = data.data
+                        /* if self!.pageNumber > 1{
+                         self?.bookingList += data.data
+                     }else{
+                         self?.bookingList = data.data
+                     }
+                     self?.pagination = data.data.count != 0*/
                     case .failure(let error):
                         print(error)
                     }

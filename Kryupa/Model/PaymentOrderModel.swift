@@ -39,7 +39,7 @@ struct PaymentOrderData {
         name = jsonData["name"] as? String ?? ""
         walletBalance = (Double(jsonData["wallet_balance"] as? Int ?? 0))
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
-        bookingPricingForCustomer = Double(jsonData["booking_pricing_for_customer"] as? Int ?? 0)
+        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
         approchID = jsonData["approch_id"] as? String ?? ""
         fulladdress = jsonData["fulladdress"] as? String ?? ""
         bookingID = jsonData["booking_id"] as? String ?? ""

@@ -30,6 +30,7 @@ struct CareGiverHomeScreenView: View {
                                     .padding([.horizontal,.vertical],24)
                             }
                             noCotentView
+                            completeProfileView
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
                                 if serviceStartData.serviceStatus == "confirm_by_customer" {
@@ -217,7 +218,7 @@ struct CareGiverHomeScreenView: View {
         
         ScrollView(.horizontal) {
             LazyHStack(spacing:1){
-                ForEach(viewModel.jobsNearYou, id: \.jobID) { jobPost in
+                ForEach(Array(viewModel.jobsNearYou.enumerated()), id: \.element.jobID) { (index,jobPost) in
                     CareGiverPortfolioView(job: jobPost, accept: {
                         viewModel.acceptRejectJob(approchID: jobPost.jobID, status: "Job Acceptance") {
                             router.showScreen(.push) { rout in
@@ -229,9 +230,16 @@ struct CareGiverHomeScreenView: View {
                             JobDetailView(jobID: jobPost.jobID)
                         }
                     })
-                        .scrollTransition(.interactive, axis: .horizontal) { view, phase in
-                            view.scaleEffect(phase.isIdentity ? 1 : 0.85)
+                    .scrollTransition(.interactive, axis: .horizontal) { view, phase in
+                        view.scaleEffect(phase.isIdentity ? 1 : 0.85)
+                    }
+                    /*
+                    .onAppear{
+                        if (viewModel.jobsNearYou.count - 1) == index && viewModel.pagination {
+                            viewModel.pageNumber += 1
+                            viewModel.getJobsNearYouList {}
                         }
+                    }*/
                 }
                 
             }

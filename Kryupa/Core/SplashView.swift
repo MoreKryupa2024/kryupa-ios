@@ -10,6 +10,10 @@ import SwiftfulRouting
 
 struct ContentView: View {
     @State var showScreen : Int = 0//Defaults().showScreen
+    var setLobbyScreen = NotificationCenter.default
+    var setCareGiverHomeScreen = NotificationCenter.default
+    var setCareSeekerHomeScreen = NotificationCenter.default
+    var logout = NotificationCenter.default
     
     var body: some View {
         RouterView() { _ in
@@ -29,17 +33,18 @@ struct ContentView: View {
         .task {
             delayText()
             
-            NotificationCenter.default.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
+            setLobbyScreen.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
                                 using: self.setCareGiverLobbyScreen)
             
-            NotificationCenter.default.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
+            setCareGiverHomeScreen.addObserver(forName: .setCareGiverHomeScreen, object: nil, queue: nil,
                                 using: self.setCareGiverHomeScreen)
             
-            NotificationCenter.default.addObserver(forName: .setCareSeekerHomeScreen, object: nil, queue: nil,
+            setCareSeekerHomeScreen.addObserver(forName: .setCareSeekerHomeScreen, object: nil, queue: nil,
                                 using: self.setCareSeekerHomeScreen)
             
-            NotificationCenter.default.addObserver(forName: .logout, object: nil, queue: nil,
+            logout.addObserver(forName: .logout, object: nil, queue: nil,
                                 using: self.logout)
+
         }
     }
     

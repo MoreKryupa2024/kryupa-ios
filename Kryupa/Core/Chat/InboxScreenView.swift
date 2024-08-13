@@ -20,7 +20,7 @@ struct InboxScreenView: View {
                 HeaderView(title: "Messages")
                 
                 ScrollView{
-                    ForEach(viewModel.inboxList,id: \.id) { profileData in
+                    ForEach(Array(viewModel.inboxList.enumerated()),id: \.element.id) { (index,profileData) in
                         SenderView(profile: profileData)
                             .asButton(.press) {
                                 viewModel.selectedChat = profileData
@@ -28,6 +28,12 @@ struct InboxScreenView: View {
                                     ChatView(userName: profileData.name,viewModel: viewModel)
                                 }
                             }
+//                            .onAppear{
+//                                if ((viewModel.inboxList.count-1) == index) && viewModel.pagination{
+//                                    viewModel.pageNumber += 1
+//                                    viewModel.getInboxList()
+//                                }
+//                            }
                             SepratorView
                     }
                 }
@@ -40,6 +46,7 @@ struct InboxScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
+            viewModel.pageNumber = 1
             viewModel.getInboxList()
         }
     }

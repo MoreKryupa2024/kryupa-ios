@@ -32,6 +32,7 @@ struct BookingScreenView: View {
             }
         }
         .task{
+            viewModel.pageNumber = 1
             viewModel.getBookings()
         }
     }
@@ -39,7 +40,7 @@ struct BookingScreenView: View {
         ScrollView{
             switch viewModel.selectedSection{
             case 1:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ServiceDetailScreenViewModel()
@@ -48,9 +49,15 @@ struct BookingScreenView: View {
                                 ServiceDetailScreenView(viewModel:viewModelReview)
                             }
                         }
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
             case 2:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
@@ -59,20 +66,38 @@ struct BookingScreenView: View {
                                 GiveReviewView(viewModel:viewModelReview)
                             }
                         }
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
             case 3:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Cancelled",bookingData: data)
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
                 
             case 0:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Draft",bookingData: data)
                         .asButton(.press) {
                             Defaults().bookingId = data.bookingID
                             NotificationCenter.default.post(name: .showBookingScreen,
                                                                             object: nil, userInfo: nil)
                         }
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
                 
             default:
@@ -86,11 +111,24 @@ struct BookingScreenView: View {
         ScrollView{
             switch viewModel.selectedSection{
             case 0:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
+                        .asButton(.press) {
+                            let viewModelReview = ServiceDetailScreenViewModel()
+                            viewModelReview.bookingsListData = data
+                            router.showScreen(.push) { rout in
+                                ServiceDetailScreenView(viewModel:viewModelReview)
+                            }
+                        }
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
             case 1:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
@@ -99,10 +137,22 @@ struct BookingScreenView: View {
                                 GiveReviewView(viewModel:viewModelReview)
                             }
                         }
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
             case 2:
-                ForEach(viewModel.bookingList,id: \.bookingID) { data in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Cancelled",bookingData: data)
+//                        .onAppear{
+//                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getBookings()
+//                            }
+//                        }
                 }
                 
             default:
@@ -136,6 +186,8 @@ struct BookingScreenView: View {
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
+            viewModel.pageNumber = 1
+            viewModel.pagination = true
             viewModel.getBookings()
         })
     }
@@ -160,6 +212,8 @@ struct BookingScreenView: View {
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
+            viewModel.pageNumber = 1
+            viewModel.pagination = true
             viewModel.getBookings()
         })
     }

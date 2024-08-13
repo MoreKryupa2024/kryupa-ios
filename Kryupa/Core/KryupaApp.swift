@@ -11,6 +11,7 @@ import GoogleSignIn
 import FirebaseCore
 import IQKeyboardManagerSwift
 import FirebaseMessaging
+import AVFoundation
 
 @main
 struct KryupaApp: App {
@@ -74,6 +75,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Notifications----------------------user Notification Center willPresent")
         //        completionHandler([.alert, .sound, .badge])
+        AudioServicesPlaySystemSound(1026)
+        HapticManager.sharde.impact(style: .heavy)
         if #available(iOS 14.0, *) {
             completionHandler([.list, .banner, .sound])
         } else {
@@ -84,6 +87,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("Notifications----------------------user Notification Center didReceive")
+        let notiInfo = response.notification.request.content.userInfo
+        print(notiInfo)
+        if let notiInfo = notiInfo as? [String:Any],let screenName = notiInfo["screenName"] as? String , screenName == "ChatScreen"  {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: .showInboxScreen, object: nil)
+                NotificationCenter.default.post(name: .setChatScreen, object: nil,userInfo: response.notification.request.content.userInfo)
+            }
+        }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

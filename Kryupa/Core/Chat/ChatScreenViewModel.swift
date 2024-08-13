@@ -17,6 +17,7 @@ class ChatScreenViewModel: ObservableObject{
     @Published var inboxList = [ChatListData]()
     @Published var messageList = [MessageData]()
     static let shared = ChatScreenViewModel()
+    var meetingTokenData: BGVInterviewMeetingTokenData?
     @Published var isLoading = Bool()
     @Published var showVideoCallView = Bool()
     @Published var isRecommended = Bool()
@@ -25,6 +26,8 @@ class ChatScreenViewModel: ObservableObject{
     @Published var showPayViewView = Bool()
     @Published var paySpecialMessageData: SpecialMessageData?
     @Published var bookingId = String()
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     
     init(){
         self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.baseURL)/")!, config: [.log(true), .compress])
@@ -69,7 +72,11 @@ class ChatScreenViewModel: ObservableObject{
             return
         }
         isLoading = true
-        let param:[String:Any] = ["contactId": contactId]
+        let param:[String:Any] = ["contactId": contactId,"pageSize":20]
+        
+        /* let param:[String:Any] = ["contactId": contactId,
+         "pageNumber":pageNumber,
+         "pageSize":20]*/
         NetworkManager.shared.getChatHistory(params: param) { [weak self] result in
             guard let self else {
                 self?.isLoading = false
@@ -91,6 +98,36 @@ class ChatScreenViewModel: ObservableObject{
                             return true
                         }
                     })
+                    
+                    /*
+                     if self.pageNumber > 1{
+                         self.messageList += data.data.filter({ MessageData in
+                             if MessageData.message.contains("video_call"){
+                                 self.showVideoCallView = false
+                                 return false
+     //                        }else if MessageData.message.contains("pay_now"){
+     //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+     //                            self.showPayViewView = true
+     //                            return false
+                             }else{
+                                 return true
+                             }
+                         })
+                     }else{
+                         self.messageList = data.data.filter({ MessageData in
+                             if MessageData.message.contains("video_call"){
+                                 self.showVideoCallView = false
+                                 return false
+     //                        }else if MessageData.message.contains("pay_now"){
+     //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+     //                            self.showPayViewView = true
+     //                            return false
+                             }else{
+                                 return true
+                             }
+                         })
+                     }
+                     self.pagination = data.data.count != 0*/
                 case .failure(let error):
                     print(error)
                 }
@@ -122,7 +159,7 @@ class ChatScreenViewModel: ObservableObject{
                      "message":message]
         
         socket.emit("message_send", with: [param]) {
-            self.messageList.append(msgData)
+            self.messageList = [msgData] + self.messageList
         }
     }
 
@@ -156,6 +193,7 @@ class ChatScreenViewModel: ObservableObject{
     
     func getInboxList(){
         isLoading = true
+        //let param = ["pageNumber":pageNumber,
         let param = ["pageNumber":1,
                      "pageSize":20]
         NetworkManager.shared.getInboxList(params: param) { [weak self] result in
@@ -164,6 +202,12 @@ class ChatScreenViewModel: ObservableObject{
                 switch result {
                 case .success(let data):
                     self?.inboxList = data.data
+                    if self!.pageNumber > 1{
+                        self?.inboxList += data.data
+                    }else{
+                        self?.inboxList = data.data
+                    }
+                    self?.pagination = data.data.count != 0
                 case .failure(let error):
                     print(error)
                 }

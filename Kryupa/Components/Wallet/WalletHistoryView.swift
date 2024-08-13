@@ -26,7 +26,7 @@ struct WalletHistoryView: View {
                 HStack(spacing:0){
                     Text(transectionListData.tnxstatus == "Credited" ? "+" : "-")
                         .foregroundStyle(transectionListData.tnxstatus == "Credited" ? .green : .red)
-                    Text("$\(transectionListData.tnxamount)")
+                    Text("$\(transectionListData.tnxamount.removeZerosFromEnd(num: 2))")
                 }
                 .font(.custom(FontContent.plusMedium, size: 22))
             }

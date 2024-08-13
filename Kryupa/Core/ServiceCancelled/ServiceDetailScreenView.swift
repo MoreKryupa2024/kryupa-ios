@@ -10,7 +10,7 @@ import SwiftfulUI
 
 struct ServiceDetailScreenView: View {
     @Environment(\.router) var router
-    @State var review: String = "Nice and polite"
+    
     @StateObject var viewModel = ServiceDetailScreenViewModel()
     
     var body: some View {
@@ -30,6 +30,7 @@ struct ServiceDetailScreenView: View {
         .toolbar(.hidden, for: .navigationBar)
         .task{
             viewModel.cancelBookingData()
+            viewModel.getReview()
         }
     }
     
@@ -37,7 +38,7 @@ struct ServiceDetailScreenView: View {
         VStack(spacing:0){
             VStack(alignment:.leading, spacing:5){
                 if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 16))
                 }
@@ -69,7 +70,7 @@ struct ServiceDetailScreenView: View {
 //                        .padding(.trailing,18)
                 }
                 
-                Text("FG 20, Sector 54, New York USA, 541236")
+                Text(viewModel.cancelSeriveDetailData?.address ?? "")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
                     .padding(.leading,24)
@@ -84,8 +85,8 @@ struct ServiceDetailScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                     
                     
-                    Text("$20.23")
-                    //Text("$\((Double(viewModel.reviewDetailData?.ratePerHours ?? "") ?? 0).removeZerosFromEnd(num: 2))")
+                    
+                    Text("$\((Double(viewModel.cancelSeriveDetailData?.pricePerHour ?? 0)).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
                 
@@ -95,8 +96,7 @@ struct ServiceDetailScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                     
                     
-                    Text("6")
-                    //Text(((Double(viewModel.reviewDetailData?.totalHours ?? 0)).removeZerosFromEnd(num: 2)))
+                    Text(((Double(viewModel.cancelSeriveDetailData?.hours ?? "") ?? 0).removeZerosFromEnd(num: 2)))
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
                 
@@ -106,8 +106,7 @@ struct ServiceDetailScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                     
                     
-                    Text("$121.38")
-//                    Text("$\((viewModel.reviewDetailData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))")
+                    Text("$\(Double(viewModel.cancelSeriveDetailData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
             }
@@ -120,26 +119,13 @@ struct ServiceDetailScreenView: View {
                 Text("Review:")
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.plusRegular, size: 17))
-                HStack(spacing:5){
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                }
-                .foregroundStyle(.D_1_D_1_D_6)
                 
-                TextEditor(text: $review)
+                RatingView(rating: viewModel.rating,action: { rating in
+                    viewModel.rating = (rating + 1)
+                })
+                .id(viewModel.rating)
+                
+                TextEditor(text: $viewModel.review)
                 .frame(height: 120)
                 .keyboardType(.asciiCapable)
                 .font(.custom(FontContent.plusRegular, size: 15))
@@ -151,9 +137,19 @@ struct ServiceDetailScreenView: View {
                         .frame(height: 125)
                 }
                 .padding(.top,10)
+                .id(viewModel.review)
                 
                 SubmitButton
                     .padding(.vertical,20)
+                    .asButton(.press) {
+                        if viewModel.rating == 0{
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
+                        }else if viewModel.review.isEmpty{
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
+                        }else{
+                            viewModel.addReview()
+                        }
+                    }
             }
             .padding(.horizontal,24)
         }
@@ -191,30 +187,29 @@ struct ServiceDetailScreenView: View {
                 Text(viewModel.bookingsListData?.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                 
-//                Text("5 years experienced")
-                //Text("\(viewModel.reviewDetailData?.yearsOfExprience ?? "") years experienced")
+                Text("\(viewModel.cancelSeriveDetailData?.yearsOfExprienceInNo ?? "") years experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
-                Text("$\(viewModel.bookingsListData?.price ?? 0)")
+                
+                Text("$\((viewModel.bookingsListData?.price ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
+                
                 HStack{
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 12,height: 12)
-                    
+                    StarsView(rating: (Double(viewModel.cancelSeriveDetailData?.rating ?? "") ?? 0), maxRating: 5, size: 12)
                     Text("(0)")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(._444446)
                 }
             }
             .padding(.top,10)
+            .padding(.horizontal,20)
          
             CancelButton
                 .padding(.top,30)
                 .asButton(.press){
                     router.showScreen(.push) { route in
-                        ServiceCancelScreenView()
+                        ServiceCancelScreenView(viewModel: viewModel)
                     }
                 }
         }

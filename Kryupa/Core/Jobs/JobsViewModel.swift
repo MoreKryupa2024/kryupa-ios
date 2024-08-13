@@ -10,6 +10,8 @@ import Foundation
 class JobsViewModel: ObservableObject {
     @Published var isloading: Bool = Bool()
     @Published var isComingfromChat: Bool = false
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     @Published var jobDetailModel: JobDetailData?
     @Published var startDate = String()
     @Published var otherDiseaseType = String()
@@ -36,6 +38,7 @@ class JobsViewModel: ObservableObject {
     }
     
     func getJobsList(){
+//        //        let param = ["pageNumber":pageNumber,
         let param = ["pageNumber":1,
                      "pageSize":20]
         
@@ -45,6 +48,12 @@ class JobsViewModel: ObservableObject {
                 self?.isloading = false
                 switch result{
                 case .success(let data):
+                    /* if self!.pageNumber > 1{
+                     self?.jobPost += data.data.jobPost
+                 }else{
+                     self?.jobPost = data.data.jobPost
+                 }
+                 self?.pagination = data.data.jobPost.count != 0*/
                     self?.jobPost = data.data.jobPost
                 case .failure(let error):
                     print(error)

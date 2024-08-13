@@ -88,7 +88,8 @@ struct SocialLoginScreenView: View {
     
     private func handleSuccessfulLogin(with authorization: ASAuthorization) {
         if let userCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            let identityToken = (userCredential.identityToken?.base64EncodedString() ?? "Identity token not available")
+            guard let data = userCredential.identityToken else { return }
+            let identityToken = String(decoding: data, as: UTF8.self)
             let authorizationCode = (userCredential.authorizationCode?.base64EncodedString() ?? "Authorization code not available")
             let userIdentifier = userCredential.user
             let fullName = userCredential.fullName

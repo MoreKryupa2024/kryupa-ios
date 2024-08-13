@@ -9,18 +9,10 @@ import SwiftUI
 import SwiftfulUI
 
 struct BookingCareGiverListView: View {
-    var onSelectedValue: ((CareGiverNearByCustomerScreenData)->Void)? = nil
-    var careGiverNearByList: [CareGiverNearByCustomerScreenData] = [CareGiverNearByCustomerScreenData]()
+    
+    var careGiverNear: CareGiverNearByCustomerScreenData
     var body: some View {
-        LazyVStack(spacing:0){
-            ForEach(careGiverNearByList,id: \.id){ giver in
-                giverView(giver: giver)
-                    .asButton(.press) {
-                        onSelectedValue?(giver)
-                    }
-                    .padding(.top,15)
-            }
-        }
+        giverView(giver: careGiverNear)
     }
     
     private func giverView(giver:CareGiverNearByCustomerScreenData)-> some View{
@@ -62,7 +54,7 @@ struct BookingCareGiverListView: View {
         }
     }
 }
-
-#Preview {
-    BookingCareGiverListView()
-}
+//
+//#Preview {
+//    BookingCareGiverListView()
+//}

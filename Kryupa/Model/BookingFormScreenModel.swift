@@ -39,7 +39,7 @@ struct BookingsListData {
     let startTime, endTime, bookingID, status: String
     let name: String
     let profilePictureURL: String
-    let price: Int
+    let price: Double
     let arrayAgg: [String]
     
     init(jsondata:[String:Any]) {
@@ -53,7 +53,7 @@ struct BookingsListData {
         status = jsondata["status"] as? String ?? ""
         name = jsondata["name"] as? String ?? ""
         profilePictureURL = jsondata["profile_picture_url"] as? String ?? ""
-        price = jsondata["price"] as? Int ?? 0
+        price = jsondata["price"] as? Double ?? Double(jsondata["price"] as? Int ?? Int(jsondata["price"] as? String ?? "") ?? 0)
         arrayAgg = jsondata["array_agg"] as? [String] ?? []
     }
 }
@@ -138,5 +138,63 @@ struct RecommendedUserBookingData {
         gender = jsonData["gender"] as? String ?? ""
         preferredLang = (jsonData["preferred_lang"] as? [String] ?? []).sorted(by: { $0 < $1 })
         preferredServiceType = (jsonData["preferred_service_type"] as? [String] ?? []).sorted(by: { $0 < $1 })
+    }
+}
+
+
+
+// MARK: - Welcome
+struct CancelSeriveDetailModel {
+    let success: Bool
+    let message: String
+    let data: CancelSeriveDetailData
+    
+    init(jsonData:[String:Any]){
+        message = jsonData["message"] as? String ?? ""
+        success = jsonData["success"] as? Bool ?? false
+        data = CancelSeriveDetailData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+// MARK: - DataClass
+struct CancelSeriveDetailData {
+    let id, status, bookingID: String
+    let isActive, isDeleted: Bool
+    let updatedBy, createdAt, updatedAt, caregiverID: String
+    let customerID: String
+    let bookingPricing, bookingPricingForCustomer: Int
+    let payChatID, startDate, endDate, startTime: String
+    let endTime: String
+    let areasOfExpertise: [String]
+    let hours,name, address, yearsOfExprienceInNo: String
+    let pricePerHour: Int
+    let rating: String
+    
+
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        status = jsonData["status"] as? String ?? ""
+        bookingID = jsonData["booking_id"] as? String ?? ""
+        isActive = jsonData["is_active"] as? Bool ?? false
+        isDeleted = jsonData["is_deleted"] as? Bool ?? false
+        updatedBy = jsonData["updated_by"] as? String ?? ""
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+        caregiverID = jsonData["caregiver_id"] as? String ?? ""
+        customerID = jsonData["customer_id"] as? String ?? ""
+        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
+        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
+        payChatID = jsonData["pay_chat_id"] as? String ?? ""
+        startDate = jsonData["start_date"] as? String ?? ""
+        endDate = jsonData["end_date"] as? String ?? ""
+        startTime = jsonData["start_time"] as? String ?? ""
+        endTime = jsonData["end_time"] as? String ?? ""
+        areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []
+        hours = jsonData["hours"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
+        address = jsonData["address"] as? String ?? ""
+        rating = jsonData["rating"] as? String ?? ""
+        pricePerHour = jsonData["price_per_hour"] as? Int ?? 0
+        yearsOfExprienceInNo = jsonData["years_of_exprience_in_no"] as? String ?? ""
     }
 }

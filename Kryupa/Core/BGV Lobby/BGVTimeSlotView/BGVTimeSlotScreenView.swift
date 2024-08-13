@@ -17,6 +17,7 @@ struct BGVTimeSlotScreenView: View {
             VStack(spacing:0){
                 HeaderView
                 WeakDayContentView
+                    .frame(height: 64)
                 
                 ScrollView {
                     LazyVStack(spacing:0){

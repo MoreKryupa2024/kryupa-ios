@@ -13,8 +13,9 @@ struct ChatView: View {
     @Environment(\.router) var router
     @State var userName: String = ""
     @State var sendMsgText: String = ""
-    var notificatioSsetBookingId = NotificationCenter.default
-    var notificatioSsetInboxId = NotificationCenter.default
+    let notificatioSsetBookingId = NotificationCenter.default
+    let notificatioSsetInboxId = NotificationCenter.default
+    @State var isPresented = false
     
     @StateObject var viewModel = ChatScreenViewModel()
     
@@ -43,8 +44,8 @@ struct ChatView: View {
                 
                 ScrollView(.vertical) {
                     LazyVStack {
-                        ForEach(viewModel.messageList.reversed(), id:\.id) {
-                            msg in
+                        ForEach(Array(viewModel.messageList.enumerated()), id:\.element.id) {
+                            (index,msg) in
                             
                             ChatBoxView(msgData: msg, selectedChat: viewModel.selectedChat,onSelectedValue: { SpecialMessageData in
                                 let viewModelJob = JobsViewModel()
@@ -53,15 +54,19 @@ struct ChatView: View {
                                     JobDetailView(viewModel:viewModelJob,jobID: SpecialMessageData.approchId)
                                 }
                             },onPaySelectedValue: { SpecialMessageData in
-                                
                                 let paymentViewModel = PaymentViewModel()
                                 paymentViewModel.paySpecialMessageData = SpecialMessageData
                                 router.showScreen(.push) { rout in
                                     PaymentOrderScreenView(viewModel: paymentViewModel)
                                 }
-                                
                             })
-                                .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+//                            .onAppear{
+//                                if (viewModel.messageList.count - 1) == index  && viewModel.pagination{
+//                                    viewModel.pageNumber += 1
+//                                    viewModel.getChatHistory()
+//                                }
+//                            }
+                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         }
                     }
                 }
@@ -73,10 +78,11 @@ struct ChatView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
             .task{
+                viewModel.pageNumber = 1
                 viewModel.connect()
                 DispatchQueue.main.async {
                     viewModel.receiveMessage { msgData, str in
-                        viewModel.messageList.append(msgData)
+                        viewModel.messageList = [msgData] + viewModel.messageList
                     }
                 }
                 viewModel.getChatHistory()
@@ -87,6 +93,21 @@ struct ChatView: View {
             
             if viewModel.isLoading{
                 LoadingView()
+            }
+            
+            if isPresented {
+                ZoomScreenView(
+                    jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
+                    sessionName: viewModel.meetingTokenData?.topic ?? "",
+                    sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
+                    username: viewModel.meetingTokenData?.userIdentity ?? ""
+                ) { error in
+                    print("error :- \(error.description)")
+                } onViewLoadedAction: {
+                    print("loaded")
+                } onViewDismissedAction: {
+                    isPresented = false
+                }
             }
         }
     }
@@ -371,7 +392,7 @@ struct ChatView: View {
                     .resizable()
                     .frame(width: 24,height: 24)
                     .asButton(.press) {
-                        
+                        isPresented = true
                     }
             }
         }

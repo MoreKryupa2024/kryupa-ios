@@ -19,7 +19,6 @@ struct  CareGiverNearByCustomerScreenModel {
         data = (jsonData["data"] as? [[String:Any]] ?? [[String:Any]]()).map{CareGiverNearByCustomerScreenData(jsonData: $0)}
     }
 }
-/* {"id":"412f10ad-50de-4bf8-b36b-f42877f5b22f","name":"Tejas sherdiwala","profile_picture_url":"https://globaldormbucket.s3.ap-south-1.amazonaws.com/ce6e8930-da89-4e25-8d89-1152f3848f37-66a1c37d-f0bb-4f2a-a7e9-96bea74de4714386172447837365642.png","price_per_hour":80,"years_of_exprience_in_no":5}*/
 // MARK: - Datum
 struct  CareGiverNearByCustomerScreenData {
     let id, name, email,profile: String

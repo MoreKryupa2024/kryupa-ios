@@ -123,7 +123,9 @@ struct SelectProfileImageView: View {
         VStack(spacing:0){
             Image(uiImage: image)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 250,height: 250)
+                .background(.gray.opacity(0.3))
                 .clipShape(.rect(cornerRadius: 125))
                 .padding(.top,40)
             
@@ -150,6 +152,7 @@ struct SelectProfileImageView: View {
                 .foregroundStyle(._444446)
                 .padding(.top,35)
         }
+        
     }
 }
 

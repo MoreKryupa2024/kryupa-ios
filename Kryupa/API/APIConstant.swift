@@ -78,6 +78,7 @@ class APIConstant{
     static let giverConfirmStartService = "\(baseURL)/apis/booking/confirm-booking"
     static let customerConfirmStartService = "\(baseURL)/apis/booking/confirm-booking-customer"
     static let cancelBookingData = "\(baseURL)/apis/booking/booking_status"
+    static let bookingCancel = "\(baseURL)/apis/booking/booking_cancel"
     
     static let getPaypalOrderID = "\(baseURL)/apis/payment/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(baseURL)/apis/payment/paypal/capture_order"
@@ -121,6 +122,9 @@ class AppConstants{
     static let GiveCare = "caregiver"
     
     static let medicalConditionArray = ["None","Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","Other"]
+    static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
+    
+    static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","3-4 Years","5-10 Years","10+ Years"]

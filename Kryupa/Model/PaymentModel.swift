@@ -34,7 +34,7 @@ struct PaymentData: Codable {
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
         bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
-        bookingPricingForCustomer = jsonData["booking_pricing_for_customer"] as? Int ?? 0
+        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
         bookingID = jsonData["booking_id"] as? String ?? ""
         approchID = jsonData["approch_id"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
@@ -129,13 +129,13 @@ struct TransectionListModel {
 // MARK: - Datum
 struct TransectionListData: Codable {
     let id: String
-    let tnxamount: Int
+    let tnxamount: Double
     let walletid, tnxnumber, tnxstatus, tnxtype: String
     let paymentmode, createdAt: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
-        tnxamount = jsonData["tnxamount"] as? Int ?? 0
+        tnxamount = jsonData["tnxamount"] as? Double ?? Double(jsonData["tnxamount"] as? Int ?? Int(jsonData["tnxamount"] as? String ?? "") ?? 0)
         walletid = jsonData["walletid"] as? String ?? ""
         tnxnumber = jsonData["tnxnumber"] as? String ?? ""
         tnxstatus = jsonData["tnxstatus"] as? String ?? ""

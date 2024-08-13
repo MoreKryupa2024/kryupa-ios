@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct GiveReviewView: View {
     
@@ -29,6 +30,7 @@ struct GiveReviewView: View {
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .onAppear{
+                    viewModel.cancelBookingData()
                     viewModel.getReview()
                 }
             }
@@ -65,14 +67,23 @@ struct GiveReviewView: View {
                 }
             }
             
-            RatingView(action: { rating in
+            RatingView(rating: viewModel.ratingValue,action: { rating in
                 viewModel.ratingValue = (rating + 1)
             })
+            .id(viewModel.ratingValue)
+            
+            TextEditor(text: $viewModel.txtReview)
+            .frame(height: 120)
+            .keyboardType(.asciiCapable)
+            .font(.custom(FontContent.plusRegular, size: 15))
+            .padding([.leading,.trailing],10)
             .disabled(viewModel.isEditReview ? false : true)
-            
-            
-            TextEditorWithPlaceholder(text: $viewModel.txtReview)
-                .disabled(viewModel.isEditReview ? false : true)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.D_1_D_1_D_6)
+                    .frame(height: 125)
+            }
             
             if viewModel.isEditReview {
                 Text("Submit")
@@ -212,17 +223,14 @@ struct GiveReviewView: View {
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
             
-            Text("$\(viewModel.bookingsListData?.price ?? 0)")
+            Text("$\((viewModel.bookingsListData?.price ?? 0).removeZerosFromEnd(num: 2))")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(._444446)
             
             HStack {
                 
-                StarsView(rating: Double(viewModel.reviewDetail?.rating.getFullRateVal() ?? 0), maxRating: 5, size: 12)
-                    .onChange(of: viewModel.reviewDetail?.rating, { oldValue, newValue in
-                        print(viewModel.reviewDetail?.rating)
-                    })
-                Text("(100)")
+                StarsView(rating: (Double(viewModel.cancelSeriveDetailData?.rating ?? "") ?? 0), maxRating: 5, size: 12)
+                Text("(0)")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)
             }
@@ -241,34 +249,6 @@ struct GiveReviewView: View {
         }
     }
 }
-
-struct TextEditorWithPlaceholder: View {
-    @Binding var text: String
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            if text.isEmpty {
-                VStack {
-                    Text("Write a review")
-                        .padding(.top, 10)
-                        .padding(.leading, 6)
-                        .opacity(0.6)
-                    Spacer()
-                }
-            }
-            
-            VStack {
-                TextEditor(text: $text)
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .frame(minHeight: 150, maxHeight: 300)
-                    .opacity(text.isEmpty ? 0.85 : 1)
-                Spacer()
-            }
-        }
-        .id(text)
-    }
-}
-
 
 #Preview {
     GiveReviewView()

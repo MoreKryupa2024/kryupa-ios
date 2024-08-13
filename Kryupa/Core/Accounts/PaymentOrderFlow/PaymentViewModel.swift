@@ -19,6 +19,8 @@ class PaymentViewModel: ObservableObject{
     @Published var fromPaymentFlow: Bool = false
     @Published var orderId: String = ""
     @Published var amount: String = String()
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     
     func getPaymentOrderDetails(){
         
@@ -127,6 +129,7 @@ class PaymentViewModel: ObservableObject{
     }
     
     func getTransectionList(){
+//        let param = ["pageNumber":pageNumber,
         let param = ["pageNumber":1,
                      "pageSize":20]
         isloading = true
@@ -139,6 +142,12 @@ class PaymentViewModel: ObservableObject{
                 self.isloading = false
                 switch result{
                 case .success(let data):
+                    /* if self.pageNumber > 1{
+                     self.transectionListData += data.data
+                 }else{
+                     self.transectionListData = data.data
+                 }
+                 self.pagination = data.data.count != 0*/
                     self.transectionListData = data.data
                 case .failure(let error):
                     print(error.localizedDescription)

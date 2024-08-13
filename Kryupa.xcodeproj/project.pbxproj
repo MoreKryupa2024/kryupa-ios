@@ -102,6 +102,7 @@
 		BE32E0352C4689BF003C7C90 /* WalletScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0342C4689BF003C7C90 /* WalletScreenView.swift */; };
 		BE32E0382C468E0F003C7C90 /* WalletHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0372C468E0F003C7C90 /* WalletHistoryView.swift */; };
 		BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32E0392C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift */; };
+		BE3A49912C6650810078F10D /* CancelSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A49902C6650810078F10D /* CancelSuccessScreen.swift */; };
 		BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */; };
 		BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */; };
 		BE3C7F282C1C1F4C000848A6 /* BookingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */; };
@@ -294,6 +295,7 @@
 		BE32E0342C4689BF003C7C90 /* WalletScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreenView.swift; sourceTree = "<group>"; };
 		BE32E0372C468E0F003C7C90 /* WalletHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHistoryView.swift; sourceTree = "<group>"; };
 		BE32E0392C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransectionHistoryScreenView.swift; sourceTree = "<group>"; };
+		BE3A49902C6650810078F10D /* CancelSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelSuccessScreen.swift; sourceTree = "<group>"; };
 		BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCancelScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenView.swift; sourceTree = "<group>"; };
 		BE3C7F272C1C1F4C000848A6 /* BookingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingScreenView.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				BE0948762C19BE7500FC2DE0 /* ServiceDetailScreenView.swift */,
 				BE3C7F212C1AF910000848A6 /* ServiceCancelScreenView.swift */,
 				BE004D5C2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift */,
+				BE3A49902C6650810078F10D /* CancelSuccessScreen.swift */,
 			);
 			path = ServiceCancelled;
 			sourceTree = "<group>";
@@ -1310,6 +1313,7 @@
 				A3BB87B32C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift in Sources */,
 				A3BB87A62C17180900C604DD /* DropDownWithCheckBoxView.swift in Sources */,
 				A3BB87AB2C17186400C604DD /* CareGiverNearByCustomerScreenViewModel.swift in Sources */,
+				BE3A49912C6650810078F10D /* CancelSuccessScreen.swift in Sources */,
 				A36BC3882C1879CC005616A5 /* PaymentListView.swift in Sources */,
 				BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */,
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,

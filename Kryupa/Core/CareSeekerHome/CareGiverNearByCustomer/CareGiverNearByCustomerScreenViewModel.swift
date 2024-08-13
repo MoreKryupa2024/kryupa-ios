@@ -10,11 +10,14 @@ import Foundation
 class CareGiverNearByCustomerScreenViewModel: ObservableObject{
     @Published var serachGiver: String = String()
     @Published var isloading: Bool = true
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     @Published var careGiverNearByList: [CareGiverNearByCustomerScreenData] = [CareGiverNearByCustomerScreenData]()
     
     func getCareGiverNearByList(bookingID:String,alert: ((String)->Void)?){
         let param: [String:Any] = [
             "pageNumber":1,
+            //"pageNumber":pageNumber,
             "pageSize":20,
             "booking_id":bookingID,
             "profile_id":"",
@@ -29,6 +32,13 @@ class CareGiverNearByCustomerScreenViewModel: ObservableObject{
                     if self?.careGiverNearByList.count == 0{
                         alert?("Currently, no caregivers are available nearby")
                     }
+                    
+                    /* if self!.pageNumber > 1{
+                     self?.careGiverNearByList += data.data
+                 }else{
+                     self?.careGiverNearByList = data.data
+                 }
+                 self?.pagination = data.data.count != 0*/
                 case .failure(let error):
                     print(error)
                     self?.isloading = false

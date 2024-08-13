@@ -11,6 +11,7 @@ struct RatingView: View {
     
     @State var starList = [false, false, false, false, false]
     @State var selected = false
+    var rating = Int()
     var action:((Int)->Void)? = nil
     var body: some View {
         LazyHStack {
@@ -34,6 +35,13 @@ struct RatingView: View {
                     }
             }
             Spacer()
+        }
+        .onAppear{
+            if rating > 1{
+                for i in 0...(rating-1){
+                    starList[i] = true
+                }
+            }
         }
     }
 }

@@ -10,7 +10,8 @@ import Foundation
 @MainActor
 class CareSeekerHomeScreenViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
-    
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     @Published var recommendedCaregiver: [RecommendedCaregiverData] = [RecommendedCaregiverData]()
     @Published var upcommingAppointments: [AppointmentData] = [AppointmentData]()
     @Published var pastAppointments: [AppointmentData] = [AppointmentData]()
@@ -19,6 +20,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
     func getRecommandationList(){
         
         let param = [
+            //"pageNumber":pageNumber,
             "pageNumber":1,
             "pageSize":20
         ]
@@ -31,6 +33,17 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                     self?.recommendedCaregiver = data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
                     self?.upcommingAppointments = data.data.upcommingAppointments
                     self?.pastAppointments = data.data.pastAppointments
+                    
+                    /* if self!.pageNumber > 1{
+                     self?.recommendedCaregiver += data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
+                     self?.upcommingAppointments += data.data.upcommingAppointments
+                     self?.pastAppointments += data.data.pastAppointments
+                 }else{
+                     self?.recommendedCaregiver = data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
+                     self?.upcommingAppointments = data.data.upcommingAppointments
+                     self?.pastAppointments = data.data.pastAppointments
+                 }
+                 self?.pagination = data.data.recommendedCaregiver.count != 0*/
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

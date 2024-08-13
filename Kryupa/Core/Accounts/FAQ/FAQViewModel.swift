@@ -15,7 +15,8 @@ class FAQViewModel: ObservableObject{
     @Published var selectedSection = 0
     @Published var faqModelData: FAQModelData?
     @Published var sendMsgText: String = ""
-    
+    @Published var pagination: Bool = true
+    @Published var pageNumber = 1
     @Published var isLoading = Bool()
     
     init(){
@@ -78,6 +79,7 @@ class FAQViewModel: ObservableObject{
     }
     
     func conversationWithAdmin(){
+//        let param = ["pageNumber":pageNumber,
         let param = ["pageNumber":1,
                      "pageSize":20]
         isLoading = true
@@ -86,6 +88,13 @@ class FAQViewModel: ObservableObject{
                 self?.isLoading = false
                 switch result{
                 case .success(let data):
+                    /*  if self!.pageNumber > 1{
+                     self?.faqModelData?.allConversation += data.data.allConversation
+                 }else{
+                     self?.faqModelData = data.data
+                 }
+                 self?.pagination = data.data.allConversation.count != 0
+                 */
                     self?.faqModelData = data.data
                 case .failure(let error):
                     print(error.getMessage())

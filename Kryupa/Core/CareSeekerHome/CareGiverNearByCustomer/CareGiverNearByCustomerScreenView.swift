@@ -18,7 +18,7 @@ struct CareGiverNearByCustomerScreenView: View {
     var body: some View {
         ZStack{
             VStack(spacing:0){
-             HeaderView
+                HeaderView
                 ScrollView{
                     if viewModel.isloading{
                         FindingView
@@ -31,7 +31,8 @@ struct CareGiverNearByCustomerScreenView: View {
         }
         .modifier(DismissingKeyboard())
         .toolbar(.hidden, for: .navigationBar)
-        .onAppear {
+        .task {
+            viewModel.pageNumber = 1
             viewModel.getCareGiverNearByList(bookingID: bookingID) { alertStr in
                 presentAlert(title: "Kryupa", subTitle: alertStr)
             }
@@ -46,15 +47,30 @@ struct CareGiverNearByCustomerScreenView: View {
             
             SearchView
             
-            BookingCareGiverListView(onSelectedValue: { giver in
-                let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
-                RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
-                router.showScreen(.push) { rout in
-                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
+            LazyVStack(spacing:0){
+                ForEach(Array(viewModel.careGiverNearByList.enumerated()),id: \.element.id){ (index,giver) in
+                    BookingCareGiverListView(careGiverNear: giver)
+                        .padding(.top,15)
+                        .asButton(.press) {
+                            let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
+                            RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
+                            router.showScreen(.push) { rout in
+                                RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                            }
+                        }
+                    
+//                        .onAppear{
+//                            if (viewModel.careGiverNearByList.count - 1) == index && viewModel.pagination{
+//                                viewModel.pageNumber += 1
+//                                viewModel.getCareGiverNearByList(bookingID: bookingID) { alertStr in
+//                                    presentAlert(title: "Kryupa", subTitle: alertStr)
+//                                }
+//                            }
+//                        }
                 }
-            }, careGiverNearByList: viewModel.careGiverNearByList)
-                .padding(.vertical,30)
-                .padding(.horizontal,24)
+            }
+            .padding(.vertical,30)
+            .padding(.horizontal,24)
         }
     }
     

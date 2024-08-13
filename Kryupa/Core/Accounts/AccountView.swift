@@ -152,19 +152,8 @@ struct AccountView: View {
             HeaderView(showBackButton: false)
             HStack{
                 HStack {
-                    AsyncImage(url: URL(string: Defaults().userType == AppConstants.GiveCare ? viewModel.profileGiver?.profileURL ?? "" : viewModel.profile?.profilePic ?? ""),content: { image in
-                        image
-                            .resizable()
-                    },placeholder: {
-                        if (Defaults().userType == AppConstants.GiveCare && viewModel.profileGiver?.profileURL != "") || (Defaults().userType == AppConstants.SeekCare && viewModel.profile?.profilePic != ""){
-                            ProgressView()
-                        }
-                        else {
-                            Image("personal")
-                        }
-                        
-                    })
-                    .frame(width: 68, height: 68)
+                    ImageLoadingView(imageURL: (Defaults().userType == AppConstants.GiveCare ? viewModel.profileGiver?.profileURL ?? "" : viewModel.profile?.profilePic ?? ""))
+                        .frame(width: 68, height: 68)
                         .cornerRadius(34)
                 }
                 .frame(width: 74, height: 74)
