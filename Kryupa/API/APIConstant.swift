@@ -96,6 +96,8 @@ class APIConstant{
     static let getInboxList = "\(baseURL)/apis/communication/chat/contact_list"
     static let bookSlot = "\(baseURL)/apis/communication/meeting/book_slot"
     static let conversationWithAdmin = "\(baseURL)/apis/communication/chat/conversationWithAdmin"
+    static let chatVideoCall = "\(baseURL)/apis/communication/vido_call/start"
+    static let chatVideoCallRecieve = "\(baseURL)/apis/communication/vido_call/recieve"
 }
 
 class FontContent{
@@ -120,6 +122,11 @@ class AppConstants{
 
     static let SeekCare = "customer"
     static let GiveCare = "caregiver"
+    
+    static let VideoCall = "Video Call"
+    static let Chat = "Chat"
+    static let AudioCall = "Audio Call"
+    
     
     static let medicalConditionArray = ["None","Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","Other"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]

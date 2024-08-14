@@ -36,7 +36,8 @@ extension Notification.Name {
     static let showBookingsHistoryScreen = Notification.Name("ShowBookingsHistoryScreen")
     static let showJobsScreen = Notification.Name("ShowJobsScreen")
     static let setBookingId = Notification.Name("SetBookingId")
-    static let setChatScreen = Notification.Name("setChatScreen")
+    static let setChatScreen = Notification.Name("SetChatScreen")
+    static let showWalletScreen = Notification.Name("ShowWalletScreen")
 
 }
 

@@ -128,6 +128,7 @@
 		BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */; };
 		BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC072BFDD88C00175566 /* Defaults.swift */; };
 		BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC092BFDDE5600175566 /* APIClient.swift */; };
+		BE62B6E32C6CD63900A37E4A /* InboxScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62B6E22C6CD63900A37E4A /* InboxScreenViewModel.swift */; };
 		BE644E2F2BF495D800A6781F /* KryupaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E2E2BF495D800A6781F /* KryupaApp.swift */; };
 		BE644E312BF495D800A6781F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE644E302BF495D800A6781F /* SplashView.swift */; };
 		BE644E332BF495D900A6781F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE644E322BF495D900A6781F /* Assets.xcassets */; };
@@ -321,6 +322,7 @@
 		BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginScreenViewModel.swift; sourceTree = "<group>"; };
 		BE50EC072BFDD88C00175566 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		BE50EC092BFDDE5600175566 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BE62B6E22C6CD63900A37E4A /* InboxScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenViewModel.swift; sourceTree = "<group>"; };
 		BE644E2B2BF495D800A6781F /* Kryupa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kryupa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE644E2E2BF495D800A6781F /* KryupaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KryupaApp.swift; sourceTree = "<group>"; };
 		BE644E302BF495D800A6781F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				A36DE7C42C171261002E0ACD /* ChatView.swift */,
 				BE0983B02C33F23000FBAECC /* ChatScreenViewModel.swift */,
 				BE3C7F232C1C1556000848A6 /* InboxScreenView.swift */,
+				BE62B6E22C6CD63900A37E4A /* InboxScreenViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1317,6 +1320,7 @@
 				A36BC3882C1879CC005616A5 /* PaymentListView.swift in Sources */,
 				BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */,
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
+				BE62B6E32C6CD63900A37E4A /* InboxScreenViewModel.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
 				A36BC3AD2C1F6734005616A5 /* GiveReviewView.swift in Sources */,

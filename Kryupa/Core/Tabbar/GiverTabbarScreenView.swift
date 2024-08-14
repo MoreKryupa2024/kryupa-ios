@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct GiverTabbarScreenView: View {
+    
     @State var selectedIndex: Int = 0
+    var showInboxScreen = NotificationCenter.default
+    var notificatioSetChatScreen = NotificationCenter.default
+    var showJobsScreen = NotificationCenter.default
+    @Environment(\.router) var router
     
     var body: some View {
         VStack{
@@ -25,8 +30,28 @@ struct GiverTabbarScreenView: View {
             TabView
         }
         .onAppear{
-            NotificationCenter.default.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
+            showJobsScreen.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
                                                    using: self.showJobsScreen)
+            showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                   using: self.showInboxScreen)
+            notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
+                                                   using: self.setChatScreen)
+        }
+    }
+    
+    private func showInboxScreen(_ notification: Notification) {
+        selectedIndex = 3
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+            if let actionType = dataDict["action_type"] {
+                let chatScreenviewModel = ChatScreenViewModel()
+                chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
+                router.showScreen(.push) { rout in
+                    ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
+                }
+            }
         }
     }
     

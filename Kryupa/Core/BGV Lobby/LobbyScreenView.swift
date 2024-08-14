@@ -42,6 +42,7 @@ struct LobbyScreenView: View {
                     username: viewModel.meetingTokenData?.userIdentity ?? ""
                 ) { error in
                     print("error :- \(error.description)")
+                    isPresented = false
                 } onViewLoadedAction: {
                     print("loaded")
                 } onViewDismissedAction: {

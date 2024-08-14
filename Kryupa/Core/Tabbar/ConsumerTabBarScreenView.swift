@@ -52,7 +52,6 @@ struct ConsumerTabBarScreenView: View {
     }
     
     private func setChatScreen(_ notification: Notification){
-        print(notification.userInfo)
         if let data = notification.userInfo, let dataDict = data as? [String:Any] {
             let chatScreenviewModel = ChatScreenViewModel()
             chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)

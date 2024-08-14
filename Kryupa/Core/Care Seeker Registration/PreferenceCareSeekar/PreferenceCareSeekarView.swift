@@ -252,8 +252,8 @@ struct PreferenceCareSeekarView: View {
             Text("Next")
                 .font(.custom(FontContent.plusMedium, size: 16))
                 .padding([.top,.bottom], 16)
-                .padding([.leading,.trailing], 40)
         }
+        .frame(width: 144)
         .background(
             ZStack{
                 Capsule(style: .circular)
@@ -270,8 +270,8 @@ struct PreferenceCareSeekarView: View {
             Text("Previous")
                 .font(.custom(FontContent.plusMedium, size: 16))
                 .padding([.top,.bottom], 16)
-                .padding([.leading,.trailing], 40)
         }
+        .frame(width: 144)
         .background(
             ZStack{
                 Capsule(style: .circular)

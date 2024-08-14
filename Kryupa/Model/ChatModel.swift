@@ -46,7 +46,7 @@ struct ChatListData {
     let caregiverID, caregiverName: String
     let caregiverPic: String
     let customerID, customerName: String
-    let customerPic: String
+    var customerPic, actionType, videoCallId: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -68,6 +68,8 @@ struct ChatListData {
         customerID = jsonData["customer_id"] as? String ?? ""
         customerName = jsonData["customer_name"] as? String ?? ""
         customerPic = jsonData["customer_pic"] as? String ?? ""
+        actionType = jsonData["action_type"] as? String ?? ""
+        videoCallId = jsonData["video_call_id"] as? String ?? ""
     }
 }
 

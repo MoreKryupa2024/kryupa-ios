@@ -26,7 +26,7 @@ struct OTPVerificationScreenView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 43)
                 
-                Text("An authentication code has been sent to you on your number ending with \(String(mobileNumber.suffix(4)))")
+                Text("An authentication code has been\nsent to you on your number ending with \(String(mobileNumber.suffix(4)))")
                     .frame(width: 270)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .multilineTextAlignment(.center)

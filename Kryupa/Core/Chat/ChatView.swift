@@ -15,8 +15,6 @@ struct ChatView: View {
     @State var sendMsgText: String = ""
     let notificatioSsetBookingId = NotificationCenter.default
     let notificatioSsetInboxId = NotificationCenter.default
-    @State var isPresented = false
-    
     @StateObject var viewModel = ChatScreenViewModel()
     
     var body: some View {
@@ -86,16 +84,17 @@ struct ChatView: View {
                     }
                 }
                 viewModel.getChatHistory()
+                viewModel.VideoCallData()
                 notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
                                                              using: self.setBookingIds)
-                
             }
+            
             
             if viewModel.isLoading{
                 LoadingView()
             }
             
-            if isPresented {
+            if viewModel.isPresented {
                 ZoomScreenView(
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
                     sessionName: viewModel.meetingTokenData?.topic ?? "",
@@ -103,10 +102,14 @@ struct ChatView: View {
                     username: viewModel.meetingTokenData?.userIdentity ?? ""
                 ) { error in
                     print("error :- \(error.description)")
+                    viewModel.selectedChat?.videoCallId = ""
+                    viewModel.isPresented = false
                 } onViewLoadedAction: {
                     print("loaded")
+                    viewModel.selectedChat?.videoCallId = ""
                 } onViewDismissedAction: {
-                    isPresented = false
+                    viewModel.selectedChat?.videoCallId = ""
+                    viewModel.isPresented = false
                 }
             }
         }
@@ -153,7 +156,7 @@ struct ChatView: View {
                 .resizable()
                 .frame(width: 18,height: 18)
                 .asButton(.press) {
-                    viewModel.showVideoCallView = false
+//                    viewModel.showVideoCallView = false
                 }
                 .offset(x: 130,y:15)
         }
@@ -182,7 +185,7 @@ struct ChatView: View {
                 .resizable()
                 .frame(width: 18,height: 18)
                 .asButton(.press) {
-                    viewModel.bookingDeclineView = false
+//                    viewModel.bookingDeclineView = false
                 }
                 .offset(x: 130,y:15)
         }
@@ -392,7 +395,7 @@ struct ChatView: View {
                     .resizable()
                     .frame(width: 24,height: 24)
                     .asButton(.press) {
-                        isPresented = true
+                        viewModel.chatVideoCallData()
                     }
             }
         }

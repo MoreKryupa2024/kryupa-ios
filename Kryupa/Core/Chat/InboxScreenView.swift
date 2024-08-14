@@ -12,7 +12,7 @@ struct InboxScreenView: View {
     
     var arrayCount: Int = 6
     @Environment(\.router) var router
-    @StateObject var viewModel = ChatScreenViewModel()
+    @StateObject var viewModel = InboxScreenViewModel()
     
     var body: some View {
         ZStack{
@@ -23,9 +23,10 @@ struct InboxScreenView: View {
                     ForEach(Array(viewModel.inboxList.enumerated()),id: \.element.id) { (index,profileData) in
                         SenderView(profile: profileData)
                             .asButton(.press) {
-                                viewModel.selectedChat = profileData
+                                let viewModelChat = ChatScreenViewModel()
+                                viewModelChat.selectedChat = profileData
                                 router.showScreen(.push) { rout in
-                                    ChatView(userName: profileData.name,viewModel: viewModel)
+                                    ChatView(userName: profileData.name,viewModel: viewModelChat)
                                 }
                             }
 //                            .onAppear{
@@ -46,7 +47,6 @@ struct InboxScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
-            viewModel.pageNumber = 1
             viewModel.getInboxList()
         }
     }

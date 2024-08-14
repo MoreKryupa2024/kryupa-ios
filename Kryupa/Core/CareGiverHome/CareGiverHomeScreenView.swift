@@ -13,6 +13,7 @@ struct CareGiverHomeScreenView: View {
     @State var showNoContent: Bool = true
     @State private var isSelectedView = 4
     @Environment(\.router) var router
+    private let imageToShare = Image("mainLogo")
 
     var body: some View {
         ZStack{
@@ -122,8 +123,12 @@ struct CareGiverHomeScreenView: View {
                 .frame(width: 185,height: 206)
                 .padding(.top,30)
             
-            nextButton
-                .padding(.vertical,30)
+            
+            ShareLink(item: imageToShare,
+                      preview: SharePreview("Kryupa", image: imageToShare)) {
+                nextButton
+                    .padding(.vertical,30)
+            }
 
         }
     }
