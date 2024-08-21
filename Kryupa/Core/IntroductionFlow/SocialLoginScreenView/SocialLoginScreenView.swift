@@ -11,7 +11,7 @@ import FirebaseMessaging
 import AuthenticationServices
 
 struct SocialLoginScreenView: View {
-    
+    @State var checkbox:Bool = true
     @Environment(\.router) var router
     var userType: String = UserDefaults.standard.value(forKey: "user") as? String ?? ""
     @StateObject private var viewModel = SocialLoginScreenViewModel()
@@ -41,7 +41,7 @@ struct SocialLoginScreenView: View {
                 Spacer()
                 Image("socialScreenIcon")
                     .resizable()
-                    .frame(width: 305,height: 295)
+                    .frame(width: 305)
                 
                 Text(title)
                     .font(.custom(FontContent.besMedium, size: 28))
@@ -54,17 +54,35 @@ struct SocialLoginScreenView: View {
                     AppleButton
                     commonButton(imageName: "googleButton")
                         .asButton(.press) {
-                            viewModel.signUpWithGoogle { param in
-                                viewModel.signCall(param: param){ userInfo in
-                                    navigateToMobileNumberView(userInfo: userInfo)
+                            if checkbox{
+                                viewModel.signUpWithGoogle { param in
+                                    viewModel.signCall(param: param){ userInfo in
+                                        navigateToMobileNumberView(userInfo: userInfo)
+                                    }
                                 }
+                            }else{
+                                presentAlert(title: "Kryupa", subTitle: "Please Check the Below Checkbox to move forword")
                             }
+                            
                         }
                 }
                 .padding(.top,24)
-                .padding(.bottom,63)
-                .toolbar(.hidden, for: .navigationBar)
+                .padding(.bottom,30)
+                
+                HStack(alignment:.top,spacing: 5){
+                    Image(checkbox ? "checkboxSelected" : "checkboxUnselected")
+                        .frame(width: 20,height: 20)
+                    Text("I agree to use in-app messaging, which may include my name. It’s advised not to include other personal health information (PHI) in message and to keep mobile devices password protected to prevent unauthorized access.")
+                        .fontWeight(.regular)
+                        .font(.system(size: 11))
+                }
+                .padding(.horizontal,24)
+                .asButton(.press) {
+                    checkbox = !checkbox
+                }
             }
+            .toolbar(.hidden, for: .navigationBar)
+            
             if viewModel.isLoading{
                 LoadingView()
             }
@@ -175,21 +193,3 @@ struct SocialLoginScreenView: View {
     SocialLoginScreenView()
 }
 
-
-struct LoadingView:View{
-    var body: some View{
-        ZStack{
-            Color(.systemBackground)
-                .ignoresSafeArea()
-                .opacity(0.5)
-            
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .gray))
-                .scaleEffect(2)
-        }
-        .frame(maxWidth: .infinity,maxHeight: .infinity)
-        .onTapGesture {
-            print("No access!")
-        }
-    }
-}

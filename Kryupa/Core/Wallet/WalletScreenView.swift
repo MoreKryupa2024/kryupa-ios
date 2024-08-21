@@ -26,7 +26,7 @@ struct WalletScreenView: View {
                             .foregroundStyle(._7_C_7_C_80)
                             .padding(.top,30)
                         
-                        Text("$\(Double(viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
+                        Text("$\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
                             .font(.custom(FontContent.besSemiBold, size: 34))
                             .foregroundStyle(._018_ABE)
                             .padding(.top,5)

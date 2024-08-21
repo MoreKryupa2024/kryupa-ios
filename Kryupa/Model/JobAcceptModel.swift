@@ -59,3 +59,35 @@ struct ServiceStartData {
         serviceStatus = jsonData["service_status"] as? String ?? ""
     }
 }
+
+
+// MARK: - Welcome
+struct BannerModel {
+    let success: Bool
+    let data: [BannerDataModel]
+    let message: String
+    
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = (jsonData["data"] as? [[String : Any]] ?? [[String : Any]]()).map{BannerDataModel(jsonData: $0)}
+    }
+}
+
+// MARK: - Datum
+struct BannerDataModel {
+    let id: String
+    let bannerURL: String
+    let title, userType, screenName, createdAt: String
+    let updatedAt: String
+
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        bannerURL = jsonData["banner_url"] as? String ?? ""
+        title = jsonData["title"] as? String ?? ""
+        userType = jsonData["user_type"] as? String ?? ""
+        screenName = jsonData["screen_name"] as? String ?? ""
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+    }
+}

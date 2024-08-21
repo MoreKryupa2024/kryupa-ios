@@ -10,12 +10,13 @@ import SwiftfulUI
 
 struct ConsumerTabBarScreenView: View {
     @State var selectedIndex: Int = 0
-    
+    @State var walletScreenShown: Bool = true
     @StateObject var bookingViewModel = BookingViewModel()
-    var showBookingScreen = NotificationCenter.default
-    var showInboxScreen = NotificationCenter.default
-    var showBookingsHistoryScreen = NotificationCenter.default
-    var notificatioSetChatScreen = NotificationCenter.default
+    let showBookingScreen = NotificationCenter.default
+    let showInboxScreen = NotificationCenter.default
+    let showBookingsHistoryScreen = NotificationCenter.default
+    let notificatioSetChatScreen = NotificationCenter.default
+    let notificatioShowWalletScreen = NotificationCenter.default
     @Environment(\.router) var router
     
     var body: some View {
@@ -36,7 +37,11 @@ struct ConsumerTabBarScreenView: View {
             Spacer()
             TabView
         }
-        .onAppear{
+        .task{
+            walletScreenShown = true
+            notificatioShowWalletScreen.addObserver(forName: .showWalletScreen, object: nil, queue: nil,
+                                                                    using: self.showWalletScreen)
+            
             showBookingScreen.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
                                                    using: self.showBookingScreen)
             
@@ -48,6 +53,15 @@ struct ConsumerTabBarScreenView: View {
             
             notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
                                                          using: self.setChatScreen)
+        }
+    }
+    
+    private func showWalletScreen(_ notification: Notification){
+        if walletScreenShown{
+            walletScreenShown = false
+            router.showScreen(.push) { rout in
+                WalletScreenView()
+            }
         }
     }
     

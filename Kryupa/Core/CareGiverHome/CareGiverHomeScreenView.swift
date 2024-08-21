@@ -24,10 +24,13 @@ struct CareGiverHomeScreenView: View {
                         if showNoContent {
                             if let serviceStartData = viewModel.serviceStartData{
                                 if serviceStartData.serviceStatus == "confirm_by_customer" {
-                                    serviceView(serviceStartData: serviceStartData)
+                                    serviceView()
                                 }
                             }else{
-                                BannerView(showIndecator: false,bannerHeight: 104)
+                                BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
+                                           showIndecator: false,
+                                           fromAssets: true,
+                                           bannerHeight: 130)
                                     .padding([.horizontal,.vertical],24)
                             }
                             noCotentView
@@ -35,10 +38,13 @@ struct CareGiverHomeScreenView: View {
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
                                 if serviceStartData.serviceStatus == "confirm_by_customer" {
-                                    serviceView(serviceStartData: serviceStartData)
+                                    serviceView()
                                 }
                             }else{
-                                BannerView(showIndecator: false,bannerHeight: 104)
+                                BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
+                                           showIndecator: false,
+                                           fromAssets: true,
+                                           bannerHeight: 130)
                                     .padding([.horizontal,.vertical],24)
                             }
                             jobsNearYouView
@@ -49,6 +55,7 @@ struct CareGiverHomeScreenView: View {
                 .toolbar(.hidden, for: .navigationBar)
             }
             .onAppear{
+                viewModel.getBannerTopData(screenName: AppConstants.CAREGIVERHOMETOPScreenBanner)
                 viewModel.getJobsNearYouList() {
                     if viewModel.jobsNearYou.count == 0 {
                         showNoContent = true
@@ -59,38 +66,24 @@ struct CareGiverHomeScreenView: View {
                 }
                 viewModel.caregiverSvcAct()
             }
+            
             if viewModel.isloading{
                 LoadingView()
             }
         }
     }
     
-    private func serviceView(serviceStartData: ServiceStartData)-> some View{
+    private func serviceView()-> some View{
         
         return ZStack(alignment:.top){
             VStack {
-                Text("Reached the location?\nBegin the service")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(FontContent.besMedium, size: 16))
-                
-                Text("Start Service")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(height: 32)
-                    .padding(.horizontal,15)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
+                Image("caregiver-home-top-start")
+                    .resizable()
                     .asButton(.press) {
                         viewModel.giverConfirmStartService()
                     }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical,12)
-            .background( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(.F_2_F_2_F_7)
-            )
         }
         .padding(.horizontal,25)
         .padding(.vertical,25)
@@ -236,15 +229,8 @@ struct CareGiverHomeScreenView: View {
                         }
                     })
                     .scrollTransition(.interactive, axis: .horizontal) { view, phase in
-                        view.scaleEffect(phase.isIdentity ? 1 : 0.85)
+                        view.scaleEffect(phase.isIdentity ? 1 : 0.75)
                     }
-                    /*
-                    .onAppear{
-                        if (viewModel.jobsNearYou.count - 1) == index && viewModel.pagination {
-                            viewModel.pageNumber += 1
-                            viewModel.getJobsNearYouList {}
-                        }
-                    }*/
                 }
                 
             }

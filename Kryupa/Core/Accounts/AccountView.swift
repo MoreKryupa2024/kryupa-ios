@@ -11,7 +11,7 @@ import SwiftfulUI
 struct AccountView: View {
     
     @StateObject private var viewModel = AccountsViewModel()
-    let notificatioShowWalletScreen = NotificationCenter.default
+    
     @State var arrAccountList: [AccountListData] = {
         if Defaults().userType == AppConstants.GiveCare{
             return AppConstants.giverAccountSectionItems
@@ -52,22 +52,15 @@ struct AccountView: View {
                     .ignoresSafeArea(edges: .top)
                     .frame(height: 0)
             }
-        .onAppear() {
+        .task() {
             UIScrollView.appearance().bounces = false
-            notificatioShowWalletScreen.addObserver(forName: .showWalletScreen, object: nil, queue: nil,
-                                                                    using: self.showWalletScreen)
+
             if Defaults().userType == AppConstants.GiveCare{
                 viewModel.getProfileGiver()
 
             }else{
                 viewModel.getProfile()
             }
-        }
-    }
-    
-    private func showWalletScreen(_ notification: Notification){
-        router.showScreen(.push) { rout in
-            WalletScreenView()
         }
     }
 

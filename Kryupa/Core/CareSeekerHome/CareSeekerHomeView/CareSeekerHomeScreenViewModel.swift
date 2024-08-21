@@ -13,8 +13,11 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
     @Published var recommendedCaregiver: [RecommendedCaregiverData] = [RecommendedCaregiverData]()
-    @Published var upcommingAppointments: [AppointmentData] = [AppointmentData]()
-    @Published var pastAppointments: [AppointmentData] = [AppointmentData]()
+    @Published var upcommingAppointments: [BookingsListData] = [BookingsListData]()
+    @Published var pastAppointments: [BookingsListData] = [BookingsListData]()
+    @Published var topBanner: [BannerDataModel] = [BannerDataModel]()
+    @Published var bottomBanner: [BannerDataModel] = [BannerDataModel]()
+    
     @Published var serviceStartData: ServiceStartData?
     
     func getRecommandationList(){
@@ -53,13 +56,45 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
     }
     
     func customerSvcAct(){
-        isloading = true
+//        isloading = true
         NetworkManager.shared.customerSvcAct() { [weak self] result in
             DispatchQueue.main.async {
-                self?.isloading = false
+//                self?.isloading = false
                 switch result{
                 case .success(let data):
                     self?.serviceStartData = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getBannerBottomData(screenName: String){
+        let param = [
+            "screen_name": screenName
+        ]
+        NetworkManager.shared.getBannerUrls(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    print("")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getBannerTopData(screenName: String) {
+        let param = [
+            "screen_name": screenName
+        ]
+        NetworkManager.shared.getBannerUrls(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.topBanner = data.data
                 case .failure(let error):
                     print(error)
                 }

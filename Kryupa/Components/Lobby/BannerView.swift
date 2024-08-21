@@ -9,20 +9,24 @@ import SwiftUI
 
 struct BannerView: View {
     
-    var colors:[Color] = [.D_1_D_1_D_6,.D_1_D_1_D_6,.gray,.D_1_D_1_D_6,.gray]
+    var banners:[BannerDataModel] = [BannerDataModel]()
+    var assetsImage:[String] = []
     @State private var isSelectedView = 0
     var showIndecator: Bool = true
+    var fromAssets: Bool = false
     var bannerHeight: CGFloat = 180
     
     var body: some View {
         VStack{
             TabView(selection:$isSelectedView){
-                ForEach(colors.indices, id: \.self) { index in
-                    ZStack{
-                        colors[index.id]
-                            .cornerRadius(10)
-                        Text("Slider\nBanner")
-                            .font(.custom(FontContent.plusMedium, size: 20))
+                if fromAssets{
+                    ForEach(assetsImage.indices, id: \.self) { index in
+                        Image(assetsImage[index])
+                            .resizable()
+                    }
+                }else{
+                    ForEach(banners.indices, id: \.self) { index in
+                        ImageLoadingView(imageURL: banners[index].bannerURL)
                     }
                 }
             }
@@ -31,15 +35,26 @@ struct BannerView: View {
             
             if showIndecator{
                 HStack{
-                    ForEach(colors.indices, id: \.self) { index in
-                        Circle()
-                            .frame(height: 6)
-                            .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
+                    if fromAssets{
+                        ForEach(banners.indices, id: \.self) { index in
+                            Circle()
+                                .frame(height: 6)
+                                .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
+                        }
+                    }else{
+                        ForEach(assetsImage.indices, id: \.self) { index in
+                            Circle()
+                                .frame(height: 6)
+                                .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
+                        }
                     }
                 }
             }
         }
     }
+    
+    //200
+    //300
 }
 
 #Preview {

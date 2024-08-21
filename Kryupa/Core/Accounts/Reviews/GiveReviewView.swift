@@ -134,7 +134,7 @@ struct GiveReviewView: View {
                 //                }
             }
             
-            Text("FG 20, Sector 54, New York\nUSA, 541236")
+            Text((viewModel.cancelSeriveDetailData?.address ?? ""))
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(.appMain)
             

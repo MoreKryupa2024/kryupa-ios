@@ -21,18 +21,19 @@ struct CareSeekerHomeScreenView: View {
                 ScrollView {
                     if let serviceStartData = viewModel.serviceStartData{
                         if serviceStartData.serviceStatus == "active" {
-                            serviceView(serviceStartData: serviceStartData)
+                            serviceView()
                         }
                     }else{
-                        Image("careSeekerHomeBannerSmall")
-                            .resizable()
-                            .frame(height: 58)
-                            .padding(.horizontal,24)
-                            .padding(.top,15)
-                            .asButton(.press) {
-                                NotificationCenter.default.post(name: .showBookingScreen,
-                                                                                object: nil, userInfo: nil)
-                            }
+                        BannerView(assetsImage: ["customer home top","customer home top 2"],
+                                   showIndecator: false,
+                                   fromAssets: true,
+                                   bannerHeight: 70)
+                        .padding(.horizontal,24)
+                        .padding(.top,24)
+                        .asButton(.press) {
+                            NotificationCenter.default.post(name: .showBookingScreen,
+                                                            object: nil, userInfo: nil)
+                        }
                     }
                     
                     if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
@@ -60,38 +61,25 @@ struct CareSeekerHomeScreenView: View {
             
         }
         .onAppear{
+            viewModel.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
             viewModel.pageNumber = 1
             viewModel.getRecommandationList()
             viewModel.customerSvcAct()
+//            viewModel.getBannerBottomData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
         }
     }
     
-    private func serviceView(serviceStartData: ServiceStartData)-> some View{
+    private func serviceView()-> some View{
         
         return ZStack(alignment:.top){
             VStack {
-                Text("Has caregiver arrived\nto your location?")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(FontContent.besMedium, size: 16))
-                
-                Text("Confirm")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(height: 32)
-                    .padding(.horizontal,15)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
+                Image("customer home top 1")
+                    .resizable()
                     .asButton(.press) {
                         viewModel.customerConfirmStartService()
                     }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical,12)
-            .background( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(.F_2_F_2_F_7)
-            )
         }
         .padding(.horizontal,25)
         .padding(.vertical,25)
@@ -107,6 +95,11 @@ struct CareSeekerHomeScreenView: View {
                     Text("See All")
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._7_C_7_C_80)
+                        .asButton(.press) {
+                            router.showScreen(.push) { rout in
+                                RecommandedListScreenView(recommendedCaregiver: viewModel.recommendedCaregiver)
+                            }
+                        }
             }
             .padding(.horizontal,24)
             RecommendedCaregiverView(recommendedCaregiver: viewModel.recommendedCaregiver) { giverData in
@@ -122,7 +115,6 @@ struct CareSeekerHomeScreenView: View {
                     RecommendedCareGiverDetailScreenView(careGiverDetail: careGiverDetails,viewModel: RecommendedCareGiverDetailScreenViewModel)
                 }
             }
-            
         }
     }
     
@@ -142,8 +134,13 @@ struct CareSeekerHomeScreenView: View {
                         }
             }
             .padding(.horizontal,24)
-            AppointmentsView(appointmentList: viewModel.upcommingAppointments)
-            
+            AppointmentsView(appointmentList: viewModel.upcommingAppointments) { data in
+                let viewModelReview = ServiceDetailScreenViewModel()
+                viewModelReview.bookingsListData = data
+                router.showScreen(.push) { rout in
+                    ServiceDetailScreenView(viewModel:viewModelReview)
+                }
+            }
         }
     }
     
@@ -163,8 +160,13 @@ struct CareSeekerHomeScreenView: View {
                         }
             }
             .padding(.horizontal,24)
-            AppointmentsView(appointmentList: viewModel.pastAppointments)
-            
+            AppointmentsView(appointmentList: viewModel.pastAppointments) { data in
+                let viewModelReview = ReviewsViewModel()
+                viewModelReview.bookingsListData = data
+                router.showScreen(.push) { rout in
+                    GiveReviewView(viewModel:viewModelReview)
+                }
+            }
         }
     }
     

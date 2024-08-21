@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct AppointmentsView: View {
     
-    var appointmentList: [AppointmentData] = [AppointmentData]()
+    var appointmentList: [BookingsListData] = [BookingsListData]()
     let viewWidth:CGFloat = CGFloat((UIScreen.screenWidth - (80)))
+    var selecatedAction:((BookingsListData)->Void)
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -79,14 +81,13 @@ struct AppointmentsView: View {
                             .foregroundStyle(.F_2_F_2_F_7)
                     }
                     .frame(width:viewWidth)
+                    .asButton(.press) {
+                        selecatedAction(data)
+                    }
                 }
             }
             .padding(.horizontal,24)
         }
         .scrollIndicators(.hidden)
     }
-}
-
-#Preview {
-    AppointmentsView()
 }

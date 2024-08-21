@@ -13,6 +13,7 @@ class LobbyScreenViewModel: ObservableObject{
     @Published var slotTitle: String = "Schedule Your\nBGV Interview!"
     @Published var slotTime: String = "Complete Interview & begin\nyour caregiving services"
     @Published var slotButton: String = "Schedule Now"
+    @Published var topBanner: [BannerDataModel] = [BannerDataModel]()
     var meetingTokenData: BGVInterviewMeetingTokenData?
     
     
@@ -38,6 +39,23 @@ class LobbyScreenViewModel: ObservableObject{
                     self?.slotTime = "Complete Interview & begin\nyour caregiving services"
                 }
             }
+        }
+    }
+    
+    func getBannerData(screenName: String){
+        let param = [
+            "screen_name": screenName
+        ]
+        NetworkManager.shared.getBannerUrls(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.topBanner = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
         }
     }
     

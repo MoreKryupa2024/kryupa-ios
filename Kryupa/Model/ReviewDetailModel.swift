@@ -55,7 +55,7 @@ struct ReviewDetailData {
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
         yearsOfExprience = jsonData["years_of_exprience"] as? String ?? ""
         cid = jsonData["cid"] as? String ?? ""
-        ratePerHours = jsonData["rate_per_hours"] as? String ?? "\(jsonData["rate_per_hours"] as? Double ?? 0)"
+        ratePerHours = jsonData["rate_per_hours"] as? String ?? "\((jsonData["rate_per_hours"] as? Double ?? 0).removeZerosFromEnd(num: 2))"
         totalHours = jsonData["total_hours"] as? Int ?? 0
     }
 }

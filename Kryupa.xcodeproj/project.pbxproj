@@ -155,6 +155,8 @@
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
 		BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */; };
 		BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAF2C18317000A71632 /* LobbyScreenViewModel.swift */; };
+		BE87FAD42C74611D000F9041 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87FAD32C74611D000F9041 /* LoadingView.swift */; };
+		BE87FAEE2C74BCAE000F9041 /* RecommandedListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87FAED2C74BCAE000F9041 /* RecommandedListScreenView.swift */; };
 		BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BE9007292C58C4AA003B6038 /* FirebaseMessaging */; };
 		BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */; };
 		BE92FD1B2C09A90000EDF49C /* RecommendedCaregiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */; };
@@ -349,6 +351,8 @@
 		BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPTextFieldView.swift; sourceTree = "<group>"; };
 		BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomScreenView.swift; sourceTree = "<group>"; };
 		BE7DDDAF2C18317000A71632 /* LobbyScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyScreenViewModel.swift; sourceTree = "<group>"; };
+		BE87FAD32C74611D000F9041 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		BE87FAED2C74BCAE000F9041 /* RecommandedListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedListScreenView.swift; sourceTree = "<group>"; };
 		BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSeekerHomeScreenView.swift; sourceTree = "<group>"; };
 		BE92FD1A2C09A90000EDF49C /* RecommendedCaregiverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCaregiverView.swift; sourceTree = "<group>"; };
 		BE92FD1D2C09B31500EDF49C /* BookingFormScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingFormScreenView.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BB87B02C1718CC00C604DD /* RecommendedCareGiverDetailScreenView.swift */,
+				BE87FAED2C74BCAE000F9041 /* RecommandedListScreenView.swift */,
 				A3BB87B12C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift */,
 			);
 			path = RecommendedGiverDetail;
@@ -859,6 +864,7 @@
 				BE1573B82BF631A400A6137D /* LoginFlow */,
 				A36BC3A42C1B0864005616A5 /* HeaderView.swift */,
 				BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */,
+				BE87FAD32C74611D000F9041 /* LoadingView.swift */,
 				BE32E0362C468DF8003C7C90 /* Wallet */,
 				BEF2EDB52C25B4410008108C /* StarsView.swift */,
 				BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */,
@@ -1320,6 +1326,7 @@
 				A36BC3882C1879CC005616A5 /* PaymentListView.swift in Sources */,
 				BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */,
 				BE4FBDB42BFB8037003442BB /* HealthInformationSeekerView.swift in Sources */,
+				BE87FAD42C74611D000F9041 /* LoadingView.swift in Sources */,
 				BE62B6E32C6CD63900A37E4A /* InboxScreenViewModel.swift in Sources */,
 				BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */,
 				BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */,
@@ -1358,6 +1365,7 @@
 				BE0948772C19BE7500FC2DE0 /* ServiceDetailScreenView.swift in Sources */,
 				A3FEF6242C2D89C300EFC3C2 /* JobAcceptModel.swift in Sources */,
 				A36BC3A32C1B0828005616A5 /* AboutUsView.swift in Sources */,
+				BE87FAEE2C74BCAE000F9041 /* RecommandedListScreenView.swift in Sources */,
 				BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */,
 				BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */,
 				BE32E0352C4689BF003C7C90 /* WalletScreenView.swift in Sources */,

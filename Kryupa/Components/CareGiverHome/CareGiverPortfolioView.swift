@@ -30,7 +30,7 @@ struct CareGiverPortfolioView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text("$\(job.customerInfo.price)")
-                        .font(.custom(FontContent.plusRegular, size: 13))
+                        .font(.custom(FontContent.plusMedium, size: 13))
                         .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -40,18 +40,16 @@ struct CareGiverPortfolioView: View {
 
             VStack(spacing: 2) {
                 Text("Service Required:")
-                    .padding(.top, 10)
-                    .padding(.horizontal, 22)
-                    .font(.custom(FontContent.plusRegular, size: 11))
+                    .padding(.top, 5)
+                    .padding(.horizontal, 15)
+                    .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(.appMain)
                     .frame(maxWidth: .infinity, alignment: .leading)
-
-
                 Text(job.bookingDetails.areaOfExpertise.joined(separator: ","))
-                    .padding(.bottom, 10)
-                    .font(.custom(FontContent.plusRegular, size: 11))
+                    .padding(.bottom, 5)
+                    .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
-                    .padding(.horizontal, 22)
+                    .padding(.horizontal, 15)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
             }
@@ -62,7 +60,6 @@ struct CareGiverPortfolioView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             .padding(.top, 10)
-//            .padding(.horizontal, 21)
 
 
             HStack {
@@ -82,20 +79,6 @@ struct CareGiverPortfolioView: View {
                     .asButton(.press) {
                         view()
                     }
-//                
-//                Spacer()
-//                
-//                Text("Accept")
-//                    .font(.custom(FontContent.plusRegular, size: 16))
-//                    .foregroundStyle(.white)
-//                    .frame(height: 32)
-//                    .frame(width: 97)
-//                    .background{
-//                        RoundedRectangle(cornerRadius: 48)
-//                    }
-//                    .asButton(.press) {
-//                        accept()
-//                    }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 21)
@@ -129,7 +112,7 @@ struct JobDescView: View {
                     .frame(width: 18,height: 18)
 //                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))
                 Text(startDate)
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -141,7 +124,7 @@ struct JobDescView: View {
                     .frame(width: 18,height: 18)
 //                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
                 Text("\(startTime) - \(endTime)")
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -155,7 +138,7 @@ struct JobDescView: View {
 //                    Text(job.customerInfo.gender)
                     Text(gender)
                         .minimumScaleFactor(0.01)
-                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                 }
                 //                .frame(maxWidth: .infinity)
@@ -175,7 +158,7 @@ struct JobDescView: View {
                         .resizable()
                         .frame(width: 18,height: 18)
                     Text("5 mil")
-                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                 }
                 //                .frame(maxWidth: .infinity)
@@ -189,7 +172,7 @@ struct JobDescView: View {
                     .frame(width: 18,height: 18)
 //                Text(job.customerInfo.diseaseType.joined(separator: ","))
                 Text(diseaseType.joined(separator:","))
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -201,4 +184,3 @@ struct JobDescView: View {
 #Preview {
     CareGiverPortfolioView(job: JobPost(jsonData: [String : Any]()), accept: {}, view: {})
 }
-//(customerInfo: CustomerInfo(name: "Alex Chatterjee", gender: "Male", price: "40.0", diseaseType: ["Diabetes", "Kidney Stone"]), bookingDetails: BookingDetails(areaOfExpertise: ["Nursing", "Bathing", "House Cleaning","Doing Chores and more"], bookingType: "One Time", startDate: "2024-06-14", endDate: "2024-06-14", startTime: "09:45:18", endTime: "00:40:22"), jobID: "f9bdf7df-103e-41b9-a95e-560b85c5bde1")

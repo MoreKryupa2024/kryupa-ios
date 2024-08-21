@@ -29,32 +29,35 @@ struct BookingsListModel {
     init(jsondata:[String:Any]) {
         message = jsondata["message"] as? String ?? ""
         success = jsondata["success"] as? Bool ?? false
-        data =  (jsondata["data"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsondata: $0)}
+        data =  (jsondata["data"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsonData: $0)}
     }
 }
 
 // MARK: - Datum
 struct BookingsListData {
-    let id, customerID, startDate, endDate: String
+    let id, caregiverID, startDate, endDate,customerID: String
     let startTime, endTime, bookingID, status: String
     let name: String
     let profilePictureURL: String
+    let relation: String
     let price: Double
     let arrayAgg: [String]
     
-    init(jsondata:[String:Any]) {
-        id = jsondata["id"] as? String ?? ""
-        customerID = jsondata["customer_id"] as? String ?? ""
-        startDate = jsondata["start_date"] as? String ?? ""
-        endDate = jsondata["end_date"] as? String ?? ""
-        startTime = jsondata["start_time"] as? String ?? ""
-        endTime = jsondata["end_time"] as? String ?? ""
-        bookingID = jsondata["booking_id"] as? String ?? ""
-        status = jsondata["status"] as? String ?? ""
-        name = jsondata["name"] as? String ?? ""
-        profilePictureURL = jsondata["profile_picture_url"] as? String ?? ""
-        price = jsondata["price"] as? Double ?? Double(jsondata["price"] as? Int ?? Int(jsondata["price"] as? String ?? "") ?? 0)
-        arrayAgg = jsondata["array_agg"] as? [String] ?? []
+    init(jsonData:[String:Any]) {
+        id = jsonData["id"] as? String ?? ""
+        caregiverID = jsonData["caregiver_id"] as? String ?? ""
+        customerID = jsonData["customer_id"] as? String ?? ""
+        startDate = jsonData["start_date"] as? String ?? ""
+        endDate = jsonData["end_date"] as? String ?? ""
+        startTime = jsonData["start_time"] as? String ?? ""
+        endTime = jsonData["end_time"] as? String ?? ""
+        bookingID = jsonData["booking_id"] as? String ?? ""
+        status = jsonData["status"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
+        profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
+        relation = jsonData["relation"] as? String ?? ""
+        price = jsonData["price"] as? Double ?? 0.0
+        arrayAgg = jsonData["array_agg"] as? [String] ?? []
     }
 }
 

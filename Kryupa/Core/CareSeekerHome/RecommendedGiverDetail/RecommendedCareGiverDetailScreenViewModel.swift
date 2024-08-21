@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@MainActor
+
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
     var options: [String] = ["Summary","Review"]

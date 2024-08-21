@@ -58,6 +58,7 @@ struct LobbyScreenView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: {
             viewModel.getLobbyStatus()
+//            viewModel.getBannerData(screenName: AppConstants.lobbyScreenBanner)
         })
     }
     
@@ -65,10 +66,14 @@ struct LobbyScreenView: View {
         VStack(alignment:.leading,spacing:10){
             Text("Feedback & Reviews")
                 .font(.custom(FontContent.plusRegular, size: 13))
-            BannerView()
+            
+            BannerView(assetsImage: ["caregiver lobby","caregiver lobby 1", "caregiver lobby 2", "caregiver lobby 3"],
+                       showIndecator: true,
+                       fromAssets: true,
+                       bannerHeight: 240)
         }
         .padding(.horizontal,24)
-        .padding(.top,15)
+        .padding(.top,25)
         .frame(height: 195)
     }
     private var sepratorView: some View{

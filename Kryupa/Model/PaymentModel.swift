@@ -95,14 +95,14 @@ struct WalletAmountModel: Codable {
 // MARK: - DataClass
 struct WalletAmountData: Codable {
     let id: String
-    let mainAmount: Int
+    let mainAmount: Double
     let userID, userType: String
     let partialAmount: Int
     let isActive, isDeleted: Bool
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
-        mainAmount = jsonData["main_amount"] as? Int ?? 0
+        mainAmount = jsonData["main_amount"] as? Double ?? Double(jsonData["main_amount"] as? Int ?? Int(jsonData["main_amount"] as? String ?? "") ?? 0)
         userID = jsonData["user_id"] as? String ?? ""
         userType = jsonData["user_type"] as? String ?? ""
         partialAmount = jsonData["partial_amount"] as? Int ?? 0

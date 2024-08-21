@@ -18,7 +18,7 @@ struct APIConstants {
 class APIConstant{
     
     static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-//    static let baseURL = "https://w7dvnjx5-3050.inc1.devtunnels.ms"//CP
+//    static let baseURL = "https://0p4wl7rj-3050.inc1.devtunnels.ms"//Bhushan
 
     
     static let sendOTP = "\(baseURL)/apis/auth/send_otp"
@@ -98,6 +98,7 @@ class APIConstant{
     static let conversationWithAdmin = "\(baseURL)/apis/communication/chat/conversationWithAdmin"
     static let chatVideoCall = "\(baseURL)/apis/communication/vido_call/start"
     static let chatVideoCallRecieve = "\(baseURL)/apis/communication/vido_call/recieve"
+    static let getBannerUrls = "\(baseURL)/apis/admin/get_banner_urls"
 }
 
 class FontContent{
@@ -114,6 +115,13 @@ class FontContent{
 }
 
 class AppConstants{
+    static let lobbyScreenBanner = "Lobby"
+    static let REFFERANDEARNScreenBanner = "Reffer and Earn"
+    static let CAREGIVERHOMETOPScreenBanner = "Caregiver Home Top"
+    static let CAREGIVERHOMEBOTTOMScreenBanner = "Caregiver Home Bottom"
+    static let CUSTOMERHOMETOPScreenBanner = "Customer Home Top"
+    static let CUSTOMERHOMEBOTTOMScreenBanner = "Customer Home Bottom"
+    
     static let config = CoreConfig(clientID: "Acsfr2dcilBLBuXe5FYHkJ68qi2w8JXQMPlWuD-qNjMVrTUPIOYPutpHRquOPZ_rv67J1YgAkDOQ8zP4", environment: .sandbox)
     static let DeviceType = "IOS"
     

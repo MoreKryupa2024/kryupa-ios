@@ -17,6 +17,41 @@ class CareGiverHomeScreenViewModel: ObservableObject
     @Published var serviceStartData: ServiceStartData?
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
+    @Published var topBanner: [BannerDataModel] = [BannerDataModel]()
+    @Published var bottomBanner: [BannerDataModel] = [BannerDataModel]()
+    
+    
+    func getBannerBottomData(screenName: String){
+        let param = [
+            "screen_name": screenName
+        ]
+        NetworkManager.shared.getBannerUrls(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    print("")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getBannerTopData(screenName: String) {
+        let param = [
+            "screen_name": screenName
+        ]
+        NetworkManager.shared.getBannerUrls(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.topBanner = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
 
     func getJobsNearYouList(completion: @escaping (()->Void)){
         
