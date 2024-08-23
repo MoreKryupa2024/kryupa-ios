@@ -381,8 +381,8 @@ struct ChatView: View {
                 .frame(width: 30,height: 30)
                 .asButton(.press) {
                     viewModel.disconnect()
-                    router.dismissScreenStack()
-                    notificatioSsetInboxId.post(name: .showInboxScreen, object: nil)
+                    router.dismissScreen()
+//                    notificatioSsetInboxId.post(name: .showInboxScreen, object: nil)
                 }
             
             Text(userName)
@@ -415,6 +415,7 @@ struct ChatView: View {
                     .resizable()
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
+                        
                     }
                 Spacer()
                 Image("NotificationBellIcon")

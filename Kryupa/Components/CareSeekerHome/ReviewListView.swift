@@ -21,7 +21,7 @@ struct ReviewListView: View {
     }
     
     private func ReviewView(reviewData:ReviewListData)-> some View{
-        VStack{
+        VStack(alignment:.leading){
             HStack(spacing:0){
                 
                 ImageLoadingView(imageURL: reviewData.reviewedByProfilePictureURL)

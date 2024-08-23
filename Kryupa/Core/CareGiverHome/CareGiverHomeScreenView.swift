@@ -28,9 +28,9 @@ struct CareGiverHomeScreenView: View {
                                 }
                             }else{
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
-                                           showIndecator: false,
+                                           showIndecator: true,
                                            fromAssets: true,
-                                           bannerHeight: 130)
+                                           bannerHeight: 104)
                                     .padding([.horizontal,.vertical],24)
                             }
                             noCotentView
@@ -42,7 +42,7 @@ struct CareGiverHomeScreenView: View {
                                 }
                             }else{
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
-                                           showIndecator: false,
+                                           showIndecator: true,
                                            fromAssets: true,
                                            bannerHeight: 130)
                                     .padding([.horizontal,.vertical],24)
@@ -79,6 +79,8 @@ struct CareGiverHomeScreenView: View {
             VStack {
                 Image("caregiver-home-top-start")
                     .resizable()
+                    .scaledToFit()
+                    .frame(height: 132)
                     .asButton(.press) {
                         viewModel.giverConfirmStartService()
                     }
@@ -86,7 +88,7 @@ struct CareGiverHomeScreenView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal,25)
-        .padding(.vertical,25)
+        .padding(.vertical,5)
     }
     
     private var noCotentView: some View{
@@ -191,7 +193,7 @@ struct CareGiverHomeScreenView: View {
         VStack(spacing:10){
             HStack{
                 Text("Jobs Near You")
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundColor(Color("242426"))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
@@ -229,7 +231,7 @@ struct CareGiverHomeScreenView: View {
                         }
                     })
                     .scrollTransition(.interactive, axis: .horizontal) { view, phase in
-                        view.scaleEffect(phase.isIdentity ? 1 : 0.75)
+                        view.scaleEffect(phase.isIdentity ? 1 : 0.85)
                     }
                 }
                 

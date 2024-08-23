@@ -165,18 +165,19 @@ struct CancelSeriveDetailData {
     let isActive, isDeleted: Bool
     let updatedBy, createdAt, updatedAt, caregiverID: String
     let customerID: String
-    let bookingPricing, bookingPricingForCustomer: Int
+    let bookingPricing, bookingPricingForCustomer, hours: Double
     let payChatID, startDate, endDate, startTime: String
-    let endTime: String
+    let endTime,bookingType: String
     let areasOfExpertise: [String]
-    let hours,name, address, yearsOfExprienceInNo: String
-    let pricePerHour: Int
+    let name, address, yearsOfExprienceInNo: String
+    let pricePerHour: Double
     let rating: String
     
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
         status = jsonData["status"] as? String ?? ""
+        bookingType = jsonData["booking_type"] as? String ?? ""
         bookingID = jsonData["booking_id"] as? String ?? ""
         isActive = jsonData["is_active"] as? Bool ?? false
         isDeleted = jsonData["is_deleted"] as? Bool ?? false
@@ -185,19 +186,21 @@ struct CancelSeriveDetailData {
         updatedAt = jsonData["updated_at"] as? String ?? ""
         caregiverID = jsonData["caregiver_id"] as? String ?? ""
         customerID = jsonData["customer_id"] as? String ?? ""
-        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
-        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
+        bookingPricing = jsonData["booking_pricing"] as? Double ?? Double(jsonData["booking_pricing"] as? Int ?? Int(jsonData["booking_pricing"] as? String ?? "") ?? 0)
+        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
         payChatID = jsonData["pay_chat_id"] as? String ?? ""
         startDate = jsonData["start_date"] as? String ?? ""
         endDate = jsonData["end_date"] as? String ?? ""
         startTime = jsonData["start_time"] as? String ?? ""
         endTime = jsonData["end_time"] as? String ?? ""
         areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []
-        hours = jsonData["hours"] as? String ?? ""
+        hours = jsonData["hours"] as? Double ?? Double(jsonData["hours"] as? Int ?? Int(jsonData["hours"] as? String ?? "") ?? 0)
+        
         name = jsonData["name"] as? String ?? ""
         address = jsonData["address"] as? String ?? ""
         rating = jsonData["rating"] as? String ?? ""
-        pricePerHour = jsonData["price_per_hour"] as? Int ?? 0
+        pricePerHour = jsonData["price_per_hour"] as? Double ?? Double(jsonData["price_per_hour"] as? Int ?? Int(jsonData["price_per_hour"] as? String ?? "") ?? 0)
+        
         yearsOfExprienceInNo = jsonData["years_of_exprience_in_no"] as? String ?? ""
     }
 }

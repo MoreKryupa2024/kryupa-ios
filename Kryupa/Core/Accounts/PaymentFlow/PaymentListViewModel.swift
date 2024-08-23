@@ -18,6 +18,7 @@ class PaymentListViewModel: ObservableObject{
     @Published var routingNumber: String = ""
     @Published var accountNumber: String = ""
     @Published var bankListData = [BankListData]()
+    @Published var orderListData = [OrderListData]()
     @Published var isloading: Bool = false
     
     func getBankList(){
@@ -34,6 +35,25 @@ class PaymentListViewModel: ObservableObject{
                     self.bankListData = data.data
                 case .failure(let error):
                     print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func getOrderList(){
+//        //        let param = ["pageNumber":pageNumber,
+        let param = ["pageNumber":1,
+                     "pageSize":20]
+        
+        isloading = true
+        NetworkManager.shared.getOrderList(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.orderListData = data.data
+                case .failure(let error):
+                    print(error)
                 }
             }
         }

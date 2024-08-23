@@ -11,6 +11,7 @@ import SwiftfulUI
 struct ConsumerTabBarScreenView: View {
     @State var selectedIndex: Int = 0
     @State var walletScreenShown: Bool = true
+    @State var chatScreenShow: Bool = true
     @StateObject var bookingViewModel = BookingViewModel()
     let showBookingScreen = NotificationCenter.default
     let showInboxScreen = NotificationCenter.default
@@ -66,11 +67,14 @@ struct ConsumerTabBarScreenView: View {
     }
     
     private func setChatScreen(_ notification: Notification){
-        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
-            let chatScreenviewModel = ChatScreenViewModel()
-            chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
-            router.showScreen(.push) { rout in
-                ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
+        if chatScreenShow{
+            chatScreenShow = false
+            if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+                let chatScreenviewModel = ChatScreenViewModel()
+                chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
+                router.showScreen(.push) { rout in
+                    ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
+                }
             }
         }
     }

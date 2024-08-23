@@ -17,6 +17,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
 
     func dateFormatter(formate:String? = nil)-> String{
         let formatter = DateFormatter()
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
         if let formate{
             formatter.dateFormat = formate
         }else{

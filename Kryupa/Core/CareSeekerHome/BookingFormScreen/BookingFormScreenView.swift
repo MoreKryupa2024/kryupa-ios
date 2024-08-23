@@ -83,6 +83,7 @@ struct BookingFormScreenView: View {
                 case 1:
                     
                     DateTimePickerScreenView(
+                        givenDate: viewModel.startTimeValue,
                         formate: "HH:mm:ss",
                         range: range(),
                         rangeThrough: nil,
@@ -96,23 +97,26 @@ struct BookingFormScreenView: View {
                             guard let incrementedDate = Calendar.current.date(byAdding: .hour, value: 1, to: value) else {
                                 return
                             }
-                            viewModel.startTimeValue = incrementedDate
+                            viewModel.endTimeValue = incrementedDate
                         }
 
                 case 2:
                     DateTimePickerScreenView(
+                        givenDate: viewModel.endTimeValue,
                         formate: "HH:mm:ss",
-                        range: viewModel.startTimeValue...,
+                        range: viewModel.endTimeValue...,
                         rangeThrough: nil,
                         valueStr: { value in
                             viewModel.endTime = value
                             viewModel.showDatePicker = false
                         },
-                        displayedComponents: .hourAndMinute
-                    )
+                        displayedComponents: .hourAndMinute) { value in
+                            viewModel.endTimeValue = value
+                        }
                     
                 case 3:
                     DateTimePickerScreenView(
+                        givenDate: viewModel.startDateValue,
                         formate: "yyyy-MM-dd'T'HH:mm:ssZ",
                         range: Date()...,
                         rangeThrough: nil,
@@ -125,20 +129,23 @@ struct BookingFormScreenView: View {
                             guard let incrementedDate = Calendar.current.date(byAdding: .day, value: 1, to: value) else {
                                 return
                             }
-                            viewModel.startDateValue = incrementedDate
+                            viewModel.startDateValue = value
+                            viewModel.endDateValue = incrementedDate
                     }
                     
                 case 4:
                     DateTimePickerScreenView(
+                        givenDate: viewModel.endDateValue,
                         formate: "yyyy-MM-dd'T'HH:mm:ssZ",
-                        range: viewModel.startDateValue...,
+                        range: viewModel.endDateValue...,
                         rangeThrough: nil,
                         valueStr: { value in
                             viewModel.endDate = value
                             viewModel.showDatePicker = false
                         },
-                        displayedComponents: .date
-                    )
+                        displayedComponents: .date){ value in
+                            viewModel.endDateValue = value
+                        }
                 default:
                     EmptyView()
                 }
@@ -162,7 +169,8 @@ struct BookingFormScreenView: View {
         if viewModel.segSelected == "One Time"{
             let startDay = (viewModel.selectedDay.numDay)
             if startDay == day{
-                return Date()...
+                let currentDate =  date.addingTimeInterval(14400)
+                return currentDate...
             }else{
                 return nil
             }
@@ -171,7 +179,8 @@ struct BookingFormScreenView: View {
             let startDay = (viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
             
             if startDay == day{
-                return Date()...
+                let currentDate =  date.addingTimeInterval(14400)
+                return currentDate...
             }else{
                 return nil
             }

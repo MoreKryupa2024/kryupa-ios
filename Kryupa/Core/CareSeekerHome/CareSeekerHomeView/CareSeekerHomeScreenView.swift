@@ -25,9 +25,9 @@ struct CareSeekerHomeScreenView: View {
                         }
                     }else{
                         BannerView(assetsImage: ["customer home top","customer home top 2"],
-                                   showIndecator: false,
+                                   showIndecator: true,
                                    fromAssets: true,
-                                   bannerHeight: 70)
+                                   bannerHeight: 58)
                         .padding(.horizontal,24)
                         .padding(.top,24)
                         .asButton(.press) {
@@ -75,6 +75,7 @@ struct CareSeekerHomeScreenView: View {
             VStack {
                 Image("customer home top 1")
                     .resizable()
+                    .frame(height: 59)
                     .asButton(.press) {
                         viewModel.customerConfirmStartService()
                     }

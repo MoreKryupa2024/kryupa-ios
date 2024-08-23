@@ -10,7 +10,7 @@ import SwiftfulUI
 
 struct DateTimePickerScreenView: View {
     
-    @State private var givenDate:Date = Date()
+    @State var givenDate:Date = Date()
     var formate:String = ""
     var range: PartialRangeFrom? = Date()...
     var rangeThrough: PartialRangeThrough? = ...Date()
@@ -43,6 +43,8 @@ struct DateTimePickerScreenView: View {
                     
                 }
                 .asButton(.press) {
+                    print(givenDate)
+                    print(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
                     valueStr?(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
                     valueDate?($givenDate.wrappedValue)
                 }

@@ -17,8 +17,8 @@ struct APIConstants {
 
 class APIConstant{
     
-    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
-//    static let baseURL = "https://0p4wl7rj-3050.inc1.devtunnels.ms"//Bhushan
+//    static let baseURL = "https://ccjlmfh6-3050.inc1.devtunnels.ms"//Rubin
+    static let baseURL = "https://0p4wl7rj-3050.inc1.devtunnels.ms"//Bhushan
 
     
     static let sendOTP = "\(baseURL)/apis/auth/send_otp"
@@ -62,7 +62,9 @@ class APIConstant{
     static let bookingReviews = "\(baseURL)/apis/user/customer/reviews/booking_reviews"
     static let addReviewGiver = "\(baseURL)/apis/user/caregiver/reviews/add_review"
     static let bookingReviewsGiver = "\(baseURL)/apis/user/caregiver/reviews/booking_reviews"
-    
+    static let myServices = "\(baseURL)/apis/user/caregiver/account/my_services"
+    static let updateMyService = "\(baseURL)/apis/user/caregiver/account/Update_my_service"
+
     
     static let getRelativeList = "\(baseURL)/apis/booking/booking_for_dropdown"
     static let createBooking = "\(baseURL)/apis/booking/createBooking"
@@ -99,6 +101,7 @@ class APIConstant{
     static let chatVideoCall = "\(baseURL)/apis/communication/vido_call/start"
     static let chatVideoCallRecieve = "\(baseURL)/apis/communication/vido_call/recieve"
     static let getBannerUrls = "\(baseURL)/apis/admin/get_banner_urls"
+    static let OrderList = "\(baseURL)/apis/payment/payment_history/Order_list"
 }
 
 class FontContent{

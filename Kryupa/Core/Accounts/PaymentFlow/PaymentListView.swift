@@ -16,59 +16,59 @@ struct PaymentListView: View {
 
     var body: some View {
         ZStack{
-            ScrollView {
+            VStack(spacing:0) {
                 HeaderView(showBackButton: true)
                 SegmentView
-                
-                if viewModel.selectedSection == 0 {
-                    LazyVStack(spacing: 15) {
-                        ForEach(0...2) {
-                            msg in
-                            
-                            PaymentHistoryCell()
-                        }
-                    }
-                    .padding(.top, 20)
-                }
-                else {
-                    
-                    if viewModel.showAddBankView {
-                        BankView
-                    } else {
+                ScrollView {
+                    if viewModel.selectedSection == 0 {
                         LazyVStack(spacing: 15) {
-                            ForEach(viewModel.bankListData,id: \.id) { item in
-                                PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
+                            ForEach(viewModel.orderListData,id: \.id) { msg in
+                                PaymentHistoryCell(orderListData: msg)
                             }
                         }
                         .padding(.top, 20)
+                    }
+                    else {
                         
-                        HStack {
-                            Text("Add new bank account")
-                                .font(.custom(FontContent.plusRegular, size: 15))
-                                .foregroundStyle(._444446)
+                        if viewModel.showAddBankView {
+                            BankView
+                        } else {
+                            LazyVStack(spacing: 15) {
+                                ForEach(viewModel.bankListData,id: \.id) { item in
+                                    PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
+                                }
+                            }
+                            .padding(.top, 20)
                             
-                            Spacer()
-                            
-                            Image("chevron-right")
-                                .frame(width: 30, height: 30)
-                            
-                        }
-                        .padding(.horizontal, 23)
-                        .frame(height: 48)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .inset(by: 1)
-                                .stroke(.E_5_E_5_EA, lineWidth: 1)
-                        )
-                        .padding([.top, .horizontal], 24)
-                        .asButton(.press) {
-                            self.viewModel.showAddBankView = true
+                            HStack {
+                                Text("Add new bank account")
+                                    .font(.custom(FontContent.plusRegular, size: 15))
+                                    .foregroundStyle(._444446)
+                                
+                                Spacer()
+                                
+                                Image("chevron-right")
+                                    .frame(width: 30, height: 30)
+                                
+                            }
+                            .padding(.horizontal, 23)
+                            .frame(height: 48)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 50)
+                                    .inset(by: 1)
+                                    .stroke(.E_5_E_5_EA, lineWidth: 1)
+                            )
+                            .padding([.top, .horizontal], 24)
+                            .asButton(.press) {
+                                self.viewModel.showAddBankView = true
+                            }
                         }
                     }
                 }
             }
             .onAppear{
                 viewModel.getBankList()
+                viewModel.getOrderList()
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)

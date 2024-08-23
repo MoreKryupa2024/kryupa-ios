@@ -28,12 +28,14 @@ struct CareGiverDetailData {
     let yearOfExperience: Int
     let language: [String]
     let bio: String
+    let showBookNow: Bool
     let totalReviewer: Int
     let pricePerHour: Int
     let avgRating: Double
     let reviewList: [ReviewListData]
     
     init(jsonData:[String:Any]){
+        showBookNow = jsonData["show_book_now"] as? Bool ?? false
         id = jsonData["id"] as? String ?? ""
         profileURL = jsonData["profile_url"] as? String ?? ""
         language = jsonData["language"] as? [String] ?? []

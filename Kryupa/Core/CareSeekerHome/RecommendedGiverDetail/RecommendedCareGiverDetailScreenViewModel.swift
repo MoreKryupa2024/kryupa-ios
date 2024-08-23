@@ -18,9 +18,9 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var chatData: ChatListData?
     
     
-    func getCareGiverDetails(giverId:String){
+    func getCareGiverDetails(giverId:String,bookingId:String){
         isloading = true
-        NetworkManager.shared.getCareGiverDetails(giverId: giverId) { [weak self] result in
+        NetworkManager.shared.getCareGiverDetails(giverId: giverId,bookingId: bookingId) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isloading = false
                 switch result{

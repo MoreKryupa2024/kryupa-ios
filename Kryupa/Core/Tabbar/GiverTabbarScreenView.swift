@@ -29,7 +29,7 @@ struct GiverTabbarScreenView: View {
             Spacer()
             TabView
         }
-        .onAppear{
+        .task{
             showJobsScreen.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
                                                    using: self.showJobsScreen)
             showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,

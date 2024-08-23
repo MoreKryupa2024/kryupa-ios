@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct PaymentHistoryCell: View {
+    
+    var orderListData: OrderListData
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack {
-                Text("Transaction #546")
+                Text("Transaction #\(orderListData.bookingID)")
                     .font(.custom(FontContent.besMedium, size: 15))
                     .foregroundStyle(.appMain)
                 
@@ -29,13 +32,13 @@ struct PaymentHistoryCell: View {
             .padding(.horizontal, 23)
             .padding(.top, 10)
             
-            Text("Monday, 07-03-24")
+            Text("\(orderListData.createdAt.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEEE, dd-MM-yyyy"))")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(._444446)
                 .padding(.horizontal, 23)
                 .padding(.top, 0)
 
-            Text("$325.21")
+            Text("$\(orderListData.bookingPricingForCustomer.removeZerosFromEnd(num: 2))")
                 .font(.custom(FontContent.plusRegular, size: 12))
                 .foregroundStyle(._444446)
                 .padding(.horizontal, 23)
@@ -49,8 +52,4 @@ struct PaymentHistoryCell: View {
         )
         .padding(.horizontal, 24)
     }
-}
-
-#Preview {
-    PaymentHistoryCell()
 }

@@ -70,7 +70,7 @@ struct LobbyScreenView: View {
             BannerView(assetsImage: ["caregiver lobby","caregiver lobby 1", "caregiver lobby 2", "caregiver lobby 3"],
                        showIndecator: true,
                        fromAssets: true,
-                       bannerHeight: 240)
+                       bannerHeight: 193)
         }
         .padding(.horizontal,24)
         .padding(.top,25)

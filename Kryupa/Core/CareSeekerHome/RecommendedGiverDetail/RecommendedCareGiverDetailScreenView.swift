@@ -44,7 +44,7 @@ struct RecommendedCareGiverDetailScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .task{
-            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "")
+            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "", bookingId: bookingID)
         }
     }
 
@@ -132,14 +132,11 @@ struct RecommendedCareGiverDetailScreenView: View {
             
             MessageButton
                 .asButton(.press){
-                    
-                    
-                    //                            viewModel.sendRequestForBookCaregiver(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
                     viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
                         let chatViewModel = ChatScreenViewModel()
                         chatViewModel.selectedChat = viewModel.chatData
                         chatViewModel.isRecommended = viewModel.isRecommended
-                        chatViewModel.normalBooking = viewModel.isNormalBooking
+                        chatViewModel.normalBooking = viewModel.isRecommended ? false : (viewModel.giverDetail?.showBookNow ?? false)
                         chatViewModel.bookingId = bookingID
                         router.showScreen(.push) { route in
                             ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)

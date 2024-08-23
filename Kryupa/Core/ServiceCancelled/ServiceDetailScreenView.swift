@@ -96,7 +96,7 @@ struct ServiceDetailScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                     
                     
-                    Text(((Double(viewModel.cancelSeriveDetailData?.hours ?? "") ?? 0).removeZerosFromEnd(num: 2)))
+                    Text(((viewModel.cancelSeriveDetailData?.hours ?? 0).removeZerosFromEnd(num: 2)))
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
                 
@@ -106,7 +106,7 @@ struct ServiceDetailScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                     
                     
-                    Text("$\(Double(viewModel.cancelSeriveDetailData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))")
+                    Text("$\((viewModel.bookingsListData?.price ?? 0).removeZerosFromEnd(num: 2))")
                         .font(.custom(FontContent.plusRegular, size: 16))
                 }
             }
@@ -137,7 +137,7 @@ struct ServiceDetailScreenView: View {
                         .frame(height: 125)
                 }
                 .padding(.top,10)
-                .id(viewModel.review)
+//                .id(viewModel.review)
                 
                 SubmitButton
                     .padding(.vertical,20)
@@ -204,14 +204,15 @@ struct ServiceDetailScreenView: View {
             }
             .padding(.top,10)
             .padding(.horizontal,20)
-         
-            CancelButton
-                .padding(.top,30)
-                .asButton(.press){
-                    router.showScreen(.push) { route in
-                        ServiceCancelScreenView(viewModel: viewModel)
+            if !((viewModel.cancelSeriveDetailData?.bookingType ?? "") == "One Time" && (viewModel.bookingsListData?.status ?? "") != "Job Schedule"){
+                CancelButton
+                    .padding(.top,30)
+                    .asButton(.press){
+                        router.showScreen(.push) { route in
+                            ServiceCancelScreenView(viewModel: viewModel)
+                        }
                     }
-                }
+            }
         }
     }
     

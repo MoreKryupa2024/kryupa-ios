@@ -23,6 +23,7 @@ struct BannerView: View {
                     ForEach(assetsImage.indices, id: \.self) { index in
                         Image(assetsImage[index])
                             .resizable()
+                            .scaledToFit()
                     }
                 }else{
                     ForEach(banners.indices, id: \.self) { index in
@@ -36,13 +37,13 @@ struct BannerView: View {
             if showIndecator{
                 HStack{
                     if fromAssets{
-                        ForEach(banners.indices, id: \.self) { index in
+                        ForEach(assetsImage.indices, id: \.self) { index in
                             Circle()
                                 .frame(height: 6)
                                 .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
                         }
                     }else{
-                        ForEach(assetsImage.indices, id: \.self) { index in
+                        ForEach(banners.indices, id: \.self) { index in
                             Circle()
                                 .frame(height: 6)
                                 .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)

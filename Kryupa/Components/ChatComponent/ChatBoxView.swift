@@ -26,7 +26,7 @@ struct ChatBoxView: View {
                 }
             }else if Defaults().userType == AppConstants.SeekCare && selectedChat?.seekerId == msgData.sender{
                 if msgData.isActionBtn{
-//                    senderUserViewService(message: msgData.message)
+                    senderUserViewService(message: msgData.message)
                 }else{
                     senderMsg(msg: msgData.message)
                 }
@@ -103,10 +103,10 @@ struct ChatBoxView: View {
             VStack(alignment: .leading) {
                 Text(SpecialMessageData.content)
                     .font(.custom(FontContent.plusRegular, size: 13))
-                    .foregroundStyle(.appMain)
+                    .foregroundStyle(Color.white)
                     .padding(.horizontal, 20)
                 
-                Text(SpecialMessageData.btnTitle)
+                /*Text(SpecialMessageData.btnTitle)
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 20)
@@ -121,7 +121,7 @@ struct ChatBoxView: View {
                         }else{
                             presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
                         }
-                    }
+                    }*/
             }
             
             .padding(.vertical, 15)

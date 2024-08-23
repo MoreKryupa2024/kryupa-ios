@@ -62,9 +62,9 @@ struct CustomerHomeData {
 
 // MARK: - RecommendedCaregiver
 struct RecommendedCaregiverData {
-    let id, name, rating, reviewCount, yearsOfExprience: String
+    let id, name, rating, reviewCount: String
     let profileURL: String
-    let price: Double
+    let pricePerHour, yearOfExprience: Double
     let arrayAgg: [String]
 
     init(jsonData:[String:Any]) {
@@ -74,7 +74,7 @@ struct RecommendedCaregiverData {
         reviewCount = jsonData["review_count"] as? String ?? ""
         profileURL = jsonData["profile_url"] as? String ?? ""
         arrayAgg = jsonData["array_agg"] as? [String] ?? []
-        yearsOfExprience = jsonData["years_of_exprience"] as? String ?? ""
-        price = jsonData["price"] as? Double ?? 0.0
+        yearOfExprience = jsonData["year_of_exprience"] as? Double ?? Double(jsonData["year_of_exprience"] as? Int ?? Int(jsonData["year_of_exprience"] as? String ?? "") ?? 0 )
+        pricePerHour = jsonData["price_per_hour"] as? Double ?? Double(jsonData["price_per_hour"] as? Int ?? Int(jsonData["price_per_hour"] as? String ?? "") ?? 0 )
     }
 }

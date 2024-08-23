@@ -13,12 +13,13 @@ class BookingFormScreenViewModel: ObservableObject{
     var dateState: Int = Int()
     
     var startDateValue: Date = Date()
-    var startTimeValue: Date = Date()
+    var endDateValue: Date = Date().addingTimeInterval(86400)
+    var startTimeValue: Date = Date().addingTimeInterval(14400)
+    var endTimeValue: Date = Date().addingTimeInterval(18000)
     var startDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
     var endDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-    
-    var startTime: String = "".convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "HH:mm:ss")
-    var endTime: String = "".convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "HH:mm:ss")
+    var startTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(14400))
+    var endTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(18000))
     
     var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
     @Published var bookingFor: String = String()

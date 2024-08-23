@@ -90,20 +90,21 @@ struct RecommandedListScreenView: View {
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.besMedium, size: 17))
                 
-                Text("\(giver.yearsOfExprience) Years Expirenced")
+                Text("\(giver.yearOfExprience.removeZerosFromEnd(num: 0)) Years Expirenced")
                     .font(.custom(FontContent.plusRegular, size: 12))
+                    .padding(.bottom,5)
                 
                 HStack{
                     StarsView(rating: Double(giver.rating) ?? 0.0, maxRating: 5, size: 12)
                     
-                    Text("(\(giver.reviewCount)")
+                    Text("( \(giver.reviewCount) )")
                         .font(.custom(FontContent.plusRegular, size: 11))
                 }
             }
             .frame(maxWidth: .infinity)
             .padding(.leading,23)
             
-            Text("$\(giver.price.removeZerosFromEnd(num: 2))")
+            Text("$\(giver.pricePerHour.removeZerosFromEnd(num: 2))")
                 .font(.custom(FontContent.plusMedium, size: 12))
                 .frame(maxHeight: .infinity,alignment: .top)
         }
