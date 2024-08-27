@@ -80,8 +80,6 @@ struct EmergencyContactView: View {
                 })
                 .padding(.top,30)
                 .padding(.horizontal,24)
-                
-                
             }
         }
         .scrollIndicators(.hidden)

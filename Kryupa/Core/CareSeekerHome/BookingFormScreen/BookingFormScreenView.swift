@@ -152,12 +152,17 @@ struct BookingFormScreenView: View {
             }
         }
         .task{
+            
             if viewModel.isRecommended {
-                viewModel.getCustomerRequirements()
+                viewModel.getCustomerRequirements { error in
+                    presentAlert(title: "Kryupa", subTitle: error)
+                }
             }
             viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
             viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
-            viewModel.getBookingForRelativeList()
+            viewModel.getBookingForRelativeList{ error in
+                presentAlert(title: "Kryupa", subTitle: error)
+            }
         }
     }
     
@@ -169,7 +174,7 @@ struct BookingFormScreenView: View {
         if viewModel.segSelected == "One Time"{
             let startDay = (viewModel.selectedDay.numDay)
             if startDay == day{
-                let currentDate =  date.addingTimeInterval(14400)
+                let currentDate =  date//.addingTimeInterval(14400)
                 return currentDate...
             }else{
                 return nil
@@ -179,7 +184,7 @@ struct BookingFormScreenView: View {
             let startDay = (viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
             
             if startDay == day{
-                let currentDate =  date.addingTimeInterval(14400)
+                let currentDate =  date//.addingTimeInterval(14400)
                 return currentDate...
             }else{
                 return nil
@@ -245,7 +250,15 @@ struct BookingFormScreenView: View {
     
     private var WeakDayContentView: some View{
         WeakDayView(selectionCount: 8,selectedValue: viewModel.selectedDay){ selectedWeak in
+            let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
+            let pickedDate = selectedWeak.serverDate.split(separator: "T").first ?? ""
             viewModel.selectedDay = selectedWeak
+            if currentDate == pickedDate{
+                viewModel.startTimeValue =  Date()//.addingTimeInterval(14400)
+                viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
+                viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
+                viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
+            }
         }
     }
     

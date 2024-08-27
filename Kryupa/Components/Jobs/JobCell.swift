@@ -16,6 +16,7 @@ struct JobCell: View {
             ImageLoadingView(imageURL: jobPostData.customerInfo.profilePictureUrl)
                 .frame(width: 63, height: 63)
                 .cornerRadius(31)
+                .clipped()
             
             VStack(alignment: .leading) {
                 HStack {

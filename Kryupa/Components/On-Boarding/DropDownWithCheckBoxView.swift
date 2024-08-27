@@ -56,7 +56,7 @@ struct DropDownWithCheckBoxView: View {
             
             if showDropDown{
                 ScrollView{
-                    LazyVStack(spacing: 15){
+                    VStack(spacing: 15){
                         ForEach(values, id: \.self) { value in
                             dropDownView(value: value)
                                 .frame(maxWidth: .infinity,alignment: .leading)

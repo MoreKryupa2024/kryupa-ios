@@ -33,7 +33,7 @@ struct RecommandedListScreenView: View {
                 .font(.custom(FontContent.besMedium, size: 20))
                 .padding(.top,21)
             
-            LazyVStack(spacing:0){
+            VStack(spacing:0){
                 ForEach(Array(recommendedCaregiver.enumerated()),id: \.element.id){ (index,giver) in
                     giverView(giver: giver)
                         .padding(.top,15)
@@ -83,6 +83,7 @@ struct RecommandedListScreenView: View {
             ImageLoadingView(imageURL:giver.profileURL)
                 .frame(width: 64,height: 64)
                 .clipShape(.rect(cornerRadius: 32))
+                .clipped()
             
             VStack(alignment:.leading, spacing:0){
                 Text(giver.name)

@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-class ProfileDetailScreenViewModel: ObservableObject
-{
+class ProfileDetailScreenViewModel: ObservableObject {
+    
     @Published var isloading: Bool = Bool()
     @Published var email: String = String()
     @Published var profileList: ProfileListData?
@@ -72,13 +72,15 @@ class ProfileDetailScreenViewModel: ObservableObject
     func uploadProfilePic(profileID: String,file:Data, fileName: String, imageUrl: @escaping(()->Void)){
         isloading = true
         NetworkManager.shared.uploadProfilePicSeeker(profileID: profileID, file: file, fileName: fileName) {[weak self] result in
-            switch result{
-            case .success(_):
-                self?.isloading = false
-                imageUrl()
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(_):
+                    self?.isloading = false
+                    imageUrl()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
         }
     }

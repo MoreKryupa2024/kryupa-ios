@@ -163,8 +163,10 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    self.meetingTokenData = data.data
-                    self.isPresented = true
+                    if self.isPresented == false{
+                        self.meetingTokenData = data.data
+                        self.isPresented = true
+                    }
                 case .failure(let error):
                     print(error)
                 }
@@ -190,8 +192,11 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    self.meetingTokenData = data.data
-                    self.isPresented = true
+                    if self.isPresented == false{
+                        self.selectedChat?.videoCallId = ""
+                        self.meetingTokenData = data.data
+                        self.isPresented = true
+                    }
                 case .failure(let error):
                     print(error)
                 }

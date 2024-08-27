@@ -70,11 +70,10 @@ struct LobbyScreenView: View {
             BannerView(assetsImage: ["caregiver lobby","caregiver lobby 1", "caregiver lobby 2", "caregiver lobby 3"],
                        showIndecator: true,
                        fromAssets: true,
-                       bannerHeight: 193)
+                       aspectRatio: 327/193)
         }
         .padding(.horizontal,24)
         .padding(.top,25)
-        .frame(height: 195)
     }
     private var sepratorView: some View{
         Image("referSepratorView")

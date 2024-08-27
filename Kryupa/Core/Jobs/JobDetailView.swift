@@ -199,6 +199,7 @@ struct JobDetailView: View {
                 ImageLoadingView(imageURL: viewModel.jobDetailModel?.profilePictureURL ?? "")
                     .frame(width: 126, height: 126)
                     .cornerRadius(63)
+                    .clipped()
             }
             .frame(width: 138, height: 138)
             .overlay(

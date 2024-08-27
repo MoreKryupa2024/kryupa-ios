@@ -114,6 +114,8 @@ struct PreferenceCareSeekarView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Years of Experience")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -150,6 +152,8 @@ struct PreferenceCareSeekarView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Gender Preference")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -179,6 +183,8 @@ struct PreferenceCareSeekarView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Need Service In")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -212,6 +218,8 @@ struct PreferenceCareSeekarView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Language Preference")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             

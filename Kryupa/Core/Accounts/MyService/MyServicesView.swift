@@ -9,19 +9,30 @@ import SwiftUI
 import SwiftfulUI
 
 struct MyServicesView: View {
-    
+    @Environment(\.router) var router
     @StateObject private var viewModel = MyServiceViewModel()
 
     var body: some View {
-        
-        ScrollView {
-            HeaderView(title: "My Services",showBackButton: true)
-            AreaOfExpertiseView
-            line
-            MySkillsView
-            BottomButtonView
+        ZStack{
+            
+            VStack(spacing:0){
+                HeaderView(title: "My Services",showBackButton: true)
+                ScrollView {
+                    AreaOfExpertiseView
+                    line
+                    MySkillsView
+                    BottomButtonView
+                }
+            }
+            .toolbar(.hidden, for: .navigationBar)
+            
+            if viewModel.isLoading{
+                LoadingView()
+            }
         }
-        .toolbar(.hidden, for: .navigationBar)
+        .task {
+            viewModel.getMyService()
+        }
     }
     
     private var BottomButtonView: some View{
@@ -36,7 +47,9 @@ struct MyServicesView: View {
                         RoundedRectangle(cornerRadius: 48)
                     }
                     .asButton(.press) {
-                        
+                        viewModel.updateMyService { error in
+                            presentAlert(title: "Kryupa", subTitle: error)
+                        }
                     }
                 
                 Spacer()
@@ -52,7 +65,7 @@ struct MyServicesView: View {
                             .stroke(.appMain, lineWidth: 1)
                     )
                     .asButton(.press) {
-                        
+                        router.dismissScreen()
                     }
             }
             .padding([.top, .horizontal], 24)

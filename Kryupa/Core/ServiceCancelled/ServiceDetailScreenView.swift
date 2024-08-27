@@ -179,6 +179,7 @@ struct ServiceDetailScreenView: View {
                     ImageLoadingView(imageURL: (viewModel.bookingsListData?.profilePictureURL ?? ""))
                         .frame(width: 126,height: 126)
                         .clipShape(.rect(cornerRadius: 63))
+                        .clipped()
                 })
                 .foregroundStyle(.white)
                 .frame(width: 138,height: 138)

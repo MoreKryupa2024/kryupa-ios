@@ -25,7 +25,7 @@ struct AppointmentsView: View {
                             ImageLoadingView(imageURL: data.profilePictureURL)
                                 .frame(width: 50,height: 50)
                                 .clipShape(.rect(cornerRadius: 25))
-                            
+                                .clipped()
                             VStack(alignment:.leading, spacing:0){
                                 Text(data.name)
                                     .font(.custom(FontContent.besMedium, size: 17))
@@ -38,10 +38,10 @@ struct AppointmentsView: View {
                             
                             Text("$\(data.price.removeZerosFromEnd())")
                                 .font(.custom(FontContent.plusMedium, size: 11))
-                                .foregroundStyle(.green)
+                                .foregroundStyle(data.status != "Job Cancelled" ? .green : .red)
                                 .padding(.vertical,5)
                                 .padding(.horizontal,10)
-                                .background(.green.opacity(0.2))
+                                .background(data.status != "Job Cancelled" ? .green.opacity(0.2) : .red.opacity(0.2))
                                 .clipShape(.rect(cornerRadius: 15))
                                 .padding(.top,25)
                             

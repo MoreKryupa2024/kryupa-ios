@@ -27,7 +27,7 @@ struct CareSeekerHomeScreenView: View {
                         BannerView(assetsImage: ["customer home top","customer home top 2"],
                                    showIndecator: true,
                                    fromAssets: true,
-                                   bannerHeight: 58)
+                                   aspectRatio: 327/58)
                         .padding(.horizontal,24)
                         .padding(.top,24)
                         .asButton(.press) {
@@ -75,7 +75,7 @@ struct CareSeekerHomeScreenView: View {
             VStack {
                 Image("customer home top 1")
                     .resizable()
-                    .frame(height: 59)
+                    .aspectRatio(327/58, contentMode: .fit)
                     .asButton(.press) {
                         viewModel.customerConfirmStartService()
                     }

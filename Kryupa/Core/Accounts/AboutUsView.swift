@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AboutUsView: View {
     @State var arrAboutUs: [AboutUsData] = [
-        AboutUsData(title: "Welcome to Kryupa,", desc: "where care meets compassion. Our platform is dedicated to connecting individuals who need care with trusted caregivers, making the process seamless and reliable for everyone involved."),
+        AboutUsData(title: "Welcome to Kryupa,", desc: "Where care meets compassion. Our platform is dedicated to connecting individuals who need care with trusted caregivers, making the process seamless and reliable for everyone involved."),
         AboutUsData(title: "Our Mission", desc: "At Kryupa, our mission is to enhance the quality of life for individuals in need by providing them access to professional, trustworthy, and empathetic caregivers. We believe in creating a community where care is not just a service but a bond built on trust, respect, and understanding."),
         AboutUsData(title: "What We Do", desc: "We offer a comprehensive platform where care seekers can easily find and connect with caregivers who meet their specific needs. Whether you require assistance for yourself, a loved one, or wish to offer your caregiving services, Kryupa is here to make that connection simple, secure, and satisfying."),
         AboutUsData(title: "Our Vision", desc: "We envision a world where everyone, regardless of their circumstances, has access to high-quality care. Kryupa aims to become the leading platform for caregiving services, known for our commitment to excellence, compassion, and innovation.\nJoin us in our journey to make caregiving a better experience for all. Whether you need care or want to offer it, Kryupa is here to support you every step of the way."),

@@ -20,7 +20,7 @@ struct BGVTimeSlotScreenView: View {
                     .frame(height: 64)
                 
                 ScrollView {
-                    LazyVStack(spacing:0){
+                    VStack(spacing:0){
                         ForEach(viewModel.availableSlotsList, id: \.id) { slot in
                             
                             AvailableTimeSlotsView(

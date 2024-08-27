@@ -55,7 +55,7 @@ struct DropDownView: View {
             if showDropDown{
                 if values.count > 4{
                     ScrollView{
-                        LazyVStack(spacing: 15){
+                        VStack(spacing: 15){
                             ForEach(values, id: \.self) { value in
                                 dropDownView(value: value)
                                     .frame(maxWidth: .infinity,alignment: .leading)
@@ -72,7 +72,7 @@ struct DropDownView: View {
                     .frame(height: 200)
                 }else{
                     ScrollView{
-                        LazyVStack(spacing: 15){
+                        VStack(spacing: 15){
                             ForEach(values, id: \.self) { value in
                                 dropDownView(value: value)
                                     .frame(maxWidth: .infinity,alignment: .leading)

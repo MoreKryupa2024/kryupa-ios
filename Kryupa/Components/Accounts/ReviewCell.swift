@@ -11,7 +11,7 @@ struct ReviewCell: View {
     @State var reviewData: ReviewData?
     
     var body: some View {
-        LazyVStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             HStack(spacing: 15) {
                 
                 
@@ -19,6 +19,7 @@ struct ReviewCell: View {
                 ImageLoadingView(imageURL: reviewData?.profilePictureUrl ?? "")
                     .frame(width: 60, height: 60)
                     .cornerRadius(30)
+                    .clipped()
                 
                 VStack(alignment: .leading) {
                     Text(reviewData?.name ?? "")

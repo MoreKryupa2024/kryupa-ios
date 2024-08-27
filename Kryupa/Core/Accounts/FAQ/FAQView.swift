@@ -21,7 +21,7 @@ struct FAQView: View {
                 
                 if viewModel.selectedSection == 0 {
                     ScrollView {
-                        LazyVStack(spacing: 15) {
+                        VStack(spacing: 15) {
                             ForEach(0...20) {
                                 msg in
                                 
@@ -36,7 +36,7 @@ struct FAQView: View {
                 }
                 else {
                     ScrollView {
-                        LazyVStack(spacing: 20){
+                        VStack(spacing: 20){
                             if let faqModelData = viewModel.faqModelData{
                                 ForEach(faqModelData.allConversation.reversed(), id:\.id) { data in
                                     FAQChatView(conversationData: data,senderId: faqModelData.userId)

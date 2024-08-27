@@ -20,7 +20,7 @@ struct ReviewsListView: View {
             SegmentView
             
             if selectedSection == 0 {
-                LazyVStack(spacing: 15) {
+                VStack(spacing: 15) {
                     ForEach(Array(viewModel.myReviewsList.enumerated()), id: \.offset) { index, model in
                         
                         ReviewCell(reviewData: model)
@@ -34,7 +34,7 @@ struct ReviewsListView: View {
                 .padding(.top, 20)
             }
             else {
-                LazyVStack(spacing: 15) {
+                VStack(spacing: 15) {
                     ForEach(Array(viewModel.givenReviewsList.enumerated()), id: \.offset) { index, model in
                         
                         ReviewCell(reviewData: model)

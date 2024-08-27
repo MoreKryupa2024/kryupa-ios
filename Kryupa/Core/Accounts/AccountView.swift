@@ -26,7 +26,7 @@ struct AccountView: View {
         
         ScrollView(showsIndicators: false){
             HeaderTopView
-            LazyVStack(alignment:.leading, spacing: 20) {
+            VStack(alignment:.leading, spacing: 20) {
                 ForEach(Array(arrAccountList.enumerated()), id: \.offset) { index, model in
                     getAccountCellView(model: model, index: index)
                         .asButton(.press) {
@@ -155,6 +155,7 @@ struct AccountView: View {
                     ImageLoadingView(imageURL: (Defaults().userType == AppConstants.GiveCare ? viewModel.profileGiver?.profileURL ?? "" : viewModel.profile?.profilePic ?? ""))
                         .frame(width: 68, height: 68)
                         .cornerRadius(34)
+                        .clipped()
                 }
                 .frame(width: 74, height: 74)
                 .overlay(

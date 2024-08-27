@@ -32,7 +32,7 @@ struct BookingScreenView: View {
             }
         }
         .task{
-            viewModel.pageNumber = 1
+//            viewModel.pageNumber = 1
             viewModel.getBookings()
         }
     }
@@ -58,7 +58,7 @@ struct BookingScreenView: View {
                 }
             case 2:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                    BookingView(status: "Completed",bookingData: data)
+                    BookingView(status: (data.status != "Job Cancelled" ? "Completed" : "Cancelled"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
                             viewModelReview.bookingsListData = data
@@ -76,6 +76,13 @@ struct BookingScreenView: View {
             case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Cancelled",bookingData: data)
+                        .asButton(.press) {
+                            let viewModelReview = ReviewsViewModel()
+                            viewModelReview.bookingsListData = data
+                            router.showScreen(.push) { rout in
+                                GiveReviewView(viewModel:viewModelReview)
+                            }
+                        }
 //                        .onAppear{
 //                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
 //                                viewModel.pageNumber += 1
@@ -147,6 +154,13 @@ struct BookingScreenView: View {
             case 2:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Cancelled",bookingData: data)
+                        .asButton(.press) {
+                            let viewModelReview = ReviewsViewModel()
+                            viewModelReview.bookingsListData = data
+                            router.showScreen(.push) { rout in
+                                GiveReviewView(viewModel:viewModelReview)
+                            }
+                        }
 //                        .onAppear{
 //                            if ((viewModel.bookingList.count-1) == index) && viewModel.pagination{
 //                                viewModel.pageNumber += 1
@@ -174,20 +188,16 @@ struct BookingScreenView: View {
                 .tag(1)
                 .font(.custom(FontContent.plusRegular, size: 15))
 
-            Text("Completed")
+            Text("Closed")
                 .tag(2)
-                .font(.custom(FontContent.plusRegular, size: 15))
-            
-            Text("Cancelled")
-                .tag(3)
                 .font(.custom(FontContent.plusRegular, size: 15))
         }
         .pickerStyle(.segmented)
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
-            viewModel.pageNumber = 1
-            viewModel.pagination = true
+//            viewModel.pageNumber = 1
+//            viewModel.pagination = true
             viewModel.getBookings()
         })
     }
@@ -212,8 +222,8 @@ struct BookingScreenView: View {
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
-            viewModel.pageNumber = 1
-            viewModel.pagination = true
+//            viewModel.pageNumber = 1
+//            viewModel.pagination = true
             viewModel.getBookings()
         })
     }

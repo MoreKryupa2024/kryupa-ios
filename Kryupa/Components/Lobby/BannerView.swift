@@ -9,12 +9,12 @@ import SwiftUI
 
 struct BannerView: View {
     
-    var banners:[BannerDataModel] = [BannerDataModel]()
-    var assetsImage:[String] = []
+    var banners:[BannerDataModel] = []
+    var assetsImage:[String] = ["customer home top","customer home top 2"]
     @State private var isSelectedView = 0
     var showIndecator: Bool = true
     var fromAssets: Bool = false
-    var bannerHeight: CGFloat = 180
+    var aspectRatio: CGFloat = 327/58
     
     var body: some View {
         VStack{
@@ -23,7 +23,6 @@ struct BannerView: View {
                     ForEach(assetsImage.indices, id: \.self) { index in
                         Image(assetsImage[index])
                             .resizable()
-                            .scaledToFit()
                     }
                 }else{
                     ForEach(banners.indices, id: \.self) { index in
@@ -32,7 +31,7 @@ struct BannerView: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .frame(height: bannerHeight)
+            .aspectRatio(aspectRatio, contentMode: .fit)
             
             if showIndecator{
                 HStack{
@@ -53,9 +52,6 @@ struct BannerView: View {
             }
         }
     }
-    
-    //200
-    //300
 }
 
 #Preview {

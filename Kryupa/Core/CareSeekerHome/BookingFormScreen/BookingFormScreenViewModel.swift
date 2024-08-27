@@ -14,12 +14,12 @@ class BookingFormScreenViewModel: ObservableObject{
     
     var startDateValue: Date = Date()
     var endDateValue: Date = Date().addingTimeInterval(86400)
-    var startTimeValue: Date = Date().addingTimeInterval(14400)
-    var endTimeValue: Date = Date().addingTimeInterval(18000)
+    var startTimeValue: Date = Date()//.addingTimeInterval(14400)
+    var endTimeValue: Date = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
     var startDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
     var endDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-    var startTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(14400))
-    var endTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(18000))
+    var startTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
+    var endTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
     
     var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
     @Published var bookingFor: String = String()
@@ -41,7 +41,8 @@ class BookingFormScreenViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
     @Published var isRecommended: Bool = false
     @Published var recommendedUserBookingData: RecommendedUserBookingData?
-    func getCustomerRequirements(){
+    
+    func getCustomerRequirements(errorAlert: @escaping ((String)-> Void)){
         isloading = true
         NetworkManager.shared.getCustomerRequirements() { [weak self] result in
             DispatchQueue.main.async {
@@ -54,7 +55,7 @@ class BookingFormScreenViewModel: ObservableObject{
                     self?.needServiceInSelected = data.data.preference.preferredServiceType
                     self?.languageSpeakingSelected = data.data.preference.preferredLang
                 case .failure(let error):
-                    print(error)
+                    errorAlert(error.getMessage())
                 }
             }
         }
@@ -90,37 +91,37 @@ class BookingFormScreenViewModel: ObservableObject{
     }
     
     
-    func getBookingForRelativeList(){
+    func getBookingForRelativeList(errorAlert: @escaping ((String)-> Void)){
         isloading = true
         NetworkManager.shared.getRelativeList { [weak self] result in
             DispatchQueue.main.async {
+                self?.isloading = false
                 switch result{
                 case .success(let data):
-                    self?.isloading = false
                     self?.bookingForList = data.data
                     if (self?.bookingID != "") {
-                        self?.getBookingDetailsById()
+                        self?.getBookingDetailsById(errorAlert: { errorStr in
+                            errorAlert(errorStr)
+                        })
                     }
                 case .failure(let error):
-                    print(error)
-                    self?.isloading = false
+                    errorAlert(error.getMessage())
                 }
             }
         }
     }
     
-    func getBookingDetailsById(){
+    func getBookingDetailsById(errorAlert: @escaping ((String)-> Void)){
         isloading = true
         NetworkManager.shared.getBookingDetailsById(bookingId: bookingID) { [weak self] result in
             DispatchQueue.main.async {
+                self?.isloading = false
                 switch result{
                 case .success(let data):
-                    self?.isloading = false
                     self?.bookingIDData = data.data
                     self?.setPrefieldBookingData()
                 case .failure(let error):
-                    print(error)
-                    self?.isloading = false
+                    errorAlert(error.getMessage())
                 }
             }
         }
@@ -160,17 +161,19 @@ class BookingFormScreenViewModel: ObservableObject{
             param["booking_id"] = bookingID
         }
         
+        if giverId != ""{
+            param["caregiver_id"] = giverId
+        }
+        
         isloading = true
         NetworkManager.shared.createBooking(params:param) { [weak self] result in
             DispatchQueue.main.async {
+                self?.isloading = false
                 switch result{
                 case .success(let data):
-                    print(data)
-                    self?.isloading = false
                     action(data.data.id)
                 case .failure(let error):
-                    print(error)
-                    self?.isloading = false
+                    alert(error.getMessage())
                 }
             }
         }

@@ -148,7 +148,7 @@ struct GiveReviewView: View {
         VStack(alignment: .leading) {
             HStack {
                 if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
                         .font(.custom(FontContent.besMedium, size: 16))
                         .foregroundStyle(.appMain)
                         .padding(.horizontal, 24)
@@ -210,6 +210,7 @@ struct GiveReviewView: View {
                 ImageLoadingView(imageURL: viewModel.bookingsListData?.profilePictureURL ?? "")
                     .frame(width: 126, height: 126)
                     .cornerRadius(63)
+                    .clipped()
             }
             .frame(width: 138, height: 138)
             .cornerRadius(69)
@@ -238,13 +239,13 @@ struct GiveReviewView: View {
             Spacer()
             Spacer()
             
-            Text("Completed")
+            Text(((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? "Completed" : "Cancelled"))
                 .padding()
                 .frame(height: 31)
                 .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle(._23_C_16_B)
+                .foregroundStyle((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? ._23_C_16_B : .red)
                 .background(
-                    RoundedRectangle(cornerRadius: 12).fill(Color.E_0_FFEE)
+                    RoundedRectangle(cornerRadius: 12).fill((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? Color.E_0_FFEE : .red.opacity(0.2))
                 )
         }
     }

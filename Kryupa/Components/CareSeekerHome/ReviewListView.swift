@@ -11,7 +11,7 @@ struct ReviewListView: View {
     var reviewList: [ReviewListData] = [ReviewListData]()
     
     var body: some View {
-        LazyVStack(spacing:0){
+        VStack(spacing:0){
             
             ForEach(reviewList, id: \.reviewID){ data in
                 ReviewView(reviewData: data)
@@ -27,7 +27,7 @@ struct ReviewListView: View {
                 ImageLoadingView(imageURL: reviewData.reviewedByProfilePictureURL)
                     .frame(width: 64,height: 64)
                     .clipShape(.rect(cornerRadius: 32))
-                
+                    .clipped()
                 VStack(alignment:.leading, spacing:5){
                     Text(reviewData.reviewedByName)
                         .frame(maxWidth: .infinity,alignment: .leading)

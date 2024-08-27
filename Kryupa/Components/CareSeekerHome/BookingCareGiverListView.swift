@@ -21,7 +21,7 @@ struct BookingCareGiverListView: View {
             ImageLoadingView(imageURL:giver.profile)
                 .frame(width: 64,height: 64)
                 .clipShape(.rect(cornerRadius: 32))
-            
+                .clipped()
             VStack(alignment:.leading, spacing:0){
                 Text(giver.name)
                     .lineLimit(1)

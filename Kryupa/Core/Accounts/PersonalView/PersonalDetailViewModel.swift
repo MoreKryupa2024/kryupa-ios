@@ -21,13 +21,15 @@ class PersonalDetailViewModel: ObservableObject{
     func uploadProfilePic(file:Data, fileName: String, imageUrl: @escaping(()->Void)){
         isloading = true
         NetworkManager.shared.uploadProfilePicGiver(file: file, fileName: fileName) {[weak self] result in
-            switch result{
-            case .success(_):
-                self?.isloading = false
-                imageUrl()
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(_):
+                    self?.isloading = false
+                    imageUrl()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
         }
     }
@@ -78,13 +80,15 @@ class PersonalDetailViewModel: ObservableObject{
         
         isloading = true
         NetworkManager.shared.updateProfile(params: param) { [weak self] result in
-            switch result{
-            case .success(_):
-                self?.isloading = false
-                next()
-            case .failure(let error):
-                self?.isloading = false
-                print(error)
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(_):
+                    self?.isloading = false
+                    next()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
             }
         }
     }

@@ -30,11 +30,14 @@ struct CareGiverHomeScreenView: View {
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
                                            showIndecator: true,
                                            fromAssets: true,
-                                           bannerHeight: 104)
+                                           aspectRatio: 327/104)
                                     .padding([.horizontal,.vertical],24)
                             }
                             noCotentView
                             completeProfileView
+                            
+                            
+                            
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
                                 if serviceStartData.serviceStatus == "confirm_by_customer" {
@@ -44,7 +47,7 @@ struct CareGiverHomeScreenView: View {
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
                                            showIndecator: true,
                                            fromAssets: true,
-                                           bannerHeight: 130)
+                                           aspectRatio: 327/104)
                                     .padding([.horizontal,.vertical],24)
                             }
                             jobsNearYouView
@@ -79,8 +82,7 @@ struct CareGiverHomeScreenView: View {
             VStack {
                 Image("caregiver-home-top-start")
                     .resizable()
-                    .scaledToFit()
-                    .frame(height: 132)
+                    .aspectRatio(327/104, contentMode: .fit)
                     .asButton(.press) {
                         viewModel.giverConfirmStartService()
                     }

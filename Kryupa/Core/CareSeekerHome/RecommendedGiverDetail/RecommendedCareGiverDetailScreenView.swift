@@ -95,6 +95,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                     ImageLoadingView(imageURL: viewModel.giverDetail?.profileURL ?? "")
                         .frame(width: 126,height: 126)
                         .clipShape(.rect(cornerRadius: 63))
+                        .clipped()
                 })
                 .foregroundStyle(.white)
                 .frame(width: 138,height: 138)

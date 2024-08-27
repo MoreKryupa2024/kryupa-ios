@@ -21,7 +21,7 @@ struct CareGiverPortfolioView: View {
                 ImageLoadingView(imageURL: job.customerInfo.profilePictureUrl)
                     .frame(width: 58,height: 58)
                     .cornerRadius(29)
-
+                    .clipped()
                 
                 VStack(spacing: 2) {
                     Text(job.customerInfo.name)

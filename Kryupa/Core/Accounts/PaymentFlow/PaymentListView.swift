@@ -21,7 +21,7 @@ struct PaymentListView: View {
                 SegmentView
                 ScrollView {
                     if viewModel.selectedSection == 0 {
-                        LazyVStack(spacing: 15) {
+                        VStack(spacing: 15) {
                             ForEach(viewModel.orderListData,id: \.id) { msg in
                                 PaymentHistoryCell(orderListData: msg)
                             }
@@ -33,7 +33,7 @@ struct PaymentListView: View {
                         if viewModel.showAddBankView {
                             BankView
                         } else {
-                            LazyVStack(spacing: 15) {
+                            VStack(spacing: 15) {
                                 ForEach(viewModel.bankListData,id: \.id) { item in
                                     PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
                                 }

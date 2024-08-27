@@ -36,7 +36,7 @@ struct BookingView: View {
             ImageLoadingView(imageURL: bookingData?.profilePictureURL ?? "")
                 .frame(width: 60, height: 60)
                 .cornerRadius(30)
-            
+                .clipped()
             VStack(alignment: .leading, spacing: 3) {
                 HStack {
                     Text(bookingData?.name ?? "")

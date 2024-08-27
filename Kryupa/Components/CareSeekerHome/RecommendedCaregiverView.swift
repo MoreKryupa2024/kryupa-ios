@@ -23,6 +23,8 @@ struct RecommendedCaregiverView: View {
                         
                         ImageLoadingView(imageURL: careData.profileURL)
                             .frame(height: 97)
+                            .clipShape(.rect(cornerRadius: 5))
+                            .clipped()
                         
                         HStack(spacing:2){
                             Text(careData.name)

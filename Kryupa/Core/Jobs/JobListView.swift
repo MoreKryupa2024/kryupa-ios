@@ -15,7 +15,7 @@ struct JobListView: View {
         ZStack{
             ScrollView {
                 HeaderView()
-                LazyVStack(spacing: 15) {
+                VStack(spacing: 15) {
                     ForEach(Array(viewModel.jobPost.enumerated()),id: \.element.jobID) {
                         (index,data) in
                         JobCell(jobPostData: data)

@@ -38,7 +38,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
         
         if medicalConditionDropDownSelected.isEmpty {
             return alert("Please Select Medical Condition")
-        }else if medicalConditionDropDownSelected.contains("Other"){
+        }else if medicalConditionDropDownSelected.contains("Other") && medicalConditionSelected.isEmpty{
             return alert("Please Enter Other Medical Condition")
         }else if mobilityLevel.isEmpty{
             return alert("Please Select Mobility Level")
@@ -140,14 +140,15 @@ class AddNewProfileScreenViewModel: ObservableObject{
     func createProfile(next: @escaping (()->Void), errorMsg: @escaping ((String)->Void)){
         isLoading = true
         NetworkManager.shared.addNewProfile(params: param) { [weak self] result in
-            switch result{
-            case .success(_):
-                self?.isLoading = false
-                next()
-            case .failure(let error):
-                self?.isLoading = false
-                errorMsg(error.getMessage())
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(_):
+                    self?.isLoading = false
+                    next()
+                case .failure(let error):
+                    self?.isLoading = false
+                    errorMsg(error.getMessage())
+                }
             }
         }
     }
@@ -157,13 +158,14 @@ class AddNewProfileScreenViewModel: ObservableObject{
         param["profileId"] = profileID
         isLoading = true
         NetworkManager.shared.updateProfile(params: param) { [weak self] result in
-            switch result{
-            case .success(_):
-                self?.isLoading = false
-                next()
-            case .failure(let error):
-                self?.isLoading = false
-                print(error)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(_):
+                    self?.isLoading = false
+                    next()
+                case .failure(let error):
+                    self?.isLoading = false
+                }
             }
         }
     }

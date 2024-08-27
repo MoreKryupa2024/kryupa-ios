@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct AddNewProfileScreenView: View {
     
@@ -75,6 +76,8 @@ struct AddNewProfileScreenView: View {
                content: {
             HStack(spacing:0){
                 Text("Mobility Level")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))
@@ -117,7 +120,7 @@ struct AddNewProfileScreenView: View {
                     title: "Other",
                     placeHolder: "(Max 100 words)",
                     value: $viewModel.medicalConditionSelected,
-                    keyboard: .asciiCapable
+                    keyboard: .asciiCapable, showRed: true
                 )
             }
             
@@ -125,7 +128,8 @@ struct AddNewProfileScreenView: View {
                 title: "Allergies",
                 placeHolder: "Enter allergies (if you have any)",
                 value: $viewModel.allergiesValue,
-                keyboard: .asciiCapable
+                keyboard: .asciiCapable,
+                showRed: false
             )
             
             mobilityLevelView
@@ -155,15 +159,10 @@ struct AddNewProfileScreenView: View {
                                 var newParam = param
                                 newParam["medicalInfoId"] = viewModel.medicalID
                                 viewModel.param["mediaclInfo"] = newParam
-
                                 viewModel.updateProfile {
-                                    router.showScreen(.push) { rout in
-                                        AccountView()
-                                    }
+                                    router.dismissScreen()
                                 }
                             }
-                            
-
                         }
                     }
             }
@@ -175,6 +174,23 @@ struct AddNewProfileScreenView: View {
     private var SaveButton: some View {
         HStack{
             Text("Save")
+                .font(.custom(FontContent.plusMedium, size: 16))
+                .padding([.top,.bottom], 16)
+                .padding([.leading,.trailing], 40)
+        }
+        .background(
+            ZStack{
+                Capsule(style: .circular)
+                    .fill(.appMain)
+            }
+        )
+        .foregroundColor(.white)
+        
+    }
+    
+    private var NextButton: some View {
+        HStack{
+            Text("Next")
                 .font(.custom(FontContent.plusMedium, size: 16))
                 .padding([.top,.bottom], 16)
                 .padding([.leading,.trailing], 40)
@@ -347,7 +363,7 @@ struct AddNewProfileScreenView: View {
                 title: "Legal Name",
                 placeHolder: "Input text",
                 value: $viewModel.name,
-                keyboard: .asciiCapable
+                keyboard: .asciiCapable, showRed: true
             )
             
             relationDropdownView
@@ -356,7 +372,7 @@ struct AddNewProfileScreenView: View {
                 title: "Email",
                 placeHolder: "Email",
                 value: $viewModel.email,
-                keyboard: .asciiCapable
+                keyboard: .asciiCapable, showRed: true
             )
             
             
@@ -369,7 +385,7 @@ struct AddNewProfileScreenView: View {
             HStack{
                 
                 Spacer()
-                SaveButton
+                NextButton
                     .asButton(.press) {
                         viewModel.dataEmergancyChecks(alert: {alertStr in
                             presentAlert(title: "Kryupa", subTitle: alertStr)
@@ -388,7 +404,7 @@ struct AddNewProfileScreenView: View {
             
             relationPersonalDropdownView
             
-            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
+            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
             
             selectionViewWithHeader(
                 leftIcone: nil,
@@ -410,17 +426,17 @@ struct AddNewProfileScreenView: View {
             selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
             
             HStack{
-                textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
-                textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
+                textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+                textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
                 
             }
             
-            textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable)
+            textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
             
             
             HStack{
                 Spacer()
-                SaveButton
+                NextButton
                     .asButton(.press) {
                         viewModel.customerDataChecks { alertStr in
                             presentAlert(title: "Kryupa", subTitle: alertStr)
@@ -428,13 +444,9 @@ struct AddNewProfileScreenView: View {
                             
                             viewModel.param["personalInfo"] = param
                             selectedSection = selectedSection + 1
-//                            router.showScreen(.push) { rout in
-//                                ExperienceandSkillsView(parameters: param)
-//                            }
                         }
                     }
             }
-            
         })
     }
     
@@ -486,13 +498,15 @@ struct AddNewProfileScreenView: View {
     }
     
     
-    private func textFieldViewWithHeader(title:String?, placeHolder: String, value: Binding<String>,keyboard: UIKeyboardType)-> some View{
+    private func textFieldViewWithHeader(title:String?, placeHolder: String, value: Binding<String>,keyboard: UIKeyboardType,showRed : Bool )-> some View{
         VStack(alignment: .leading, content: {
             if let title{
                 HStack(spacing:0){
                     Text(title)
-                    Text("*")
-                        .foregroundStyle(.red)
+                    if showRed{
+                        Text("*")
+                            .foregroundStyle(.red)
+                    }
                 }
                 .font(.custom(FontContent.plusMedium, size: 17))
             }
@@ -515,23 +529,40 @@ struct AddNewProfileScreenView: View {
     
     private var SegmentView: some View{
         
-        Picker("Profile", selection: $selectedSection) {
-            Text("Personal Info")
-                .tag(0)
-                .font(.custom(FontContent.plusRegular, size: 12))
-
-            Text("Emergency")
-                .tag(1)
-                .font(.custom(FontContent.plusRegular, size: 12))
-            
-            Text("Medical")
-                .tag(2)
-                .font(.custom(FontContent.plusRegular, size: 12))
+        HStack(spacing: 0) {
+            SegmentTextView(title: "Personal Info", select: selectedSection == 0)
+                .asButton {
+                    selectedSection = 0
+                }
+            SegmentTextView(title: "Emergency", select: selectedSection == 1)
+                .asButton {
+                    selectedSection = 1
+                }
+            SegmentTextView(title: "Medical", select: selectedSection == 2)
+                .asButton {
+                    selectedSection = 2
+                }
         }
-        .pickerStyle(.segmented)
+        .padding(2)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.E_5_E_5_EA)
+        )
         .padding(.horizontal, 24)
         .padding(.top, 20)
         
+    }
+    
+    private func SegmentTextView(title: String, select: Bool) -> some View{
+        Text(title)
+            .foregroundStyle((select ? .appMain : ._7_C_7_C_80))
+            .frame(maxWidth: .infinity)
+            .font(.custom(FontContent.plusMedium, size: 12))
+            .frame(height: 30)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .foregroundStyle(select ? .white : .E_5_E_5_EA)
+            )
     }
 }
 

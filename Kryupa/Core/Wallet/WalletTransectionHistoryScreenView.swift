@@ -15,7 +15,7 @@ struct WalletTransectionHistoryScreenView: View {
             VStack(spacing:0){
                 HeaderView(showBackButton: true)
                 ScrollView {
-                    LazyVStack(spacing:0){
+                    VStack(spacing:0){
                         Text("Transactions")
                             .padding(.vertical,24)
                             .font(.custom(FontContent.besMedium, size: 20))

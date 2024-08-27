@@ -66,6 +66,7 @@ struct InboxScreenView: View {
             ImageLoadingView(imageURL: profile.profilePictureURL)
                 .clipShape(Circle())
                 .frame(width: 45,height: 45)
+                .clipped()
             
             VStack(alignment:.leading, spacing:0){
                 Text(profile.name)

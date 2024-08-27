@@ -331,28 +331,21 @@ struct PersonalDetailView: View {
                         ImageLoadingView(imageURL: viewModel.personalDetail?.profilePictureUrl ?? "")
                             .frame(width: 60, height: 60)
                             .cornerRadius(30)
+                            .clipped()
                     }
-                    
-                    HStack {
-                        
-                        Spacer()
-                        VStack {
-                            Image("edit")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                                .padding(.top, 0)
-                            
-                            Spacer()
-                        }
-                        .frame(height: 60)
-                    }
-                    .padding(.horizontal, 8)
                 }
                 .frame(width: 67, height: 67)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 33)
-                        .inset(by: 1)
-                        .stroke(.AEAEB_2, lineWidth: 1)
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 33)
+                            .inset(by: 1)
+                            .stroke(.AEAEB_2, lineWidth: 1)
+                        
+                        Image("edit")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .offset(x:18,y:-25)
+                    }
                 )
                 .onTapGesture {
                     showsAlertForImageUpload.toggle()

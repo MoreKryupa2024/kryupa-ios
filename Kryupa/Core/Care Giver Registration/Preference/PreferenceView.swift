@@ -160,6 +160,8 @@ struct PreferenceView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Language Preference")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -197,6 +199,8 @@ struct PreferenceView: View {
                content: {
             HStack(spacing:0){
                 Text("Distance")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))

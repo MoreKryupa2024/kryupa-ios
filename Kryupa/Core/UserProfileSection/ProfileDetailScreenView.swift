@@ -19,7 +19,7 @@ struct ProfileDetailScreenView: View {
     @State var showsAlertForImageUpload = false
     @State var showPicker = Bool()
     @State var isCam = Bool()
-    @State var selectedImage: UIImage = UIImage(imageLiteralResourceName: "personal")
+    @State var selectedImage: UIImage? = nil//UIImage(imageLiteralResourceName: "personal")
 
     var body: some View {
         ZStack{
@@ -28,10 +28,9 @@ struct ProfileDetailScreenView: View {
                 ScrollView{
                     HStack(alignment:.top){
                         DropDownView(selectedValue: selecedProfile,values: viewModel.profileList?.profiles ?? AppConstants.relationArray) { value in
-                            
+                            selectedImage = nil
                             selecedProfile = value
                             viewModel.getPersonalDetails(profileName: selecedProfile)
-                            
                         }
                         AddNewButton
                             .asButton(.press) {
@@ -181,15 +180,28 @@ struct ProfileDetailScreenView: View {
     private var ImageViewSection: some View{
         HStack(spacing:15){
             ZStack {
-                Image(uiImage: selectedImage)
-                    .resizable()
-                    .frame(width: 68, height: 68)
-                    .clipShape(.rect(cornerRadius: 34))
-                    .padding(3)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 37)
-                            .stroke(.AEAEB_2, lineWidth: 1)
-                    )
+                if let selectedImage {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .frame(width: 68, height: 68)
+                        .clipShape(.rect(cornerRadius: 34))
+                        .padding(3)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 37)
+                                .stroke(.AEAEB_2, lineWidth: 1)
+                        )
+                }else{
+                    ImageLoadingView(imageURL: viewModel.personalDetail?.profilePictureUrl ?? "")
+                        .frame(width: 68, height: 68)
+                        .clipShape(.rect(cornerRadius: 34))
+                        .clipped()
+                        .padding(3)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 37)
+                                .stroke(.AEAEB_2, lineWidth: 1)
+                        )
+                }
+                
                 Image("edit")
                     .offset(x:22,y:-25)
             }

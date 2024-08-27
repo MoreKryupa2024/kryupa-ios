@@ -257,6 +257,8 @@ struct ExperienceandSkillsView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Area Of Expertise")
+                Text("*")
+                    .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             
@@ -291,7 +293,8 @@ struct ExperienceandSkillsView: View {
             HStack(spacing:0){
                 Text("Years of Experience")
                     .font(.custom(FontContent.plusMedium, size: 17))
-                
+                Text("*")
+                    .foregroundStyle(.red)
                 Spacer()
                 
                 HStack(spacing: 0){
@@ -335,6 +338,8 @@ struct ExperienceandSkillsView: View {
             if let title{
                 HStack(spacing:0){
                     Text(title)
+                    Text("*")
+                        .foregroundStyle(.red)
                 }
                 .font(.custom(FontContent.plusMedium, size: 17))
             }

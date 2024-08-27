@@ -91,8 +91,8 @@ struct PaymentOrderScreenView: View {
             Text(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? "Add & Pay" : "Confirm")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .foregroundStyle(.white)
-                .frame(height: 32)
-                .padding(.horizontal,8)
+                .frame(height: 35)
+                .padding(.horizontal,20)
                 .background{
                     RoundedRectangle(cornerRadius: 48)
                 }
@@ -116,7 +116,7 @@ struct PaymentOrderScreenView: View {
             Text("Cancel")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .foregroundStyle(.appMain)
-                .frame(height: 32)
+                .frame(height: 35)
                 .frame(width: 99)
                 .overlay(
                     RoundedRectangle(cornerRadius: 48)

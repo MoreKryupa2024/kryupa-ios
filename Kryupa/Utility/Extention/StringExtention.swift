@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 extension String{
     func validateMobile() -> Bool {
-        let PHONE_REGEX = "^[0-9+]{0,1}+[0-9]{5,16}$"
+        let PHONE_REGEX = "^[0-9+]{0,1}+[0-9]{9,9}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         let result = phoneTest.evaluate(with: self)
         return result

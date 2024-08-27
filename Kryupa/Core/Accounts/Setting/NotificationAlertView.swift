@@ -14,7 +14,7 @@ struct NotificationAlertView: View {
         ZStack{
             VStack {
                 HeaderView(title: "Notification Alert",showBackButton: true)
-                LazyVStack(spacing: 15) {
+                VStack(spacing: 15) {
                     ForEach(Array(viewModel.arrNotificationAlert.enumerated()), id: \.offset) { index, model in
                         
                         getNotificationCellView(title: model.title, toggleState: model.toggleState,index: index)

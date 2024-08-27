@@ -13,6 +13,7 @@ struct ChatView: View {
     @Environment(\.router) var router
     @State var userName: String = ""
     @State var sendMsgText: String = ""
+    @State var bookingCalled: Bool = true
     let notificatioSsetBookingId = NotificationCenter.default
     let notificatioSsetInboxId = NotificationCenter.default
     @StateObject var viewModel = ChatScreenViewModel()
@@ -41,7 +42,7 @@ struct ChatView: View {
                 }
                 
                 ScrollView(.vertical) {
-                    LazyVStack {
+                    VStack {
                         ForEach(Array(viewModel.messageList.enumerated()), id:\.element.id) {
                             (index,msg) in
                             
@@ -113,13 +114,20 @@ struct ChatView: View {
                 }
             }
         }
+        .onDisappear(perform: {
+            viewModel.selectedChat?.videoCallId = ""
+            viewModel.isPresented = false
+        })
     }
     
     private func setBookingIds(_ notification: Notification){
-        if let bookingid = notification.userInfo?["bookingId"] as? String {
-            viewModel.bookingId = bookingid
-            viewModel.isRecommended = false
-            viewModel.sendRequestForBookCaregiver()
+        if bookingCalled {
+            if let bookingid = notification.userInfo?["bookingId"] as? String {
+                viewModel.bookingId = bookingid
+                viewModel.isRecommended = false
+                bookingCalled = false
+                viewModel.sendRequestForBookCaregiver()
+            }
         }
     }
     

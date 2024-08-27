@@ -47,7 +47,7 @@ struct CareGiverNearByCustomerScreenView: View {
             
             SearchView
             
-            LazyVStack(spacing:0){
+            VStack(spacing:0){
                 ForEach(Array(viewModel.careGiverNearByList.enumerated()),id: \.element.id){ (index,giver) in
                     BookingCareGiverListView(careGiverNear: giver)
                         .padding(.top,15)

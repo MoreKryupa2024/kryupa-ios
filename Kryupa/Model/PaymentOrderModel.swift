@@ -37,7 +37,7 @@ struct PaymentOrderData {
 
     init(jsonData:[String:Any]){
         name = jsonData["name"] as? String ?? ""
-        walletBalance = (Double(jsonData["wallet_balance"] as? Int ?? 0))
+        walletBalance = (jsonData["wallet_balance"] as? Double ?? Double(jsonData["wallet_balance"] as? Int ?? Int(jsonData["wallet_balance"] as? String ?? "") ?? 0))
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
         bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
         approchID = jsonData["approch_id"] as? String ?? ""

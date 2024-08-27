@@ -16,7 +16,7 @@ class BookingViewModel: ObservableObject{
     @Published var pageNumber = 1
     
     func getBookings(){
-        bookingList = []
+//        bookingList = []
         isLoading = true
         //var param : [String : Any] = ["pageNumber":pageNumber,
         var param : [String : Any] = ["pageNumber":1,
@@ -28,14 +28,13 @@ class BookingViewModel: ObservableObject{
             case 1:
                 param["status"] = "Active"
             case 2:
-                param["status"] = "Completed"
-            case 3:
-                param["status"] = "Cancelled"
+                param["status"] = "Result"
             case 0:
                 param["status"] = "Open"
             default:
                 break
             }
+            print(param)
             NetworkManager.shared.getBookings(params: param) { [weak self] result in
                 
                 DispatchQueue.main.async {

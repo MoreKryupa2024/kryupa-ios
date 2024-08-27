@@ -46,7 +46,7 @@ struct WalletScreenView: View {
                             }
                             .padding(.top,30)
                         
-                        LazyVStack(spacing:0){
+                        VStack(spacing:0){
                             HStack(content: {
                                 Text("Transactions")
                                 Spacer()
