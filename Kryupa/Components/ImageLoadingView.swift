@@ -21,7 +21,7 @@ struct ImageLoadingView: View {
                 
                 image
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
 //                    .task {
 //                        do {
 //                            let _ = try await fetchImage(imageURL)
