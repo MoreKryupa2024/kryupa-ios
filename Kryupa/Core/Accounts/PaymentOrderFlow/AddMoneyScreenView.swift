@@ -16,7 +16,7 @@ struct AddMoneyScreenView: View {
         VStack(spacing:0){
             HeaderView(showBackButton: true)
             TextField(text: $viewModel.amount) {
-                Text("0.00")
+                Text("$0.00")
                     .foregroundStyle(._018_ABE)
             }
             .foregroundStyle(._018_ABE)

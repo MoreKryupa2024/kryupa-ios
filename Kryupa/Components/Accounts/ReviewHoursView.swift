@@ -37,6 +37,19 @@ struct ReviewHoursView: View {
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
             }
+            if AppConstants.SeekCare == Defaults().userType{
+                HStack {
+                    Text("Platform Fee:")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .foregroundStyle(.appMain)
+                    
+                    Spacer()
+                    
+                    Text("2%")
+                        .font(.custom(FontContent.plusRegular, size: 16))
+                        .foregroundStyle(.appMain)
+                }
+            }
             
             HStack {
                 Text("Total:")

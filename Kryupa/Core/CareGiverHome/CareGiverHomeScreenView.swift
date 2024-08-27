@@ -36,8 +36,6 @@ struct CareGiverHomeScreenView: View {
                             noCotentView
                             completeProfileView
                             
-                            
-                            
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
                                 if serviceStartData.serviceStatus == "confirm_by_customer" {
@@ -52,6 +50,10 @@ struct CareGiverHomeScreenView: View {
                             }
                             jobsNearYouView
                         }
+                        Image("GiverHomeFooter")
+                            .resizable()
+                            .aspectRatio(375/188, contentMode: .fit)
+                            .padding(.top,30)
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -219,7 +221,7 @@ struct CareGiverHomeScreenView: View {
     private var jobsNearYouGridView: some View{
         
         ScrollView(.horizontal) {
-            LazyHStack(spacing:1){
+            HStack(spacing:1){
                 ForEach(Array(viewModel.jobsNearYou.enumerated()), id: \.element.jobID) { (index,jobPost) in
                     CareGiverPortfolioView(job: jobPost, accept: {
                         viewModel.acceptRejectJob(approchID: jobPost.jobID, status: "Job Acceptance") {

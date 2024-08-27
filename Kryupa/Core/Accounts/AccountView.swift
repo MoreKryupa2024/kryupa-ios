@@ -141,7 +141,7 @@ struct AccountView: View {
             Image(model.image)
             
             Text(model.title)
-                .font(.custom(FontContent.plusRegular, size: 13))
+                .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(.appMain)
         }
         .padding(.horizontal, 24)

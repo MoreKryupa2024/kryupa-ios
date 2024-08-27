@@ -240,55 +240,40 @@ struct ProfileDetailScreenView: View {
                 Text(viewModel.personalDetail?.profileName ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                     .foregroundStyle(.appMain)
-                HStack(spacing:30){
-                    HStack {
-                        Image("bin")
-                        Text("Delete")
-                            .foregroundStyle(.FF_3_A_3_A)
-                    }
-                    HStack {
-                        Image("edit-two")
-                            .resizable()
-                            .frame(width: 17, height: 17)
-                            .font(.custom(FontContent.plusRegular, size: 17))
-                        
-                        Text("Edit")
-                            .font(.custom(FontContent.plusRegular, size: 16))
-                            .foregroundStyle(._7_C_7_C_80)
-                    }
-                    .asButton(.press) {
-                        
-                        let viewModelAddNewProfile = convertPersonalDetailModelToAddNewProfileModel()
-
-                        router.showScreen(.push) { rout in
+                
+                HStack {
+                    Image("edit-two")
+                        .resizable()
+                        .frame(width: 17, height: 17)
+                        .font(.custom(FontContent.plusRegular, size: 17))
                     
-                            AddNewProfileScreenView(viewModel: viewModelAddNewProfile)
-                        }
+                    Text("Edit")
+                        .font(.custom(FontContent.plusRegular, size: 16))
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .asButton(.press) {
+                    
+                    let viewModelAddNewProfile = convertPersonalDetailModelToAddNewProfileModel()
+                    
+                    router.showScreen(.push) { rout in
+                        
+                        AddNewProfileScreenView(viewModel: viewModelAddNewProfile)
                     }
                 }
+                
                 .asButton(.press) {
                     showingAlert = true
                 }
                 .alert("Are you sure you want to delete this profile?", isPresented: $showingAlert) {
-                        Button("Confirm", action: {
-                            viewModel.deleteProfile {
-                                router.showScreen(.push) { rout in
-                                    AccountView()
-                                }
+                    Button("Confirm", action: {
+                        viewModel.deleteProfile {
+                            router.showScreen(.push) { rout in
+                                AccountView()
                             }
-                        })
-                        Button("Cancel", role: .cancel, action: {})
-                    }
-
-//                .alert("Are you sure you want to delete this profile?", isPresented: $showingAlert) {
-//                    Button("Confirm", role: .cancel) {
-//                        viewModel.deleteProfile {
-//                            router.showScreen(.push) { rout in
-//                                AccountView()
-//                            }
-//                        }
-//                    }
-//                }
+                        }
+                    })
+                    Button("Cancel", role: .cancel, action: {})
+                }
             }
             Spacer()
         }

@@ -146,6 +146,17 @@ struct PaymentOrderScreenView: View {
                 Text((viewModel.paymentOrderData?.hours ?? 0).removeZerosFromEnd(num: 2))
                     .font(.custom(FontContent.plusRegular, size: 16))
             }
+            if AppConstants.SeekCare == Defaults().userType{
+                HStack {
+                    Text("Platform Fee:")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .foregroundStyle(.appMain)
+                    Spacer()
+                    Text("2%")
+                        .font(.custom(FontContent.plusRegular, size: 16))
+                        .foregroundStyle(.appMain)
+                }
+            }
             HStack{
                 Text("Total:")
                     .font(.custom(FontContent.plusLight, size: 15))

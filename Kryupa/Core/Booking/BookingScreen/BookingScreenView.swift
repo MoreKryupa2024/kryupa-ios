@@ -20,11 +20,50 @@ struct BookingScreenView: View {
                 if Defaults().userType == AppConstants.SeekCare{
                     SegmentView
                         .padding(.bottom,20)
-                    SeekerBookingView
+                    if viewModel.bookingList.isEmpty{
+                        VStack{
+                            Spacer()
+                            Image("BookingEmpty")
+                                .resizable()
+                                .aspectRatio(283/250, contentMode: .fit)
+                                .padding(.horizontal,46)
+                            switch viewModel.selectedSection{
+                            case 1:
+                                Text("Your Active List Looks Empty")
+                            case 2:
+                                Text("Your Closed List Looks Empty")
+                            default:
+                                Text("Your Draft List Looks Empty")
+                            }
+                            Spacer()
+                        }
+                    }else{
+                        SeekerBookingView
+                    }
                 }else{
                     GiverSegmentView
                         .padding(.bottom,20)
-                    GiverBookingView
+                    if viewModel.bookingList.isEmpty{
+                        VStack{
+                            Spacer()
+                            Image("BookingEmpty")
+                                .resizable()
+                                .aspectRatio(283/250, contentMode: .fit)
+                                .padding(.horizontal,46)
+                            switch viewModel.selectedSection{
+                            case 1:
+                                Text("Your Complete List Looks Empty")
+                            case 2:
+                                Text("Your Cancelled List Looks Empty")
+                            default:
+                                Text("Your Active List Looks Empty")
+                            }
+                            Spacer()
+                        }
+                            
+                        }else{
+                        GiverBookingView
+                    }
                 }
             }
             if viewModel.isLoading{
@@ -198,6 +237,7 @@ struct BookingScreenView: View {
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
 //            viewModel.pageNumber = 1
 //            viewModel.pagination = true
+            viewModel.bookingList = []
             viewModel.getBookings()
         })
     }
@@ -224,6 +264,7 @@ struct BookingScreenView: View {
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
 //            viewModel.pageNumber = 1
 //            viewModel.pagination = true
+            viewModel.bookingList = []
             viewModel.getBookings()
         })
     }

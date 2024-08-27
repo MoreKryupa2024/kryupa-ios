@@ -39,13 +39,13 @@ struct BannerView: View {
                         ForEach(assetsImage.indices, id: \.self) { index in
                             Circle()
                                 .frame(height: 6)
-                                .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
+                                .foregroundStyle(isSelectedView != index.id ? .D_1_D_1_D_6 : .appMain)
                         }
                     }else{
                         ForEach(banners.indices, id: \.self) { index in
                             Circle()
                                 .frame(height: 6)
-                                .foregroundStyle(isSelectedView == index.id ? .D_1_D_1_D_6 : .appMain)
+                                .foregroundStyle(isSelectedView != index.id ? .D_1_D_1_D_6 : .appMain)
                         }
                     }
                 }

@@ -13,26 +13,40 @@ struct JobListView: View {
     
     var body: some View {
         ZStack{
-            ScrollView {
+            VStack(spacing: 0) {
                 HeaderView()
-                VStack(spacing: 15) {
-                    ForEach(Array(viewModel.jobPost.enumerated()),id: \.element.jobID) {
-                        (index,data) in
-                        JobCell(jobPostData: data)
-                            .asButton(.press) {
-                                router.showScreen(.push) { rout in
-                                    JobDetailView(viewModel:viewModel, jobID: data.jobID)
-                                }
+                if viewModel.jobPost.count == 0{
+                    VStack{
+                        Spacer()
+                        Image("BookingEmpty")
+                            .resizable()
+                            .aspectRatio(283/268, contentMode: .fit)
+                            .padding(.horizontal,46)
+                        Text("Your Job List Looks Empty")
+                        Spacer()
+                    }
+                }else{
+                    ScrollView{
+                        VStack(spacing: 15) {
+                            ForEach(Array(viewModel.jobPost.enumerated()),id: \.element.jobID) {
+                                (index,data) in
+                                JobCell(jobPostData: data)
+                                    .asButton(.press) {
+                                        router.showScreen(.push) { rout in
+                                            JobDetailView(viewModel:viewModel, jobID: data.jobID)
+                                        }
+                                    }
+                                //                            .onAppear{
+                                //                                if (viewModel.jobPost.count - 1) == index && viewModel.pagination{
+                                //                                    viewModel.pageNumber += 1
+                                //                                    viewModel.getJobsList()
+                                //                                }
+                                //                            }
                             }
-//                            .onAppear{
-//                                if (viewModel.jobPost.count - 1) == index && viewModel.pagination{
-//                                    viewModel.pageNumber += 1
-//                                    viewModel.getJobsList()
-//                                }
-//                            }
+                        }
+                        .padding(.top, 24)
                     }
                 }
-                .padding(.top, 24)
             }
             .onAppear{
                 viewModel.pageNumber = 1

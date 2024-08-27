@@ -12,40 +12,67 @@ struct ReviewsListView: View {
     @State var selectedSection = 0
     @Environment(\.router) var router
     @StateObject private var viewModel = ReviewsViewModel()
-
+    
     var body: some View {
-        
-        ScrollView {
+        VStack(spacing:0){
             HeaderView(showBackButton: true)
             SegmentView
             
             if selectedSection == 0 {
-                VStack(spacing: 15) {
-                    ForEach(Array(viewModel.myReviewsList.enumerated()), id: \.offset) { index, model in
-                        
-                        ReviewCell(reviewData: model)
-                            .asButton(.press) {
-                                router.showScreen(.push) { rout in
-                                    ReviewDetailView(reviewID: model.reviewid)
-                                }
+                if viewModel.myReviewsList.count == 0{
+                    VStack{
+                        Spacer()
+                        Image("ReviewEmpty")
+                            .resizable()
+                            .aspectRatio(283/268, contentMode: .fit)
+                            .padding(.horizontal,46)
+                        Text("Your Review List Looks Empty")
+                        Spacer()
+                    }
+                }else{
+                    ScrollView {
+                        VStack(spacing: 15) {
+                            ForEach(Array(viewModel.myReviewsList.enumerated()), id: \.offset) { index, model in
+                                
+                                ReviewCell(reviewData: model)
+                                    .asButton(.press) {
+                                        router.showScreen(.push) { rout in
+                                            ReviewDetailView(reviewID: model.reviewid)
+                                        }
+                                    }
                             }
+                        }
+                        .padding(.top, 20)
                     }
                 }
-                .padding(.top, 20)
             }
             else {
-                VStack(spacing: 15) {
-                    ForEach(Array(viewModel.givenReviewsList.enumerated()), id: \.offset) { index, model in
-                        
-                        ReviewCell(reviewData: model)
-                            .asButton(.press) {
-                                router.showScreen(.push) { rout in
-                                    ReviewDetailView(reviewID: model.reviewid)
-                                }
+                if viewModel.givenReviewsList.count == 0{
+                    VStack{
+                        Spacer()
+                        Image("ReviewEmpty")
+                            .resizable()
+                            .aspectRatio(283/268, contentMode: .fit)
+                            .padding(.horizontal,46)
+                        Text("Your Review List Looks Empty")
+                        Spacer()
+                    }
+                }else{
+                    ScrollView {
+                        VStack(spacing: 15) {
+                            ForEach(Array(viewModel.givenReviewsList.enumerated()), id: \.offset) { index, model in
+                                
+                                ReviewCell(reviewData: model)
+                                    .asButton(.press) {
+                                        router.showScreen(.push) { rout in
+                                            ReviewDetailView(reviewID: model.reviewid)
+                                        }
+                                    }
                             }
+                        }
+                        .padding(.top, 20)
                     }
                 }
-                .padding(.top, 20)
             }
         }
         .scrollIndicators(.hidden)

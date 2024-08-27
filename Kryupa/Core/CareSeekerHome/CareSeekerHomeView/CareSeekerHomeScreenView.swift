@@ -51,6 +51,11 @@ struct CareSeekerHomeScreenView: View {
                         RecommendedGiverView
                             .padding(.top,30)
                     }
+                    
+                    Image("SeekerHomeFooter")
+                        .resizable()
+                        .aspectRatio(375/188, contentMode: .fit)
+                        .padding(.top,30)
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
@@ -90,11 +95,11 @@ struct CareSeekerHomeScreenView: View {
         VStack(spacing:10){
             HStack{
                 Text("Recommended Caregiver")
-                    .font(.custom(FontContent.plusMedium, size: 15))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
                     Text("See All")
-                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(._7_C_7_C_80)
                         .asButton(.press) {
                             router.showScreen(.push) { rout in
@@ -123,11 +128,11 @@ struct CareSeekerHomeScreenView: View {
         VStack(spacing:10){
             HStack{
                 Text("Upcoming Appointments")
-                    .font(.custom(FontContent.plusMedium, size: 15))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
                     Text("See All")
-                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(._7_C_7_C_80)
                         .asButton(.press) {
                             let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 1]
@@ -149,11 +154,11 @@ struct CareSeekerHomeScreenView: View {
         VStack(spacing:10){
             HStack{
                 Text("Past Appointments")
-                    .font(.custom(FontContent.plusMedium, size: 15))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
                     Text("See All")
-                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(._7_C_7_C_80)
                         .asButton(.press) {
                             let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 2]

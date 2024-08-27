@@ -19,51 +19,65 @@ struct PaymentListView: View {
             VStack(spacing:0) {
                 HeaderView(showBackButton: true)
                 SegmentView
-                ScrollView {
+                
                     if viewModel.selectedSection == 0 {
-                        VStack(spacing: 15) {
-                            ForEach(viewModel.orderListData,id: \.id) { msg in
-                                PaymentHistoryCell(orderListData: msg)
+                        if viewModel.orderListData.count == 0{
+                            VStack{
+                                Spacer()
+                                Image("PaymentEmpty")
+                                    .resizable()
+                                    .aspectRatio(283/268, contentMode: .fit)
+                                    .padding(.horizontal,46)
+                                Text("Your Transaction List Looks Empty")
+                                Spacer()
+                            }
+                        }else{
+                            ScrollView {
+                                VStack(spacing: 15) {
+                                    ForEach(viewModel.orderListData,id: \.id) { msg in
+                                        PaymentHistoryCell(orderListData: msg)
+                                    }
+                                }
+                                .padding(.top, 20)
                             }
                         }
-                        .padding(.top, 20)
                     }
                     else {
-                        
-                        if viewModel.showAddBankView {
-                            BankView
-                        } else {
-                            VStack(spacing: 15) {
-                                ForEach(viewModel.bankListData,id: \.id) { item in
-                                    PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
+                        ScrollView {
+                            if viewModel.showAddBankView {
+                                BankView
+                            } else {
+                                VStack(spacing: 15) {
+                                    ForEach(viewModel.bankListData,id: \.id) { item in
+                                        PaymentMethodCell(bankListData:item,tag: 0, selectedPaymentMethod: self.$viewModel.selectedPaymentMethod)
+                                    }
+                                }
+                                .padding(.top, 20)
+                                
+                                HStack {
+                                    Text("Add new bank account")
+                                        .font(.custom(FontContent.plusRegular, size: 15))
+                                        .foregroundStyle(._444446)
+                                    
+                                    Spacer()
+                                    
+                                    Image("chevron-right")
+                                        .frame(width: 30, height: 30)
+                                    
+                                }
+                                .padding(.horizontal, 23)
+                                .frame(height: 48)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .inset(by: 1)
+                                        .stroke(.E_5_E_5_EA, lineWidth: 1)
+                                )
+                                .padding([.top, .horizontal], 24)
+                                .asButton(.press) {
+                                    self.viewModel.showAddBankView = true
                                 }
                             }
-                            .padding(.top, 20)
-                            
-                            HStack {
-                                Text("Add new bank account")
-                                    .font(.custom(FontContent.plusRegular, size: 15))
-                                    .foregroundStyle(._444446)
-                                
-                                Spacer()
-                                
-                                Image("chevron-right")
-                                    .frame(width: 30, height: 30)
-                                
-                            }
-                            .padding(.horizontal, 23)
-                            .frame(height: 48)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 50)
-                                    .inset(by: 1)
-                                    .stroke(.E_5_E_5_EA, lineWidth: 1)
-                            )
-                            .padding([.top, .horizontal], 24)
-                            .asButton(.press) {
-                                self.viewModel.showAddBankView = true
-                            }
                         }
-                    }
                 }
             }
             .onAppear{

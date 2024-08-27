@@ -18,29 +18,32 @@ struct InboxScreenView: View {
         ZStack{
             VStack(spacing:20){
                 HeaderView(title: "Messages")
-                
-                ScrollView{
-                    ForEach(Array(viewModel.inboxList.enumerated()),id: \.element.id) { (index,profileData) in
-                        SenderView(profile: profileData)
-                            .asButton(.press) {
-                                let viewModelChat = ChatScreenViewModel()
-                                viewModelChat.selectedChat = profileData
-                                router.showScreen(.push) { rout in
-                                    ChatView(userName: profileData.name,viewModel: viewModelChat)
-                                }
-                            }
-//                            .onAppear{
-//                                if ((viewModel.inboxList.count-1) == index) && viewModel.pagination{
-//                                    viewModel.pageNumber += 1
-//                                    viewModel.getInboxList()
-//                                }
-//                            }
-                            SepratorView
+                if viewModel.inboxList.count == 0{
+                    VStack{
+                        Spacer()
+                        Image("InboxEmpty")
+                            .resizable()
+                            .aspectRatio(283/268, contentMode: .fit)
+                            .padding(.horizontal,46)
+                        Text("There Are No New Messages")
+                        Spacer()
                     }
-                }
-                .scrollIndicators(.hidden)
+                }else{
+                    ScrollView{
+                        ForEach(Array(viewModel.inboxList.enumerated()),id: \.element.id) { (index,profileData) in
+                            SenderView(profile: profileData)
+                                .asButton(.press) {
+                                    let viewModelChat = ChatScreenViewModel()
+                                    viewModelChat.selectedChat = profileData
+                                    router.showScreen(.push) { rout in
+                                        ChatView(userName: profileData.name,viewModel: viewModelChat)
+                                    }
+                                }
+                            SepratorView
+                        }
+                    }
+                    .scrollIndicators(.hidden)}
             }
-            
             if viewModel.isLoading{
                 LoadingView()
             }

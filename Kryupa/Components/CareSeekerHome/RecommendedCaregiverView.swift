@@ -15,8 +15,7 @@ struct RecommendedCaregiverView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing:10){
-//                ForEach(recommendedCaregiver,id: \.id) { index in
+            HStack(spacing:10){
                 ForEach(recommendedCaregiver, id: \.id) { careData in
                     
                     VStack(spacing:0){
@@ -28,7 +27,7 @@ struct RecommendedCaregiverView: View {
                         
                         HStack(spacing:2){
                             Text(careData.name)
-                                .font(.custom(FontContent.plusMedium, size: 13))
+                                .font(.custom(FontContent.plusMedium, size: 15))
                                 .lineLimit(1)
                             Spacer()
                             Image(systemName: "star.fill")
@@ -40,14 +39,14 @@ struct RecommendedCaregiverView: View {
                         .padding(.top,5)
                         
                         Text("(\(careData.arrayAgg.joined(separator: ", "))")
-                            .font(.custom(FontContent.plusRegular, size: 11))
+                            .font(.custom(FontContent.plusRegular, size: 13))
                             .multilineTextAlignment(.center)
                             .foregroundStyle(._444446)
                             .padding(.top,10)
                             .lineLimit(1)
                         
                         Text("View Profile")
-                            .font(.custom(FontContent.plusRegular, size: 13))
+                            .font(.custom(FontContent.plusRegular, size: 15))
                             .foregroundStyle(.white)
                             .padding(.horizontal,20)
                             .padding(.vertical,8)

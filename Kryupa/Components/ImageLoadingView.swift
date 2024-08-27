@@ -13,24 +13,9 @@ struct ImageLoadingView: View {
     
     var body: some View {
         AsyncImage(url: URL(string: imageURL),content: { image in
-//            if let cachedImage = Self.cache.object(forKey: imageURL as NSString){
-//                Image(uiImage: cachedImage)
-//                    .resizable()
-//                    .scaledToFit()
-//            }else{
-                
                 image
                     .resizable()
                     .scaledToFill()
-//                    .task {
-//                        do {
-//                            let _ = try await fetchImage(imageURL)
-//                            print("image save")
-//                        } catch { //never gets caught
-//                            print("Image not saved \(error.localizedDescription)")
-//                        }
-//                    }
-//            }
         },placeholder: {
             Image("placeholderImage")
                 .resizable()

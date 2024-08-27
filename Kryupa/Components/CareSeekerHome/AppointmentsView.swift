@@ -16,7 +16,7 @@ struct AppointmentsView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing:10){
+            HStack(spacing:10){
                 ForEach(appointmentList,id: \.id) { data in
                     
                     VStack(spacing:0){
@@ -31,13 +31,13 @@ struct AppointmentsView: View {
                                     .font(.custom(FontContent.besMedium, size: 17))
                                     .frame(maxWidth:.infinity,alignment: .leading)
                                 Text("For \(data.relation)")
-                                    .font(.custom(FontContent.plusRegular, size: 11))
+                                    .font(.custom(FontContent.plusRegular, size: 13))
                                     .foregroundStyle(._7_C_7_C_80)
                             }
                             .lineLimit(1)
                             
                             Text("$\(data.price.removeZerosFromEnd())")
-                                .font(.custom(FontContent.plusMedium, size: 11))
+                                .font(.custom(FontContent.plusMedium, size: 13))
                                 .foregroundStyle(data.status != "Job Cancelled" ? .green : .red)
                                 .padding(.vertical,5)
                                 .padding(.horizontal,10)
@@ -55,9 +55,9 @@ struct AppointmentsView: View {
                         HStack(spacing:5){
                             Image("clock")
                                 .resizable()
-                                .frame(width: 18,height: 18)
+                                .frame(width: 22,height: 22)
                             Text("\(data.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(data.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
-                                .font(.custom(FontContent.plusRegular, size: 12))
+                                .font(.custom(FontContent.plusRegular, size: 15))
                                 .foregroundStyle(._444446)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -65,10 +65,10 @@ struct AppointmentsView: View {
                         HStack(spacing:5){
                             Image("calender")
                                 .resizable()
-                                .frame(width: 18,height: 18)
+                                .frame(width: 22,height: 22)
                             
                             Text("\(data.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))")
-                                .font(.custom(FontContent.plusRegular, size: 12))
+                                .font(.custom(FontContent.plusRegular, size: 15))
                                 .foregroundStyle(._444446)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }

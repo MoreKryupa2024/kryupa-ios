@@ -21,7 +21,7 @@ struct ChatView: View {
     var body: some View {
         ZStack{
             
-            VStack(spacing:20){
+            VStack(spacing:0){
                 //HeaderView
                 usernameView
                 if Defaults().userType == AppConstants.SeekCare{
@@ -74,6 +74,9 @@ struct ChatView: View {
                 .scrollIndicators(.hidden)
                 sendMessageView
             }
+            .background(
+                Image("ChatBackground")
+            )
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
             .task{
@@ -279,7 +282,10 @@ struct ChatView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
         }
+        .background(.white)
         .padding(.horizontal,25)
+        .padding(.top,10)
+        
     }
     
     private var sendMessageView: some View{
@@ -335,6 +341,8 @@ struct ChatView: View {
             
         }
         .padding(.horizontal, 20)
+        .padding(.top, 10)
+        .background(.white)
     }
     
     private var requestView: some View{
@@ -390,7 +398,6 @@ struct ChatView: View {
                 .asButton(.press) {
                     viewModel.disconnect()
                     router.dismissScreen()
-//                    notificatioSsetInboxId.post(name: .showInboxScreen, object: nil)
                 }
             
             Text(userName)
@@ -408,8 +415,8 @@ struct ChatView: View {
             }
         }
         .padding(.horizontal, 24)
-        
-        
+        .padding(.bottom, 10)
+        .background(.white)
     }
     
     private var HeaderView: some View{

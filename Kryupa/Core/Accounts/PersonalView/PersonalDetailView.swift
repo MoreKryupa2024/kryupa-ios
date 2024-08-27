@@ -347,7 +347,7 @@ struct PersonalDetailView: View {
                             .offset(x:18,y:-25)
                     }
                 )
-                .onTapGesture {
+                .asButton {
                     showsAlertForImageUpload.toggle()
                 }
                 .actionSheet(isPresented: $showsAlertForImageUpload) {
