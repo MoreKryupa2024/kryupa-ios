@@ -10,10 +10,10 @@ import SwiftUI
 @MainActor
 class PreferenceCareSeekarViewModel: ObservableObject{
     
-    @Published var yearsOfExperienceSelected: String = String()
+    @Published var yearsOfExperienceSelected: String = "Any"
     @Published var genderSelected: String = String()
     @Published var needServiceInSelected: [String] = [String]()
-    @Published var languageSpeakingSelected: [String] = [String]()
+    @Published var languageSpeakingSelected: [String] = ["English"]
     @Published var isLoading:Bool = false
     @Published var showPreference:Bool = false
     

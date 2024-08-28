@@ -40,8 +40,10 @@ struct WalletScreenView: View {
                                 RoundedRectangle(cornerRadius: 48)
                             }
                             .asButton(.press) {
+                                let addMoneyViewModel = PaymentViewModel()
+                                addMoneyViewModel.walletAmountData = viewModel.walletAmountData
                                 router.showScreen(.push) { rout in
-                                    AddMoneyScreenView()
+                                    AddMoneyScreenView(viewModel: addMoneyViewModel)
                                 }
                             }
                             .padding(.top,30)

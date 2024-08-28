@@ -16,13 +16,13 @@ struct PersonalGiverModel: Codable {
 
 // MARK: - DataClass
 struct PersonalGiverData: Codable {
-    let id, caregiverID, profileID, name: String
+    let id, caregiverID, profileID, name, email, dob: String
     let gender, ssnVerificationStatus, interviewStatus, bgvStatus, profilePictureUrl: String?
     var expertise: Expertise
     let additionalRequirements, preferredLanguages: [String]
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case id,email,dob
         case caregiverID = "caregiver_id"
         case profileID = "profile_id"
         case name, gender

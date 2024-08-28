@@ -33,11 +33,11 @@ class BookingFormScreenViewModel: ObservableObject{
     var bookingID: String = Defaults().bookingId
     @Published var bookingIDData: BookingIDData?
     
-    @Published var languageSpeakingSelected: [String] = [String]()
+    @Published var languageSpeakingSelected: [String] = ["English"]
     @Published var needServiceInSelected: [String] = [String]()
     @Published var additionalInfoSelected: [String] = [String]()
     @Published var additionalSkillsSelected: [String] = [String]()
-    @Published var yearsOfExperienceSelected: String = String()
+    @Published var yearsOfExperienceSelected: String = "Any"
     @Published var isloading: Bool = Bool()
     @Published var isRecommended: Bool = false
     @Published var recommendedUserBookingData: RecommendedUserBookingData?

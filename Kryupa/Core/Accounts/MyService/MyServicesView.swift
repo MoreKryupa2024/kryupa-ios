@@ -16,13 +16,38 @@ struct MyServicesView: View {
         ZStack{
             
             VStack(spacing:0){
-                HeaderView(title: "My Services",showBackButton: true)
-                ScrollView {
-                    AreaOfExpertiseView
-                    line
-                    MySkillsView
-                    BottomButtonView
+                HeaderView(showBackButton: true)
+                SegmentView
+                    .padding(.top, 10)
+                    .padding(.bottom, 30)
+                switch viewModel.selectedSection{
+                case 1:
+                    ScrollView{
+                        VStack(spacing:0){
+                            VStack(spacing: 20,
+                                   content: {
+                                
+                                mobilityLevelView
+                                languageSpeakingView
+                                distanceView
+                                BottomButtonView
+                            })
+                            .padding(.top,10)
+                            .padding([.leading,.trailing],24)
+                        }
+                    }
+                    .scrollIndicators(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
+
+                default:
+                    ScrollView {
+                        AreaOfExpertiseView
+                        line
+                        MySkillsView
+                        BottomButtonView
+                    }
                 }
+                
             }
             .toolbar(.hidden, for: .navigationBar)
             
@@ -33,6 +58,122 @@ struct MyServicesView: View {
         .task {
             viewModel.getMyService()
         }
+    }
+    
+    private var mobilityLevelView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Mobility Level")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 17))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.mobilityLevel,
+                placeHolder: "Select",
+                values: AppConstants.mobilityLevelArray) { value in
+                    viewModel.mobilityLevel = value
+                }
+        })
+    }
+    
+    private var languageSpeakingView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Language Preference")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                    
+                    if let languageSpeakingArray{
+                        HStack(spacing:0){
+                            CheckBoxView(
+                                isSelected: !viewModel.languageSpeakingSelected.contains(languageSpeakingArray),
+                                name: languageSpeakingArray
+                            )
+                            .opacity(AppConstants.languageSpeakingArray.last == languageSpeakingArray ? 0 : 1)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                            .asButton(.press) {
+                                if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
+                                    viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
+                                }else{
+                                    if viewModel.languageSpeakingSelected.count < 5{
+                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+    }
+    
+    private var distanceView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Distance")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 17))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.distance,
+                placeHolder: "Select",
+                values: AppConstants.distanceArray) { value in
+                    viewModel.distance = value
+                }
+        })
+    }
+    
+    
+    private var SegmentView: some View{
+        
+        HStack(spacing: 0) {
+            SegmentTextView(title: "My Services", select: viewModel.selectedSection == 0)
+                .asButton {
+                    viewModel.selectedSection = 0
+                }
+            SegmentTextView(title: "My Preferences", select: viewModel.selectedSection == 1)
+                .asButton {
+                    viewModel.selectedSection = 1
+                }
+        }
+        .padding(2)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.E_5_E_5_EA)
+        )
+        .padding(.horizontal, 24)
+        .padding(.top, 20)
+    }
+    
+    private func SegmentTextView(title: String, select: Bool) -> some View{
+        Text(title)
+            .foregroundStyle((select ? .appMain : ._7_C_7_C_80))
+            .frame(maxWidth: .infinity)
+            .font(.custom(FontContent.plusMedium, size: 12))
+            .frame(height: 30)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .foregroundStyle(select ? .white : .E_5_E_5_EA)
+            )
     }
     
     private var BottomButtonView: some View{
@@ -77,7 +218,7 @@ struct MyServicesView: View {
             HStack(spacing:0){
                 Text("My Skills")
             }
-            .font(.custom(FontContent.plusRegular, size: 17))
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             ZStack{
@@ -119,9 +260,11 @@ struct MyServicesView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Area of expertise")
-                    .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(.appMain)
+                Text("*")
+                    .foregroundStyle(.red)
             }
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             ZStack{
                 NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: viewModel.areaOfExpertiseList) { service in

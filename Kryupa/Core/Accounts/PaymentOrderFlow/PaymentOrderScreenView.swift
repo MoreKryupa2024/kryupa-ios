@@ -26,7 +26,7 @@ struct PaymentOrderScreenView: View {
                                 .resizable()
                                 .frame(width: 24,height: 24)
                             Text("Your current wallet balance is $\((viewModel.paymentOrderData?.walletBalance ?? 0).removeZerosFromEnd(num: 2))")
-                                .font(.custom(FontContent.plusMedium, size: 13))
+                                .font(.custom(FontContent.plusMedium, size: 15))
                         }
                         .padding(.top,15)
                         .foregroundStyle(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? .red : .green)

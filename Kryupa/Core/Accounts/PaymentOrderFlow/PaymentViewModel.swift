@@ -18,7 +18,7 @@ class PaymentViewModel: ObservableObject{
     @Published var showPaypal: Bool = false
     @Published var fromPaymentFlow: Bool = false
     @Published var orderId: String = ""
-    @Published var amount: String = String()
+    @Published var amount: String = "0.00"
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
     

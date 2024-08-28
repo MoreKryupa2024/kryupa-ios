@@ -27,6 +27,10 @@ struct PersonalDetailView: View {
             
             ScrollView(showsIndicators: false){
                 HeaderTopView
+                PersonalInfoSection
+                    .padding(.horizontal,24)
+                    .padding(.top,20)
+                line
                 textFieldViewWithHeader(
                     title: "Bio",
                     placeHolder: "Input text",
@@ -39,8 +43,6 @@ struct PersonalDetailView: View {
                 AdditionalInfoView.disabled(!editProfile)
                 line
                 QualificationView
-                //            line
-                //            EducationDropdownView
                 
                 if editProfile {
                     languageDropdownView.disabled(!editProfile)
@@ -65,6 +67,36 @@ struct PersonalDetailView: View {
             if viewModel.isloading{
                 LoadingView()
             }
+        }
+    }
+    
+    private func TitleTextView(title: String, value: String)-> some View{
+        HStack(spacing:0){
+            Text(title)
+                .font(.custom(FontContent.plusRegular, size: 15))
+                .foregroundStyle(.appMain)
+
+                
+            Spacer()
+            
+            Text(value)
+                .font(.custom(FontContent.plusRegular, size: 15))
+                .foregroundStyle(._7_C_7_C_80)
+        }
+        .font(.custom(FontContent.plusRegular, size: 15))
+    }
+    
+    private var PersonalInfoSection: some View{
+        VStack(spacing:10){
+            HStack(spacing:0){
+                Text("Personal Info")
+                    .font(.custom(FontContent.plusMedium, size: 17))
+                    .foregroundStyle(.appMain)
+                Spacer()
+            }
+            .padding(.bottom,5)
+            TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
+            TitleTextView(title: "DOB:", value: (viewModel.personalDetail?.dob ?? "").convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM YYYY"))
         }
     }
     
@@ -291,23 +323,20 @@ struct PersonalDetailView: View {
                 }
                 .font(.custom(FontContent.plusMedium, size: 17))
             }
-            TextField(text: value, axis: .vertical) {
-                Text(placeHolder)
-                    .foregroundStyle(._7_C_7_C_80)
-            }
-            .lineLimit(3)
-            .frame(height: 48)
-            .keyboardType(keyboard)
+            TextEditor(text: value)
+            .frame(height: 120)
+            .keyboardType(.asciiCapable)
             .font(.custom(FontContent.plusRegular, size: 15))
-            .padding([.horizontal],10)
+            .padding([.leading,.trailing],10)
             .background {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(lineWidth: 1)
                     .foregroundStyle(.D_1_D_1_D_6)
-                    .frame(height: 48)
+                    .frame(height: 125)
             }
         })
-        .padding([.top, .horizontal],24)
+        .padding(.horizontal,24)
+        .padding(.top,24)
 
     }
     

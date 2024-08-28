@@ -96,6 +96,7 @@ struct CareGiverHomeScreenView: View {
         }
         .padding(.horizontal,25)
         .padding(.vertical,5)
+        .padding(.top,10)
     }
     
     private var noCotentView: some View{

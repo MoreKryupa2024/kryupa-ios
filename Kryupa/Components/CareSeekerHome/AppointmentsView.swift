@@ -11,7 +11,7 @@ import SwiftfulUI
 struct AppointmentsView: View {
     
     var appointmentList: [BookingsListData] = [BookingsListData]()
-    let viewWidth:CGFloat = CGFloat((UIScreen.screenWidth - (80)))
+    let viewWidth:CGFloat = CGFloat((UIScreen.screenWidth - (50)))
     var selecatedAction:((BookingsListData)->Void)
     
     var body: some View {
