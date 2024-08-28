@@ -126,8 +126,8 @@ struct CareGiverNearByCustomerScreenView: View {
                         router.dismissScreen()
                     }
                 Spacer()
-                Image("NotificationBellIcon")
-                    .frame(width: 25,height: 25)
+//                Image("NotificationBellIcon")
+//                    .frame(width: 25,height: 25)
             }
             .padding(.horizontal,24)
         }

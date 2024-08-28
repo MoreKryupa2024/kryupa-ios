@@ -15,7 +15,7 @@ struct ChatView: View {
     @State var sendMsgText: String = ""
     @State var bookingCalled: Bool = true
     let notificatioSsetBookingId = NotificationCenter.default
-    let notificatioSsetInboxId = NotificationCenter.default
+
     @StateObject var viewModel = ChatScreenViewModel()
     
     var body: some View {
@@ -81,16 +81,8 @@ struct ChatView: View {
             .toolbar(.hidden, for: .navigationBar)
             .task{
                 viewModel.pageNumber = 1
-                viewModel.connect()
-                DispatchQueue.main.async {
-                    viewModel.receiveMessage { msgData, str in
-                        viewModel.messageList = [msgData] + viewModel.messageList
-                    }
-                }
                 viewModel.getChatHistory()
                 viewModel.VideoCallData()
-                notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
-                                                             using: self.setBookingIds)
             }
             
             
@@ -121,17 +113,6 @@ struct ChatView: View {
             viewModel.selectedChat?.videoCallId = ""
             viewModel.isPresented = false
         })
-    }
-    
-    private func setBookingIds(_ notification: Notification){
-        if bookingCalled {
-            if let bookingid = notification.userInfo?["bookingId"] as? String {
-                viewModel.bookingId = bookingid
-                viewModel.isRecommended = false
-                bookingCalled = false
-                viewModel.sendRequestForBookCaregiver()
-            }
-        }
     }
     
     private var videoCallView: some View{
@@ -417,27 +398,6 @@ struct ChatView: View {
         .padding(.horizontal, 24)
         .padding(.bottom, 10)
         .background(.white)
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        
-                    }
-                Spacer()
-                Image("NotificationBellIcon")
-                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
     }
 }
 

@@ -59,6 +59,9 @@ struct CareSeekerHomeScreenView: View {
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
+//                .refreshable {
+//                    viewModel.customerSvcAct()
+//                }
             }
             if viewModel.isloading{
                 LoadingView()
@@ -72,6 +75,7 @@ struct CareSeekerHomeScreenView: View {
             viewModel.customerSvcAct()
 //            viewModel.getBannerBottomData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
         }
+        
     }
     
     private func serviceView()-> some View{
@@ -210,8 +214,8 @@ struct CareSeekerHomeScreenView: View {
             
             HStack{
                 Spacer()
-                Image("NotificationBellIcon")
-                    .frame(width: 25,height: 25)
+//                Image("NotificationBellIcon")
+//                    .frame(width: 25,height: 25)
             }
             .padding(.horizontal,24)
         }

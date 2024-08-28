@@ -58,6 +58,9 @@ struct CareGiverHomeScreenView: View {
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
+//                .refreshable {
+//                    viewModel.caregiverSvcAct()
+//                }
             }
             .onAppear{
                 viewModel.getBannerTopData(screenName: AppConstants.CAREGIVERHOMETOPScreenBanner)
@@ -156,8 +159,8 @@ struct CareGiverHomeScreenView: View {
             
             HStack{
                 Spacer()
-                Image("NotificationBellIcon")
-                    .frame(width: 25,height: 25)
+//                Image("NotificationBellIcon")
+//                    .frame(width: 25,height: 25)
             }
             .padding(.horizontal,24)
         }
@@ -197,12 +200,12 @@ struct CareGiverHomeScreenView: View {
         VStack(spacing:10){
             HStack{
                 Text("Jobs Near You")
-                    .font(.custom(FontContent.plusRegular, size: 15))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .foregroundColor(Color("242426"))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
                 Text("See All")
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
                     .asButton(.press) {
                         NotificationCenter.default.post(name: .showJobsScreen,

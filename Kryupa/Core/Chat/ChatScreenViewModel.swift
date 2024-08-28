@@ -19,11 +19,9 @@ class ChatScreenViewModel: ObservableObject{
     static let shared = ChatScreenViewModel()
     var meetingTokenData: BGVInterviewMeetingTokenData?
     @Published var isLoading = Bool()
-//    @Published var showVideoCallView = Bool()
     @Published var isRecommended = Bool()
     @Published var normalBooking = Bool()
-//    @Published var bookingDeclineView = Bool()
-//    @Published var showPayViewView = Bool()
+    let notificatioSsetBookingId = NotificationCenter.default
     @Published var paySpecialMessageData: SpecialMessageData?
     @Published var bookingId = String()
     @Published var pagination: Bool = true
@@ -33,6 +31,20 @@ class ChatScreenViewModel: ObservableObject{
     init(){
         self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.baseURL)/")!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
+        connect()
+        receiveMessage { msgData, str in
+            self.messageList = [msgData] + self.messageList
+        }
+        notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
+                                                     using: self.setBookingIds)
+    }
+    
+    private func setBookingIds(_ notification: Notification) {
+        if let bookingid = notification.userInfo?["bookingId"] as? String {
+            bookingId = bookingid
+            isRecommended = false
+            sendRequestForBookCaregiver()
+        }
     }
     
     func sendRequestForBookCaregiver(){
@@ -235,6 +247,7 @@ class ChatScreenViewModel: ObservableObject{
     func receiveMessage(_ completion: @escaping (MessageData, String) -> Void) {
         socket.on("message_receive") { [weak self] data, _ in
             if let typeDict = data[0] as? NSDictionary {
+                print(typeDict)
                 var senderId = String()
                 var recipientId = String()
                 if Defaults().userType == AppConstants.GiveCare{
@@ -246,7 +259,6 @@ class ChatScreenViewModel: ObservableObject{
                 }
                 let message = typeDict.value(forKey: "message") as? String ?? ""
                 let actionButton = typeDict.value(forKey: "is_action_btn") as? Bool ?? false
-                print(message)
                 HapticManager.sharde.impact(style: .heavy)
                 let msgData = MessageData(jsonData: [
                     "id": "\(UUID())",
@@ -259,7 +271,4 @@ class ChatScreenViewModel: ObservableObject{
             }
         }
     }
-    
-    
-    
 }

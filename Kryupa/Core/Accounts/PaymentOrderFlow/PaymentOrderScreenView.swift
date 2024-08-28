@@ -29,7 +29,7 @@ struct PaymentOrderScreenView: View {
                                 .font(.custom(FontContent.plusMedium, size: 13))
                         }
                         .padding(.top,15)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? .red : .green)
                         
                         VStack(alignment:.leading,spacing:5){
                             if let startDate = viewModel.paymentOrderData?.startDate, let endDate = viewModel.paymentOrderData?.endDate{

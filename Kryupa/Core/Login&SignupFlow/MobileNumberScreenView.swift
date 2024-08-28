@@ -33,11 +33,15 @@ struct MobileNumberScreenView: View {
                     mobileNumberHeaderTitleView
                     
                     mobileNumberFieldView
-                    
+                        .onChange(of: viewModel.mobileNumner) { oldValue, newValue in
+                            if viewModel.mobileNumner.count > 10{
+                                viewModel.mobileNumner.removeLast()
+                            }
+                        }
                     sendCodeButton
                         .padding(.top,50)
                         .asButton(.press) {
-                            if "+1\(viewModel.mobileNumner)".validateMobile(){
+                            if viewModel.mobileNumner.validateMobile(){
                                 viewModel.sendOTP {
                                     router.showScreen(.push) { _ in
                                         OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner,requestId: viewModel.sendOTPdata?.requestID ?? "")
@@ -48,6 +52,8 @@ struct MobileNumberScreenView: View {
 //                                    }
                                     presentAlert(title: "Kruypa", subTitle: error)
                                 }
+                            }else{
+                                presentAlert(title: "Kruypa", subTitle: "Please Enter 10-Digit Mobile No.")
                             }
                         }
                     

@@ -134,6 +134,11 @@ struct EmergencyContactView: View {
             .foregroundStyle(.D_1_D_1_D_6)
         }
         .frame(height: 44)
+        .onChange(of: viewModel.number) { oldValue, newValue in
+            if viewModel.number.count > 10{
+                viewModel.number.removeLast()
+            }
+        }
     }
     
     

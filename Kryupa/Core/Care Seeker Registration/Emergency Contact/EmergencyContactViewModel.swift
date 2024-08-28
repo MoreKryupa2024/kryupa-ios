@@ -24,7 +24,7 @@ class EmergencyContactViewModel: ObservableObject{
         }else if !email.isValidEmail() {
             return alert("Please Enter Email")
         }else if !number.validateMobile(){
-            return alert("Please Enter Mobile No.")
+            return alert("Please Enter 10-Digit Mobile No.")
         }else{
              var param = [String:Any]()
              param = [

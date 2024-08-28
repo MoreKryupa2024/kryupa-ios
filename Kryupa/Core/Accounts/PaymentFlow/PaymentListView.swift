@@ -169,18 +169,39 @@ struct PaymentListView: View {
     
     private var SegmentView: some View{
         
-        Picker("Payment", selection: $viewModel.selectedSection) {
-            Text("Payment History")
-                .tag(0)
-                .font(.custom(FontContent.plusRegular, size: 12))
-
-            Text("Payment Method")
-                .tag(1)
-                .font(.custom(FontContent.plusRegular, size: 12))
+        HStack(spacing: 0) {
+            SegmentTextView(title: "Payment History", select: viewModel.selectedSection == 0)
+                .asButton {
+                    viewModel.selectedSection = 0
+                }
+            SegmentTextView(title: "Payment Method", select: viewModel.selectedSection == 1)
+                .asButton {
+                    if AppConstants.SeekCare == Defaults().userType{
+                        viewModel.selectedSection = 0
+                    }else{
+                        viewModel.selectedSection = 1
+                    }
+                }
         }
-        .pickerStyle(.segmented)
+        .padding(2)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.E_5_E_5_EA)
+        )
         .padding(.horizontal, 24)
         .padding(.top, 20)
+    }
+    
+    private func SegmentTextView(title: String, select: Bool) -> some View{
+        Text(title)
+            .foregroundStyle((select ? .appMain : ._7_C_7_C_80))
+            .frame(maxWidth: .infinity)
+            .font(.custom(FontContent.plusMedium, size: 12))
+            .frame(height: 30)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .foregroundStyle(select ? .white : .E_5_E_5_EA)
+            )
     }
 }
 
