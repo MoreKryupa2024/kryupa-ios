@@ -19,7 +19,7 @@ struct RecommendedCareGiverDetailScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
+            VStack(spacing:15){
              HeaderView
                 ScrollView{
                     ProfileView
@@ -84,7 +84,7 @@ struct RecommendedCareGiverDetailScreenView: View {
         VStack(spacing:0){
             Text("Profile")
                 .font(.custom(FontContent.besMedium, size: 20))
-                .padding(.top,23)
+                .padding(.top,13)
                 .padding(.bottom,15)
             
             

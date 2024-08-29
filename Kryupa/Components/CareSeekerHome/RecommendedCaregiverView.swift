@@ -38,7 +38,7 @@ struct RecommendedCaregiverView: View {
                         }
                         .padding(.top,5)
                         
-                        Text("(\(careData.arrayAgg.joined(separator: ", "))")
+                        Text("\(careData.arrayAgg.joined(separator: ", "))")
                             .font(.custom(FontContent.plusRegular, size: 13))
                             .multilineTextAlignment(.center)
                             .foregroundStyle(._444446)

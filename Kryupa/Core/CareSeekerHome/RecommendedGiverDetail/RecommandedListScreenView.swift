@@ -15,8 +15,8 @@ struct RecommandedListScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-                HeaderView
+            VStack(spacing:15){
+                HeaderView(showBackButton:true)
                 ScrollView{
                     CaregiverNearYouView
                 }
@@ -51,27 +51,6 @@ struct RecommandedListScreenView: View {
                             }
                         }
                 }
-            }
-            .padding(.horizontal,24)
-        }
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        router.dismissScreen()
-                    }
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
             }
             .padding(.horizontal,24)
         }

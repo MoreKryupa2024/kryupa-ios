@@ -91,3 +91,9 @@ struct AppointmentsView: View {
         .scrollIndicators(.hidden)
     }
 }
+
+#Preview {
+    AppointmentsView { _ in
+        
+    }
+}

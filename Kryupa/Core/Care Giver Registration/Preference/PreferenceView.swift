@@ -13,6 +13,8 @@ struct PreferenceView: View {
     @Environment(\.router) var router
     var parameters = [String:Any]()
     @StateObject private var viewModel = PreferenceViewModel()
+    @State var mobilityLevelShow:Bool = Bool()
+    @State var distanceShow:Bool = Bool()
     
     var body: some View {
         ZStack{
@@ -29,7 +31,8 @@ struct PreferenceView: View {
                                 .foregroundStyle(.appMain)
                                 .frame(width: 236,height: 4)
                         }
-                        .padding([.leading,.trailing],24)
+                        .padding(.horizontal,24)
+                        .padding(.top,20)
                         
                         HStack{
                             Text("Preference")
@@ -149,8 +152,12 @@ struct PreferenceView: View {
             DropDownView(
                 selectedValue: viewModel.preferenceListData.mobilityLevel,
                 placeHolder: "Select",
+                showDropDown: mobilityLevelShow,
                 values: AppConstants.mobilityLevelArray) { value in
                     viewModel.preferenceListData.mobilityLevel = value
+                }onShowValue: {
+                    mobilityLevelShow = !mobilityLevelShow
+                    distanceShow = false
                 }
         })
     }
@@ -209,8 +216,12 @@ struct PreferenceView: View {
             DropDownView(
                 selectedValue: viewModel.preferenceListData.distance,
                 placeHolder: "Select",
+                showDropDown: distanceShow,
                 values: AppConstants.distanceArray) { value in
                     viewModel.preferenceListData.distance = value
+                }onShowValue: {
+                    distanceShow = !distanceShow
+                    mobilityLevelShow = false
                 }
         })
     }

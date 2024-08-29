@@ -17,17 +17,18 @@ struct IntroductionScreenView: View {
             Spacer()
             Image("Intro1")
                 .resizable()
-                .frame(width: 305,height: 295)
+                .aspectRatio(305/294, contentMode: .fit)
+                .padding(.horizontal,24)
             
             Text("Connect with trusted caregivers and care seekers in your area.")
-                .font(.custom(FontContent.besMedium, size: 25))
+                .font(.custom(FontContent.besMedium, size: 29))
                 .multilineTextAlignment(.center)
-                .padding(.horizontal,24)
                 .padding(.top, 66)
                 .padding(.bottom, 30)
-            
+                .frame(width: 277)
+            Spacer()
             nextButton
-                .padding(.bottom, 34)
+                .padding(.bottom, 54)
                 .asButton(.press) {
                     router.showScreen(.push) { _ in
                         UserSelectionScreenView()

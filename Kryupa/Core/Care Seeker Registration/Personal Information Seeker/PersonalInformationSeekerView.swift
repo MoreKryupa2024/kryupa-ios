@@ -12,28 +12,31 @@ struct PersonalInformationSeekerView: View {
     
     @Environment(\.router) var router
     @StateObject private var viewModel = PersonalInformationScreenViewModel()
+    @State var genderDropShow = Bool()
+    @State var languageDropShow = Bool()
     
     var body: some View {
         ZStack{
-                VStack(spacing:0){
-                    ZStack(alignment:.leading){
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.E_5_E_5_EA)
-                            .frame(height: 4)
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.appMain)
-                            .frame(width: 130,height: 4)
-                    }
-                    
-                    Text("Personal Information")
-                        .font(.custom(FontContent.besMedium, size: 22))
-                        .frame(height: 28)
-                        .padding(.top,30)
-                    
-                    ScrollView {
+            VStack(spacing:0){
+                ZStack(alignment:.leading){
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.E_5_E_5_EA)
+                        .frame(height: 4)
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.appMain)
+                        .frame(width: 130,height: 4)
+                }
+                .padding(.top,20)
+                
+                Text("Personal Information")
+                    .font(.custom(FontContent.besMedium, size: 22))
+                    .frame(height: 28)
+                    .padding(.top,30)
+                
+                ScrollView {
                     VStack(spacing: 25,
                            content: {
-                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
                         
                         selectionViewWithHeader(
                             leftIcone: nil,
@@ -54,21 +57,34 @@ struct PersonalInformationSeekerView: View {
                         languageDropdownView
                         
                         selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
-                            .onTapGesture {
-                                router.showScreen(.push) { rout in
-                                    Test()
-                                }
-                            }
-                                            
+                        
+                        //                            .onTapGesture {
+                        //                                router.showScreen(.push) { rout in
+                        //                                    Test()
+                        //                                }
+                        //                            }
+                        
                         
                         HStack{
+                            textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
+                                .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                    if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+                                        viewModel.personalInfoData.postalCode?.removeLast()
+                                    }
+                                }
                             textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                            textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
+                                .disabled(true)
                             
                         }
                         
-                        textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
-                        
+                        HStack{
+                            textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
+                                .disabled(true)
+                            
+                            textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
+                                .disabled(true)
+                            
+                        }
                         
                         HStack{
                             Spacer()
@@ -90,13 +106,11 @@ struct PersonalInformationSeekerView: View {
                 }
                 
             }
-                .padding([.leading,.trailing],24)
+            .padding([.leading,.trailing],24)
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 30 : 0)
-            .onTapGesture {
-                print("No access!")
-            }
+            .modifier(DismissingKeyboard())
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()
@@ -119,8 +133,12 @@ struct PersonalInformationSeekerView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
                 placeHolder: "Select",
+                showDropDown: genderDropShow,
                 values: AppConstants.genderArray) { value in
                     viewModel.personalInfoData.gender = value
+                }onShowValue: {
+                    genderDropShow = !genderDropShow
+                    languageDropShow = false
                 }
         })
     }
@@ -140,8 +158,12 @@ struct PersonalInformationSeekerView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,
                 placeHolder: "Select",
+                showDropDown: languageDropShow,
                 values: AppConstants.languageSpeakingArray) { value in
                     viewModel.personalInfoData.language = value
+                }onShowValue: {
+                    languageDropShow = !languageDropShow
+                    genderDropShow = false
                 }
         })
     }

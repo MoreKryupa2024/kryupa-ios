@@ -38,6 +38,16 @@ struct DismissingKeyboard: ViewModifier {
     }
 }
 
+func dismissingKeyboardGlobal(){
+    let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+    keyWindow?.endEditing(true)
+}
+
 extension View{
     func presentAlert(title: String, subTitle: String, primaryAction: UIAlertAction? = nil, secondaryAction: UIAlertAction? = nil) {
         DispatchQueue.main.async {

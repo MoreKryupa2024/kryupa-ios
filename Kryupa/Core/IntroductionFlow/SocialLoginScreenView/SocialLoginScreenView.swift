@@ -41,17 +41,28 @@ struct SocialLoginScreenView: View {
                 Spacer()
                 Image("socialScreenIcon")
                     .resizable()
-                    .frame(width: 305)
+                    .aspectRatio(333/274, contentMode: .fit)
                 
                 Text(title)
                     .font(.custom(FontContent.besMedium, size: 28))
                     .multilineTextAlignment(.center)
                     .lineSpacing(0)
                     .padding(.top, 66)
-                    .padding(.horizontal, 24)
+                    .frame(width: 330)
                 
                 VStack(alignment:.center, spacing: 10.0){
-                    AppleButton
+                    ZStack{
+                        AppleButton
+                            .disabled(!checkbox)
+                        if !checkbox{
+                            Text("")
+                                .frame(width: 270,height: 48)
+                                .background(.white.opacity(0.01))
+                                .asButton(.press) {
+                                    presentAlert(title: "Kryupa", subTitle: "Please Check the Below Checkbox to move forword")
+                                }
+                        }
+                    }
                     commonButton(imageName: "googleButton")
                         .asButton(.press) {
                             if checkbox{
@@ -60,10 +71,9 @@ struct SocialLoginScreenView: View {
                                         navigateToMobileNumberView(userInfo: userInfo)
                                     }
                                 }
-                            }else{
+                            } else {
                                 presentAlert(title: "Kryupa", subTitle: "Please Check the Below Checkbox to move forword")
                             }
-                            
                         }
                 }
                 .padding(.top,24)
@@ -181,11 +191,19 @@ struct SocialLoginScreenView: View {
     
     //MARK: Common Button View
     private func commonButton(imageName: String)-> some View {
-        HStack{
+        HStack(alignment:.center,spacing:8){
             Image(imageName)
                 .resizable()
-                .frame(width: 270,height: 48)
+                .frame(width: 20,height: 20)
+            
+            Text("Sign up with Google")
+                .font(.custom(FontContent.plusMedium, size: 16))
         }
+        .frame(width: 270,height: 48)
+        .background(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(.D_1_D_1_D_6,lineWidth: 1)
+        )
     }
 }
 

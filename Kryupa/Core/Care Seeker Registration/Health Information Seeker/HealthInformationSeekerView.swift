@@ -14,7 +14,8 @@ struct HealthInformationSeekerView: View {
     var parameters:[String:Any] = [String:Any]()
     
     @StateObject private var viewModel = HealthInformationSeekerViewModel()
-    
+    @State var medicalConditionDownShow:Bool = Bool()
+    @State var mobilityLevelDownShow:Bool = Bool()
     
     var body: some View {
         
@@ -27,7 +28,8 @@ struct HealthInformationSeekerView: View {
                         .foregroundStyle(.appMain)
                         .frame(width: 196,height: 4)
                 }
-                .padding([.leading,.trailing],24)
+                .padding(.horizontal,24)
+                .padding(.top,20)
                 
                 
                 Text("Health Information")
@@ -185,8 +187,12 @@ struct HealthInformationSeekerView: View {
             DropDownView(
                 selectedValue: viewModel.mobilityLevel,
                 placeHolder: "Select",
+                showDropDown: mobilityLevelDownShow,
                 values: AppConstants.mobilityLevelArray) { value in
                     viewModel.mobilityLevel = value
+                }onShowValue: {
+                    mobilityLevelDownShow = !mobilityLevelDownShow
+                    medicalConditionDownShow = false
                 }
         })
     }
@@ -197,13 +203,16 @@ struct HealthInformationSeekerView: View {
             DropDownWithCheckBoxView(
                 selectedValue: viewModel.medicalConditionDropDownSelected,
                 placeHolder: "View More",
+                showDropDown: medicalConditionDownShow,
                 values: AppConstants.medicalConditionArray) { value in
                     viewModel.medicalConditionDropDownSelected = value
+                }onShowValue: {
+                    medicalConditionDownShow = !medicalConditionDownShow
+                    mobilityLevelDownShow = false
                 }
                 
         })
         .padding(.bottom,-10)
-//        .padding(.top,10)
     }
 }
 

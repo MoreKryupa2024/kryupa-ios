@@ -283,10 +283,10 @@ struct ChatView: View {
                 TextField("Hello!", text:$sendMsgText, axis: .vertical)
                     .lineLimit(3)
                     .padding(.leading, 15)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 10)
                     .foregroundStyle(.gray)
-                    .font(.custom(FontContent.plusRegular, size: 17))
-                    .frame(minHeight: 36)
+                    .font(.custom(FontContent.plusRegular, size: 20))
+                    .frame(minHeight: 44)
                 
                 
                 HStack(spacing:5) {
@@ -311,7 +311,7 @@ struct ChatView: View {
                             sendMsgText = ""
                         }
                 }
-                .padding(.trailing, 5)
+                .padding(.trailing, 10)
                 
             }
             .overlay(

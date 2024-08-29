@@ -30,6 +30,7 @@ struct PreferenceCareSeekarView: View {
                                 .frame(width: 236,height: 4)
                         }
                         .padding([.leading,.trailing],24)
+                        .padding(.top,20)
                         
                         HStack{
                             Text("Preference")
@@ -99,7 +100,7 @@ struct PreferenceCareSeekarView: View {
                         Image("SeekerInfoDetails")
                             .resizable()
                             .frame(width: 300,height: 55)
-                            .offset(x: 5,y:55)
+                            .offset(x: 5,y:76)
                     }
                 }
             }

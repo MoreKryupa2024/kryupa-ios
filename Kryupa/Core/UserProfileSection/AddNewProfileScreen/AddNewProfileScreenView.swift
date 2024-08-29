@@ -14,6 +14,13 @@ struct AddNewProfileScreenView: View {
     @State var selectedSection = 0
     
     @StateObject var viewModel = AddNewProfileScreenViewModel()
+    @State var mobilityLevelDownShow:Bool = Bool()
+    @State var distanceDownShow:Bool = Bool()
+    @State var languageDownShow:Bool = Bool()
+    @State var genderDownShow:Bool = Bool()
+    @State var relationPersonalDownShow:Bool = Bool()
+    @State var relationDownShow:Bool = Bool()
+    @State var medicalConditionDownShow:Bool = Bool()
     
     var body: some View {
         ZStack{
@@ -86,8 +93,17 @@ struct AddNewProfileScreenView: View {
             DropDownView(
                 selectedValue: viewModel.mobilityLevel,
                 placeHolder: "Select",
+                showDropDown: mobilityLevelDownShow,
                 values: AppConstants.mobilityLevelArray) { value in
                     viewModel.mobilityLevel = value
+                }onShowValue: {
+                    mobilityLevelDownShow = !mobilityLevelDownShow
+                    distanceDownShow = false
+                    languageDownShow = false
+                    genderDownShow = false
+                    relationPersonalDownShow = false
+                    relationDownShow = false
+                    medicalConditionDownShow = false
                 }
         })
     }
@@ -100,8 +116,17 @@ struct AddNewProfileScreenView: View {
             DropDownWithCheckBoxView(
                 selectedValue: viewModel.medicalConditionDropDownSelected,
                 placeHolder: "View More",
+                showDropDown: medicalConditionDownShow,
                 values: AppConstants.medicalConditionArray) { value in
                     viewModel.medicalConditionDropDownSelected = value
+                }onShowValue: {
+                    medicalConditionDownShow = !medicalConditionDownShow
+                    mobilityLevelDownShow = false
+                    distanceDownShow = false
+                    languageDownShow = false
+                    genderDownShow = false
+                    relationPersonalDownShow = false
+                    relationDownShow = false
                 }
                 
         })
@@ -234,8 +259,17 @@ struct AddNewProfileScreenView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,
                 placeHolder: "Select",
+                showDropDown: languageDownShow,
                 values: AppConstants.languageSpeakingArray) { value in
                     viewModel.personalInfoData.language = value
+                }onShowValue: {
+                    languageDownShow = !languageDownShow
+                    mobilityLevelDownShow = false
+                    distanceDownShow = false
+                    genderDownShow = false
+                    relationPersonalDownShow = false
+                    relationDownShow = false
+                    medicalConditionDownShow = false
                 }
         })
     }
@@ -256,8 +290,17 @@ struct AddNewProfileScreenView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
                 placeHolder: "Select",
+                showDropDown: genderDownShow,
                 values: AppConstants.genderArray) { value in
                     viewModel.personalInfoData.gender = value
+                }onShowValue: {
+                    genderDownShow = !genderDownShow
+                    languageDownShow = false
+                    mobilityLevelDownShow = false
+                    distanceDownShow = false
+                    relationPersonalDownShow = false
+                    relationDownShow = false
+                    medicalConditionDownShow = false
                 }
         })
         .padding(.bottom,-10)
@@ -312,7 +355,8 @@ struct AddNewProfileScreenView: View {
         }
         .frame(height: 44)
         .onChange(of: viewModel.number) { oldValue, newValue in
-            if viewModel.number.count > 10{
+            viewModel.number = viewModel.number.applyPatternOnNumbers(pattern: "(###) ###-####", replacementCharacter: "#")
+            if viewModel.number.count > 14{
                 viewModel.number.removeLast()
             }
         }
@@ -333,8 +377,17 @@ struct AddNewProfileScreenView: View {
             DropDownView(
                 selectedValue: viewModel.relationPersonal,
                 placeHolder: "Select",
+                showDropDown: relationPersonalDownShow,
                 values: AppConstants.relationArray) { value in
                     viewModel.relationPersonal = value
+                }onShowValue: {
+                    relationPersonalDownShow = !relationPersonalDownShow
+                    genderDownShow = false
+                    languageDownShow = false
+                    mobilityLevelDownShow = false
+                    distanceDownShow = false
+                    relationDownShow = false
+                    medicalConditionDownShow = false
                 }
         })
     }
@@ -354,12 +407,20 @@ struct AddNewProfileScreenView: View {
             DropDownView(
                 selectedValue: viewModel.relation,
                 placeHolder: "Select",
+                showDropDown: relationDownShow,
                 values: AppConstants.relationArray) { value in
                     viewModel.relation = value
+                }onShowValue: {
+                    relationDownShow = !relationDownShow
+                    relationPersonalDownShow = false
+                    genderDownShow = false
+                    languageDownShow = false
+                    mobilityLevelDownShow = false
+                    distanceDownShow = false
+                    medicalConditionDownShow = false
                 }
         })
     }
-    
     
     private var EmergencyInfoView: some View{
         VStack(spacing: 25,
@@ -367,7 +428,7 @@ struct AddNewProfileScreenView: View {
             
             textFieldViewWithHeader(
                 title: "Legal Name",
-                placeHolder: "Input text",
+                placeHolder: "Full Legal Name",
                 value: $viewModel.name,
                 keyboard: .asciiCapable, showRed: true
             )
@@ -410,7 +471,7 @@ struct AddNewProfileScreenView: View {
             
             relationPersonalDropdownView
             
-            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
             
             selectionViewWithHeader(
                 leftIcone: nil,
@@ -432,12 +493,25 @@ struct AddNewProfileScreenView: View {
             selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
             
             HStack{
+                textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),keyboard: .numberPad, showRed: true)
+                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+                            viewModel.personalInfoData.postalCode?.removeLast()
+                        }
+                    }
                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
-                textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+                    .disabled(true)
                 
             }
             
-            textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+            HStack{
+                textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+                    .disabled(true)
+                
+                textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+                    .disabled(true)
+                
+            }
             
             
             HStack{

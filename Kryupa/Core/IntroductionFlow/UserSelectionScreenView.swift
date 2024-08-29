@@ -17,13 +17,14 @@ struct UserSelectionScreenView: View {
             Spacer()
             Image("UserTypeScreenIcon")
                 .resizable()
-                .frame(width: 330,height: 290)
+                .aspectRatio(330/290, contentMode: .fit)
+                .padding(.horizontal,24)
             
             setTitle(title: "Ready to Lend a Hand?")
-                .padding(.top, 85)
+                .padding(.top, 50)
             
             commonButton(title: "Give Care")
-                .padding(.top, 10)
+                .padding(.top, 25)
                 .asButton(.press) {
                     navigateToSocialScreenView(AppConstants.GiveCare)
                 }
@@ -35,7 +36,7 @@ struct UserSelectionScreenView: View {
                 .padding(.top, 30)
             
             commonButton(title: "Seek Care")
-                .padding(.top, 10)
+                .padding(.top, 25)
                 .padding(.bottom, 56)
                 .asButton(.press) {
                     navigateToSocialScreenView(AppConstants.SeekCare)
@@ -61,7 +62,7 @@ struct UserSelectionScreenView: View {
     //MARK: Set Title View
     private func setTitle(title: String)-> some View{
         Text(title)
-            .font(.custom(FontContent.plusMedium, size: 17))
+            .font(.custom(FontContent.besMedium, size: 22))
             .multilineTextAlignment(.center)
     }
     
@@ -77,9 +78,9 @@ struct UserSelectionScreenView: View {
     private func commonButton(title: String)-> some View {
         HStack{
             Text(title)
-                .font(.custom(FontContent.plusMedium, size: 16))
-                .padding([.top,.bottom], 8)
-                .padding([.leading,.trailing], 20)
+                .font(.custom(FontContent.plusMedium, size: 19))
+                .padding([.top,.bottom], 16)
+                .padding([.leading,.trailing], 40)
         }
         .background(
             ZStack{

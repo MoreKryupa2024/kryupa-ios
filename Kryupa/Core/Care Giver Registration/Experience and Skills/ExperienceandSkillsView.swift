@@ -39,6 +39,7 @@ struct ExperienceandSkillsView: View {
                         .frame(width: 196,height: 4)
                 }
                 .padding([.leading,.trailing],24)
+                .padding(.top,20)
                 
                 Text("Experience and Skills")
                     .font(.custom(FontContent.besMedium, size: 22))

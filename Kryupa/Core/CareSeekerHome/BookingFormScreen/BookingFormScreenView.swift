@@ -14,18 +14,19 @@ struct BookingFormScreenView: View {
     
     @StateObject var viewModel = BookingFormScreenViewModel()
     var notificatioSsetBookingId = NotificationCenter.default
+    @State var bookingForDropShow:Bool = Bool()
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-                HeaderView
+            VStack(spacing:15){
+                HeaderView(showBackButton:viewModel.isRecommended)
                 
                 ScrollView {
                     VStack(spacing: 0){
                         Text("Let Us Find Best Caregiver\nFor You")
                             .font(.custom(FontContent.besMedium, size: 20))
                             .multilineTextAlignment(.center)
-                            .padding(.top,20)
+                            .padding(.top,05)
                         
                         BookingForDropdownView
                             .padding(.top,20)
@@ -457,35 +458,14 @@ struct BookingFormScreenView: View {
             DropDownView(
                 selectedValue: viewModel.bookingFor,
                 placeHolder: "Select",
+                showDropDown: bookingForDropShow,
                 values: viewModel.bookingForList.map{$0.name}) { value in
                     viewModel.bookingFor = value
+                }onShowValue: {
+                    bookingForDropShow = !bookingForDropShow
                 }
         })
         .padding(.horizontal,24)
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                if viewModel.isRecommended{
-                    Image("navBack")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                        .asButton(.press) {
-                            router.dismissScreen()
-                        }
-                }
-
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
     }
     
     private var sepratorView: some View{

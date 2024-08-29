@@ -17,6 +17,7 @@ struct ProfileDetailScreenView: View {
     @State private var showingAlert = false
     @State private var selectedItem: PhotosPickerItem?
     @State var showsAlertForImageUpload = false
+    @State var profilesDownShow = false
     @State var showPicker = Bool()
     @State var isCam = Bool()
     @State var selectedImage: UIImage? = nil//UIImage(imageLiteralResourceName: "personal")
@@ -27,10 +28,14 @@ struct ProfileDetailScreenView: View {
                 HeaderView(title: "Profile",showBackButton: true)
                 ScrollView{
                     HStack(alignment:.top){
-                        DropDownView(selectedValue: selecedProfile,values: viewModel.profileList?.profiles ?? AppConstants.relationArray) { value in
+                        DropDownView(selectedValue: selecedProfile,
+                                     showDropDown: profilesDownShow,
+                                     values: viewModel.profileList?.profiles ?? AppConstants.relationArray) { value in
                             selectedImage = nil
                             selecedProfile = value
                             viewModel.getPersonalDetails(profileName: selecedProfile)
+                        }onShowValue: {
+                            profilesDownShow = !profilesDownShow
                         }
                         AddNewButton
                             .asButton(.press) {

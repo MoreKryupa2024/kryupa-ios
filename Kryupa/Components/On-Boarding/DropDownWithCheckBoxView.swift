@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct DropDownWithCheckBoxView: View {
     
     @State var selectedValue: [String] = [String]()
     var placeHolder: String = "Select"
-    @State private var showDropDown: Bool = false
+    var showDropDown: Bool = false
     var values: [String] = AppConstants.medicalConditionArray
-    
     var onSelectedValue: (([String])->Void)? = nil
+    var onShowValue: (()->Void)? = nil
     
     var body: some View {
         VStack(spacing:0){
@@ -49,8 +50,9 @@ struct DropDownWithCheckBoxView: View {
                     .frame(height: 48)
                     .background(.white)
             }
-            .onTapGesture {
-                showDropDown.toggle()
+            .asButton {
+                dismissingKeyboardGlobal()
+                onShowValue?()
             }
             
             
@@ -62,10 +64,9 @@ struct DropDownWithCheckBoxView: View {
                                 .frame(maxWidth: .infinity,alignment: .leading)
                                 .padding(.horizontal,10)
                                 .background()
-                                .onTapGesture {
-                                    
+                                .asButton {  
                                     if value == "None"{
-                                        showDropDown = false
+                                        onShowValue?()
                                         selectedValue = [value]
                                     }else{
                                         if selectedValue.contains(value){
@@ -78,6 +79,7 @@ struct DropDownWithCheckBoxView: View {
                                         }
                                     }
                                     onSelectedValue?(selectedValue)
+                                    dismissingKeyboardGlobal()
                                 }
                         }
                     }

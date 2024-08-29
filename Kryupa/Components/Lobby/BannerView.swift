@@ -13,7 +13,7 @@ struct BannerView: View {
     var assetsImage:[String] = ["customer home top","customer home top 2"]
     @State private var isSelectedView = 0
     var showIndecator: Bool = true
-    var fromAssets: Bool = false
+    var fromAssets: Bool = true
     var aspectRatio: CGFloat = 327/58
     
     var body: some View {
@@ -23,10 +23,12 @@ struct BannerView: View {
                     ForEach(assetsImage.indices, id: \.self) { index in
                         Image(assetsImage[index])
                             .resizable()
+                            .padding(.horizontal, 24)
                     }
                 }else{
                     ForEach(banners.indices, id: \.self) { index in
                         ImageLoadingView(imageURL: banners[index].bannerURL)
+                            .padding(.horizontal, 24)
                     }
                 }
             }

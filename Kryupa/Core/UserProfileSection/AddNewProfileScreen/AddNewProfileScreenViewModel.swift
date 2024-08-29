@@ -83,7 +83,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
                  "relative_name": name,
                  "relation": relation,
                  "relative_email": email,
-                 "relative_mobile_no": number
+                 "relative_mobile_no": number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#")
              ]
             next(param)
         }
@@ -111,6 +111,9 @@ class AddNewProfileScreenViewModel: ObservableObject{
         }
         guard let address = personalInfoData.address, address != "" else {
             return alert("Please Enter Address")
+        }
+        guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
+            return alert("Please Enter Postal Code")
         }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")

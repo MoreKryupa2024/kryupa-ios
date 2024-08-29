@@ -21,6 +21,8 @@ struct PersonalDetailView: View {
     @State var selectedImage: UIImage = UIImage(imageLiteralResourceName: "personal")
     @State var didImageSelected: Bool = false
     @State var editProfile: Bool = false
+    @State var educationDownShow: Bool = false
+    @State var languageDropDownShow: Bool = false
 
     var body: some View {
         ZStack{
@@ -115,9 +117,14 @@ struct PersonalDetailView: View {
             DropDownWithCheckBoxView(
                 selectedValue: viewModel.languageDropDownSelected,
                 placeHolder: "Select Language",
+                showDropDown: languageDropDownShow,
                 values: AppConstants.languageSpeakingArray) { value in
                     viewModel.languageDropDownSelected = value
-                }.id(viewModel.languageDropDownSelected.first)
+                }onShowValue: {
+                    languageDropDownShow = !languageDropDownShow
+                    educationDownShow = false
+                }
+                .id(viewModel.languageDropDownSelected.first)
             
 
         })
@@ -186,8 +193,12 @@ struct PersonalDetailView: View {
             DropDownView(
                 selectedValue: viewModel.education,
                 placeHolder: "College Degree",
+                showDropDown: educationDownShow,
                 values: viewModel.educationList) { value in
                     viewModel.education = value
+                }onShowValue: {
+                    educationDownShow = !educationDownShow
+                    languageDropDownShow = false
                 }
         })
         .padding(.horizontal,24)

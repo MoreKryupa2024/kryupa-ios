@@ -16,20 +16,20 @@ struct CareSeekerHomeScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-                HeaderView
+            VStack(spacing:15){
+                HeaderView()
                 ScrollView {
                     if let serviceStartData = viewModel.serviceStartData{
                         if serviceStartData.serviceStatus == "active" {
                             serviceView()
                         }
                     }else{
-                        BannerView(assetsImage: ["customer home top","customer home top 2"],
-                                   showIndecator: true,
+                        BannerView(assetsImage: ["customer home top"],//,"customer home top 2"],
+                                   showIndecator: false,
                                    fromAssets: true,
                                    aspectRatio: 327/58)
-                        .padding(.horizontal,24)
-                        .padding(.top,24)
+//                        .padding(.horizontal,24)
+                        .padding(.top,14)
                         .asButton(.press) {
                             NotificationCenter.default.post(name: .showBookingScreen,
                                                             object: nil, userInfo: nil)
@@ -92,7 +92,7 @@ struct CareSeekerHomeScreenView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal,25)
-        .padding(.vertical,25)
+        .padding(.vertical,15)
     }
     
     private var RecommendedGiverView:some View{
@@ -203,21 +203,6 @@ struct CareSeekerHomeScreenView: View {
                     NotificationCenter.default.post(name: .showBookingScreen,
                                                                     object: nil, userInfo: nil)
                 }
-        }
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
         }
     }
 }

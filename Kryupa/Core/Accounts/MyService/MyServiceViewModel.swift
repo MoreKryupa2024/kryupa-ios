@@ -56,9 +56,9 @@ class MyServiceViewModel: ObservableObject{
             }
             
             let param:[String:Any] = ["skilles":self.mySkillsSelected,
-                                      "language":self.languageSpeakingSelected,
+                                      "areaOfExperties":self.areaOfExpertiseSelected,
                                       "preference":[
-                                        "areaOfExperties":self.areaOfExpertiseSelected,
+                                        "language":self.languageSpeakingSelected,
                                         "mobility_level":self.mobilityLevel,
                                         "distance":self.distance]]
             self.isLoading = true

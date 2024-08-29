@@ -34,7 +34,8 @@ struct MobileNumberScreenView: View {
                     
                     mobileNumberFieldView
                         .onChange(of: viewModel.mobileNumner) { oldValue, newValue in
-                            if viewModel.mobileNumner.count > 10{
+                            viewModel.mobileNumner = viewModel.mobileNumner.applyPatternOnNumbers(pattern: "(###) ###-####", replacementCharacter: "#")
+                            if viewModel.mobileNumner.count > 14{
                                 viewModel.mobileNumner.removeLast()
                             }
                         }
@@ -44,7 +45,7 @@ struct MobileNumberScreenView: View {
                             if viewModel.mobileNumner.validateMobile(){
                                 viewModel.sendOTP {
                                     router.showScreen(.push) { _ in
-                                        OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner,requestId: viewModel.sendOTPdata?.requestID ?? "")
+                                        OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#"),requestId: viewModel.sendOTPdata?.requestID ?? "")
                                     }
                                 } errorAction: { error in
 //                                    router.showScreen(.push) { _ in

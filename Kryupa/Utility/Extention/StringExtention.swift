@@ -7,7 +7,21 @@
 
 import Foundation
 import SwiftUI
+
 extension String{
+    
+    func applyPatternOnNumbers(pattern: String, replacementCharacter: Character) -> String {
+        var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        for index in 0 ..< pattern.count {
+            guard index < pureNumber.count else { return pureNumber }
+            let stringIndex = String.Index(utf16Offset: index, in: pattern)
+            let patternCharacter = pattern[stringIndex]
+            guard patternCharacter != replacementCharacter else { continue }
+            pureNumber.insert(patternCharacter, at: stringIndex)
+        }
+        return pureNumber
+    }
+    
     func validateMobile() -> Bool {
         let PHONE_REGEX = "^[0-9+]{0,1}+[0-9]{9,9}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)

@@ -24,6 +24,7 @@ struct PersonalInfo {
     var address: String? = "123, Test Addresss, Street"
     var city: String? = "Indore"
     var state: String? = "MP"
+    var postalCode: String? = "12345"
     var country: String? = "India"
 }
 

@@ -18,7 +18,7 @@ struct LobbyScreenView: View {
     var body: some View {
         
         ZStack{
-            VStack(spacing:0) {
+            VStack(spacing:15) {
                 HeaderView
                 ScrollView {
                     ScheduleInterview
@@ -66,13 +66,13 @@ struct LobbyScreenView: View {
         VStack(alignment:.leading,spacing:10){
             Text("Feedback & Reviews")
                 .font(.custom(FontContent.plusRegular, size: 13))
+                .padding(.horizontal,24)
             
             BannerView(assetsImage: ["caregiver lobby","caregiver lobby 1", "caregiver lobby 2", "caregiver lobby 3"],
                        showIndecator: true,
                        fromAssets: true,
                        aspectRatio: 327/193)
         }
-        .padding(.horizontal,24)
         .padding(.top,25)
     }
     private var sepratorView: some View{

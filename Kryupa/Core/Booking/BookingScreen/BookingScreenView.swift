@@ -15,7 +15,7 @@ struct BookingScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack{
+            VStack(){
                 HeaderView()
                 if Defaults().userType == AppConstants.SeekCare{
                     SegmentView

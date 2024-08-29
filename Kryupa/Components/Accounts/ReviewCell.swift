@@ -22,9 +22,10 @@ struct ReviewCell: View {
                     .clipped()
                 
                 VStack(alignment: .leading) {
-                    Text(reviewData?.name ?? "")
+                    Text(reviewData?.name ?? "Nirmal")
                         .font(.custom(FontContent.besMedium, size: 15))
                         .foregroundStyle(.appMain)
+                        .padding(.bottom, 1)
                     let createdDate = reviewData?.createdAt.split(separator: " ").first ?? ""
                     Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM"))
                         .font(.custom(FontContent.plusRegular, size: 12))

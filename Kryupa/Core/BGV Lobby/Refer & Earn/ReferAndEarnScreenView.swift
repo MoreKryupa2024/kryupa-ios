@@ -14,8 +14,8 @@ struct ReferAndEarnScreenView: View {
     private let imageToShare = Image("mainLogo")
     
     var body: some View {
-        VStack{
-            HeaderView
+        VStack(spacing:15){
+            HeaderView(showBackButton:true)
             ScrollView{
                 BannerView
                 HStack(spacing:18){
@@ -204,26 +204,6 @@ struct ReferAndEarnScreenView: View {
             .padding(.horizontal,24)
             .padding(.top,10)
         
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .padding(.leading,24)
-                Spacer()
-            }
-            .asButton(.press) {
-                router.dismissScreen()
-            }
-            
-            Image("refer & earn header")
-                .resizable()
-                .frame(width: 135,height: 20)
-        }
-        .padding(.vertical,10)
     }
 }
 

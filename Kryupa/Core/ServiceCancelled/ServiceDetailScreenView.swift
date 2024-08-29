@@ -15,8 +15,8 @@ struct ServiceDetailScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-             HeaderView
+            VStack(spacing:15){
+                HeaderView(showBackButton:true)
                 ScrollView{
                     ProfileView
                     DetailView
@@ -182,7 +182,7 @@ struct ServiceDetailScreenView: View {
         VStack(spacing:0){
             Text("Profile")
                 .font(.custom(FontContent.besMedium, size: 20))
-                .padding(.top,23)
+                .padding(.top,13)
                 .padding(.bottom,15)
             
             
@@ -263,26 +263,6 @@ struct ServiceDetailScreenView: View {
         .foregroundColor(.white)
     }
     
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        router.dismissScreen()
-                    }
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
-    }
 }
 
 #Preview {

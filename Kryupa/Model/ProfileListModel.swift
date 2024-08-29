@@ -39,7 +39,7 @@ struct MyServiceData {
     let preferences: MyPreferencesData
     init(jsonData:[String:Any]){
         skilles = jsonData["skilles"] as? [String] ?? []
-        areaOfExperties = jsonData["areaOfExperties"] as? [String] ?? []
+        areaOfExperties = jsonData["area_of_experties"] as? [String] ?? []
         preferences = MyPreferencesData(jsonData: jsonData["preferences"] as? [String:Any] ?? [String:Any]())
     }
 }

@@ -11,18 +11,13 @@ import SwiftfulUI
 struct ServiceCancelScreenView: View {
     @Environment(\.router) var router
     @StateObject var viewModel = ServiceDetailScreenViewModel()
+    @State var selectedReasonDownShow: Bool = false
     
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-             HeaderView
+            VStack(spacing:15){
+             HeaderView(title: "Personal Information")
                 ScrollView{
-                    
-                    Text("Personal Information")
-                        .font(.custom(FontContent.besMedium, size: 22))
-                        .frame(height: 28)
-                        .padding(.top,30)
-                    
                     ReasonDropdownView
                         .padding(.horizontal,24)
                         .padding(.top,30)
@@ -112,8 +107,11 @@ struct ServiceCancelScreenView: View {
             DropDownView(
                 selectedValue: viewModel.selectedReason,
                 placeHolder: "Select",
+                showDropDown: selectedReasonDownShow,
                 values: Defaults().userType == AppConstants.GiveCare ? AppConstants.cancelGiverReasons : AppConstants.cancelSeekerReasons) { value in
                     viewModel.selectedReason = value
+                }onShowValue: {
+                    selectedReasonDownShow = !selectedReasonDownShow
                 }
         })
         .padding(.bottom,-10)
@@ -133,27 +131,6 @@ struct ServiceCancelScreenView: View {
             }
         )
         .foregroundColor(.white)
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Image("navBack")
-                    .resizable()
-                    .frame(width: 30,height: 30)
-                    .asButton(.press) {
-                        router.dismissScreen()
-                    }
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
     }
 }
 

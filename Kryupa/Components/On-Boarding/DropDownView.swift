@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct DropDownView: View {
     
     @State var selectedValue: String? = nil
     var placeHolder: String = "Select"
-    @State private var showDropDown: Bool = false
+    var showDropDown: Bool = Bool()
     var values: [String] = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","Bedridden"]
     
     var onSelectedValue: ((String)->Void)? = nil
+    var onShowValue: (()->Void)? = nil
     
     var body: some View {
         VStack(spacing:0){
@@ -48,8 +50,10 @@ struct DropDownView: View {
                     .frame(height: 48)
                     .background(.white)
             }
-            .onTapGesture {
-                showDropDown.toggle()
+            .asButton {
+                onShowValue?()
+//                showDropDown = !showDropDown
+                dismissingKeyboardGlobal()
             }
             
             if showDropDown{
@@ -60,10 +64,12 @@ struct DropDownView: View {
                                 dropDownView(value: value)
                                     .frame(maxWidth: .infinity,alignment: .leading)
                                     .padding(.horizontal,10)
-                                    .onTapGesture {
+                                    .asButton {
                                         onSelectedValue?(value)
                                         selectedValue = value
-                                        showDropDown = false
+//                                        showDropDown = false
+                                        onShowValue?()
+                                        dismissingKeyboardGlobal()
                                     }
                             }
                         }
@@ -77,10 +83,12 @@ struct DropDownView: View {
                                 dropDownView(value: value)
                                     .frame(maxWidth: .infinity,alignment: .leading)
                                     .padding(.horizontal,10)
-                                    .onTapGesture {
+                                    .asButton {
                                         onSelectedValue?(value)
                                         selectedValue = value
-                                        showDropDown = false
+//                                        showDropDown = false
+                                        onShowValue?()
+                                        dismissingKeyboardGlobal()
                                     }
                             }
                         }

@@ -23,7 +23,7 @@ class EmergencyContactViewModel: ObservableObject{
             return alert("Please Select Your Relation")
         }else if !email.isValidEmail() {
             return alert("Please Enter Email")
-        }else if !number.validateMobile(){
+        }else if !number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#").validateMobile(){
             return alert("Please Enter 10-Digit Mobile No.")
         }else{
              var param = [String:Any]()
@@ -31,7 +31,7 @@ class EmergencyContactViewModel: ObservableObject{
                  "relative_name": name,
                  "relation": relation,
                  "relative_email": email,
-                 "relative_mobile_no": number
+                 "relative_mobile_no": number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#")
              ]
             next(param)
         }

@@ -27,11 +27,11 @@ struct ContentView: View {
             case 7: MobileNumberScreenView()
             case 8: SelectProfileImageView()
             default:
-                splashView
+                PersonalInformationScreenView()
             }
         }
         .task {
-            delayText()
+//            delayText()
             
             setLobbyScreen.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
                                 using: self.setCareGiverLobbyScreen)

@@ -17,8 +17,8 @@ struct CareGiverHomeScreenView: View {
 
     var body: some View {
         ZStack{
-            VStack(spacing:0){
-                HeaderView
+            VStack(spacing:15){
+                HeaderView(showBackButton: false)
                 ScrollView{
                     VStack(spacing:0) {
                         if showNoContent {
@@ -31,7 +31,7 @@ struct CareGiverHomeScreenView: View {
                                            showIndecator: true,
                                            fromAssets: true,
                                            aspectRatio: 327/104)
-                                    .padding([.horizontal,.vertical],24)
+                                    .padding([.vertical],24)
                             }
                             noCotentView
                             completeProfileView
@@ -46,7 +46,7 @@ struct CareGiverHomeScreenView: View {
                                            showIndecator: true,
                                            fromAssets: true,
                                            aspectRatio: 327/104)
-                                    .padding([.horizontal,.vertical],24)
+                                    .padding([.vertical],24)
                             }
                             jobsNearYouView
                         }
@@ -95,8 +95,7 @@ struct CareGiverHomeScreenView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.horizontal,25)
-        .padding(.vertical,5)
-        .padding(.top,10)
+        .padding(.vertical,24)
     }
     
     private var noCotentView: some View{
@@ -150,22 +149,6 @@ struct CareGiverHomeScreenView: View {
             }
         )
         .foregroundColor(.white)
-    }
-    
-    private var HeaderView: some View{
-        ZStack{
-            Image("KryupaLobby")
-                .resizable()
-                .frame(width: 124,height: 20)
-            
-            HStack{
-                Spacer()
-//                Image("NotificationBellIcon")
-//                    .frame(width: 25,height: 25)
-            }
-            .padding(.horizontal,24)
-        }
-        .padding(.top, 10)
     }
     
     private var completeProfileView: some View{

@@ -8,12 +8,12 @@
 import SwiftUI
 import SwiftfulUI
 
-
 struct PersonalInformationScreenView: View {
     
     @Environment(\.router) var router
     @StateObject private var viewModel = PersonalInformationScreenViewModel()
-    
+    @State var genderDropDownShow: Bool = false
+    @State var languageDropDownShow: Bool = false
     var body: some View {
         ZStack{
             
@@ -26,6 +26,7 @@ struct PersonalInformationScreenView: View {
                             .foregroundStyle(.appMain)
                             .frame(width: 130,height: 4)
                     }
+                    .padding(.top,20)
                     
                     Text("Personal Information")
                         .font(.custom(FontContent.besMedium, size: 22))
@@ -53,7 +54,7 @@ struct PersonalInformationScreenView: View {
                     ScrollView {
                     VStack(spacing: 25,
                            content: {
-                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
                         
                         selectionViewWithHeader(
                             leftIcone: nil,
@@ -92,13 +93,24 @@ struct PersonalInformationScreenView: View {
                         selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
                         
                         HStack{
+                            textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
+                                .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                    if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+                                        viewModel.personalInfoData.postalCode?.removeLast()
+                                    }
+                                }
                             textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                            textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
-                            
+                                .disabled(true)
                         }
                         
-                        textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
-                        
+                        HStack{
+                            textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
+                                .disabled(true)
+                            
+                            textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
+                                .disabled(true)
+                            
+                        }
                         
                         HStack{
                             Spacer()
@@ -124,9 +136,7 @@ struct PersonalInformationScreenView: View {
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 30 : 0)
-            .onTapGesture {
-                print("No access!")
-            }
+            .modifier(DismissingKeyboard())
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()
@@ -181,8 +191,12 @@ struct PersonalInformationScreenView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.gender,
                 placeHolder: "Select",
+                showDropDown: genderDropDownShow,
                 values: AppConstants.genderArray) { value in
                     viewModel.personalInfoData.gender = value
+                }onShowValue: {
+                    genderDropDownShow = !genderDropDownShow
+                    languageDropDownShow = false
                 }
         })
         .padding(.bottom,-10)
@@ -203,9 +217,14 @@ struct PersonalInformationScreenView: View {
             DropDownView(
                 selectedValue: viewModel.personalInfoData.language,
                 placeHolder: "Select",
+                showDropDown: languageDropDownShow,
                 values: AppConstants.languageSpeakingArray) { value in
                     viewModel.personalInfoData.language = value
+                }onShowValue: {
+                    languageDropDownShow = !languageDropDownShow
+                    genderDropDownShow = false
                 }
+                
         })
     }
     

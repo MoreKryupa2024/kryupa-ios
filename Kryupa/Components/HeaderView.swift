@@ -23,6 +23,7 @@ struct HeaderView: View {
                 Image("KryupaLobby")
                     .resizable()
                     .frame(width: 124,height: 20)
+                    .padding(.vertical,5)
                 
                 HStack{
                     if showBackButton {
@@ -48,7 +49,7 @@ struct HeaderView: View {
                     .foregroundStyle(.appMain)
             }
         }
-        .padding(.top, 10)
+//        .padding(.top, 10)
         
     }
 }

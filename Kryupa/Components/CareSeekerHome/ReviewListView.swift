@@ -45,6 +45,7 @@ struct ReviewListView: View {
             
             Text(reviewData.review)
                 .font(.custom(FontContent.plusRegular, size: 11))
+                .padding(.top, 5)
         }
         .padding(.vertical,9)
         .padding(.horizontal,10)

@@ -11,7 +11,8 @@ import SwiftfulUI
 struct MyServicesView: View {
     @Environment(\.router) var router
     @StateObject private var viewModel = MyServiceViewModel()
-
+    @State var mobilityLevelDownShow:Bool = Bool()
+    @State var distanceDownShow:Bool = Bool()
     var body: some View {
         ZStack{
             
@@ -75,8 +76,12 @@ struct MyServicesView: View {
             DropDownView(
                 selectedValue: viewModel.mobilityLevel,
                 placeHolder: "Select",
+                showDropDown: mobilityLevelDownShow,
                 values: AppConstants.mobilityLevelArray) { value in
                     viewModel.mobilityLevel = value
+                }onShowValue: {
+                    mobilityLevelDownShow = !mobilityLevelDownShow
+                    distanceDownShow = false
                 }
         })
     }
@@ -136,8 +141,12 @@ struct MyServicesView: View {
             DropDownView(
                 selectedValue: viewModel.distance,
                 placeHolder: "Select",
+                showDropDown: distanceDownShow,
                 values: AppConstants.distanceArray) { value in
                     viewModel.distance = value
+                }onShowValue: {
+                    distanceDownShow = !distanceDownShow
+                    mobilityLevelDownShow = false
                 }
         })
     }

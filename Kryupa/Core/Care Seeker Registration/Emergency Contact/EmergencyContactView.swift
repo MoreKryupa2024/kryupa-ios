@@ -13,7 +13,7 @@ struct EmergencyContactView: View {
     var parameters:[String:Any] = [String:Any]()
     
     @StateObject private var viewModel = EmergencyContactViewModel()
-    
+    @State var relationDropShow:Bool = Bool()
     var body: some View {
             VStack(spacing:0){
                 ZStack(alignment:.leading){
@@ -25,6 +25,7 @@ struct EmergencyContactView: View {
                         .frame(width: 196,height: 4)
                 }
                 .padding([.leading,.trailing],24)
+                .padding(.top,20)
                 
                 
                 Text("Emergency Contact")
@@ -37,7 +38,7 @@ struct EmergencyContactView: View {
                     
                     textFieldViewWithHeader(
                         title: "Legal Name",
-                        placeHolder: "Input text",
+                        placeHolder: "Full Legal Name",
                         value: $viewModel.name,
                         keyboard: .asciiCapable
                     )
@@ -125,6 +126,12 @@ struct EmergencyContactView: View {
             .keyboardType(.numberPad)
             .frame(height: 44)
             .font(.custom(FontContent.plusRegular, size: 15))
+            .onChange(of: viewModel.number) { oldValue, newValue in
+                viewModel.number = viewModel.number.applyPatternOnNumbers(pattern: "(###) ###-####", replacementCharacter: "#")
+                if viewModel.number.count > 14{
+                    viewModel.number.removeLast()
+                }
+            }
         }
         .background{
             RoundedRectangle(
@@ -222,8 +229,11 @@ struct EmergencyContactView: View {
             DropDownView(
                 selectedValue: viewModel.relation,
                 placeHolder: "Select",
+                showDropDown: relationDropShow,
                 values: AppConstants.relationArray) { value in
                     viewModel.relation = value
+                }onShowValue: {
+                    relationDropShow = !relationDropShow
                 }
         })
     }
