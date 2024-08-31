@@ -17,15 +17,15 @@ struct ExprienceAndSkills {
 
 // MARK: - PersonalInfo
 struct PersonalInfo {
-    var name: String? = Defaults().fullName
+    var name: String?// = Defaults().fullName
     var language, dob, gender, ssn: String?
     var latitude: Double? = 22.00
     var longitude: Double? = 22.00
-    var address: String? = "123, Test Addresss, Street"
-    var city: String? = "Indore"
-    var state: String? = "MP"
-    var postalCode: String? = "12345"
-    var country: String? = "India"
+    var address: String?
+    var city: String?
+    var state: String?
+    var postalCode: String?
+    var country: String?
 }
 
 // MARK: - PreferenceList
@@ -69,5 +69,42 @@ struct SendOTPData {
     init(jsonData: [String:Any]){
         requestID = jsonData["request_id"] as? String ?? ""
         type = jsonData["type"] as? String ?? ""
+    }
+}
+
+
+// MARK: - Welcome
+struct ZipCpdeModel  {
+    let data: ZipCpdeData
+    
+    init(jsonData: [String:Any]){
+        data = ZipCpdeData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+// MARK: - DataClass
+struct ZipCpdeData {
+    let postCode, country, countryAbbreviation: String
+    let places: [Place]
+
+    init(jsonData: [String:Any]){
+        postCode = jsonData["post code"] as? String ?? ""
+        country = jsonData["country"] as? String ?? ""
+        countryAbbreviation = jsonData["country abbreviation"] as? String ?? ""
+        places = (jsonData["places"] as? [[String:Any]] ?? [[String:Any]]()).map{Place(jsonData: $0) }
+    }
+}
+
+// MARK: - Place
+struct Place {
+    let placeName, longitude, state, stateAbbreviation: String
+    let latitude: String
+
+    init(jsonData: [String:Any]){
+        placeName = jsonData["place name"] as? String ?? ""
+        longitude = jsonData["longitude"] as? String ?? ""
+        state = jsonData["state"] as? String ?? ""
+        stateAbbreviation = jsonData["state abbreviation"] as? String ?? ""
+        latitude = jsonData["latitude"] as? String ?? ""
     }
 }

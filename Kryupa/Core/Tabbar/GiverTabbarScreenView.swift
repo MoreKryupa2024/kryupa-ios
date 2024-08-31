@@ -112,11 +112,11 @@ struct GiverTabbarScreenView: View {
         }
         .padding(.top,10)
         .background(
-            Color.white // any non-transparent background
-                .shadow(color: ._444446.opacity(0.2), radius: 10, x: 0, y: 0)
-                .mask(Rectangle().padding(.top, -20)) /// here!
+            Rectangle()
+                .foregroundStyle(._444446.opacity(0.2))
+                .frame(height: 1)
+                .offset(y:-34)
         )
-        //        .ignoresSafeArea()
     }
     
     private func showJobsScreen(_ notification: Notification) {

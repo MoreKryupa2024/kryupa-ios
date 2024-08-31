@@ -47,10 +47,7 @@ struct AddNewProfileScreenView: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .blur(radius: viewModel.showDatePicker ? 30 : 0)
-            .onTapGesture {
-                print("No access!")
-            }
+            .blur(radius: viewModel.showDatePicker ? 05 : 0)
             
             if viewModel.isLoading{
                 LoadingView()
@@ -61,8 +58,6 @@ struct AddNewProfileScreenView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
-        
-        
     }
     
     private var medicalConditionView: some View{
@@ -240,8 +235,10 @@ struct AddNewProfileScreenView: View {
                 viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker
             },
-            displayedComponents: .date
-        )
+            displayedComponents: .date, cancelAction:  {
+                viewModel.showDatePicker = false
+                viewModel.dateOfBirthSelected = true
+            })
     }
     
     private var languageDropdownView: some View{
@@ -490,13 +487,16 @@ struct AddNewProfileScreenView: View {
             
             languageDropdownView
             
-            selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
+            AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
             
             HStack{
                 textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),keyboard: .numberPad, showRed: true)
                     .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
                         if (viewModel.personalInfoData.postalCode ?? "").count > 5{
                             viewModel.personalInfoData.postalCode?.removeLast()
+                        }
+                        if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+                            viewModel.getAddress()
                         }
                     }
                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
@@ -527,6 +527,43 @@ struct AddNewProfileScreenView: View {
                         }
                     }
             }
+        })
+    }
+    
+    private func AddressView(value: Binding<String>)-> some View{
+        return VStack(alignment: .leading, content: {
+            
+                HStack(spacing:0){
+                    Text("Address")
+                    Text("*")
+                        .foregroundStyle(.red)
+                }
+                .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            HStack(spacing:0){
+                
+                Image("PersonalInfoLocation")
+                    .padding(.trailing,5)
+                    .frame(width: 24,height: 24)
+                
+                TextField(text: value) {
+                    Text("Address")
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .keyboardType(.asciiCapable)
+                .font(.custom(FontContent.plusRegular, size: 15))
+                
+            }
+            .font(.custom(FontContent.plusRegular, size: 15))
+            .padding([.leading,.trailing],10)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.D_1_D_1_D_6)
+                    .frame(height: 48)
+            }
+            .padding(.top,10)
         })
     }
     

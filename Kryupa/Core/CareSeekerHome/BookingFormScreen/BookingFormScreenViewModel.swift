@@ -66,24 +66,23 @@ class BookingFormScreenViewModel: ObservableObject{
             return
         }
         bookingFor = bookingForList.filter{$0.id == bookingIDData.profileID}.first?.name ?? ""
-        
-        let weakDay = WeakDayData(id: 0,
-                                  day:  bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "E"),
-                                  numDay: bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "dd"),
-                                  serverDate: bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
-                                  serverTime: bookingIDData.startTime)
-        
-        
-        selectedDay = Date.getDates(forLastNDays: 7).filter{$0.day == weakDay.day && $0.numDay == weakDay.numDay}.first ?? Date.getDates(forLastNDays: 1).first!
-        startDate = bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-        endDate = bookingIDData.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-        
-        startTime = bookingIDData.startTime
-        endTime = bookingIDData.endTime
-        
+        if startDate < bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ") {
+            let weakDay = WeakDayData(id: 0,
+                                      day:  bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "E"),
+                                      numDay: bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "dd"),
+                                      serverDate: bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+                                      serverTime: bookingIDData.startTime)
+            
+            
+            selectedDay = Date.getDates(forLastNDays: 7).filter{$0.day == weakDay.day && $0.numDay == weakDay.numDay}.first ?? Date.getDates(forLastNDays: 1).first!
+            startDate = bookingIDData.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
+            endDate = bookingIDData.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
+            
+            startTime = bookingIDData.startTime
+            endTime = bookingIDData.endTime
+        }
         segSelected = bookingIDData.bookingType
         additionalSkillsSelected = bookingIDData.additionalSkills
-//        additionalInfoSelected = bookingIDData.add
         genderSelected = bookingIDData.gender
         yearsOfExperienceSelected = bookingIDData.yearsOfExprience
         languageSpeakingSelected = bookingIDData.languages

@@ -17,40 +17,92 @@ struct DateTimePickerScreenView: View {
     var valueStr: ((String)->Void)? = nil
     var displayedComponents: DatePickerComponents = .date
     var valueDate: ((Date)->Void)? = nil
+    var cancelAction: (()->Void)? = nil
     
     var body: some View {
         ZStack{
-            VStack{
-                if let range {
-                    DatePicker("", selection: $givenDate, in: range, displayedComponents: displayedComponents )
-                        .datePickerStyle(.wheel)
-                }else if let rangeThrough {
-                    DatePicker("", selection: $givenDate, in: rangeThrough, displayedComponents: displayedComponents )
-                        .datePickerStyle(.wheel)
-                }else{
-                    DatePicker("", selection: $givenDate, displayedComponents: displayedComponents )
-                        .datePickerStyle(.wheel)
-                }
-                HStack{
-                    Spacer()
-                    Text("Done")
-                        .padding(10)
-                        .foregroundStyle(.white)
-                        .background{
-                            Color.blue
+            Color(.systemBackground)
+                .ignoresSafeArea()
+                .opacity(0.1)
+            ZStack{
+                VStack {
+                    if let range {
+                        if displayedComponents == .date{
+                            DatePicker(selection: $givenDate,
+                                       in: range ,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.graphical)
+                        }else{
+                            DatePicker(selection: $givenDate,
+                                       in: range ,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.wheel)
                         }
-                        .cornerRadius(5)
+                    }else if let rangeThrough {
+                        
+                        if displayedComponents == .date{
+                            DatePicker(selection: $givenDate,
+                                       in: rangeThrough ,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.graphical)
+                        }else{
+                            DatePicker(selection: $givenDate,
+                                       in: rangeThrough ,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.wheel)
+                        }
+                    }else{
+                        if displayedComponents == .date{
+                            DatePicker(selection: $givenDate,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.graphical)
+                        }else{
+                            DatePicker(selection: $givenDate,
+                                       displayedComponents: displayedComponents){}
+                                .datePickerStyle(.wheel)
+                        }
+                    }
+                    
+                    HStack(spacing: 15){
+                        Text("Cancel")
+                            .frame(maxWidth: .infinity)
+                            .padding(10)
+                            .foregroundStyle(.black)
+                            .cornerRadius(5)
+                            .asButton {
+                                cancelAction?()
+                            }
+                        Text("Done")
+                            .frame(maxWidth: .infinity)
+                            .padding(10)
+                            .foregroundStyle(.white)
+                            .background{
+                                Color.blue
+                            }
+                            .cornerRadius(5)
+                            .asButton(.press) {
+                                print(givenDate)
+                                print(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
+                                valueStr?(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
+                                valueDate?($givenDate.wrappedValue)
+                            }
+                    }
                     
                 }
-                .asButton(.press) {
-                    print(givenDate)
-                    print(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
-                    valueStr?(dateFormatChange(dateFormat: formate, dates: $givenDate.wrappedValue))
-                    valueDate?($givenDate.wrappedValue)
-                }
+                .padding()
             }
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(.white)
+                    .frame(width: 350)
+                    .shadow(radius: 2)
+            )
             .padding()
         }
+        .frame(maxWidth: .infinity,maxHeight: .infinity)
+//        .asButton {
+//            print("No access!")
+//        }
     }
 }
 

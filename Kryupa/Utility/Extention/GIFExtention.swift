@@ -71,6 +71,12 @@ func dateFormatChange(dateFormat:String, dates: Date)-> String{
     return dateFormatter.string(from: dates)
 }
 
+func dateFormatChangeToDate(dateFormat:String, dates: String)-> Date?{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
+    return dateFormatter.date(from: dates)
+}
+
 func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,beforeZone: String, afterZone: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = beforeFormat

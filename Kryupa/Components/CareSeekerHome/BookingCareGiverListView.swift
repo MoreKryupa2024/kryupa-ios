@@ -30,7 +30,7 @@ struct BookingCareGiverListView: View {
                 
                 Text("\(giver.yearsOfExprience) Years Expirenced")
                     .font(.custom(FontContent.plusRegular, size: 12))
-                
+                    .padding(.bottom,5)
                 HStack{
                     StarsView(rating: 3.5, maxRating: 5, size: 12)
                     
@@ -42,8 +42,8 @@ struct BookingCareGiverListView: View {
             .padding(.leading,23)
             
             Text("$\(giver.price)")
-                .font(.custom(FontContent.plusMedium, size: 12))
-                .frame(maxHeight: .infinity,alignment: .top)
+                .font(.custom(FontContent.plusMedium, size: 15))
+                .frame(maxHeight: .infinity,alignment: .center)
         }
         .padding(.vertical,9)
         .padding(.horizontal,10)

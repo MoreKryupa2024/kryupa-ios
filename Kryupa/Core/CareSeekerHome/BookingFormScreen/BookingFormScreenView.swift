@@ -70,7 +70,7 @@ struct BookingFormScreenView: View {
                 
                 BottomButtonView
             }
-            .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            .blur(radius: viewModel.showDatePicker ? 05 : 0)
             .onTapGesture {
                 print("No access!")
             }
@@ -90,22 +90,32 @@ struct BookingFormScreenView: View {
                         rangeThrough: nil,
                         valueStr: { value in
                             viewModel.startTime = value
-                            viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
+                            if value > "23:00:00"{
+                                viewModel.endTime = "23:59:00"
+                            }else{
+                                viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
+                            }
                             viewModel.showDatePicker = false
                         },
                         displayedComponents: .hourAndMinute) { value in
-                            
-                            guard let incrementedDate = Calendar.current.date(byAdding: .hour, value: 1, to: value) else {
-                                return
+                            if dateFormatChange(dateFormat: "HH:mm:ss", dates: value) > "23:00:00"{
+                                guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
+                                viewModel.endTimeValue = date
+                            }else{
+                                guard let incrementedDate = Calendar.current.date(byAdding: .hour, value: 1, to: value) else {
+                                    return
+                                }
+                                viewModel.endTimeValue = incrementedDate
                             }
-                            viewModel.endTimeValue = incrementedDate
+                        }cancelAction: {
+                            viewModel.showDatePicker = false
                         }
 
                 case 2:
                     DateTimePickerScreenView(
                         givenDate: viewModel.endTimeValue,
                         formate: "HH:mm:ss",
-                        range: viewModel.endTimeValue...,
+                        range: viewModel.segSelected != "One Time" ? nil : viewModel.endTimeValue...,
                         rangeThrough: nil,
                         valueStr: { value in
                             viewModel.endTime = value
@@ -113,6 +123,8 @@ struct BookingFormScreenView: View {
                         },
                         displayedComponents: .hourAndMinute) { value in
                             viewModel.endTimeValue = value
+                        }cancelAction: {
+                            viewModel.showDatePicker = false
                         }
                     
                 case 3:
@@ -132,6 +144,8 @@ struct BookingFormScreenView: View {
                             }
                             viewModel.startDateValue = value
                             viewModel.endDateValue = incrementedDate
+                    }cancelAction: {
+                        viewModel.showDatePicker = false
                     }
                     
                 case 4:
@@ -146,6 +160,8 @@ struct BookingFormScreenView: View {
                         },
                         displayedComponents: .date){ value in
                             viewModel.endDateValue = value
+                        }cancelAction: {
+                            viewModel.showDatePicker = false
                         }
                 default:
                     EmptyView()

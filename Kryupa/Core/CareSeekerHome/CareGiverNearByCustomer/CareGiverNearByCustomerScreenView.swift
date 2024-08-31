@@ -34,7 +34,7 @@ struct CareGiverNearByCustomerScreenView: View {
         .task {
             viewModel.pageNumber = 1
             viewModel.getCareGiverNearByList(bookingID: bookingID) { alertStr in
-                presentAlert(title: "Kryupa", subTitle: alertStr)
+//                presentAlert(title: "Kryupa", subTitle: alertStr)
             }
         }
     }
@@ -48,25 +48,28 @@ struct CareGiverNearByCustomerScreenView: View {
             SearchView
             
             VStack(spacing:0){
-                ForEach(Array(viewModel.careGiverNearByList.enumerated()),id: \.element.id){ (index,giver) in
-                    BookingCareGiverListView(careGiverNear: giver)
-                        .padding(.top,15)
-                        .asButton(.press) {
-                            let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
-                            RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
-                            router.showScreen(.push) { rout in
-                                RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                
+                if viewModel.careGiverNearByList.count == 0 {
+                        Image("NearyouEmpty")
+                            .resizable()
+                            .aspectRatio(283/225, contentMode: .fit)
+                            .padding(.horizontal,40)
+                            .padding(.top,130)
+                            .padding(.bottom,30)
+                        Text("Oops! Seems Like All Caregivers\nAre Currently Occupied")
+                        .multilineTextAlignment(.center)
+                }else{
+                    ForEach(Array(viewModel.careGiverNearByList.enumerated()),id: \.element.id){ (index,giver) in
+                        BookingCareGiverListView(careGiverNear: giver)
+                            .padding(.top,15)
+                            .asButton(.press) {
+                                let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
+                                RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
+                                router.showScreen(.push) { rout in
+                                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                                }
                             }
-                        }
-                    
-//                        .onAppear{
-//                            if (viewModel.careGiverNearByList.count - 1) == index && viewModel.pagination{
-//                                viewModel.pageNumber += 1
-//                                viewModel.getCareGiverNearByList(bookingID: bookingID) { alertStr in
-//                                    presentAlert(title: "Kryupa", subTitle: alertStr)
-//                                }
-//                            }
-//                        }
+                    }
                 }
             }
             .padding(.vertical,30)

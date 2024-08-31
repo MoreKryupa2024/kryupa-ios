@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 class BookingViewModel: ObservableObject{
     @Published var bookingList = [BookingsListData]()
     @Published var selectedSection = 0

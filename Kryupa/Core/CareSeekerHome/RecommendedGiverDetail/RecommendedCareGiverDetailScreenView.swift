@@ -26,7 +26,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                     SegmentView
                     if viewModel.selection == "Summary"{
                         Text(viewModel.giverDetail?.bio ?? "")
-                            .font(.custom(FontContent.plusRegular, size: 12))
+                            .font(.custom(FontContent.plusRegular, size: 15))
                             .foregroundStyle(._444446)
                             .frame(maxWidth: .infinity,alignment: .leading)
                             .padding(.horizontal,24)
@@ -120,6 +120,16 @@ struct RecommendedCareGiverDetailScreenView: View {
             }
             .padding(.top,10)
             .padding(.horizontal,24)
+            HStack(spacing:0){
+                Text("Area Of Experties:")
+                    .font(.custom(FontContent.plusMedium, size: 12))
+                
+                Text(" \(viewModel.giverDetail?.areaOfExperties.joined(separator: ",") ?? "")")
+                    .lineLimit(1)
+                    .font(.custom(FontContent.plusRegular, size: 12))
+            }
+            .padding(.horizontal,30)
+            .padding([.top,.bottom],5)
             
             HStack(spacing:0){
                 Text("Languages:")
@@ -129,7 +139,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .lineLimit(1)
                     .font(.custom(FontContent.plusRegular, size: 12))
             }
-            .padding([.vertical,.horizontal],30)
+            .padding([.bottom,.horizontal],30)
             
             MessageButton
                 .asButton(.press){

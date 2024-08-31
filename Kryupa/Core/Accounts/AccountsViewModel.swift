@@ -7,8 +7,7 @@
 
 import Foundation
 
-class AccountsViewModel: ObservableObject
-{
+class AccountsViewModel: ObservableObject {
     @Published var profile: ProfileData?
     @Published var isloading: Bool = Bool()
     @Published var profileGiver: ProfileGiverDataClass?
@@ -44,7 +43,6 @@ class AccountsViewModel: ObservableObject
                     print(error)
                 }
             }
-            
         }
     }
 }

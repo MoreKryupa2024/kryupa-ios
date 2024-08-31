@@ -42,7 +42,7 @@ struct MobileNumberScreenView: View {
                     sendCodeButton
                         .padding(.top,50)
                         .asButton(.press) {
-                            if viewModel.mobileNumner.validateMobile(){
+                            if viewModel.mobileNumner.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#").validateMobile(){
                                 viewModel.sendOTP {
                                     router.showScreen(.push) { _ in
                                         OTPVerificationScreenView(mobileNumber: viewModel.mobileNumner.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#"),requestId: viewModel.sendOTPdata?.requestID ?? "")

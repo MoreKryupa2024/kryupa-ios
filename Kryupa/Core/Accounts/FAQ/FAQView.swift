@@ -56,8 +56,11 @@ struct FAQView: View {
                     .scrollIndicators(.hidden)
                     
                     sendMessageView
-                }
+                }       
             }
+            .background(
+                Image("ChatBackground")
+            )
             .toolbar(.hidden, for: .navigationBar)
             .task{
                 viewModel.pageNumber = 1

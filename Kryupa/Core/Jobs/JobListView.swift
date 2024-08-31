@@ -46,6 +46,7 @@ struct JobListView: View {
                         }
                         .padding(.top, 24)
                     }
+                    .scrollIndicators(.hidden)
                 }
             }
             .onAppear{

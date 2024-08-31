@@ -30,7 +30,7 @@ struct CareGiverPortfolioView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text("$\(job.customerInfo.price)")
-                        .font(.custom(FontContent.plusMedium, size: 13))
+                        .font(.custom(FontContent.plusMedium, size: 15))
                         .foregroundStyle(.appMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -47,7 +47,7 @@ struct CareGiverPortfolioView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text(job.bookingDetails.areaOfExpertise.joined(separator: ","))
                     .padding(.bottom, 5)
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._7_C_7_C_80)
                     .padding(.horizontal, 15)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,7 +63,7 @@ struct CareGiverPortfolioView: View {
 
 
             HStack {
-                Text("View Profile")
+                Text("View Booking")
                     .font(.custom(FontContent.plusRegular, size: 16))
                     .foregroundStyle(.appMain)
                     .padding(.vertical, 8)
@@ -109,7 +109,7 @@ struct JobDescView: View {
             HStack(spacing:5){
                 Image("calender")
                     .resizable()
-                    .frame(width: 18,height: 18)
+                    .frame(width: 22,height: 22)
 //                Text(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))
                 Text(startDate)
                     .font(.custom(FontContent.plusRegular, size: 15))
@@ -121,7 +121,7 @@ struct JobDescView: View {
             HStack(spacing:5){
                 Image("clock")
                     .resizable()
-                    .frame(width: 18,height: 18)
+                    .frame(width: 22,height: 22)
 //                Text("\(job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))")
                 Text("\(startTime) - \(endTime)")
                     .font(.custom(FontContent.plusRegular, size: 15))
@@ -134,7 +134,7 @@ struct JobDescView: View {
                 HStack(spacing:2){
                     Image("account")
                         .resizable()
-                        .frame(width: 18,height: 18)
+                        .frame(width: 22,height: 22)
 //                    Text(job.customerInfo.gender)
                     Text(gender)
                         .minimumScaleFactor(0.01)
@@ -153,14 +153,14 @@ struct JobDescView: View {
 //                }
                 //                .frame(maxWidth: .infinity)
                 
-                HStack(spacing:2){
-                    Image("Location")
-                        .resizable()
-                        .frame(width: 18,height: 18)
-                    Text("5 mil")
-                        .font(.custom(FontContent.plusRegular, size: 15))
-                        .foregroundStyle(._444446)
-                }
+//                HStack(spacing:2){
+//                    Image("Location")
+//                        .resizable()
+//                        .frame(width: 22,height: 22)
+//                    Text("5 mil")
+//                        .font(.custom(FontContent.plusRegular, size: 15))
+//                        .foregroundStyle(._444446)
+//                }
                 //                .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -169,10 +169,10 @@ struct JobDescView: View {
             HStack(spacing:5){
                 Image("heartbeat")
                     .resizable()
-                    .frame(width: 18,height: 18)
+                    .frame(width: 22,height: 22)
 //                Text(job.customerInfo.diseaseType.joined(separator: ","))
                 Text(diseaseType.joined(separator:","))
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

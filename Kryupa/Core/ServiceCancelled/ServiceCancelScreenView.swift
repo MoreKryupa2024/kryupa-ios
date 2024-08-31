@@ -16,17 +16,17 @@ struct ServiceCancelScreenView: View {
     var body: some View {
         ZStack{
             VStack(spacing:15){
-             HeaderView(title: "Personal Information")
+             HeaderView(title: "Personal Information",showBackButton: true)
                 ScrollView{
                     ReasonDropdownView
                         .padding(.horizontal,24)
                         .padding(.top,30)
                     
-                    if viewModel.selectedReason == "Other"{
-                        otherFieldView
-                            .padding(.horizontal,24)
-                            .padding(.top,15)
-                    }
+//                    if viewModel.selectedReason == "Other"{
+//                        otherFieldView
+//                            .padding(.horizontal,24)
+//                            .padding(.top,15)
+//                    }
                     
                     DescriptionView
                         .padding(.top,15)

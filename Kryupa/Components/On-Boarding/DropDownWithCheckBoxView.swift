@@ -85,6 +85,7 @@ struct DropDownWithCheckBoxView: View {
                     }
                     .padding([.top,.bottom],15)
                 }
+                .scrollIndicators(.hidden)
                 .frame(height: values.count > 4 ? 200 : .infinity)
             }
         }

@@ -56,20 +56,16 @@ struct PersonalInformationSeekerView: View {
                         
                         languageDropdownView
                         
-                        selectionViewWithHeader(leftIcone: "PersonalInfoLocation", rightIcon: nil, value: viewModel.personalInfoData.address, title: "Address", placeHolder: "Input text")
-                        
-                        //                            .onTapGesture {
-                        //                                router.showScreen(.push) { rout in
-                        //                                    Test()
-                        //                                }
-                        //                            }
-                        
+                        AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
                         
                         HStack{
                             textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
                                 .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
                                     if (viewModel.personalInfoData.postalCode ?? "").count > 5{
                                         viewModel.personalInfoData.postalCode?.removeLast()
+                                    }
+                                    if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+                                        viewModel.getAddress()
                                     }
                                 }
                             textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
@@ -109,13 +105,50 @@ struct PersonalInformationSeekerView: View {
             .padding([.leading,.trailing],24)
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
-            .blur(radius: viewModel.showDatePicker ? 30 : 0)
+            .blur(radius: viewModel.showDatePicker ? 05 : 0)
             .modifier(DismissingKeyboard())
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()
             }
         }
+    }
+    
+    private func AddressView(value: Binding<String>)-> some View{
+        return VStack(alignment: .leading, content: {
+            
+                HStack(spacing:0){
+                    Text("Address")
+                    Text("*")
+                        .foregroundStyle(.red)
+                }
+                .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            HStack(spacing:0){
+                
+                Image("PersonalInfoLocation")
+                    .padding(.trailing,5)
+                    .frame(width: 24,height: 24)
+                
+                TextField(text: value) {
+                    Text("Address")
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .keyboardType(.asciiCapable)
+                .font(.custom(FontContent.plusRegular, size: 15))
+                
+            }
+            .font(.custom(FontContent.plusRegular, size: 15))
+            .padding([.leading,.trailing],10)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.D_1_D_1_D_6)
+                    .frame(height: 48)
+            }
+            .padding(.top,10)
+        })
     }
     
     private var genderDropdownView: some View{
@@ -195,7 +228,10 @@ struct PersonalInformationSeekerView: View {
                 viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker
             },
-            displayedComponents: .date
+            displayedComponents: .date, cancelAction: {
+                viewModel.showDatePicker = false
+                viewModel.dateOfBirthSelected = true
+            }
         )
     }
     

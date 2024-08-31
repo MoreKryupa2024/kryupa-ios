@@ -27,6 +27,7 @@ struct CareGiverDetailData {
     let name: String
     let yearOfExperience: Int
     let language: [String]
+    let areaOfExperties: [String]
     let bio: String
     let showBookNow: Bool
     let totalReviewer: Int
@@ -39,6 +40,7 @@ struct CareGiverDetailData {
         id = jsonData["id"] as? String ?? ""
         profileURL = jsonData["profile_url"] as? String ?? ""
         language = jsonData["language"] as? [String] ?? []
+        areaOfExperties = jsonData["area_of_experties"] as? [String] ?? []
         yearOfExperience = jsonData["year_of_experience"] as? Int ?? 0
         name = jsonData["name"] as? String ?? ""
         bio = jsonData["bio"] as? String ?? ""

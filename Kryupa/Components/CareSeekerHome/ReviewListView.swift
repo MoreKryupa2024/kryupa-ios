@@ -28,13 +28,14 @@ struct ReviewListView: View {
                     .frame(width: 64,height: 64)
                     .clipShape(.rect(cornerRadius: 32))
                     .clipped()
-                VStack(alignment:.leading, spacing:5){
+                VStack(alignment:.leading, spacing:0){
                     Text(reviewData.reviewedByName)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 17))
                     
                     Text("5 Years Expirenced")
                         .font(.custom(FontContent.plusRegular, size: 12))
+                        .padding(.bottom,5)
                     
                     StarsView(rating: reviewData.rating, maxRating: 5, size: 12)
                         
@@ -44,7 +45,7 @@ struct ReviewListView: View {
             }
             
             Text(reviewData.review)
-                .font(.custom(FontContent.plusRegular, size: 11))
+                .font(.custom(FontContent.plusRegular, size: 13))
                 .padding(.top, 5)
         }
         .padding(.vertical,9)

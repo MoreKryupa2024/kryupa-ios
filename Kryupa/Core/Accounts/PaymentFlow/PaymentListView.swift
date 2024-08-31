@@ -18,8 +18,14 @@ struct PaymentListView: View {
         ZStack{
             VStack(spacing:0) {
                 HeaderView(showBackButton: true)
-                SegmentView
-                
+                if AppConstants.GiveCare == Defaults().userType{
+                    SegmentView
+                }else{
+                    Text("Payment History")
+                        .font(.custom(FontContent.besMedium, size: 20))
+                        .foregroundStyle(.appMain)
+                        .padding(.top,30)
+                }
                     if viewModel.selectedSection == 0 {
                         if viewModel.orderListData.count == 0{
                             VStack{
@@ -35,7 +41,11 @@ struct PaymentListView: View {
                             ScrollView {
                                 VStack(spacing: 15) {
                                     ForEach(viewModel.orderListData,id: \.id) { msg in
-                                        PaymentHistoryCell(orderListData: msg)
+                                        if AppConstants.GiveCare == Defaults().userType{
+                                            PaymentHistoryCell(orderListData: msg)
+                                        }else{
+                                            seekerPayedView(orderData: msg)
+                                        }
                                     }
                                 }
                                 .padding(.top, 20)
@@ -91,6 +101,67 @@ struct PaymentListView: View {
                 LoadingView()
             }
         }
+    }
+    
+    private func showSeekerPaymentHistoryList()-> some View{
+        return ScrollView{
+            VStack(spacing: 15) {
+                ForEach(viewModel.orderListData,id: \.id) { msg in
+                    PaymentHistoryCell(orderListData: msg)
+                }
+            }
+            .padding(.top, 20)
+        }
+    }
+    
+    private func seekerPayedView(orderData:OrderListData)-> some View{
+        return HStack(spacing:15){
+                
+                ImageLoadingView(imageURL:orderData.profilePictureURL)
+                    .frame(width: 64,height: 64)
+                    .clipShape(.rect(cornerRadius: 32))
+                    .clipped()
+                VStack(alignment:.leading, spacing:0){
+                    HStack{
+                        Text(orderData.name)
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                            .font(.custom(FontContent.besMedium, size: 17))
+                        Spacer()
+                        Text("Paid")
+                            .padding()
+                            .frame(height: 23)
+                            .font(.custom(FontContent.plusMedium, size: 11))
+                            .foregroundStyle(._23_C_16_B)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12).fill(Color.E_0_FFEE)
+                            )
+                    }
+                    let startDate = orderData.startDate.components(separatedBy: " ").first ?? ""
+                    let endDate = orderData.endDate.components(separatedBy: " ").first ?? ""
+                    
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMMM -"))\(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMMM yyyy"))")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .padding(.bottom,5)
+                        .foregroundStyle(._7_C_7_C_80)
+                    
+                    Text("$\(orderData.bookingPricingForCustomer.removeZerosFromEnd(num: 2))")
+                        .font(.custom(FontContent.plusRegular, size: 15))
+                        .padding(.bottom,5)
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.leading,5)
+        
+            }
+            .padding(.vertical,9)
+            .padding(.horizontal,10)
+            .background{
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1.0)
+                    .foregroundStyle(.E_5_E_5_EA)
+            }
+            .padding(.horizontal,24)
     }
     
     private var BankView: some View{

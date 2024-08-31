@@ -81,7 +81,7 @@ struct AccountView: View {
                 MyServicesView()
             }
             
-        case "Payments & Refunds","Payments":
+        case "Payments":
             router.showScreen(.push) { rout in
                 PaymentListView()
             }
@@ -120,6 +120,10 @@ struct AccountView: View {
             
             presentAlert(title: "Kryupa", subTitle: "Logout",primaryAction: primaryAction,secondaryAction: secondaryAction)
             
+        case "Delete or deactivate account":
+            router.showScreen(.push) { rout in
+                DeactivateAccountView()
+            }
         default:
             break
         }

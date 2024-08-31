@@ -13,7 +13,8 @@ struct DropDownView: View {
     @State var selectedValue: String? = nil
     var placeHolder: String = "Select"
     var showDropDown: Bool = Bool()
-    var values: [String] = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","Bedridden"]
+    var values: [String] = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","Bedridden","Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","Bedridden"]
+//    var values: [String] = ["Full mobility","Moderate mobility","Limited mobility"]
     
     var onSelectedValue: ((String)->Void)? = nil
     var onShowValue: (()->Void)? = nil
@@ -73,7 +74,7 @@ struct DropDownView: View {
                                     }
                             }
                         }
-                        .padding([.top,.bottom],15)
+                        .padding([.top],15)
                     }
                     .frame(height: 200)
                 }else{
@@ -97,6 +98,7 @@ struct DropDownView: View {
                 }
             }
         }
+        .scrollIndicators(.hidden)
         .background{
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 1)

@@ -114,7 +114,7 @@ struct OrderListModel {
 // MARK: - Datum
 struct OrderListData {
     let id: String
-    let bookingPricing: Int
+    let bookingPricing: Double
     let bookingPricingForCustomer: Double
     let bookingID, approchID: String
     let name: String
@@ -130,7 +130,7 @@ struct OrderListData {
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
-        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
+        bookingPricing = jsonData["booking_pricing"] as? Double ?? Double(jsonData["booking_pricing"] as? Int ?? Int(jsonData["booking_pricing"] as? String ?? "") ?? 0)
         bookingPricingForCustomer = jsonData["booking_pricing_for_customer"] as? Double ?? 0
         bookingID = jsonData["booking_id"] as? String ?? ""
         approchID = jsonData["approch_id"] as? String ?? ""

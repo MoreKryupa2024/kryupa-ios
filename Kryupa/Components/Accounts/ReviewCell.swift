@@ -28,10 +28,10 @@ struct ReviewCell: View {
                         .padding(.bottom, 1)
                     let createdDate = reviewData?.createdAt.split(separator: " ").first ?? ""
                     Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM"))
-                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                     HStack {
-                        StarsView(rating: Double(reviewData?.rating.getFullRateVal() ?? 0), maxRating: 5, size: 12)
+                        StarsView(rating: Double(reviewData?.rating.getFullRateVal() ?? 0), maxRating: 5, size: 20)
                     }
                 }
                 
@@ -39,7 +39,7 @@ struct ReviewCell: View {
             }
             
             Text(reviewData?.review ?? "")
-                .font(.custom(FontContent.plusRegular, size: 12))
+                .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(._444446)
                 .padding(.top, 5)
             

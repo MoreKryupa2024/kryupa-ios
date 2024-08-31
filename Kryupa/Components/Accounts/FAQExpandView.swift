@@ -17,7 +17,7 @@ struct FAQExpandView: View {
                     .foregroundStyle(._242426)
                     .font(.custom(FontContent.plusRegular, size: 13))
                 Spacer()
-                Image(isExpanded ? "chevron-up" : "chevron-right")
+                Image(isExpanded ? "chevron-down" : "chevron-right")
                     .resizable()
                     .frame(width: 30, height: 30)
             }

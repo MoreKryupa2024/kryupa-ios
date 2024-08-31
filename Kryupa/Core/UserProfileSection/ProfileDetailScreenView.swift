@@ -85,9 +85,7 @@ struct ProfileDetailScreenView: View {
             }
             .padding(.bottom,5)
             
-            
-//            TitleTextView(title: "Name:", value: viewModel.personalDetail?.profileName ?? "")
-            TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
+//            TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
             TitleTextView(title: "Language:", value: viewModel.personalDetail?.language ?? "")
             TitleTextView(title: "DOB:", value: viewModel.personalDetail?.dob!.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM YYYY") ?? "")
         }

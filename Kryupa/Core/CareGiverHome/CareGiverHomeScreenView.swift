@@ -34,7 +34,7 @@ struct CareGiverHomeScreenView: View {
                                     .padding([.vertical],24)
                             }
                             noCotentView
-                            completeProfileView
+//                            completeProfileView
                             
                         } else {
                             if let serviceStartData = viewModel.serviceStartData{
@@ -198,10 +198,10 @@ struct CareGiverHomeScreenView: View {
             }
             .padding(.horizontal,24)
             jobsNearYouGridView
-            completeProfileView
+//            completeProfileView
 
         }
-        .padding(.top, 30)
+        .padding(.top, 10)
         
     }
     

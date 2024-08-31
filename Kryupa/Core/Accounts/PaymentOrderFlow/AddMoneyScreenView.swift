@@ -107,7 +107,7 @@ struct AddMoneyScreenView: View {
     }
     
     private func capsuleView(value: String)-> some View{
-        return Text("$\(value)")
+        return Text("+$\(value)")
             .foregroundStyle(._7_C_7_C_80)
             .font(.custom(FontContent.plusMedium, size: 15))
             .frame(width: 77,height: 36)

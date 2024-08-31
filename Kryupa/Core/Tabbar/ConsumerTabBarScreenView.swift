@@ -9,25 +9,21 @@ import SwiftUI
 import SwiftfulUI
 
 struct ConsumerTabBarScreenView: View {
-    @State var selectedIndex: Int = 0
-    @State var walletScreenShown: Bool = true
-    @State var chatScreenShow: Bool = true
-    @StateObject var bookingViewModel = BookingViewModel()
-    let showBookingScreen = NotificationCenter.default
-    let showInboxScreen = NotificationCenter.default
-    let showBookingsHistoryScreen = NotificationCenter.default
-    let notificatioSetChatScreen = NotificationCenter.default
+    
+    
+    @StateObject var consumerTabBarScreenViewModel = ConsumerTabBarScreenViewModel()
     let notificatioShowWalletScreen = NotificationCenter.default
     @Environment(\.router) var router
+    @State var navWallet:Bool = true
     
     var body: some View {
         VStack{
-            switch selectedIndex{
+            switch consumerTabBarScreenViewModel.selectedIndex{
                 
             case 1: 
 //                let bookingViewModel = BookingViewModel()
 //                bookingViewModel.selectedSection = selectedIndexBooking
-                BookingScreenView(viewModel: bookingViewModel)
+                BookingScreenView(viewModel: consumerTabBarScreenViewModel.bookingViewModel)
             case 2: BookingFormScreenView()
             case 3: InboxScreenView()
             case 4: AccountView()
@@ -38,43 +34,25 @@ struct ConsumerTabBarScreenView: View {
             Spacer()
             TabView
         }
-        .task{
-            walletScreenShown = true
+        .onChange(of: consumerTabBarScreenViewModel.selectedIndex) { oldValue, newValue in
+            if consumerTabBarScreenViewModel.chatScreenShow{
+                consumerTabBarScreenViewModel.chatScreenShow = false
+                router.showScreen(.push) { rout in
+                    ChatView(userName: consumerTabBarScreenViewModel.chatScreenviewModel.selectedChat?.name ?? "",viewModel: consumerTabBarScreenViewModel.chatScreenviewModel)
+                }
+            }
+        }
+        .task {
             notificatioShowWalletScreen.addObserver(forName: .showWalletScreen, object: nil, queue: nil,
-                                                                    using: self.showWalletScreen)
-            
-            showBookingScreen.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
-                                                   using: self.showBookingScreen)
-            
-            showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
-                                                   using: self.showInboxScreen)
-            
-            showBookingsHistoryScreen.addObserver(forName: .showBookingsHistoryScreen, object: nil, queue: nil,
-                                                   using: self.showBookingsHistoryScreen)
-            
-            notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
-                                                         using: self.setChatScreen)
+                                                    using: self.showWalletScreen)
         }
     }
     
     private func showWalletScreen(_ notification: Notification){
-        if walletScreenShown{
-            walletScreenShown = false
+        if navWallet{
+            navWallet = false
             router.showScreen(.push) { rout in
                 WalletScreenView()
-            }
-        }
-    }
-    
-    private func setChatScreen(_ notification: Notification){
-        if chatScreenShow{
-            chatScreenShow = false
-            if let data = notification.userInfo, let dataDict = data as? [String:Any] {
-                let chatScreenviewModel = ChatScreenViewModel()
-                chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
-                router.showScreen(.push) { rout in
-                    ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
-                }
             }
         }
     }
@@ -83,46 +61,46 @@ struct ConsumerTabBarScreenView: View {
         HStack(){
             Spacer()
             
-            tabbarItem(image: "Home", text: "Home", selected: selectedIndex == 0)
+            tabbarItem(image: "Home", text: "Home", selected: consumerTabBarScreenViewModel.selectedIndex == 0)
                 .asButton(.press) {
-                    bookingViewModel.selectedSection = 0
+                    consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
-                    selectedIndex = 0
+                    consumerTabBarScreenViewModel.selectedIndex = 0
                 }
             
             Spacer()
-            tabbarItem(image: "Bookings", text: "Bookings", selected: selectedIndex == 1)
+            tabbarItem(image: "Bookings", text: "Bookings", selected: consumerTabBarScreenViewModel.selectedIndex == 1)
                 .asButton(.press) {
-                    bookingViewModel.selectedSection = 0
+                    consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
-                    selectedIndex = 1
+                    consumerTabBarScreenViewModel.selectedIndex = 1
                 }
             Spacer()
             
-            tabbarItem(image: "Jobs", text: "Book now", selected: selectedIndex == 2)
+            tabbarItem(image: "Jobs", text: "Book now", selected: consumerTabBarScreenViewModel.selectedIndex == 2)
                 .asButton(.press) {
-                    bookingViewModel.selectedSection = 0
+                    consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
-                    selectedIndex = 2
+                    consumerTabBarScreenViewModel.selectedIndex = 2
                 }
             Spacer()
-            tabbarItem(image: "Inbox", text: "Inbox", selected: selectedIndex == 3)
+            tabbarItem(image: "Inbox", text: "Inbox", selected: consumerTabBarScreenViewModel.selectedIndex == 3)
                 .asButton(.press) {
-                    bookingViewModel.selectedSection = 0
+                    consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
-                    selectedIndex = 3
+                    consumerTabBarScreenViewModel.selectedIndex = 3
                 }
             
             Spacer()
-            tabbarItem(image: "account", text: "Account", selected: selectedIndex == 4)
+            tabbarItem(image: "account", text: "Account", selected: consumerTabBarScreenViewModel.selectedIndex == 4)
                 .asButton(.press) {
-                    bookingViewModel.selectedSection = 0
+                    consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     ChatScreenViewModel.shared.disconnect()
                     Defaults().bookingId = ""
-                    selectedIndex = 4
+                    consumerTabBarScreenViewModel.selectedIndex = 4
                     
                 }
             Spacer()
@@ -148,6 +126,44 @@ struct ConsumerTabBarScreenView: View {
         .foregroundStyle(selected ? .appMain : ._7_C_7_C_80)
     }
     
+}
+
+#Preview {
+    ConsumerTabBarScreenView()
+}
+
+class ConsumerTabBarScreenViewModel: ObservableObject{
+    let showBookingScreen = NotificationCenter.default
+    let showInboxScreen = NotificationCenter.default
+    let showBookingsHistoryScreen = NotificationCenter.default
+    let notificatioSetChatScreen = NotificationCenter.default
+    @Published var bookingViewModel = BookingViewModel()
+    @Published var selectedIndex: Int = 0
+    @Published var chatScreenShow: Bool = false
+    
+    @Published var chatScreenviewModel = ChatScreenViewModel()
+    
+    init(){
+        showBookingScreen.addObserver(forName: .showBookingScreen, object: nil, queue: nil,
+                                      using: self.showBookingScreen)
+        
+        showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                    using: self.showInboxScreen)
+        
+        showBookingsHistoryScreen.addObserver(forName: .showBookingsHistoryScreen, object: nil, queue: nil,
+                                              using: self.showBookingsHistoryScreen)
+        
+        notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
+                                             using: self.setChatScreen)
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+            chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
+        }
+        chatScreenShow = true
+    }
+    
     private func showBookingScreen(_ notification: Notification) {
         selectedIndex = 2
     }
@@ -162,8 +178,4 @@ struct ConsumerTabBarScreenView: View {
         }
         selectedIndex = 1
     }
-}
-
-#Preview {
-    ConsumerTabBarScreenView()
 }

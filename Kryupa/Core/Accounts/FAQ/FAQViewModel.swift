@@ -20,7 +20,7 @@ class FAQViewModel: ObservableObject{
     @Published var isLoading = Bool()
     
     init(){
-        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.baseURL)/")!, config: [.log(true), .compress])
+        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
     }
     

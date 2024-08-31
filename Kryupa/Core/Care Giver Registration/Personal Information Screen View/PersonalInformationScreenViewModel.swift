@@ -52,6 +52,9 @@ class PersonalInformationScreenViewModel: ObservableObject{
         guard let address = personalInfoData.address, address != "" else {
             return alert("Please Enter Address")
         }
+        guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
+            return alert("Please Enter Postal Code")
+        }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")
         }
@@ -69,6 +72,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
                                  "latitude": personalInfoData.latitude ?? 0.0,
                                  "longitude": personalInfoData.latitude ?? 0.0,
                                  "address": address,
+                                 "zipcode": postalCode,
                                  "city": city,
                                  "state": state,
                                  "country": country,
@@ -96,6 +100,9 @@ class PersonalInformationScreenViewModel: ObservableObject{
         guard let address = personalInfoData.address, address != "" else {
             return alert("Please Enter Address")
         }
+        guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
+            return alert("Please Enter Postal Code")
+        }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")
         }
@@ -113,10 +120,29 @@ class PersonalInformationScreenViewModel: ObservableObject{
                                  "latitude": personalInfoData.latitude ?? 0.0,
                                  "longitude": personalInfoData.latitude ?? 0.0,
                                  "address": address,
+                                 "zipcode": postalCode,
                                  "city": city,
                                  "state": state,
                                  "country": country]
         
         next(param)
+    }
+    
+    func getAddress(){
+        let param = ["zipcode":personalInfoData.postalCode ?? ""]
+        DispatchQueue.main.async {
+            NetworkManager.shared.getAddress(params: param) { result in
+                switch result{
+                case .success(let data):
+                    self.personalInfoData.latitude = Double(data.data.places.first?.latitude ?? "") ?? 0.0
+                    self.personalInfoData.longitude = Double(data.data.places.first?.longitude ?? "") ?? 0.0
+                    self.personalInfoData.state = data.data.places.first?.state ?? ""
+                    self.personalInfoData.city = data.data.places.first?.placeName ?? ""
+                    self.personalInfoData.country = data.data.country
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

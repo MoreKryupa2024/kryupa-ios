@@ -34,6 +34,22 @@ class AddNewProfileScreenViewModel: ObservableObject{
     
     @Published var param = [String:Any]()
     
+    func getAddress(){
+        let param = ["zipcode":personalInfoData.postalCode ?? ""]
+        NetworkManager.shared.getAddress(params: param) { result in
+            switch result{
+            case .success(let data):
+                self.personalInfoData.latitude = Double(data.data.places.first?.latitude ?? "") ?? 0.0
+                self.personalInfoData.longitude = Double(data.data.places.first?.longitude ?? "") ?? 0.0
+                self.personalInfoData.state = data.data.places.first?.state ?? ""
+                self.personalInfoData.city = data.data.places.first?.placeName ?? ""
+                self.personalInfoData.country = data.data.country
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func dataMedicalChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
         if medicalConditionDropDownSelected.isEmpty {
@@ -75,7 +91,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
             return alert("Please Select Your Relation")
         }else if !email.isValidEmail() {
             return alert("Please Enter Email")
-        }else if !number.validateMobile(){
+        }else if !number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#").validateMobile(){
             return alert("Please Enter 10-Digit Mobile No.")
         }else{
              var param = [String:Any]()
@@ -132,6 +148,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
                  "latitude": personalInfoData.latitude ?? 0.0,
                  "longitude": personalInfoData.latitude ?? 0.0,
                  "address": address,
+                 "zipcode": postalCode,
                  "city": city,
                  "state": state,
                  "country": country,

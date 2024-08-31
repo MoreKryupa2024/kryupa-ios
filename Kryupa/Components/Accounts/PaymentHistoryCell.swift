@@ -14,13 +14,13 @@ struct PaymentHistoryCell: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack {
-                Text("Transaction #\(orderListData.bookingID)")
-                    .font(.custom(FontContent.besMedium, size: 15))
-                    .foregroundStyle(.appMain)
+                Text("Received From")
+                    .font(.custom(FontContent.plusRegular, size: 15))
+                    .foregroundStyle(._444446)
                 
                 Spacer()
                 
-                Text("Paid")
+                Text("$\(orderListData.bookingPricing.removeZerosFromEnd(num: 2))")
                     .padding()
                     .frame(height: 23)
                     .font(.custom(FontContent.plusMedium, size: 11))
@@ -31,15 +31,16 @@ struct PaymentHistoryCell: View {
             }
             .padding(.horizontal, 23)
             .padding(.top, 10)
-            let date = orderListData.createdAt.components(separatedBy: " ").first ?? ""
-            Text("\(date.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, dd-MM-yyyy"))")
-                .font(.custom(FontContent.plusRegular, size: 12))
-                .foregroundStyle(._444446)
+            
+            Text("\(orderListData.name)")
+                .font(.custom(FontContent.besMedium, size: 16))
+                .foregroundStyle(.appMain)
                 .padding(.horizontal, 23)
                 .padding(.top, 0)
 
-            Text("$\(orderListData.bookingPricingForCustomer.removeZerosFromEnd(num: 2))")
-                .font(.custom(FontContent.plusRegular, size: 12))
+            let date = orderListData.createdAt.components(separatedBy: " ").first ?? ""
+            Text("\(date.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, dd-MM-yyyy"))")
+                .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(._444446)
                 .padding(.horizontal, 23)
                 .padding(.bottom, 10)

@@ -12,7 +12,7 @@ struct JobDetailView: View {
 
     @StateObject var viewModel = JobsViewModel()
     @StateObject private var viewModelHome = CareGiverHomeScreenViewModel()
-    var jobID: String
+    var jobID: String = "912d5565-8c0c-4eb7-b96f-9c8873a9f418"
     @Environment(\.router) var router
 
     var body: some View {
@@ -26,24 +26,39 @@ struct JobDetailView: View {
                     JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
                         .padding(.horizontal, 24)
                         .padding(.top, 18)
-                    OtherMedicalConditionView
-                    line
-                    //            JobScheduleView
-                    //            line
-                    getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
-                    line
-                    getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
+                    if (viewModel.otherDiseaseType != "-") {
+                        OtherMedicalConditionView
+                        line
+                    }
+                    
+                    if getArrayOfSkillsRequired().count != 0{
+                        getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
+                        line
+                    }
+                    
+                    if getArrayOfPersonalPrefernces().count != 0{
+                        getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
+                    }
+                    
                     if let approchStatus = viewModel.jobDetailModel?.approchStatus{
                         if approchStatus == "Connecting Request"{
                             bottomButtonView
+                        } else if approchStatus == "Rejected By Caregiver"{
+                          Text("You have declined this booking request")
+                                .font(.custom(FontContent.plusMedium, size: 15))
+                                .padding(.top,30)
+                            
+                        } else {
+                            Text("You have accepeted this booking request")
+                                .font(.custom(FontContent.plusMedium, size: 15))
+                                .padding(.top,30)
                         }
                     }
                 }
                 .toolbar(.hidden, for: .navigationBar)
-                .onAppear() {
+                .task {
                     viewModel.getJobsDetail(approachID: jobID) {}
                 }
-                
             }
             if viewModel.isloading{
                 LoadingView()
@@ -56,7 +71,7 @@ struct JobDetailView: View {
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text(heading)
-                    .font(.custom(FontContent.plusMedium, size: 13))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
                     .frame(maxWidth: .infinity,alignment: .leading)
             }
@@ -67,10 +82,10 @@ struct JobDetailView: View {
                     HStack {
                         Image(skill?.image ?? "")
                             .resizable()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 22, height: 22)
                         
                         Text(skill?.title ?? "")
-                            .font(.custom(FontContent.plusRegular, size: 12))
+                            .font(.custom(FontContent.plusRegular, size: 15))
                             .foregroundStyle(.appMain)
                         
                         Spacer()
@@ -169,11 +184,11 @@ struct JobDetailView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Other Medical Conditions")
-                    .font(.custom(FontContent.plusMedium, size: 13))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
 
                 Text(viewModel.otherDiseaseType)
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(.appMain)
             }
             
@@ -214,7 +229,7 @@ struct JobDetailView: View {
             
 
             Text("$\(viewModel.jobDetailModel?.bookingPricing ?? 0)")
-                .font(.custom(FontContent.plusRegular, size: 12))
+                .font(.custom(FontContent.plusRegular, size: 17))
                 .foregroundStyle(.appMain)
             if !viewModel.isComingfromChat{
                 Text("Message")
@@ -253,11 +268,11 @@ struct JobDetailView: View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
                 Text("Service Required")
-                    .font(.custom(FontContent.plusMedium, size: 13))
+                    .font(.custom(FontContent.plusMedium, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
 
-                Text(viewModel.jobDetailModel?.areasOfExpertise.joined(separator: ",") ?? "")
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                Text(viewModel.jobDetailModel?.areasOfExpertise.joined(separator: ",") ?? "hjafsgfjh,ahgsfjh")
+                    .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(.appMain)
             }
             Spacer()

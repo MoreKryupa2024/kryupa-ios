@@ -29,7 +29,7 @@ class ChatScreenViewModel: ObservableObject{
     @Published var isPresented = false
     
     init(){
-        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.baseURL)/")!, config: [.log(true), .compress])
+        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
         connect()
         receiveMessage { msgData, str in
