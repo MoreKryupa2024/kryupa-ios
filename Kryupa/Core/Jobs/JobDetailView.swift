@@ -58,12 +58,18 @@ struct JobDetailView: View {
                 .toolbar(.hidden, for: .navigationBar)
                 .task {
                     viewModel.getJobsDetail(approachID: jobID) {}
+                    NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                         using: self.setChatScreen)
                 }
             }
             if viewModel.isloading{
                 LoadingView()
             }
         }
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     func getGridView(heading: String, skillsList: [SkillData]) -> some View{

@@ -11,6 +11,7 @@ import SwiftfulUI
 struct GiveReviewView: View {
     
     @StateObject var viewModel = ReviewsViewModel()
+    @Environment(\.router) var router
     
     var body: some View {
         ZStack{
@@ -32,6 +33,8 @@ struct GiveReviewView: View {
                 .onAppear{
                     viewModel.cancelBookingData()
                     viewModel.getReview()
+                    NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                         using: self.setChatScreen)
                 }
             }
             
@@ -39,6 +42,10 @@ struct GiveReviewView: View {
                 LoadingView()
             }
         }
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var WriteReview: some View {

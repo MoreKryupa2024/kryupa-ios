@@ -14,14 +14,24 @@ struct APIConstants {
   static let userErrorMessage: String = "user_err_msg"
   static let blockedData: String = "data"
 }
-
+var debugss: Bool = false
 class APIConstant{
     
     static let authBaseURL = "https://auth.wahinnovations.in"
+    
+//    static let communicationBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/communication"
     static let communicationBaseURL = "https://communication.wahinnovations.in"
+    
+//        static let paymentBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/payment"
     static let paymentBaseURL = "https://payments.wahinnovations.in"
+    
+    
+//    static let bookingBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/booking"
     static let bookingBaseURL = "https://booking.wahinnovations.in"
+    
+//        static let userBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/user"
     static let userBaseURL = "https://user.wahinnovations.in"
+    
     static let adminBaseURL = "https://admin.wahinnovations.in"
 
     static let sendOTP = "\(authBaseURL)/send_otp"

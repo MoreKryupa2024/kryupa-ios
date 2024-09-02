@@ -29,7 +29,7 @@ struct CareGiverDetailData {
     let language: [String]
     let areaOfExperties: [String]
     let bio: String
-    let showBookNow: Bool
+    var showBookNow: Bool
     let totalReviewer: Int
     let pricePerHour: Int
     let avgRating: Double

@@ -69,10 +69,8 @@ struct CareSeekerHomeScreenView: View {
             
         }
         .onAppear{
-            viewModel.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
             viewModel.pageNumber = 1
             viewModel.getRecommandationList()
-            viewModel.customerSvcAct()
 //            viewModel.getBannerBottomData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
         }
         

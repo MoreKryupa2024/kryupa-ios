@@ -57,8 +57,16 @@ struct AddNewProfileScreenView: View {
                 dateOfBirthPicker()
             }
         }
+        .task {
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
+        }
         .toolbar(.hidden, for: .navigationBar)
     }
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
+    }
+    
     
     private var medicalConditionView: some View{
         

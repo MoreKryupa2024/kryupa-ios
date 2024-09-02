@@ -25,8 +25,10 @@ class BookingViewModel: ObservableObject{
         if Defaults().userType == AppConstants.SeekCare{
             switch selectedSection{
             case 1:
-                param["status"] = "Active"
+                param["status"] = "Pending"
             case 2:
+                param["status"] = "Active"
+            case 3:
                 param["status"] = "Result"
             case 0:
                 param["status"] = "Open"

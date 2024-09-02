@@ -7,21 +7,20 @@
 
 import Foundation
 
-@MainActor
 class BookingFormScreenViewModel: ObservableObject{
     @Published var showDatePicker: Bool = Bool()
     var dateState: Int = Int()
     
-    var startDateValue: Date = Date()
-    var endDateValue: Date = Date().addingTimeInterval(86400)
-    var startTimeValue: Date = Date()//.addingTimeInterval(14400)
-    var endTimeValue: Date = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
-    var startDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-    var endDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
-    var startTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
-    var endTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
+    @Published var startDateValue: Date = Date()
+    @Published var endDateValue: Date = Date().addingTimeInterval(86400)
+    @Published var startTimeValue: Date = Date()//.addingTimeInterval(14400)
+    @Published var endTimeValue: Date = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
+    @Published var startDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
+    @Published var endDate: String = "".convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "yyyy-MM-dd'T'HH:mm:ssZ")
+    @Published var startTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
+    @Published var endTime: String = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
     
-    var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
+    @Published var selectedDay: WeakDayData = Date.getDates(forLastNDays: 1).first!
     @Published var bookingFor: String = String()
     @Published var giverName: String = String()
     @Published var giverId: String = String()
@@ -41,6 +40,17 @@ class BookingFormScreenViewModel: ObservableObject{
     @Published var isloading: Bool = Bool()
     @Published var isRecommended: Bool = false
     @Published var recommendedUserBookingData: RecommendedUserBookingData?
+    
+    init(){
+        if startTime > "23:00:00" && segSelected == "One Time"{
+            endTime = "23:59:00"
+            guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
+            endTimeValue = date
+        }else{
+            endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
+            endTimeValue = Date().addingTimeInterval(3600)
+        }
+    }
     
     func getCustomerRequirements(errorAlert: @escaping ((String)-> Void)){
         isloading = true

@@ -6,54 +6,37 @@
 //
 
 import SwiftUI
-
+import SwiftfulRouting
 struct GiverTabbarScreenView: View {
     
-    @State var selectedIndex: Int = 0
-    var showInboxScreen = NotificationCenter.default
-    var notificatioSetChatScreen = NotificationCenter.default
-    var showJobsScreen = NotificationCenter.default
     @Environment(\.router) var router
-    @State var chatScreenShow: Bool = true
+    @StateObject var viewModel = GiverTabbarScreenViewModel()
     
     var body: some View {
-        VStack{
-            switch selectedIndex{
-            case 1: BookingScreenView()
-            case 2: JobListView()
-            case 3: InboxScreenView()
-            case 4: AccountView()
-            default:
-                CareGiverHomeScreenView()
+        ZStack{
+            VStack{
+                switch viewModel.selectedIndex{
+                case 1: BookingScreenView()
+                case 2: JobListView()
+                case 3: InboxScreenView()
+                case 4: AccountView()
+                default:
+                    CareGiverHomeScreenView()
+                }
+                Spacer()
+                TabView
             }
             
-            Spacer()
-            TabView
+            if viewModel.isLoading{
+                LoadingView()
+            }
+            
         }
-        .task{
-            showJobsScreen.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
-                                                   using: self.showJobsScreen)
-            showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
-                                                   using: self.showInboxScreen)
-            notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
-                                                   using: self.setChatScreen)
-        }
-    }
-    
-    private func showInboxScreen(_ notification: Notification) {
-        selectedIndex = 3
-    }
-    
-    private func setChatScreen(_ notification: Notification){
-        if chatScreenShow{
-            chatScreenShow = false
-            if let data = notification.userInfo, let dataDict = data as? [String:Any] {
-                if let actionType = dataDict["action_type"] {
-                    let chatScreenviewModel = ChatScreenViewModel()
-                    chatScreenviewModel.selectedChat = ChatListData(jsonData: dataDict)
-                    router.showScreen(.push) { rout in
-                        ChatView(userName: data["name"] as? String ?? "",viewModel: chatScreenviewModel)
-                    }
+        .onChange(of: viewModel.isPresented) { oldValue, newValue in
+            if viewModel.isPresented{
+                viewModel.isPresented = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    NotificationCenter.default.post(name: .setChatScreen, object: nil,userInfo: viewModel.notObjext)
                 }
             }
         }
@@ -74,39 +57,35 @@ struct GiverTabbarScreenView: View {
     private var TabView: some View{
         HStack(){
             Spacer()
-            tabbarItem(image: "Home", text: "Home", selected: selectedIndex == 0)
+            tabbarItem(image: "Home", text: "Home", selected: viewModel.selectedIndex == 0)
                 .asButton(.press) {
-                    ChatScreenViewModel.shared.disconnect()
-                    selectedIndex = 0
+                    viewModel.selectedIndex = 0
                 }
             
             Spacer()
             
-            tabbarItem(image: "Bookings", text: "Bookings", selected: selectedIndex == 1)
+            tabbarItem(image: "Bookings", text: "Bookings", selected: viewModel.selectedIndex == 1)
                 .asButton(.press) {
-                    ChatScreenViewModel.shared.disconnect()
-                    selectedIndex = 1
+                    viewModel.selectedIndex = 1
                 }
             Spacer()
             
-            tabbarItem(image: "Jobs", text: "Jobs", selected: selectedIndex == 2)
+            tabbarItem(image: "Jobs", text: "Jobs", selected: viewModel.selectedIndex == 2)
                 .asButton(.press) {
-                    ChatScreenViewModel.shared.disconnect()
-                    selectedIndex = 2
+                    viewModel.selectedIndex = 2
                 }
             Spacer()
             
-            tabbarItem(image: "Inbox", text: "Inbox", selected: selectedIndex == 3)
+            tabbarItem(image: "Inbox", text: "Inbox", selected: viewModel.selectedIndex == 3)
                 .asButton(.press) {
-                    selectedIndex = 3
+                    viewModel.selectedIndex = 3
                 }
             
             Spacer()
             
-            tabbarItem(image: "Account", text: "Account", selected: selectedIndex == 4)
+            tabbarItem(image: "Account", text: "Account", selected: viewModel.selectedIndex == 4)
                 .asButton(.press) {
-                    ChatScreenViewModel.shared.disconnect()
-                    selectedIndex = 4
+                    viewModel.selectedIndex = 4
                 }
             Spacer()
         }
@@ -118,12 +97,40 @@ struct GiverTabbarScreenView: View {
                 .offset(y:-34)
         )
     }
-    
-    private func showJobsScreen(_ notification: Notification) {
-        selectedIndex = 2
-    }
 }
 
 #Preview {
     GiverTabbarScreenView()
+}
+
+
+class GiverTabbarScreenViewModel: ObservableObject{
+    
+    @Published var selectedIndex: Int = 0
+    var showInboxScreen = NotificationCenter.default
+    var showJobsScreen = NotificationCenter.default
+    @Published var isLoading: Bool = false
+    @Published var isPresented: Bool = false
+    let chatScreenviewModel = ChatScreenViewModel()
+    var meetingTokenData: BGVInterviewMeetingTokenData?
+    @Published var notObjext = [String:Any]()
+    
+    init(){
+        showJobsScreen.addObserver(forName: .showJobsScreen, object: nil, queue: nil,
+                                               using: self.showJobsScreen)
+        showInboxScreen.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                               using: self.showInboxScreen)
+    }
+    
+    private func showJobsScreen(_ notification: Notification) {
+        selectedIndex = 2
+    }
+    
+    private func showInboxScreen(_ notification: Notification) {
+        selectedIndex = 3
+        self.isPresented = true
+        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+            self.notObjext = dataDict
+        }
+    }
 }

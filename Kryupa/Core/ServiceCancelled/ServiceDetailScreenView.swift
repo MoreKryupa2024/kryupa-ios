@@ -31,7 +31,14 @@ struct ServiceDetailScreenView: View {
         .task{
             viewModel.cancelBookingData()
             viewModel.getReview()
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
+            
         }
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var DetailView: some View{

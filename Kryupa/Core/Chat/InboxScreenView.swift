@@ -33,10 +33,9 @@ struct InboxScreenView: View {
                         ForEach(Array(viewModel.inboxList.enumerated()),id: \.element.id) { (index,profileData) in
                             SenderView(profile: profileData)
                                 .asButton(.press) {
-                                    let viewModelChat = ChatScreenViewModel()
-                                    viewModelChat.selectedChat = profileData
+                                    viewModel.viewModelChat.selectedChat = profileData
                                     router.showScreen(.push) { rout in
-                                        ChatView(userName: profileData.name,viewModel: viewModelChat)
+                                        ChatView(userName: profileData.name,viewModel: viewModel.viewModelChat)
                                     }
                                 }
                             SepratorView
@@ -51,6 +50,14 @@ struct InboxScreenView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
             viewModel.getInboxList()
+        }
+        .onChange(of: viewModel.showChatView) { oldValue, newValue in
+            if viewModel.showChatView{
+                viewModel.showChatView = false
+                router.showScreen(.push) { rout in
+                    ChatView(userName: viewModel.viewModelChat.selectedChat?.name ?? "",viewModel: viewModel.viewModelChat)
+                }
+            }
         }
     }
     

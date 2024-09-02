@@ -140,23 +140,41 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 12))
             }
             .padding([.bottom,.horizontal],30)
-            
-            MessageButton
-                .asButton(.press){
-                    viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
-                        let chatViewModel = ChatScreenViewModel()
-                        chatViewModel.selectedChat = viewModel.chatData
-                        chatViewModel.isRecommended = viewModel.isRecommended
-                        chatViewModel.normalBooking = viewModel.isRecommended ? false : (viewModel.giverDetail?.showBookNow ?? false)
-                        chatViewModel.bookingId = bookingID
-                        router.showScreen(.push) { route in
-                            ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)
+            HStack(spacing:30){
+                MessageButton
+                    .asButton(.press){
+                        viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                            let chatViewModel = ChatScreenViewModel()
+                            chatViewModel.selectedChat = viewModel.chatData
+                            chatViewModel.isRecommended = viewModel.isRecommended
+                            chatViewModel.normalBooking = viewModel.isRecommended ? false : (viewModel.giverDetail?.showBookNow ?? false)
+                            chatViewModel.bookingId = bookingID
+                            router.showScreen(.push) { route in
+                                ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)
+                            }
+                        } alert: { strMsg in
+                            presentAlert(title: "Kryupa", subTitle: strMsg)
                         }
-                    } alert: { strMsg in
-                        presentAlert(title: "Kryupa", subTitle: strMsg)
+                        
                     }
-                    
+                if (viewModel.giverDetail?.showBookNow ?? false) || viewModel.isRecommended {
+                    BookNowButton
+                        .asButton(.press) {
+                            if viewModel.isRecommended{
+                                let bookingViewModel = BookingFormScreenViewModel()
+                                bookingViewModel.isRecommended = true
+                                bookingViewModel.giverId = careGiverDetail?.id ?? ""
+                                bookingViewModel.giverName = careGiverDetail?.name ?? ""
+                                
+                                router.showScreen(.push) { route in
+                                    BookingFormScreenView(viewModel: bookingViewModel)
+                                }
+                            }else{
+                                viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                            }
+                        }
                 }
+            }
         }
     }
     
@@ -174,6 +192,20 @@ struct RecommendedCareGiverDetailScreenView: View {
             .padding(.top,5)
     }
     
+    private var BookNowButton: some View {
+        
+        Text("Book Now")
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .foregroundStyle(.white)
+            .padding(.horizontal,20)
+            .padding(.vertical,8)
+            .background{
+                RoundedRectangle(cornerRadius: 16)
+                    .foregroundStyle(.appMain)
+            }
+            .padding(.top,5)
+    }
+    
     private var HeaderView: some View{
         ZStack{
             Image("KryupaLobby")
@@ -185,7 +217,6 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .resizable()
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
-                        ChatScreenViewModel.shared.disconnect()
                         router.dismissScreen()
                     }
                 Spacer()

@@ -90,7 +90,7 @@ struct BookingFormScreenView: View {
                         rangeThrough: nil,
                         valueStr: { value in
                             viewModel.startTime = value
-                            if value > "23:00:00"{
+                            if value > "23:00:00" && viewModel.segSelected == "One Time"{
                                 viewModel.endTime = "23:59:00"
                             }else{
                                 viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
@@ -98,7 +98,7 @@ struct BookingFormScreenView: View {
                             viewModel.showDatePicker = false
                         },
                         displayedComponents: .hourAndMinute) { value in
-                            if dateFormatChange(dateFormat: "HH:mm:ss", dates: value) > "23:00:00"{
+                            if dateFormatChange(dateFormat: "HH:mm:ss", dates: value) > "23:00:00" && viewModel.segSelected == "One Time"{
                                 guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
                                 viewModel.endTimeValue = date
                             }else{
@@ -134,6 +134,16 @@ struct BookingFormScreenView: View {
                         range: Date()...,
                         rangeThrough: nil,
                         valueStr: { value in
+                            
+                            let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
+                            let pickedDate = value.split(separator: "T").first ?? ""
+                            
+                            if currentDate == pickedDate && viewModel.startTime < dateFormatChange(dateFormat: "HH:mm:ss", dates: Date()){
+                                viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
+                                viewModel.startTimeValue =  Date()
+                                viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
+                                viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))
+                            }
                             viewModel.startDate = value
                             viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
                             viewModel.showDatePicker = false
@@ -269,12 +279,15 @@ struct BookingFormScreenView: View {
         WeakDayView(selectionCount: 8,selectedValue: viewModel.selectedDay){ selectedWeak in
             let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
             let pickedDate = selectedWeak.serverDate.split(separator: "T").first ?? ""
+            
             viewModel.selectedDay = selectedWeak
-            if currentDate == pickedDate{
-                viewModel.startTimeValue =  Date()//.addingTimeInterval(14400)
-                viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
-                viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
-                viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))//.addingTimeInterval(18000))
+            if currentDate == pickedDate && viewModel.startTime < dateFormatChange(dateFormat: "HH:mm:ss", dates: Date()){
+                DispatchQueue.main.async {
+                    viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
+                    viewModel.startTimeValue =  Date()
+                    viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
+                    viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))
+                }
             }
         }
     }
@@ -340,6 +353,11 @@ struct BookingFormScreenView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .asButton(.press) {
                     viewModel.segSelected = "One Time"
+                    if viewModel.startTime > "23:00:00"{
+                        viewModel.endTime = "23:59:00"
+                        guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
+                        viewModel.endTimeValue = date
+                    }
                 }
             Text("Recurring")
                 .padding(.vertical,6)
@@ -657,11 +675,11 @@ struct BookingFormScreenView: View {
                 .asButton(.press) {
                     viewModel.bookingFor = ""
                     viewModel.genderSelected = ""
-                    viewModel.languageSpeakingSelected = []
+                    viewModel.languageSpeakingSelected = ["English"]
                     viewModel.needServiceInSelected = []
                     viewModel.additionalInfoSelected = []
                     viewModel.additionalSkillsSelected = []
-                    viewModel.yearsOfExperienceSelected = ""
+                    viewModel.yearsOfExperienceSelected = "Any"
                 }
         }
         .padding(.vertical,5)

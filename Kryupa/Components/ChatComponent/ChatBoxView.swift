@@ -34,7 +34,7 @@ struct ChatBoxView: View {
                 if msgData.isActionBtn{
                     let SpecialMessageData = SpecialMessageData(jsonData: (msgData.message.toJSON() as? [String : Any] ?? [String : Any]()))
                     if SpecialMessageData.type == "view_service"{
-                        otherUserViewService(message: SpecialMessageData)
+//                        otherUserViewService(message: SpecialMessageData)
                     }else if SpecialMessageData.type == "pay_now"{
                         otherUserViewService(message: SpecialMessageData)
                     }

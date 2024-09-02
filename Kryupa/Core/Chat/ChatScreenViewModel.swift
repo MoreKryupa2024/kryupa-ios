@@ -29,14 +29,12 @@ class ChatScreenViewModel: ObservableObject{
     @Published var isPresented = false
     
     init(){
-        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(true), .compress])
+        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(false), .compress])
         self.socket = self.manager.defaultSocket
-        connect()
-        receiveMessage { msgData, str in
-            self.messageList = [msgData] + self.messageList
-        }
-        notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
-                                                     using: self.setBookingIds)
+    }
+    
+    deinit{
+        disconnect()
     }
     
     private func setBookingIds(_ notification: Notification) {

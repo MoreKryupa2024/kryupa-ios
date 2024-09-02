@@ -11,6 +11,7 @@ struct ReviewDetailView: View {
     
     @StateObject private var viewModel = ReviewsViewModel()
     @State var reviewID = ""
+    @Environment(\.router) var router
     
     var body: some View {
         ScrollView {
@@ -27,7 +28,13 @@ struct ReviewDetailView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
             viewModel.getReviewDetail(reviewID: reviewID, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
         }
+    }
+
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var ReviewView: some View{

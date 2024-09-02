@@ -36,7 +36,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                     self?.recommendedCaregiver = data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
                     self?.upcommingAppointments = data.data.upcommingAppointments
                     self?.pastAppointments = data.data.pastAppointments
-                    
+                    self?.customerSvcAct()
                     /* if self!.pageNumber > 1{
                      self?.recommendedCaregiver += data.data.recommendedCaregiver.sorted(by: { $0.rating > $1.rating })
                      self?.upcommingAppointments += data.data.upcommingAppointments
@@ -50,6 +50,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 case .failure(let error):
                     self?.isloading = false
                     print(error)
+                    self?.customerSvcAct()
                 }
             }
         }
@@ -63,8 +64,10 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 switch result{
                 case .success(let data):
                     self?.serviceStartData = data.data
+                    self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
                 case .failure(let error):
                     print(error)
+                    self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
                 }
             }
         }
@@ -79,8 +82,10 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 switch result{
                 case .success(let data):
                     print("")
+//                    self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
                 case .failure(let error):
-                    print(error)
+                    print("")
+//                    self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
                 }
             }
         }

@@ -79,7 +79,14 @@ struct ReviewsListView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
             viewModel.getReviews(myReviews: true, careGiver: Defaults().userType == AppConstants.GiveCare ? true : false)
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
+            
         }
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var SegmentView: some View{

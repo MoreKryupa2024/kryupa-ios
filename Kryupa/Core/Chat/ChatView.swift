@@ -20,25 +20,13 @@ struct ChatView: View {
     
     var body: some View {
         ZStack{
-            
             VStack(spacing:0){
-                //HeaderView
                 usernameView
                 if Defaults().userType == AppConstants.SeekCare{
-//                    if viewModel.showVideoCallView{
-//                        videoCallView
+//                    if (viewModel.normalBooking || viewModel.isRecommended){
+//                        bookNowView
 //                    }
-//                    
-//                    if viewModel.bookingDeclineView{
-//                        bookingDeclineView
-//                    }
-                    if (viewModel.normalBooking || viewModel.isRecommended){
-                        bookNowView
-                    }
-                    
-//                    if viewModel.showPayViewView{
-//                        acceptedRequestView
-//                    }
+
                 }
                 
                 ScrollView(.vertical) {
@@ -59,12 +47,6 @@ struct ChatView: View {
                                     PaymentOrderScreenView(viewModel: paymentViewModel)
                                 }
                             })
-//                            .onAppear{
-//                                if (viewModel.messageList.count - 1) == index  && viewModel.pagination{
-//                                    viewModel.pageNumber += 1
-//                                    viewModel.getChatHistory()
-//                                }
-//                            }
                             .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         }
                     }
@@ -79,12 +61,6 @@ struct ChatView: View {
             )
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
-            .task{
-                viewModel.pageNumber = 1
-                viewModel.getChatHistory()
-                viewModel.VideoCallData()
-            }
-            
             
             if viewModel.isLoading{
                 LoadingView()
@@ -109,117 +85,27 @@ struct ChatView: View {
                 }
             }
         }
+        .onAppear{
+            viewModel.pageNumber = 1
+            viewModel.getChatHistory()
+            viewModel.VideoCallData()
+            viewModel.disconnect()
+            viewModel.connect()
+            viewModel.receiveMessage { msgData, str in
+                self.viewModel.messageList = [msgData] + self.viewModel.messageList
+            }
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
+        }
         .onDisappear(perform: {
             viewModel.selectedChat?.videoCallId = ""
             viewModel.isPresented = false
+            viewModel.disconnect()
         })
     }
     
-    private var videoCallView: some View{
-        
-        return ZStack(alignment:.top){
-            VStack {
-                Text("Why discuss it on messages?\nVideo Call Now!")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(._7_C_7_C_80)
-                
-                
-                Text("Start Video Call")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(height: 32)
-                    .padding(.horizontal,15)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
-                    .asButton(.press) {
-                        presentAlert(title: "Kryupa", subTitle: "This Feature Coming Soon!")
-                    }
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical,12)
-            .overlay( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.E_5_E_5_EA, lineWidth: 1)
-            )
-            
-            Image("circle-x")
-                .resizable()
-                .frame(width: 18,height: 18)
-                .asButton(.press) {
-//                    viewModel.showVideoCallView = false
-                }
-                .offset(x: 130,y:15)
-        }
-        .padding(.horizontal,25)
-        
-    }
-    
-    private var bookingDeclineView: some View{
-        
-        return ZStack(alignment:.top){
-            VStack {
-                Text("The caregiver has declined the\nrequest for service.")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(._7_C_7_C_80)
-                
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical,12)
-            .overlay( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.E_5_E_5_EA, lineWidth: 1)
-            )
-            
-            Image("circle-x")
-                .resizable()
-                .frame(width: 18,height: 18)
-                .asButton(.press) {
-//                    viewModel.bookingDeclineView = false
-                }
-                .offset(x: 130,y:15)
-        }
-        .padding(.horizontal,25)
-        
-    }
-    
-    private var acceptedRequestView: some View{
-        
-        return ZStack(alignment:.top){
-            VStack {
-                Text("Congratulations!\nThe caregiver has accepted the request")
-                    .multilineTextAlignment(.center)
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(._7_C_7_C_80)
-                
-                
-                Text("Pay Now")
-                    .font(.custom(FontContent.plusRegular, size: 16))
-                    .foregroundStyle(.white)
-                    .frame(height: 32)
-                    .padding(.horizontal,15)
-                    .background{
-                        RoundedRectangle(cornerRadius: 48)
-                    }
-                    .asButton(.press) {
-                        let paymentViewModel = PaymentViewModel()
-                        paymentViewModel.paySpecialMessageData = viewModel.paySpecialMessageData
-                        router.showScreen(.push) { rout in
-                            PaymentOrderScreenView(viewModel: paymentViewModel)
-                        }
-                    }
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical,12)
-            .overlay( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.E_5_E_5_EA, lineWidth: 1)
-            )
-        }
-        .padding(.horizontal,25)
-        
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var bookNowView: some View{

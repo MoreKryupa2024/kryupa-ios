@@ -50,7 +50,15 @@ struct ServiceCancelScreenView: View {
                 LoadingView()
             }
         }
+        .task {
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
+        }
         .toolbar(.hidden, for: .navigationBar)
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var otherFieldView: some View{

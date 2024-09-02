@@ -101,6 +101,8 @@ struct WalletScreenView: View {
             .onAppear{
                 viewModel.pageNumber = 1
                 viewModel.getWalletBalance()
+                NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                     using: self.setChatScreen)
             }
             
             if viewModel.isloading{
@@ -111,6 +113,10 @@ struct WalletScreenView: View {
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         
+    }
+
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
 }
 

@@ -11,6 +11,21 @@ import Foundation
 class InboxScreenViewModel: ObservableObject{
     @Published var inboxList = [ChatListData]()
     @Published var isLoading = Bool()
+    @Published var showChatView = Bool()
+    let notificatioSetChatScreen = NotificationCenter.default
+    let viewModelChat = ChatScreenViewModel()
+    
+    init(){
+        notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,
+                                             using: self.setChatScreen)
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+            viewModelChat.selectedChat = ChatListData(jsonData: dataDict)
+            showChatView = true
+        }
+    }
     
     func getInboxList(){
         isLoading = true

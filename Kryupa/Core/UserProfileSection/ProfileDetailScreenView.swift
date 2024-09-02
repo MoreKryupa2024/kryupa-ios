@@ -66,12 +66,16 @@ struct ProfileDetailScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear() {
+            NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
+                                                 using: self.setChatScreen)
             viewModel.getProfileList()
             viewModel.getPersonalDetails(profileName: selecedProfile)
 //            viewModel.testgetPersonalDetails(profileName: selecedProfile)
         }
-        
-        
+    }
+    
+    private func setChatScreen(_ notification: Notification){
+        router.dismissScreenStack()
     }
     
     private var PersonalInfoSection: some View{
