@@ -15,7 +15,7 @@ struct PaymentConfirmScreenView: View {
         ZStack{
             VStack{
                 HeaderView(title: "Payment Confirmed")
-                
+                ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)
                     .frame(height: 325)
@@ -24,7 +24,7 @@ struct PaymentConfirmScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 12))
                         
                     
-                    Text("Your Booking for \((viewModel.paymentOrderData?.createdAt.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "d MMMM")) ?? "") has\nbeen Confirmed")
+                    Text("Your Booking for \((viewModel.paymentOrderData?.createdAt.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "MMMM d")) ?? "") has\nbeen Confirmed")
                         
                         .font(.custom(FontContent.plusRegular, size: 12))
                         

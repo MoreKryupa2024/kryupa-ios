@@ -74,6 +74,9 @@ class PaymentListViewModel: ObservableObject{
                 self.isloading = false
                 switch result{
                 case .success(_):
+                    self.routingNumber = ""
+                    self.bankName = ""
+                    self.accountNumber = ""
                     self.showAddBankView = false
                     self.getBankList()
                 case .failure(let error):

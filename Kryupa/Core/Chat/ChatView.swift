@@ -21,7 +21,12 @@ struct ChatView: View {
     var body: some View {
         ZStack{
             VStack(spacing:0){
-                usernameView
+                UserNameView(backAction: {
+                    viewModel.disconnect()
+                    router.dismissScreen()
+                }, videoAction: {
+                    viewModel.chatVideoCallData()
+                }, nameStr: userName)
                 if Defaults().userType == AppConstants.SeekCare{
 //                    if (viewModel.normalBooking || viewModel.isRecommended){
 //                        bookNowView
@@ -102,6 +107,7 @@ struct ChatView: View {
             viewModel.isPresented = false
             viewModel.disconnect()
         })
+        .modifier(DismissingKeyboard())
     }
     
     private func setChatScreen(_ notification: Notification){
@@ -253,37 +259,6 @@ struct ChatView: View {
                 .inset(by: 1)
                 .stroke(.E_5_E_5_EA, lineWidth: 1)
         )
-    }
-    
-    private var usernameView: some View{
-        
-        HStack(spacing: 10) {
-            
-            Image("navBack")
-                .resizable()
-                .frame(width: 30,height: 30)
-                .asButton(.press) {
-                    viewModel.disconnect()
-                    router.dismissScreen()
-                }
-            
-            Text(userName)
-                .lineLimit(1)
-                .font(.custom(FontContent.besRegular, size: 20))
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            HStack {
-                Image("video")
-                    .resizable()
-                    .frame(width: 24,height: 24)
-                    .asButton(.press) {
-                        viewModel.chatVideoCallData()
-                    }
-            }
-        }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 10)
-        .background(.white)
     }
 }
 

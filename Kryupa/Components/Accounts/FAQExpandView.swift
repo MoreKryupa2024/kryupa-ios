@@ -9,22 +9,22 @@ import SwiftUI
 
 struct FAQExpandView: View {
     @State var isExpanded = false
-
+    var data: AboutUsData
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Lorem ipsum dolor sit amet consectetur.")
+                Text(data.title)
                     .foregroundStyle(._242426)
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusRegular, size: 17))
                 Spacer()
-                Image(isExpanded ? "chevron-down" : "chevron-right")
+                Image(!isExpanded ? "chevron-down" : "chevron-up")
                     .resizable()
                     .frame(width: 30, height: 30)
             }
             if isExpanded {
-                Text("Lorem ipsum dolor sit amet consectetur. Eget purus libero scelerisque sed amet. Donec sed risus semper vitae elit consectetur.")
+                Text(data.desc)
                     .foregroundStyle(._7_C_7_C_80)
-                    .font(.custom(FontContent.plusRegular, size: 12))
+                    .font(.custom(FontContent.plusRegular, size: 15))
                 
             }
         }
@@ -44,8 +44,4 @@ struct FAQExpandView: View {
         )
         .padding(.horizontal, 24)
     }
-}
-
-#Preview {
-    FAQExpandView()
 }

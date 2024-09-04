@@ -87,6 +87,7 @@ class PaymentViewModel: ObservableObject{
     }
     
     func getPaypalOrderID(){
+        let amount = (Double(amount) ?? 0).removeZerosFromEnd(num: 2)
         let param = ["amount":Double(amount) ?? 0]
         isloading = true
         NetworkManager.shared.getPaypalOrderID(params: param) { [weak self] result in

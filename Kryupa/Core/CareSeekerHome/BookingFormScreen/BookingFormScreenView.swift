@@ -70,277 +70,246 @@ struct BookingFormScreenView: View {
                 
                 BottomButtonView
             }
-            .blur(radius: viewModel.showDatePicker ? 05 : 0)
-            .onTapGesture {
-                print("No access!")
-            }
             
             if viewModel.isloading{
                 LoadingView()
             }
-            
-            if viewModel.showDatePicker{
-                switch viewModel.dateState{
-                case 1:
-                    
-                    DateTimePickerScreenView(
-                        givenDate: viewModel.startTimeValue,
-                        formate: "HH:mm:ss",
-                        range: range(),
-                        rangeThrough: nil,
-                        valueStr: { value in
-                            viewModel.startTime = value
-                            if value > "23:00:00" && viewModel.segSelected == "One Time"{
-                                viewModel.endTime = "23:59:00"
-                            }else{
-                                viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
-                            }
-                            viewModel.showDatePicker = false
-                        },
-                        displayedComponents: .hourAndMinute) { value in
-                            if dateFormatChange(dateFormat: "HH:mm:ss", dates: value) > "23:00:00" && viewModel.segSelected == "One Time"{
-                                guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
-                                viewModel.endTimeValue = date
-                            }else{
-                                guard let incrementedDate = Calendar.current.date(byAdding: .hour, value: 1, to: value) else {
-                                    return
-                                }
-                                viewModel.endTimeValue = incrementedDate
-                            }
-                        }cancelAction: {
-                            viewModel.showDatePicker = false
-                        }
-
-                case 2:
-                    DateTimePickerScreenView(
-                        givenDate: viewModel.endTimeValue,
-                        formate: "HH:mm:ss",
-                        range: viewModel.segSelected != "One Time" ? nil : viewModel.endTimeValue...,
-                        rangeThrough: nil,
-                        valueStr: { value in
-                            viewModel.endTime = value
-                            viewModel.showDatePicker = false
-                        },
-                        displayedComponents: .hourAndMinute) { value in
-                            viewModel.endTimeValue = value
-                        }cancelAction: {
-                            viewModel.showDatePicker = false
-                        }
-                    
-                case 3:
-                    DateTimePickerScreenView(
-                        givenDate: viewModel.startDateValue,
-                        formate: "yyyy-MM-dd'T'HH:mm:ssZ",
-                        range: Date()...,
-                        rangeThrough: nil,
-                        valueStr: { value in
-                            
-                            let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
-                            let pickedDate = value.split(separator: "T").first ?? ""
-                            
-                            if currentDate == pickedDate && viewModel.startTime < dateFormatChange(dateFormat: "HH:mm:ss", dates: Date()){
-                                viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
-                                viewModel.startTimeValue =  Date()
-                                viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
-                                viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))
-                            }
-                            viewModel.startDate = value
-                            viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
-                            viewModel.showDatePicker = false
-                        },
-                        displayedComponents: .date){ value in
-                            guard let incrementedDate = Calendar.current.date(byAdding: .day, value: 1, to: value) else {
-                                return
-                            }
-                            viewModel.startDateValue = value
-                            viewModel.endDateValue = incrementedDate
-                    }cancelAction: {
-                        viewModel.showDatePicker = false
-                    }
-                    
-                case 4:
-                    DateTimePickerScreenView(
-                        givenDate: viewModel.endDateValue,
-                        formate: "yyyy-MM-dd'T'HH:mm:ssZ",
-                        range: viewModel.endDateValue...,
-                        rangeThrough: nil,
-                        valueStr: { value in
-                            viewModel.endDate = value
-                            viewModel.showDatePicker = false
-                        },
-                        displayedComponents: .date){ value in
-                            viewModel.endDateValue = value
-                        }cancelAction: {
-                            viewModel.showDatePicker = false
-                        }
-                default:
-                    EmptyView()
-                }
-            }
         }
         .task{
-            
             if viewModel.isRecommended {
                 viewModel.getCustomerRequirements { error in
                     presentAlert(title: "Kryupa", subTitle: error)
                 }
             }
-            viewModel.endTime = setFutureDate(value: viewModel.startTime, currFormate: "HH:mm:ss", givenFormate: "HH:mm:ss", incrementValue: 1, component: .hour)
-            viewModel.endDate = setFutureDate(value: viewModel.startDate, currFormate: "yyyy-MM-dd'T'HH:mm:ssZ", givenFormate: "yyyy-MM-dd'T'HH:mm:ssZ", incrementValue: 1, component: .day)
             viewModel.getBookingForRelativeList{ error in
                 presentAlert(title: "Kryupa", subTitle: error)
             }
         }
     }
-    
-    private func range()-> (PartialRangeFrom<Date>)?{
-        
-        let date = Date()
-        let calendar = Calendar.current
-        let day = "\(calendar.component(.day, from: date))"
-        if viewModel.segSelected == "One Time"{
-            let startDay = (viewModel.selectedDay.numDay)
-            if startDay == day{
-                let currentDate =  date//.addingTimeInterval(14400)
-                return currentDate...
-            }else{
-                return nil
-            }
-            
-        }else{
-            let startDay = (viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
-            
-            if startDay == day{
-                let currentDate =  date//.addingTimeInterval(14400)
-                return currentDate...
-            }else{
-                return nil
-            }
-        }
-    }
-    
-    private func setFutureDate(value: String , currFormate: String, givenFormate: String, incrementValue: Int, component:Calendar.Component)-> String{
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = currFormate
-        guard let date = dateFormatter.date(from: value) else {
-            return ""
-        }
-        
-        guard let incrementedDate = Calendar.current.date(byAdding: component, value: incrementValue, to: date) else {
-            return ""
-        }
-        
-        dateFormatter.dateFormat = givenFormate
-        let strDate = dateFormatter.string(from: incrementedDate)
-        
-        return strDate
-    }
-    
-    private func addOrSubtractMonth(value: Int, date: Date, component:Calendar.Component) -> Date {
-        Calendar.current.date(byAdding: component, value: value, to: date)!
-    }
 
     
     private var DateTimeView: some View{
         
-        VStack{
+        VStack(spacing:15){
             Text("Pick Date & Time")
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .font(.custom(FontContent.plusMedium, size: 17))
             if viewModel.segSelected == "One Time"{
-                WeakDayContentView
-                    .id(viewModel.selectedDay.numDay)
+                OneTimeContentView
             }else{
                 RecurringContentView
             }
-            HStack(spacing:29){
-                Text(viewModel.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))
-                    .asButton(.press) {
-                        viewModel.dateState = 1
-                        viewModel.showDatePicker = true
-                    }
-                    
-                Text("-")
-                Text(viewModel.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))
-                    .asButton(.press) {
-                        viewModel.dateState = 2
-                        viewModel.showDatePicker = true
-                    }
-                    
-            }
-            .font(.custom(FontContent.besMedium, size: 22))
+            
+            SelectTimeContentView
+            
+            DurationTimeContentView
         }
         .padding(.horizontal,24)
         .padding(.top,15)
     }
     
-    private var WeakDayContentView: some View{
-        WeakDayView(selectionCount: 8,selectedValue: viewModel.selectedDay){ selectedWeak in
-            let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
-            let pickedDate = selectedWeak.serverDate.split(separator: "T").first ?? ""
-            
-            viewModel.selectedDay = selectedWeak
-            if currentDate == pickedDate && viewModel.startTime < dateFormatChange(dateFormat: "HH:mm:ss", dates: Date()){
-                DispatchQueue.main.async {
-                    viewModel.startTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date())//.addingTimeInterval(14400))
-                    viewModel.startTimeValue =  Date()
-                    viewModel.endTimeValue = Date().addingTimeInterval(3600)//.addingTimeInterval(18000)
-                    viewModel.endTime = dateFormatChange(dateFormat: "HH:mm:ss", dates: Date().addingTimeInterval(3600))
+    private var OneTimeContentView: some View{
+        VStack{
+            HStack{
+                Text("Select Date")
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .padding(.leading,24)
+                Spacer()
+
+                Text(dateFormatChange(dateFormat: "d MMM", dates: viewModel.startDateValue))
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .padding(.vertical,8)
+                    .padding(.horizontal,20)
+                    .background{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(lineWidth: 1)
+                    }
+                    .padding(.trailing,24)
+                    .asButton {
+                        withAnimation(.bouncy) {
+                            viewModel.showDatePicker = true
+                        }
+                    }
+            }
+            .padding(.vertical,16)
+            .background{
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.E_5_E_5_EA)
+            }
+            if viewModel.showDatePicker{
+                VStack(spacing:0){
+                    DatePicker(selection:$viewModel.startDateValue, in: Date()..., displayedComponents: .date) {}
+                        .datePickerStyle(.graphical)
+                    
+                    Text("Done")
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .foregroundStyle(.white)
+                        .background{
+                            Color.blue
+                        }
+                        .cornerRadius(10)
+                        .padding([.leading,.trailing,.bottom],10)
+                        .asButton(.press) {
+                            withAnimation(.bouncy) {
+                                let startDate = (dateFormatChange(dateFormat: "yyyy-MM-dd", dates: viewModel.startDateValue))
+                                let currentDate = (dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date()))
+                                if (startDate == currentDate){
+                                    viewModel.startTimeValue = Date()
+                                }
+                                viewModel.showDatePicker = false
+                            }
+                        }
                 }
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1)
+                        .foregroundStyle(.D_1_D_1_D_6)
+                    
+                )
+                .padding(.top,10)
             }
         }
     }
     
-    private var RecurringContentView: some View{
-        HStack(spacing:0){
-            VStack(spacing:0){
-                Text(viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(.E_5_E_5_EA)
-                    .font(.custom(FontContent.besSemiBold, size: 34))
-                
-                Text(viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "MMMM"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical,4)
-                    .background(.appMain)
-                    .foregroundStyle(.white)
+    private var SelectTimeContentView: some View{
+        VStack{
+            HStack{
+                Text("Select Time")
                     .font(.custom(FontContent.plusRegular, size: 16))
-            }
-            .frame(width: 105,height: 79)
-            .asButton(.press) {
-                viewModel.dateState = 3
-                viewModel.showDatePicker = true
-            }
-            
-            
-            RoundedRectangle(cornerRadius: 5)
-                .foregroundStyle(._7_C_7_C_80)
-                .frame(width: 35,height: 5)
-                .frame(maxWidth: .infinity,maxHeight: .infinity)
+                    .padding(.leading,24)
+                Spacer()
                 
-            
-            VStack(spacing:0){
-                Text(viewModel.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "d"))
-                    .frame(maxWidth: .infinity,maxHeight: .infinity)
-                    .background(.E_5_E_5_EA)
-                    .font(.custom(FontContent.besSemiBold, size: 34))
-                
-                Text(viewModel.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ssZ", afterFormat: "MMMM"))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical,4)
-                    .background(.appMain)
-                    .foregroundStyle(.white)
+                Text(dateFormatChange(dateFormat: "h:mm a", dates: viewModel.startTimeValue))
                     .font(.custom(FontContent.plusRegular, size: 16))
+                    .padding(.vertical,8)
+                    .padding(.horizontal,20)
+                    .background{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(lineWidth: 1)
+                    }
+                    .padding(.trailing,24)
+                    .asButton {
+                        withAnimation(.bouncy) {
+                            viewModel.showTimePicker = true
+                        }
+                    }
             }
-            .frame(width: 105,height: 79)
-            .asButton(.press) {
-                viewModel.dateState = 4
-                viewModel.showDatePicker = true
+            .padding(.vertical,16)
+            .background{
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.E_5_E_5_EA)
             }
             
+            
+            if viewModel.showTimePicker{
+                
+                VStack(spacing:0){
+                    
+                    
+                    if (Date() < viewModel.startDateValue) && viewModel.segSelected == "One Time"{
+                        DatePicker(selection:$viewModel.startTimeValue, displayedComponents: .hourAndMinute) {}
+                            .datePickerStyle(.wheel)
+                    }else if viewModel.segSelected != "One Time" && !viewModel.dateArray.contains(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())){
+                        DatePicker(selection:$viewModel.startTimeValue, displayedComponents: .hourAndMinute) {}
+                            .datePickerStyle(.wheel)
+                    }else{
+                        DatePicker(selection:$viewModel.startTimeValue, in: Date()..., displayedComponents: .hourAndMinute) {}
+                            .datePickerStyle(.wheel)
+                    }
+                    
+                    Text("Done")
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .foregroundStyle(.white)
+                        .background{
+                            Color.blue
+                        }
+                        .cornerRadius(5)
+                        .padding([.leading,.trailing,.bottom],10)
+                        .asButton(.press) {
+                            withAnimation(.bouncy) {
+                                viewModel.showTimePicker = false
+                            }
+                        }
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1)
+                        .foregroundStyle(.D_1_D_1_D_6)
+                    
+                )
+                .padding(.top,10)
+            }
         }
-        
+    }
+    
+    private var DurationTimeContentView: some View{
+        HStack{
+            Text("Duration")
+                .font(.custom(FontContent.plusRegular, size: 16))
+                .padding(.leading,24)
+            Spacer()
+            
+            HStack(spacing:15) {
+                Image("minus")
+                    .asButton(.press) {
+                        if Int(viewModel.duration) == 1 {
+                            viewModel.duration = 1
+                        } else {
+                            viewModel.duration = viewModel.duration - 1
+                        }
+                    }
+                Text(String("\(viewModel.duration)"))
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                Image("plus")
+                    .asButton(.press) {
+                        viewModel.duration = viewModel.duration + 1
+                    }
+            }
+            .padding(.horizontal, 15)
+            .frame(height: 32)
+            .overlay(
+                RoundedRectangle(cornerRadius: 60)
+                    .inset(by: 1)
+                    .stroke(.D_1_D_1_D_6, lineWidth: 1)
+            )
+        }
+        .padding(.trailing,24)
+        .padding(.vertical,16)
+        .background{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(lineWidth: 1)
+                .foregroundStyle(.E_5_E_5_EA)
+        }
+    }
+    
+    private var RecurringContentView: some View{
+        MultiDatePicker(selection: $viewModel.startDateSValue, in: Date()...) {}
+            .datePickerStyle(.graphical)
+            .onChange(of: viewModel.startDateSValue, { oldValue, newValue in
+                viewModel.dateArray = []
+                if viewModel.startDateSValue.count > 0 {
+                    
+                    for i in viewModel.startDateSValue{
+                        viewModel.dateArray.append(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: i.date ?? Date()))
+                        print(i)
+                    }
+                }
+                if viewModel.dateArray.contains(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())){
+                    viewModel.startTimeValue = Date()
+                }
+            })
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.D_1_D_1_D_6)
+                    
+            )
+            .padding(.bottom,15)
+            .padding(.top,10)
     }
     
     private var SegmentController: some View{
@@ -353,11 +322,9 @@ struct BookingFormScreenView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .asButton(.press) {
                     viewModel.segSelected = "One Time"
-                    if viewModel.startTime > "23:00:00"{
-                        viewModel.endTime = "23:59:00"
-                        guard let date = dateFormatChangeToDate(dateFormat: "HH:mm:ss", dates: "23:59:00") else { return }
-                        viewModel.endTimeValue = date
-                    }
+                    viewModel.startTimeValue = Date()
+                    viewModel.startDateValue = Date()
+                    viewModel.startDateSValue = []
                 }
             Text("Recurring")
                 .padding(.vertical,6)
@@ -367,6 +334,7 @@ struct BookingFormScreenView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .asButton(.press) {
                     viewModel.segSelected = "Recurring"
+                    viewModel.startDateSValue = []
                 }
         }
         .padding([.horizontal,.vertical],3)
@@ -522,18 +490,20 @@ struct BookingFormScreenView: View {
             
             
             ZStack{
-                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 5, items: AppConstants.needServiceInArray) { service in
-                    if let service{
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 5, items: viewModel.needServiceInArray) { data in
+                    if let data{
                         CheckBoxView(
-                            isSelected: !viewModel.needServiceInSelected.contains(service),
-                            name: service
+                            isSelected: !viewModel.needServiceInSelected.contains(data.service),
+                            name: data.service,
+                            price: Double(data.amount)
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding(.bottom,5)
                         .asButton(.press) {
-                                if viewModel.needServiceInSelected.contains(service){
-                                    viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != service}
+                            if viewModel.needServiceInSelected.contains(data.service){
+                                viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != data.service}
                                 }else{
-                                    viewModel.needServiceInSelected.append(service)
+                                    viewModel.needServiceInSelected.append(data.service)
                                 }
                             viewModel.needServiceInSelected = viewModel.needServiceInSelected.sorted(by: { $0 < $1 })
                         }

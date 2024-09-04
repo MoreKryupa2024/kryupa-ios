@@ -81,15 +81,16 @@ struct BookingScreenView: View {
             case 1:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Pending",bookingData: data,payNowAction: { data in
-                        print("")
-                    })
-                        .asButton(.press) {
-                            
+                        let paymentViewModel = PaymentViewModel()
+                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
+                        router.showScreen(.push) { rout in
+                            PaymentOrderScreenView(viewModel: paymentViewModel)
                         }
+                    })
                 }
             case 2:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                    BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
+                    BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ServiceDetailScreenViewModel()
                             viewModelReview.bookingsListData = data
@@ -97,7 +98,6 @@ struct BookingScreenView: View {
                                 ServiceDetailScreenView(viewModel:viewModelReview)
                             }
                         }
-
                 }
             case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
@@ -113,7 +113,9 @@ struct BookingScreenView: View {
             case 0:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Draft",bookingData: data,deleteAction: { data in
-                        
+                        viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
+                            presentAlert(title: "Kryupa", subTitle: errorStr)
+                        }
                     })
                     .asButton(.press) {
                         Defaults().bookingId = data.bookingID
@@ -134,7 +136,7 @@ struct BookingScreenView: View {
             switch viewModel.selectedSection{
             case 0:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                    BookingView(status: data.status == "Job Schedule" ? "Schedule" : "Active",bookingData: data)
+                    BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ServiceDetailScreenViewModel()
                             viewModelReview.bookingsListData = data

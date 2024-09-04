@@ -101,28 +101,28 @@ struct CareGiverHomeScreenView: View {
     private var noCotentView: some View{
         
         VStack(spacing:0){
-            Text("Waiting for care seekers?\nNo Worries! Refer and Earn")
-                .font(.custom(FontContent.besMedium, size: 20))
-                .multilineTextAlignment(.center)
-            
-            HStack{
-                Text("Win Upto")
-                Text("$5")
-                    .strikethrough()
-                Text("$25")
-            }
-            .foregroundStyle(.white)
-            .padding(.vertical,5)
-            .padding(.horizontal,10)
-            .background{
-                RoundedRectangle(cornerRadius: 5)
-            }
-            .font(.custom(FontContent.besMedium, size: 17))
-            .padding(.top,10)
+//            Text("Waiting for care seekers?\nNo Worries! Refer and Earn")
+//                .font(.custom(FontContent.besMedium, size: 20))
+//                .multilineTextAlignment(.center)
+//            
+//            HStack{
+//                Text("Win Upto")
+//                Text("$5")
+//                    .strikethrough()
+//                Text("$25")
+//            }
+//            .foregroundStyle(.white)
+//            .padding(.vertical,5)
+//            .padding(.horizontal,10)
+//            .background{
+//                RoundedRectangle(cornerRadius: 5)
+//            }
+//            .font(.custom(FontContent.besMedium, size: 17))
+//            .padding(.top,10)
             
             Image("emptyHome")
                 .resizable()
-                .frame(width: 185,height: 206)
+                .frame(width: 285,height: 306)
                 .padding(.top,30)
             
             

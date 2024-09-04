@@ -46,7 +46,7 @@ struct SuccessfulScreeenView: View {
                     .font(.custom(FontContent.besMedium, size: 22))
                     .padding(.top,50)
                 
-                
+                ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)
                     .frame(height: 325)

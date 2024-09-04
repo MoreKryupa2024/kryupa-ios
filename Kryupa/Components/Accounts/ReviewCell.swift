@@ -27,7 +27,7 @@ struct ReviewCell: View {
                         .foregroundStyle(.appMain)
                         .padding(.bottom, 1)
                     let createdDate = reviewData?.createdAt.split(separator: " ").first ?? ""
-                    Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM"))
+                    Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd"))
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                     HStack {

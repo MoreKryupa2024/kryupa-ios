@@ -15,7 +15,7 @@ struct MoneyAddedScreenView: View {
         ZStack{
             VStack{
                 HeaderView(title: "Money Added")
-                
+                ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)
                     .frame(height: 325)

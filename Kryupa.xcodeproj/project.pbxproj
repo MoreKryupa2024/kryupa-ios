@@ -83,6 +83,9 @@
 		BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */; };
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
+		BE1D6E992C85FD6600DB134B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = BE1D6E982C85FD6600DB134B /* Lottie */; };
+		BE1D6E9B2C85FD9000DB134B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D6E9A2C85FD9000DB134B /* LottieView.swift */; };
+		BE1D6E9D2C85FE0E00DB134B /* SuccessLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */; };
 		BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */; };
 		BE2B58A62C3EA777002EC297 /* CardPayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A52C3EA777002EC297 /* CardPayments */; };
 		BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */ = {isa = PBXBuildFile; productRef = BE2B58A72C3EA777002EC297 /* CorePayments */; };
@@ -125,6 +128,7 @@
 		BE4FBDB72BFB8406003442BB /* SelectProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBDB62BFB8406003442BB /* SelectProfileImageView.swift */; };
 		BE4FBDB92BFB8AAC003442BB /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBDB82BFB8AAC003442BB /* CameraView.swift */; };
 		BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4FBDBA2BFB96CD003442BB /* DropDownView.swift */; };
+		BE5045C32C870D4C00038603 /* ChatViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5045C22C870D4C00038603 /* ChatViewHeader.swift */; };
 		BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */; };
 		BE50EC082BFDD88C00175566 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC072BFDD88C00175566 /* Defaults.swift */; };
 		BE50EC0A2BFDDE5600175566 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50EC092BFDDE5600175566 /* APIClient.swift */; };
@@ -168,6 +172,7 @@
 		BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */; };
 		BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */; };
 		BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */; };
+		BE98D8412C8838590021466B /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BE98D8402C8838590021466B /* Success.gif */; };
 		BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA42BFDC73A00B6A7B0 /* FirebaseAuth */; };
 		BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */; };
 		BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */; };
@@ -175,7 +180,6 @@
 		BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */; };
 		BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */; };
 		BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */; };
-		BEC365922BFCC400005AC4A0 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEC365912BFCC400005AC4A0 /* Success.gif */; };
 		BEC5E9D42C352F42000BC2A1 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */; };
 		BEC5E9D62C355653000BC2A1 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D52C355653000BC2A1 /* HapticManager.swift */; };
 		BEC5E9D82C357ABB000BC2A1 /* ImageLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */; };
@@ -284,6 +288,8 @@
 		BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileNumberScreenView.swift; sourceTree = "<group>"; };
 		BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationScreenView.swift; sourceTree = "<group>"; };
 		BE1573BD2BF64C9400A6137D /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		BE1D6E9A2C85FD9000DB134B /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuccessLottie.json; sourceTree = "<group>"; };
 		BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		BE2B58AD2C3EA9B6002EC297 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		BE2CA3BE2C5103DF007F1059 /* AddMoneyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyScreenView.swift; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 		BE4FBDB62BFB8406003442BB /* SelectProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileImageView.swift; sourceTree = "<group>"; };
 		BE4FBDB82BFB8AAC003442BB /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BE4FBDBA2BFB96CD003442BB /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		BE5045C22C870D4C00038603 /* ChatViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewHeader.swift; sourceTree = "<group>"; };
 		BE50EC052BFDC9FF00175566 /* SocialLoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginScreenViewModel.swift; sourceTree = "<group>"; };
 		BE50EC072BFDD88C00175566 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		BE50EC092BFDDE5600175566 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -362,11 +369,11 @@
 		BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInformationSeekerViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCareSeekarViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileImageViewModel.swift; sourceTree = "<group>"; };
+		BE98D8402C8838590021466B /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Success.gif; path = ../../../Downloads/Success.gif; sourceTree = "<group>"; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
 		BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewModel.swift; sourceTree = "<group>"; };
 		BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulScreeenView.swift; sourceTree = "<group>"; };
 		BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFExtention.swift; sourceTree = "<group>"; };
-		BEC365912BFCC400005AC4A0 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Success.gif; sourceTree = "<group>"; };
 		BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		BEC5E9D52C355653000BC2A1 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingView.swift; sourceTree = "<group>"; };
@@ -398,6 +405,7 @@
 				BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */,
 				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
 				BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */,
+				BE1D6E992C85FD6600DB134B /* Lottie in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BE2B58A62C3EA777002EC297 /* CardPayments in Frameworks */,
 				BE2D337A2C3FCFD700192323 /* PayPalWebPayments in Frameworks */,
@@ -423,6 +431,7 @@
 				A36BC39A2C1AC7DB005616A5 /* FAQExpandView.swift */,
 				A36BC3AE2C1F73A4005616A5 /* ReviewHoursView.swift */,
 				A36BC3B02C1F782B005616A5 /* RatingView.swift */,
+				BE5045C22C870D4C00038603 /* ChatViewHeader.swift */,
 				A3FEF6152C25882F00EFC3C2 /* GalleryView.swift */,
 			);
 			path = Accounts;
@@ -803,7 +812,8 @@
 				BEEF2E5D2C44DFCD0020A892 /* Kryupa.entitlements */,
 				BE644E882BF4D4F400A6781F /* Info.plist */,
 				BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */,
-				BEC365912BFCC400005AC4A0 /* Success.gif */,
+				BE98D8402C8838590021466B /* Success.gif */,
+				BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */,
 				BE1573BB2BF64C6500A6137D /* Utility */,
 				BE644E4D2BF4D2E000A6781F /* Fonts */,
 				BE644E3F2BF49C9A00A6781F /* API */,
@@ -868,6 +878,7 @@
 				BE32E0362C468DF8003C7C90 /* Wallet */,
 				BEF2EDB52C25B4410008108C /* StarsView.swift */,
 				BEC5E9D72C357ABB000BC2A1 /* ImageLoadingView.swift */,
+				BE1D6E9A2C85FD9000DB134B /* LottieView.swift */,
 				BE3C7F292C1C2425000848A6 /* Booking */,
 			);
 			path = Components;
@@ -1162,6 +1173,7 @@
 				BE2B58AB2C3EA777002EC297 /* PaymentButtons */,
 				BE2D33792C3FCFD700192323 /* PayPalWebPayments */,
 				BE9007292C58C4AA003B6038 /* FirebaseMessaging */,
+				BE1D6E982C85FD6600DB134B /* Lottie */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1199,6 +1211,7 @@
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */,
+				BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
@@ -1215,6 +1228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE644E922BF50ED300A6781F /* PlusJakartaDisplay-Bold.otf in Resources */,
+				BE1D6E9D2C85FE0E00DB134B /* SuccessLottie.json in Resources */,
 				BE644E9F2BF50F4500A6781F /* Besley-SemiBold.ttf in Resources */,
 				BE644E932BF50ED300A6781F /* PlusJakartaDisplay-Medium.otf in Resources */,
 				BE644E9C2BF50F4500A6781F /* Besley-Bold.ttf in Resources */,
@@ -1223,7 +1237,7 @@
 				BE644E9E2BF50F4500A6781F /* Besley-Italic.ttf in Resources */,
 				BE644E332BF495D900A6781F /* Assets.xcassets in Resources */,
 				BE644E942BF50ED300A6781F /* PlusJakartaDisplay-Regular.otf in Resources */,
-				BEC365922BFCC400005AC4A0 /* Success.gif in Resources */,
+				BE98D8412C8838590021466B /* Success.gif in Resources */,
 				BE644E952BF50ED300A6781F /* PlusJakartaDisplay-Light.otf in Resources */,
 				BE644E9D2BF50F4500A6781F /* Besley-Medium.ttf in Resources */,
 				BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */,
@@ -1254,6 +1268,7 @@
 				BE3C7F242C1C1556000848A6 /* InboxScreenView.swift in Sources */,
 				A3FEF60E2C21CE1400EFC3C2 /* ProfileDetailScreenViewModel.swift in Sources */,
 				A3BB87AE2C1718A500C604DD /* ReviewListView.swift in Sources */,
+				BE1D6E9B2C85FD9000DB134B /* LottieView.swift in Sources */,
 				A36BC3AF2C1F73A4005616A5 /* ReviewHoursView.swift in Sources */,
 				BECD50982C5CE1FF004DD43D /* FAQViewModel.swift in Sources */,
 				A3FEF60A2C219FD200EFC3C2 /* ProfileModel.swift in Sources */,
@@ -1291,6 +1306,7 @@
 				A3BB87A02C1717B500C604DD /* CareGiverDetailModel.swift in Sources */,
 				A36BC3922C19A6B2005616A5 /* JobsModel.swift in Sources */,
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
+				BE5045C32C870D4C00038603 /* ChatViewHeader.swift in Sources */,
 				A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
@@ -1636,6 +1652,14 @@
 				kind = branch;
 			};
 		};
+		BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/paypal/paypal-ios/";
@@ -1691,6 +1715,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
+		};
+		BE1D6E982C85FD6600DB134B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		BE2B58A52C3EA777002EC297 /* CardPayments */ = {
 			isa = XCSwiftPackageProductDependency;

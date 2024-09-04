@@ -120,6 +120,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
                 case .failure(let error):
                     self?.isloading = false
                     print(error)
+                    completion()
                 }
             }
             
@@ -133,7 +134,7 @@ class CareGiverHomeScreenViewModel: ObservableObject
                 self?.isloading = false
                 switch result{
                 case .success(let data):
-                    self?.serviceStartData = data.data
+                    self?.serviceStartData = data.dataTwo
                 case .failure(let error):
                     print(error)
                 }

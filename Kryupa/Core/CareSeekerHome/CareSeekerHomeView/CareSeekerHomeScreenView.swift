@@ -19,21 +19,23 @@ struct CareSeekerHomeScreenView: View {
             VStack(spacing:15){
                 HeaderView()
                 ScrollView {
-                    if let serviceStartData = viewModel.serviceStartData{
-                        if serviceStartData.serviceStatus == "active" {
+                    if viewModel.serviceStartData.count > 0{
                             serviceView()
-                        }
                     }else{
-                        BannerView(assetsImage: ["customer home top"],//,"customer home top 2"],
+                        BannerView(assetsImage: ["customer home top","payBanner"],//,"customer home top 2"],
                                    showIndecator: false,
                                    fromAssets: true,
-                                   aspectRatio: 327/58)
+                                   aspectRatio: 327/58,onSelect: { index in
+                            if index == 0{
+                                NotificationCenter.default.post(name: .showBookingScreen,
+                                                                object: nil, userInfo: nil)
+                            }else{
+                                let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 1]
+                                showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
+                            }
+                        })
 //                        .padding(.horizontal,24)
                         .padding(.top,14)
-                        .asButton(.press) {
-                            NotificationCenter.default.post(name: .showBookingScreen,
-                                                            object: nil, userInfo: nil)
-                        }
                     }
                     
                     if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
@@ -77,19 +79,21 @@ struct CareSeekerHomeScreenView: View {
     }
     
     private func serviceView()-> some View{
-        
-        return ZStack(alignment:.top){
-            VStack {
-                Image("customer home top 1")
-                    .resizable()
-                    .aspectRatio(327/58, contentMode: .fit)
-                    .asButton(.press) {
-                        viewModel.customerConfirmStartService()
-                    }
-            }
-            .frame(maxWidth: .infinity)
+        var nameList = [String]()
+        var imageBanner = [String]()
+        for i in viewModel.serviceStartData{
+            nameList.append(i.name)
+            imageBanner.append("customer home top 1")
         }
-        .padding(.horizontal,25)
+        
+        return BannerView(assetsImage: imageBanner,
+                          nameList: nameList,
+                          showIndecator: (viewModel.serviceStartData.count > 1),
+                          fromAssets: true,
+                          aspectRatio: 327/58,
+                          onSelect: { index in
+            viewModel.customerConfirmStartService(serviceStartData: viewModel.serviceStartData[index])
+        })
         .padding(.vertical,15)
     }
     
@@ -137,7 +141,7 @@ struct CareSeekerHomeScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(._7_C_7_C_80)
                         .asButton(.press) {
-                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 1]
+                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 2]
                             showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
                         }
             }
@@ -163,7 +167,7 @@ struct CareSeekerHomeScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 17))
                         .foregroundStyle(._7_C_7_C_80)
                         .asButton(.press) {
-                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 2]
+                            let selectedIndexBookingScreenDict:[String: Int] = ["selectedIndexBookingScreen": 3]
                             showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
                         }
             }

@@ -17,13 +17,14 @@ struct CancelSuccessScreen: View {
                 GifImageView("Success")
                     .padding(.horizontal,20)
                     .frame(height: 325)
+                //LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 VStack(spacing:20){
                     Text("Your Booking has been cancelled!\nCustomer Service will contact you soon.")
                         .font(.custom(FontContent.plusRegular, size: 12))
                 }
                 .multilineTextAlignment(.center)
                 .foregroundStyle(._444446)
-                .padding(.top,50)
+                .padding(.top,40)
                 
                 Spacer()
             }

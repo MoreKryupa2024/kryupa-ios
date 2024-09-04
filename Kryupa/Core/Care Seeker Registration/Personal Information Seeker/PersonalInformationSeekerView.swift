@@ -41,7 +41,7 @@ struct PersonalInformationSeekerView: View {
                         selectionViewWithHeader(
                             leftIcone: nil,
                             rightIcon: "PersonalInfoCalender",
-                            value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "dd-MM-yyyy") : "",
+                            value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "MM-dd-yyyy") : "",
                             title: "Date Of Birth",
                             placeHolder: "Select"
                         )
@@ -57,29 +57,42 @@ struct PersonalInformationSeekerView: View {
                         languageDropdownView
                         
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
-                        
-                        HStack{
-                            textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
-                                .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
-                                    if (viewModel.personalInfoData.postalCode ?? "").count > 5{
-                                        viewModel.personalInfoData.postalCode?.removeLast()
+                        VStack(alignment:.leading,spacing:5){
+                            HStack{
+                                textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
+                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
+                                        }else{
+                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+                                                viewModel.getAddress()
+                                            }else{
+                                                viewModel.personalInfoData.city = ""
+                                                viewModel.personalInfoData.state = ""
+                                                viewModel.personalInfoData.country = ""
+                                                viewModel.personalInfoData.zipError = ""
+                                            }
+                                        }
                                     }
-                                    if (viewModel.personalInfoData.postalCode ?? "").count == 5{
-                                        viewModel.getAddress()
-                                    }
-                                }
-                            textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                                .disabled(true)
-                            
+                                textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
+                                    .disabled(true)
+                                    .foregroundStyle(._7_C_7_C_80)
+                            }
+                            if let zipError = viewModel.personalInfoData.zipError, !(zipError.isEmpty){
+                                Text(zipError)
+                                    .foregroundStyle(.red)
+                                    .offset(y:10)
+                            }
                         }
                         
                         HStack{
                             textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
                                 .disabled(true)
+                                .foregroundStyle(._7_C_7_C_80)
                             
                             textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
                                 .disabled(true)
-                            
+                                .foregroundStyle(._7_C_7_C_80)
                         }
                         
                         HStack{

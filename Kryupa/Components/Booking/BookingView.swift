@@ -74,7 +74,7 @@ struct BookingView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 3){
                             if let startDate = bookingData?.startDate, let endDate = bookingData?.endDate{
-                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
                                     .font(.custom(FontContent.plusRegular, size: 12))
                                     .foregroundStyle(._444446)
                                     .lineLimit(1)
@@ -90,9 +90,11 @@ struct BookingView: View {
                                     .foregroundStyle(.FFB_323)
                             }
                         }
+                        Spacer()
                         if status == "Draft" {
                             Image("DeleteButton")
                                 .frame(width: 25,height: 25)
+                                .offset(y: 10)
                                 .asButton {
                                     guard let bookingData else {return}
                                     deleteAction?(bookingData)

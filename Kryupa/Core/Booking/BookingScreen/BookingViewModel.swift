@@ -15,9 +15,7 @@ class BookingViewModel: ObservableObject{
     @Published var pageNumber = 1
     
     func getBookings(){
-//        bookingList = []
         isLoading = true
-        //var param : [String : Any] = ["pageNumber":pageNumber,
         var param : [String : Any] = ["pageNumber":1,
                                       "pageSize":20]
        
@@ -80,6 +78,23 @@ class BookingViewModel: ObservableObject{
                     case .failure(let error):
                         print(error)
                     }
+                }
+            }
+        }
+    }
+    
+    func deleteBooking(bookingId:String,alert: @escaping ((String)->Void)){
+        isLoading = true
+        let param = ["booking_id":bookingId]
+        NetworkManager.shared.deletebooking(params: param) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result{
+                case .success(_):
+                    self?.getBookings()
+                    alert("Draft Deleted Successfully")
+                case .failure(let error):
+                    alert(error.getMessage())
                 }
             }
         }

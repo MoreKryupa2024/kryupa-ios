@@ -13,6 +13,7 @@ struct RatingView: View {
     @State var selected = false
     var rating = Int()
     var action:((Int)->Void)? = nil
+    var canChange = true
     var body: some View {
         LazyHStack {
             ForEach(Array(starList.enumerated()), id: \.offset) { index, model in
@@ -20,18 +21,20 @@ struct RatingView: View {
                     .resizable()
                     .frame(width: 20, height: 20)
                     .asButton(.press) {
-                        for (indexS,_) in starList.enumerated() {
-                            if indexS <= index {
-                                starList.remove(at: indexS)
-                                starList.insert(true, at: indexS)
+                        if canChange{
+                            for (indexS,_) in starList.enumerated() {
+                                if indexS <= index {
+                                    starList.remove(at: indexS)
+                                    starList.insert(true, at: indexS)
+                                }
+                                if indexS > index {
+                                    starList.remove(at: indexS)
+                                    starList.insert(false, at: indexS)
+                                }
                             }
-                            if indexS > index {
-                                starList.remove(at: indexS)
-                                starList.insert(false, at: indexS)
-                            }
+                            action?(index)
+                            selected.toggle()
                         }
-                        action?(index)
-                        selected.toggle()
                     }
             }
             Spacer()

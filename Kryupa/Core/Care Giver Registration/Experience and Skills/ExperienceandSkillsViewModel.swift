@@ -35,11 +35,11 @@ class ExperienceandSkillsViewModel: ObservableObject{
         guard let areaOfExpertise = exprienceAndSkillsData.areaOfExpertise, areaOfExpertise.count != 0 else {
             return alert("Please Select Area Of Expertise")
         }
-        
-        guard let certificateAndDocuments = exprienceAndSkillsData.certificateAndDocuments, certificateAndDocuments.count != 0 else {
-            return alert("Please Upload Your Certificate & Documents")
-        }
-       
+//        
+//        guard let certificateAndDocuments = exprienceAndSkillsData.certificateAndDocuments, certificateAndDocuments.count != 0 else {
+//            return alert("Please Upload Your Certificate & Documents")
+//        }
+//       
         var param = [String:Any]()
         param = [
             "bio": bio,

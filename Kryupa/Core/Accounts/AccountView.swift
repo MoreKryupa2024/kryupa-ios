@@ -23,43 +23,48 @@ struct AccountView: View {
     @Environment(\.router) var router
 
     var body: some View {
-        
-        ScrollView(showsIndicators: false){
-            HeaderTopView
-            VStack(alignment:.leading, spacing: 20) {
-                ForEach(Array(arrAccountList.enumerated()), id: \.offset) { index, model in
-                    getAccountCellView(model: model, index: index)
-                        .asButton(.press) {
-                            navigationLink(screen: model.title)
+        ZStack{
+            
+            ScrollView(showsIndicators: false){
+                HeaderTopView
+                VStack(alignment:.leading, spacing: 20) {
+                    ForEach(Array(arrAccountList.enumerated()), id: \.offset) { index, model in
+                        getAccountCellView(model: model, index: index)
+                            .asButton(.press) {
+                                navigationLink(screen: model.title)
+                            }
+                        if Defaults().userType == AppConstants.GiveCare{
+                            if index == 4 || index == 6 {
+                                line
+                            }
+                        }else{
+                            if index == 4 || index == 6 {
+                                line
+                            }
                         }
-                    if Defaults().userType == AppConstants.GiveCare{
-                        if index == 4 || index == 6 {
-                            line
-                        }
-                    }else{
-                        if index == 4 || index == 6 {
-                            line
-                        }
+                        
                     }
-                    
                 }
+                .padding(.top, 20)
             }
-            .padding(.top, 20)
-        }
-        .overlay(alignment: .top) {
+            .overlay(alignment: .top) {
                 Color.clear
                     .background(.regularMaterial)
                     .ignoresSafeArea(edges: .top)
                     .frame(height: 0)
             }
-        .task() {
-            UIScrollView.appearance().bounces = false
-
-            if Defaults().userType == AppConstants.GiveCare{
-                viewModel.getProfileGiver()
-
-            }else{
-                viewModel.getProfile()
+            .task() {
+                UIScrollView.appearance().bounces = false
+                
+                if Defaults().userType == AppConstants.GiveCare{
+                    viewModel.getProfileGiver()
+                    
+                }else{
+                    viewModel.getProfile()
+                }
+            }
+            if viewModel.isloading{
+                LoadingView()
             }
         }
     }
@@ -107,20 +112,23 @@ struct AccountView: View {
                 AboutUsView()
             }
         case "Logout":
-            
+            viewModel.getProfile()
             let primaryAction = UIAlertAction(title: "OK", style: .default) { action in
-                let domain = Bundle.main.bundleIdentifier!
-                UserDefaults.standard.removePersistentDomain(forName: domain)
-                UserDefaults.standard.synchronize()
-                NotificationCenter.default.post(name: .logout,
-                                                object: nil, userInfo: nil)
+                viewModel.logout {
+                    
+                    let domain = Bundle.main.bundleIdentifier!
+                    UserDefaults.standard.removePersistentDomain(forName: domain)
+                    UserDefaults.standard.synchronize()
+                    NotificationCenter.default.post(name: .logout,
+                                                    object: nil, userInfo: nil)
+                } errorAction: { errorStr in
+                    presentAlert(title: "Kryupa", subTitle: errorStr)
+                }
             }
-            
             let secondaryAction = UIAlertAction(title: "Cancel", style: .cancel)
-            
             presentAlert(title: "Kryupa", subTitle: "Logout",primaryAction: primaryAction,secondaryAction: secondaryAction)
             
-        case "Delete or deactivate account":
+        case "Deactivate account":
             router.showScreen(.push) { rout in
                 DeactivateAccountView()
             }

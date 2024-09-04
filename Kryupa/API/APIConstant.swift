@@ -113,7 +113,11 @@ class APIConstant{
     static let conversationWithAdmin = "\(communicationBaseURL)/chat/conversationWithAdmin"
     static let chatVideoCall = "\(communicationBaseURL)/vido_call/start"
     static let chatVideoCallRecieve = "\(communicationBaseURL)/vido_call/recieve"
+    
     static let getBannerUrls = "\(adminBaseURL)/get_banner_urls"
+    static let deletebooking = "\(bookingBaseURL)/deletebooking"
+    
+    static let logout = "\(authBaseURL)/authenticate/logout"
 }
 
 class FontContent{
@@ -156,6 +160,7 @@ class AppConstants{
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
+    static let needServicePriceInArray = [("Physical Therapy",30),("Occupational Therapy",25),("Nursing",20),("Companianship",10)]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
     static let languageSpeakingArray = ["English","Spanish","Mandarin","Tagalog","Vietnamese","French","Russian","German","Hindi",""]
@@ -174,7 +179,7 @@ class AppConstants{
 //        AccountListData(title: "Settings", image: "settings"),
         AccountListData(title: "About app", image: "aboutUs"),
         AccountListData(title: "Logout", image: "logout"),
-        AccountListData(title: "Delete or deactivate account", image: "setting_delete_account")
+        AccountListData(title: "Deactivate account", image: "setting_delete_account")
     ]
 
     static let seekerAccountSectionItems = [
@@ -186,7 +191,7 @@ class AppConstants{
 //        AccountListData(title: "Settings", image: "settings"),
         AccountListData(title: "About app", image: "aboutUs"),
         AccountListData(title: "Logout", image: "logout"),
-        AccountListData(title: "Delete or deactivate account", image: "setting_delete_account")
+        AccountListData(title: "Deactivate account", image: "setting_delete_account")
     ]
     
     static let timeZones = ["CEST": "Europe/Paris", "WEST": "Europe/Lisbon", "CDT": "America/Chicago", "EET": "Europe/Istanbul", "BRST": "America/Sao Paulo", "EEST": "Europe/Istanbul", "CET": "Europe/Paris", "MSD": "Europe/Moscow", "MST": "America/Denver", "KST": "Asia/Seoul", "PET": "America/Lima", "NZDT": "Pacific/Auckland", "CLT": "America/Santiago", "HST": "Pacific/Honolulu", "MDT": "America/Denver", "NZST": "Pacific/Auckland", "COT": "America/Bogota", "CST": "America/Chicago", "SGT": "Asia/Singapore", "CAT": "Africa/Harare", "BRT": "America/Sao Paulo", "WET": "Europe/Lisbon", "IST": "Asia/Calcutta", "HKT": "Asia/Hong Kong", "GST": "Asia/Dubai", "EDT": "America/New York", "WIT": "Asia/Jakarta", "UTC": "UTC", "JST": "Asia/Tokyo", "IRST": "Asia/Tehran", "PHT": "Asia/Manila", "AKDT": "America/Juneau", "BST": "Europe/London", "PST": "America/Los Angeles", "ART": "America/Argentina/Buenos Aires", "PDT": "America/Los Angeles", "WAT": "Africa/Lagos", "EST": "America/New York", "BDT": "Asia/Dhaka", "CLST": "America/Santiago", "AKST": "America/Juneau", "ADT": "America/Halifax", "AST": "America/Halifax", "PKT": "Asia/Karachi", "GMT": "GMT", "ICT": "Asia/Bangkok", "MSK": "Europe/Moscow", "EAT": "Africa/Addis Ababa"]

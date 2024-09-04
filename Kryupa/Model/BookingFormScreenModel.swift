@@ -9,15 +9,54 @@ import Foundation
 
 
 // MARK: - Empty
-struct RelativeModel: Codable {
+struct RelativeModel{
     let success: Bool
     let message: String
-    let data: [RelativeDataModel]
+    let data: RelativeData
+    
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = RelativeData(jsonData:jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
 }
 
+// MARK: - DataClass
+struct RelativeData {
+    let relationArray: [RelativeDataModel]
+    let pricingArray: [PricingArray]
+    
+    init(jsonData:[String:Any]){
+        relationArray = (jsonData["relationArray"] as? [[String:Any]] ?? [[String:Any]]()).map{RelativeDataModel(jsonData: $0)}
+        pricingArray = (jsonData["pricingArray"] as? [[String:Any]] ?? [[String:Any]]()).map{PricingArray(jsonData: $0)}
+    }
+}
+
+// MARK: - PricingArray
+struct PricingArray {
+    let id, service, amount: String
+    let isDeleted: Bool
+    let createdAt, updatedAt: String
+
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        service = jsonData["service"] as? String ?? ""
+        amount = jsonData["amount"] as? String ?? ""
+        isDeleted = jsonData["is_deleted"] as? Bool ?? false
+        createdAt = jsonData["created_at"] as? String ?? ""
+        updatedAt = jsonData["updated_at"] as? String ?? ""
+    }
+}
+
+
 // MARK: - Datum
-struct RelativeDataModel: Codable {
+struct RelativeDataModel {
     let id, name: String
+    
+    init(jsonData:[String:Any]){
+        name = jsonData["name"] as? String ?? ""
+        id = jsonData["id"] as? String ?? ""
+    }
 }
 
 // MARK: - Empty
@@ -82,7 +121,8 @@ struct BookingIDData {
     let isActive, isDeleted: Bool
     let createdAt, updatedAt, profileID, customerID: String
     let status, yearsOfExprience: String
-    let areasOfExpertise, additionalSkills, languages: [String]
+    let noOfHours: Int
+    let areasOfExpertise, additionalSkills, languages, startDateArray: [String]
     
     init(jsondata:[String:Any]) {
         id = jsondata["id"] as? String ?? ""
@@ -100,10 +140,12 @@ struct BookingIDData {
         profileID = jsondata["profile_id"] as? String ?? ""
         customerID = jsondata["customer_id"] as? String ?? ""
         status = jsondata["status"] as? String ?? ""
+        noOfHours = jsondata["no_of_hours"] as? Int ?? 0
         yearsOfExprience = jsondata["years_of_exprience"] as? String ?? ""
         areasOfExpertise = jsondata["areas_of_expertise"] as? [String] ?? []
         additionalSkills = jsondata["additional_skills"] as? [String] ?? []
         languages = jsondata["languages"] as? [String] ?? []
+        startDateArray = jsondata["start_date_array"] as? [String] ?? []
     }
 }
 

@@ -97,6 +97,16 @@ struct SelectProfileImageView: View {
                         viewModel.profilePicture = image
                     }
                 }
+            SkipButton
+                .padding(.top,25)
+                .asButton(.press) {//(resource: "placeholderImage")
+                    let imageModel: UIImage = UIImage(imageLiteralResourceName: "placeholderImage")
+                    viewModel.uploadProfilePic(file: imageModel.jpegData(compressionQuality: 0.5) ?? Data(), fileName: "user_image.png") {
+                        router.showScreen(.push) { _ in
+                            SuccessfulScreeenView()
+                        }
+                    }
+                }
         }
     }
     
@@ -116,6 +126,19 @@ struct SelectProfileImageView: View {
         )
         .foregroundColor(.white)
         
+    }
+    
+    private var SkipButton: some View {
+        HStack{
+            Text("Skip Now")
+                .font(.custom(FontContent.plusMedium, size: 16))
+                .padding([.top,.bottom], 16)
+                .padding([.leading,.trailing], 40)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 1)
+        )
     }
     
     

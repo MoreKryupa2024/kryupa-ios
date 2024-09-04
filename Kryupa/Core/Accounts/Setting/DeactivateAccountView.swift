@@ -16,7 +16,7 @@ struct DeactivateAccountView: View {
     var body: some View {
         ZStack{
             VStack {
-                HeaderView(title: "Deactivate / Delete account",showBackButton: true)
+                HeaderView(title:  "Deactivate account",showBackButton: true)
                 DeleteView
                 Spacer()
             }
@@ -54,7 +54,7 @@ struct DeactivateAccountView: View {
         
         VStack {
             VStack(alignment: .leading, spacing: 15) {
-                Text("Are you sure you want to delete the account?")
+                Text("Are you sure you want to deactivate the account?")
                     .font(.custom(FontContent.plusRegular, size: 15))
                     .foregroundStyle(._444446)
                 
@@ -66,7 +66,7 @@ struct DeactivateAccountView: View {
             .padding(.horizontal, 25)
             .padding(.top, 10)
             
-            Text("Delete Account")
+            Text("Deactivate Account")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .foregroundStyle(.white)
                 .frame(height: 53)

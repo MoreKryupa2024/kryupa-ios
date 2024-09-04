@@ -18,7 +18,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
     @Published var topBanner: [BannerDataModel] = [BannerDataModel]()
     @Published var bottomBanner: [BannerDataModel] = [BannerDataModel]()
     
-    @Published var serviceStartData: ServiceStartData?
+    @Published var serviceStartData: [ServiceStartData] = []
     
     func getRecommandationList(){
         
@@ -107,8 +107,8 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
         }
     }
     
-    func customerConfirmStartService(){
-        guard let approch_id = serviceStartData?.id else {return}
+    func customerConfirmStartService(serviceStartData:ServiceStartData){
+        let approch_id = serviceStartData.id
         let param = [
             "approch_id": approch_id
         ]
@@ -118,7 +118,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                 self?.isloading = false
                 switch result{
                 case .success(_):
-                    self?.serviceStartData = nil
+                    self?.getRecommandationList()
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

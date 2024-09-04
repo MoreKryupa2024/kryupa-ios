@@ -89,14 +89,5 @@ struct PaymentMethodCell: View {
             }
         }
         .padding(.horizontal, 24)
-
-//        .asButton(.press) {
-//            if selectedPaymentMethod == tag {
-//                selectedPaymentMethod = -1
-//            }
-//            else {
-//                viewModel.paymentMethodSelected = tag
-//            }
-//        }
     }
 }

@@ -95,6 +95,10 @@ extension String{
         guard let data = self.data(using: .utf8, allowLossyConversion: false) else { return nil }
         return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
     }
+    
+    func removeZero()-> String{
+        return String(format:"%0.0f", self)
+    }
 }
 
 extension Double {
@@ -110,7 +114,7 @@ extension Double {
         let formatter = NumberFormatter()
         let number = NSNumber(value: self)
         formatter.minimumFractionDigits = num
-        formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
+        formatter.maximumFractionDigits = num //maximum digits in Double after dot (maximum precision)
         return String(formatter.string(from: number) ?? "")
     }
 }

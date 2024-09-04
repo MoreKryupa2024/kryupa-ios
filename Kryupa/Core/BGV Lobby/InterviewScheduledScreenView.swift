@@ -24,7 +24,7 @@ struct InterviewScheduledScreenView: View {
                     .font(.custom(FontContent.besMedium, size: 28))
                     .padding(.top,65)
                 
-                
+                ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)
                     .frame(height: 325)

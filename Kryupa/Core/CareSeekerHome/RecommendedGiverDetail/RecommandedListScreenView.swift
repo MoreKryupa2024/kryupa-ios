@@ -84,9 +84,9 @@ struct RecommandedListScreenView: View {
             .frame(maxWidth: .infinity)
             .padding(.leading,23)
             
-            Text("$\(giver.pricePerHour.removeZerosFromEnd(num: 2))")
-                .font(.custom(FontContent.plusMedium, size: 12))
-                .frame(maxHeight: .infinity,alignment: .top)
+//            Text("$\(giver.pricePerHour.removeZerosFromEnd(num: 2))")
+//                .font(.custom(FontContent.plusMedium, size: 12))
+//                .frame(maxHeight: .infinity,alignment: .top)
         }
         .padding(.vertical,9)
         .padding(.horizontal,10)

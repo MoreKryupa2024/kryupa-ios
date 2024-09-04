@@ -45,7 +45,7 @@ struct ServiceDetailScreenView: View {
         VStack(spacing:0){
             VStack(alignment:.leading, spacing:5){
                 if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 16))
                 }
@@ -143,7 +143,7 @@ struct ServiceDetailScreenView: View {
                 
                 RatingView(rating: viewModel.rating,action: { rating in
                     viewModel.rating = (rating + 1)
-                })
+                },canChange: !(viewModel.isReviewGiven))
                 .id(viewModel.rating)
                 
                 TextEditor(text: $viewModel.review)
@@ -158,19 +158,21 @@ struct ServiceDetailScreenView: View {
                         .frame(height: 125)
                 }
                 .padding(.top,10)
-//                .id(viewModel.review)
+                .disabled(viewModel.isReviewGiven)
                 
-                SubmitButton
-                    .padding(.vertical,20)
-                    .asButton(.press) {
-                        if viewModel.rating == 0{
-                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
-                        }else if viewModel.review.isEmpty{
-                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
-                        }else{
-                            viewModel.addReview()
+                if !(viewModel.isReviewGiven){
+                    SubmitButton
+                        .padding(.vertical,20)
+                        .asButton(.press) {
+                            if viewModel.rating == 0{
+                                presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
+                            }else if viewModel.review.isEmpty{
+                                presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
+                            }else{
+                                viewModel.addReview()
+                            }
                         }
-                    }
+                }
             }
             .padding(.horizontal,24)
         }

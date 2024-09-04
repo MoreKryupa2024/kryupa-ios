@@ -29,6 +29,22 @@ class AccountsViewModel: ObservableObject {
         }
     }
     
+    func logout(action:@escaping (()->Void), errorAction:@escaping ((String)->Void)){
+        isloading = true
+        NetworkManager.shared.logout { result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(_):
+                    action()
+                    self.isloading = false
+                case .failure(let error):
+                    errorAction(error.getMessage())
+                    self.isloading = false
+                }
+            }
+        }
+    }
+    
     func getProfileGiver(){
         isloading = true
         NetworkManager.shared.getProfileGiver() { [weak self] result in

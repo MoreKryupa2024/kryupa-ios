@@ -31,7 +31,7 @@ struct JobCell: View {
                         .foregroundStyle(.appMain)
                 }
                 
-                Text("\(jobPostData.bookingDetails.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM")) - \(jobPostData.bookingDetails.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                Text("\(jobPostData.bookingDetails.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d")) - \(jobPostData.bookingDetails.endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
 

@@ -39,7 +39,7 @@ struct PaymentHistoryCell: View {
                 .padding(.top, 0)
 
             let date = orderListData.createdAt.components(separatedBy: " ").first ?? ""
-            Text("\(date.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, dd-MM-yyyy"))")
+            Text("\(date.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, MM-dd-yyyy"))")
                 .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(._444446)
                 .padding(.horizontal, 23)

@@ -18,7 +18,7 @@ struct WalletScreenView: View {
         ZStack {
             VStack(spacing:0){
                 HeaderView(showBackButton: true)
-                ScrollView {
+//                ScrollView {
                     VStack(spacing:0){
                         
                         Text("Your Wallet Balance")
@@ -79,7 +79,7 @@ struct WalletScreenView: View {
                                         .padding(.bottom,15)
                                 }
                             }
-                            
+                            Spacer()
                         }
                         .background {
                             Rectangle()
@@ -96,7 +96,7 @@ struct WalletScreenView: View {
                         }
                         .padding(.top,30)
                     }
-                }
+//                }
             }
             .onAppear{
                 viewModel.pageNumber = 1

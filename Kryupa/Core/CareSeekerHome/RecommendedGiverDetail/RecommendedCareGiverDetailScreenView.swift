@@ -32,8 +32,13 @@ struct RecommendedCareGiverDetailScreenView: View {
                             .padding(.horizontal,24)
                             .padding(.top,15)
                     }else{
-                        ReviewListView(reviewList:viewModel.giverDetail?.reviewList ?? [])
-                            .padding(.horizontal,24)
+                        if (viewModel.giverDetail?.reviewList.count ?? 0) == 0{
+                            Text("No Reviews Found!")
+                                .padding(.top,45)
+                        }else{
+                            ReviewListView(reviewList:viewModel.giverDetail?.reviewList ?? [])
+                                .padding(.horizontal,24)
+                        }
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -107,9 +112,9 @@ struct RecommendedCareGiverDetailScreenView: View {
                 Text("\(viewModel.giverDetail?.yearOfExperience ?? 0) years experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
-                Text("$\(viewModel.giverDetail?.pricePerHour ?? 0)")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._444446)
+//                Text("$\(viewModel.giverDetail?.pricePerHour ?? 0)")
+//                    .font(.custom(FontContent.plusRegular, size: 12))
+//                    .foregroundStyle(._444446)
                 HStack{
                     StarsView(rating: (viewModel.giverDetail?.avgRating ?? 0.0), maxRating: 5,size: 12)
                     

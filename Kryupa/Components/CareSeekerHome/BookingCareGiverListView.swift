@@ -40,10 +40,10 @@ struct BookingCareGiverListView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.leading,23)
-            
-            Text("$\(giver.price)")
-                .font(.custom(FontContent.plusMedium, size: 15))
-                .frame(maxHeight: .infinity,alignment: .center)
+//            
+//            Text("$\(giver.price)")
+//                .font(.custom(FontContent.plusMedium, size: 15))
+//                .frame(maxHeight: .infinity,alignment: .center)
         }
         .padding(.vertical,9)
         .padding(.horizontal,10)

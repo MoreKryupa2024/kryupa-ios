@@ -21,7 +21,7 @@ class SettingViewModel: ObservableObject{
     @Published var selectedOption = "No, Deactivate my account till next login"
     @Published var arrcheckList: [NotificationAlertData] = [
         NotificationAlertData(title: "Yes, I am sure", toggleState: false),
-        NotificationAlertData(title: "No, Deactivate my account till next login", toggleState: false)
+//        NotificationAlertData(title: "No, Deactivate my account till next login", toggleState: false)
     ]
     
     func getNotificationSetting(){

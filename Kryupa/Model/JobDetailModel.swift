@@ -34,6 +34,7 @@ struct JobDetailData {
     let approchStatus: String
     let diseaseType, areasOfExpertise, additionalSkills, additionalInfo: [String]
     let languages: [String]
+    let serviceDetails: [ServiceDetailsData]
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -65,5 +66,20 @@ struct JobDetailData {
         additionalSkills = jsonData["additional_skills"] as? [String] ?? []
         additionalInfo = jsonData["additional_info"] as? [String] ?? []
         languages = jsonData["languages"] as? [String] ?? []
+        serviceDetails = (jsonData["servicedetails"] as? [[String:Any]] ?? [[String:Any]]()).map{ServiceDetailsData(jsonData: $0)}
+    }
+}
+
+struct ServiceDetailsData {
+    let bookingID, serviceStatus, serviceDate, serviceStartTime: String
+    let serviceEndTime, serviceEndDate: String
+
+    init(jsonData:[String:Any]){
+        bookingID = jsonData["booking_id"] as? String ?? ""
+        serviceStatus = jsonData["service_status"] as? String ?? ""
+        serviceDate = jsonData["service_date"] as? String ?? ""
+        serviceStartTime = jsonData["service_start_time"] as? String ?? ""
+        serviceEndTime = jsonData["service_end_time"] as? String ?? ""
+        serviceEndDate = jsonData["service_end_date"] as? String ?? ""
     }
 }

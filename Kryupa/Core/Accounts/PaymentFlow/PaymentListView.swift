@@ -140,7 +140,7 @@ struct PaymentListView: View {
                     let startDate = orderData.startDate.components(separatedBy: " ").first ?? ""
                     let endDate = orderData.endDate.components(separatedBy: " ").first ?? ""
                     
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMMM -"))\(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMMM yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM dd -"))\(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM dd yyyy"))")
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .padding(.bottom,5)
                         .foregroundStyle(._7_C_7_C_80)
@@ -232,6 +232,9 @@ struct PaymentListView: View {
                 )
                 .asButton(.press) {
                     self.viewModel.showAddBankView = false
+                    self.viewModel.bankName = ""
+                    self.viewModel.routingNumber = ""
+                    self.viewModel.accountNumber = ""
                 }
             
         }
@@ -245,7 +248,7 @@ struct PaymentListView: View {
                 .asButton {
                     viewModel.selectedSection = 0
                 }
-            SegmentTextView(title: "Payment Method", select: viewModel.selectedSection == 1)
+            SegmentTextView(title: "Bank Account", select: viewModel.selectedSection == 1)
                 .asButton {
                     if AppConstants.SeekCare == Defaults().userType{
                         viewModel.selectedSection = 0

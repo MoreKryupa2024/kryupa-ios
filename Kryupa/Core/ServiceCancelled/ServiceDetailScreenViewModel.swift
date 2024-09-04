@@ -10,6 +10,7 @@ class ServiceDetailScreenViewModel: ObservableObject{
     @Published var review: String = ""
     @Published var rating: Int = 0
     @Published var isloading: Bool = Bool()
+    @Published var isReviewGiven: Bool = Bool()
     @Published var bookingsListData: BookingsListData?
     @Published var cancelSeriveDetailData: CancelSeriveDetailData?
     @Published var selectedReason: String = String()
@@ -48,6 +49,7 @@ class ServiceDetailScreenViewModel: ObservableObject{
                 switch result{
                 case .success(_):
                     self?.isloading = false
+                    self?.isReviewGiven = true
                 case .failure(let error):
                     self?.isloading = false
                     print(error)
@@ -103,6 +105,12 @@ class ServiceDetailScreenViewModel: ObservableObject{
                     self?.isloading = false
                     self?.rating = data.data.rating
                     self?.review = data.data.review
+                    
+                    if self?.rating == 0 && (self?.review.isEmpty ?? false){
+                        self?.isReviewGiven = false
+                    }else{
+                        self?.isReviewGiven = true
+                    }
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

@@ -67,7 +67,7 @@ struct AppointmentsView: View {
                                 .resizable()
                                 .frame(width: 22,height: 22)
                             
-                            Text("\(data.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))")
+                            Text("\(data.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd yyyy"))")
                                 .font(.custom(FontContent.plusRegular, size: 15))
                                 .foregroundStyle(._444446)
                                 .frame(maxWidth: .infinity, alignment: .leading)

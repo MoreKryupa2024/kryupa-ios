@@ -76,7 +76,7 @@ struct GiveReviewView: View {
             
             RatingView(rating: viewModel.ratingValue,action: { rating in
                 viewModel.ratingValue = (rating + 1)
-            })
+            },canChange: viewModel.isEditReview)
             .id(viewModel.ratingValue)
             
             TextEditor(text: $viewModel.txtReview)
@@ -155,7 +155,7 @@ struct GiveReviewView: View {
         VStack(alignment: .leading) {
             HStack {
                 if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "d MMMM yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
                         .font(.custom(FontContent.besMedium, size: 16))
                         .foregroundStyle(.appMain)
                         .padding(.horizontal, 24)
@@ -191,7 +191,7 @@ struct GiveReviewView: View {
         Divider()
             .background(.F_2_F_2_F_7)
             .padding(.top, 24)
-            .padding(.trailing, 35)
+            .padding(.horizontal, 24)
             .frame(height: 2)
     }
     

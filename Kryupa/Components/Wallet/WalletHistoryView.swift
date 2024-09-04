@@ -18,7 +18,7 @@ struct WalletHistoryView: View {
                     Text(transectionListData.tnxstatus)
                         .font(.custom(FontContent.plusMedium, size: 22))
                         .foregroundStyle(.appSubTitle)
-                    Text(((transectionListData.createdAt.components(separatedBy: " ")).first ?? "").convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "d MMMM yy"))
+                    Text(((transectionListData.createdAt.components(separatedBy: " ")).first ?? "").convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM d yy"))
                         .font(.custom(FontContent.plusRegular, size: 13))
                         .foregroundStyle(._7_C_7_C_80)
                 }

@@ -39,13 +39,17 @@ class AddNewProfileScreenViewModel: ObservableObject{
         NetworkManager.shared.getAddress(params: param) { result in
             switch result{
             case .success(let data):
-                self.personalInfoData.latitude = Double(data.data.places.first?.latitude ?? "") ?? 0.0
-                self.personalInfoData.longitude = Double(data.data.places.first?.longitude ?? "") ?? 0.0
-                self.personalInfoData.state = data.data.places.first?.state ?? ""
-                self.personalInfoData.city = data.data.places.first?.placeName ?? ""
-                self.personalInfoData.country = data.data.country
+                DispatchQueue.main.async {
+                    self.personalInfoData.latitude = Double(data.data.places.first?.latitude ?? "") ?? 0.0
+                    self.personalInfoData.longitude = Double(data.data.places.first?.longitude ?? "") ?? 0.0
+                    self.personalInfoData.state = data.data.places.first?.state ?? ""
+                    self.personalInfoData.city = data.data.places.first?.placeName ?? ""
+                    self.personalInfoData.country = data.data.country
+                }
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self.personalInfoData.zipError = "Postal code not found!"
+                }
             }
         }
     }

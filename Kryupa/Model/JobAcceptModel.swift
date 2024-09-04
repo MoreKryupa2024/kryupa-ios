@@ -41,22 +41,25 @@ struct JobAcceptData: Codable {
 struct ServiceStartModel {
     let success: Bool
     let message: String
-    let data: ServiceStartData
+    let data: [ServiceStartData]
+    let dataTwo: ServiceStartData
     
     init(jsonData:[String:Any]){
         success = jsonData["success"] as? Bool ?? false
         message = jsonData["message"] as? String ?? ""
-        data = ServiceStartData(jsonData: jsonData["data"] as? [String : Any] ?? [String : Any]())
+        data = (jsonData["data"] as? [[String : Any]] ?? [[String : Any]]()).map{ServiceStartData(jsonData: $0)}
+        dataTwo = ServiceStartData(jsonData: jsonData["data"] as? [String : Any] ?? [String : Any]())
     }
 }
 
 // MARK: - DataClass
 struct ServiceStartData {
-    let id, serviceStatus: String
+    let id, serviceStatus,name: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
         serviceStatus = jsonData["service_status"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
     }
 }
 

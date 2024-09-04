@@ -11,27 +11,29 @@ import SwiftfulUI
 struct FAQView: View {
    @StateObject var viewModel = FAQViewModel()
     
+    
     var body: some View {
         ZStack{
-            VStack {
+            VStack(spacing:0){
                 HeaderView(showBackButton: true) {
                     viewModel.disconnect()
                 }
+                .background(.white)
+                
                 SegmentView
+                    .background(.white)
                 
                 if viewModel.selectedSection == 0 {
                     ScrollView {
                         VStack(spacing: 15) {
-                            ForEach(0...20) {
+                            ForEach(viewModel.faq,id: \.title) {
                                 msg in
-                                
-                                FAQExpandView()
+                                FAQExpandView(data: msg)
                             }
                         }
                         .padding(.top, 20)
                     }
                     .scrollIndicators(.hidden)
-                    
                     Spacer()
                 }
                 else {
@@ -56,10 +58,12 @@ struct FAQView: View {
                     .scrollIndicators(.hidden)
                     
                     sendMessageView
-                }       
+                        .padding(.top,15)
+                        .background(.white)
+                }
             }
             .background(
-                Image("ChatBackground")
+                Image("ChatBackground").opacity(viewModel.selectedSection == 1 ? 1 : 0)
             )
             .toolbar(.hidden, for: .navigationBar)
             .task{
@@ -139,10 +143,12 @@ struct FAQView: View {
         }
         .pickerStyle(.segmented)
         .padding(.horizontal, 24)
-        .padding(.top, 20)
+        .padding(.top, 30)
         .onChange(of: viewModel.selectedSection) { oldValue, newValue in
             if viewModel.selectedSection == 1{
+                viewModel.disconnect()
                 viewModel.connect()
+                viewModel.receiveMessage()
             }else{
                 viewModel.disconnect()
             }

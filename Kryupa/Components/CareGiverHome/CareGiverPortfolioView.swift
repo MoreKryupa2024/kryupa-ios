@@ -36,7 +36,7 @@ struct CareGiverPortfolioView: View {
                 }
             }
 
-            JobDescView(startDate: "\(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "dd MMM yyyy"))", startTime: (job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), endTime: (job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), gender: job.customerInfo.gender, diseaseType: job.customerInfo.diseaseType)
+            JobDescView(startDate: "\(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd yyyy"))", startTime: (job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), endTime: (job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), gender: job.customerInfo.gender, diseaseType: job.customerInfo.diseaseType)
 
             VStack(spacing: 2) {
                 Text("Service Required:")

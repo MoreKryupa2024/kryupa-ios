@@ -23,13 +23,16 @@ struct JobDetailView: View {
                     UserView
                     ServiceRequiredView
                     line
-                    JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd MMM yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
+                    JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
                         .padding(.horizontal, 24)
                         .padding(.top, 18)
                     if (viewModel.otherDiseaseType != "-") {
                         OtherMedicalConditionView
                         line
                     }
+                    
+                    JobSchedule
+                    line
                     
                     if getArrayOfSkillsRequired().count != 0{
                         getGridView(heading: "Skills Required", skillsList: getArrayOfSkillsRequired())
@@ -70,6 +73,29 @@ struct JobDetailView: View {
     
     private func setChatScreen(_ notification: Notification){
         router.dismissScreenStack()
+    }
+    
+    private var JobSchedule: some View{
+        VStack(alignment: .leading,spacing: 10){
+            
+            Text("Job Schedule")
+                .font(.custom(FontContent.plusMedium, size: 17))
+                .foregroundStyle(._7_C_7_C_80)
+                .frame(maxWidth: .infinity,alignment: .leading)
+            
+            VStack(spacing:7){
+                ForEach(viewModel.jobDetailModel?.serviceDetails ?? [], id: \.serviceDate) { data in
+                    HStack{
+                        Text(data.serviceDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, MMM d yyyy"))
+                        Spacer()
+                        Text("\(viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "") - \(viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "")")//h:mm a
+                    }
+                    .font(.custom(FontContent.plusRegular, size: 15))
+                }
+            }
+        }
+        .padding(.horizontal,24)
+        .padding(.top,17)
     }
     
     func getGridView(heading: String, skillsList: [SkillData]) -> some View{
@@ -113,6 +139,7 @@ struct JobDetailView: View {
                     .frame(width: 99)
                     .asButton(.press) {
                         viewModelHome.acceptRejectJob(approchID: jobID, status: "Rejected By Caregiver") {
+                            presentAlert(title: "Kryupa", subTitle: "You have declined the booking request.")
                             router.dismissScreen()
                         }
                     }
@@ -132,26 +159,28 @@ struct JobDetailView: View {
                     }
                     .asButton(.press) {
                         viewModelHome.acceptRejectJob(approchID: jobID, status: "Job Acceptance") {
-                            if viewModel.isComingfromChat{
-                                router.dismissScreen()
-                            }else{
-                                let ChatScreenViewModel = ChatScreenViewModel()
-                                guard let jobDetailModel = viewModel.jobDetailModel else {
-                                    return
-                                }
-                                let selectedChat = ChatListData(jsonData: [
-                                    "id":jobDetailModel.contactID,
-                                    "user2_id":jobDetailModel.caregiversID,
-                                    "user1_id":jobDetailModel.customerID,
-                                    "name":jobDetailModel.name,
-                                    "profile_picture_url":jobDetailModel.profilePictureURL
-                                ])
-                                
-                                ChatScreenViewModel.selectedChat = selectedChat
-                                router.showScreen(.push) { rout in
-                                        ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
-                                }
-                            }
+                            presentAlert(title: "Kryupa", subTitle: "You have successfully accepted the booking request.")
+                            router.dismissScreen()
+//                            if viewModel.isComingfromChat{
+//                                router.dismissScreen()
+//                            }else{
+//                                let ChatScreenViewModel = ChatScreenViewModel()
+//                                guard let jobDetailModel = viewModel.jobDetailModel else {
+//                                    return
+//                                }
+//                                let selectedChat = ChatListData(jsonData: [
+//                                    "id":jobDetailModel.contactID,
+//                                    "user2_id":jobDetailModel.caregiversID,
+//                                    "user1_id":jobDetailModel.customerID,
+//                                    "name":jobDetailModel.name,
+//                                    "profile_picture_url":jobDetailModel.profilePictureURL
+//                                ])
+//                                
+//                                ChatScreenViewModel.selectedChat = selectedChat
+//                                router.showScreen(.push) { rout in
+//                                        ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+//                                }
+//                            }
                         }
                     }
             }

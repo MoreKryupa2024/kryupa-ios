@@ -33,7 +33,7 @@ struct PaymentOrderScreenView: View {
                         
                         VStack(alignment:.leading,spacing:5){
                             if let startDate = viewModel.paymentOrderData?.startDate, let endDate = viewModel.paymentOrderData?.endDate{
-                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, d MMMM")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "d MMMM yyyy"))")
+                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM d yyyy"))")
                                     .font(.custom(FontContent.besMedium, size: 16))
                                     .frame(maxWidth: .infinity,alignment: .leading)
                             }
