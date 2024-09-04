@@ -62,7 +62,8 @@ struct ReviewListData {
         reviewID = jsonData["review_id"] as? String ?? ""
         reviewedBy = jsonData["reviewed_by"] as? String ?? ""
         reviewedByName = jsonData["reviewed_by_name"] as? String ?? ""
-        reviewedByProfilePictureURL = jsonData["reviewed_by_profile_picture_url"] as? String ?? ""
+        //
+        reviewedByProfilePictureURL = jsonData["reviewed_by_profile_picture_url"] as? String ?? jsonData["profile_picture"] as? String ?? ""
         rating = jsonData["rating"] as? Double ?? 0.0
         review = jsonData["review"] as? String ?? ""
         createdAt = jsonData["created_at"] as? String ?? ""

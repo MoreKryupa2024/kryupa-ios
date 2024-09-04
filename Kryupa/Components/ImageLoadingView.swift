@@ -10,9 +10,24 @@ import SwiftUI
 struct ImageLoadingView: View {
     
     var imageURL = String()
-    private let manager = CacheManager.instance
-   
-    var body: some View {
+    //    private let manager = CacheManager.instance
+    
+    var body: some View{
+        AsyncImage(url: URL(string: imageURL),content: { image in
+            image
+                .resizable()
+                .scaledToFill()
+            
+        },placeholder: {
+            Image("placeholderImage")
+                .resizable()
+                .scaledToFit()
+                .padding()
+        })
+        .frame(maxWidth: .infinity,maxHeight: .infinity)
+        .background(.gray.opacity(0.3))
+    }
+} /*{
         
         if let imageCache = manager.get(name: imageURL){
             Image(uiImage: imageCache)
@@ -34,24 +49,24 @@ struct ImageLoadingView: View {
             })
             .frame(maxWidth: .infinity,maxHeight: .infinity)
             .background(.gray.opacity(0.3))
-            .task {
-                downloadImage()
-            }
+//            .task {
+//                downloadImage()
+//            }
         }
     }
-    
-    func downloadImage(){
-        guard let url = URL(string: imageURL) else {return}
-        
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map { ((UIImage(data: $0.data) ?? UIImage(named: "placeholderImage"))!)}
-            .receive(on: DispatchQueue.main)
-            .sink { (_) in
-                
-            }receiveValue: { (returnImage) in
-                manager.add(image: returnImage, name: imageURL)
-            }
-    }
+//    
+//    func downloadImage(){
+//        guard let url = URL(string: imageURL) else {return}
+//        
+//        URLSession.shared.dataTaskPublisher(for: url)
+//            .map { ((UIImage(data: $0.data) ?? UIImage(named: "placeholderImage"))!)}
+//            .receive(on: DispatchQueue.main)
+//            .sink { (_) in
+//                
+//            }receiveValue: { (returnImage) in
+//                manager.add(image: returnImage, name: imageURL)
+//            }
+//    }
 }
 
 class CacheManager{
@@ -77,3 +92,4 @@ class CacheManager{
         
     }
 }
+*/

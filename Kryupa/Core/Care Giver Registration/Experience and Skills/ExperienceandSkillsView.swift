@@ -192,8 +192,8 @@ struct ExperienceandSkillsView: View {
         VStack{
             HStack(spacing:0){
                 Text("Certification & documents")
-                Text("*")
-                    .foregroundStyle(.red)
+//                Text("*")
+//                    .foregroundStyle(.red)
                 Spacer()
             }
             

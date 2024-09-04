@@ -116,7 +116,7 @@ struct ProfileDetailScreenView: View {
             viewModelAddNewProfile.date = date
         }
         
-        let personalInfo = PersonalInfo(name: viewModel.personalDetail?.profileName, language: viewModel.personalDetail?.language, dob: viewModel.personalDetail?.dob, gender: viewModel.personalDetail?.gender, address: viewModel.personalDetail?.address, city: viewModel.personalDetail?.city, state: viewModel.personalDetail?.state, country: viewModel.personalDetail?.country)
+        let personalInfo = PersonalInfo(name: viewModel.personalDetail?.profileName, language: viewModel.personalDetail?.language, dob: viewModel.personalDetail?.dob, gender: viewModel.personalDetail?.gender, address: viewModel.personalDetail?.address, city: viewModel.personalDetail?.city, state: viewModel.personalDetail?.state,postalCode: viewModel.personalDetail?.zipcode, country: viewModel.personalDetail?.country)
 
         viewModelAddNewProfile.personalInfoData = personalInfo
         viewModelAddNewProfile.medicalConditionSelected = viewModel.personalDetail?.medicalinfo?.otherDisease ?? ""

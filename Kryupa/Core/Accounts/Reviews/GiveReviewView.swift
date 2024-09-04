@@ -26,8 +26,10 @@ struct GiveReviewView: View {
                     if let reviewDetailData = viewModel.reviewDetailData {
                         ReviewHoursView(ratePerHr: reviewDetailData.ratePerHours, noOfHrs: reviewDetailData.totalHours, total: reviewDetailData.bookingPricingForCustomer)
                     }
-                    line
-                    WriteReview
+                    if ((viewModel.bookingsListData?.status ?? "") != "Depreciated") {
+                        line
+                        WriteReview
+                    }
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .onAppear{
@@ -245,14 +247,14 @@ struct GiveReviewView: View {
             
             Spacer()
             Spacer()
-            
-            Text(((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? "Completed" : "Cancelled"))
+            Text((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? "Cancelled" : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? "Depreciated" : "Completed"))
                 .padding()
                 .frame(height: 31)
                 .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? ._23_C_16_B : .red)
+                .foregroundStyle((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? .red : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? Color.gray : ._23_C_16_B))
                 .background(
-                    RoundedRectangle(cornerRadius: 12).fill((viewModel.bookingsListData?.status ?? "") != "Job Cancelled" ? Color.E_0_FFEE : .red.opacity(0.2))
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? .red.opacity(0.2) : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? .F_2_F_2_F_7 : .E_0_FFEE))
                 )
         }
     }

@@ -76,7 +76,12 @@ struct PersonalInformationSeekerView: View {
                                     }
                                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
                                     .disabled(true)
-                                    .foregroundStyle(._7_C_7_C_80)
+                                    .background{
+                                        RoundedRectangle(cornerRadius: 8)
+                                        .foregroundStyle(.D_1_D_1_D_6)
+                                        .frame(height: 48)
+                                        .offset(y:5)
+                                    }
                             }
                             if let zipError = viewModel.personalInfoData.zipError, !(zipError.isEmpty){
                                 Text(zipError)
@@ -88,11 +93,21 @@ struct PersonalInformationSeekerView: View {
                         HStack{
                             textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
                                 .disabled(true)
-                                .foregroundStyle(._7_C_7_C_80)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 8)
+                                    .foregroundStyle(.D_1_D_1_D_6)
+                                    .frame(height: 48)
+                                    .offset(y:5)
+                                }
                             
                             textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
                                 .disabled(true)
-                                .foregroundStyle(._7_C_7_C_80)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 8)
+                                    .foregroundStyle(.D_1_D_1_D_6)
+                                    .frame(height: 48)
+                                    .offset(y:5)
+                                }
                         }
                         
                         HStack{

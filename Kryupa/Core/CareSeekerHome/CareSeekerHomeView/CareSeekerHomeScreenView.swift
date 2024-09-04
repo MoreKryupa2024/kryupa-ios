@@ -187,11 +187,13 @@ struct CareSeekerHomeScreenView: View {
             Image("bookingFirstIcone")
                 .resizable()
                 .scaledToFit()
+                .frame(height: 207)
                 .padding(.horizontal,80)
                 .padding(.top,30)
             
             Text("Your Booking list Looks Empty")
                 .padding(.top,10)
+                .padding(.bottom,10)
             
             Text("Book A Service")
                 .foregroundStyle(.white)

@@ -49,7 +49,7 @@ struct OTPVerificationScreenView: View {
                                 let param = ["mobileNo":mobileNumber,
                                              "countryCode":"+1",
                                              "otp":otp,
-                                             "request_id": requestId]
+                                             "request_id": requestId == "" ? "abc" : requestId]
                                 self.viewModel.verifyOTP(param:param) {
                                     router.showScreen(.push) { _ in
                                         PersonalInformationScreenView()

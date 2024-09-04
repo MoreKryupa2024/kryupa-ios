@@ -487,6 +487,7 @@ struct BookingFormScreenView: View {
                     .foregroundStyle(.red)
             }
             .font(.custom(FontContent.plusMedium, size: 17))
+            .frame(maxWidth: .infinity,alignment: .leading)
             
             
             ZStack{

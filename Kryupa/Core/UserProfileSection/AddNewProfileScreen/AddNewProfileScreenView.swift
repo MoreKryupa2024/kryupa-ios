@@ -174,15 +174,11 @@ struct AddNewProfileScreenView: View {
                             
                             if viewModel.profileID == "" {
                                 viewModel.param["mediaclInfo"] = param
-
                                 viewModel.createProfile {
-                                    router.showScreen(.push) { rout in
-                                        AccountView()
-                                    }
+                                    router.dismissScreen()
                                 } errorMsg: { msg in
                                     presentAlert(title: "Kryupa", subTitle: msg)
                                 }
-
                             }
                             else {
                                 var newParam = param
@@ -515,7 +511,12 @@ struct AddNewProfileScreenView: View {
                         }
                     textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
                         .disabled(true)
-                        .foregroundStyle(._7_C_7_C_80)
+                        .background{
+                            RoundedRectangle(cornerRadius: 8)
+                            .foregroundStyle(.D_1_D_1_D_6)
+                            .frame(height: 48)
+                            .offset(y:5)
+                        }
                     
                 }
                 if let zipError = viewModel.personalInfoData.zipError, !(zipError.isEmpty){
@@ -528,11 +529,21 @@ struct AddNewProfileScreenView: View {
             HStack{
                 textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
                     .disabled(true)
-                    .foregroundStyle(._7_C_7_C_80)
+                    .background{
+                        RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.D_1_D_1_D_6)
+                        .frame(height: 48)
+                        .offset(y:5)
+                    }
                 
                 textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
                     .disabled(true)
-                    .foregroundStyle(._7_C_7_C_80)
+                    .background{
+                        RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.D_1_D_1_D_6)
+                        .frame(height: 48)
+                        .offset(y:5)
+                    }
                 
             }
             

@@ -65,7 +65,7 @@ class SettingViewModel: ObservableObject{
     
     func deleteAccount(){
         isloading = true
-        let param = ["is_deleted":arrcheckList[0].title == selectedOption,
+        let param = [//"is_deleted":arrcheckList[0].title == selectedOption,
                      "is_inactive":arrcheckList[1].title == selectedOption]
         
         NetworkManager.shared.deleteAccount(params:param) { [weak self] result in

@@ -19,6 +19,8 @@ struct BookingView: View {
             return .FFB_323
         }else if status == "Draft" {
             return ._444446
+        }else if status == "Depreciated" {
+            return .gray
         }else{
             return ._23_C_16_B
         }
@@ -31,7 +33,8 @@ struct BookingView: View {
             return .E_5_E_5_EA
         }else if status == "Pending" {
             return .FFF_7_E_7
-                
+        }else if status == "Depreciated" {
+            return .F_2_F_2_F_7
         }else{
             return .E_0_FFEE
         }

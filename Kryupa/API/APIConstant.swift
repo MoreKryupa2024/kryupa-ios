@@ -160,12 +160,11 @@ class AppConstants{
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
     static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
-    static let needServicePriceInArray = [("Physical Therapy",30),("Occupational Therapy",25),("Nursing",20),("Companianship",10)]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
     static let languageSpeakingArray = ["English","Spanish","Mandarin","Tagalog","Vietnamese","French","Russian","German","Hindi",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
-    static let distanceArray = ["Within 1 mile","1-5 miles","5-10 miles"]
+    static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
     static let relationArray = ["Spouse","Mother","Father","In-laws","Child","Sibling","Friend"]
     static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
