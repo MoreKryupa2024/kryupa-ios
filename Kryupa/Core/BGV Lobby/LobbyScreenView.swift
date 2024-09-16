@@ -22,12 +22,12 @@ struct LobbyScreenView: View {
                 HeaderView
                 ScrollView {
                     ScheduleInterview
-                    ReferView
-                        .asButton(.press) {
-                            router.showScreen(.push) { _ in
-                                ReferAndEarnScreenView()
-                            }
-                        }
+//                    ReferView
+//                        .asButton(.press) {
+//                            router.showScreen(.push) { _ in
+//                                ReferAndEarnScreenView()
+//                            }
+//                        }
                     VerificationStatus
                         .padding(.horizontal,24)
                         .padding(.vertical,20)

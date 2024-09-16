@@ -14,7 +14,7 @@ struct APIConstants {
   static let userErrorMessage: String = "user_err_msg"
   static let blockedData: String = "data"
 }
-var debugss: Bool = false
+
 class APIConstant{
     
     static let authBaseURL = "https://auth.wahinnovations.in"
@@ -159,13 +159,13 @@ class AppConstants{
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
-    static let needServiceInArray = ["Physical Therapy","Occupational Therapy","Nursing","Companianship"]
+    static let needServiceInArray = ["Housekeeping","Home Health Aid","Physical Therapy","Occupational Therapy","Nursing","Companionship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
     static let languageSpeakingArray = ["English","Spanish","Mandarin","Tagalog","Vietnamese","French","Russian","German","Hindi",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
     static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
-    static let relationArray = ["Spouse","Mother","Father","In-laws","Child","Sibling","Friend"]
+    static let relationArray = ["Spouse","Mother","Father","Child","Sibling","Friend"]
     static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
     

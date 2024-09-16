@@ -17,8 +17,9 @@ struct ExprienceAndSkills {
 
 // MARK: - PersonalInfo
 struct PersonalInfo {
-    var name: String?// = Defaults().fullName
-    var zipError: String?// = Defaults().fullName
+    var name: String?
+    var lastName: String?
+    var zipError: String?
     var language, dob, gender, ssn: String?
     var latitude: Double? = 22.00
     var longitude: Double? = 22.00

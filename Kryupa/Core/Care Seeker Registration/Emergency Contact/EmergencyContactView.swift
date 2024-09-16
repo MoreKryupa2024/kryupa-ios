@@ -15,30 +15,30 @@ struct EmergencyContactView: View {
     @StateObject private var viewModel = EmergencyContactViewModel()
     @State var relationDropShow:Bool = Bool()
     var body: some View {
-            VStack(spacing:0){
-                ZStack(alignment:.leading){
-                    RoundedRectangle(cornerRadius: 4)
-                        .foregroundStyle(.E_5_E_5_EA)
-                        .frame(height: 4)
-                    RoundedRectangle(cornerRadius: 4)
-                        .foregroundStyle(.appMain)
-                        .frame(width: 196,height: 4)
-                }
-                .padding([.leading,.trailing],24)
-                .padding(.top,20)
-                
-                
-                Text("Emergency Contact")
-                    .font(.custom(FontContent.besMedium, size: 22))
-                    .frame(height: 28)
-                    .padding(.top,30)
-                ScrollView{
+        VStack(spacing:0){
+            ZStack(alignment:.leading){
+                RoundedRectangle(cornerRadius: 4)
+                    .foregroundStyle(.E_5_E_5_EA)
+                    .frame(height: 4)
+                RoundedRectangle(cornerRadius: 4)
+                    .foregroundStyle(.appMain)
+                    .frame(width: 196,height: 4)
+            }
+            .padding([.leading,.trailing],24)
+            .padding(.top,20)
+            
+            
+            Text("Emergency Contact")
+                .font(.custom(FontContent.besMedium, size: 22))
+                .frame(height: 28)
+                .padding(.top,30)
+            ScrollView{
                 VStack(spacing: 25,
                        content: {
                     
                     textFieldViewWithHeader(
-                        title: "Legal Name",
-                        placeHolder: "Full Legal Name",
+                        title: "Preferred Name",
+                        placeHolder: "Full Preferred Name",
                         value: $viewModel.name,
                         keyboard: .asciiCapable
                     )
@@ -62,6 +62,7 @@ struct EmergencyContactView: View {
                     HStack{
                         previousButton
                             .asButton(.press) {
+                                saveDefaultsData()
                                 router.dismissScreen()
                             }
                         Spacer()
@@ -72,6 +73,7 @@ struct EmergencyContactView: View {
                                 }, next: { param in
                                     var parameter = parameters
                                     parameter["emergencyContact"] = param
+                                    saveDefaultsData()
                                     router.showScreen(.push) { rout in
                                         HealthInformationSeekerView(parameters: parameter)
                                     }
@@ -82,10 +84,26 @@ struct EmergencyContactView: View {
                 .padding(.top,30)
                 .padding(.horizontal,24)
             }
+            .task {
+                viewModel.name = Defaults().emergencyInfo["relative_name"] as? String ?? ""
+                viewModel.relation = Defaults().emergencyInfo["relation"] as? String ?? ""
+                viewModel.email = Defaults().emergencyInfo["relative_email"] as? String ?? ""
+                viewModel.number = Defaults().emergencyInfo["relative_mobile_no"] as? String ?? ""
+            }
         }
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         .modifier(DismissingKeyboard())
+        
+    }
+    
+    func saveDefaultsData(){
+        Defaults().emergencyInfo = [
+            "relative_name": viewModel.name,
+            "relation": viewModel.relation,
+            "relative_email": viewModel.email,
+            "relative_mobile_no": viewModel.number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#")
+        ]
     }
     
     //MARK: Mobile Number Header Title View
@@ -231,6 +249,7 @@ struct EmergencyContactView: View {
                     relationDropShow = !relationDropShow
                 }
         })
+        .id(viewModel.relation)
     }
 }
 

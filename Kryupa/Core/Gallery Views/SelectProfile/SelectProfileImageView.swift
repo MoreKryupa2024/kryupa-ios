@@ -32,13 +32,25 @@ struct SelectProfileImageView: View {
                     }
                     .padding([.leading,.trailing],24)
                     
-                    
-                    Text("Smile!\nClick A Picture")
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center)
-                        .font(.custom(FontContent.besMedium, size: 22))
-                        .frame(width: 205)
-                        .padding(.top,30)
+                    ZStack(alignment:.topLeading){
+                        
+                        Text("Smile!\nClick A Picture")
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .font(.custom(FontContent.besMedium, size: 22))
+                            .frame(maxWidth: .infinity)
+                            .padding(.top,30)
+                            .padding(.horizontal,24)
+                        
+                        Image("navBack")
+                            .resizable()
+                            .frame(width: 30,height: 30)
+                            .padding(.top,30)
+                            .padding(.horizontal,24)
+                            .asButton(.press) {
+                                router.dismissScreen()
+                            }
+                    }
                     
                     if let profilePicture = viewModel.profilePicture{
                         pictureSelectedView(image: profilePicture)
@@ -97,16 +109,18 @@ struct SelectProfileImageView: View {
                         viewModel.profilePicture = image
                     }
                 }
-            SkipButton
-                .padding(.top,25)
-                .asButton(.press) {//(resource: "placeholderImage")
-                    let imageModel: UIImage = UIImage(imageLiteralResourceName: "placeholderImage")
-                    viewModel.uploadProfilePic(file: imageModel.jpegData(compressionQuality: 0.5) ?? Data(), fileName: "user_image.png") {
-                        router.showScreen(.push) { _ in
-                            SuccessfulScreeenView()
+            if Defaults().userType == AppConstants.SeekCare{
+                SkipButton
+                    .padding(.top,25)
+                    .asButton(.press) {//(resource: "placeholderImage")
+                        let imageModel: UIImage = UIImage(imageLiteralResourceName: "placeholderImage")
+                        viewModel.uploadProfilePic(file: imageModel.jpegData(compressionQuality: 0.5) ?? Data(), fileName: "user_image.png") {
+                            router.showScreen(.push) { _ in
+                                SuccessfulScreeenView()
+                            }
                         }
                     }
-                }
+            }
         }
     }
     

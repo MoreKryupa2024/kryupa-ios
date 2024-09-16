@@ -23,7 +23,16 @@ struct JobDetailView: View {
                     UserView
                     ServiceRequiredView
                     line
-                    JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd yyyy"), startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a") ?? "", gender: viewModel.jobDetailModel?.gender ?? "", diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
+                    JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", 
+                                                                                  afterFormat: "MMM dd yyyy"),
+                                hours: "2",
+                                price: "\(viewModel.jobDetailModel?.bookingPricing ?? 0)",
+                                startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss",
+                                                                                                   afterFormat: "h:mm a") ?? "",
+                                endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss",
+                                                                                               afterFormat: "h:mm a") ?? "",
+                                gender: viewModel.jobDetailModel?.gender ?? "",
+                                diseaseType: viewModel.jobDetailModel?.diseaseType ?? [""])
                         .padding(.horizontal, 24)
                         .padding(.top, 18)
                     if (viewModel.otherDiseaseType != "-") {
@@ -262,10 +271,6 @@ struct JobDetailView: View {
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
             
-
-            Text("$\(viewModel.jobDetailModel?.bookingPricing ?? 0)")
-                .font(.custom(FontContent.plusRegular, size: 17))
-                .foregroundStyle(.appMain)
             if !viewModel.isComingfromChat{
                 Text("Message")
                     .font(.custom(FontContent.plusMedium, size: 16))

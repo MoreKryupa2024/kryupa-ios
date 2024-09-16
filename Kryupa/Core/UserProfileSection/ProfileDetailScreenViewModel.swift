@@ -16,15 +16,22 @@ class ProfileDetailScreenViewModel: ObservableObject {
     @Published var personalDetail: PersonalData?
     @Published var profilePicture: UIImage? = nil
 
-    func getProfileList(){
+    func getProfileList(profileName: String){
         isloading = true
         NetworkManager.shared.getProfileList() { [weak self] result in
             
             DispatchQueue.main.async() {
                 switch result{
                 case .success(let data):
-                    self?.isloading = false
-                    self?.profileList = data.data
+                    guard let self else{return}
+                    self.isloading = false
+                    self.profileList = data.data
+                    guard let profileList = self.profileList else{return}
+                    if profileList.profiles.contains(profileName){
+                        self.getPersonalDetails(profileName: profileName)
+                    }else{
+                        self.getPersonalDetails(profileName: profileList.profiles.first ?? "")
+                    }
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

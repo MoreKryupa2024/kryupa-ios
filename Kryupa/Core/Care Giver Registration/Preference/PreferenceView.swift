@@ -61,6 +61,7 @@ struct PreferenceView: View {
                                     HStack{
                                         previousButton
                                             .asButton(.press) {
+                                                saveDefaultsData()
                                                 router.dismissScreen()
                                             }
                                         Spacer()
@@ -69,6 +70,7 @@ struct PreferenceView: View {
                                                 viewModel.dataChecks (parameters: parameters){ alertStr in
                                                     presentAlert(title: "Kryupa", subTitle: alertStr)
                                                 } next: {
+                                                    saveDefaultsData()
                                                     router.showScreen(.push) { rout in
                                                         SelectProfileImageView()
                                                     }
@@ -84,6 +86,11 @@ struct PreferenceView: View {
                         .scrollIndicators(.hidden)
                         .toolbar(.hidden, for: .navigationBar)
                     }
+                    .task {
+                        viewModel.preferenceListData.mobilityLevel = Defaults().prefereInfo["mobility_level"] as? String ?? ""
+                        viewModel.languageSpeakingSelected = Defaults().prefereInfo["language"] as? [String] ?? []
+                        viewModel.preferenceListData.distance = Defaults().prefereInfo["distance"] as? String ?? ""
+                    }
                     if viewModel.showPreference{
                         Image("GiverInfoDetails")
                             .resizable()
@@ -96,6 +103,14 @@ struct PreferenceView: View {
                 LoadingView()
             }
         }
+    }
+    
+    func saveDefaultsData(){
+        Defaults().prefereInfo = [
+            "mobility_level": viewModel.preferenceListData.mobilityLevel ?? "",
+            "language": viewModel.languageSpeakingSelected,
+            "distance": viewModel.preferenceListData.distance ?? ""
+        ]
     }
     
     //MARK: Send Code Button View
@@ -160,6 +175,7 @@ struct PreferenceView: View {
                     distanceShow = false
                 }
         })
+        .id(viewModel.preferenceListData.mobilityLevel)
     }
     
     private var languageSpeakingView: some View{
@@ -224,6 +240,7 @@ struct PreferenceView: View {
                     mobilityLevelShow = false
                 }
         })
+        .id(viewModel.preferenceListData.distance)
     }
 }
 

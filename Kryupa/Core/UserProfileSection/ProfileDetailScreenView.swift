@@ -37,6 +37,7 @@ struct ProfileDetailScreenView: View {
                         }onShowValue: {
                             profilesDownShow = !profilesDownShow
                         }
+                        .id(selecedProfile)
                         AddNewButton
                             .asButton(.press) {
                                 router.showScreen(.push) { rout in
@@ -68,8 +69,8 @@ struct ProfileDetailScreenView: View {
         .onAppear() {
             NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                  using: self.setChatScreen)
-            viewModel.getProfileList()
-            viewModel.getPersonalDetails(profileName: selecedProfile)
+            viewModel.getProfileList(profileName: selecedProfile)
+//            viewModel.getPersonalDetails(profileName: selecedProfile)
 //            viewModel.testgetPersonalDetails(profileName: selecedProfile)
         }
     }
@@ -91,7 +92,7 @@ struct ProfileDetailScreenView: View {
             
 //            TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
             TitleTextView(title: "Language:", value: viewModel.personalDetail?.language ?? "")
-            TitleTextView(title: "DOB:", value: viewModel.personalDetail?.dob!.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd YYYY") ?? "")
+            TitleTextView(title: "DOB:", value: viewModel.personalDetail?.dob!.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM,dd YYYY") ?? "")
         }
     }
     
@@ -106,17 +107,11 @@ struct ProfileDetailScreenView: View {
         viewModelAddNewProfile.number = viewModel.personalDetail?.emergencycontact?.relativeMobileNo ?? ""
 
         viewModelAddNewProfile.relationPersonal = viewModel.personalDetail?.relation ?? ""
-                            
-        if viewModel.personalDetail?.dob != "" && viewModel.personalDetail?.dob != nil {
-            viewModelAddNewProfile.dateOfBirthSelected = true
-            let isoDate = (viewModel.personalDetail?.dob ?? "") + "T10:44:00+0000"
-            let dateFormatter = ISO8601DateFormatter()
-            let date = dateFormatter.date(from:isoDate)!
-            
-            viewModelAddNewProfile.date = date
-        }
         
-        let personalInfo = PersonalInfo(name: viewModel.personalDetail?.profileName, language: viewModel.personalDetail?.language, dob: viewModel.personalDetail?.dob, gender: viewModel.personalDetail?.gender, address: viewModel.personalDetail?.address, city: viewModel.personalDetail?.city, state: viewModel.personalDetail?.state,postalCode: viewModel.personalDetail?.zipcode, country: viewModel.personalDetail?.country)
+        viewModelAddNewProfile.dateOfBirthSelected = true
+        viewModelAddNewProfile.date = dateFormatChangeToDate(dateFormat: "YYYY-MM-dd", dates: (viewModel.personalDetail?.dob ?? "")) ?? Date()
+        
+        let personalInfo = PersonalInfo(name: viewModel.personalDetail?.firstname,lastName: viewModel.personalDetail?.lastname, language: viewModel.personalDetail?.language, dob: viewModel.personalDetail?.dob, gender: viewModel.personalDetail?.gender, address: viewModel.personalDetail?.address, city: viewModel.personalDetail?.city, state: viewModel.personalDetail?.state,postalCode: viewModel.personalDetail?.zipcode, country: viewModel.personalDetail?.country)
 
         viewModelAddNewProfile.personalInfoData = personalInfo
         viewModelAddNewProfile.medicalConditionSelected = viewModel.personalDetail?.medicalinfo?.otherDisease ?? ""
@@ -162,7 +157,7 @@ struct ProfileDetailScreenView: View {
             
             
             TitleTextView(title: "Name:", value: viewModel.personalDetail?.emergencycontact?.relativeName ?? "")
-            TitleTextView(title: "Phone number:", value: viewModel.personalDetail?.emergencycontact?.relativeMobileNo ?? "")
+            TitleTextView(title: "Phone number:", value: "+1 \(viewModel.personalDetail?.emergencycontact?.relativeMobileNo ?? "")")
             TitleTextView(title: "Relation:", value: viewModel.personalDetail?.emergencycontact?.relation ?? "")
             
         }

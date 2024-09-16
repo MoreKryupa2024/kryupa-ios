@@ -19,7 +19,7 @@ struct BookingView: View {
             return .FFB_323
         }else if status == "Draft" {
             return ._444446
-        }else if status == "Depreciated" {
+        }else if status == "Expired" {
             return .gray
         }else{
             return ._23_C_16_B
@@ -33,7 +33,7 @@ struct BookingView: View {
             return .E_5_E_5_EA
         }else if status == "Pending" {
             return .FFF_7_E_7
-        }else if status == "Depreciated" {
+        }else if status == "Expired" {
             return .F_2_F_2_F_7
         }else{
             return .E_0_FFEE
@@ -92,6 +92,11 @@ struct BookingView: View {
                                     .font(.custom(FontContent.plusRegular, size: 12))
                                     .foregroundStyle(.FFB_323)
                             }
+                            if status == "Pending" && (bookingData?.status ?? "") == "Payment Pending" && Defaults().userType == AppConstants.GiveCare{
+                                Text("Awaiting confirmation from careseeker")
+                                    .font(.custom(FontContent.plusRegular, size: 12))
+                                    .foregroundStyle(.FFB_323)
+                            }
                         }
                         Spacer()
                         if status == "Draft" {
@@ -106,7 +111,7 @@ struct BookingView: View {
                     }
                 }
             }
-            if status == "Pending" && (bookingData?.status ?? "") == "Payment Pending"{
+            if status == "Pending" && (bookingData?.status ?? "") == "Payment Pending" && Defaults().userType == AppConstants.SeekCare{
                 PayNowButton
                     .asButton {
                         guard let bookingData else {return}

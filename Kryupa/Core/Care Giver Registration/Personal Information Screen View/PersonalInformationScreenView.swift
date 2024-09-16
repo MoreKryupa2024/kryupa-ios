@@ -9,52 +9,55 @@ import SwiftUI
 import SwiftfulUI
 
 struct PersonalInformationScreenView: View {
-    
+    @State var openPlacePicker = false
     @Environment(\.router) var router
     @StateObject private var viewModel = PersonalInformationScreenViewModel()
     @State var genderDropDownShow: Bool = false
     @State var languageDropDownShow: Bool = false
+    
     var body: some View {
         ZStack{
             
-                VStack(spacing:0){
-                    ZStack(alignment:.leading){
-                        RoundedRectangle(cornerRadius: 4)
-                            .foregroundStyle(.E_5_E_5_EA)
-                            .frame(height: 4)
-                        RoundedRectangle(cornerRadius: 4)
+            VStack(spacing:0){
+                ZStack(alignment:.leading){
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.E_5_E_5_EA)
+                        .frame(height: 4)
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundStyle(.appMain)
+                        .frame(width: 130,height: 4)
+                }
+                .padding(.top,20)
+                
+                Text("Personal Information")
+                    .font(.custom(FontContent.besMedium, size: 22))
+                    .frame(height: 28)
+                    .padding(.top,30)
+                
+                
+                RoundedRectangle(cornerRadius: 5)
+                    .overlay(content: {
+                        Text("Background checks are on us, No charges involved!")
+                            .font(.custom(FontContent.plusMedium, size: 12))
+                            .multilineTextAlignment(.center)
                             .foregroundStyle(.appMain)
-                            .frame(width: 130,height: 4)
-                    }
-                    .padding(.top,20)
-                    
-                    Text("Personal Information")
-                        .font(.custom(FontContent.besMedium, size: 22))
-                        .frame(height: 28)
-                        .padding(.top,30)
-                    
-                    
-                    RoundedRectangle(cornerRadius: 5)
-                        .overlay(content: {
-                            Text("Background checks are on us, No charges involved!")
-                                .font(.custom(FontContent.plusMedium, size: 12))
-                                .multilineTextAlignment(.center)
-                                .foregroundStyle(.appMain)
-                        })
-                        .frame(height: 35)
-                        .foregroundStyle(.FAE_9_A_2)
-                        .padding(.top,30)
-                    
-                    HStack(content: {
-                        Image("PersonalInformationMagic")
-                        Spacer()
                     })
-                    .padding(.top,-92)
-                    .padding(.leading,-24)
-                    ScrollView {
+                    .frame(height: 35)
+                    .foregroundStyle(.FAE_9_A_2)
+                    .padding(.top,30)
+                
+                HStack(content: {
+                    Image("PersonalInformationMagic")
+                    Spacer()
+                })
+                .padding(.top,-92)
+                .padding(.leading,-24)
+                ScrollView {
                     VStack(spacing: 25,
                            content: {
-                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        textFieldViewWithHeader(title: "First Name", placeHolder: "First Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        
+                        textFieldViewWithHeader(title: "Last Name", placeHolder: "Last Name",value: $viewModel.personalInfoData.lastName,keyboard: .asciiCapable)
                         
                         selectionViewWithHeader(
                             leftIcone: nil,
@@ -89,33 +92,52 @@ struct PersonalInformationScreenView: View {
                             }
                         
                         languageDropdownView
-                                                
+                        
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
+                            .asButton {
+                                openPlacePicker = true
+                            }
+                            .sheet(isPresented: $openPlacePicker) {
+                                PlacePicker(address: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""),
+                                            country: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),
+                                            state: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),
+                                            city: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),
+                                            latitude: $viewModel.personalInfoData.latitude.toUnwrapped(defaultValue: 0.0),
+                                            postalCode: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),
+                                            longitude: $viewModel.personalInfoData.longitude.toUnwrapped(defaultValue: 0.0))
+                            }
                         
                         VStack(alignment:.leading,spacing:5){
                             HStack{
-                                textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
-                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
-                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
-                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
-                                        }else{
-                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
-                                                viewModel.getAddress()
-                                            }else{
-                                                viewModel.personalInfoData.city = ""
-                                                viewModel.personalInfoData.state = ""
-                                                viewModel.personalInfoData.country = ""
-                                                viewModel.personalInfoData.zipError = ""
-                                            }
-                                        }
+                                textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
+                                    .disabled(true)
+                                    .background{
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .foregroundStyle(.D_1_D_1_D_6)
+                                            .frame(height: 48)
+                                            .offset(y:5)
                                     }
+                                //                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                //                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+                                //                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
+                                //                                        }else{
+                                //                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+                                //                                                viewModel.getAddress()
+                                //                                            }else{
+                                //                                                viewModel.personalInfoData.city = ""
+                                //                                                viewModel.personalInfoData.state = ""
+                                //                                                viewModel.personalInfoData.country = ""
+                                //                                                viewModel.personalInfoData.zipError = ""
+                                //                                            }
+                                //                                        }
+                                //                                    }
                                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
                                     .disabled(true)
                                     .background{
                                         RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle(.D_1_D_1_D_6)
-                                        .frame(height: 48)
-                                        .offset(y:5)
+                                            .foregroundStyle(.D_1_D_1_D_6)
+                                            .frame(height: 48)
+                                            .offset(y:5)
                                     }
                             }
                             if let zipError = viewModel.personalInfoData.zipError, !(zipError.isEmpty){
@@ -130,18 +152,18 @@ struct PersonalInformationScreenView: View {
                                 .disabled(true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                    .foregroundStyle(.D_1_D_1_D_6)
-                                    .frame(height: 48)
-                                    .offset(y:5)
+                                        .foregroundStyle(.D_1_D_1_D_6)
+                                        .frame(height: 48)
+                                        .offset(y:5)
                                 }
                             
                             textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
                                 .disabled(true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                    .foregroundStyle(.D_1_D_1_D_6)
-                                    .frame(height: 48)
-                                    .offset(y:5)
+                                        .foregroundStyle(.D_1_D_1_D_6)
+                                        .frame(height: 48)
+                                        .offset(y:5)
                                 }
                             
                         }
@@ -153,6 +175,7 @@ struct PersonalInformationScreenView: View {
                                     viewModel.dataChecks { alertStr in
                                         presentAlert(title: "Kryupa", subTitle: alertStr)
                                     } next: { param in
+                                        saveDefaultsData()
                                         router.showScreen(.push) { rout in
                                             ExperienceandSkillsView(parameters: param)
                                         }
@@ -166,16 +189,47 @@ struct PersonalInformationScreenView: View {
                 }
                 
             }
-                .padding([.leading,.trailing],24)
+            .padding([.leading,.trailing],24)
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 05 : 0)
             .modifier(DismissingKeyboard())
+            .task {
+                viewModel.personalInfoData.language = Defaults().personalInfo["language"] as? String ?? ""
+                viewModel.personalInfoData.dob = Defaults().personalInfo["dob"] as? String ?? ""
+                viewModel.personalInfoData.gender = Defaults().personalInfo["gender"] as? String ?? ""
+                viewModel.personalInfoData.latitude = Defaults().personalInfo["latitude"] as? Double ?? 0.0
+                viewModel.personalInfoData.latitude = Defaults().personalInfo["longitude"] as? Double ?? 0.0
+                viewModel.personalInfoData.address = Defaults().personalInfo["address"] as? String ?? ""
+                viewModel.personalInfoData.postalCode = Defaults().personalInfo["zipcode"] as? String ?? ""
+                viewModel.personalInfoData.city = Defaults().personalInfo["city"] as? String ?? ""
+                viewModel.personalInfoData.state = Defaults().personalInfo["state"] as? String ?? ""
+                viewModel.personalInfoData.name = Defaults().personalInfo["firstname"] as? String ?? ""
+                viewModel.personalInfoData.lastName = Defaults().personalInfo["lastname"] as? String ?? ""
+                viewModel.personalInfoData.country = Defaults().personalInfo["country"] as? String ?? ""
+                viewModel.personalInfoData.ssn = Defaults().personalInfo["ssn_no"] as? String ?? ""
+            }
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()
             }
         }
+    }
+    
+    func saveDefaultsData(){
+        Defaults().personalInfo = ["language": viewModel.personalInfoData.language ?? "",
+                                   "dob": viewModel.personalInfoData.dob ?? "",
+                                   "gender": viewModel.personalInfoData.gender ?? "",
+                                   "latitude": viewModel.personalInfoData.latitude ?? 0.0,
+                                   "longitude": viewModel.personalInfoData.latitude ?? 0.0,
+                                   "address": viewModel.personalInfoData.address ?? "",
+                                   "zipcode": viewModel.personalInfoData.postalCode ?? "",
+                                   "city": viewModel.personalInfoData.city ?? "",
+                                   "state": viewModel.personalInfoData.state ?? "",
+                                   "firstname":viewModel.personalInfoData.name ?? "",
+                                   "lastname":viewModel.personalInfoData.lastName ?? "",
+                                   "country": viewModel.personalInfoData.country ?? "",
+                                   "ssn_no":viewModel.personalInfoData.ssn ?? ""]
     }
     
     //MARK: Send Code Button View
@@ -260,7 +314,7 @@ struct PersonalInformationScreenView: View {
                     languageDropDownShow = !languageDropDownShow
                     genderDropDownShow = false
                 }
-                
+            
         })
     }
     
@@ -314,12 +368,12 @@ struct PersonalInformationScreenView: View {
     private func AddressView(value: Binding<String>)-> some View{
         return VStack(alignment: .leading, content: {
             
-                HStack(spacing:0){
-                    Text("Address")
-                    Text("*")
-                        .foregroundStyle(.red)
-                }
-                .font(.custom(FontContent.plusMedium, size: 17))
+            HStack(spacing:0){
+                Text("Address")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             
             HStack(spacing:0){
@@ -334,6 +388,7 @@ struct PersonalInformationScreenView: View {
                 }
                 .keyboardType(.asciiCapable)
                 .font(.custom(FontContent.plusRegular, size: 15))
+                .disabled(true)
                 
             }
             .font(.custom(FontContent.plusRegular, size: 15))

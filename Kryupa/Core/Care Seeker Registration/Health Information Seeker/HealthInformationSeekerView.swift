@@ -68,6 +68,7 @@ struct HealthInformationSeekerView: View {
                     HStack{
                         previousButton
                             .asButton(.press) {
+                                saveDefaultsData()
                                 router.dismissScreen()
                             }
                         Spacer()
@@ -78,6 +79,7 @@ struct HealthInformationSeekerView: View {
                                 } next: { param in
                                     var params = parameters
                                     params["medicalInfo"] = param
+                                    saveDefaultsData()
                                     router.showScreen(.push) { rout in
                                         PreferenceCareSeekarView(parameters: params)
                                     }
@@ -92,6 +94,21 @@ struct HealthInformationSeekerView: View {
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         .modifier(DismissingKeyboard())
+        .task {
+            viewModel.allergiesValue = Defaults().healthInfo["allergies"] as? String ?? ""
+            viewModel.mobilityLevel = Defaults().healthInfo["mobility_level"] as? String ?? ""
+            viewModel.medicalConditionSelected = Defaults().healthInfo["other_disease_type"] as? String ?? ""
+            viewModel.medicalConditionDropDownSelected = Defaults().healthInfo["disease_type"] as? [String] ?? []
+        }
+    }
+    
+    func saveDefaultsData(){
+        Defaults().healthInfo = [
+            "allergies": viewModel.allergiesValue,
+            "mobility_level": viewModel.mobilityLevel,
+            "other_disease_type": viewModel.medicalConditionSelected,
+            "disease_type": viewModel.medicalConditionDropDownSelected
+        ]
     }
     
     
@@ -195,6 +212,7 @@ struct HealthInformationSeekerView: View {
                     medicalConditionDownShow = false
                 }
         })
+        .id(viewModel.mobilityLevel)
     }
     
     private var medicalConditionDropdownView: some View{
@@ -212,6 +230,7 @@ struct HealthInformationSeekerView: View {
                 }
                 
         })
+        .id(viewModel.medicalConditionDropDownSelected)
         .padding(.bottom,-10)
     }
 }

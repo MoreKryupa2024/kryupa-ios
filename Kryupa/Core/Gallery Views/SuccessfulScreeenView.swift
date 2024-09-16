@@ -13,7 +13,7 @@ struct SuccessfulScreeenView: View {
     
     var title: String{
         if userType == AppConstants.GiveCare{
-            return "Thankyou for registering"
+            return "Thank you for registering"
         }else{
             return "Welcome Aboard!"
         }

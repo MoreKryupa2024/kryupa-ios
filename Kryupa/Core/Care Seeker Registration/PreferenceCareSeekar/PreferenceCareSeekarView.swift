@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftfulUI
-//router.dismissScreen()
 
 struct PreferenceCareSeekarView: View {
     
@@ -62,14 +61,15 @@ struct PreferenceCareSeekarView: View {
                                     genderView
                                         .padding([.leading,.trailing],24)
                                     
-                                    sepratorView
+                                    /*sepratorView
                                     
                                     languageSpeakingView
                                         .padding([.leading,.trailing],24)
-                                    
+                                    */
                                     HStack{
                                         previousButton
                                             .asButton(.press) {
+                                                saveDefaultsData()
                                                 router.dismissScreen()
                                             }
                                         Spacer()
@@ -78,6 +78,7 @@ struct PreferenceCareSeekarView: View {
                                                 viewModel.dataChecks(parameters: parameters) { alertStr in
                                                     presentAlert(title: "Kryupa", subTitle: alertStr)
                                                 } next: {
+                                                    saveDefaultsData()
                                                     router.showScreen(.push) { rout in
                                                         SelectProfileImageView()
                                                     }
@@ -88,14 +89,18 @@ struct PreferenceCareSeekarView: View {
                                     .padding(.horizontal,24)
                                 })
                                 .padding(.top,30)
-                                
-                                
-                                
                             }
                         }
                         .scrollIndicators(.hidden)
                         .toolbar(.hidden, for: .navigationBar)
                     }
+                    .task {
+                        viewModel.languageSpeakingSelected = Defaults().prefereInfo["preferredLanguageType"] as? [String] ?? []
+                        viewModel.genderSelected = Defaults().prefereInfo["gender"] as? String ?? ""
+                        viewModel.yearsOfExperienceSelected = Defaults().prefereInfo["year_of_experience"] as? String ?? ""
+                        viewModel.needServiceInSelected = Defaults().prefereInfo["preferredServiceType"] as? [String] ?? []
+                    }
+                    
                     if viewModel.showPreference{
                         Image("SeekerInfoDetails")
                             .resizable()
@@ -108,6 +113,15 @@ struct PreferenceCareSeekarView: View {
                 LoadingView()
             }
         }
+    }
+    
+    func saveDefaultsData(){
+        Defaults().prefereInfo = [
+            "preferredLanguageType": viewModel.languageSpeakingSelected,
+            "gender": viewModel.genderSelected,
+            "year_of_experience": viewModel.yearsOfExperienceSelected,
+            "preferredServiceType": viewModel.needServiceInSelected
+        ]
     }
     
     private var yearsofExperienceView: some View{

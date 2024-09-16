@@ -34,7 +34,11 @@ class PersonalInformationScreenViewModel: ObservableObject{
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
         guard let name = personalInfoData.name, name != "" else {
-            return alert("Please Enter Legal Name")
+            return alert("Please Enter First Name")
+        }
+        
+        guard let lastName = personalInfoData.lastName, lastName != "" else {
+            return alert("Please Enter Last Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -53,7 +57,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
             return alert("Please Enter Address")
         }
         guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
-            return alert("Please Enter Postal Code")
+            return alert("Please Enter Zip Code")
         }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")
@@ -65,8 +69,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
             return alert("Please Enter Country")
         }
         var param = [String:Any]()
-        param["personalInfo"] = ["name": name,
-                                 "language": language,
+        param["personalInfo"] = ["language": language,
                                  "dob": dob,
                                  "gender": gender,
                                  "latitude": personalInfoData.latitude ?? 0.0,
@@ -75,6 +78,8 @@ class PersonalInformationScreenViewModel: ObservableObject{
                                  "zipcode": postalCode,
                                  "city": city,
                                  "state": state,
+                                 "firstname":name,
+                                 "lastname":lastName,
                                  "country": country,
                                  "ssn_no":ssn]
         
@@ -84,7 +89,11 @@ class PersonalInformationScreenViewModel: ObservableObject{
     func customerDataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
         guard let name = personalInfoData.name, name != "" else {
-            return alert("Please Enter Legal Name")
+            return alert("Please Enter First Name")
+        }
+        
+        guard let lastName = personalInfoData.lastName, lastName != "" else {
+            return alert("Please Enter Last Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -101,7 +110,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
             return alert("Please Enter Address")
         }
         guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
-            return alert("Please Enter Postal Code")
+            return alert("Please Enter Zip Code")
         }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")
@@ -113,7 +122,8 @@ class PersonalInformationScreenViewModel: ObservableObject{
             return alert("Please Enter Country")
         }
         var param = [String:Any]()
-        param["personalInfo"] = ["name": name,
+        param["personalInfo"] = ["firstname":name,
+                                 "lastname":lastName,
                                  "language": language,
                                  "dob": dob,
                                  "gender": gender,
@@ -143,7 +153,7 @@ class PersonalInformationScreenViewModel: ObservableObject{
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        self.personalInfoData.zipError = "Postal code not found!"
+                        self.personalInfoData.zipError = "Zip code not found!"
                     }
                 }
             }

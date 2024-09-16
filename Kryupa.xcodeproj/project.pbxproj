@@ -178,6 +178,8 @@
 		BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */; };
 		BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */; };
 		BEB68A3D2C0082BB00DCB9BE /* PreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */; };
+		BEBE49D82C92D71C0065A816 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = BEBE49D72C92D71C0065A816 /* GooglePlaces */; };
+		BEBE49DA2C92D8410065A816 /* GooglePlaceScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */; };
 		BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */; };
 		BEC365902BFCC364005AC4A0 /* GIFExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */; };
 		BEC5E9D42C352F42000BC2A1 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */; };
@@ -372,6 +374,7 @@
 		BE98D8402C8838590021466B /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Success.gif; path = ../../../Downloads/Success.gif; sourceTree = "<group>"; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
 		BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewModel.swift; sourceTree = "<group>"; };
+		BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlaceScreenView.swift; sourceTree = "<group>"; };
 		BEC3658A2BFCB600005AC4A0 /* SuccessfulScreeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulScreeenView.swift; sourceTree = "<group>"; };
 		BEC3658F2BFCC364005AC4A0 /* GIFExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFExtention.swift; sourceTree = "<group>"; };
 		BEC5E9D32C352F42000BC2A1 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 				BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */,
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
+				BEBE49D82C92D71C0065A816 /* GooglePlaces in Frameworks */,
 				BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */,
 				BE09486E2C196E0F00FC2DE0 /* ZoomVideoSDK.xcframework in Frameworks */,
 				BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */,
@@ -846,6 +850,7 @@
 				A36DE7C52C171261002E0ACD /* Chat */,
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
+				BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */,
 				BE3C7F2E2C1C3EAB000848A6 /* UserProfileSection */,
 				BE3C7F252C1C1F0D000848A6 /* Booking */,
 				BE7DDDAC2C181CE800A71632 /* ZoomScreenView */,
@@ -1174,6 +1179,7 @@
 				BE2D33792C3FCFD700192323 /* PayPalWebPayments */,
 				BE9007292C58C4AA003B6038 /* FirebaseMessaging */,
 				BE1D6E982C85FD6600DB134B /* Lottie */,
+				BEBE49D72C92D71C0065A816 /* GooglePlaces */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1212,6 +1218,7 @@
 				BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */,
 				BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				BEBE49D62C92D71C0065A816 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			productRefGroup = BE644E2C2BF495D800A6781F /* Products */;
 			projectDirPath = "";
@@ -1402,6 +1409,7 @@
 				BE2DE0CC2BFF6BFF00B14C13 /* RegistrationDataModel.swift in Sources */,
 				BE644E452BF4BC8700A6781F /* GoogleSignupModel.swift in Sources */,
 				BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */,
+				BEBE49DA2C92D8410065A816 /* GooglePlaceScreenView.swift in Sources */,
 				BE004D5D2C64E7BC001907E6 /* ServiceDetailScreenViewModel.swift in Sources */,
 				A3FEF6202C2AF8B800EFC3C2 /* ReviewModel.swift in Sources */,
 				BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */,
@@ -1700,6 +1708,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		BEBE49D62C92D71C0065A816 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
 		BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1780,6 +1796,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BEA63BA62BFDC81900B6A7B0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		BEBE49D72C92D71C0065A816 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEBE49D62C92D71C0065A816 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

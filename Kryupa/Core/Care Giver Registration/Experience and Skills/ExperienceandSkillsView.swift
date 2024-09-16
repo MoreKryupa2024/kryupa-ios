@@ -83,6 +83,7 @@ struct ExperienceandSkillsView: View {
                             previousButton
                                 .padding(.leading,24)
                                 .asButton(.press) {
+                                    saveDefaultsData()
                                     router.dismissScreen()
                                 }
                             Spacer()
@@ -92,6 +93,7 @@ struct ExperienceandSkillsView: View {
                                     viewModel.dataChecks(filesArray: fileArray) { alertStr in
                                         presentAlert(title: "Kryupa", subTitle: alertStr)
                                     } next: { param in
+                                        saveDefaultsData()
                                         var params = parameters
                                         params["exprienceAndSkills"] = param
                                         router.showScreen(.push) { rout in
@@ -106,6 +108,12 @@ struct ExperienceandSkillsView: View {
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
+            }
+            .task {
+                viewModel.exprienceAndSkillsData.bio = Defaults().experienceInfo["bio"] as? String ?? ""
+                viewModel.areaOfExpertiseSelected = Defaults().experienceInfo["area_of_expertise"] as? [String] ?? []
+                viewModel.yearsOfExprience = Defaults().experienceInfo["years_of_exprience"] as? Int ?? 0
+                viewModel.exprienceAndSkillsData.yearsOfExprience = "\(viewModel.yearsOfExprience)"
             }
             
             if viewModel.isLoading{
@@ -285,7 +293,14 @@ struct ExperienceandSkillsView: View {
                 }
             }
         }
-        
+    }
+    
+    func saveDefaultsData(){
+        Defaults().experienceInfo = [
+            "bio": viewModel.exprienceAndSkillsData.bio ?? "",
+            "area_of_expertise": viewModel.areaOfExpertiseSelected,
+            "years_of_exprience": viewModel.yearsOfExprience,
+        ]
     }
     
     private var yearsofExperienceView: some View{

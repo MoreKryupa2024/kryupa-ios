@@ -116,7 +116,11 @@ class AddNewProfileScreenViewModel: ObservableObject{
         }
         
         guard let name = personalInfoData.name, name != "" else {
-            return alert("Please Enter Full Legal Name")
+            return alert("Please Enter First Name")
+        }
+        
+        guard let lastName = personalInfoData.lastName, lastName != "" else {
+            return alert("Please Enter Last Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -133,7 +137,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
             return alert("Please Enter Address")
         }
         guard let postalCode = personalInfoData.postalCode, postalCode != "" else {
-            return alert("Please Enter Postal Code")
+            return alert("Please Enter Zip Code")
         }
         guard let city = personalInfoData.city, city != "" else {
             return alert("Please Enter City")
@@ -145,7 +149,8 @@ class AddNewProfileScreenViewModel: ObservableObject{
             return alert("Please Enter Country")
         }
         var param = [String:Any]()
-        param = ["name": name,
+        param = ["firstname":name,
+                 "lastname":lastName,
                  "language": language,
                  "dob": dob,
                  "gender": gender,

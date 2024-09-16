@@ -21,6 +21,12 @@ enum DefaultKeys: String {
     case email
     case mobile
     case showScreen
+    
+    case healthInfo
+    case personalInfo
+    case prefereInfo
+    case emergencyInfo
+    case experienceInfo
 }
 
 class Defaults {
@@ -55,6 +61,46 @@ class Defaults {
             return getStringValue(key: .accessToken)
         } set {
             set(value: newValue, key: .accessToken)
+        }
+    }
+    
+    var healthInfo: [String:Any] {
+        get {
+            return getDictionary(key: .healthInfo)
+        } set {
+            set(value: newValue, key: .healthInfo)
+        }
+    }
+    
+    var personalInfo: [String:Any] {
+        get {
+            return getDictionary(key: .personalInfo)
+        } set {
+            set(value: newValue, key: .personalInfo)
+        }
+    }
+    
+    var prefereInfo: [String:Any] {
+        get {
+            return getDictionary(key: .prefereInfo)
+        } set {
+            set(value: newValue, key: .prefereInfo)
+        }
+    }
+    
+    var emergencyInfo: [String:Any] {
+        get {
+            return getDictionary(key: .emergencyInfo)
+        } set {
+            set(value: newValue, key: .emergencyInfo)
+        }
+    }
+    
+    var experienceInfo: [String:Any] {
+        get {
+            return getDictionary(key: .experienceInfo)
+        } set {
+            set(value: newValue, key: .experienceInfo)
         }
     }
     

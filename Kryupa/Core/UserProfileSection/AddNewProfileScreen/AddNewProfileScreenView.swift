@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulUI
 
 struct AddNewProfileScreenView: View {
-    
+    @State var openPlacePicker = false
     @Environment(\.router) var router
     @State var selectedSection = 0
     
@@ -181,12 +181,7 @@ struct AddNewProfileScreenView: View {
                                 }
                             }
                             else {
-                                var newParam = param
-                                newParam["medicalInfoId"] = viewModel.medicalID
-                                viewModel.param["mediaclInfo"] = newParam
-                                viewModel.updateProfile {
-                                    router.dismissScreen()
-                                }
+                                updateData()
                             }
                         }
                     }
@@ -194,6 +189,28 @@ struct AddNewProfileScreenView: View {
         })
     }
     
+    func updateData(){
+        viewModel.customerDataChecks { alertStr in
+            presentAlert(title: "Kryupa", subTitle: alertStr)
+        } next: { param in
+            viewModel.param["personalInfo"] = param
+            viewModel.dataEmergancyChecks(alert: { alertStr in
+                presentAlert(title: "Kryupa", subTitle: alertStr)
+            }, next: { param in
+                viewModel.param["emergencyContact"] = param
+                viewModel.dataMedicalChecks { alertStr in
+                    presentAlert(title: "Kryupa", subTitle: alertStr)
+                } next: { param in
+                    var newParam = param
+                    newParam["medicalInfoId"] = viewModel.medicalID
+                    viewModel.param["mediaclInfo"] = newParam
+                    viewModel.updateProfile {
+                        router.dismissScreen()
+                    }
+                }
+            })
+        }
+    }
     
     //MARK: Send Code Button View
     private var SaveButton: some View {
@@ -232,7 +249,8 @@ struct AddNewProfileScreenView: View {
     
     private func dateOfBirthPicker()-> some View{
         DateTimePickerScreenView(
-            formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            givenDate: viewModel.date,
+            formate: "yyyy-MM-dd",
             range: nil,
             rangeThrough: ...Date(),
             valueStr: { value in
@@ -428,8 +446,8 @@ struct AddNewProfileScreenView: View {
                content: {
             
             textFieldViewWithHeader(
-                title: "Legal Name",
-                placeHolder: "Full Legal Name",
+                title: "Preferred Name",
+                placeHolder: "Full Preferred Name",
                 value: $viewModel.name,
                 keyboard: .asciiCapable, showRed: true
             )
@@ -453,18 +471,27 @@ struct AddNewProfileScreenView: View {
             HStack{
                 
                 Spacer()
-                NextButton
-                    .asButton(.press) {
-                        viewModel.dataEmergancyChecks(alert: {alertStr in
-                            presentAlert(title: "Kryupa", subTitle: alertStr)
-                        }, next: { param in
-                            viewModel.param["emergencyContact"] = param
-                            selectedSection = selectedSection + 1
-                        })
-                    }
+                if viewModel.profileID == "" {
+                    NextButton
+                        .asButton(.press) {
+                            viewModel.dataEmergancyChecks(alert: {alertStr in
+                                presentAlert(title: "Kryupa", subTitle: alertStr)
+                            }, next: { param in
+                                viewModel.param["emergencyContact"] = param
+                                selectedSection = selectedSection + 1
+                            })
+                        }
+                }else{
+                    SaveButton
+                        .asButton(.press) {
+                            updateData()
+                        }
+                }
             }
         })
     }
+    
+    
     
     private var PersonalInfoView:some View{
         VStack(spacing: 25,
@@ -472,12 +499,14 @@ struct AddNewProfileScreenView: View {
             
             relationPersonalDropdownView
             
-            textFieldViewWithHeader(title: "Full Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+            textFieldViewWithHeader(title: "First Name", placeHolder: "First Name",value: $viewModel.personalInfoData.name.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
+            
+            textFieldViewWithHeader(title: "Last Name", placeHolder: "Last Name",value: $viewModel.personalInfoData.lastName.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
             
             selectionViewWithHeader(
                 leftIcone: nil,
                 rightIcon: "PersonalInfoCalender",
-                value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "MM-dd-yyyy") : "",
+                value: viewModel.dateOfBirthSelected ? viewModel.personalInfoData.dob?.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MM-dd-yyyy") : "",
                 title: "Date Of Birth",
                 placeHolder: "Select"
             )
@@ -492,23 +521,42 @@ struct AddNewProfileScreenView: View {
             languageDropdownView
             
             AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
+                .asButton {
+                    openPlacePicker = true
+                }
+                .sheet(isPresented: $openPlacePicker) {
+                    PlacePicker(address: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""),
+                                country: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),
+                                state: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),
+                                city: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),
+                                latitude: $viewModel.personalInfoData.latitude.toUnwrapped(defaultValue: 0.0),
+                                postalCode: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),
+                                longitude: $viewModel.personalInfoData.longitude.toUnwrapped(defaultValue: 0.0))
+                }
             VStack(alignment:.leading,spacing:5){
                 HStack{
-                    textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),keyboard: .numberPad, showRed: true)
-                        .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
-                            if (viewModel.personalInfoData.postalCode ?? "").count > 5{
-                                viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
-                            }else{
-                                if (viewModel.personalInfoData.postalCode ?? "").count == 5{
-                                    viewModel.getAddress()
-                                }else{
-                                    viewModel.personalInfoData.city = ""
-                                    viewModel.personalInfoData.state = ""
-                                    viewModel.personalInfoData.country = ""
-                                    viewModel.personalInfoData.zipError = ""
-                                }
-                            }
+                    textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),keyboard: .numberPad, showRed: true)
+                        .disabled(true)
+                        .background{
+                            RoundedRectangle(cornerRadius: 8)
+                                .foregroundStyle(.D_1_D_1_D_6)
+                                .frame(height: 48)
+                                .offset(y:5)
                         }
+//                        .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+//                            if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+//                                viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
+//                            }else{
+//                                if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+//                                    viewModel.getAddress()
+//                                }else{
+//                                    viewModel.personalInfoData.city = ""
+//                                    viewModel.personalInfoData.state = ""
+//                                    viewModel.personalInfoData.country = ""
+//                                    viewModel.personalInfoData.zipError = ""
+//                                }
+//                            }
+//                        }
                     textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
                         .disabled(true)
                         .background{
@@ -550,16 +598,22 @@ struct AddNewProfileScreenView: View {
             
             HStack{
                 Spacer()
-                NextButton
-                    .asButton(.press) {
-                        viewModel.customerDataChecks { alertStr in
-                            presentAlert(title: "Kryupa", subTitle: alertStr)
-                        } next: { param in
-                            
-                            viewModel.param["personalInfo"] = param
-                            selectedSection = selectedSection + 1
+                if viewModel.profileID == "" {
+                    NextButton
+                        .asButton(.press) {
+                            viewModel.customerDataChecks { alertStr in
+                                presentAlert(title: "Kryupa", subTitle: alertStr)
+                            } next: { param in
+                                viewModel.param["personalInfo"] = param
+                                selectedSection = selectedSection + 1
+                            }
                         }
-                    }
+                }else{
+                    SaveButton
+                        .asButton(.press) {
+                            updateData()
+                        }
+                }
             }
         })
     }
@@ -587,7 +641,7 @@ struct AddNewProfileScreenView: View {
                 }
                 .keyboardType(.asciiCapable)
                 .font(.custom(FontContent.plusRegular, size: 15))
-                
+                .disabled(true)
             }
             .font(.custom(FontContent.plusRegular, size: 15))
             .padding([.leading,.trailing],10)

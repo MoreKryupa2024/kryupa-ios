@@ -16,7 +16,7 @@ struct PersonalModel: Codable {
 
 // MARK: - DataClass
 struct PersonalData: Codable {
-    var customersid, email, profileid, profileName, profilePictureUrl, zipcode: String?
+    var customersid, email, profileid, profileName, profilePictureUrl, zipcode, firstname,lastname: String?
     var language, dob, gender, address: String?
     var city, state, country, relation: String?
     var medicalinfo: Medicalinfo?
@@ -24,7 +24,7 @@ struct PersonalData: Codable {
     var emergencycontact: Emergencycontact?
 
     enum CodingKeys: String, CodingKey {
-        case customersid, email, profileid,zipcode
+        case customersid, email, profileid,zipcode,lastname,firstname
         case profileName = "profile_name"
         case profilePictureUrl = "profile_picture_url"
         case language, dob, gender, address, city, state, country, relation, medicalinfo, preferences, emergencycontact

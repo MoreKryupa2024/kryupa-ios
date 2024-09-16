@@ -14,7 +14,7 @@ class MyServiceViewModel: ObservableObject{
     @Published var languageSpeakingSelected: [String] = ["English"]
     @Published var mobilityLevel: String = ""
     @Published var distance: String = "Within 1 mile"
-    var areaOfExpertiseList = ["Physical Therapy", "Occupational Therapy", "Nursing", "Companianship"]
+    var areaOfExpertiseList = ["Physical Therapy", "Occupational Therapy", "Nursing", "Companionship"]
     @Published var mySkillsSelected: [String] = [String]()
     var mySkillsList = ["Respite Care", "Live in home care", "Transportation", "Errands / shopping", "Light housecleaning", "Meal preparation", "Help with staying physically active", "Medical Transportation", "Dementia", "Bathing / dressing", "Companionship", "Feeding", "Mobility Assistance", "Heavy lifting"]
     @Published var isLoading: Bool = false

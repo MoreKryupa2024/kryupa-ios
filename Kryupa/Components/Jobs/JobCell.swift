@@ -42,7 +42,7 @@ struct JobCell: View {
 
         }
         .frame(height: 81)
-        .padding(.horizontal, 10)
+        .padding([.horizontal,.vertical], 10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .inset(by: 1)

@@ -98,7 +98,7 @@ struct PersonalDetailView: View {
             }
             .padding(.bottom,5)
             TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
-            TitleTextView(title: "DOB:", value: (viewModel.personalDetail?.dob ?? "").convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd YYYY"))
+            TitleTextView(title: "DOB:", value: (viewModel.personalDetail?.dob ?? "").convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM,dd YYYY"))
         }
     }
     

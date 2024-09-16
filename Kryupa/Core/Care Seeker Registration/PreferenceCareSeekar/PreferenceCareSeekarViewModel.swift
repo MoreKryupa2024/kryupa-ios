@@ -25,13 +25,13 @@ class PreferenceCareSeekarViewModel: ObservableObject{
             return alert("Please Select Gender")
         }else if needServiceInSelected.isEmpty{
             return alert("Please Select Service")
-        }else if languageSpeakingSelected.isEmpty{
+        }/*else if languageSpeakingSelected.isEmpty{
             return alert("Please Select Speaking Language")
-        }else{
+        }*/else{
             isLoading = true
             var param = parameters
             param["preferences"] = [
-                "preferredLanguageType": languageSpeakingSelected,
+//                "preferredLanguageType": languageSpeakingSelected,
                 "gender": genderSelected,
                 "year_of_experience": yearsOfExperienceSelected,
                 "preferredServiceType":needServiceInSelected

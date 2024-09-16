@@ -36,7 +36,14 @@ struct CareGiverPortfolioView: View {
                 }
             }
 
-            JobDescView(startDate: "\(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd yyyy"))", startTime: (job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), endTime: (job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")), gender: job.customerInfo.gender, diseaseType: job.customerInfo.diseaseType)
+            JobDescView(startDate: "\(job.bookingDetails.startDate.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM dd yyyy"))",
+                        startTime: (job.bookingDetails.startTime.convertDateFormater(beforeFormat: "HH:mm:ss",
+                                                                                     afterFormat: "h:mm a")),
+                        endTime: (job.bookingDetails.endTime.convertDateFormater(beforeFormat: "HH:mm:ss",
+                                                                                 afterFormat: "h:mm a")), 
+                        gender: job.customerInfo.gender,
+                        diseaseType: job.customerInfo.diseaseType)
+            
 
             VStack(spacing: 2) {
                 Text("Service Required:")
@@ -98,6 +105,8 @@ struct JobDescView: View {
     
 //    var job: JobPost
     var startDate: String
+    var hours: String = ""
+    var price: String = ""
     var startTime: String
     var endTime: String
     var gender: String
@@ -128,6 +137,32 @@ struct JobDescView: View {
                     .foregroundStyle(._444446)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            if !price.isEmpty || !hours.isEmpty{
+                HStack(spacing:15){
+                    if !hours.isEmpty{
+                        HStack(spacing:2){
+                            
+                            Image("hours")
+                                .resizable()
+                                .frame(width: 22,height: 22)
+                            Text("\(hours) Hours")
+                                .font(.custom(FontContent.plusRegular, size: 15))
+                                .foregroundStyle(._444446)
+                        }
+                    }
+                    if !price.isEmpty{
+                        HStack(spacing:2){
+                            Image("dollar")
+                                .resizable()
+                                .frame(width: 22,height: 22)
+                            Text("$\(price)")
+                                .font(.custom(FontContent.plusRegular, size: 15))
+                                .foregroundStyle(._444446)
+                        }
+                    }
+                    Spacer()
+                }
+            }
             
             HStack {
                 
@@ -143,14 +178,7 @@ struct JobDescView: View {
                 }
                 //                .frame(maxWidth: .infinity)
                 
-//                HStack(spacing:2){
-//                    Image("weight")
-//                        .resizable()
-//                        .frame(width: 18,height: 18)
-//                    Text("100 kg")
-//                        .font(.custom(FontContent.plusRegular, size: 12))
-//                        .foregroundStyle(._444446)
-//                }
+
                 //                .frame(maxWidth: .infinity)
                 
 //                HStack(spacing:2){

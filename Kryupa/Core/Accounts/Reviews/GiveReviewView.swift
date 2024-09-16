@@ -247,7 +247,7 @@ struct GiveReviewView: View {
             
             Spacer()
             Spacer()
-            Text((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? "Cancelled" : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? "Depreciated" : "Completed"))
+            Text((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? "Cancelled" : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? "Expired" : "Completed"))
                 .padding()
                 .frame(height: 31)
                 .font(.custom(FontContent.plusRegular, size: 16))

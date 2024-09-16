@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulUI
 
 struct PersonalInformationSeekerView: View {
-    
+    @State var openPlacePicker = false
     @Environment(\.router) var router
     @StateObject private var viewModel = PersonalInformationScreenViewModel()
     @State var genderDropShow = Bool()
@@ -36,7 +36,9 @@ struct PersonalInformationSeekerView: View {
                 ScrollView {
                     VStack(spacing: 25,
                            content: {
-                        textFieldViewWithHeader(title: "Legal Name", placeHolder: "Full Legal Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        textFieldViewWithHeader(title: "First Name", placeHolder: "First Name",value: $viewModel.personalInfoData.name,keyboard: .asciiCapable)
+                        
+                        textFieldViewWithHeader(title: "Last Name", placeHolder: "Last Name",value: $viewModel.personalInfoData.lastName,keyboard: .asciiCapable)
                         
                         selectionViewWithHeader(
                             leftIcone: nil,
@@ -57,23 +59,43 @@ struct PersonalInformationSeekerView: View {
                         languageDropdownView
                         
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
+                            .asButton {
+                                openPlacePicker = true
+                            }
+                            .sheet(isPresented: $openPlacePicker) {
+                                PlacePicker(address: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""),
+                                            country: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),
+                                            state: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),
+                                            city: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),
+                                            latitude: $viewModel.personalInfoData.latitude.toUnwrapped(defaultValue: 0.0),
+                                            postalCode: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),
+                                            longitude: $viewModel.personalInfoData.longitude.toUnwrapped(defaultValue: 0.0))
+                            }
+                        
                         VStack(alignment:.leading,spacing:5){
                             HStack{
-                                textFieldViewWithHeader(title: nil, placeHolder: "Postal Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
-                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
-                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
-                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
-                                        }else{
-                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
-                                                viewModel.getAddress()
-                                            }else{
-                                                viewModel.personalInfoData.city = ""
-                                                viewModel.personalInfoData.state = ""
-                                                viewModel.personalInfoData.country = ""
-                                                viewModel.personalInfoData.zipError = ""
-                                            }
-                                        }
+                                textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
+                                    .disabled(true)
+                                    .background{
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .foregroundStyle(.D_1_D_1_D_6)
+                                            .frame(height: 48)
+                                            .offset(y:5)
                                     }
+//                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+//                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
+//                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
+//                                        }else{
+//                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
+//                                                viewModel.getAddress()
+//                                            }else{
+//                                                viewModel.personalInfoData.city = ""
+//                                                viewModel.personalInfoData.state = ""
+//                                                viewModel.personalInfoData.country = ""
+//                                                viewModel.personalInfoData.zipError = ""
+//                                            }
+//                                        }
+//                                    }
                                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
                                     .disabled(true)
                                     .background{
@@ -117,6 +139,7 @@ struct PersonalInformationSeekerView: View {
                                     viewModel.customerDataChecks { alertStr in
                                         presentAlert(title: "Kryupa", subTitle: alertStr)
                                     } next: { param in
+                                        saveDefaultsData()
                                         router.showScreen(.push) { rout in
                                             EmergencyContactView(parameters: param)
                                         }
@@ -135,11 +158,40 @@ struct PersonalInformationSeekerView: View {
             .toolbar(.hidden, for: .navigationBar)
             .blur(radius: viewModel.showDatePicker ? 05 : 0)
             .modifier(DismissingKeyboard())
+            .task {
+                viewModel.personalInfoData.language = Defaults().personalInfo["language"] as? String ?? ""
+                viewModel.personalInfoData.dob = Defaults().personalInfo["dob"] as? String ?? ""
+                viewModel.personalInfoData.gender = Defaults().personalInfo["gender"] as? String ?? ""
+                viewModel.personalInfoData.latitude = Defaults().personalInfo["latitude"] as? Double ?? 0.0
+                viewModel.personalInfoData.latitude = Defaults().personalInfo["longitude"] as? Double ?? 0.0
+                viewModel.personalInfoData.address = Defaults().personalInfo["address"] as? String ?? ""
+                viewModel.personalInfoData.postalCode = Defaults().personalInfo["zipcode"] as? String ?? ""
+                viewModel.personalInfoData.city = Defaults().personalInfo["city"] as? String ?? ""
+                viewModel.personalInfoData.state = Defaults().personalInfo["state"] as? String ?? ""
+                viewModel.personalInfoData.name = Defaults().personalInfo["firstname"] as? String ?? ""
+                viewModel.personalInfoData.lastName = Defaults().personalInfo["lastname"] as? String ?? ""
+                viewModel.personalInfoData.country = Defaults().personalInfo["country"] as? String ?? ""
+            }
             
             if viewModel.showDatePicker{
                 dateOfBirthPicker()
             }
         }
+    }
+    
+    func saveDefaultsData(){
+        Defaults().personalInfo = ["language": viewModel.personalInfoData.language ?? "",
+                                   "dob": viewModel.personalInfoData.dob ?? "",
+                                   "gender": viewModel.personalInfoData.gender ?? "",
+                                   "latitude": viewModel.personalInfoData.latitude ?? 0.0,
+                                   "longitude": viewModel.personalInfoData.latitude ?? 0.0,
+                                   "address": viewModel.personalInfoData.address ?? "",
+                                   "zipcode": viewModel.personalInfoData.postalCode ?? "",
+                                   "city": viewModel.personalInfoData.city ?? "",
+                                   "state": viewModel.personalInfoData.state ?? "",
+                                   "firstname":viewModel.personalInfoData.name ?? "",
+                                   "lastname":viewModel.personalInfoData.lastName ?? "",
+                                   "country": viewModel.personalInfoData.country ?? ""]
     }
     
     private func AddressView(value: Binding<String>)-> some View{
@@ -165,7 +217,7 @@ struct PersonalInformationSeekerView: View {
                 }
                 .keyboardType(.asciiCapable)
                 .font(.custom(FontContent.plusRegular, size: 15))
-                
+                .disabled(true)
             }
             .font(.custom(FontContent.plusRegular, size: 15))
             .padding([.leading,.trailing],10)

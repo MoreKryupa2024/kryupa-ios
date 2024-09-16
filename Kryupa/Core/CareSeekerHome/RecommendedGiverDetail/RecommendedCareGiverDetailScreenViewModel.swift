@@ -9,7 +9,7 @@ import Foundation
 
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
-    var options: [String] = ["Summary","Review"]
+    var options: [String] = ["Summary","Reviews"]
     @Published var selection: String = "Summary"
     @Published var isloading: Bool = true
     @Published var isRecommended: Bool = false

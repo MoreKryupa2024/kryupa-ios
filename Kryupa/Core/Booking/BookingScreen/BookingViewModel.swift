@@ -57,8 +57,10 @@ class BookingViewModel: ObservableObject{
             case 0:
                 param["status"] = "Active"
             case 1:
-                param["status"] = "Completed"
+                param["status"] = "Pending"
             case 2:
+                param["status"] = "Completed"
+            case 3:
                 param["status"] = "Cancelled"
             default:
                 break

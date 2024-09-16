@@ -28,10 +28,12 @@ struct BookingScreenView: View {
                                 .aspectRatio(283/250, contentMode: .fit)
                                 .padding(.horizontal,46)
                             switch viewModel.selectedSection{
-                            case 1:
-                                Text("Your Active List Looks Empty")
                             case 2:
+                                Text("Your Active List Looks Empty")
+                            case 3:
                                 Text("Your Closed List Looks Empty")
+                            case 1:
+                                Text("Your Pending List Looks Empty")
                             default:
                                 Text("Your Draft List Looks Empty")
                             }
@@ -51,10 +53,12 @@ struct BookingScreenView: View {
                                 .aspectRatio(283/250, contentMode: .fit)
                                 .padding(.horizontal,46)
                             switch viewModel.selectedSection{
-                            case 1:
-                                Text("Your Complete List Looks Empty")
                             case 2:
+                                Text("Your Complete List Looks Empty")
+                            case 3:
                                 Text("Your Cancelled List Looks Empty")
+                            case 1:
+                                Text("Your Pending List Looks Empty")
                             default:
                                 Text("Your Active List Looks Empty")
                             }
@@ -101,7 +105,7 @@ struct BookingScreenView: View {
                 }
             case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                    BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Depreciated" : "Completed"),bookingData: data)
+                    BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
                             viewModelReview.bookingsListData = data
@@ -147,6 +151,16 @@ struct BookingScreenView: View {
                 }
             case 1:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                    BookingView(status: "Pending",bookingData: data,payNowAction: { data in
+                        let paymentViewModel = PaymentViewModel()
+                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
+                        router.showScreen(.push) { rout in
+                            PaymentOrderScreenView(viewModel: paymentViewModel)
+                        }
+                    })
+                }
+            case 2:
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
@@ -156,9 +170,9 @@ struct BookingScreenView: View {
                             }
                         }
                 }
-            case 2:
+            case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                    BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Depreciated" : "Completed"),bookingData: data)
+                    BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
                             viewModelReview.bookingsListData = data
@@ -211,13 +225,17 @@ struct BookingScreenView: View {
             Text("Active")
                 .tag(0)
                 .font(.custom(FontContent.plusRegular, size: 15))
+            
+            Text("Pending")
+                .tag(1)
+                .font(.custom(FontContent.plusRegular, size: 15))
 
             Text("Completed")
-                .tag(1)
+                .tag(2)
                 .font(.custom(FontContent.plusRegular, size: 15))
             
             Text("Cancelled")
-                .tag(2)
+                .tag(3)
                 .font(.custom(FontContent.plusRegular, size: 15))
         }
         .pickerStyle(.segmented)

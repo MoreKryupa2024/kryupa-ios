@@ -67,6 +67,7 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
                     self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
                 case .failure(let error):
                     print(error)
+                    self?.serviceStartData = []
                     self?.getBannerTopData(screenName: AppConstants.CUSTOMERHOMETOPScreenBanner)
                 }
             }
