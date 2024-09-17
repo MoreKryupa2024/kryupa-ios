@@ -25,7 +25,7 @@ struct JobDetailView: View {
                     line
                     JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", 
                                                                                   afterFormat: "MMM dd yyyy"),
-                                hours: "2",
+                                hours: "\(viewModel.jobDetailModel?.totalhours ?? 0)",
                                 price: "\(viewModel.jobDetailModel?.bookingPricing ?? 0)",
                                 startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss",
                                                                                                    afterFormat: "h:mm a") ?? "",

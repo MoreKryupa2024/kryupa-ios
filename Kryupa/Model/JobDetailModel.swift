@@ -35,7 +35,8 @@ struct JobDetailData {
     let diseaseType, areasOfExpertise, additionalSkills, additionalInfo: [String]
     let languages: [String]
     let serviceDetails: [ServiceDetailsData]
-
+    let totalhours: Int
+    
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
         bookingType = jsonData["booking_type"] as? String ?? ""
@@ -55,6 +56,7 @@ struct JobDetailData {
         name = jsonData["name"] as? String ?? ""
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
         bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
+        totalhours = jsonData["totalhours"] as? Int ?? 0
         allergies = jsonData["allergies"] as? String ?? ""
         mobilityLevel = jsonData["mobility_level"] as? String ?? ""
         otherDiseaseType = jsonData["other_disease_type"] as? String ?? ""

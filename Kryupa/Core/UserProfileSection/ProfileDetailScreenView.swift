@@ -12,8 +12,7 @@ import PhotosUI
 struct ProfileDetailScreenView: View {
     @Environment(\.router) var router
     
-    @StateObject private var viewModel = ProfileDetailScreenViewModel()
-    @State var selecedProfile = ""
+    @StateObject var viewModel = ProfileDetailScreenViewModel()
     @State private var showingAlert = false
     @State private var selectedItem: PhotosPickerItem?
     @State var showsAlertForImageUpload = false
@@ -28,16 +27,16 @@ struct ProfileDetailScreenView: View {
                 HeaderView(title: "Profile",showBackButton: true)
                 ScrollView{
                     HStack(alignment:.top){
-                        DropDownView(selectedValue: selecedProfile,
+                        DropDownView(selectedValue: viewModel.selecedProfile,
                                      showDropDown: profilesDownShow,
                                      values: viewModel.profileList?.profiles ?? AppConstants.relationArray) { value in
                             selectedImage = nil
-                            selecedProfile = value
-                            viewModel.getPersonalDetails(profileName: selecedProfile)
+                            viewModel.selecedProfile = value
+                            viewModel.getPersonalDetails(profileName: viewModel.selecedProfile)
                         }onShowValue: {
                             profilesDownShow = !profilesDownShow
                         }
-                        .id(selecedProfile)
+                        .id(viewModel.selecedProfile)
                         AddNewButton
                             .asButton(.press) {
                                 router.showScreen(.push) { rout in
@@ -69,7 +68,7 @@ struct ProfileDetailScreenView: View {
         .onAppear() {
             NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                  using: self.setChatScreen)
-            viewModel.getProfileList(profileName: selecedProfile)
+            viewModel.getProfileList()
 //            viewModel.getPersonalDetails(profileName: selecedProfile)
 //            viewModel.testgetPersonalDetails(profileName: selecedProfile)
         }

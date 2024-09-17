@@ -15,8 +15,9 @@ class ProfileDetailScreenViewModel: ObservableObject {
     @Published var profileList: ProfileListData?
     @Published var personalDetail: PersonalData?
     @Published var profilePicture: UIImage? = nil
+    @Published var selecedProfile = ""
 
-    func getProfileList(profileName: String){
+    func getProfileList(){
         isloading = true
         NetworkManager.shared.getProfileList() { [weak self] result in
             
@@ -27,9 +28,10 @@ class ProfileDetailScreenViewModel: ObservableObject {
                     self.isloading = false
                     self.profileList = data.data
                     guard let profileList = self.profileList else{return}
-                    if profileList.profiles.contains(profileName){
-                        self.getPersonalDetails(profileName: profileName)
+                    if profileList.profiles.contains(self.selecedProfile){
+                        self.getPersonalDetails(profileName: self.selecedProfile)
                     }else{
+                        self.selecedProfile = profileList.profiles.first ?? ""
                         self.getPersonalDetails(profileName: profileList.profiles.first ?? "")
                     }
                 case .failure(let error):

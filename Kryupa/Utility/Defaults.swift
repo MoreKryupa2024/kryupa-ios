@@ -39,23 +39,6 @@ class Defaults {
         setKeyIfNotSetAlready()
     }
     
-    
-    /*func logoutUser(_ completion: (() -> Void)? = nil){
-     
-     let referralTempData = referralData
-     let deepLinkTempData = deepLinkData
-     let removeCardCoachMarkShownTempData = removeCardCoachMarkShown
-     
-     let domain = Bundle.main.bundleIdentifier!
-     UserDefaults.standard.removePersistentDomain(forName: domain)
-     UserDefaults.standard.synchronize()
-     
-     referralData = referralTempData
-     deepLinkData = deepLinkTempData
-     removeCardCoachMarkShown = removeCardCoachMarkShownTempData
-     completion?()
-     }*/
-    
     var accessToken: String {
         get {
             return getStringValue(key: .accessToken)
