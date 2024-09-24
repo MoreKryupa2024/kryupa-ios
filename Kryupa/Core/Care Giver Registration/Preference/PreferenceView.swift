@@ -52,11 +52,12 @@ struct PreferenceView: View {
                                 VStack(spacing: 20,
                                        content: {
                                     
-                                    mobilityLevelView
+                                    CanHelpInView
+                                    
+                                    distanceView
                                     
                                     languageSpeakingView
                                     
-                                    distanceView
                                     
                                     HStack{
                                         previousButton
@@ -87,7 +88,7 @@ struct PreferenceView: View {
                         .toolbar(.hidden, for: .navigationBar)
                     }
                     .task {
-                        viewModel.preferenceListData.mobilityLevel = Defaults().prefereInfo["mobility_level"] as? String ?? ""
+                        viewModel.preferenceListData.canHelpIn = Defaults().prefereInfo["mobility_level"] as? [String] ?? []
                         viewModel.languageSpeakingSelected = Defaults().prefereInfo["language"] as? [String] ?? []
                         viewModel.preferenceListData.distance = Defaults().prefereInfo["distance"] as? String ?? ""
                     }
@@ -107,7 +108,7 @@ struct PreferenceView: View {
     
     func saveDefaultsData(){
         Defaults().prefereInfo = [
-            "mobility_level": viewModel.preferenceListData.mobilityLevel ?? "",
+            "mobility_level": viewModel.preferenceListData.canHelpIn,
             "language": viewModel.languageSpeakingSelected,
             "distance": viewModel.preferenceListData.distance ?? ""
         ]
@@ -151,38 +152,43 @@ struct PreferenceView: View {
         
     }
     
-    
-    private var mobilityLevelView: some View{
-        VStack(alignment: .leading, spacing:0,
-               content: {
+    private var CanHelpInView: some View{
+        
+        VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Mobility Level")
-                Text("*")
-                    .foregroundStyle(.red)
+                Text("Can Help In")
             }
-            .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))
-            .padding(.bottom,10)
             
-            DropDownView(
-                selectedValue: viewModel.preferenceListData.mobilityLevel,
-                placeHolder: "Select",
-                showDropDown: mobilityLevelShow,
-                values: AppConstants.mobilityLevelArray) { value in
-                    viewModel.preferenceListData.mobilityLevel = value
-                }onShowValue: {
-                    mobilityLevelShow = !mobilityLevelShow
-                    distanceShow = false
+            ZStack{
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: AppConstants.canHelpInArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !(viewModel.preferenceListData.canHelpIn ?? []).contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if (viewModel.preferenceListData.canHelpIn ?? []).contains(service){
+                                viewModel.preferenceListData.canHelpIn = (viewModel.preferenceListData.canHelpIn ?? []).filter{ $0 != service}
+                            }else{
+                                viewModel.preferenceListData.canHelpIn?.append(service)
+                            }
+                            viewModel.preferenceListData.canHelpIn = (viewModel.preferenceListData.canHelpIn ?? []).sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
                 }
-        })
-        .id(viewModel.preferenceListData.mobilityLevel)
+            }
+        }
     }
     
     private var languageSpeakingView: some View{
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Language Preference")
+                Text("Preferred Language Of Customer")
                 Text("*")
                     .foregroundStyle(.red)
             }

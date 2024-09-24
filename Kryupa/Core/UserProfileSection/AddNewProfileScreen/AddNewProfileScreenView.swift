@@ -86,29 +86,49 @@ struct AddNewProfileScreenView: View {
                content: {
             HStack(spacing:0){
                 Text("Mobility Level")
-                Text("*")
-                    .foregroundStyle(.red)
             }
             .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))
             .padding(.bottom,10)
             
-            DropDownView(
-                selectedValue: viewModel.mobilityLevel,
-                placeHolder: "Select",
-                showDropDown: mobilityLevelDownShow,
-                values: AppConstants.mobilityLevelArray) { value in
-                    viewModel.mobilityLevel = value
-                }onShowValue: {
-                    mobilityLevelDownShow = !mobilityLevelDownShow
-                    distanceDownShow = false
-                    languageDownShow = false
-                    genderDownShow = false
-                    relationPersonalDownShow = false
-                    relationDownShow = false
-                    medicalConditionDownShow = false
-                }
+            mobilitySelectionView(title: "Dressing", value: "Dressing")
+            mobilitySelectionView(title: "Eating / Cutting Up Food", value: "Eating / Cutting Up Food")
+            mobilitySelectionView(title: "Walking / Transferring", value: "Walking / Transferring")
+            mobilitySelectionView(title: "Toileting", value: "Toileting")
+            mobilitySelectionView(title: "Bathing", value: "Bathing")
         })
+    }
+    
+    func mobilitySelectionView(title:String,value: String) -> some View{
+        return VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text(title)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            ZStack{
+                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.mobArray) { valueStr in
+                    if let valueStr {
+                        
+                        CircleCheckBoxView(
+                            isSelected: "Need Assistance" != valueStr ? viewModel.canHelpInSelect.contains(value) : !viewModel.canHelpInSelect.contains(value),
+                            name: valueStr
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if "Need Assistance" == valueStr{
+                                viewModel.canHelpInSelect.append(value)
+                            }else{
+                                viewModel.canHelpInSelect = viewModel.canHelpInSelect.filter{$0 != value}
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.bottom,15)
     }
     
     private var medicalConditionDropdownView: some View{

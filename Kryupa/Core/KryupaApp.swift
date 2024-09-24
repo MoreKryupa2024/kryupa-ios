@@ -27,6 +27,8 @@ struct KryupaApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate{
+    
+    var window: UIWindow?
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
@@ -46,6 +48,13 @@ class AppDelegate: NSObject, UIApplicationDelegate{
         }
         IQKeyboardManager.shared.enable = true
         return true
+    }
+    
+    func rootSetUp(){
+        window = UIWindow()
+        let navigationController = UINavigationController(rootViewController: UIHostingController(rootView: ContentView()))
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
     
     @available(iOS 9.0, *)

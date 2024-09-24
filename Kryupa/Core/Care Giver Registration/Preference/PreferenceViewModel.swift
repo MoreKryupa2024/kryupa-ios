@@ -18,10 +18,6 @@ class PreferenceViewModel: ObservableObject{
     func dataChecks(parameters:[String:Any],alert:@escaping((String)->Void),next:@escaping(()->Void)){
         
         
-        guard let mobilityLevel = preferenceListData.mobilityLevel, mobilityLevel != "" else {
-            return alert("Please Select Mobility Level")
-        }
-        
         if languageSpeakingSelected.isEmpty{
             return alert("Please Select Speaking Language")
         }
@@ -32,7 +28,7 @@ class PreferenceViewModel: ObservableObject{
         isLoading = true
         var param = parameters
         param["preferenceList"] = [
-            "mobility_level": mobilityLevel,
+            "can_help_in": preferenceListData.canHelpIn ?? [],
             "language": languageSpeakingSelected,
             "distance": distance
         ]

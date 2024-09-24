@@ -153,7 +153,7 @@ class AppConstants{
     static let VideoCall = "Video Call"
     static let Chat = "Chat"
     static let AudioCall = "Audio Call"
-    
+    static let canHelpInArray = ["Dressing", "Eating/cutting up food","Bathing","Walking/Transferring", "Toileting"]
     
     static let medicalConditionArray = ["None","Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","Other"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
@@ -161,6 +161,7 @@ class AppConstants{
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
     static let needServiceInArray = ["Housekeeping","Home Health Aid","Physical Therapy","Occupational Therapy","Nursing","Companionship"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
+    static let mobArray = ["Independent","Need Assistance"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
     static let languageSpeakingArray = ["English","Spanish","Mandarin","Tagalog","Vietnamese","French","Russian","German","Hindi",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
@@ -170,7 +171,7 @@ class AppConstants{
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
     
     static let giverAccountSectionItems = [
-        AccountListData(title: "Personal Details", image: "personalDetail"),
+        AccountListData(title: "Personal Details & Preferences", image: "personalDetail"),
         AccountListData(title: "My Services", image: "myservice"),
         AccountListData(title: "Payments", image: "payments"),
         AccountListData(title: "Reviews", image: "reviews"),

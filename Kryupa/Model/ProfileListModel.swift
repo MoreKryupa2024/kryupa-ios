@@ -8,15 +8,26 @@
 import Foundation
 
 // MARK: - Welcome
-struct ProfileListModel: Codable {
+struct ProfileListModel {
     let success: Bool
     let message: String?
-    let data: ProfileListData
+    let data: [Profile]
+    
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = (jsonData["data"] as? [[String:Any]] ?? []).map{Profile(jsonData: $0)}
+    }
 }
 
-// MARK: - DataClass
-struct ProfileListData: Codable {
-    let profiles: [String]
+struct Profile {
+    let id: String
+    let name: String
+    
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
+    }
 }
 
 // MARK: - Welcome
@@ -36,10 +47,12 @@ struct MyServiceModel {
 struct MyServiceData {
     let skilles: [String]
     let areaOfExperties: [String]
+    let additionalrequirement: [String]
     let preferences: MyPreferencesData
     init(jsonData:[String:Any]){
         skilles = jsonData["skilles"] as? [String] ?? []
         areaOfExperties = jsonData["area_of_experties"] as? [String] ?? []
+        additionalrequirement = jsonData["additionalrequirement"] as? [String] ?? []
         preferences = MyPreferencesData(jsonData: jsonData["preferences"] as? [String:Any] ?? [String:Any]())
     }
 }

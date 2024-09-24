@@ -14,9 +14,10 @@ class MyServiceViewModel: ObservableObject{
     @Published var languageSpeakingSelected: [String] = ["English"]
     @Published var mobilityLevel: String = ""
     @Published var distance: String = "Within 1 mile"
-    var areaOfExpertiseList = ["Physical Therapy", "Occupational Therapy", "Nursing", "Companionship"]
+    var areaOfExpertiseList = AppConstants.needServiceInArray
     @Published var mySkillsSelected: [String] = [String]()
-    var mySkillsList = ["Respite Care", "Live in home care", "Transportation", "Errands / shopping", "Light housecleaning", "Meal preparation", "Help with staying physically active", "Medical Transportation", "Dementia", "Bathing / dressing", "Companionship", "Feeding", "Mobility Assistance", "Heavy lifting"]
+    @Published var additionalInfoSelected: [String] = []
+    var mySkillsList = AppConstants.additionalSkillsAraay
     @Published var isLoading: Bool = false
     
     func getMyService(){
@@ -31,6 +32,7 @@ class MyServiceViewModel: ObservableObject{
                     
                     self?.distance = data.data.preferences.distance
                     self?.mobilityLevel = data.data.preferences.mobilityLevel
+                    self?.additionalInfoSelected = data.data.additionalrequirement
                     self?.languageSpeakingSelected = data.data.preferences.language
                 case .failure(let error):
                     print(error.getMessage())
@@ -44,23 +46,11 @@ class MyServiceViewModel: ObservableObject{
             if self.areaOfExpertiseSelected.count == 0 {
                 error("Please select at list one area of Expertise")
                 return
-            }else if  self.mobilityLevel.isEmpty {
-                error("Please select Mobility Level")
-                return
-            }else if  self.languageSpeakingSelected.isEmpty {
-                error("Please select at list one Language Speaking")
-                return
-            }else if  self.distance.count == 0 {
-                error("Please Select Distance")
-                return
             }
             
             let param:[String:Any] = ["skilles":self.mySkillsSelected,
-                                      "areaOfExperties":self.areaOfExpertiseSelected,
-                                      "preference":[
-                                        "language":self.languageSpeakingSelected,
-                                        "mobility_level":self.mobilityLevel,
-                                        "distance":self.distance]]
+                                      "additional_requirements": self.additionalInfoSelected,
+                                      "areaOfExperties":self.areaOfExpertiseSelected]
             self.isLoading = true
             NetworkManager.shared.updateMyService(params: param) { [weak self] result in
                 self?.isLoading = false

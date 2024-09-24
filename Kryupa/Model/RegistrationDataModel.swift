@@ -32,7 +32,8 @@ struct PersonalInfo {
 
 // MARK: - PreferenceList
 struct PreferenceList {
-    var weight, mobilityLevel, language, distance: String?
+    var weight, language, distance: String?
+    var canHelpIn: [String]?
 }
 
 

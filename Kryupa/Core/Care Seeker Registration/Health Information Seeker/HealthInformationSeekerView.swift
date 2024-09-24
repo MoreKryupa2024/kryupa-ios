@@ -63,7 +63,7 @@ struct HealthInformationSeekerView: View {
                         keyboard: .asciiCapable
                     )
                     
-                    mobilityLevelView
+                    NeedHelpInView
                     
                     HStack{
                         previousButton
@@ -96,7 +96,7 @@ struct HealthInformationSeekerView: View {
         .modifier(DismissingKeyboard())
         .task {
             viewModel.allergiesValue = Defaults().healthInfo["allergies"] as? String ?? ""
-            viewModel.mobilityLevel = Defaults().healthInfo["mobility_level"] as? String ?? ""
+            viewModel.canHelpInSelect = Defaults().healthInfo["mobility_level"] as? [String] ?? []
             viewModel.medicalConditionSelected = Defaults().healthInfo["other_disease_type"] as? String ?? ""
             viewModel.medicalConditionDropDownSelected = Defaults().healthInfo["disease_type"] as? [String] ?? []
         }
@@ -105,7 +105,7 @@ struct HealthInformationSeekerView: View {
     func saveDefaultsData(){
         Defaults().healthInfo = [
             "allergies": viewModel.allergiesValue,
-            "mobility_level": viewModel.mobilityLevel,
+            "mobility_level": viewModel.canHelpInSelect,
             "other_disease_type": viewModel.medicalConditionSelected,
             "disease_type": viewModel.medicalConditionDropDownSelected
         ]
@@ -188,31 +188,36 @@ struct HealthInformationSeekerView: View {
         .foregroundColor(.appMain)
     }
     
-    
-    private var mobilityLevelView: some View{
-        VStack(alignment: .leading, spacing:0,
-               content: {
+    private var NeedHelpInView: some View{
+        
+        VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Mobility Level")
-                Text("*")
-                    .foregroundStyle(.red)
+                Text("Need Help In")
             }
-            .frame(height: 21)
             .font(.custom(FontContent.plusMedium, size: 17))
-            .padding(.bottom,10)
             
-            DropDownView(
-                selectedValue: viewModel.mobilityLevel,
-                placeHolder: "Select",
-                showDropDown: mobilityLevelDownShow,
-                values: AppConstants.mobilityLevelArray) { value in
-                    viewModel.mobilityLevel = value
-                }onShowValue: {
-                    mobilityLevelDownShow = !mobilityLevelDownShow
-                    medicalConditionDownShow = false
+            ZStack{
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: AppConstants.canHelpInArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !(viewModel.canHelpInSelect).contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if (viewModel.canHelpInSelect).contains(service){
+                                viewModel.canHelpInSelect = (viewModel.canHelpInSelect).filter{ $0 != service}
+                            } else {
+                                viewModel.canHelpInSelect.append(service)
+                            }
+                            viewModel.canHelpInSelect = (viewModel.canHelpInSelect).sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
                 }
-        })
-        .id(viewModel.mobilityLevel)
+            }
+        }
     }
     
     private var medicalConditionDropdownView: some View{

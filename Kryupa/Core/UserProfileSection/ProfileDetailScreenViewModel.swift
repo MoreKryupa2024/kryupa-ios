@@ -12,7 +12,7 @@ class ProfileDetailScreenViewModel: ObservableObject {
     
     @Published var isloading: Bool = Bool()
     @Published var email: String = String()
-    @Published var profileList: ProfileListData?
+    @Published var profileList: [Profile] = []
     @Published var personalDetail: PersonalData?
     @Published var profilePicture: UIImage? = nil
     @Published var selecedProfile = ""
@@ -27,12 +27,13 @@ class ProfileDetailScreenViewModel: ObservableObject {
                     guard let self else{return}
                     self.isloading = false
                     self.profileList = data.data
-                    guard let profileList = self.profileList else{return}
-                    if profileList.profiles.contains(self.selecedProfile){
+                    if self.profileList.contains(where: { pro in
+                        pro.name == (self.selecedProfile)
+                    }){
                         self.getPersonalDetails(profileName: self.selecedProfile)
                     }else{
-                        self.selecedProfile = profileList.profiles.first ?? ""
-                        self.getPersonalDetails(profileName: profileList.profiles.first ?? "")
+                        self.selecedProfile = self.profileList.first?.name ?? ""
+                        self.getPersonalDetails(profileName: self.profileList.first?.name ?? "")
                     }
                 case .failure(let error):
                     self?.isloading = false
@@ -60,9 +61,9 @@ class ProfileDetailScreenViewModel: ObservableObject {
     }
     
     func getPersonalDetails(profileName: String){
-                
+        let profileId = profileList.filter{$0.name == selecedProfile}.first?.id ?? ""
         isloading = true
-        NetworkManager.shared.getPersonalDetails(params: ["profileName": profileName]) { [weak self] result in
+        NetworkManager.shared.getPersonalDetails(params: ["profileName": profileName,"profileId":profileId]) { [weak self] result in
             
             DispatchQueue.main.async() {
                 switch result{

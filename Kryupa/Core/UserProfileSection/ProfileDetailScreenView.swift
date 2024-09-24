@@ -27,9 +27,10 @@ struct ProfileDetailScreenView: View {
                 HeaderView(title: "Profile",showBackButton: true)
                 ScrollView{
                     HStack(alignment:.top){
+                        let nameArray = viewModel.profileList.map{ $0.name}
                         DropDownView(selectedValue: viewModel.selecedProfile,
                                      showDropDown: profilesDownShow,
-                                     values: viewModel.profileList?.profiles ?? AppConstants.relationArray) { value in
+                                     values: nameArray) { value in
                             selectedImage = nil
                             viewModel.selecedProfile = value
                             viewModel.getPersonalDetails(profileName: viewModel.selecedProfile)
@@ -115,7 +116,7 @@ struct ProfileDetailScreenView: View {
         viewModelAddNewProfile.personalInfoData = personalInfo
         viewModelAddNewProfile.medicalConditionSelected = viewModel.personalDetail?.medicalinfo?.otherDisease ?? ""
         viewModelAddNewProfile.medicalConditionDropDownSelected = viewModel.personalDetail?.medicalinfo?.diseaseTypes ?? [""]
-        viewModelAddNewProfile.mobilityLevel = viewModel.personalDetail?.medicalinfo?.mobility ?? ""
+        viewModelAddNewProfile.canHelpInSelect = viewModel.personalDetail?.canHelpIn ?? []
         viewModelAddNewProfile.allergiesValue = viewModel.personalDetail?.medicalinfo?.allergies ?? ""
 
         viewModelAddNewProfile.profileID = viewModel.personalDetail?.profileid ?? ""

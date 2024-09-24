@@ -13,6 +13,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
     @Published var exprienceAndSkillsData: ExprienceAndSkills = ExprienceAndSkills()
     @Published var showFilePicker: Bool = false
     @Published var areaOfExpertiseSelected: [String] = [String]()
+    @Published var additionalInfoSelected: [String] = [String]()
     @Published var isLoading:Bool = false
     var yearsOfExprience: Int = Int()
     
@@ -44,6 +45,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
         param = [
             "bio": bio,
             "area_of_expertise": areaOfExpertise,
+            "additional_requirements": additionalInfoSelected,
             "certificate_and_documents": certificateAndDocuments,
             "years_of_exprience": yearsOfExprience,
         ]

@@ -12,7 +12,7 @@ class HealthInformationSeekerViewModel: ObservableObject{
     
     @Published var medicalConditionSelected: String = String()
     @Published var medicalConditionDropDownSelected: [String] = [String]()
-    @Published var mobilityLevel: String = String()
+    @Published var canHelpInSelect: [String] = []
     @Published var allergiesValue: String = String()
     
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
@@ -21,13 +21,11 @@ class HealthInformationSeekerViewModel: ObservableObject{
             return alert("Please Select Medical Condition")
         }else if medicalConditionDropDownSelected.contains("Other") && medicalConditionSelected.isEmpty{
             return alert("Please Enter Other Medical Condition")
-        }else if mobilityLevel.isEmpty{
-            return alert("Please Select Mobility Level")
         }else{
              var param = [String:Any]()
              param = [
                  "allergies": allergiesValue,
-                 "mobility_level": mobilityLevel,
+                 "can_help_in": canHelpInSelect,
                  "other_disease_type": medicalConditionSelected,
                  "disease_type": medicalConditionDropDownSelected
              ]

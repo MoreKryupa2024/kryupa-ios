@@ -20,16 +20,30 @@ struct JobsModel {
 }
 
 // MARK: - DataClass
-struct JobsData: Codable {
+struct JobsData {
     let jobPost: [JobPost]
+    let isexist: Isexist
 
     init(jsonData:[String:Any]){
         jobPost = (jsonData["job_post"] as? [[String:Any]] ?? [[String:Any]]()).map{JobPost(jsonData: $0)}
+        isexist = Isexist(jsonData: jsonData["isexist"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+
+// MARK: - Isexist
+struct Isexist {
+    let inExpertise, inRequirements, inPreferences: Bool
+
+    init(jsonData:[String:Any]){
+        inExpertise = jsonData["in_expertise"] as? Bool ?? false
+        inRequirements = jsonData["in_requirements"] as? Bool ?? false
+        inPreferences = jsonData["in_preferences"] as? Bool ?? false
     }
 }
 
 // MARK: - JobPost
-struct JobPost: Codable {
+struct JobPost {
     let customerInfo: CustomerInfo
     let bookingDetails: BookingDetails
     let jobID: String
@@ -42,7 +56,7 @@ struct JobPost: Codable {
 }
 
 // MARK: - BookingDetails
-struct BookingDetails: Codable {
+struct BookingDetails {
     let areaOfExpertise: [String]
     let bookingType, startDate, endDate, startTime: String
     let endTime: String
@@ -58,7 +72,7 @@ struct BookingDetails: Codable {
 }
 
 // MARK: - CustomerInfo
-struct CustomerInfo: Codable {
+struct CustomerInfo {
     let name, gender, profilePictureUrl: String
     let price: Int
     let diseaseType: [String]

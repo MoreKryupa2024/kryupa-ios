@@ -2248,15 +2248,13 @@ class NetworkManager{
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             
             do {
-                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(PersonalGiverModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = PersonalGiverModel(jsonData: parsedData)
                 if apiData.success{
                     print(apiData)
                     completionHandler(.success(apiData))
                 }else{
                     completionHandler(.failure(.custom(apiData.message ?? "")))
-
                 }
             }catch{
                 completionHandler(.failure(.somethingWentWrong))
@@ -2509,9 +2507,8 @@ class NetworkManager{
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             
             do {
-                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(ProfileListModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ProfileListModel(jsonData: parsedData)
                 if apiData.success{
                     print(apiData)
                     completionHandler(.success(apiData))

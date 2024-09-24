@@ -19,7 +19,11 @@ struct PaymentListView: View {
             VStack(spacing:0) {
                 HeaderView(showBackButton: true)
                 if AppConstants.GiveCare == Defaults().userType{
-                    SegmentView
+//                    SegmentView
+                    Text("Payment History")
+                        .font(.custom(FontContent.besMedium, size: 20))
+                        .foregroundStyle(.appMain)
+                        .padding(.top,30)
                 }else{
                     Text("Payment History")
                         .font(.custom(FontContent.besMedium, size: 20))

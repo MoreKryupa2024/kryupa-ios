@@ -18,9 +18,13 @@ struct MyServicesView: View {
             
             VStack(spacing:0){
                 HeaderView(showBackButton: true)
-                SegmentView
-                    .padding(.top, 10)
-                    .padding(.bottom, 30)
+//                SegmentView
+//                    .padding(.top, 10)
+//                    .padding(.bottom, 30)
+                Text("My Services")
+                    .font(.custom(FontContent.besMedium, size: 20))
+                    .foregroundStyle(.appMain)
+                    .padding(.vertical,30)
                 switch viewModel.selectedSection{
                 case 1:
                     ScrollView{
@@ -45,6 +49,8 @@ struct MyServicesView: View {
                         AreaOfExpertiseView
                         line
                         MySkillsView
+                        line
+                        AdditionalInfoView
                         BottomButtonView
                     }
                 }
@@ -221,6 +227,40 @@ struct MyServicesView: View {
             .padding([.top, .horizontal], 24)
     }
     
+    private var AdditionalInfoView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional info")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalInfoArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalInfoSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if viewModel.additionalInfoSelected.contains(service){
+                                viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
+                            }else{
+                                viewModel.additionalInfoSelected.append(service)
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
+        .padding(.top,10)
+    }
+    
     private var MySkillsView: some View{
         
         VStack(alignment: .leading){
@@ -276,7 +316,7 @@ struct MyServicesView: View {
             .font(.custom(FontContent.plusMedium, size: 17))
             
             ZStack{
-                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: viewModel.areaOfExpertiseList) { service in
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: viewModel.areaOfExpertiseList) { service in
                     if let service{
                         CheckBoxView(
                             isSelected: !viewModel.areaOfExpertiseSelected.contains(service),

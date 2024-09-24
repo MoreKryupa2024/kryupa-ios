@@ -97,7 +97,7 @@ struct PreferenceCareSeekarView: View {
                     .task {
                         viewModel.languageSpeakingSelected = Defaults().prefereInfo["preferredLanguageType"] as? [String] ?? []
                         viewModel.genderSelected = Defaults().prefereInfo["gender"] as? String ?? ""
-                        viewModel.yearsOfExperienceSelected = Defaults().prefereInfo["year_of_experience"] as? String ?? ""
+                        viewModel.yearsOfExperienceSelected = Defaults().prefereInfo["year_of_experience"] as? String ?? "Any"
                         viewModel.needServiceInSelected = Defaults().prefereInfo["preferredServiceType"] as? [String] ?? []
                     }
                     
@@ -137,8 +137,9 @@ struct PreferenceCareSeekarView: View {
             ZStack{
                 NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.yearsOfExperienceArray) { experience in
                     if let experience{
-                        PillView(
-                            isSelected: viewModel.yearsOfExperienceSelected == experience,
+                    
+                        CircleCheckBoxView(
+                            isSelected: viewModel.yearsOfExperienceSelected != experience,
                             name: experience
                         )
                         .asButton(.press) {

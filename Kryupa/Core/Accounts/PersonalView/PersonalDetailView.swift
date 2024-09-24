@@ -23,6 +23,7 @@ struct PersonalDetailView: View {
     @State var editProfile: Bool = false
     @State var educationDownShow: Bool = false
     @State var languageDropDownShow: Bool = false
+    @State var distanceDropDownShow: Bool = false
 
     var body: some View {
         ZStack{
@@ -41,13 +42,26 @@ struct PersonalDetailView: View {
                 ).disabled(!editProfile)
                 line
                 yearOfExpView.disabled(!editProfile)
+//                line
+//                AdditionalInfoView.disabled(!editProfile)
                 line
-                AdditionalInfoView.disabled(!editProfile)
+                languageDropdownView.disabled(!editProfile)
+                    .padding(.top,10)
+                HStack(spacing:0){
+                    Text("Preference")
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                }
+                .font(.custom(FontContent.plusMedium, size: 17))
+                .padding(.horizontal,24)
+                .padding(.top,15)
                 line
-                QualificationView
-                
+                CanHelpInView.disabled(!editProfile)
+                    .padding(.vertical,15)
+                preferredLanguageView.disabled(!editProfile)
+                    .padding(.bottom,15)
+                DistanceDropdownView.disabled(!editProfile)
+                    .padding(.bottom,15)
                 if editProfile {
-                    languageDropdownView.disabled(!editProfile)
                     bottomButtonView
                 }
             }
@@ -102,35 +116,74 @@ struct PersonalDetailView: View {
         }
     }
     
-    private var languageDropdownView: some View{
-        VStack(alignment: .leading, spacing:0,
-               content: {
-//            HStack(spacing:0){
-//                Text("Language")
-//                Text("*")
-//                    .foregroundStyle(.red)
-//            }
-//            .frame(height: 21)
-//            .font(.custom(FontContent.plusMedium, size: 17))
-//            .padding(.bottom,10)
+    private var CanHelpInView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Can Help In")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
             
-            DropDownWithCheckBoxView(
-                selectedValue: viewModel.languageDropDownSelected,
-                placeHolder: "Select Language",
-                showDropDown: languageDropDownShow,
-                values: AppConstants.languageSpeakingArray) { value in
-                    viewModel.languageDropDownSelected = value
-                }onShowValue: {
-                    languageDropDownShow = !languageDropDownShow
-                    educationDownShow = false
+            ZStack{
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: AppConstants.canHelpInArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.canHelpInSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                                if viewModel.canHelpInSelected.contains(service){
+                                    viewModel.canHelpInSelected = viewModel.canHelpInSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.canHelpInSelected.append(service)
+                                }
+                            viewModel.canHelpInSelected = viewModel.canHelpInSelected.sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
                 }
-                .id(viewModel.languageDropDownSelected.first)
-            
-
-        })
+            }
+        }
         .padding(.horizontal,24)
-        .padding(.top, 10)
-        .padding(.bottom,-10)
+    }
+    
+    private var preferredLanguageView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Preferred Language Of Customer")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                    
+                    if let languageSpeakingArray{
+                        HStack(spacing:0){
+                            CheckBoxView(
+                                isSelected: !viewModel.languageDropDownSelected.contains(languageSpeakingArray),
+                                name: languageSpeakingArray
+                            )
+                            .opacity(AppConstants.languageSpeakingArray.last == languageSpeakingArray ? 0 : 1)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                            .asButton(.press) {
+                                    if viewModel.languageDropDownSelected.contains(languageSpeakingArray){
+                                        viewModel.languageDropDownSelected = viewModel.languageDropDownSelected.filter{ $0 != languageSpeakingArray}
+                                    }else{
+                                        viewModel.languageDropDownSelected.append(languageSpeakingArray)
+                                    }
+                                viewModel.languageDropDownSelected = viewModel.languageDropDownSelected.sorted(by: { $0 < $1 })
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
     }
     
     private var bottomButtonView: some View {
@@ -205,41 +258,54 @@ struct PersonalDetailView: View {
         .padding(.top, 10)
     }
     
-    private var QualificationView: some View{
-        
-        VStack(alignment: .leading, spacing: 10) {
-//            Text("Qualifications")
-//                .font(.custom(FontContent.plusMedium, size: 17))
-//                .foregroundStyle(._242426)
-//            
-//            
-//            HStack {
-//                Text("Education:")
-//                    .font(.custom(FontContent.plusRegular, size: 12))
-//                    .foregroundStyle(._242426)
-//                Spacer()
-//                Text("College Degree")
-//                    .font(.custom(FontContent.plusRegular, size: 12))
-//                    .foregroundStyle(._242426)
-//            }
-            
-            Text("Language")
-                .font(.custom(FontContent.plusMedium, size: 17))
-                .foregroundStyle(._242426)
-
-            HStack {
-//                Text("Languages:")
-//                    .font(.custom(FontContent.plusRegular, size: 12))
-//                    .foregroundStyle(._242426)
-//                Spacer()
-                Text( viewModel.languageDropDownSelected.isEmpty ? "-" : "\(viewModel.languageDropDownSelected.joined(separator: ","))")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._242426)
-                Spacer()
+    private var languageDropdownView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Language")
             }
-        }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 17))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.language,
+                placeHolder: "Select",
+                showDropDown: languageDropDownShow,
+                values: AppConstants.languageSpeakingArray) { value in
+                    viewModel.language = value
+                }onShowValue: {
+                    languageDropDownShow = !languageDropDownShow
+                    distanceDropDownShow = false
+                }
+        })
+        .id(viewModel.language)
         .padding(.horizontal,24)
-        .padding(.top, 10)
+    }
+    
+    private var DistanceDropdownView: some View{
+        VStack(alignment: .leading, spacing:0,
+               content: {
+            HStack(spacing:0){
+                Text("Distance")
+            }
+            .frame(height: 21)
+            .font(.custom(FontContent.plusMedium, size: 17))
+            .padding(.bottom,10)
+            
+            DropDownView(
+                selectedValue: viewModel.distance,
+                placeHolder: "Select",
+                showDropDown: distanceDropDownShow,
+                values: AppConstants.distanceArray) { value in
+                    viewModel.distance = value
+                }onShowValue: {
+                    distanceDropDownShow = !distanceDropDownShow
+                    languageDropDownShow = false
+                }
+        })
+        .id(viewModel.distance)
+        .padding(.horizontal,24)
     }
     
     private var AdditionalInfoView: some View{
@@ -320,7 +386,7 @@ struct PersonalDetailView: View {
     private var line: some View {
         Divider()
             .background(.F_2_F_2_F_7)
-            .padding(.trailing, 30)
+            .padding(.horizontal, 30)
             .padding(.leading, 0)
             .padding(.top, 10)
         }
@@ -441,25 +507,6 @@ struct PersonalDetailView: View {
                 
                 VStack() {
                     if editProfile {
-                       /* Text("Save")
-                            .frame(width: 62 ,height: 23)
-                            .font(.custom(FontContent.plusRegular, size: 11))
-                            .foregroundStyle(.white)
-                            .background(.appMain)
-                            .clipShape(Capsule())
-                            .asButton(.press) {
-                                viewModel.personalDetail?.expertise.bio = strBio
-                                viewModel.personalDetail?.expertise.exprience = intExp
-                                viewModel.validateData { alertStr in
-                                    presentAlert(title: "Kryupa", subTitle: alertStr)
-                                } next: { param in
-                                    viewModel.updateProfile(param: param) {
-                                        editProfile = false
-                                    }
-                                }
-                            }
-                        
-                        Spacer()*/
                         
                         HStack {
                             Image("edit-two")

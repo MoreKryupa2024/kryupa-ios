@@ -71,6 +71,8 @@ struct ExperienceandSkillsView: View {
                             .frame(maxWidth: .infinity,alignment: .leading)
                         
                         sepratorView
+                        AdditionalInfoView
+                        sepratorView
                         
                         VStack(spacing:0){
                             certificationDocumentsView
@@ -112,6 +114,7 @@ struct ExperienceandSkillsView: View {
             .task {
                 viewModel.exprienceAndSkillsData.bio = Defaults().experienceInfo["bio"] as? String ?? ""
                 viewModel.areaOfExpertiseSelected = Defaults().experienceInfo["area_of_expertise"] as? [String] ?? []
+                viewModel.additionalInfoSelected = Defaults().experienceInfo["additionalInfoSelected"] as? [String] ?? []
                 viewModel.yearsOfExprience = Defaults().experienceInfo["years_of_exprience"] as? Int ?? 0
                 viewModel.exprienceAndSkillsData.yearsOfExprience = "\(viewModel.yearsOfExprience)"
             }
@@ -121,6 +124,40 @@ struct ExperienceandSkillsView: View {
             }
         }
         .modifier(DismissingKeyboard())
+    }
+    
+    private var AdditionalInfoView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional info")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalInfoArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalInfoSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if viewModel.additionalInfoSelected.contains(service){
+                                viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
+                            }else{
+                                viewModel.additionalInfoSelected.append(service)
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
+        .padding(.top,10)
     }
     
     private var FileView: some View{
@@ -299,6 +336,7 @@ struct ExperienceandSkillsView: View {
         Defaults().experienceInfo = [
             "bio": viewModel.exprienceAndSkillsData.bio ?? "",
             "area_of_expertise": viewModel.areaOfExpertiseSelected,
+            "additionalInfoSelected": viewModel.additionalInfoSelected,
             "years_of_exprience": viewModel.yearsOfExprience,
         ]
     }

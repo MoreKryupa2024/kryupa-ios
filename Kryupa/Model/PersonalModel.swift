@@ -19,6 +19,7 @@ struct PersonalData: Codable {
     var customersid, email, profileid, profileName, profilePictureUrl, zipcode, firstname,lastname: String?
     var language, dob, gender, address: String?
     var city, state, country, relation: String?
+    var canHelpIn: [String]?
     var medicalinfo: Medicalinfo?
     var preferences: PreferencesData?
     var emergencycontact: Emergencycontact?
@@ -26,6 +27,7 @@ struct PersonalData: Codable {
     enum CodingKeys: String, CodingKey {
         case customersid, email, profileid,zipcode,lastname,firstname
         case profileName = "profile_name"
+        case canHelpIn = "can_help_in"
         case profilePictureUrl = "profile_picture_url"
         case language, dob, gender, address, city, state, country, relation, medicalinfo, preferences, emergencycontact
     }

@@ -71,7 +71,7 @@ struct AccountView: View {
 
     private func navigationLink(screen:String){
         switch screen{
-        case "Personal Details":
+        case "Personal Details","Personal Details & Preferences":
             let profileDetailScreenViewModel = ProfileDetailScreenViewModel()
             profileDetailScreenViewModel.selecedProfile = viewModel.profile?.customerName ?? ""
             router.showScreen(.push) { rout in

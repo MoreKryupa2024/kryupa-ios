@@ -9,12 +9,13 @@ import Foundation
 
 @MainActor
 class PersonalDetailViewModel: ObservableObject{
-    
+    @Published var canHelpInSelected: [String] = [String]()
     @Published var additionalInfoSelected: [String] = [String]()
     @Published var education: String = String()
+    @Published var language: String = String()
+    @Published var distance: String = String()
     @Published var educationList = ["Degree 1", "Degree 2", "Degree 3"]
     @Published var languageDropDownSelected: [String] = [String]()
-    @Published var languageList = ["Hindi", "English", "French", "Spanish"]
     @Published var isloading: Bool = Bool()
     @Published var personalDetail: PersonalGiverData?
 
@@ -45,6 +46,9 @@ class PersonalDetailViewModel: ObservableObject{
                     self?.isloading = false
                     self?.personalDetail = data.data
                     self?.languageDropDownSelected = self?.personalDetail?.preferredLanguages ?? []
+                    self?.canHelpInSelected = self?.personalDetail?.canHelpIn ?? []
+                    self?.distance = self?.personalDetail?.distance ?? ""
+                    self?.language = self?.personalDetail?.language ?? ""
                     completion()
                 case .failure(let error):
                     self?.isloading = false
@@ -70,7 +74,10 @@ class PersonalDetailViewModel: ObservableObject{
         ] as [String : Any]
         
         param = ["expertise": expParam,
-                 "additional_requirements": additionalInfoSelected,
+//                 "additional_requirements": additionalInfoSelected,
+                 "distance":distance,
+                 "language":language,
+                 "can_help_in":canHelpInSelected,
                  "preferred_languages": languageDropDownSelected]
         
         next(param)
