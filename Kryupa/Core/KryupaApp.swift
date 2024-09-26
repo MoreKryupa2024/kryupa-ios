@@ -50,13 +50,6 @@ class AppDelegate: NSObject, UIApplicationDelegate{
         return true
     }
     
-    func rootSetUp(){
-        window = UIWindow()
-        let navigationController = UINavigationController(rootViewController: UIHostingController(rootView: ContentView()))
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-    }
-    
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance.handle(url)

@@ -17,22 +17,28 @@ struct APIConstants {
 
 class APIConstant{
     
-    static let authBaseURL = "https://auth.wahinnovations.in"
+//    static let authBaseURL = "https://auth.wahinnovations.in"
+    static let authBaseURL = "https://newapi.wahinnovations.in/apis/auth"
     
 //    static let communicationBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/communication"
-    static let communicationBaseURL = "https://communication.wahinnovations.in"
+//    static let communicationBaseURL = "https://communication.wahinnovations.in"
+    static let communicationBaseURL = "https://newapi.wahinnovations.in/apis/communication"
     
 //        static let paymentBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/payment"
-    static let paymentBaseURL = "https://payments.wahinnovations.in"
+//    static let paymentBaseURL = "https://payments.wahinnovations.in"
+    static let paymentBaseURL = "https://newapi.wahinnovations.in/apis/payment"
     
     
 //    static let bookingBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/booking"
-    static let bookingBaseURL = "https://booking.wahinnovations.in"
+//    static let bookingBaseURL = "https://booking.wahinnovations.in"
+    static let bookingBaseURL = "https://newapi.wahinnovations.in/apis/booking"
     
 //        static let userBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/user"
-    static let userBaseURL = "https://user.wahinnovations.in"
+//    static let userBaseURL = "https://user.wahinnovations.in"
+    static let userBaseURL = "https://newapi.wahinnovations.in/apis/user"
     
-    static let adminBaseURL = "https://admin.wahinnovations.in"
+//    static let adminBaseURL = "https://admin.wahinnovations.in"
+    static let adminBaseURL = "https://newapi.wahinnovations.in/apis/admin"
 
     static let sendOTP = "\(authBaseURL)/send_otp"
     static let googleSignup = "\(authBaseURL)/authenticate"
@@ -153,20 +159,20 @@ class AppConstants{
     static let VideoCall = "Video Call"
     static let Chat = "Chat"
     static let AudioCall = "Audio Call"
-    static let canHelpInArray = ["Dressing", "Eating/cutting up food","Bathing","Walking/Transferring", "Toileting"]
+    static let canHelpInArray = ["Bathing", "Dressing", "Eating/cutting up food", "Toileting", "Walking/Transferring",]
     
-    static let medicalConditionArray = ["None","Diabetes","Hypertension","Heart Disease","Asthma","Arthritis","Osteoporosis","Chronic Kidney Disease","Depression","Obesity","Other"]
+    static let medicalConditionArray = ["Arthritis","Asthma","Chronic Kidney Disease","Depression","Diabetes","Heart Disease","Hypertension","Obesity","Osteoporosis","Obesity","Other","None"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
-    static let needServiceInArray = ["Housekeeping","Home Health Aid","Physical Therapy","Occupational Therapy","Nursing","Companionship"]
+    static let needServiceInArray = ["Nursing","Physical Therapy","Occupational Therapy","Support Services(Companionship, Housekeeping, Home Health Aid)"]
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let mobArray = ["Independent","Need Assistance"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
-    static let languageSpeakingArray = ["English","Spanish","Mandarin","Tagalog","Vietnamese","French","Russian","German","Hindi",""]
+    static let languageSpeakingArray = ["German","Spanish","French","Hindi","Mandarin","Russian","Tagalog","Vietnamese","English",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
     static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
-    static let relationArray = ["Spouse","Parent","Child","Sibling","Friend"]
+    static let relationArray = ["Child","Friend","Parent","Sibling","Spouse"]
     static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
     

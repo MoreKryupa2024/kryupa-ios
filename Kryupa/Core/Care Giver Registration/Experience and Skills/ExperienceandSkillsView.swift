@@ -310,17 +310,19 @@ struct ExperienceandSkillsView: View {
             
             
             ZStack{
-                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 4, items: AppConstants.needServiceInArray) { expertise in
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 4, items: AppConstants.needServiceInArray) { expertise in
                     if let expertise{
-                        CheckBoxView(
+                        CircleCheckBoxView(
                             isSelected: !viewModel.areaOfExpertiseSelected.contains(expertise),
-                            name: expertise
+                            name: expertise,
+                            color: viewModel.areaOfExpertiseSelected == [] ? .appMain : viewModel.areaOfExpertiseSelected.contains(expertise) ? .appMain : .AEAEB_2
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
                             if viewModel.areaOfExpertiseSelected.contains(expertise){
                                 viewModel.areaOfExpertiseSelected = viewModel.areaOfExpertiseSelected.filter{ $0 != expertise}
                             }else{
+                                viewModel.areaOfExpertiseSelected = []
                                 viewModel.areaOfExpertiseSelected.append(expertise)
                             }
                         }

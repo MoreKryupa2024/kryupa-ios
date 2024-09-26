@@ -493,10 +493,11 @@ struct BookingFormScreenView: View {
             ZStack{
                 NonLazyVGrid(columns: 1, alignment: .leading, spacing: 5, items: viewModel.needServiceInArray) { data in
                     if let data{
-                        CheckBoxView(
+                        CircleCheckBoxView(
                             isSelected: !viewModel.needServiceInSelected.contains(data.service),
                             name: data.service,
-                            price: Double(data.amount)
+                            price: Double(data.amount),
+                            color: viewModel.needServiceInSelected == [] ? .appMain : viewModel.needServiceInSelected.contains(data.service) ? .appMain : .AEAEB_2
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding(.bottom,5)
@@ -504,6 +505,7 @@ struct BookingFormScreenView: View {
                             if viewModel.needServiceInSelected.contains(data.service){
                                 viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != data.service}
                                 }else{
+                                    viewModel.needServiceInSelected = []
                                     viewModel.needServiceInSelected.append(data.service)
                                 }
                             viewModel.needServiceInSelected = viewModel.needServiceInSelected.sorted(by: { $0 < $1 })
