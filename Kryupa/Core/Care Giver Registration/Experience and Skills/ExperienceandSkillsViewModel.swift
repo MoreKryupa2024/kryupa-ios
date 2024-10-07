@@ -25,7 +25,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
             certificateAndDocuments.append(i.serverUrl)
         }
         exprienceAndSkillsData.certificateAndDocuments = certificateAndDocuments
-        
+        exprienceAndSkillsData.bio = (exprienceAndSkillsData.bio ?? "").removingWhitespaces()
         guard let bio = exprienceAndSkillsData.bio, bio != "" else {
             return alert("Please Enter Bio")
         }

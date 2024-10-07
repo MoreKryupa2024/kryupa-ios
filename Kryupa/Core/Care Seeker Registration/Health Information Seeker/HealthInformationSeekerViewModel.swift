@@ -16,7 +16,8 @@ class HealthInformationSeekerViewModel: ObservableObject{
     @Published var allergiesValue: String = String()
     
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        medicalConditionSelected = medicalConditionSelected.removingWhitespaces()
+        allergiesValue = allergiesValue.removingWhitespaces()
         if medicalConditionDropDownSelected.isEmpty {
             return alert("Please Select Medical Condition")
         }else if medicalConditionDropDownSelected.contains("Other") && medicalConditionSelected.isEmpty{

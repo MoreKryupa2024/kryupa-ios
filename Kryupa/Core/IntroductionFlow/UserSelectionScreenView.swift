@@ -80,7 +80,8 @@ struct UserSelectionScreenView: View {
             Text(title)
                 .font(.custom(FontContent.plusMedium, size: 19))
                 .padding([.top,.bottom], 16)
-                .padding([.leading,.trailing], 40)
+                .frame(width: 190)
+//                .padding([.leading,.trailing], 40)
         }
         .background(
             ZStack{

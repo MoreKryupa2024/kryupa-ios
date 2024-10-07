@@ -54,6 +54,9 @@ struct HealthInformationSeekerView: View {
                             value: $viewModel.medicalConditionSelected,
                             keyboard: .asciiCapable
                         )
+                        .onTapGesture {
+                            medicalConditionDownShow = false
+                        }
                     }
                     
                     textFieldViewWithHeader(
@@ -235,7 +238,6 @@ struct HealthInformationSeekerView: View {
                 }
                 
         })
-        .id(viewModel.medicalConditionDropDownSelected)
         .padding(.bottom,-10)
     }
 }

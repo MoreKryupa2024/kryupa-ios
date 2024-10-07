@@ -132,9 +132,9 @@ struct EmergencyContactView: View {
                 .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(._444446)
             
-            Image("DropDownDrackGray")
-                .resizable()
-                .frame(width: 16,height: 16)
+//            Image("DropDownDrackGray")
+//                .resizable()
+//                .frame(width: 16,height: 16)
             
             TextField(text: $viewModel.number) {
                 Text("123454321")

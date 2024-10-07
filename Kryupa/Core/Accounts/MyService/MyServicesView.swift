@@ -318,17 +318,15 @@ struct MyServicesView: View {
             ZStack{
                 NonLazyVGrid(columns: 1, alignment: .leading, spacing: 10, items: viewModel.areaOfExpertiseList) { service in
                     if let service{
-                        CircleCheckBoxView(
+                        CheckBoxView(
                             isSelected: !viewModel.areaOfExpertiseSelected.contains(service),
-                            name: service,
-                            color: viewModel.areaOfExpertiseSelected == [] ? .appMain : viewModel.areaOfExpertiseSelected.contains(service) ? .appMain : .AEAEB_2
+                            name: service
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
                             if viewModel.areaOfExpertiseSelected.contains(service){
                                 viewModel.areaOfExpertiseSelected = viewModel.areaOfExpertiseSelected.filter{ $0 != service}
                             }else{
-                                viewModel.areaOfExpertiseSelected = []
                                 viewModel.areaOfExpertiseSelected.append(service)
                             }
                         }

@@ -11,13 +11,13 @@ import FirebaseMessaging
 import AuthenticationServices
 
 struct SocialLoginScreenView: View {
-    @State var checkbox:Bool = true
+    @State var checkbox:Bool =  Defaults().userType == AppConstants.GiveCare ? true : true
     @Environment(\.router) var router
     var userType: String = UserDefaults.standard.value(forKey: "user") as? String ?? ""
     @StateObject private var viewModel = SocialLoginScreenViewModel()
     var title: String{
         if userType == AppConstants.GiveCare{
-            return "Ready to Provide Care? Join our network of caregivers."
+            return "Ready to Provide Care? Join our network of care givers."
         }else{
             return "Your Path for Quality Care Starts Here! Register Now"
         }
@@ -78,17 +78,18 @@ struct SocialLoginScreenView: View {
                 }
                 .padding(.top,24)
                 .padding(.bottom,30)
-                
-                HStack(alignment:.top,spacing: 5){
-                    Image(checkbox ? "checkboxSelected" : "checkboxUnselected")
-                        .frame(width: 20,height: 20)
-                    Text("I agree to use in-app messaging, which may include my name. It’s advised not to include other personal health information (PHI) in message and to keep mobile devices password protected to prevent unauthorized access.")
-                        .fontWeight(.regular)
-                        .font(.system(size: 11))
-                }
-                .padding(.horizontal,24)
-                .asButton(.press) {
-                    checkbox = !checkbox
+                if Defaults().userType == AppConstants.SeekCare{
+                    HStack(alignment:.top,spacing: 5){
+                        Image(checkbox ? "checkboxSelected" : "checkboxUnselected")
+                            .frame(width: 20,height: 20)
+                        Text("I agree to use in-app messaging, which may include my name. It’s advised not to include other personal health information (PHI) in message and to keep mobile devices password protected to prevent unauthorized access.")
+                            .fontWeight(.regular)
+                            .font(.system(size: 11))
+                    }
+                    .padding(.horizontal,24)
+                    .asButton(.press) {
+                        checkbox = !checkbox
+                    }
                 }
             }
             .toolbar(.hidden, for: .navigationBar)

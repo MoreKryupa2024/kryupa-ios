@@ -24,7 +24,7 @@ struct ProfileDetailScreenView: View {
     var body: some View {
         ZStack{
             VStack{
-                HeaderView(title: "Profile",showBackButton: true)
+                HeaderView(title: "Personal Details",showBackButton: true)
                 ScrollView{
                     HStack(alignment:.top){
                         let nameArray = viewModel.profileList.map{ $0.name}

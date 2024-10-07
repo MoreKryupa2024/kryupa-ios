@@ -18,7 +18,7 @@ class MobileScreenViewModel: ObservableObject{
     
     func sendOTP(action :  @escaping() -> Void,errorAction :  @escaping (String) -> Void){
         let param = ["mobile_no":mobileNumner.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#"),
-                     "country_code":"1"]
+                     "country_code":"+1"]
         isLoading = true
         NetworkManager.shared.sendOTP(params: param) { [weak self] result in
             DispatchQueue.main.async {

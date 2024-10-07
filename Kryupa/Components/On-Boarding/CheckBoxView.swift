@@ -19,7 +19,19 @@ struct CheckBoxView: View {
                 .resizable()
                 .frame(width: 18,height: 18)
                 .padding(.top,1.5)
-            Text(name)
+            VStack{
+                if name.contains("("){
+                    let name = name.split(separator: "(").first ?? ""
+                    let extra = self.name.split(separator: "(").last ?? ""
+                    Text(name)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                    Text("(\(extra)")
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .font(.custom(FontContent.plusRegular, size: 9))
+                }else{
+                    Text(name)
+                }
+            }.padding(.vertical,2)
             if let price {
                 Spacer()
                 Text("($\(price.removeZerosFromEnd(num: 0))/hr)")

@@ -21,16 +21,29 @@ struct OTPVerificationScreenView: View {
         ZStack{
             
             VStack(spacing:0,content: {
-                Text("Phone verification")
-                    .font(.custom(FontContent.besMedium, size: 28))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 43)
+                ZStack{
+                    HStack{
+                        Image("navBack")
+                            .resizable()
+                            .frame(width: 30,height: 30)
+                            .asButton(.press) {
+                                router.dismissScreen()
+                            }
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal,24)
+                    Text("Phone verification")
+                        .font(.custom(FontContent.besMedium, size: 28))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.top, 10)
                 
                 Text("An authentication code has been\nsent to you on your number ending with \(String(mobileNumber.suffix(4)))")
                     .frame(width: 270)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .multilineTextAlignment(.center)
-                    .padding(.top, 20)
+                    .padding(.top, 52)
                     .foregroundStyle(._444446)
                 
                 VStack{

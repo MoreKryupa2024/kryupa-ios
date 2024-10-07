@@ -32,11 +32,11 @@ class PersonalInformationScreenViewModel: ObservableObject{
     
     
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        personalInfoData.name = (personalInfoData.name ?? "").removingWhitespaces()
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
-        
+        personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
         }
@@ -50,6 +50,11 @@ class PersonalInformationScreenViewModel: ObservableObject{
         guard let ssn = personalInfoData.ssn, ssn != "" else {
             return alert("Please Enter SSN No.")
         }
+        
+//        guard let ssn = personalInfoData.ssn, ssn.count != 11 else {
+//            return alert("Please Enter Valid SSN No.")
+//        }
+        
         guard let language = personalInfoData.language, language != "" else {
             return alert("Please Enter Language")
         }
@@ -88,10 +93,12 @@ class PersonalInformationScreenViewModel: ObservableObject{
     
     func customerDataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         
+        personalInfoData.name = (personalInfoData.name ?? "").removingWhitespaces()
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
         
+        personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
         }

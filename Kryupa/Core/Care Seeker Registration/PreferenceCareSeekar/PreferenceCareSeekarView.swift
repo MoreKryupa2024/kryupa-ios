@@ -208,17 +208,15 @@ struct PreferenceCareSeekarView: View {
             ZStack{
                 NonLazyVGrid(columns: 1, alignment: .leading, spacing: 5, items: AppConstants.needServiceInArray) { service in
                     if let service{
-                        CircleCheckBoxView(
+                        CheckBoxView(
                             isSelected: !viewModel.needServiceInSelected.contains(service),
-                            name: service,
-                            color: viewModel.needServiceInSelected == [] ? .appMain : viewModel.needServiceInSelected.contains(service) ? .appMain : .AEAEB_2
+                            name: service
                         )
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .asButton(.press) {
                             if viewModel.needServiceInSelected.contains(service){
                                 viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != service}
                             }else{
-                                viewModel.needServiceInSelected = []
                                 viewModel.needServiceInSelected.append(service)
                             }
                         }

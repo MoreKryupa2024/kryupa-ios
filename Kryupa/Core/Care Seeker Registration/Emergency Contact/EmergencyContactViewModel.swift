@@ -16,7 +16,7 @@ class EmergencyContactViewModel: ObservableObject{
     @Published var number: String = String()
     
     func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        name = name.removingWhitespaces()
         if name.isEmpty {
             return alert("Please Enter Name")
         }else if relation.isEmpty{

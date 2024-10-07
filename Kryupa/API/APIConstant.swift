@@ -169,7 +169,7 @@ class AppConstants{
     static let genderArray = ["Male","Female","Other","Prefer not to say"]
     static let mobArray = ["Independent","Need Assistance"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
-    static let languageSpeakingArray = ["German","Spanish","French","Hindi","Mandarin","Russian","Tagalog","Vietnamese","English",""]
+    static let languageSpeakingArray = ["English","French","German","Hindi","Mandarin","Russian","Spanish","Tagalog","Vietnamese",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
     static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
     static let relationArray = ["Child","Friend","Parent","Sibling","Spouse"]

@@ -151,6 +151,9 @@ struct AddNewProfileScreenView: View {
                     value: $viewModel.medicalConditionSelected,
                     keyboard: .asciiCapable, showRed: true
                 )
+                .onTapGesture {
+                    medicalConditionDownShow = false
+                }
             }
             
             textFieldViewWithHeader(
@@ -262,6 +265,7 @@ struct AddNewProfileScreenView: View {
                 viewModel.showDatePicker = false
                 viewModel.dateOfBirthSelected = true
             })
+        .padding(.horizontal,24)
     }
     
     private var languageDropdownView: some View{
@@ -353,9 +357,9 @@ struct AddNewProfileScreenView: View {
                 .font(.custom(FontContent.plusRegular, size: 15))
                 .foregroundStyle(._444446)
             
-            Image("DropDownDrackGray")
-                .resizable()
-                .frame(width: 16,height: 16)
+//            Image("DropDownDrackGray")
+//                .resizable()
+//                .frame(width: 16,height: 16)
             
             TextField(text: $viewModel.number) {
                 Text("123454321")

@@ -10,6 +10,7 @@ import SwiftUI
 
 extension String{
     
+    
     func applyPatternOnNumbers(pattern: String, replacementCharacter: Character) -> String {
         var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
         for index in 0 ..< pattern.count {
@@ -23,7 +24,7 @@ extension String{
     }
     
     func validateMobile() -> Bool {
-        let PHONE_REGEX = "^[0-9+]{0,1}+[0-9]{9,9}$"
+        let PHONE_REGEX = "^[2-9]\\d{9}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         let result = phoneTest.evaluate(with: self)
         return result
@@ -98,6 +99,17 @@ extension String{
     
     func removeZero()-> String{
         return String(format:"%0.0f", self)
+    }
+    
+    func removingWhitespaces() -> String {
+        let str = self.condenseWhitespace()
+        return str.trimmingCharacters(in: .whitespaces)
+        
+    }
+    
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
 }
 

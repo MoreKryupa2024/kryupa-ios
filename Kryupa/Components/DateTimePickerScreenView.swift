@@ -94,10 +94,8 @@ struct DateTimePickerScreenView: View {
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundStyle(.white)
-                    .frame(width: 350)
                     .shadow(radius: 2)
             )
-            .padding()
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
 //        .asButton {

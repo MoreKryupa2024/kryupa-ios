@@ -55,7 +55,8 @@ class AddNewProfileScreenViewModel: ObservableObject{
     }
     
     func dataMedicalChecks(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        medicalConditionSelected = medicalConditionSelected.removingWhitespaces()
+        allergiesValue = allergiesValue.removingWhitespaces()
         if medicalConditionDropDownSelected.isEmpty {
             return alert("Please Select Medical Condition")
         }else if medicalConditionDropDownSelected.contains("Other") && medicalConditionSelected.isEmpty{
@@ -86,7 +87,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
     }
     
     func dataEmergancyChecks(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        name = name.removingWhitespaces()
         if name.isEmpty {
             return alert("Please Enter Name")
         }else if relation.isEmpty{
@@ -112,11 +113,11 @@ class AddNewProfileScreenViewModel: ObservableObject{
         if relationPersonal.isEmpty{
             return alert("Please Select Your Relation")
         }
-        
+        personalInfoData.name = (personalInfoData.name ?? "").removingWhitespaces()
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
-        
+        personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
         }

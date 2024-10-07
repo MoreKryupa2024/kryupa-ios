@@ -313,6 +313,7 @@ struct PersonalInformationSeekerView: View {
                 viewModel.dateOfBirthSelected = true
             }
         )
+        .padding(.horizontal,24)
     }
     
     private func selectionViewWithHeader(leftIcone: String?, rightIcon: String?, value:String?,title: String?, placeHolder: String)-> some View{

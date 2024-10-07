@@ -264,6 +264,7 @@ struct PersonalInformationScreenView: View {
                 viewModel.dateOfBirthSelected = true
             }
         )
+        .padding(.horizontal,24)
     }
     
     private var genderDropdownView: some View{

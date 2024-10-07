@@ -20,7 +20,7 @@ struct IntroductionScreenView: View {
                 .aspectRatio(305/294, contentMode: .fit)
                 .padding(.horizontal,24)
             
-            Text("Connect with trusted caregivers and care seekers in your area.")
+            Text("Connect with trusted care givers and care seekers in your area.")
                 .font(.custom(FontContent.besMedium, size: 29))
                 .multilineTextAlignment(.center)
                 .padding(.top, 66)
