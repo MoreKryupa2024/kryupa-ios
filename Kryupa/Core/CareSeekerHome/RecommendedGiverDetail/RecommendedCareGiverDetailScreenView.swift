@@ -176,6 +176,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                                 }
                             }else{
                                 viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                                presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
                             }
                         }
                 }

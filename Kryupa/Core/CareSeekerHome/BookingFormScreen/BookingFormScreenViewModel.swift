@@ -48,7 +48,7 @@ class BookingFormScreenViewModel: ObservableObject{
                     self?.recommendedUserBookingData = data.data.preference
                     self?.genderSelected = data.data.preference.gender
                     self?.yearsOfExperienceSelected = data.data.preference.yearOfExperience
-                    self?.needServiceInSelected = data.data.preference.preferredServiceType
+//                    self?.needServiceInSelected = data.data.preference.preferredServiceType
                     self?.languageSpeakingSelected = data.data.preference.preferredLang
                 case .failure(let error):
                     errorAlert(error.getMessage())
@@ -81,8 +81,9 @@ class BookingFormScreenViewModel: ObservableObject{
     }
     
     func getBookingForRelativeList(errorAlert: @escaping ((String)-> Void)){
+        let param = ["caregiver_id":giverId]
         isloading = true
-        NetworkManager.shared.getRelativeList { [weak self] result in
+        NetworkManager.shared.getRelativeList(params: param) { [weak self] result in
             DispatchQueue.main.async {
                 switch result{
                 case .success(let data):

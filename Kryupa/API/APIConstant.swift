@@ -23,6 +23,7 @@ class APIConstant{
 //    static let communicationBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/communication"
 //    static let communicationBaseURL = "https://communication.wahinnovations.in"
     static let communicationBaseURL = "https://newapi.wahinnovations.in/apis/communication"
+    static let chatURL = "https://newapi.wahinnovations.in/"
     
 //        static let paymentBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/payment"
 //    static let paymentBaseURL = "https://payments.wahinnovations.in"

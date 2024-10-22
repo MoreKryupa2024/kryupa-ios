@@ -599,9 +599,9 @@ struct BookingFormScreenView: View {
             return false
         }else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
             return false
-        }else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
+        }/*else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
             return false
-        }else{
+        }*/else{
             return true
         }
      
@@ -626,6 +626,7 @@ struct BookingFormScreenView: View {
                             notificatioSsetBookingId.post(name: .setBookingId,
                                                                             object: nil, userInfo: bookingDict)
                         }else{
+                            viewModel.bookingID = bookingId
                             router.showScreen(.push) { rout in
                                 CareGiverNearByCustomerScreenView(bookingID: bookingId)
                             }

@@ -1788,7 +1788,7 @@ class NetworkManager{
         }
         
         request.allHTTPHeaderFields = commonHeaders
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         
         let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
             

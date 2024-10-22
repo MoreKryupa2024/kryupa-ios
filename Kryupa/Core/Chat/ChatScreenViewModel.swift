@@ -29,7 +29,7 @@ class ChatScreenViewModel: ObservableObject{
     @Published var isPresented = false
     
     init(){
-        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(false), .compress])
+        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
     }
     
@@ -65,7 +65,7 @@ class ChatScreenViewModel: ObservableObject{
 
     func connect() {
         socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
+            print("---socket connected")
             //Call your first socket here
         }
         let param = ["Authorization": "bearer \(Defaults().accessToken)"]
@@ -224,48 +224,56 @@ class ChatScreenViewModel: ObservableObject{
             recipientId = selectedChat?.giverId ?? ""
             senderId = selectedChat?.seekerId ?? ""
         }
+        let id  = "\(UUID())"
         
         let msgData = MessageData(jsonData: [
-            "id": "\(UUID())",
+            "id": id,
             "message": message,
             "sender":senderId,
             "recipient":recipientId
         ])
         let param = ["contact_Id":selectedChat?.id ?? "",
+                     "id": id,
                      "sender_id":senderId,
                      "recipient_id":recipientId,
                      "Authorization": "bearer \(Defaults().accessToken)",
                      "message":message]
-        
+        print("---message_send Called")
         socket.emit("message_send", with: [param]) {
             self.messageList = [msgData] + self.messageList
         }
     }
 
     func receiveMessage(_ completion: @escaping (MessageData, String) -> Void) {
+        print("---message_receive Called")
         socket.on("message_receive") { [weak self] data, _ in
+            guard let self else { return }
             if let typeDict = data[0] as? NSDictionary {
                 print(typeDict)
                 var senderId = String()
                 var recipientId = String()
                 if Defaults().userType == AppConstants.GiveCare{
-                    recipientId = self?.selectedChat?.giverId ?? ""
-                    senderId = self?.selectedChat?.seekerId ?? ""
+                    recipientId = self.selectedChat?.giverId ?? ""
+                    senderId = self.selectedChat?.seekerId ?? ""
                 }else{
-                    senderId = self?.selectedChat?.giverId ?? ""
-                    recipientId = self?.selectedChat?.seekerId ?? ""
+                    senderId = self.selectedChat?.giverId ?? ""
+                    recipientId = self.selectedChat?.seekerId ?? ""
                 }
                 let message = typeDict.value(forKey: "message") as? String ?? ""
+                let id = typeDict.value(forKey: "id") as? String ?? ""
                 let actionButton = typeDict.value(forKey: "is_action_btn") as? Bool ?? false
                 HapticManager.sharde.impact(style: .heavy)
                 let msgData = MessageData(jsonData: [
-                    "id": "\(UUID())",
+                    "id": id,
                     "message": message,
                     "sender":senderId,
                     "recipient":recipientId,
                     "is_action_btn":actionButton
                 ])
-                completion(msgData, "")
+                let messcount = self.messageList.filter{$0.id == id}
+                if messcount.count == 0{
+                    completion(msgData, "")
+                }
             }
         }
     }

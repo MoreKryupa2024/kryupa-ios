@@ -47,7 +47,7 @@ class FAQViewModel: ObservableObject{
     }
     
     init(){
-        self.manager = SocketManager(socketURL: URL(string: "\(APIConstant.communicationBaseURL)/")!, config: [.log(true), .compress])
+        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
     }
     
@@ -65,14 +65,15 @@ class FAQViewModel: ObservableObject{
     }
     
     func sendMessage(_ message: String) {
-        
+        let id  = "\(UUID())"
         let msgData = AllConversationData(jsonData: [
-            "id": "\(UUID())",
+            "id": id,
             "message": message,
             "sender":faqModelData?.userId ?? "",
             "recipient":faqModelData?.adminId ?? ""
         ])
         let param = ["contact_Id":faqModelData?.contactID ?? "",
+                     "id": id,
                      "sender_id":faqModelData?.userId ?? "",
                      "recipient_id":faqModelData?.adminId ?? "",
                      "Authorization": "bearer \(Defaults().accessToken)",
@@ -91,15 +92,19 @@ class FAQViewModel: ObservableObject{
             if let typeDict = data[0] as? NSDictionary {
                 
                 let message = typeDict.value(forKey: "message") as? String ?? ""
+                let id = typeDict.value(forKey: "id") as? String ?? ""
                 HapticManager.sharde.impact(style: .heavy)
                 let msgData = AllConversationData(jsonData: [
-                    "id": "\(UUID())",
+                    "id": id,
                     "message": message,
                     "sender":faqModelData?.adminId ?? "",
                     "recipient":faqModelData?.userId ?? "",
                 ])
-                DispatchQueue.main.async {
-                    self.faqModelData?.allConversation = [msgData] + (self.faqModelData?.allConversation ?? [])
+                let messcount = self.faqModelData?.allConversation.filter{$0.id == id}
+                if messcount?.count == 0 {
+                    DispatchQueue.main.async {
+                        self.faqModelData?.allConversation = [msgData] + (self.faqModelData?.allConversation ?? [])
+                    }
                 }
             }
         }

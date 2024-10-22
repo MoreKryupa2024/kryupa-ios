@@ -94,10 +94,12 @@ struct ChatView: View {
             viewModel.pageNumber = 1
             viewModel.getChatHistory()
             viewModel.VideoCallData()
-            viewModel.disconnect()
-            viewModel.connect()
-            viewModel.receiveMessage { msgData, str in
-                self.viewModel.messageList = [msgData] + self.viewModel.messageList
+            DispatchQueue.main.async {
+                viewModel.disconnect()
+                viewModel.connect()
+                viewModel.receiveMessage { msgData, str in
+                    self.viewModel.messageList = [msgData] + self.viewModel.messageList
+                }
             }
             NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                  using: self.setChatScreen)

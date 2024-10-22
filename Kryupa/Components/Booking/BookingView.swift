@@ -15,6 +15,8 @@ struct BookingView: View {
     var statusColor: Color {
         if status == "Cancelled"{
             return .D_3180_C
+        }else if status == "Rejected"{
+                return .D_3180_C
         }else if status == "Pending" {
             return .FFB_323
         }else if status == "Draft" {
@@ -28,6 +30,8 @@ struct BookingView: View {
     
     var statusBackColor: Color {
         if status == "Cancelled"{
+            return .FFE_3_E_3
+        }else if status == "Rejected"{
             return .FFE_3_E_3
         }else if status == "Draft" {
             return .E_5_E_5_EA

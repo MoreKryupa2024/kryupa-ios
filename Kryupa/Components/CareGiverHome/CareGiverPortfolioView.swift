@@ -155,7 +155,7 @@ struct JobDescView: View {
                             Image("dollar")
                                 .resizable()
                                 .frame(width: 22,height: 22)
-                            Text("$\(price)")
+                            Text("\(price)")
                                 .font(.custom(FontContent.plusRegular, size: 15))
                                 .foregroundStyle(._444446)
                         }
