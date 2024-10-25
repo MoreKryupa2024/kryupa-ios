@@ -17,64 +17,65 @@ struct CareGiverHomeScreenView: View {
 
     var body: some View {
         ZStack{
-            VStack(spacing:15){
-                HeaderView(showBackButton: false)
-                ScrollView{
-                    VStack(spacing:0) {
-                        if showNoContent {
-                            if let serviceStartData = viewModel.serviceStartData{
-                                if serviceStartData.serviceStatus == "confirm_by_customer" {
-                                    serviceView()
-                                }
-                            }else{
+            if let serviceStartData = viewModel.serviceStartData{
+                if serviceStartData.serviceStatus == "confirm_by_customer" {
+                    StartServiceScreenView(serviceStartData: [serviceStartData]) { serviceStartData in
+                        viewModel.giverConfirmStartService()
+                    } cancelAction: { serviceStartData in
+                        viewModel.giverCancelStartService()
+                    }
+                }
+            }else{
+                VStack(spacing:15){
+                    HeaderView(showBackButton: false)
+                    ScrollView{
+                        VStack(spacing:0) {
+                            if showNoContent {
+                                
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
                                            showIndecator: true,
                                            fromAssets: true,
                                            aspectRatio: 327/104)
-                                    .padding([.vertical],24)
-                            }
-                            noCotentView
-//                            completeProfileView
-                            
-                        } else {
-                            if let serviceStartData = viewModel.serviceStartData{
-                                if serviceStartData.serviceStatus == "confirm_by_customer" {
-                                    serviceView()
-                                }
-                            }else{
+                                .padding([.vertical],24)
+                                
+                                noCotentView
+                                //                            completeProfileView
+                                
+                            } else {
+                                
                                 BannerView(assetsImage: ["cargiver-home-top","cargiver-home-top 2"],
                                            showIndecator: true,
                                            fromAssets: true,
                                            aspectRatio: 327/104)
-                                    .padding([.vertical],24)
+                                .padding([.vertical],24)
+                                
+                                jobsNearYouView
                             }
-                            jobsNearYouView
+                            Image("GiverHomeFooter")
+                                .resizable()
+                                .aspectRatio(375/188, contentMode: .fit)
+                                .padding(.top,30)
                         }
-                        Image("GiverHomeFooter")
-                            .resizable()
-                            .aspectRatio(375/188, contentMode: .fit)
-                            .padding(.top,30)
                     }
+                    .scrollIndicators(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
+                    //                .refreshable {
+                    //                    viewModel.caregiverSvcAct()
+                    //                }
                 }
-                .scrollIndicators(.hidden)
-                .toolbar(.hidden, for: .navigationBar)
-//                .refreshable {
-//                    viewModel.caregiverSvcAct()
-//                }
-            }
-            .onAppear{
-                viewModel.getBannerTopData(screenName: AppConstants.CAREGIVERHOMETOPScreenBanner)
-                viewModel.getJobsNearYouList() {
-                    if viewModel.jobsNearYou.count == 0 {
-                        showNoContent = true
+                .onAppear{
+                    viewModel.getBannerTopData(screenName: AppConstants.CAREGIVERHOMETOPScreenBanner)
+                    viewModel.getJobsNearYouList() {
+                        if viewModel.jobsNearYou.count == 0 {
+                            showNoContent = true
+                        }
+                        else {
+                            showNoContent = false
+                        }
                     }
-                    else {
-                        showNoContent = false
-                    }
+                    viewModel.caregiverSvcAct()
                 }
-                viewModel.caregiverSvcAct()
             }
-            
             if viewModel.isloading{
                 LoadingView()
             }

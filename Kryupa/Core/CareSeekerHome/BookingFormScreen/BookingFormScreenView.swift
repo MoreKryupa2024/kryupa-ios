@@ -647,6 +647,11 @@ struct BookingFormScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
+                    viewModel.startDateValue = Date()
+                    viewModel.startTimeValue = Date()
+                    viewModel.duration = 1
+                    viewModel.startDateSValue = []
+                    viewModel.dateArray = []
                     viewModel.bookingFor = ""
                     viewModel.genderSelected = ""
                     viewModel.languageSpeakingSelected = ["English"]

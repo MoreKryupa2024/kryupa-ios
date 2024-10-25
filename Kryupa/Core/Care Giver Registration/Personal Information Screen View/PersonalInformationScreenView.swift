@@ -66,6 +66,7 @@ struct PersonalInformationScreenView: View {
                             title: "Date Of Birth",
                             placeHolder: "Select"
                         )
+                        .id(viewModel.personalInfoData.dob)
                         .background()
                         .asButton(){
                             viewModel.dateOfBirthSelected = true
@@ -74,6 +75,7 @@ struct PersonalInformationScreenView: View {
                         
                         
                         genderDropdownView
+                            .id(viewModel.personalInfoData.gender)
                         
                         textFieldViewWithHeader(title: "SSN", placeHolder: "Number",value: $viewModel.personalInfoData.ssn,keyboard: .numberPad)
                             .onChange(of: viewModel.personalInfoData.ssn) {
@@ -92,6 +94,7 @@ struct PersonalInformationScreenView: View {
                             }
                         
                         languageDropdownView
+                            .id(viewModel.personalInfoData.language)
                         
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
                             .asButton {
@@ -208,6 +211,7 @@ struct PersonalInformationScreenView: View {
                 viewModel.personalInfoData.lastName = Defaults().personalInfo["lastname"] as? String ?? ""
                 viewModel.personalInfoData.country = Defaults().personalInfo["country"] as? String ?? ""
                 viewModel.personalInfoData.ssn = Defaults().personalInfo["ssn_no"] as? String ?? ""
+                viewModel.dateOfBirthSelected = viewModel.personalInfoData.dob != ""
             }
             
             if viewModel.showDatePicker{

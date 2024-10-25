@@ -88,7 +88,7 @@ struct BookingView: View {
                             }
                             
                             Text("\((bookingData?.arrayAgg ?? []).joined(separator: ","))")
-                                .lineLimit(status == "Draft" ? 2 : 1)
+//                                .lineLimit(status == "Draft" ? 2 : 1)
                                 .font(.custom(FontContent.plusRegular, size: 12))
                                 .foregroundStyle(._444446)
                             if status == "Pending" && (bookingData?.status ?? "") != "Payment Pending"{

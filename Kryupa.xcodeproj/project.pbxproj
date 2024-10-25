@@ -172,7 +172,6 @@
 		BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */; };
 		BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */; };
 		BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */; };
-		BE98D8412C8838590021466B /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BE98D8402C8838590021466B /* Success.gif */; };
 		BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA42BFDC73A00B6A7B0 /* FirebaseAuth */; };
 		BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */; };
 		BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */; };
@@ -199,6 +198,8 @@
 		BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */; };
 		BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB52C25B4410008108C /* StarsView.swift */; };
 		BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */; };
+		CE75DBFD2CC7DA9F00500731 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE75DBFC2CC7DA9F00500731 /* Success.gif */; };
+		CE75DC012CC7DBED00500731 /* StartServiceScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75DC002CC7DBED00500731 /* StartServiceScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -371,7 +372,6 @@
 		BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInformationSeekerViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCareSeekarViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileImageViewModel.swift; sourceTree = "<group>"; };
-		BE98D8402C8838590021466B /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Success.gif; path = ../../../Downloads/Success.gif; sourceTree = "<group>"; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
 		BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewModel.swift; sourceTree = "<group>"; };
 		BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlaceScreenView.swift; sourceTree = "<group>"; };
@@ -395,6 +395,8 @@
 		BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerScreenView.swift; sourceTree = "<group>"; };
 		BEF2EDB52C25B4410008108C /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
+		CE75DBFC2CC7DA9F00500731 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Success.gif; path = /Users/user/Downloads/Success.gif; sourceTree = "<absolute>"; };
+		CE75DC002CC7DBED00500731 /* StartServiceScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartServiceScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -816,8 +818,8 @@
 				BEEF2E5D2C44DFCD0020A892 /* Kryupa.entitlements */,
 				BE644E882BF4D4F400A6781F /* Info.plist */,
 				BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */,
-				BE98D8402C8838590021466B /* Success.gif */,
 				BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */,
+				CE75DBFC2CC7DA9F00500731 /* Success.gif */,
 				BE1573BB2BF64C6500A6137D /* Utility */,
 				BE644E4D2BF4D2E000A6781F /* Fonts */,
 				BE644E3F2BF49C9A00A6781F /* API */,
@@ -1023,6 +1025,7 @@
 			children = (
 				A3BB87A32C1717ED00C604DD /* CareSeekerHomeScreenViewModel.swift */,
 				BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */,
+				CE75DC002CC7DBED00500731 /* StartServiceScreenView.swift */,
 			);
 			path = CareSeekerHomeView;
 			sourceTree = "<group>";
@@ -1244,7 +1247,7 @@
 				BE644E9E2BF50F4500A6781F /* Besley-Italic.ttf in Resources */,
 				BE644E332BF495D900A6781F /* Assets.xcassets in Resources */,
 				BE644E942BF50ED300A6781F /* PlusJakartaDisplay-Regular.otf in Resources */,
-				BE98D8412C8838590021466B /* Success.gif in Resources */,
+				CE75DBFD2CC7DA9F00500731 /* Success.gif in Resources */,
 				BE644E952BF50ED300A6781F /* PlusJakartaDisplay-Light.otf in Resources */,
 				BE644E9D2BF50F4500A6781F /* Besley-Medium.ttf in Resources */,
 				BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */,
@@ -1293,6 +1296,7 @@
 				BE4FBDB72BFB8406003442BB /* SelectProfileImageView.swift in Sources */,
 				BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */,
 				BE50EC062BFDC9FF00175566 /* SocialLoginScreenViewModel.swift in Sources */,
+				CE75DC012CC7DBED00500731 /* StartServiceScreenView.swift in Sources */,
 				A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
 				A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */,
 				BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */,

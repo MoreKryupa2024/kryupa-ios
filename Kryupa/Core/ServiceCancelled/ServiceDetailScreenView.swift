@@ -220,7 +220,7 @@ struct ServiceDetailScreenView: View {
                     .foregroundStyle(._444446)
                 
                 HStack{
-                    StarsView(rating: (Double(viewModel.cancelSeriveDetailData?.rating ?? "") ?? 0), maxRating: 5, size: 12)
+                    StarsView(rating: (Double(viewModel.averageRating) ?? 0), maxRating: 5, size: 12)
                     Text("(0)")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(._444446)

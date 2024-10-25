@@ -54,12 +54,15 @@ struct ServiceStartModel {
 
 // MARK: - DataClass
 struct ServiceStartData {
-    let id, serviceStatus,name: String
+    let id, serviceStatus,caregiverName,profilePictureUrl,areaOfExperties,customerName: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
         serviceStatus = jsonData["service_status"] as? String ?? ""
-        name = jsonData["name"] as? String ?? ""
+        caregiverName = jsonData["caregiver_name"] as? String ?? ""
+        profilePictureUrl = jsonData["profile_picture_url"] as? String ?? ""
+        areaOfExperties = jsonData["area_of_experties"] as? String ?? ""
+        customerName = jsonData["customer_name"] as? String ?? ""
     }
 }
 

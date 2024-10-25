@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor
+
 class MyServiceViewModel: ObservableObject{
     @Published var selectedSection: Int = 0
     @Published var areaOfExpertiseSelected: [String] = [String]()
@@ -22,8 +22,8 @@ class MyServiceViewModel: ObservableObject{
     
     func getMyService(){
         isLoading = true
-        DispatchQueue.main.async {
             NetworkManager.shared.getMyServices { [weak self] result in
+                DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
                 case .success(let data):
@@ -42,7 +42,7 @@ class MyServiceViewModel: ObservableObject{
     }
     
     func updateMyService(error: @escaping (String)-> Void){
-        DispatchQueue.main.async {
+        
             if self.areaOfExpertiseSelected.count == 0 {
                 error("Please select at list one area of Expertise")
                 return
@@ -53,6 +53,7 @@ class MyServiceViewModel: ObservableObject{
                                       "areaOfExperties":self.areaOfExpertiseSelected]
             self.isLoading = true
             NetworkManager.shared.updateMyService(params: param) { [weak self] result in
+                DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
                 case .success(_):

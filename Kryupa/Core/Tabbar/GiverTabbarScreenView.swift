@@ -83,7 +83,7 @@ struct GiverTabbarScreenView: View {
             
             Spacer()
             
-            tabbarItem(image: "Account", text: "Account", selected: viewModel.selectedIndex == 4)
+            tabbarItem(image: "account", text: "Account", selected: viewModel.selectedIndex == 4)
                 .asButton(.press) {
                     viewModel.selectedIndex = 4
                 }

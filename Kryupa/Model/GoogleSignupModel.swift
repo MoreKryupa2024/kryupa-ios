@@ -9,10 +9,17 @@ import Foundation
 
 
 // MARK: - Empty
-struct Empty: Codable {
+struct Empty{
     let success: Bool
     let message: String
     let data: DataClass
+    
+    init(jsonData:[String:Any]){
+        self.success = jsonData["success"] as? Bool ?? false
+        self.message = jsonData["message"] as? String ?? ""
+        self.data = DataClass(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+        
+    }
 }
 
 // MARK: - Empty
@@ -28,28 +35,33 @@ struct EmptyCareGiverRegister: Codable {
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct DataClass {
     let accessToken, refrenceToken: String
     let userInfo: UserInfo
     let userTypes, verificationStatus: String
 
-    enum CodingKeys: String, CodingKey {
-        case accessToken, refrenceToken, userInfo
-        case userTypes = "UserTypes"
-        case verificationStatus
+    init(jsonData:[String:Any]){
+        accessToken = jsonData["accessToken"] as? String ?? ""
+        refrenceToken = jsonData["refrenceToken"] as? String ?? ""
+        userInfo = UserInfo(jsonData: jsonData["userInfo"] as? [String:Any] ?? [String:Any]())
+        userTypes = jsonData["UserTypes"] as? String ?? ""
+        verificationStatus = jsonData["verificationStatus"] as? String ?? ""
     }
 }
 
 // MARK: - UserInfo
-struct UserInfo: Codable {
+struct UserInfo {
     let id, email, name: String
     let verifiedEmail: Bool
     let fcmToken, role: String
 
-    enum CodingKeys: String, CodingKey {
-        case id, email, name
-        case verifiedEmail
-        case fcmToken, role
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+        email = jsonData["email"] as? String ?? ""
+        name = jsonData["name"] as? String ?? ""
+        verifiedEmail = jsonData["verified_email"] as? Bool ?? false
+        fcmToken = jsonData["fcmToken"] as? String ?? ""
+        role = jsonData["role"] as? String ?? ""
     }
 }
 

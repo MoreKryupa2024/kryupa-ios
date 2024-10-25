@@ -97,6 +97,7 @@ class APIConstant{
     static let bookingDetailsForCaregiver = "\(bookingBaseURL)/BookingDetailsForCaregiver"
     static let sendRequestForBookCaregiver = "\(bookingBaseURL)/caregiver_approch"
     static let giverConfirmStartService = "\(bookingBaseURL)/confirm-booking"
+    static let cancelStartService = "\(bookingBaseURL)/cancel/caregiverservice"
     static let customerConfirmStartService = "\(bookingBaseURL)/confirm-booking-customer"
     static let cancelBookingData = "\(bookingBaseURL)/booking_status"
     static let bookingCancel = "\(bookingBaseURL)/booking_cancel"

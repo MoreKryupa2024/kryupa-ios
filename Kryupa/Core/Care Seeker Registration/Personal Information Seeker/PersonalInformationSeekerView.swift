@@ -47,6 +47,7 @@ struct PersonalInformationSeekerView: View {
                             title: "Date Of Birth",
                             placeHolder: "Select"
                         )
+                        .id(viewModel.personalInfoData.dob)
                         .background()
                         .asButton{
                             viewModel.dateOfBirthSelected = true
@@ -54,9 +55,11 @@ struct PersonalInformationSeekerView: View {
                         }
                         
                         genderDropdownView
+                            .id(viewModel.personalInfoData.gender)
                         
                         
                         languageDropdownView
+                            .id(viewModel.personalInfoData.language)
                         
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
                             .asButton {
@@ -171,6 +174,7 @@ struct PersonalInformationSeekerView: View {
                 viewModel.personalInfoData.name = Defaults().personalInfo["firstname"] as? String ?? ""
                 viewModel.personalInfoData.lastName = Defaults().personalInfo["lastname"] as? String ?? ""
                 viewModel.personalInfoData.country = Defaults().personalInfo["country"] as? String ?? ""
+                viewModel.dateOfBirthSelected = viewModel.personalInfoData.dob != ""
             }
             
             if viewModel.showDatePicker{

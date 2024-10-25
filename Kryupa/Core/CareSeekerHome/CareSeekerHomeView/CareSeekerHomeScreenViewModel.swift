@@ -129,4 +129,24 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
         }
     }
     
+    func customerCancelStartService(serviceStartData:ServiceStartData){
+        let approch_id = serviceStartData.id
+        let param = [
+            "service_id": approch_id
+        ]
+        isloading = true
+        NetworkManager.shared.giverCancelStartService(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(_):
+                    self?.getRecommandationList()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
 }

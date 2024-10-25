@@ -204,7 +204,9 @@ struct MyServicesView: View {
                     }
                     .asButton(.press) {
                         viewModel.updateMyService { error in
-                            presentAlert(title: "Kryupa", subTitle: error)
+                            presentAlert(title: "Kryupa", subTitle: error,primaryAction: UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                router.dismissScreen()
+                            }))
                         }
                     }
                 

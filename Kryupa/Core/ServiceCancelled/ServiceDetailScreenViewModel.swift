@@ -8,6 +8,8 @@
 import Foundation
 class ServiceDetailScreenViewModel: ObservableObject{
     @Published var review: String = ""
+    @Published var averageRating: String = ""
+    @Published var averageNoRating: String = ""
     @Published var rating: Int = 0
     @Published var isloading: Bool = Bool()
     @Published var isReviewGiven: Bool = Bool()
@@ -105,6 +107,7 @@ class ServiceDetailScreenViewModel: ObservableObject{
                     self?.isloading = false
                     self?.rating = data.data.rating
                     self?.review = data.data.review
+                    self?.averageRating = data.data.averageRating
                     
                     if self?.rating == 0 && (self?.review.isEmpty ?? false){
                         self?.isReviewGiven = false

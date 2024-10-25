@@ -16,12 +16,16 @@ struct CareSeekerHomeScreenView: View {
     
     var body: some View {
         ZStack{
-            VStack(spacing:15){
-                HeaderView()
-                ScrollView {
-                    if viewModel.serviceStartData.count > 0{
-                            serviceView()
-                    }else{
+            if viewModel.serviceStartData.count > 0{
+                StartServiceScreenView(serviceStartData: viewModel.serviceStartData) { serviceStartData in
+                    viewModel.customerConfirmStartService(serviceStartData: serviceStartData)
+                } cancelAction: { serviceStartData in
+                    viewModel.customerCancelStartService(serviceStartData: serviceStartData)
+                }
+            }else{
+                VStack(spacing:15){
+                    HeaderView()
+                    ScrollView {
                         BannerView(assetsImage: ["customer home top","payBanner"],//,"customer home top 2"],
                                    showIndecator: false,
                                    fromAssets: true,
@@ -34,41 +38,41 @@ struct CareSeekerHomeScreenView: View {
                                 showBookingsHistoryScreen.post(name: .showBookingsHistoryScreen, object: nil, userInfo: selectedIndexBookingScreenDict)
                             }
                         })
-//                        .padding(.horizontal,24)
+                        //                        .padding(.horizontal,24)
                         .padding(.top,14)
-                    }
-                    
-                    if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
-                        BookFirstServiceView
-                    }
-                    if viewModel.upcommingAppointments.count != 0{
-                        UpcomingAppointmentsView
+                        
+                        
+                        if viewModel.upcommingAppointments.count == 0 && viewModel.pastAppointments.count == 0{
+                            BookFirstServiceView
+                        }
+                        if viewModel.upcommingAppointments.count != 0{
+                            UpcomingAppointmentsView
+                                .padding(.top,30)
+                        }
+                        if viewModel.pastAppointments.count != 0{
+                            PastAppointmentsView
+                                .padding(.top,30)
+                        }
+                        if viewModel.recommendedCaregiver.count != 0{
+                            RecommendedGiverView
+                                .padding(.top,30)
+                        }
+                        
+                        Image("SeekerHomeFooter")
+                            .resizable()
+                            .aspectRatio(375/188, contentMode: .fit)
                             .padding(.top,30)
                     }
-                    if viewModel.pastAppointments.count != 0{
-                        PastAppointmentsView
-                            .padding(.top,30)
-                    }
-                    if viewModel.recommendedCaregiver.count != 0{
-                        RecommendedGiverView
-                            .padding(.top,30)
-                    }
-                    
-                    Image("SeekerHomeFooter")
-                        .resizable()
-                        .aspectRatio(375/188, contentMode: .fit)
-                        .padding(.top,30)
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
-//                .refreshable {
-//                    viewModel.customerSvcAct()
-//                }
+                //                .refreshable {
+                //                    viewModel.customerSvcAct()
+                //                }
             }
             if viewModel.isloading{
                 LoadingView()
             }
-            
         }
         .onAppear{
             viewModel.pageNumber = 1
@@ -82,7 +86,7 @@ struct CareSeekerHomeScreenView: View {
         var nameList = [String]()
         var imageBanner = [String]()
         for i in viewModel.serviceStartData{
-            nameList.append(i.name)
+            nameList.append(i.customerName)
             imageBanner.append("customer home top 1")
         }
         

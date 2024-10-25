@@ -98,6 +98,28 @@ class CareGiverHomeScreenViewModel: ObservableObject
                     self?.serviceStartData = nil
                 case .failure(let error):
                     print(error)
+                    self?.serviceStartData = nil
+                }
+            }
+            
+        }
+    }
+    
+    func giverCancelStartService(){
+        guard let approch_id = serviceStartData?.id else {return}
+        let param = [
+            "service_id": approch_id
+        ]
+        isloading = true
+        NetworkManager.shared.giverCancelStartService(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(_):
+                    self?.serviceStartData = nil
+                case .failure(let error):
+                    print(error)
+                    self?.serviceStartData = nil
                 }
             }
             
