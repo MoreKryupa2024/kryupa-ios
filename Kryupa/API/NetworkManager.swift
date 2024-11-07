@@ -304,6 +304,7 @@ class NetworkManager{
                     self?.defaults.accessToken = apiData.data.accessToken
                     self?.defaults.refreshToken = apiData.data.refrenceToken
                     self?.defaults.userType = apiData.data.userTypes
+                    self?.defaults.firstName = apiData.data.userInfo.name
                     completionHandler(.success(apiData))
                 }else{
                     completionHandler(.failure(.custom(apiData.message)))

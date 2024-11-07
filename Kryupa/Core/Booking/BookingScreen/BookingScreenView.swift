@@ -83,7 +83,7 @@ struct BookingScreenView: View {
         ScrollView{
             switch viewModel.selectedSection{
             case 1:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: "Pending",bookingData: data,payNowAction: { data in
                         let paymentViewModel = PaymentViewModel()
                         paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
@@ -91,9 +91,14 @@ struct BookingScreenView: View {
                             PaymentOrderScreenView(viewModel: paymentViewModel)
                         }
                     })
+                    .asButton(.press) {
+                        router.showScreen(.push) { rout in
+                            JobDetailView(jobID: data.id,bookingData: data)
+                        }
+                    }
                 }
             case 2:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ServiceDetailScreenViewModel()
@@ -104,7 +109,7 @@ struct BookingScreenView: View {
                         }
                 }
             case 3:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
@@ -115,7 +120,7 @@ struct BookingScreenView: View {
                         }
                 }
             case 0:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: "Draft",bookingData: data,deleteAction: { data in
                         viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
                             presentAlert(title: "Kryupa", subTitle: errorStr)
@@ -139,7 +144,7 @@ struct BookingScreenView: View {
         ScrollView{
             switch viewModel.selectedSection{
             case 0:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ServiceDetailScreenViewModel()
@@ -150,7 +155,7 @@ struct BookingScreenView: View {
                         }
                 }
             case 1:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: "Pending",bookingData: data,payNowAction: { data in
                         let paymentViewModel = PaymentViewModel()
                         paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
@@ -158,9 +163,14 @@ struct BookingScreenView: View {
                             PaymentOrderScreenView(viewModel: paymentViewModel)
                         }
                     })
+                    .asButton(.press) {
+                        router.showScreen(.push) { rout in
+                            JobDetailView(jobID: data.id,bookingData: data)
+                        }
+                    }
                 }
             case 2:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: "Completed",bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
@@ -171,7 +181,7 @@ struct BookingScreenView: View {
                         }
                 }
             case 3:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()

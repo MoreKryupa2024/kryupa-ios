@@ -24,7 +24,7 @@ struct GiveReviewView: View {
                     AddressView
                     line
                     if let reviewDetailData = viewModel.reviewDetailData {
-                        ReviewHoursView(ratePerHr: reviewDetailData.ratePerHours, noOfHrs: reviewDetailData.totalHours, total: reviewDetailData.bookingPricingForCustomer)
+                        ReviewHoursView(ratePerHr: reviewDetailData.ratePerHours, noOfHrs: reviewDetailData.totalHours, total: Defaults().userType == AppConstants.SeekCare ? reviewDetailData.bookingPricingForCustomer : Double(reviewDetailData.bookingPricing))
                     }
                     if ((viewModel.bookingsListData?.status ?? "") != "Depreciated") {
                         line
@@ -239,8 +239,8 @@ struct GiveReviewView: View {
             
             HStack {
                 
-                StarsView(rating: (Double(viewModel.cancelSeriveDetailData?.rating ?? "") ?? 0), maxRating: 5, size: 12)
-                Text("(0)")
+                StarsView(rating: (Double(viewModel.averageRating) ?? 0), maxRating: 5, size: 12)
+                Text("(\(viewModel.totalReviews))")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)
             }

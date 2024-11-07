@@ -25,7 +25,7 @@ struct BGVTimeSlotScreenView: View {
                             
                             AvailableTimeSlotsView(
                                 isSelected: viewModel.selectedSlotID == slot.id,
-                                availablityTime: "\(slot.startingTime.convertDateFormater(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a")) - \(slot.endTime.convertDateFormater(beforeFormat: "HH:mm:ss.SSSs", afterFormat: "h:mm a"))"
+                                availablityTime: "\(slot.startingTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(slot.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))"
                             )
                             .asButton {
                                 viewModel.selectedSlotID = slot.id

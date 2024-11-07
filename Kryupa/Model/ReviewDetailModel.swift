@@ -29,11 +29,12 @@ struct ReviewDetailData {
     let endDate, startTime, endTime, name, relation: String?
     let profilePictureURL: String
     let yearsOfExprience: String
-    let cid, ratePerHours: String
-    let totalHours,rating: Int
+    let cid, ratePerHours,totalReviews: String
+    let totalHours,rating,bookingPricing: Int
 
     init(jsonData:[String:Any]){
         reviewid = jsonData["reviewid"] as? String ?? ""
+        totalReviews = jsonData["total_reviews"] as? String ?? ""
         rating = jsonData["rating"] as? Int ?? Int(jsonData["rating"] as? Double ?? Double(jsonData["rating"] as? String ?? "") ?? 0)
         averageRating = jsonData["average_rating"] as? String ?? ""
         review = jsonData["review"] as? String ?? ""
@@ -57,5 +58,6 @@ struct ReviewDetailData {
         cid = jsonData["cid"] as? String ?? ""
         ratePerHours = jsonData["rate_per_hours"] as? String ?? "\((jsonData["rate_per_hours"] as? Double ?? 0).removeZerosFromEnd(num: 2))"
         totalHours = jsonData["total_hours"] as? Int ?? 0
+        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
     }
 }

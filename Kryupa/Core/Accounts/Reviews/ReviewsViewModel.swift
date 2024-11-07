@@ -22,6 +22,8 @@ class ReviewsViewModel: ObservableObject{
     @Published var isEditAddress = false
     @Published var isEditReview = false
     @Published var txtReview = ""
+    @Published var averageRating = ""
+    @Published var totalReviews = ""
     var ratingValue = Int()
 
     func getReviews(myReviews: Bool, careGiver: Bool){
@@ -105,6 +107,8 @@ class ReviewsViewModel: ObservableObject{
                     self?.isloading = false
                     self?.ratingValue = data.data.rating
                     self?.txtReview = data.data.review
+                    self?.averageRating = data.data.averageRating
+                    self?.totalReviews = data.data.totalReviews
                     self?.reviewDetailData = data.data
                 case .failure(let error):
                     self?.isloading = false

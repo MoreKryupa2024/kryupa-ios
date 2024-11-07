@@ -221,7 +221,7 @@ struct ServiceDetailScreenView: View {
                 
                 HStack{
                     StarsView(rating: (Double(viewModel.averageRating) ?? 0), maxRating: 5, size: 12)
-                    Text("(0)")
+                    Text("(\(viewModel.totalReviews))")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(._444446)
                 }

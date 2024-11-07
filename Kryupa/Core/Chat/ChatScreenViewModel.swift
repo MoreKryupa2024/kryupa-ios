@@ -82,7 +82,7 @@ class ChatScreenViewModel: ObservableObject{
             return
         }
         isLoading = true
-        let param:[String:Any] = ["contactId": contactId,"pageSize":20]
+        let param:[String:Any] = ["contactId": contactId,"pageSize":20,"pageNumber":pageNumber]
         
         /* let param:[String:Any] = ["contactId": contactId,
          "pageNumber":pageNumber,
@@ -96,18 +96,34 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    self.messageList = data.data.filter({ MessageData in
-                        if MessageData.message.contains("video_call"){
-//                            self.showVideoCallView = false
-                            return false
-//                        }else if MessageData.message.contains("pay_now"){
-//                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-//                            self.showPayViewView = true
-//                            return false
-                        }else{
-                            return true
-                        }
-                    })
+                    if self.pageNumber == 1{
+                        self.messageList = data.data.filter({ MessageData in
+                            if MessageData.message.contains("video_call"){
+    //                            self.showVideoCallView = false
+                                return false
+    //                        }else if MessageData.message.contains("pay_now"){
+    //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+    //                            self.showPayViewView = true
+    //                            return false
+                            }else{
+                                return true
+                            }
+                        })
+                    }else{
+                        self.messageList += data.data.filter({ MessageData in
+                            if MessageData.message.contains("video_call"){
+    //                            self.showVideoCallView = false
+                                return false
+    //                        }else if MessageData.message.contains("pay_now"){
+    //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
+    //                            self.showPayViewView = true
+    //                            return false
+                            }else{
+                                return true
+                            }
+                        })
+                    }
+                    
                     
                     /*
                      if self.pageNumber > 1{

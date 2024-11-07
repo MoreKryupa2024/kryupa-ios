@@ -55,6 +55,17 @@ extension String{
         return timeStamp
     }
     
+    func convertDateFormaterTimeZone(beforeFormat: String, afterFormat: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = beforeFormat
+        formatter.timeZone = TimeZone(secondsFromGMT:0) // UTC
+        let defaultTimeZoneStr = formatter.date(from: self) ?? Date()
+        let dateFormatter = DateFormatter()
+        formatter.timeZone = TimeZone.current // Local
+        dateFormatter.dateFormat = afterFormat
+        return dateFormatter.string(from:defaultTimeZoneStr)
+    }
+    
     func getFullRateVal() -> Int {
         
         var value = Int("\(self.split(separator: ".").first ?? "0")") ?? 0

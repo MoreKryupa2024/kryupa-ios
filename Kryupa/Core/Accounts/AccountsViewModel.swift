@@ -38,6 +38,7 @@ class AccountsViewModel: ObservableObject {
                     action()
                     self.isloading = false
                 case .failure(let error):
+                    action()
                     errorAction(error.getMessage())
                     self.isloading = false
                 }

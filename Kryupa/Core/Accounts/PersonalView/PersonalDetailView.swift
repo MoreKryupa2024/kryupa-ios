@@ -198,7 +198,8 @@ struct PersonalDetailView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    viewModel.personalDetail?.expertise.bio = strBio
+                    strBio = strBio.removingWhitespaces()
+                    viewModel.personalDetail?.expertise.bio = strBio.removingWhitespaces()
                     viewModel.personalDetail?.expertise.exprience = intExp
                     viewModel.validateData { alertStr in
                         presentAlert(title: "Kryupa", subTitle: alertStr)
@@ -397,6 +398,8 @@ struct PersonalDetailView: View {
             if let title{
                 HStack(spacing:0){
                     Text(title)
+                    Text("*")
+                        .foregroundStyle(.red)
                 }
                 .font(.custom(FontContent.plusMedium, size: 17))
             }

@@ -61,7 +61,9 @@ class PersonalDetailViewModel: ObservableObject{
     
     
     func validateData(alert:((String)->Void),next:(([String:Any])->Void)){
-        
+        guard let bio = personalDetail?.expertise.bio, bio != "" else {
+            return alert("Please Enter Bio")
+        }
         if languageDropDownSelected.count == 0 {
             return alert("Please Select Language.")
         }

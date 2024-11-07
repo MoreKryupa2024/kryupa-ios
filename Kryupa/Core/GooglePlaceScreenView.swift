@@ -54,11 +54,12 @@ struct PlacePicker: UIViewControllerRepresentable {
 
         func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
             DispatchQueue.main.async {
+                print(place.addressComponents)
 //                print(place.description.description as Any)
 //                self.parent.address =  place.name!
                 self.parent.address =  "\(place.addressComponents?.first(where: { $0.type == "street_number" })?.name ?? "") \(place.addressComponents?.first(where: { $0.type == "route" })?.name ?? "")"
                 self.parent.country =  "\(place.addressComponents?.first(where: { $0.type == "country" })?.name ?? "")"
-                self.parent.city =  "\(place.addressComponents?.first(where: { $0.type == "sublocality_level_1" })?.name ?? "")"
+                self.parent.city =  "\(place.addressComponents?.first(where: { $0.type == "sublocality_level_1" })?.name ?? "\(place.addressComponents?.first(where: { $0.type == "locality" })?.name ?? "")")"
                 self.parent.state =  "\(place.addressComponents?.first(where: { $0.type == "administrative_area_level_1" })?.name ?? "")"
                 self.parent.postalCode =  "\(place.addressComponents?.first(where: { $0.type == "postal_code" })?.name ?? "")"
                 self.parent.latitude =  (place.coordinate.latitude)
@@ -69,7 +70,7 @@ struct PlacePicker: UIViewControllerRepresentable {
                 print("state: \(place.addressComponents?.first(where: { $0.type == "administrative_area_level_1" })?.name ?? "")")
                 print("country: \(place.addressComponents?.first(where: { $0.type == "country" })?.name ?? "")")
                 print("postal_code: \(place.addressComponents?.first(where: { $0.type == "postal_code" })?.name ?? "")")
-                print("city: \(place.addressComponents?.first(where: { $0.type == "sublocality_level_1" })?.name ?? "")")
+                print("city: \(place.addressComponents?.first(where: { $0.type == "sublocality_level_1" })?.name ?? "\(place.addressComponents?.first(where: { $0.type == "locality" })?.name ?? "")")")
                 print("address: \(place.addressComponents?.first(where: { $0.type == "street_number" })?.name ?? "") \(place.addressComponents?.first(where: { $0.type == "route" })?.name ?? "")")
                 print("name: \(place.name!)")
             }

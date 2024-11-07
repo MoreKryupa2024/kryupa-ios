@@ -31,7 +31,7 @@ struct ReviewCell: View {
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                     HStack {
-                        StarsView(rating: Double(reviewData?.rating.getFullRateVal() ?? 0), maxRating: 5, size: 20)
+                        StarsView(rating: (Double(reviewData?.rating ?? "") ?? 0), maxRating: 5, size: 20)
                     }
                 }
                 

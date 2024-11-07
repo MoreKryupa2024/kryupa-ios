@@ -122,7 +122,7 @@ class BookingFormScreenViewModel: ObservableObject{
     
     
     func createBooking(action:(@escaping(String)->Void),alert:(@escaping(String)->Void)){
-        
+        dateArray = dateArray.sorted{$0 < $1}
         if bookingFor.isEmpty{
          return alert("Please Select Person for this Booking.")
         }else if needServiceInSelected.count == 0{

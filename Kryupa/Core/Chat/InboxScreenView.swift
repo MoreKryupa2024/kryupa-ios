@@ -92,7 +92,7 @@ struct InboxScreenView: View {
             .frame(maxWidth: .infinity)
             .padding(.leading,12)
 //            Text(\((profile.lastActionAt.components(separatedBy: " ").first ?? "").convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd-MM"))
-                 Text("\((profile.lastActionAt.components(separatedBy: " ").last ?? "").convertDateFormater(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
+                 Text("\((profile.lastActionAt.components(separatedBy: " ").last ?? "").convertDateFormaterTimeZone(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
                 .font(.custom(FontContent.plusRegular, size: 13))
                 .padding(.top,10)
                 .frame(maxHeight: .infinity,alignment: .top)

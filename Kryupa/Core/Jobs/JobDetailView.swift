@@ -14,7 +14,7 @@ struct JobDetailView: View {
     @StateObject private var viewModelHome = CareGiverHomeScreenViewModel()
     var jobID: String = "912d5565-8c0c-4eb7-b96f-9c8873a9f418"
     @Environment(\.router) var router
-
+    var bookingData: BookingsListData?
     var body: some View {
         ZStack{
             VStack(spacing:0){
@@ -51,19 +51,43 @@ struct JobDetailView: View {
                     if getArrayOfPersonalPrefernces().count != 0{
                         getGridView(heading: "Personal Preferences", skillsList: getArrayOfPersonalPrefernces())
                     }
-                    
-                    if let approchStatus = viewModel.jobDetailModel?.approchStatus{
-                        if approchStatus == "Connecting Request"{
-                            bottomButtonView
-                        } else if approchStatus == "Rejected By Caregiver"{
-                          Text("You have declined this booking request")
-                                .font(.custom(FontContent.plusMedium, size: 15))
-                                .padding(.top,30)
-                            
-                        } else {
-                            Text("You have accepeted this booking request")
-                                .font(.custom(FontContent.plusMedium, size: 15))
-                                .padding(.top,30)
+                    if Defaults().userType == AppConstants.GiveCare{
+                        if let approchStatus = viewModel.jobDetailModel?.approchStatus{
+                            if approchStatus == "Connecting Request"{
+                                bottomButtonView
+                            }else if (bookingData?.status ?? "") == "Payment Pending" && Defaults().userType == AppConstants.GiveCare{
+                                Text("Awaiting confirmation from careseeker")
+                                    .font(.custom(FontContent.plusRegular, size: 16))
+                                    .foregroundStyle(.FFB_323)
+                                    .padding(.top,20)
+                            }
+                            //                        else if approchStatus == "Rejected By Caregiver"{
+                            //                          Text("You have declined this booking request")
+                            //                                .font(.custom(FontContent.plusMedium, size: 15))
+                            //                                .padding(.top,30)
+                            //
+                            //                        } else {
+                            //                            Text("You have accepeted this booking request")
+                            //                                .font(.custom(FontContent.plusMedium, size: 15))
+                            //                                .padding(.top,30)
+                            //                        }
+                        }
+                    }else{
+                        if (bookingData?.status ?? "") == "Payment Pending"{
+                            PayNowButton
+                                .padding(.top,20)
+                                .asButton {
+                                    let paymentViewModel = PaymentViewModel()
+                                    paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : bookingData?.id ?? ""])
+                                    router.showScreen(.push) { rout in
+                                        PaymentOrderScreenView(viewModel: paymentViewModel)
+                                    }
+                                }
+                        }else{
+                            Text("Awaiting confirmation from caregiver")
+                                .font(.custom(FontContent.plusRegular, size: 16))
+                                .foregroundStyle(.FFB_323)
+                                .padding(.top,20)
                         }
                     }
                 }
@@ -78,6 +102,22 @@ struct JobDetailView: View {
                 LoadingView()
             }
         }
+    }
+    
+    private var PayNowButton: some View {
+        
+        Text("Pay Now")
+            .font(.custom(FontContent.plusMedium, size: 16))
+            .foregroundStyle(._23_C_16_B)
+            .padding(.vertical,9)
+            .frame(maxWidth: .infinity)
+            .background{
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(._23_C_16_B)
+            }
+            .padding(.top,5)
+            .padding(.horizontal,20)
     }
     
     private func setChatScreen(_ notification: Notification){

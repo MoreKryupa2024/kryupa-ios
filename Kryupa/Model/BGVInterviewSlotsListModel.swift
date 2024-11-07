@@ -71,7 +71,7 @@ struct BGVInterviewMeetingTokenData {
         sessionToken = jsonData["sessionToken"] as? String ?? ""
         sessionKey = jsonData["session_key"] as? String ?? ""
         topic = jsonData["topic"] as? String ?? ""
-        userIdentity = jsonData["userIdentity"] as? String ?? ""
+        userIdentity = "\(Defaults().firstName) \(Defaults().lastName)" //jsonData["userIdentity"] as? String ?? ""
         videoCallID = jsonData["videoCallID"] as? String ?? ""
         success = jsonData["success"] as? Bool ?? false
     }
@@ -88,6 +88,7 @@ struct BGVInterviewBookedSlotData {
         interviewStatus = jsonData["interview_status"] as? String ?? ""
         ssnVerificationStatus = jsonData["ssn_verification_status"] as? String ?? ""
         timeZone = jsonData["time_zone"] as? String ?? ""
-        interviewDateTime = jsonData["interview_date_time"] as? String ?? ""
+        let timeString = (jsonData["interview_date_time"] as? String ?? "").components(separatedBy: "GMT").first ?? ""
+        interviewDateTime = timeString.convertDateFormater(beforeFormat: "E MMM dd yyyy HH:mm:ss", afterFormat: "MM/dd/yyyy, h:mm a")
     }
 }

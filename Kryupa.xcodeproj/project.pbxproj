@@ -191,6 +191,7 @@
 		BECD509C2C5CE667004DD43D /* FAQChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD509B2C5CE667004DD43D /* FAQChatView.swift */; };
 		BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */; };
 		BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE28AC02C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift */; };
+		BEE327912CCBC82800B34AB6 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEE327902CCBC82800B34AB6 /* Success.gif */; };
 		BEEA72022BF7366A004E7DED /* PersonalInformationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEA72012BF7366A004E7DED /* PersonalInformationScreenView.swift */; };
 		BEEB798B2C05FD32005C12AB /* WeakDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798A2C05FD32005C12AB /* WeakDayView.swift */; };
 		BEEB798D2C05FDD8005C12AB /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB798C2C05FDD8005C12AB /* BannerView.swift */; };
@@ -198,7 +199,6 @@
 		BEF2EDB42C257DB60008108C /* DateTimePickerScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */; };
 		BEF2EDB62C25B4410008108C /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF2EDB52C25B4410008108C /* StarsView.swift */; };
 		BEFB670D2C1708CD003ED6DF /* ChatBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */; };
-		CE75DBFD2CC7DA9F00500731 /* Success.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE75DBFC2CC7DA9F00500731 /* Success.gif */; };
 		CE75DC012CC7DBED00500731 /* StartServiceScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75DC002CC7DBED00500731 /* StartServiceScreenView.swift */; };
 /* End PBXBuildFile section */
 
@@ -387,6 +387,7 @@
 		BECD509B2C5CE667004DD43D /* FAQChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQChatView.swift; sourceTree = "<group>"; };
 		BEE28ABB2C05A3A200A3CDFF /* LobbyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LobbyScreenView.swift; path = "Kryupa/Core/BGV Lobby/LobbyScreenView.swift"; sourceTree = SOURCE_ROOT; };
 		BEE28AC02C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGVTimeSlotScreenView.swift; sourceTree = "<group>"; };
+		BEE327902CCBC82800B34AB6 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Success.gif; sourceTree = "<group>"; };
 		BEEA72012BF7366A004E7DED /* PersonalInformationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationScreenView.swift; sourceTree = "<group>"; };
 		BEEB798A2C05FD32005C12AB /* WeakDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakDayView.swift; sourceTree = "<group>"; };
 		BEEB798C2C05FDD8005C12AB /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -395,7 +396,6 @@
 		BEF2EDB32C257DB60008108C /* DateTimePickerScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerScreenView.swift; sourceTree = "<group>"; };
 		BEF2EDB52C25B4410008108C /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		BEFB670C2C1708CD003ED6DF /* ChatBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBoxView.swift; sourceTree = "<group>"; };
-		CE75DBFC2CC7DA9F00500731 /* Success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Success.gif; path = /Users/user/Downloads/Success.gif; sourceTree = "<absolute>"; };
 		CE75DC002CC7DBED00500731 /* StartServiceScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartServiceScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -819,7 +819,7 @@
 				BE644E882BF4D4F400A6781F /* Info.plist */,
 				BEC8F92E2BFDC30900A9CC7F /* GoogleService-Info.plist */,
 				BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */,
-				CE75DBFC2CC7DA9F00500731 /* Success.gif */,
+				BEE327902CCBC82800B34AB6 /* Success.gif */,
 				BE1573BB2BF64C6500A6137D /* Utility */,
 				BE644E4D2BF4D2E000A6781F /* Fonts */,
 				BE644E3F2BF49C9A00A6781F /* API */,
@@ -1247,7 +1247,7 @@
 				BE644E9E2BF50F4500A6781F /* Besley-Italic.ttf in Resources */,
 				BE644E332BF495D900A6781F /* Assets.xcassets in Resources */,
 				BE644E942BF50ED300A6781F /* PlusJakartaDisplay-Regular.otf in Resources */,
-				CE75DBFD2CC7DA9F00500731 /* Success.gif in Resources */,
+				BEE327912CCBC82800B34AB6 /* Success.gif in Resources */,
 				BE644E952BF50ED300A6781F /* PlusJakartaDisplay-Light.otf in Resources */,
 				BE644E9D2BF50F4500A6781F /* Besley-Medium.ttf in Resources */,
 				BEC8F92F2BFDC30900A9CC7F /* GoogleService-Info.plist in Resources */,

@@ -24,6 +24,7 @@ class BGVTimeSlotScreenViewModel: ObservableObject{
                     self?.isloading = false
                 case .success(let data):
                     self?.availableSlotsList = data.data
+                    self?.availableSlotsList.sort{$0.startingTime < $1.startingTime}
                     self?.isloading = false
                 }
             }

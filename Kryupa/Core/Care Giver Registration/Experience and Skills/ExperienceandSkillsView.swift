@@ -263,7 +263,7 @@ struct ExperienceandSkillsView: View {
             .onTapGesture {
                 viewModel.showFilePicker.toggle()
             }
-            .fileImporter(isPresented: $viewModel.showFilePicker, allowedContentTypes: [.pdf]) { result in
+            .fileImporter(isPresented: $viewModel.showFilePicker, allowedContentTypes: [.pdf,.jpeg,.png,.zip]) { result in
                 do{
                     let fileUrl = try result.get()
                     

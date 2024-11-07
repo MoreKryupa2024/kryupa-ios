@@ -55,8 +55,9 @@ struct ChatView: View {
                             .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         }
                     }
+                    .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                 }
-                .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                .defaultScrollAnchor(.bottom)
                 .padding(.horizontal, 10)
                 .scrollIndicators(.hidden)
                 sendMessageView
@@ -94,6 +95,7 @@ struct ChatView: View {
             viewModel.pageNumber = 1
             viewModel.getChatHistory()
             viewModel.VideoCallData()
+            viewModel.messageList = []
             DispatchQueue.main.async {
                 viewModel.disconnect()
                 viewModel.connect()
@@ -109,6 +111,12 @@ struct ChatView: View {
             viewModel.isPresented = false
             viewModel.disconnect()
         })
+        .refreshable {
+            if viewModel.messageList.count > 0{
+                viewModel.pageNumber += 1
+                viewModel.getChatHistory()
+            }
+        }
         .modifier(DismissingKeyboard())
     }
     
