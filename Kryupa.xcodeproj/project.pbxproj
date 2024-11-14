@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A335CE2D2CE4E1FB0072B001 /* ApplePayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A335CE2C2CE4E1FB0072B001 /* ApplePayHelper.swift */; };
+		A335CE302CE51B030072B001 /* ApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A335CE2F2CE51B030072B001 /* ApplePayViewModel.swift */; };
+		A335CE322CE5C0F90072B001 /* ApplePayResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A335CE312CE5C0F90072B001 /* ApplePayResponseModel.swift */; };
 		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
 		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
@@ -219,6 +222,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A335CE2C2CE4E1FB0072B001 /* ApplePayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayHelper.swift; sourceTree = "<group>"; };
+		A335CE2F2CE51B030072B001 /* ApplePayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewModel.swift; sourceTree = "<group>"; };
+		A335CE312CE5C0F90072B001 /* ApplePayResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayResponseModel.swift; sourceTree = "<group>"; };
 		A36BC3702C185163005616A5 /* zoomcml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = zoomcml.xcframework; path = Kryupa/Frameworks/zoomcml.xcframework; sourceTree = "<group>"; };
 		A36BC3712C185163005616A5 /* ZoomVideoSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDK.xcframework; path = Kryupa/Frameworks/ZoomVideoSDK.xcframework; sourceTree = "<group>"; };
 		A36BC3722C185163005616A5 /* ZoomVideoSDKUIToolkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ZoomVideoSDKUIToolkit.xcframework; path = Kryupa/Frameworks/ZoomVideoSDKUIToolkit.xcframework; sourceTree = "<group>"; };
@@ -428,6 +434,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A335CE2B2CE4E1EA0072B001 /* ApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				A335CE2C2CE4E1FB0072B001 /* ApplePayHelper.swift */,
+			);
+			path = ApplePay;
+			sourceTree = "<group>";
+		};
+		A335CE2E2CE51AF00072B001 /* ApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				A335CE2F2CE51B030072B001 /* ApplePayViewModel.swift */,
+			);
+			path = ApplePay;
+			sourceTree = "<group>";
+		};
 		A36BC37C2C186285005616A5 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +684,7 @@
 		BE3C7F252C1C1F0D000848A6 /* Booking */ = {
 			isa = PBXGroup;
 			children = (
+				A335CE2E2CE51AF00072B001 /* ApplePay */,
 				BE3C7F262C1C1F28000848A6 /* BookingScreen */,
 			);
 			path = Booking;
@@ -871,6 +894,7 @@
 		BE644E3D2BF49C8D00A6781F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A335CE2B2CE4E1EA0072B001 /* ApplePay */,
 				A3FEF6012C201C3200EFC3C2 /* Jobs */,
 				A36BC37C2C186285005616A5 /* Accounts */,
 				A36DE7C22C171241002E0ACD /* CareGiverHome */,
@@ -917,6 +941,7 @@
 				BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */,
 				BE11D51B2C5A5262004FCC34 /* SettingModel.swift */,
 				BECD50992C5CE4BF004DD43D /* FAQModel.swift */,
+				A335CE312CE5C0F90072B001 /* ApplePayResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1319,6 +1344,7 @@
 				BEE28ABC2C05A3A200A3CDFF /* LobbyScreenView.swift in Sources */,
 				BE5045C32C870D4C00038603 /* ChatViewHeader.swift in Sources */,
 				A36BC3A72C1B1627005616A5 /* ReviewDetailView.swift in Sources */,
+				A335CE302CE51B030072B001 /* ApplePayViewModel.swift in Sources */,
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
@@ -1342,6 +1368,7 @@
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */,
+				A335CE2D2CE4E1FB0072B001 /* ApplePayHelper.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */,
@@ -1404,6 +1431,7 @@
 				BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */,
 				BEE28AC12C05FB9D00A3CDFF /* BGVTimeSlotScreenView.swift in Sources */,
 				BE644E4C2BF4CFAE00A6781F /* IntroductionScreenView.swift in Sources */,
+				A335CE322CE5C0F90072B001 /* ApplePayResponseModel.swift in Sources */,
 				BECD509C2C5CE667004DD43D /* FAQChatView.swift in Sources */,
 				BEC3658B2BFCB600005AC4A0 /* SuccessfulScreeenView.swift in Sources */,
 				BE0983B12C33F23000FBAECC /* ChatScreenViewModel.swift in Sources */,

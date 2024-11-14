@@ -10,7 +10,10 @@ import SwiftUI
 struct PaymentOrderScreenView: View {
     @Environment(\.router) var router
     @StateObject var viewModel = PaymentViewModel()
-    
+    let paymentHandler = PaymentHandler()
+    @StateObject var viewModelApplePay = ApplePayViewModel()
+
+
     var body: some View {
         ZStack {
             VStack(spacing:0){
@@ -103,8 +106,39 @@ struct PaymentOrderScreenView: View {
                     if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
                         viewModel.amount = "\(viewModel.paymentOrderData?.diffrenceAmount ?? 0.0)"
                         viewModel.fromPaymentFlow = true
-                        router.showScreen(.push) { rout in
+                       /* router.showScreen(.push) { rout in
                             PaymentMethodsScreenView(viewModel: viewModel)
+                        }*/
+                        
+                        self.paymentHandler.startPayment(viewModel: viewModel) { (success, token) in
+                            if success {
+                                print("Success+++++++",token)
+                                
+                                viewModelApplePay.setApplePayTransactionID(transactionID: token) { status in
+                                    if status {
+                                        //send to success screen
+                                        router.showScreen(.push) { rout in
+                                            PaymentConfirmScreenView(viewModel: viewModel)
+                                        }
+                                    }
+                                    else {
+                                        print("Failed")
+                                    }
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            } else {
+                                print("Failed")
+                            }
                         }
                     }else{
                         router.showScreen(.push) { rout in

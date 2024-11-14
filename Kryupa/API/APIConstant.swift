@@ -111,7 +111,8 @@ class APIConstant{
     static let addBank = "\(paymentBaseURL)/bank/add_bank"
     static let getOrderInvoice = "\(paymentBaseURL)/paypal/order_invoice"
     static let OrderList = "\(paymentBaseURL)/payment_history/Order_list"
-    
+    static let setApplePayStatus = "https://v9hhx3kk-3000.inc1.devtunnels.ms/status/update"
+
     
     static let getMeetingToken = "\(communicationBaseURL)/meeting/zoom_session_token"
     static let getChatHistory = "\(communicationBaseURL)/chat/get_conversation"
