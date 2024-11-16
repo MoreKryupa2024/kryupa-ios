@@ -13,12 +13,43 @@ struct CareSeekerHomeScreenView: View {
     @Environment(\.router) var router
     @StateObject private var viewModel = CareSeekerHomeScreenViewModel()
     var showBookingsHistoryScreen = NotificationCenter.default
-    
+    let paymentHandler = PaymentHandler()
+    @StateObject var viewModelApplePay = ApplePayViewModel()
+
     var body: some View {
         ZStack{
             if viewModel.serviceStartData.count > 0{
                 StartServiceScreenView(serviceStartData: viewModel.serviceStartData) { serviceStartData in
-                    viewModel.customerConfirmStartService(serviceStartData: serviceStartData)
+                    //apple pay
+                    self.paymentHandler.startPayment(amount: "\((serviceStartData.amount).removeZerosFromEnd(num: 2))") { (success, token) in
+                        if success {
+                            print("Success+++++++",token)
+                            
+                            viewModelApplePay.setApplePayTransactionID(transactionID: token) { status in
+                                if status {
+                                    //send to success screen
+                                    
+                                    viewModel.customerConfirmStartService(serviceStartData: serviceStartData)
+
+                                    
+                                    
+//                                    router.showScreen(.push) { rout in
+//                                        let paymentViewModel = PaymentViewModel()
+//                                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : bookingData?.id ?? ""])
+//                                        paymentViewModel.paymentOrderData?.createdAt = ""
+
+//                                        PaymentConfirmScreenView(viewModel: paymentViewModel)
+//                                    }
+                                }
+                                else {
+                                    print("Failed")
+                                }
+                            }                            
+                        } else {
+                            print("Failed")
+                        }
+                    }
+                    
                 } cancelAction: { serviceStartData in
                     viewModel.customerCancelStartService(serviceStartData: serviceStartData)
                 }

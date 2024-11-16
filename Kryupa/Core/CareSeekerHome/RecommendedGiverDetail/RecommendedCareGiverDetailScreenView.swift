@@ -16,7 +16,8 @@ struct RecommendedCareGiverDetailScreenView: View {
     @State var bookingID: String = String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
-    
+    let paymentHandler = PaymentHandler()
+
     var body: some View {
         ZStack{
             VStack(spacing:15){
@@ -175,8 +176,17 @@ struct RecommendedCareGiverDetailScreenView: View {
                                     BookingFormScreenView(viewModel: bookingViewModel)
                                 }
                             }else{
-                                viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
-                                presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
+                                //apple pay
+                                self.paymentHandler.startPayment(amount: "0.5") { (success, token) in
+                                    if success {
+                                        print("Success+++++++",token)
+                                        viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                                        presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
+
+                                    } else {
+                                        print("Failed")
+                                    }
+                                }
                             }
                         }
                 }

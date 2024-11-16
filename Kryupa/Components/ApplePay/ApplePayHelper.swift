@@ -23,11 +23,11 @@ class PaymentHandler: NSObject {
     var paymentStatus = PKPaymentAuthorizationStatus.failure
     var completionHandler: PaymentCompletionHandler?
     
-    @MainActor func startPayment(viewModel: PaymentViewModel, completion: @escaping PaymentCompletionHandler) {
+    @MainActor func startPayment(amount: String, completion: @escaping PaymentCompletionHandler) {
         
-        let amount = PKPaymentSummaryItem(label: "Amount", amount: NSDecimalNumber(string: "\((viewModel.paymentOrderData?.pricePerHour ?? 0).removeZerosFromEnd(num: 2))"), type: .final)
-        let tax = PKPaymentSummaryItem(label: "Tax", amount: NSDecimalNumber(string: "2"), type: .final)
-        let total = PKPaymentSummaryItem(label: "ToTal", amount: NSDecimalNumber(string: "\((viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))"), type: .final)
+//        let amount = PKPaymentSummaryItem(label: "Amount", amount: NSDecimalNumber(string: "\((viewModel.paymentOrderData?.pricePerHour ?? 0).removeZerosFromEnd(num: 2))"), type: .final)
+//        let tax = PKPaymentSummaryItem(label: "Tax", amount: NSDecimalNumber(string: "2"), type: .final)
+        let total = PKPaymentSummaryItem(label: "ToTal", amount: NSDecimalNumber(string: amount), type: .final)
         
 //        paymentSummaryItems = [amount, tax, total];
         paymentSummaryItems = [total];
