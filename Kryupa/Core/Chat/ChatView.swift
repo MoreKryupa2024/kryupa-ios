@@ -25,7 +25,9 @@ struct ChatView: View {
                     viewModel.disconnect()
                     router.dismissScreen()
                 }, videoAction: {
-                    viewModel.chatVideoCallData()
+                    viewModel.chatVideoCallData(onlyAudio: false)
+                }, audioAction: {
+                    viewModel.chatVideoCallData(onlyAudio: true)
                 }, nameStr: userName)
                 if Defaults().userType == AppConstants.SeekCare{
 //                    if (viewModel.normalBooking || viewModel.isRecommended){
@@ -72,29 +74,47 @@ struct ChatView: View {
                 LoadingView()
             }
             
-            if viewModel.isPresented {
+            if viewModel.isPresentedVideo {
                 ZoomScreenView(
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
                     sessionName: viewModel.meetingTokenData?.topic ?? "",
                     sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
-                    username: viewModel.meetingTokenData?.userIdentity ?? ""
+                    username: viewModel.meetingTokenData?.userIdentity ?? "", onlyAudio: false
                 ) { error in
                     print("error :- \(error.description)")
                     viewModel.selectedChat?.videoCallId = ""
-                    viewModel.isPresented = false
+                    viewModel.isPresentedVideo = false
                 } onViewLoadedAction: {
                     print("loaded")
                     viewModel.selectedChat?.videoCallId = ""
                 } onViewDismissedAction: {
                     viewModel.selectedChat?.videoCallId = ""
-                    viewModel.isPresented = false
+                    viewModel.isPresentedVideo = false
+                }
+            }
+            else if viewModel.isPresentedAudio {
+                ZoomScreenView(
+                    jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
+                    sessionName: viewModel.meetingTokenData?.topic ?? "",
+                    sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
+                    username: viewModel.meetingTokenData?.userIdentity ?? "", onlyAudio: true
+                ) { error in
+                    print("error :- \(error.description)")
+                    viewModel.selectedChat?.videoCallId = ""
+                    viewModel.isPresentedAudio = false
+                } onViewLoadedAction: {
+                    print("loaded")
+                    viewModel.selectedChat?.videoCallId = ""
+                } onViewDismissedAction: {
+                    viewModel.selectedChat?.videoCallId = ""
+                    viewModel.isPresentedAudio = false
                 }
             }
         }
         .onAppear{
             viewModel.pageNumber = 1
             viewModel.getChatHistory()
-            viewModel.VideoCallData()
+            viewModel.VideoCallData(onlyAudio: false)
             viewModel.messageList = []
             DispatchQueue.main.async {
                 viewModel.disconnect()
@@ -108,7 +128,8 @@ struct ChatView: View {
         }
         .onDisappear(perform: {
             viewModel.selectedChat?.videoCallId = ""
-            viewModel.isPresented = false
+            viewModel.isPresentedVideo = false
+            viewModel.isPresentedAudio = false
             viewModel.disconnect()
         })
         .refreshable {

@@ -26,8 +26,9 @@ class ChatScreenViewModel: ObservableObject{
     @Published var bookingId = String()
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
-    @Published var isPresented = false
-    
+    @Published var isPresentedVideo = false
+    @Published var isPresentedAudio = false
+
     init(){
         self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
@@ -161,7 +162,7 @@ class ChatScreenViewModel: ObservableObject{
         }
     }
     
-    func chatVideoCallData(){
+    func chatVideoCallData(onlyAudio: Bool){
         guard let contactId = selectedChat?.id else {return}
         if (selectedChat?.id ?? "") == ""{
             return
@@ -189,9 +190,20 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    if self.isPresented == false{
-                        self.meetingTokenData = data.data
-                        self.isPresented = true
+                    
+                    if onlyAudio {
+                        if self.isPresentedAudio == false{
+                            self.meetingTokenData = data.data
+                            self.isPresentedAudio = true
+                            self.isPresentedVideo = false
+                        }
+                    }
+                    else {
+                        if self.isPresentedVideo == false{
+                            self.meetingTokenData = data.data
+                            self.isPresentedVideo = true
+                            self.isPresentedAudio = false
+                        }
                     }
                 case .failure(let error):
                     print(error)
@@ -200,7 +212,7 @@ class ChatScreenViewModel: ObservableObject{
         }
     }
     
-    func VideoCallData(){
+    func VideoCallData(onlyAudio: Bool){
         guard let videoCallId = selectedChat?.videoCallId else {return}
         if (selectedChat?.videoCallId ?? "") == ""{
             return
@@ -218,10 +230,22 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    if self.isPresented == false{
-                        self.selectedChat?.videoCallId = ""
-                        self.meetingTokenData = data.data
-                        self.isPresented = true
+                    
+                    if onlyAudio {
+                        if self.isPresentedAudio == false{
+                            self.selectedChat?.videoCallId = ""
+                            self.meetingTokenData = data.data
+                            self.isPresentedAudio = true
+                            self.isPresentedVideo = false
+                        }
+                    }
+                    else {
+                        if self.isPresentedVideo == false{
+                            self.selectedChat?.videoCallId = ""
+                            self.meetingTokenData = data.data
+                            self.isPresentedVideo = true
+                            self.isPresentedAudio = false
+                        }
                     }
                 case .failure(let error):
                     print(error)
