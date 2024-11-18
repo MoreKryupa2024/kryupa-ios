@@ -2,7 +2,7 @@
 //  GooglePlaceScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 12/09/24.
+//  Created by Nirmal Singh Rajput on 12/09/24.
 //
 import Foundation
 import UIKit

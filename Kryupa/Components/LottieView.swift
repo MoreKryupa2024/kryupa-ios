@@ -2,7 +2,7 @@
 //  LottieView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 02/09/24.
+//  Created by Nirmal Singh Rajput on 02/09/24.
 //
 
 import Lottie

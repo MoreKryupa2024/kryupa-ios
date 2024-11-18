@@ -2,7 +2,7 @@
 //  SettingViewModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 31/07/24.
+//  Created by Nirmal Singh Rajput on 31/07/24.
 //
 
 import Foundation

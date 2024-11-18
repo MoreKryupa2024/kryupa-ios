@@ -7,9 +7,11 @@
 
 import SwiftUI
 import SwiftfulUI
+import IQKeyboardManagerSwift
 import Combine
 
 struct ChatView: View {
+    @State private var keyboardHeight: CGFloat = 0
     @Environment(\.router) var router
     @State var userName: String = ""
     @State var sendMsgText: String = ""
@@ -31,7 +33,6 @@ struct ChatView: View {
 //                    if (viewModel.normalBooking || viewModel.isRecommended){
 //                        bookNowView
 //                    }
-
                 }
                 
                 ScrollView(.vertical) {
@@ -61,6 +62,9 @@ struct ChatView: View {
                 .padding(.horizontal, 10)
                 .scrollIndicators(.hidden)
                 sendMessageView
+                    .padding(.bottom, keyboardHeight == 0 ? 0 : (keyboardHeight-32))
+                    .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
+                    .animation(.easeInOut, value: 0.6)
             }
             .background(
                 Image("ChatBackground")
@@ -97,19 +101,18 @@ struct ChatView: View {
             viewModel.VideoCallData()
             viewModel.messageList = []
             DispatchQueue.main.async {
-                viewModel.disconnect()
                 viewModel.connect()
-                viewModel.receiveMessage { msgData, str in
-                    self.viewModel.messageList = [msgData] + self.viewModel.messageList
-                }
             }
             NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                  using: self.setChatScreen)
+            IQKeyboardManager.shared.enable = false
+            
         }
         .onDisappear(perform: {
             viewModel.selectedChat?.videoCallId = ""
             viewModel.isPresented = false
             viewModel.disconnect()
+            IQKeyboardManager.shared.enable = true
         })
         .refreshable {
             if viewModel.messageList.count > 0{
@@ -203,7 +206,8 @@ struct ChatView: View {
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            let text = sendMsgText.trimmingCharacters(in: .whitespaces)
+                            sendMsgText = sendMsgText.removingWhitespaces()
+                            let text = sendMsgText.removingWhitespaces()
                             if !text.isEmpty{
                                 DispatchQueue.main.async {
                                     viewModel.sendMessage(text)

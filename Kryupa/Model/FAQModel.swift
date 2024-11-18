@@ -2,7 +2,7 @@
 //  FAQModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 02/08/24.
+//  Created by Nirmal Singh Rajput on 02/08/24.
 //
 
 import Foundation

@@ -196,7 +196,7 @@ struct ChatBoxView: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-            Text("\((msgData?.createdAt.components(separatedBy: " ").first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")), \((msgData?.createdAt.components(separatedBy: " ").last ?? "").convertDateFormater(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
+            Text("\((msgData?.createdAt.components(separatedBy: " ").first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")), \((msgData?.createdAt.components(separatedBy: " ").last ?? "").convertDateFormaterTimeZone(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
            .font(.custom(FontContent.plusRegular, size: 13))
            .padding(.top,10)
            .frame(maxWidth: .infinity, alignment: .leading)

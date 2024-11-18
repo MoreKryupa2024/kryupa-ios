@@ -11,8 +11,8 @@ import SocketIO
 
 class ChatScreenViewModel: ObservableObject{
     
-    private let manager: SocketManager!
-    private let socket: SocketIOClient!
+    var manager: SocketManager?
+    var socket: SocketIOClient?
     var selectedChat: ChatListData?
     
     @Published var messageList = [MessageData]()
@@ -27,15 +27,6 @@ class ChatScreenViewModel: ObservableObject{
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
     @Published var isPresented = false
-    
-    init(){
-        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
-        self.socket = self.manager.defaultSocket
-    }
-    
-    deinit{
-        disconnect()
-    }
     
     private func setBookingIds(_ notification: Notification) {
         if let bookingid = notification.userInfo?["bookingId"] as? String {
@@ -54,7 +45,6 @@ class ChatScreenViewModel: ObservableObject{
                 self?.isLoading = false
                 switch result{
                 case .success(_):
-//                    self?.selectedChat = data.data
                     self?.getChatHistory()
                 case .failure(let error):
                     print(error.getMessage())
@@ -64,16 +54,24 @@ class ChatScreenViewModel: ObservableObject{
     }
 
     func connect() {
-        socket.on(clientEvent: .connect) {data, ack in
-            print("---socket connected")
-            //Call your first socket here
+        chatWindowFocus()
+        self.receiveMessage { msgData, str in
+            self.messageList = [msgData] + self.messageList
         }
-        let param = ["Authorization": "bearer \(Defaults().accessToken)"]
-        socket.connect(withPayload: param)
     }
 
     func disconnect() {
-        socket.disconnect()
+        chatWindowUnfocus()
+    }
+    
+    func chatWindowFocus(){
+        let param = ["contactId":selectedChat?.id ?? ""]
+        self.socket?.emit("chat_window_focus", with: [param]){}
+    }
+    
+    func chatWindowUnfocus(){
+        let param = ["contactId":selectedChat?.id ?? ""]
+        self.socket?.emit("chat_window_unfocus", with: [param]){}
     }
     
     func getChatHistory(){
@@ -84,9 +82,6 @@ class ChatScreenViewModel: ObservableObject{
         isLoading = true
         let param:[String:Any] = ["contactId": contactId,"pageSize":20,"pageNumber":pageNumber]
         
-        /* let param:[String:Any] = ["contactId": contactId,
-         "pageNumber":pageNumber,
-         "pageSize":20]*/
         NetworkManager.shared.getChatHistory(params: param) { [weak self] result in
             guard let self else {
                 self?.isLoading = false
@@ -99,12 +94,7 @@ class ChatScreenViewModel: ObservableObject{
                     if self.pageNumber == 1{
                         self.messageList = data.data.filter({ MessageData in
                             if MessageData.message.contains("video_call"){
-    //                            self.showVideoCallView = false
                                 return false
-    //                        }else if MessageData.message.contains("pay_now"){
-    //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-    //                            self.showPayViewView = true
-    //                            return false
                             }else{
                                 return true
                             }
@@ -112,48 +102,12 @@ class ChatScreenViewModel: ObservableObject{
                     }else{
                         self.messageList += data.data.filter({ MessageData in
                             if MessageData.message.contains("video_call"){
-    //                            self.showVideoCallView = false
                                 return false
-    //                        }else if MessageData.message.contains("pay_now"){
-    //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-    //                            self.showPayViewView = true
-    //                            return false
                             }else{
                                 return true
                             }
                         })
                     }
-                    
-                    
-                    /*
-                     if self.pageNumber > 1{
-                         self.messageList += data.data.filter({ MessageData in
-                             if MessageData.message.contains("video_call"){
-                                 self.showVideoCallView = false
-                                 return false
-     //                        }else if MessageData.message.contains("pay_now"){
-     //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-     //                            self.showPayViewView = true
-     //                            return false
-                             }else{
-                                 return true
-                             }
-                         })
-                     }else{
-                         self.messageList = data.data.filter({ MessageData in
-                             if MessageData.message.contains("video_call"){
-                                 self.showVideoCallView = false
-                                 return false
-     //                        }else if MessageData.message.contains("pay_now"){
-     //                            self.paySpecialMessageData = SpecialMessageData(jsonData: (MessageData.message.toJSON() as? [String : Any] ?? [String : Any]()))
-     //                            self.showPayViewView = true
-     //                            return false
-                             }else{
-                                 return true
-                             }
-                         })
-                     }
-                     self.pagination = data.data.count != 0*/
                 case .failure(let error):
                     print(error)
                 }
@@ -255,14 +209,14 @@ class ChatScreenViewModel: ObservableObject{
                      "Authorization": "bearer \(Defaults().accessToken)",
                      "message":message]
         print("---message_send Called")
-        socket.emit("message_send", with: [param]) {
+        socket?.emit("message_send", with: [param]) {
             self.messageList = [msgData] + self.messageList
         }
     }
 
     func receiveMessage(_ completion: @escaping (MessageData, String) -> Void) {
         print("---message_receive Called")
-        socket.on("message_receive") { [weak self] data, _ in
+        socket?.on("message_receive") { [weak self] data, _ in
             guard let self else { return }
             if let typeDict = data[0] as? NSDictionary {
                 print(typeDict)
@@ -284,7 +238,8 @@ class ChatScreenViewModel: ObservableObject{
                     "message": message,
                     "sender":senderId,
                     "recipient":recipientId,
-                    "is_action_btn":actionButton
+                    "is_action_btn":actionButton,
+                    "created_at": Date().formattedDateString(format: "yyyy-MM-dd HH:mm:ss.SSS")
                 ])
                 let messcount = self.messageList.filter{$0.id == id}
                 if messcount.count == 0{

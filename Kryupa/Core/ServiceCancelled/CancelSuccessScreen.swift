@@ -2,7 +2,7 @@
 //  CancelSuccessScreen.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 09/08/24.
+//  Created by Nirmal Singh Rajput on 09/08/24.
 //
 
 import SwiftUI

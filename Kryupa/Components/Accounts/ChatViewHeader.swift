@@ -2,7 +2,7 @@
 //  ChatViewHeader.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 03/09/24.
+//  Created by Nirmal Singh Rajput on 03/09/24.
 //
 
 import SwiftUI

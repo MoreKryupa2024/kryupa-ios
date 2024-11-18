@@ -26,78 +26,6 @@ func makeUIView(context: Context) -> WKWebView {
     }
 }
 
-extension Notification.Name {
-    static let setLobbyScreen = Notification.Name("SetLobbyScreen")
-    static let setCareGiverHomeScreen = Notification.Name("setCareGiverHomeScreen")
-    static let setCareSeekerHomeScreen = Notification.Name("setCareSeekerHomeScreen")
-    static let logout = Notification.Name("logout")
-    static let showBookingScreen = Notification.Name("ShowBookingScreen")
-    static let showInboxScreen = Notification.Name("ShowInboxScreen")
-    static let showBookingsHistoryScreen = Notification.Name("ShowBookingsHistoryScreen")
-    static let showJobsScreen = Notification.Name("ShowJobsScreen")
-    static let setBookingId = Notification.Name("SetBookingId")
-    static let setChatScreen = Notification.Name("SetChatScreen")
-    static let showWalletScreen = Notification.Name("ShowWalletScreen")
-
-}
-
-
-extension Date {
-    static func getDates(forLastNDays nDays: Int) -> [WeakDayData] {
-        let cal = NSCalendar.current
-        // start with today
-        var date = cal.date(byAdding: Calendar.Component.day, value: -1, to: Date())!
-
-        var arrDates = [WeakDayData]()
-
-        for _ in 0 ... (nDays-1) {
-            // move back in time by one day:
-            date = cal.date(byAdding: Calendar.Component.day, value: +1, to: date)!
-
-            let weakDay = WeakDayData(id: arrDates.count + 1, 
-                                      day: dateFormatChange(dateFormat: "E", dates: date),
-                                      numDay: dateFormatChange(dateFormat: "dd", dates: date),
-                                      serverDate: dateFormatChange(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", dates: date),
-                                      serverTime: dateFormatChange(dateFormat: "HH:mm:ss", dates: date))
-            arrDates.append(weakDay)
-        }
-        return arrDates
-    }
-}
-
-func dateFormatChange(dateFormat:String, dates: Date)-> String{
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = dateFormat
-    return dateFormatter.string(from: dates)
-}
-
-func dateFormatChangeToDate(dateFormat:String, dates: String)-> Date?{
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = dateFormat
-    return dateFormatter.date(from: dates)
-}
-
-func dateFormatChangeToDate(dates: String)-> Date?{
-    let dateFormatter = DateFormatter()
-    return dateFormatter.date(from: dates)
-}
-
-func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,beforeZone: String, afterZone: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = beforeFormat
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
-
-    guard let date = dateFormatter.date(from: date) else {
-        assert(false, "no date from string")
-        return ""
-    }
-
-    dateFormatter.dateFormat = afterFormat
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
-    let timeStamp = dateFormatter.string(from: date)
-
-    return timeStamp
-}
 
 extension UIView {
 // This is the function to convert UIView to UIImage
@@ -107,4 +35,9 @@ extension UIView {
             layer.render(in: rendererContext.cgContext)
         }
     }
+}
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
 }

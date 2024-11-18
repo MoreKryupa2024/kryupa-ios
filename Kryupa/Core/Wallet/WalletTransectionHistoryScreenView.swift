@@ -2,7 +2,7 @@
 //  WalletTransectionHistoryScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 16/07/24.
+//  Created by Nirmal Singh Rajput on 16/07/24.
 //
 
 import SwiftUI

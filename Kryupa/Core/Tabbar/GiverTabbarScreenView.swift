@@ -60,6 +60,7 @@ struct GiverTabbarScreenView: View {
             tabbarItem(image: "Home", text: "Home", selected: viewModel.selectedIndex == 0)
                 .asButton(.press) {
                     viewModel.selectedIndex = 0
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             
             Spacer()
@@ -67,12 +68,14 @@ struct GiverTabbarScreenView: View {
             tabbarItem(image: "Bookings", text: "Bookings", selected: viewModel.selectedIndex == 1)
                 .asButton(.press) {
                     viewModel.selectedIndex = 1
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
             
             tabbarItem(image: "Jobs", text: "Jobs", selected: viewModel.selectedIndex == 2)
                 .asButton(.press) {
                     viewModel.selectedIndex = 2
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
             
@@ -86,6 +89,7 @@ struct GiverTabbarScreenView: View {
             tabbarItem(image: "account", text: "Account", selected: viewModel.selectedIndex == 4)
                 .asButton(.press) {
                     viewModel.selectedIndex = 4
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
         }

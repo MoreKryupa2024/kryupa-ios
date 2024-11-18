@@ -49,6 +49,7 @@ struct InboxScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
+            viewModel.connect()
             viewModel.getInboxList()
         }
         .onChange(of: viewModel.showChatView) { oldValue, newValue in
@@ -72,12 +73,22 @@ struct InboxScreenView: View {
     
     private func SenderView(profile:ChatListData)-> some View{
         HStack(spacing:0){
-            
-            ImageLoadingView(imageURL: profile.profilePictureURL)
-                .clipShape(Circle())
-                .frame(width: 45,height: 45)
-                .clipped()
-            
+            ZStack{
+                ImageLoadingView(imageURL: profile.profilePictureURL)
+                    .clipShape(Circle())
+                    .frame(width: 50,height: 50)
+                    .clipped()
+                
+                if profile.unseenOrDeliveredCount != "" {
+                    Text("\(profile.unseenOrDeliveredCount)")
+                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .foregroundStyle(.white)
+                        .frame(minWidth: 20, minHeight: 20)
+                        .background(.blue)
+                        .cornerRadius(20)
+                        .offset(x:15,y:15)
+                }
+            }
             VStack(alignment:.leading, spacing:0){
                 Text(profile.name)
                     .lineLimit(1)
@@ -85,6 +96,7 @@ struct InboxScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 16))
                 
                 Text(profile.lastMessage)
+                    .lineLimit(1)
                     .font(.custom(FontContent.plusRegular, size: 13))
                     .foregroundStyle(._7_C_7_C_80)
                 

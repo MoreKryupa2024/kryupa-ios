@@ -72,6 +72,7 @@ struct ConsumerTabBarScreenView: View {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 0
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             
             Spacer()
@@ -80,6 +81,7 @@ struct ConsumerTabBarScreenView: View {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 1
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
             
@@ -88,6 +90,7 @@ struct ConsumerTabBarScreenView: View {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 2
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
             tabbarItem(image: "Inbox", text: "Inbox", selected: consumerTabBarScreenViewModel.selectedIndex == 3)
@@ -103,7 +106,7 @@ struct ConsumerTabBarScreenView: View {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
                     Defaults().bookingId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 4
-                    
+                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
             Spacer()
         }

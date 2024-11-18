@@ -2,7 +2,7 @@
 //  PaymentViewModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 24/07/24.
+//  Created by Nirmal Singh Rajput on 24/07/24.
 //
 
 import Foundation

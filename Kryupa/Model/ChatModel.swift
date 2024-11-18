@@ -45,6 +45,7 @@ struct ChatListData {
     let sessionKey, sessionTopic: String
     let caregiverID, caregiverName: String
     let caregiverPic: String
+    let unseenOrDeliveredCount: String
     let customerID, customerName: String
     var customerPic, actionType, videoCallId: String
 
@@ -67,6 +68,7 @@ struct ChatListData {
         caregiverPic = jsonData["caregiver_pic"] as? String ?? ""
         customerID = jsonData["customer_id"] as? String ?? ""
         customerName = jsonData["customer_name"] as? String ?? ""
+        unseenOrDeliveredCount = jsonData["unseen_or_delivered_count"] as? String ?? ""
         customerPic = jsonData["customer_pic"] as? String ?? ""
         actionType = jsonData["action_type"] as? String ?? ""
         videoCallId = jsonData["video_call_id"] as? String ?? ""

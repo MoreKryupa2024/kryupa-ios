@@ -2,7 +2,7 @@
 //  RecommandedListScreenView.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 20/08/24.
+//  Created by Nirmal Singh Rajput on 20/08/24.
 //
 
 import SwiftUI

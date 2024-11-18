@@ -2,7 +2,7 @@
 //  ServiceDetailScreenViewModel.swift
 //  Kryupa
 //
-//  Created by Hemant Singh Rajput on 08/08/24.
+//  Created by Nirmal Singh Rajput on 08/08/24.
 //
 
 import Foundation
