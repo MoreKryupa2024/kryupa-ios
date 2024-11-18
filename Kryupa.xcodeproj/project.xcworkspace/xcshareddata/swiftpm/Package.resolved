@@ -1,5 +1,5 @@
 {
-  "originHash" : "ef5d1b211a641ccb333588ddcdefdbc7cdb46e5de61ebedc35dcaba98e459a31",
+  "originHash" : "b5e2783cca64ad98cdd79cbb766d2dcbe40fb68aeb63c33eac8cb16d644f769e",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -233,6 +233,15 @@
       "state" : {
         "revision" : "7e6e2d1c29d05e1519f2f5a2ce6012fe4e4dfa19",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "videosdk-ui-toolkit-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zoom/videosdk-ui-toolkit-ios.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8b2e4c2e033d9f3acf776354ca7fbf284fded0c7"
       }
     }
   ],

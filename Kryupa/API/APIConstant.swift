@@ -100,6 +100,8 @@ class APIConstant{
     static let customerConfirmStartService = "\(bookingBaseURL)/confirm-booking-customer"
     static let cancelBookingData = "\(bookingBaseURL)/booking_status"
     static let bookingCancel = "\(bookingBaseURL)/booking_cancel"
+    static let getCardVerificationInfo = "\(bookingBaseURL)/appleinfo/get"
+    static let setCardVerificationInfo = "\(bookingBaseURL)/appleinfo/set"
     
     static let getPaypalOrderID = "\(paymentBaseURL)/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(paymentBaseURL)/paypal/capture_order"
@@ -128,4 +130,7 @@ class APIConstant{
     
     //Stripe
     static let sendStripePaymentMethodId = ""
+    
+    //Apple pay
+    static let setApplePayStatus = "https://v9hhx3kk-3000.inc1.devtunnels.ms/status/update"
 }

@@ -26,7 +26,8 @@ class ChatScreenViewModel: ObservableObject{
     @Published var bookingId = String()
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
-    @Published var isPresented = false
+    @Published var isPresentedVideo = false
+    @Published var isPresentedAudio = false
     
     private func setBookingIds(_ notification: Notification) {
         if let bookingid = notification.userInfo?["bookingId"] as? String {
@@ -115,7 +116,7 @@ class ChatScreenViewModel: ObservableObject{
         }
     }
     
-    func chatVideoCallData(){
+    func chatVideoCallData(onlyAudio: Bool){
         guard let contactId = selectedChat?.id else {return}
         if (selectedChat?.id ?? "") == ""{
             return
@@ -132,7 +133,8 @@ class ChatScreenViewModel: ObservableObject{
         isLoading = true
         let param:[String:Any] = ["contact_Id": contactId,
                                   "received_by":recipientId,
-                                  "started_by":senderId]
+                                  "started_by":senderId,
+                                  "call_type": onlyAudio ? "audio" : "video"]
         
         NetworkManager.shared.chatVideoCall(params: param) { [weak self] result in
             guard let self else {
@@ -143,9 +145,21 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    if self.isPresented == false{
-                        self.meetingTokenData = data.data
-                        self.isPresented = true
+                    
+                    self.meetingTokenData = data.data
+                    
+                    
+                    if onlyAudio {
+                        if self.isPresentedAudio == false{
+                            self.isPresentedAudio = true
+                            self.isPresentedVideo = false
+                        }
+                    }
+                    else {
+                        if self.isPresentedVideo == false{
+                            self.isPresentedVideo = true
+                            self.isPresentedAudio = false
+                        }
                     }
                 case .failure(let error):
                     print(error)
@@ -161,6 +175,7 @@ class ChatScreenViewModel: ObservableObject{
         }
         
         isLoading = true
+        
         let param:[String:Any] = ["video_call_id": videoCallId]
         
         NetworkManager.shared.chatVideoCallID(params: param) { [weak self] result in
@@ -172,11 +187,17 @@ class ChatScreenViewModel: ObservableObject{
                 self.isLoading = false
                 switch result{
                 case .success(let data):
-                    if self.isPresented == false{
+                    
                         self.selectedChat?.videoCallId = ""
                         self.meetingTokenData = data.data
-                        self.isPresented = true
-                    }
+                        if data.data.callType == "audio"{
+                            self.isPresentedAudio = true
+                            self.isPresentedVideo = false
+                        }
+                        else {
+                            self.isPresentedAudio = false
+                            self.isPresentedVideo = true
+                        }
                 case .failure(let error):
                     print(error)
                 }

@@ -64,7 +64,7 @@ struct BGVInterviewMeetingTokenModel {
 // MARK: - DataClass
 struct BGVInterviewMeetingTokenData {
     let sessionToken, sessionKey, topic, userIdentity: String
-    let videoCallID: String
+    let videoCallID,callType: String
     let success: Bool
 
     init(jsonData:[String:Any]) {
@@ -73,6 +73,7 @@ struct BGVInterviewMeetingTokenData {
         topic = jsonData["topic"] as? String ?? ""
         userIdentity = "\(Defaults().firstName) \(Defaults().lastName)" //jsonData["userIdentity"] as? String ?? ""
         videoCallID = jsonData["videoCallID"] as? String ?? ""
+        callType = jsonData["call_type"] as? String ?? ""
         success = jsonData["success"] as? Bool ?? false
     }
 }

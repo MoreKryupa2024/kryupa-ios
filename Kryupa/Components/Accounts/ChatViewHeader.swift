@@ -12,6 +12,8 @@ struct UserNameView:  View{
     
     var backAction:(()-> Void)? = nil
     var videoAction:(()-> Void)? = nil
+    var audioAction:(()-> Void)? = nil
+    @State private var showingAlert = false
     var nameStr = String()
     
     var body: some View {
@@ -28,12 +30,25 @@ struct UserNameView:  View{
                 .font(.custom(FontContent.besRegular, size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack {
+            HStack(spacing: 10){
+                Image("audio")
+                    .resizable()
+                    .frame(width: 24,height: 24)
+                    .asButton(.press) {
+                        audioAction?()
+                    }
+                
                 Image("video")
                     .resizable()
                     .frame(width: 24,height: 24)
                     .asButton(.press) {
-                        videoAction?()
+                        showingAlert = true
+                    }
+                    .alert("Are you sure you want to start a video call?", isPresented: $showingAlert) {
+                        Button("Yes", action: {
+                            videoAction?()
+                        })
+                        Button("No", role: .cancel, action: {})
                     }
             }
         }
