@@ -30,6 +30,36 @@
             endingLineNumber = "219"
             landmarkName = "ImageViewSection"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "CB934AE7-5209-4FB1-B8B8-83082C166486 - b44bb000e132ae9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SwiftUI.ActionSheet in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.fullScreenCover&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.alert&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(_: SwiftUI.LocalizedStringKey, isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, actions: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.Spacer)&gt; in Kryupa.ProfileDetailScreenView.ImageViewSection.getter : some"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/UserProfileSection/ProfileDetailScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219">
+               </Location>
+               <Location
+                  uuid = "CB934AE7-5209-4FB1-B8B8-83082C166486 - 2f0a093a77bbe944"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #3 () -&gt; SwiftUI.ActionSheet in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.fullScreenCover&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.alert&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(_: SwiftUI.LocalizedStringKey, isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, actions: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.Spacer)&gt; in Kryupa.ProfileDetailScreenView.ImageViewSection.getter : some"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/UserProfileSection/ProfileDetailScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "220"
+                  endingLineNumber = "220">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,6 +172,50 @@
             endingLineNumber = "117"
             landmarkName = "customerConfirmStartService(serviceStartData:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5DD64EFB-4B76-4899-9E2E-7A1E4C47CA86 - 593856148bce7a7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kryupa.CareSeekerHomeScreenViewModel.customerConfirmStartService(serviceStartData: Kryupa.ServiceStartData) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117">
+               </Location>
+               <Location
+                  uuid = "5DD64EFB-4B76-4899-9E2E-7A1E4C47CA86 - 6994941be9d8201a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.CareSeekerHomeScreenViewModel.customerConfirmStartService(serviceStartData: Kryupa.ServiceStartData) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117">
+               </Location>
+               <Location
+                  uuid = "5DD64EFB-4B76-4899-9E2E-7A1E4C47CA86 - 2b445ae05a490c59"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor @Sendable () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.CareSeekerHomeScreenViewModel.customerConfirmStartService(serviceStartData: Kryupa.ServiceStartData) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,42 +228,40 @@
             filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "VideoCallData(onlyAudio:)"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "VideoCallData()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "89A6FE83-AE55-4D71-B762-78C01C82898A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/Chat/ChatView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3E927B89-6C1D-49F2-B89A-F84CA4B9D53F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "getChatHistory()"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2FDC9FA7-966B-4596-A152-64701DA8A69C - 97d5647cb11a6545"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kryupa.ChatScreenViewModel.VideoCallData() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Chat/ChatScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "225"
+                  endingLineNumber = "225">
+               </Location>
+               <Location
+                  uuid = "2FDC9FA7-966B-4596-A152-64701DA8A69C - 1358e802902b46eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Kryupa.Results&lt;Kryupa.BGVInterviewMeetingTokenModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.ChatScreenViewModel.VideoCallData() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Chat/ChatScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "225"
+                  endingLineNumber = "225">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,6 +278,36 @@
             endingLineNumber = "114"
             landmarkName = "getChatHistory()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5FC29117-2D4B-490B-ACAD-82A8A9CB85FE - bd4d6931d4f6ca59"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.MessageModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.ChatScreenViewModel.getChatHistory() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Chat/ChatScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114">
+               </Location>
+               <Location
+                  uuid = "5FC29117-2D4B-490B-ACAD-82A8A9CB85FE - 6b947f44bae87871"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Kryupa.MessageData) -&gt; Swift.Bool in closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.MessageModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.ChatScreenViewModel.getChatHistory() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Chat/ChatScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -227,54 +329,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D0E961F6-53C0-42F5-B170-790C17FEE4DD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "getChatHistory()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "38E439A1-7DE1-47B9-8010-E9AD57625168"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "getChatHistory()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4309156C-6E45-43AD-904F-622CC0F5E920"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "getChatHistory()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2981424F-1577-4753-8538-D46531851FA5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -282,9 +336,701 @@
             filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "VideoCallData(onlyAudio:)"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "VideoCallData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52085F7A-2CF6-476F-82DE-B9149CB2214F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "ProfileView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "52085F7A-2CF6-476F-82DE-B9149CB2214F - c16b415fd2c501a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #2 () -&gt; () in closure #5 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;)&gt; in Kryupa.RecommendedCareGiverDetailScreenView.ProfileView.getter : some"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182">
+               </Location>
+               <Location
+                  uuid = "52085F7A-2CF6-476F-82DE-B9149CB2214F - 45110b49344a028a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.String) -&gt; () in closure #2 (Swift.Bool) -&gt; () in closure #2 () -&gt; () in closure #5 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.asButton(_: SwiftfulUI.ButtonType, action: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;)&gt; in Kryupa.RecommendedCareGiverDetailScreenView.ProfileView.getter : some"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E46A886D-E056-4722-A031-F13AFC94340B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "ProfileView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82E08803-A069-4111-8F14-AAC81979D24C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "getCardVerificationDetails(action:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EAEE7D34-9CF4-4671-B506-7958070AC52E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Model/ApplePayResponseModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "init(jsonData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E2A6DFF-55A4-434B-9669-6EFBD278C14F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/API/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1617"
+            endingLineNumber = "1617"
+            landmarkName = "getCardVerificationDetails(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D2A65D8-2B57-47B9-91F6-4B6694DB5CF5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "ProfileView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE252FFF-1914-417D-B641-850CEFE103C2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "setCardVerificationDetails()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BE252FFF-1914-417D-B641-850CEFE103C2 - 37cdf1c8223d9b53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.CardVerificationModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.RecommendedCareGiverDetailScreenViewModel.setCardVerificationDetails() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60">
+               </Location>
+               <Location
+                  uuid = "BE252FFF-1914-417D-B641-850CEFE103C2 - 37cdf1c8223d9b53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.CardVerificationModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.RecommendedCareGiverDetailScreenViewModel.setCardVerificationDetails() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60">
+               </Location>
+               <Location
+                  uuid = "BE252FFF-1914-417D-B641-850CEFE103C2 - 37cdf1c8223d9b53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.CardVerificationModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.RecommendedCareGiverDetailScreenViewModel.setCardVerificationDetails() -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38F475A2-3776-434E-B9AB-054F881B4662"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3B223F9-FA5C-4792-8621-02FCA80FE840"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A51766DC-3E28-4AFA-BF99-C5E7CE4BE891"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE0C2960-62A5-4DE4-985B-8C8DD5A6F2D1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4434882E-59A9-4CC2-AFBC-C1DD562D3C4C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40B2E1F7-8E92-419A-A159-D88619E0501C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E389E79E-3DBC-4A66-900D-061F37257763"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "774A8746-0650-4AE9-8CDA-E1D0576DB3DD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0C51748-1B2D-4388-9DA5-042871F4082E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "customerCancelStartService(serviceStartData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F3158B7-5DCA-4A86-9A84-D22FC6436208"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "customerCancelStartService(serviceStartData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22C29A4D-73B1-4F64-A089-DA423851B308"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "customerCancelStartService(serviceStartData:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "22C29A4D-73B1-4F64-A089-DA423851B308 - ab603b839026a9b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor @Sendable () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.CareSeekerHomeScreenViewModel.customerCancelStartService(serviceStartData: Kryupa.ServiceStartData) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143">
+               </Location>
+               <Location
+                  uuid = "22C29A4D-73B1-4F64-A089-DA423851B308 - ab603b839026a9b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor @Sendable () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.CareSeekerHomeScreenViewModel.customerCancelStartService(serviceStartData: Kryupa.ServiceStartData) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00B7880C-7DDF-4B04-8AEB-905B9D068B32"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/API/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2333"
+            endingLineNumber = "2333"
+            landmarkName = "giverCancelStartService(params:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "00B7880C-7DDF-4B04-8AEB-905B9D068B32 - 1cd5da10e0a7d2de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Kryupa.NetworkManager.giverCancelStartService(params: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, completionHandler: (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/API/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2333"
+                  endingLineNumber = "2333">
+               </Location>
+               <Location
+                  uuid = "00B7880C-7DDF-4B04-8AEB-905B9D068B32 - 1cd5da10e0a7d2de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Kryupa.NetworkManager.giverCancelStartService(params: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, completionHandler: (Kryupa.Results&lt;Kryupa.ServiceStartModel, Kryupa.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/API/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2333"
+                  endingLineNumber = "2333">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "737D2C94-FF6C-49DF-B655-7D3CC788C4C2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/API/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2337"
+            endingLineNumber = "2337"
+            landmarkName = "giverCancelStartService(params:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "16E6B8A0-FF08-4471-B519-23E3AD8F2909"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/API/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2334"
+            endingLineNumber = "2334"
+            landmarkName = "giverCancelStartService(params:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9DDD6FDB-22C3-41D3-91C8-A0AFBB92A748"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "customerSvcAct()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9374F336-0CE5-4578-845C-FDAB7BE813AD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "customerSvcAct()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1CB8817F-EFC3-48A4-A0EC-5BD0569C07A7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "85322C3C-88D7-4EF2-9324-2CCC89F4D2E3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/RecommendedGiverDetail/RecommendedCareGiverDetailScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "ProfileView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5B5567D5-11C8-4E43-8417-099AF27B6E4C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Booking/ApplePay/ApplePayViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "setApplePayTransactionID(transactionID:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5B5567D5-11C8-4E43-8417-099AF27B6E4C - 8d1b0c956e965533"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.ApplePayModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.ApplePayViewModel.setApplePayTransactionID(transactionID: Swift.String, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Booking/ApplePay/ApplePayViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+               <Location
+                  uuid = "5B5567D5-11C8-4E43-8417-099AF27B6E4C - 8d1b0c956e965533"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Kryupa.Results&lt;Kryupa.ApplePayModel, Kryupa.NetworkError&gt;) -&gt; () in Kryupa.ApplePayViewModel.setApplePayTransactionID(transactionID: Swift.String, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Kryupa"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/poojanenava/Documents/Pooja/Moreyeahs/KryupaGithub/WithApplePay/kryupa-ios/Kryupa/Core/Booking/ApplePay/ApplePayViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "660FF390-07A0-469F-BDB5-8BE2C98FF5B5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3489133-9ECE-4D1B-BF24-71CCA0501DAE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/CareSeekerHome/CareSeekerHomeView/CareSeekerHomeScreenView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1A2E9ED-8E1C-4636-9F7A-C3EA69E99D13"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3664C817-0C44-4F9E-B38D-62805E2A8670"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "chatVideoCallData(onlyAudio:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1604F475-A1D1-4AD0-B0D4-6F58ACF98D0B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "VideoCallData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4404A258-6CBC-49D9-968F-766C9A58513A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "VideoCallData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B52C814E-32C7-46D9-93E7-CEB587DD2573"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kryupa/Core/Chat/ChatScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "chatVideoCallData(onlyAudio:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

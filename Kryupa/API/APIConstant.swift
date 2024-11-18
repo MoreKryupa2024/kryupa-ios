@@ -84,6 +84,8 @@ class APIConstant{
     static let bookingReviewsGiver = "\(userBaseURL)/caregiver/reviews/booking_reviews"
     static let myServices = "\(userBaseURL)/caregiver/account/my_services"
     static let updateMyService = "\(userBaseURL)/caregiver/account/Update_my_service"
+    static let getCardVerificationInfo = "\(bookingBaseURL)/appleinfo/get"
+    static let setCardVerificationInfo = "\(bookingBaseURL)/appleinfo/set"
 
     static let getRelativeList = "\(bookingBaseURL)/booking_for_dropdown"
     static let createBooking = "\(bookingBaseURL)/createBooking"

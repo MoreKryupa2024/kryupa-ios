@@ -16,3 +16,16 @@ struct ApplePayModel: Codable {
         message = jsonData["message"] as? String ?? ""
     }
 }
+
+struct CardVerificationModel: Codable {
+    let status: Bool
+    let message: String
+    let data: [String]
+    
+    init(jsonData:[String:Any]){
+        status = jsonData["status"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = jsonData["data"] as? [String] ?? []
+    }
+
+}

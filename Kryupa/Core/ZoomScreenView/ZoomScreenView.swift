@@ -16,7 +16,7 @@ struct ZoomScreenView: UIViewControllerRepresentable {
     var sessionName = ""
     var sessionPassword = ""
     var username = ""
-    var onlyAudio = false
+    var callType = ""
     var toolkitErrorAction: (UIToolkitError) -> Void
     var onViewLoadedAction: () -> Void
     var onViewDismissedAction: () -> Void
@@ -34,7 +34,7 @@ struct ZoomScreenView: UIViewControllerRepresentable {
         vc.sessionName = sessionName
         vc.username = username
         vc.sessionPassword = sessionPassword
-        vc.onlyAudio = onlyAudio
+        vc.callType = callType
     }
     
     func makeCoordinator() -> Coordinator {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
     var sessionName = ""
     var username = ""
     var sessionPassword = ""
-    var onlyAudio = false
+    var callType = ""
     var delegate: UIToolkitDelegate?
     
     override func viewDidLoad() {
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     func present(){
         var vc = UIToolkitVC(sessionContext: SessionContext(jwt: jwt, sessionName: sessionName, sessionPassword: sessionPassword, username: username))
 
-        if onlyAudio {
+        if callType == "audio" {
             let ip = InitParams(features: [.Audio, .ShareScreen, .Users])
             vc = UIToolkitVC(sessionContext: SessionContext(jwt: jwt, sessionName: sessionName, sessionPassword: sessionPassword, username: username), initParams: ip)
         }

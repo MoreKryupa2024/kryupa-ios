@@ -177,14 +177,26 @@ struct RecommendedCareGiverDetailScreenView: View {
                                 }
                             }else{
                                 //apple pay
-                                self.paymentHandler.startPayment(amount: "0.5") { (success, token) in
-                                    if success {
-                                        print("Success+++++++",token)
+                                viewModel.getCardVerificationDetails { status in
+                                    if !status {
+                                        self.paymentHandler.startPayment(amount: "0.5") { (success, token) in
+                                            if success {
+                                                print("Success+++++++",token)
+                                                
+                                                viewModel.setCardVerificationDetails()
+                                                
+                                                viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                                                presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
+
+                                            } else {
+                                                print("Failed")
+                                            }
+                                        }
+                                    }
+                                    else {
                                         viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
                                         presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
 
-                                    } else {
-                                        print("Failed")
                                     }
                                 }
                             }

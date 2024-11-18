@@ -79,7 +79,7 @@ struct ChatView: View {
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
                     sessionName: viewModel.meetingTokenData?.topic ?? "",
                     sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
-                    username: viewModel.meetingTokenData?.userIdentity ?? "", onlyAudio: false
+                    username: viewModel.meetingTokenData?.userIdentity ?? "", callType: "video"
                 ) { error in
                     print("error :- \(error.description)")
                     viewModel.selectedChat?.videoCallId = ""
@@ -97,7 +97,7 @@ struct ChatView: View {
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
                     sessionName: viewModel.meetingTokenData?.topic ?? "",
                     sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
-                    username: viewModel.meetingTokenData?.userIdentity ?? "", onlyAudio: true
+                    username: viewModel.meetingTokenData?.userIdentity ?? "", callType: "audio"
                 ) { error in
                     print("error :- \(error.description)")
                     viewModel.selectedChat?.videoCallId = ""
@@ -114,7 +114,7 @@ struct ChatView: View {
         .onAppear{
             viewModel.pageNumber = 1
             viewModel.getChatHistory()
-            viewModel.VideoCallData(onlyAudio: false)
+            viewModel.VideoCallData()
             viewModel.messageList = []
             DispatchQueue.main.async {
                 viewModel.disconnect()
@@ -128,8 +128,8 @@ struct ChatView: View {
         }
         .onDisappear(perform: {
             viewModel.selectedChat?.videoCallId = ""
-            viewModel.isPresentedVideo = false
-            viewModel.isPresentedAudio = false
+//            viewModel.isPresentedVideo = false
+//            viewModel.isPresentedAudio = false
             viewModel.disconnect()
         })
         .refreshable {

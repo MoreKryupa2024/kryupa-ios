@@ -1532,6 +1532,101 @@ class NetworkManager{
         task.resume()
     }
     
+    func setCardVerificationDetails(completionHandler :  @escaping (Results<CardVerificationModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.setCardVerificationInfo) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+//        if let parameters = params{
+//            print(parameters)
+//            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+//            request.httpBody = jsonData
+//        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = CardVerificationModel(jsonData: parsedData)
+//                if apiData.status{
+                    completionHandler(.success(apiData))
+//                }else{
+//                    completionHandler(.failure(.somethingWentWrong))
+//                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func getCardVerificationDetails(completionHandler :  @escaping (Results<CardVerificationModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:"\(APIConstant.getCardVerificationInfo)") else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            let decoder = JSONDecoder()
+
+            do {
+                let apiData = try decoder.decode(CardVerificationModel.self, from: data)
+//                if apiData.status{
+                    completionHandler(.success(apiData))
+//                }else{
+//                    completionHandler(.failure(.somethingWentWrong))
+//                }
+//                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func getCareGiverDetails(giverId: String,bookingId: String,completionHandler :  @escaping (Results<CareGiverDetailModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:"\(APIConstant.getCareGiverInCustomerDetails)\(giverId)&booking_id=\(bookingId)") else {
