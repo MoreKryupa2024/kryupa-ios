@@ -236,9 +236,12 @@ struct ExperienceandSkillsView: View {
     private var certificationDocumentsView: some View{
         VStack{
             HStack(spacing:0){
-                Text("Certification & documents")
+                Text("Certification & documents.")
 //                Text("*")
 //                    .foregroundStyle(.red)
+                Text(" (.pdf)")
+                    .foregroundStyle(._7_C_7_C_80)
+                    .font(.custom(FontContent.plusRegular, size: 13))
                 Spacer()
             }
             

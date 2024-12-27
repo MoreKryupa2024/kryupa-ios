@@ -21,14 +21,26 @@ struct BGVTimeSlotScreenView: View {
                 
                 ScrollView {
                     VStack(spacing:0){
-                        ForEach(viewModel.availableSlotsList, id: \.id) { slot in
-                            
-                            AvailableTimeSlotsView(
-                                isSelected: viewModel.selectedSlotID == slot.id,
-                                availablityTime: "\(slot.startingTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(slot.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))"
-                            )
-                            .asButton {
-                                viewModel.selectedSlotID = slot.id
+                        if viewModel.availableSlotsList.count == 0 {
+                            VStack(spacing:40){
+                                Spacer()
+                                Image("SlotsEmpty")
+                                    .resizable()
+                                    .aspectRatio(283/225, contentMode: .fit)
+                                    .padding(.horizontal,46)
+                                Text("No slots are available!\nPlease try again after sometime.")
+                                    .multilineTextAlignment(.center)
+                                Spacer()
+                            }
+                        }else{
+                            ForEach(viewModel.availableSlotsList, id: \.id) { slot in
+                                AvailableTimeSlotsView(
+                                    isSelected: viewModel.selectedSlotID == slot.id,
+                                    availablityTime: "\(slot.startingTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")) - \(slot.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a"))"
+                                )
+                                .asButton {
+                                    viewModel.selectedSlotID = slot.id
+                                }
                             }
                         }
                     }
@@ -41,8 +53,12 @@ struct BGVTimeSlotScreenView: View {
                 nextButton
                     .padding(.vertical,27)
                     .asButton(.press) {
-                        router.showScreen(.push) { _ in
-                            InterviewScheduledScreenView(selectedSlotID: viewModel.selectedSlotID)
+                        if viewModel.selectedSlotID.isEmpty{
+                            presentAlert(title: "Kryupa", subTitle: "Please Select Slot for Interview")
+                        }else {
+                            router.showScreen(.push) { _ in
+                                InterviewScheduledScreenView(selectedSlotID: viewModel.selectedSlotID)
+                            }
                         }
                     }
             }
@@ -77,6 +93,7 @@ struct BGVTimeSlotScreenView: View {
         WeakDayView(selectedValue: viewModel.selectedDay){ selectedWeak in
             viewModel.selectedDay = selectedWeak
             viewModel.getSlotList()
+            viewModel.selectedSlotID = ""
         }
         .padding(.horizontal,24)
         .padding(.top,24)

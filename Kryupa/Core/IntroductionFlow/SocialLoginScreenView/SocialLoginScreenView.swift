@@ -12,7 +12,9 @@ import AuthenticationServices
 
 struct SocialLoginScreenView: View {
     @State var checkbox:Bool =  Defaults().userType == AppConstants.GiveCare ? true : true
+    @State var showTCView:Bool = false
     @Environment(\.router) var router
+    @State var param:[String:Any] = [:]
     var userType: String = UserDefaults.standard.value(forKey: "user") as? String ?? ""
     @StateObject private var viewModel = SocialLoginScreenViewModel()
     var title: String{
@@ -94,6 +96,18 @@ struct SocialLoginScreenView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             
+            if showTCView{
+                AppleSignupTCScreenView {
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        showTCView = false
+                        viewModel.signCall(param: param){ userInfo in
+                            navigateToMobileNumberView(userInfo: userInfo)
+                        }
+                    }
+                }
+                .transition(.move(edge: .bottom))
+            }
+            
             if viewModel.isLoading{
                 LoadingView()
             }
@@ -127,8 +141,7 @@ struct SocialLoginScreenView: View {
             print("identityToken:- \(identityToken)")
             print("authorizationCode:- \(authorizationCode)")
             print("userIdentifier:- \(userIdentifier)")
-            
-            let param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
+            self.param = ["deviceId": UIDevice.current.identifierForVendor!.uuidString,
                          "deviceType": AppConstants.DeviceType,
                          "socialAccessToken": identityToken,
                          "fcmToken": Messaging.messaging().fcmToken ?? "safasfasf",
@@ -136,16 +149,20 @@ struct SocialLoginScreenView: View {
                          "userType": Defaults().userType,
                          "providerType": AppConstants.SocialApple
             ]
-            
-            viewModel.signCall(param: param){ userInfo in
-                navigateToMobileNumberView(userInfo: userInfo)
+            if let email{
+                viewModel.signCall(param: param){ userInfo in
+                    navigateToMobileNumberView(userInfo: userInfo)
+                }
+            }else{
+                withAnimation(.easeIn(duration: 0.5)) {
+                    showTCView = true
+                }
             }
         }
     }
     
     private func handleLoginError(with error: Error) {
-        
-        print("Could not authenticate: \\(error.localizedDescription)")
+        print("Could not authenticate: \(error.localizedDescription)")
     }
     
     //MARK: Navigate To Mobile Number Screen

@@ -88,6 +88,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
     
     func dataEmergancyChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         name = name.removingWhitespaces()
+        email = email.removingWhitespaces()
         if name.isEmpty {
             return alert("Please Enter Name")
         }else if relation.isEmpty{

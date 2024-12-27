@@ -12,34 +12,69 @@ struct PaymentMethodsScreenView: View {
     
     @Environment(\.router) var router
     @StateObject var viewModel = PaymentViewModel()
+    let paymentHandler = PaymentHandler()
+    
+    @State var showCardListScreen = false
+    @State var showMoneyAddedScreen = false
+    @State var showPaymentConfirmScreen = false
+    
+    var paymentConfirmAction: (()->Void)? = nil
+    var backAction: (()->Void)? = nil
     
     var body: some View {
         ZStack{
             VStack{
-                HeaderView(title: "Payment", showBackButton: true)
+                HeaderView(title: "Payment", showBackButton: true) {
+                    backAction?()
+                }
                 VStack(spacing:15){
-//                    ZelleView
-//                        .asButton(.press) {
-//                            router.showScreen(.push) { rout in
-//                                MoneyAddedScreenView(viewModel: viewModel)
-//                            }
-//                        }
                     PaypalView
                         .asButton(.press) {
-                            
                             viewModel.getPaypalOrderID()
-//                            router.showScreen(.push) { rout in
-//                                MoneyAddedScreenView()
-//                            }
                         }
-//                    VenmoView
-//                        .asButton(.press) {
-//                            router.showScreen(.push) { rout in
-//                                MoneyAddedScreenView(viewModel: viewModel)
-//                            }
-//                        }
+                    StripeView
+                        .asButton(.press) {
+                            self.showCardListScreen = true
+                        }
+                    
+                    ApplePayView
+                        .asButton(.press) {
+                            self.paymentHandler.startPayment(amount: viewModel.amount) { (success, token) in
+                                if success {
+                                    print(token)
+                                    self.viewModel.applePayPaymentConfirm(transactionID: token)
+                                    self.showMoneyAddedScreen = true
+                                }else{
+                                    self.presentAlert(title: "Kryupa", subTitle: token)
+                                }
+                            }
+                        }
                     Spacer()
                 }
+            }
+            
+            if showCardListScreen{
+                CardListScreenView(viewPaymentViewModel: viewModel) {
+                    self.showMoneyAddedScreen = true
+                } backAction: {
+                    showCardListScreen = false
+                }
+                .background(.white)
+            }
+            
+            if showMoneyAddedScreen{
+                MoneyAddedScreenView(viewModel: viewModel,paymentConfirmAction: {
+                    self.showMoneyAddedScreen = false
+                    paymentConfirmAction?()
+                })
+                .background(.white)
+            }
+            
+            if showPaymentConfirmScreen{
+                PaymentConfirmScreenView(paymentConfirmAction: {
+                    paymentConfirmAction?()
+                }, viewModel: viewModel)
+                    .background(.white)
             }
             
             if viewModel.isloading {
@@ -54,13 +89,9 @@ struct PaymentMethodsScreenView: View {
                     print(result)
                     viewModel.confirmPaypalOrderID() {
                         if viewModel.fromPaymentFlow{
-                            router.showScreen(.push) { rout in
-                                PaymentConfirmScreenView(viewModel: viewModel)
-                            }
+                            self.showPaymentConfirmScreen = true
                         }else{
-                            router.showScreen(.push) { rout in
-                                MoneyAddedScreenView(viewModel: viewModel)
-                            }
+                            self.showMoneyAddedScreen = true
                         }
                     }
                 } payPalError: { payPalClient, error in
@@ -111,6 +142,43 @@ struct PaymentMethodsScreenView: View {
                 .stroke(lineWidth: 1.0)
                 .foregroundStyle(.E_5_E_5_EA)
                 
+        }
+        .padding(.horizontal,24)
+    }
+    
+    private var StripeView: some View{
+        HStack(spacing:20){
+            Image("Stripe")
+                .resizable()
+                .frame(width: 50,height: 35)
+            Text("Continue With Stripe")
+                .font(.custom(FontContent.plusRegular, size: 15))
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 48)
+        .overlay {
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(lineWidth: 1.0)
+                .foregroundStyle(.E_5_E_5_EA)
+                
+        }
+        .padding(.horizontal,24)
+    }
+    
+    private var ApplePayView: some View{
+        HStack(spacing:20){
+            Image("ApplePay")
+                .resizable()
+                .frame(width: 35,height: 35)
+            Text("Continue With Apple Pay")
+                .font(.custom(FontContent.plusRegular, size: 15))
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 48)
+        .overlay {
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(lineWidth: 1.0)
+                .foregroundStyle(.E_5_E_5_EA)
         }
         .padding(.horizontal,24)
     }

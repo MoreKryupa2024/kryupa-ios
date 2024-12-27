@@ -14,6 +14,9 @@ struct OTPVerificationScreenView: View {
     var mobileNumber: String = String()
     @State var otp: String = String()
     var requestId: String = String()
+    @State private var timeRemaining = 30
+    @State private var timerActive = false
+    @State private var timer: Timer?
     
     @StateObject private var viewModel = MobileScreenViewModel()
     
@@ -84,6 +87,9 @@ struct OTPVerificationScreenView: View {
                 
             })
             .modifier(DismissingKeyboard())
+            .task {
+                startTimer()
+            }
             
             if viewModel.isLoading{
                 LoadingView()
@@ -95,18 +101,35 @@ struct OTPVerificationScreenView: View {
     private var resendOTPView: some View{
         HStack(spacing:5){
             Text("Didn’t receive the code?")
-            Text("Resend it")
+            Text(timerActive ? "Resend OTP in (\(timeRemaining))" :"Resend it")
                 .underline()
                 .asButton(.press) {
                     self.viewModel.mobileNumner = self.mobileNumber
-                    self.viewModel.sendOTP {} errorAction: { _ in }
+                    self.viewModel.sendOTP { startTimer() } errorAction: { _ in}
                 }
+                .disabled(timerActive)
         }
         .font(.custom(FontContent.plusRegular, size: 13))
         .foregroundStyle(._444446)
         .padding(.top, 15)
     }
-
+    
+    func startTimer() {
+        timeRemaining = 30
+        timerActive = true
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {  timer in
+            if self.timeRemaining > 1 {
+                DispatchQueue.main.async {
+                    self.timeRemaining -= 1
+                }
+            } else {
+                timer.invalidate()
+                DispatchQueue.main.async {
+                    self.timerActive = false
+                }
+            }
+        }
+    }
     
     //MARK: Verify Code View
     private var verifyCodeButton: some View {

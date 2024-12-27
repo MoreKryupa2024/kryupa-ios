@@ -13,42 +13,20 @@ struct CareSeekerHomeScreenView: View {
     @Environment(\.router) var router
     @StateObject private var viewModel = CareSeekerHomeScreenViewModel()
     var showBookingsHistoryScreen = NotificationCenter.default
+    @State var serviceStart: ServiceStartData?
     let paymentHandler = PaymentHandler()
     @StateObject var viewModelApplePay = ApplePayViewModel()
+    @State var showPaymentOrderScreen = false
+    @StateObject var paymentViewModel = PaymentViewModel()
     
     var body: some View {
         ZStack{
             if viewModel.serviceStartData.count > 0{
                 StartServiceScreenView(serviceStartData: viewModel.serviceStartData) { serviceStartData in
-//                    viewModel.customerConfirmStartService(serviceStartData: serviceStartData)
-                    self.paymentHandler.startPayment(amount: "\((serviceStartData.amount).removeZerosFromEnd(num: 2))") { (success, token) in
-                        if success {
-                            print("Success+++++++",token)
-                            
-                            viewModelApplePay.setApplePayTransactionID(transactionID: token) { status in
-                                if status {
-                                    //send to success screen
-                                    
-                                    viewModel.customerConfirmStartService(serviceStartData: serviceStartData)
-
-                                    
-                                    
-//                                    router.showScreen(.push) { rout in
-//                                        let paymentViewModel = PaymentViewModel()
-//                                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : bookingData?.id ?? ""])
-//                                        paymentViewModel.paymentOrderData?.createdAt = ""
-
-//                                        PaymentConfirmScreenView(viewModel: paymentViewModel)
-//                                    }
-                                }
-                                else {
-                                    print("Failed")
-                                }
-                            }
-                        } else {
-                            print("Failed")
-                        }
-                    }
+                    showPaymentOrderScreen = true
+                    paymentViewModel.amount = "20.0"
+                    self.serviceStart = serviceStartData
+                    
                 } cancelAction: { serviceStartData in
                     viewModel.customerCancelStartService(serviceStartData: serviceStartData)
                 }
@@ -96,12 +74,25 @@ struct CareSeekerHomeScreenView: View {
                 }
                 .scrollIndicators(.hidden)
                 .toolbar(.hidden, for: .navigationBar)
-                //                .refreshable {
-                //                    viewModel.customerSvcAct()
-                //                }
+//                .refreshable {
+//                    viewModel.customerSvcAct()
+//                }
             }
+            
             if viewModel.isloading{
                 LoadingView()
+            }
+            
+            if showPaymentOrderScreen{
+                PaymentOrderScreenView(viewModel: paymentViewModel,serviceId: serviceStart?.id ?? "") {
+                    guard let serviceStart else {return}
+                    
+                    viewModel.payForService(serviceStartData: serviceStart)
+                    showPaymentOrderScreen = false
+                } backAction: {
+                    showPaymentOrderScreen = false
+                }
+                .background(.white)
             }
         }
         .onAppear{

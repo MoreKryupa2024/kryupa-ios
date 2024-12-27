@@ -10,18 +10,18 @@ import Stripe
 import SwiftfulUI
 
 struct AddCardStripeScreenView: View {
-
-    var paymentIntentClientSecret: String?
+    
+    @Environment(\.router) var router
+    @StateObject var viewPaymentViewModel = PaymentViewModel()
     @StateObject var viewModel = AddCardStripeScreenViewModel()
-    
-    init(){
-        StripeAPI.defaultPublishableKey = "pk_test_51QAAWBK8WBOXOCFNsADeGxnj0uC5mIKHuKiGrHYsyeNsAwNhaSr66pXXa462QK3AyQbOONJ69s47mvsHw4S025Ry00RaT9xX8K"
-    }
-    
+    var moneyAddedAction: (()->Void)? = nil
+    var backAction: (()->Void)? = nil
     var body: some View {
         ZStack{
             VStack(spacing:0){
-                HeaderView(showBackButton: true)
+                HeaderView(showBackButton: true) {
+                    backAction?()
+                }
                 
                 Text("Add Card Details")
                     .font(.custom(FontContent.besMedium, size: 20))
@@ -39,11 +39,18 @@ struct AddCardStripeScreenView: View {
                 
                 SaveButton
                     .asButton(.press) {
-                        viewModel.saveCard(paymentIntentClientSecret: paymentIntentClientSecret)
+                        viewModel.stripeCreateSetupIntent(amount: viewPaymentViewModel.amount) { errorStr in
+                            presentAlert(title: "Kryupa", subTitle: errorStr)
+                        }
                     }
                 Spacer()
             }
             .toolbar(.hidden, for: .navigationBar)
+            .onChange(of: viewModel.amountAdded) { oldValue, newValue in
+                if viewModel.amountAdded{
+                    moneyAddedAction?()
+                }
+            }
             
             if viewModel.isLoading{
                 LoadingView()

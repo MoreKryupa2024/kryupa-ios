@@ -14,12 +14,17 @@ class PaymentListViewModel: ObservableObject{
     @Published var selectedPaymentMethod: Int = 0
     @Published var selectedSection = 0
     @Published var showAddBankView = false
-    @Published var bankName: String = ""
+    @Published var fullName: String = ""
+    @Published var ssnNumber: String = ""
+    @Published var typeAccount: String = ""
     @Published var routingNumber: String = ""
     @Published var accountNumber: String = ""
     @Published var bankListData = [BankListData]()
+    @Published var selectedbankData: BankListData?
     @Published var orderListData = [OrderListData]()
     @Published var isloading: Bool = false
+    @Published var walletAmountData: WalletAmountData?
+    @Published var amount: String = "0.00"
     
     func getBankList(){
         isloading = true
@@ -59,11 +64,15 @@ class PaymentListViewModel: ObservableObject{
         }
     }
     
-    func AddBankAccount(){
+    func AddBankAccount(errorAction: @escaping (String) -> Void){
         
-        let param = ["routing_number":routingNumber,
+        let param = ["account_holder_name":fullName,
+                     "account_holder_type":typeAccount.lowercased(),
+                     "routing_number":routingNumber,
                      "account_number":accountNumber,
-                     "bank_name":bankName]
+                     "currency":"usd",
+                     "country":"US",
+                     "object":"bank_account"]
         isloading = true
         NetworkManager.shared.addBank(params:param) { [weak self] result in
             DispatchQueue.main.async {
@@ -75,12 +84,62 @@ class PaymentListViewModel: ObservableObject{
                 switch result{
                 case .success(_):
                     self.routingNumber = ""
-                    self.bankName = ""
+                    self.fullName = ""
+                    self.ssnNumber = ""
                     self.accountNumber = ""
                     self.showAddBankView = false
                     self.getBankList()
                 case .failure(let error):
                     print(error.localizedDescription)
+                    errorAction(error.getMessage())
+                }
+            }
+        }
+    }
+    
+    
+    func withdrawToStripeAccount(successAction:(()->Void)?,errorAction:((String)->Void)?){
+        guard let selectedbankData else{
+            return
+        }
+        let param:[String:Any] = ["amount":Int(self.amount) ?? 0,
+                                  "currency":"usd",
+                                  "destination":selectedbankData.stripeBankNo,
+                                  "description":"\(amount) USD has been withdrawn",
+                                  "stripeAccount":selectedbankData.stripACNo]
+        isloading = true
+        NetworkManager.shared.transferAmountToStripe(params:param) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else{
+                    self?.isloading = false
+                    return
+                }
+                self.isloading = false
+                switch result{
+                case .success(_):
+                    self.withdrawToBankAccount(param: param, successAction: successAction, errorAction: errorAction)
+                case .failure(let error):
+                    errorAction?(error.getMessage())
+                }
+            }
+        }
+    }
+    
+    private func withdrawToBankAccount(param:[String:Any],successAction:(()->Void)?,errorAction:((String)->Void)?){
+        isloading = true
+        NetworkManager.shared.transferAmountToAccount(params:param) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else{
+                    self?.isloading = false
+                    return
+                }
+                self.isloading = false
+                switch result{
+                case .success(_):
+                    successAction?()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    errorAction?(error.getMessage())
                 }
             }
         }

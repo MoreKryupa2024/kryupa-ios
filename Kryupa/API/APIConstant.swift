@@ -15,31 +15,24 @@ struct APIConstants {
 }
 
 class APIConstant{
-    
-//    static let authBaseURL = "https://auth.wahinnovations.in"
+    //MARK: Server URL's Strat
     static let authBaseURL = "https://newapi.wahinnovations.in/apis/auth"
     
-//    static let communicationBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/communication"
-//    static let communicationBaseURL = "https://communication.wahinnovations.in"
     static let communicationBaseURL = "https://newapi.wahinnovations.in/apis/communication"
+    
     static let chatURL = "https://newapi.wahinnovations.in/"
     
-//        static let paymentBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/payment"
-//    static let paymentBaseURL = "https://payments.wahinnovations.in"
     static let paymentBaseURL = "https://newapi.wahinnovations.in/apis/payment"
     
-    
-//    static let bookingBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/booking"
-//    static let bookingBaseURL = "https://booking.wahinnovations.in"
     static let bookingBaseURL = "https://newapi.wahinnovations.in/apis/booking"
     
-//        static let userBaseURL = "https://kmwswmkf-3050.inc1.devtunnels.ms/apis/user"
-//    static let userBaseURL = "https://user.wahinnovations.in"
     static let userBaseURL = "https://newapi.wahinnovations.in/apis/user"
     
-//    static let adminBaseURL = "https://admin.wahinnovations.in"
     static let adminBaseURL = "https://newapi.wahinnovations.in/apis/admin"
-
+    
+    static let payment = "https://newapi.wahinnovations.in/apis/payment"
+    //MARK: Server URL's End
+    
     static let sendOTP = "\(authBaseURL)/send_otp"
     static let googleSignup = "\(authBaseURL)/authenticate"
     
@@ -83,6 +76,7 @@ class APIConstant{
     static let bookingReviewsGiver = "\(userBaseURL)/caregiver/reviews/booking_reviews"
     static let myServices = "\(userBaseURL)/caregiver/account/my_services"
     static let updateMyService = "\(userBaseURL)/caregiver/account/Update_my_service"
+    static let deactivateAccount = "\(userBaseURL)/account/deactivate"
 
     static let getRelativeList = "\(bookingBaseURL)/booking_for_dropdown"
     static let createBooking = "\(bookingBaseURL)/createBooking"
@@ -94,6 +88,7 @@ class APIConstant{
     static let getBookingDetailsById = "\(bookingBaseURL)/getBookingById?booking_id="
     static let updateApprochStatus = "\(bookingBaseURL)/update_approch_status"
     static let bookingDetailsForCaregiver = "\(bookingBaseURL)/BookingDetailsForCaregiver"
+    static let bookingDetailsForCustomer = "\(bookingBaseURL)/BookingDetailsForCustomer"
     static let sendRequestForBookCaregiver = "\(bookingBaseURL)/caregiver_approch"
     static let giverConfirmStartService = "\(bookingBaseURL)/confirm-booking"
     static let cancelStartService = "\(bookingBaseURL)/cancel/caregiverservice"
@@ -102,6 +97,8 @@ class APIConstant{
     static let bookingCancel = "\(bookingBaseURL)/booking_cancel"
     static let getCardVerificationInfo = "\(bookingBaseURL)/appleinfo/get"
     static let setCardVerificationInfo = "\(bookingBaseURL)/appleinfo/set"
+    static let deletebooking = "\(bookingBaseURL)/deletebooking"
+    static let serviceInvoice = "\(bookingBaseURL)/service-invoice"
     
     static let getPaypalOrderID = "\(paymentBaseURL)/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(paymentBaseURL)/paypal/capture_order"
@@ -109,9 +106,9 @@ class APIConstant{
     static let getWalletById = "\(paymentBaseURL)/wallet/getWalletById"
     static let payCaregiverBooking = "\(paymentBaseURL)/wallet/pay_for_caregiver_booking"
     static let getBankList = "\(paymentBaseURL)/bank/get_bank_list"
-    static let addBank = "\(paymentBaseURL)/bank/add_bank"
     static let getOrderInvoice = "\(paymentBaseURL)/paypal/order_invoice"
     static let OrderList = "\(paymentBaseURL)/payment_history/Order_list"
+    static let applePayPayment = "\(paymentBaseURL)/apple/applepay"
     
     
     static let getMeetingToken = "\(communicationBaseURL)/meeting/zoom_session_token"
@@ -124,12 +121,18 @@ class APIConstant{
     static let chatVideoCallRecieve = "\(communicationBaseURL)/vido_call/recieve"
     
     static let getBannerUrls = "\(adminBaseURL)/get_banner_urls"
-    static let deletebooking = "\(bookingBaseURL)/deletebooking"
-    
     static let logout = "\(authBaseURL)/authenticate/logout"
     
     //Stripe
-    static let sendStripePaymentMethodId = ""
+    static let stripeCreateSetupIntent = "\(payment)/stripe/create-setup-intent"
+    static let stripeCreateCustomer = "\(payment)/stripe/create-customer"
+    static let stripeCharge = "\(payment)/stripe/charge"
+    static let stripeCardList = "\(payment)/stripe/cardDetails"
+    static let payForService = "\(payment)/service/pay-amount"
+    static let createBankAccount = "\(payment)/account/create"
+    static let transferAmountToAccount = "\(payment)/withdraw/tranferdata"
+    static let transferAmountToStripe = "\(payment)/withdraw/amount"
+    static let deleteStripeCard = "\(payment)/stripe/deleteCard"
     
     //Apple pay
     static let setApplePayStatus = "https://v9hhx3kk-3000.inc1.devtunnels.ms/status/update"

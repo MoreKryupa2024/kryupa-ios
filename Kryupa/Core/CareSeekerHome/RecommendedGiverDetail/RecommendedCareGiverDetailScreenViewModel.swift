@@ -15,6 +15,7 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var isRecommended: Bool = false
     @Published var isNormalBooking: Bool = false
     @Published var giverDetail: CareGiverDetailData?
+    @Published var walletAmountData: WalletAmountData?
     @Published var chatData: ChatListData?
     let notificatioSsetBookingId = NotificationCenter.default
     
@@ -27,6 +28,24 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
         if let bookingid = notification.userInfo?["bookingId"] as? String {
             isRecommended = false
             sendRequestForBookCaregiver(bookingId: bookingid)
+        }
+    }
+    
+    func getWalletBalance(){
+        NetworkManager.shared.getWallet { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else{
+                    self?.isloading = false
+                    return
+                }
+                self.isloading = false
+                switch result{
+                case .success(let data):
+                    self.walletAmountData = data.data
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     
@@ -70,11 +89,12 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
         isloading = true
         NetworkManager.shared.getCareGiverDetails(giverId: giverId,bookingId: bookingId) { [weak self] result in
             DispatchQueue.main.async {
-                self?.isloading = false
                 switch result{
                 case .success(let data):
                     self?.giverDetail = data.data
+                    self?.getWalletBalance()
                 case .failure(let error):
+                    self?.isloading = false
                     print(error)
                 }
             }

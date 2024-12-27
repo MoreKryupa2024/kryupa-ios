@@ -28,7 +28,7 @@ struct BookingCareGiverListView: View {
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.besMedium, size: 17))
                 
-                Text("\(giver.yearsOfExprience) Years Expirenced")
+                Text("\(giver.yearsOfExprience) Years Experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .padding(.bottom,5)
                 HStack{

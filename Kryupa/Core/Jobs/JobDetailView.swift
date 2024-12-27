@@ -18,7 +18,9 @@ struct JobDetailView: View {
     var body: some View {
         ZStack{
             VStack(spacing:0){
-                HeaderView(showBackButton: true)
+                HeaderView(showBackButton: true) {
+                    viewModel.disconnect()
+                }
                 ScrollView {
                     UserView
                     ServiceRequiredView
@@ -93,7 +95,12 @@ struct JobDetailView: View {
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .task {
-                    viewModel.getJobsDetail(approachID: jobID) {}
+                    viewModel.connect()
+                    if Defaults().userType == AppConstants.SeekCare{
+                        viewModel.getJobsDetailForCustomer(approachID: jobID) {}
+                    }else{
+                        viewModel.getJobsDetail(approachID: jobID) {}
+                    }
                     NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                          using: self.setChatScreen)
                 }
@@ -322,17 +329,29 @@ struct JobDetailView: View {
                         guard let jobDetailModel = viewModel.jobDetailModel else {
                             return
                         }
-                        let selectedChat = ChatListData(jsonData: [
-                            "id":jobDetailModel.contactID,
-                            "user2_id":jobDetailModel.caregiversID,
-                            "user1_id":jobDetailModel.customerID,
-                            "name":jobDetailModel.name,
-                            "profile_picture_url":jobDetailModel.profilePictureURL
-                        ])
-                        
-                        ChatScreenViewModel.selectedChat = selectedChat
-                        router.showScreen(.push) { rout in
-                                ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+                        ChatScreenViewModel.manager = viewModel.manager
+                        ChatScreenViewModel.socket = viewModel.socket
+                        if Defaults().userType == AppConstants.SeekCare{
+                            viewModel.createConversation(giverId: jobDetailModel.caregiversID, bookingId: "") {
+                                ChatScreenViewModel.selectedChat = viewModel.chatData
+                                router.showScreen(.push) { rout in
+                                        ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+                                }
+                            } alert: { error in
+                                presentAlert(title: "Kryupa", subTitle: error)
+                            }
+                        }else{
+                            let selectedChat = ChatListData(jsonData: [
+                                "id":jobDetailModel.contactID,
+                                "user2_id":jobDetailModel.caregiversID,
+                                "user1_id":jobDetailModel.customerID,
+                                "name":jobDetailModel.name,
+                                "profile_picture_url":jobDetailModel.profilePictureURL
+                            ])
+                            ChatScreenViewModel.selectedChat = selectedChat
+                            router.showScreen(.push) { rout in
+                                    ChatView(userName: (viewModel.jobDetailModel?.name ?? ""),viewModel: ChatScreenViewModel)
+                            }
                         }
                     }
                     .background{

@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SwiftfulUI
+import IQKeyboardManagerSwift
+import Combine
 
 struct FAQView: View {
    @StateObject var viewModel = FAQViewModel()
-    
+    @State private var keyboardHeight: CGFloat = 0
     
     var body: some View {
         ZStack{
@@ -43,34 +45,38 @@ struct FAQView: View {
                                 ForEach(faqModelData.allConversation.reversed(), id:\.id) { data in
                                     FAQChatView(conversationData: data,senderId: faqModelData.userId)
                                         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-//                                        .onAppear{
-//                                            if (faqModelData.allConversation.count - 1) == index && viewModel.pagination{
-//                                                viewModel.pageNumber += 1
-//                                                viewModel.conversationWithAdmin()
-//                                            }
-//                                        }
                                  }
                             }
                         }
+                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                     }
-                    .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                    .defaultScrollAnchor(.bottom)
                     .padding(.horizontal, 10)
                     .scrollIndicators(.hidden)
                     
                     sendMessageView
                         .padding(.top,15)
                         .background(.white)
+                        .padding(.bottom, keyboardHeight == 0 ? 0 : (keyboardHeight-32))
+                        .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
+                        .animation(.easeInOut, value: 0.6)
                 }
             }
             .background(
                 Image("ChatBackground").opacity(viewModel.selectedSection == 1 ? 1 : 0)
             )
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
             .task{
                 viewModel.pageNumber = 1
                 viewModel.conversationWithAdmin()
                 viewModel.receiveMessage()
+                IQKeyboardManager.shared.enable = false
             }
+            .onDisappear(perform: {
+                IQKeyboardManager.shared.enable = true
+            })
+            .modifier(DismissingKeyboard())
             
             if viewModel.isLoading{
                 LoadingView()
@@ -110,7 +116,8 @@ struct FAQView: View {
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            let text = viewModel.sendMsgText.trimmingCharacters(in: .whitespaces)
+                            viewModel.sendMsgText = viewModel.sendMsgText.removingWhitespaces()
+                            let text = viewModel.sendMsgText.removingWhitespaces()
                             if !text.isEmpty{
                                 viewModel.sendMessage(text)
                             }

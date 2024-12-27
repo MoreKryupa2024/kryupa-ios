@@ -12,61 +12,72 @@ struct AddMoneyScreenView: View {
     
     @StateObject var viewModel = PaymentViewModel()
     @Environment(\.router) var router
+    @State var showPaymentMethodScreen = false
     
     var body: some View {
-        VStack(spacing:0){
-            HeaderView(showBackButton: true)
-            Text("Your Wallet Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
-                .font(.custom(FontContent.plusRegular, size: 17))
-                .foregroundStyle(._7_C_7_C_80)
+        ZStack{
+            VStack(spacing:0){
+                HeaderView(showBackButton: true)
+                Text("Your Wallet Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
+                    .font(.custom(FontContent.plusRegular, size: 17))
+                    .foregroundStyle(._7_C_7_C_80)
+                    .padding(.top,45)
+                HStack(alignment:.center,spacing: 0){
+                    Spacer()
+                    Text("$")
+                    Text(viewModel.amount)
+                    Spacer()
+                }
+                .foregroundStyle(._018_ABE)
+                .font(.custom(FontContent.besMedium, size: 30))
+                .frame(width: 267, height: 70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.D_1_D_1_D_6, lineWidth: 1)
+                )
                 .padding(.top,45)
-            HStack(alignment:.center,spacing: 0){
-                Spacer()
-                Text("$")
-                Text(viewModel.amount)
-                Spacer()
-            }
-            .foregroundStyle(._018_ABE)
-            .font(.custom(FontContent.besMedium, size: 30))
-            .frame(width: 267, height: 70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.D_1_D_1_D_6, lineWidth: 1)
-            )
-            .padding(.top,45)
-            
-            HStack(spacing:15){
-                capsuleView(value: "100")
-                capsuleView(value: "200")
-                capsuleView(value: "500")
-            }
-            .padding(.top,17)
-            .padding(.horizontal, 24)
-            
-            Spacer()
-            Text("Add Money")
-                .frame(maxWidth: .infinity)
-                .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle(.white)
-                .frame(height: 52)
-                .background{
-                    RoundedRectangle(cornerRadius: 48)
+                
+                HStack(spacing:15){
+                    capsuleView(value: "100")
+                    capsuleView(value: "200")
+                    capsuleView(value: "500")
                 }
-                .padding(.horizontal,25)
-                .asButton(.press) {
-                    if (Int(viewModel.amount) ?? 0 ) > 0{
-                        router.showScreen(.push) { rout in
-                            PaymentMethodsScreenView(viewModel: viewModel)
-                        }
-                    }else{
-                        presentAlert(title: "Kryupa", subTitle: "Please Enter Amount")
+                .padding(.top,17)
+                .padding(.horizontal, 24)
+                
+                Spacer()
+                Text("Add Money")
+                    .frame(maxWidth: .infinity)
+                    .font(.custom(FontContent.plusRegular, size: 16))
+                    .foregroundStyle(.white)
+                    .frame(height: 52)
+                    .background{
+                        RoundedRectangle(cornerRadius: 48)
                     }
-                }
-                .padding(.top,90)
-            KeyboardView
+                    .padding(.horizontal,25)
+                    .asButton(.press) {
+                        if (Int(viewModel.amount) ?? 0 ) > 0{
+                            showPaymentMethodScreen = true
+                        }else{
+                            presentAlert(title: "Kryupa", subTitle: "Please Enter Amount")
+                        }
+                    }
+                    .padding(.top,90)
+                KeyboardView
+                
+            }
+            .toolbar(.hidden, for: .navigationBar)
             
+            if showPaymentMethodScreen{
+                PaymentMethodsScreenView(viewModel: viewModel,
+                                         paymentConfirmAction: {
+                    router.dismissScreen()
+                },backAction: {
+                    showPaymentMethodScreen = false
+                })
+                    .background(.white)
+            }
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var KeyboardView: some View{

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581668AD2D06D6F400192FAD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 581668AC2D06D6F400192FAD /* FirebaseCrashlytics */; };
+		5840EB952D06E732008F0B1A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 5840EB942D06E732008F0B1A /* FirebaseAnalyticsOnDeviceConversion */; };
+		5840EB972D06E732008F0B1A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 5840EB962D06E732008F0B1A /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		5840EB992D06E732008F0B1A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 5840EB982D06E732008F0B1A /* FirebaseAppCheck */; };
+		5840EB9B2D06E75B008F0B1A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5840EB9A2D06E75B008F0B1A /* FirebaseAnalytics */; };
+		5840EB9D2D06E75B008F0B1A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5840EB9C2D06E75B008F0B1A /* FirebaseAnalyticsSwift */; };
+		589AC35B2D1297BA00C1A95A /* WithdrawMoneyScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589AC35A2D1297BA00C1A95A /* WithdrawMoneyScreenView.swift */; };
+		58C758982D087C9D001B8F41 /* AppleSignupTCScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C758972D087C9D001B8F41 /* AppleSignupTCScreenView.swift */; };
 		A36BC3772C18527A005616A5 /* MyServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3762C18527A005616A5 /* MyServicesView.swift */; };
 		A36BC3792C185396005616A5 /* MyServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC3782C185396005616A5 /* MyServiceViewModel.swift */; };
 		A36BC3802C1862DA005616A5 /* PaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */; };
@@ -77,7 +85,6 @@
 		BE1573B52BF6115600A6137D /* MobileNumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B42BF6115600A6137D /* MobileNumberScreenView.swift */; };
 		BE1573B72BF62D7A00A6137D /* OTPVerificationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573B62BF62D7A00A6137D /* OTPVerificationScreenView.swift */; };
 		BE1573BE2BF64C9400A6137D /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1573BD2BF64C9400A6137D /* StringExtention.swift */; };
-		BE1D6E992C85FD6600DB134B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = BE1D6E982C85FD6600DB134B /* Lottie */; };
 		BE1D6E9B2C85FD9000DB134B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D6E9A2C85FD9000DB134B /* LottieView.swift */; };
 		BE1D6E9D2C85FE0E00DB134B /* SuccessLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = BE1D6E9C2C85FE0E00DB134B /* SuccessLottie.json */; };
 		BE1EB9EC2C22D0C7006A8B1F /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1EB9EB2C22D0C7006A8B1F /* BookingViewModel.swift */; };
@@ -170,6 +177,7 @@
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
 		BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */; };
 		BE7DDDB02C18317000A71632 /* LobbyScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAF2C18317000A71632 /* LobbyScreenViewModel.swift */; };
+		BE82FF8E2CF07A2300FF8276 /* StripeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82FF8D2CF07A2300FF8276 /* StripeModel.swift */; };
 		BE87FAD42C74611D000F9041 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87FAD32C74611D000F9041 /* LoadingView.swift */; };
 		BE87FAEE2C74BCAE000F9041 /* RecommandedListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87FAED2C74BCAE000F9041 /* RecommandedListScreenView.swift */; };
 		BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BE9007292C58C4AA003B6038 /* FirebaseMessaging */; };
@@ -183,6 +191,7 @@
 		BE95D5D02C04553B00881B3C /* HealthInformationSeekerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */; };
 		BE95D5D22C04597500881B3C /* PreferenceCareSeekarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */; };
 		BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */; };
+		BE96B8AE2CEE155900CD0231 /* CardListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96B8AD2CEE155900CD0231 /* CardListScreenView.swift */; };
 		BEA4C1162CEB6CA700E2F712 /* ZoomVideoSDKScreenShare in Frameworks */ = {isa = PBXBuildFile; productRef = BEA4C1152CEB6CA700E2F712 /* ZoomVideoSDKScreenShare */; };
 		BEA4C1182CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BEA4C1172CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS */; };
 		BEA4C11B2CEB6FF500E2F712 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4C11A2CEB6FF500E2F712 /* VideoToolbox.framework */; };
@@ -233,6 +242,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		589AC35A2D1297BA00C1A95A /* WithdrawMoneyScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawMoneyScreenView.swift; sourceTree = "<group>"; };
+		58C758972D087C9D001B8F41 /* AppleSignupTCScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignupTCScreenView.swift; sourceTree = "<group>"; };
 		A36BC3762C18527A005616A5 /* MyServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServicesView.swift; sourceTree = "<group>"; };
 		A36BC3782C185396005616A5 /* MyServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceViewModel.swift; sourceTree = "<group>"; };
 		A36BC37F2C1862DA005616A5 /* PaymentHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryCell.swift; sourceTree = "<group>"; };
@@ -381,6 +392,7 @@
 		BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPTextFieldView.swift; sourceTree = "<group>"; };
 		BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomScreenView.swift; sourceTree = "<group>"; };
 		BE7DDDAF2C18317000A71632 /* LobbyScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyScreenViewModel.swift; sourceTree = "<group>"; };
+		BE82FF8D2CF07A2300FF8276 /* StripeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeModel.swift; sourceTree = "<group>"; };
 		BE87FAD32C74611D000F9041 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BE87FAED2C74BCAE000F9041 /* RecommandedListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandedListScreenView.swift; sourceTree = "<group>"; };
 		BE92FD172C09A69900EDF49C /* CareSeekerHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareSeekerHomeScreenView.swift; sourceTree = "<group>"; };
@@ -392,6 +404,7 @@
 		BE95D5CF2C04553B00881B3C /* HealthInformationSeekerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInformationSeekerViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D12C04597500881B3C /* PreferenceCareSeekarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCareSeekarViewModel.swift; sourceTree = "<group>"; };
 		BE95D5D42C0497C700881B3C /* SelectProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileImageViewModel.swift; sourceTree = "<group>"; };
+		BE96B8AD2CEE155900CD0231 /* CardListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListScreenView.swift; sourceTree = "<group>"; };
 		BEA4C11A2CEB6FF500E2F712 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		BEA4C11C2CEB700800E2F712 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
@@ -438,15 +451,19 @@
 				BE90072A2C58C4AA003B6038 /* FirebaseMessaging in Frameworks */,
 				BE6854CE2CDDE2B00075955D /* Stripe in Frameworks */,
 				BE6854D42CDDE2B10075955D /* StripeFinancialConnections in Frameworks */,
+				5840EB952D06E732008F0B1A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				BEA4C1162CEB6CA700E2F712 /* ZoomVideoSDKScreenShare in Frameworks */,
 				BE95D5CC2C0449D400881B3C /* IQKeyboardManagerSwift in Frameworks */,
 				BE644E8B2BF4D86D00A6781F /* SwiftfulUI in Frameworks */,
 				BEA4C1182CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS in Frameworks */,
+				5840EB9B2D06E75B008F0B1A /* FirebaseAnalytics in Frameworks */,
+				5840EB9D2D06E75B008F0B1A /* FirebaseAnalyticsSwift in Frameworks */,
 				BEBE49D82C92D71C0065A816 /* GooglePlaces in Frameworks */,
 				BE6854D02CDDE2B10075955D /* StripeApplePay in Frameworks */,
 				BE2B58A82C3EA777002EC297 /* CorePayments in Frameworks */,
 				BE0983AF2C33F20E00FBAECC /* SocketIO in Frameworks */,
-				BE1D6E992C85FD6600DB134B /* Lottie in Frameworks */,
+				5840EB992D06E732008F0B1A /* FirebaseAppCheck in Frameworks */,
+				5840EB972D06E732008F0B1A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */,
 				BE2B58A62C3EA777002EC297 /* CardPayments in Frameworks */,
 				BE2D337A2C3FCFD700192323 /* PayPalWebPayments in Frameworks */,
@@ -457,6 +474,7 @@
 				BE2B58AC2C3EA777002EC297 /* PaymentButtons in Frameworks */,
 				BE6854DA2CDDE2B10075955D /* StripePayments in Frameworks */,
 				BE2B58AA2C3EA777002EC297 /* PayPalNativePayments in Frameworks */,
+				581668AD2D06D6F400192FAD /* FirebaseCrashlytics in Frameworks */,
 				BE6854DC2CDDE2B10075955D /* StripePaymentsUI in Frameworks */,
 				BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */,
 			);
@@ -666,6 +684,7 @@
 			children = (
 				A36BC3872C1879CC005616A5 /* PaymentListView.swift */,
 				A36BC3892C187A0B005616A5 /* PaymentListViewModel.swift */,
+				589AC35A2D1297BA00C1A95A /* WithdrawMoneyScreenView.swift */,
 			);
 			path = PaymentFlow;
 			sourceTree = "<group>";
@@ -905,6 +924,7 @@
 				BE644E2E2BF495D800A6781F /* KryupaApp.swift */,
 				BE644E302BF495D800A6781F /* SplashView.swift */,
 				BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */,
+				58C758972D087C9D001B8F41 /* AppleSignupTCScreenView.swift */,
 				BE6854B42CDDE1C90075955D /* Stripe */,
 				BE3C7F2E2C1C3EAB000848A6 /* UserProfileSection */,
 				BE3C7F252C1C1F0D000848A6 /* Booking */,
@@ -972,6 +992,7 @@
 				BE2CA3C22C510B3B007F1059 /* PaymentOrderModel.swift */,
 				BE11D51B2C5A5262004FCC34 /* SettingModel.swift */,
 				BECD50992C5CE4BF004DD43D /* FAQModel.swift */,
+				BE82FF8D2CF07A2300FF8276 /* StripeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1043,6 +1064,7 @@
 			children = (
 				BE6854B52CDDE23B0075955D /* PaymentGatewayController.swift */,
 				BE6854DD2CDDE30F0075955D /* AddCardStripeScreenView.swift */,
+				BE96B8AD2CEE155900CD0231 /* CardListScreenView.swift */,
 				BE6854DF2CDDE54F0075955D /* AddCardStripeScreenViewModel.swift */,
 			);
 			path = Stripe;
@@ -1233,6 +1255,7 @@
 				BE644E282BF495D800A6781F /* Frameworks */,
 				BE644E292BF495D800A6781F /* Resources */,
 				BEB1084C2C17282300FDC55C /* Embed Frameworks */,
+				581668AE2D06D7E700192FAD /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1256,7 +1279,6 @@
 				BE2B58AB2C3EA777002EC297 /* PaymentButtons */,
 				BE2D33792C3FCFD700192323 /* PayPalWebPayments */,
 				BE9007292C58C4AA003B6038 /* FirebaseMessaging */,
-				BE1D6E982C85FD6600DB134B /* Lottie */,
 				BEBE49D72C92D71C0065A816 /* GooglePlaces */,
 				BE6854CD2CDDE2B00075955D /* Stripe */,
 				BE6854CF2CDDE2B10075955D /* StripeApplePay */,
@@ -1268,6 +1290,12 @@
 				BE6854DB2CDDE2B10075955D /* StripePaymentsUI */,
 				BEA4C1152CEB6CA700E2F712 /* ZoomVideoSDKScreenShare */,
 				BEA4C1172CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS */,
+				581668AC2D06D6F400192FAD /* FirebaseCrashlytics */,
+				5840EB942D06E732008F0B1A /* FirebaseAnalyticsOnDeviceConversion */,
+				5840EB962D06E732008F0B1A /* FirebaseAnalyticsWithoutAdIdSupport */,
+				5840EB982D06E732008F0B1A /* FirebaseAppCheck */,
+				5840EB9A2D06E75B008F0B1A /* FirebaseAnalytics */,
+				5840EB9C2D06E75B008F0B1A /* FirebaseAnalyticsSwift */,
 			);
 			productName = Kryupa;
 			productReference = BE644E2B2BF495D800A6781F /* Kryupa.app */;
@@ -1305,7 +1333,6 @@
 				BE95D5CA2C0449D400881B3C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */,
-				BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				BEBE49D62C92D71C0065A816 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 				BE6854CC2CDDE2B00075955D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 				BEA4C1142CEB6CA700E2F712 /* XCRemoteSwiftPackageReference "videosdk-ui-toolkit-ios" */,
@@ -1342,6 +1369,32 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		581668AE2D06D7E700192FAD /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE644E272BF495D800A6781F /* Sources */ = {
@@ -1388,6 +1441,7 @@
 				CE75DC012CC7DBED00500731 /* StartServiceScreenView.swift in Sources */,
 				A3BB87B42C1718CC00C604DD /* RecommendedCareGiverDetailScreenViewModel.swift in Sources */,
 				A3FEF6002C201C2D00EFC3C2 /* JobListView.swift in Sources */,
+				BE82FF8E2CF07A2300FF8276 /* StripeModel.swift in Sources */,
 				BE3C7F352C1C4C5F000848A6 /* AddNewProfileScreenViewModel.swift in Sources */,
 				BE4FBDAE2BFB6BE4003442BB /* CircleCheckBoxView.swift in Sources */,
 				BE4FBDBB2BFB96CD003442BB /* DropDownView.swift in Sources */,
@@ -1395,6 +1449,7 @@
 				BE92FD1E2C09B31500EDF49C /* BookingFormScreenView.swift in Sources */,
 				BE32E0382C468E0F003C7C90 /* WalletHistoryView.swift in Sources */,
 				BE4FBDA52BFB5242003442BB /* PreferenceView.swift in Sources */,
+				58C758982D087C9D001B8F41 /* AppleSignupTCScreenView.swift in Sources */,
 				BEB68A3B2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift in Sources */,
 				A36DE7C32C171241002E0ACD /* CareGiverPortfolioView.swift in Sources */,
 				BE3C7F222C1AF910000848A6 /* ServiceCancelScreenView.swift in Sources */,
@@ -1432,6 +1487,7 @@
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */,
 				BEFA99702CEB73D20056B6D0 /* ApplePayResponseModel.swift in Sources */,
+				BE96B8AE2CEE155900CD0231 /* CardListScreenView.swift in Sources */,
 				BE95D5D52C0497C700881B3C /* SelectProfileImageViewModel.swift in Sources */,
 				BE1573B12BF5D1CD00A6137D /* UserSelectionScreenView.swift in Sources */,
 				A36BC3A12C1B0194005616A5 /* DeactivateAccountView.swift in Sources */,
@@ -1517,6 +1573,7 @@
 				BE32E03A2C4691F2003C7C90 /* WalletTransectionHistoryScreenView.swift in Sources */,
 				BE92FD182C09A69900EDF49C /* CareSeekerHomeScreenView.swift in Sources */,
 				BE32E0302C465BFF003C7C90 /* PaymentConfirmScreenView.swift in Sources */,
+				589AC35B2D1297BA00C1A95A /* WithdrawMoneyScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1651,6 +1708,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 16;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Kryupa/Preview Content\"";
 				DEVELOPMENT_TEAM = FS87CRZ2ZU;
 				ENABLE_PREVIEWS = YES;
@@ -1764,14 +1822,6 @@
 				kind = branch;
 			};
 		};
-		BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.0;
-			};
-		};
 		BE2B58A42C3EA777002EC297 /* XCRemoteSwiftPackageReference "paypal-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/paypal/paypal-ios/";
@@ -1847,15 +1897,35 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		581668AC2D06D6F400192FAD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEFC22F32BFDC57900B802A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		5840EB942D06E732008F0B1A /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		5840EB962D06E732008F0B1A /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		5840EB982D06E732008F0B1A /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAppCheck;
+		};
+		5840EB9A2D06E75B008F0B1A /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAnalytics;
+		};
+		5840EB9C2D06E75B008F0B1A /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAnalyticsSwift;
+		};
 		BE0983AE2C33F20E00FBAECC /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BE0983AD2C33F20E00FBAECC /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
-		};
-		BE1D6E982C85FD6600DB134B /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BE1D6E972C85FD6600DB134B /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		BE2B58A52C3EA777002EC297 /* CardPayments */ = {
 			isa = XCSwiftPackageProductDependency;

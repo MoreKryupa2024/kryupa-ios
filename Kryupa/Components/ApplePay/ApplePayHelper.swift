@@ -27,7 +27,7 @@ class PaymentHandler: NSObject {
         
 //        let amount = PKPaymentSummaryItem(label: "Amount", amount: NSDecimalNumber(string: "\((viewModel.paymentOrderData?.pricePerHour ?? 0).removeZerosFromEnd(num: 2))"), type: .final)
 //        let tax = PKPaymentSummaryItem(label: "Tax", amount: NSDecimalNumber(string: "2"), type: .final)
-        let total = PKPaymentSummaryItem(label: "ToTal", amount: NSDecimalNumber(string: amount), type: .final)
+        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: amount), type: .final)
         
 //        paymentSummaryItems = [amount, tax, total];
         paymentSummaryItems = [total];

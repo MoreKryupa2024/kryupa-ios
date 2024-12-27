@@ -188,7 +188,7 @@ struct PreferenceView: View {
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Preferred Language Of Customer")
+                Text("Languages You know")
                 Text("*")
                     .foregroundStyle(.red)
             }

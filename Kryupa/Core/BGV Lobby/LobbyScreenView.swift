@@ -39,7 +39,8 @@ struct LobbyScreenView: View {
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
                     sessionName: viewModel.meetingTokenData?.topic ?? "",
                     sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
-                    username: viewModel.meetingTokenData?.userIdentity ?? ""
+                    username: viewModel.meetingTokenData?.userIdentity ?? "",
+                    callType: "video"
                 ) { error in
                     print("error :- \(error.description)")
                     isPresented = false

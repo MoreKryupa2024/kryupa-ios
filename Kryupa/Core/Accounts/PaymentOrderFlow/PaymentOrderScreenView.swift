@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct PaymentOrderScreenView: View {
+    
     @Environment(\.router) var router
     @StateObject var viewModel = PaymentViewModel()
+    var serviceId: String = ""
+    @State var showPaymentMethodScreen = false
+    var paymentConfirmAction: (()->Void)? = nil
+    var backAction: (()->Void)? = nil
     
     var body: some View {
         ZStack {
             VStack(spacing:0){
-                HeaderView(showBackButton: true)
+                HeaderView(showBackButton: true) {
+                    backAction?()
+                }
                 
                 ScrollView{
+                    let diffrenceAmount = (viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0)-(viewModel.walletAmountData?.mainAmount ?? 0.0)
                     VStack(spacing:0){
                         Text("Payment")
                             .font(.custom(FontContent.besMedium, size: 20))
@@ -25,15 +33,15 @@ struct PaymentOrderScreenView: View {
                             Image("warningRed")
                                 .resizable()
                                 .frame(width: 24,height: 24)
-                            Text("Your current wallet balance is $\((viewModel.paymentOrderData?.walletBalance ?? 0).removeZerosFromEnd(num: 2))")
+                            Text("Your current wallet balance is $\((viewModel.walletAmountData?.mainAmount ?? 0.0).removeZerosFromEnd(num: 2))")
                                 .font(.custom(FontContent.plusMedium, size: 15))
                         }
                         .padding(.top,15)
-                        .foregroundStyle(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? .red : .green)
+                        .foregroundStyle((diffrenceAmount > 0) ? .red : .green)
                         
                         VStack(alignment:.leading,spacing:5){
-                            if let startDate = viewModel.paymentOrderData?.startDate, let endDate = viewModel.paymentOrderData?.endDate{
-                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM d yyyy"))")
+                            if let startDate = viewModel.paymentOrderData?.startDate {
+                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEEE, MMMM d"))")
                                     .font(.custom(FontContent.besMedium, size: 16))
                                     .frame(maxWidth: .infinity,alignment: .leading)
                             }
@@ -74,13 +82,21 @@ struct PaymentOrderScreenView: View {
                     }
                 }
             }
-            
+            if showPaymentMethodScreen{
+                PaymentMethodsScreenView(viewModel: viewModel,paymentConfirmAction: {
+                    paymentConfirmAction?()
+                }, backAction: {
+                    showPaymentMethodScreen = false
+                })
+                    .background(.white)
+            }
             if viewModel.isloading{
                 LoadingView()
             }
         }
-        .task{
-            viewModel.getPaymentOrderDetails()
+        .onAppear{
+            viewModel.getServiceId(serviceId: self.serviceId)
+            viewModel.getWalletBalance()
         }
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
@@ -88,7 +104,8 @@ struct PaymentOrderScreenView: View {
     
     private var buttonView: some View{
         HStack(spacing: 40) {
-            Text(((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0) ? "Add & Pay" : "Confirm")
+            let diffrenceAmount = (viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0)-(viewModel.walletAmountData?.mainAmount ?? 0.0)
+            Text((diffrenceAmount > 0) ? "Add & Pay" : "Confirm")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .foregroundStyle(.white)
                 .frame(height: 35)
@@ -100,16 +117,12 @@ struct PaymentOrderScreenView: View {
                     if (viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0) == 0{
                         return
                     }
-                    if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
-                        viewModel.amount = "\(viewModel.paymentOrderData?.diffrenceAmount ?? 0.0)"
+                    if (diffrenceAmount > 0){
+                        viewModel.amount = "\(diffrenceAmount)"
                         viewModel.fromPaymentFlow = true
-                        router.showScreen(.push) { rout in
-                            PaymentMethodsScreenView(viewModel: viewModel)
-                        }
+                        showPaymentMethodScreen = true
                     }else{
-                        router.showScreen(.push) { rout in
-                            PaymentConfirmScreenView(viewModel: viewModel)
-                        }
+                        paymentConfirmAction?()
                     }
                 }
             
@@ -124,7 +137,7 @@ struct PaymentOrderScreenView: View {
                         .stroke(.appMain, lineWidth: 1)
                 )
                 .asButton(.press) {
-                    router.dismissScreen()
+                    backAction?()
                 }
         }
         .padding(.vertical,24)
@@ -165,10 +178,11 @@ struct PaymentOrderScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 16))
                 
             }
-            if ((viewModel.paymentOrderData?.diffrenceAmount ?? 0) > 0){
+            let diffrenceAmount = (viewModel.paymentOrderData?.bookingPricingForCustomer ?? 0)-(viewModel.walletAmountData?.mainAmount ?? 0.0)
+            if (diffrenceAmount > 0){
                 HStack{
                     Spacer()
-                    Text("Add $\((viewModel.paymentOrderData?.diffrenceAmount ?? 0).removeZerosFromEnd(num: 2)) more to complete trasnaction")
+                    Text("Add $\(diffrenceAmount.removeZerosFromEnd(num: 2)) more to complete trasnaction")
                         .font(.custom(FontContent.plusRegular, size: 11))
                         .foregroundStyle(.red)
                 }
@@ -185,7 +199,7 @@ struct PaymentOrderScreenView: View {
                 Spacer()
             }
             
-            Text(viewModel.paymentOrderData?.areasOfExpertise.joined(separator: ", ") ?? "None")
+            Text(viewModel.paymentOrderData?.areasOfExpertise ?? "None")
                 .foregroundStyle(._242426)
                 .font(.custom(FontContent.plusRegular, size: 12))
         }
@@ -213,9 +227,9 @@ struct PaymentOrderScreenView: View {
                 Text("Address:")
                     .font(.custom(FontContent.plusRegular, size: 17))
                 Spacer()
-                Image("editAddress")
-                    .resizable()
-                    .frame(width: 53,height: 21)
+//                Image("editAddress")
+//                    .resizable()
+//                    .frame(width: 53,height: 21)
             }
             
             Text(viewModel.paymentOrderData?.fulladdress ?? "")

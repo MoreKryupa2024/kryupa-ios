@@ -61,7 +61,7 @@ struct JobDetailData {
         mobilityLevel = jsonData["mobility_level"] as? String ?? ""
         otherDiseaseType = jsonData["other_disease_type"] as? String ?? ""
         contactID = jsonData["contact_id"] as? String ?? ""
-        caregiversID = jsonData["caregivers_id"] as? String ?? ""
+        caregiversID = jsonData["caregivers_id"] as? String ?? jsonData["caregiver_id"] as? String ?? ""
         approchStatus = jsonData["approch_status"] as? String ?? ""
         diseaseType = jsonData["disease_type"] as? [String] ?? []
         areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []

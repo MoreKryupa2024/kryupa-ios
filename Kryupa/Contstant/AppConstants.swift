@@ -35,20 +35,22 @@ class AppConstants{
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
     static let needServiceInArray = ["Nursing","Physical Therapy","Occupational Therapy","Support Services(Companionship, Housekeeping, Home Health Aid)"]
-    static let genderArray = ["Male","Female","Other","Prefer not to say"]
+    static let genderArray = ["Male","Female","Prefer not to say"]
+    static let bankAccountType = ["Standard","Individual"]
     static let mobArray = ["Independent","Need Assistance"]
     static let yearsOfExperienceArray = ["Any","1-2 Years","3-4 Years","5-10 Years","10+ Years"]
     static let languageSpeakingArray = ["English","French","German","Hindi","Mandarin","Russian","Spanish","Tagalog","Vietnamese",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
     static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
-    static let relationArray = ["Child","Friend","Parent","Sibling","Spouse"]
+    static let relationArray = ["Child","Friend","Parent","Sibling","Spouse", "Other"]
     static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
-   static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinate"]
+   static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinated"]
     
     static let giverAccountSectionItems = [
         AccountListData(title: "Personal Details & Preferences", image: "personalDetail"),
         AccountListData(title: "My Services", image: "myservice"),
         AccountListData(title: "Payments", image: "payments"),
+        AccountListData(title: "Wallet", image: "wallet"),
         AccountListData(title: "Reviews", image: "reviews"),
         AccountListData(title: "Help & FAQ", image: "help"),
 //        AccountListData(title: "Settings", image: "settings"),
@@ -61,7 +63,7 @@ class AppConstants{
         AccountListData(title: "Personal Details", image: "personalDetail"),
         AccountListData(title: "Payments", image: "payments"),
         AccountListData(title: "Wallet", image: "wallet"),
-        AccountListData(title: "Reviews", image: "reviews"),
+        AccountListData(title: "Reviews", image: "reviewsSeeker"),
         AccountListData(title: "Help & FAQ", image: "help"),
 //        AccountListData(title: "Settings", image: "settings"),
         AccountListData(title: "About app", image: "aboutUs"),

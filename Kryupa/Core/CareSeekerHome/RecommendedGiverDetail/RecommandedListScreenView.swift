@@ -70,7 +70,7 @@ struct RecommandedListScreenView: View {
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .font(.custom(FontContent.besMedium, size: 17))
                 
-                Text("\(giver.yearOfExprience.removeZerosFromEnd(num: 0)) Years Expirenced")
+                Text("\(giver.yearOfExprience.removeZerosFromEnd(num: 0)) Years Experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .padding(.bottom,5)
                 

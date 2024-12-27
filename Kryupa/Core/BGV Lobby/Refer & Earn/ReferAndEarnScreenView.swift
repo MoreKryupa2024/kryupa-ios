@@ -25,11 +25,11 @@ struct ReferAndEarnScreenView: View {
                 .padding(.horizontal,24)
                 ReferPointsView
                 
-                ShareLink(item: imageToShare,
-                          preview: SharePreview("Kryupa", image: imageToShare)) {
+//                ShareLink(item: imageToShare,
+//                          preview: SharePreview("Kryupa", image: imageToShare)) {
                     nextButton
                         .padding(.top,25)
-                }
+//                }
             }
             .scrollIndicators(.hidden)
             .toolbar(.hidden, for: .navigationBar)

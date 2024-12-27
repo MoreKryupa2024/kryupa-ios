@@ -66,7 +66,7 @@ struct MobileNumberScreenView: View {
             })
             .onAppear(perform: {
 #if DEBUG && targetEnvironment(simulator)
-                self.viewModel.mobileNumner = "6466124295"
+                self.viewModel.mobileNumner = "6466124295".applyPatternOnNumbers(pattern: "(###) ###-####", replacementCharacter: "#")
 #else
                 //
 #endif

@@ -70,10 +70,12 @@ class BookingFormScreenViewModel: ObservableObject{
         languageSpeakingSelected = bookingIDData.languages
         needServiceInSelected = bookingIDData.areasOfExpertise
         if segSelected == "One Time"{
-            startDateValue = dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",dates: bookingIDData.startDateArray.first ?? "") ?? Date()
+            let strDate = (bookingIDData.startDateArray.first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            startDateValue = dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",dates: strDate) ?? Date()
         }else{
             for i in bookingIDData.startDateArray{
-                let date = (dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", dates: i) ?? Date())
+                let strDate = i.convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                let date = (dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", dates: strDate) ?? Date())
                 let comps = Calendar.current.dateComponents([.calendar,.era,.year, .month, .day,.isLeapMonth], from: date)
                 startDateSValue.insert(comps)
             }
@@ -129,6 +131,10 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select at list One Service.")
         }else if segSelected != "One Time" && startDateSValue.count == 0{
             return alert("Please Select Recurring Dates.")
+        }else if showDatePicker{
+            return alert("Please Confirm the Selected Date.")
+        }else if showTimePicker{
+            return alert("Please Confirm the Selected Time.")
         }else if genderSelected.isEmpty{
             return alert("Please Select Preferred Service Provider Gender.")
         }else if languageSpeakingSelected.count == 0{

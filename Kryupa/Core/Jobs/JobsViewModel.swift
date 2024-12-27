@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SocketIO
 
 class JobsViewModel: ObservableObject {
     @Published var isloading: Bool = Bool()
@@ -15,12 +16,74 @@ class JobsViewModel: ObservableObject {
     @Published var jobDetailModel: JobDetailData?
     @Published var startDate = String()
     @Published var otherDiseaseType = String()
+    @Published var chatData: ChatListData?
     @Published var jobPost = [JobPost]()
+    var manager: SocketManager!
+    var socket: SocketIOClient!
+    
+    init(){
+        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
+        self.socket = self.manager.defaultSocket
+    }
+    
+    deinit {
+        disconnect()
+    }
+    
+    func createConversation(giverId:String,bookingId:String,action:(@escaping()->Void),alert: ((String)->Void)?){
+        let param = ["caregiver_id":giverId,
+                     "booking_id":bookingId]
+        isloading = true
+        NetworkManager.shared.createConversation(params:param) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.chatData = data.data
+                    action()
+                case .failure(let error):
+                    alert?(error.getMessage())
+                }
+            }
+        }
+    }
+    
+    func disconnect() {
+        socket.disconnect()
+    }
+    
+    func connect() {
+        socket.on(clientEvent: .connect) {data, ack in
+            //Call your first socket here
+        }
+        let param = ["Authorization": "bearer \(Defaults().accessToken)"]
+        socket.connect(withPayload: param)
+    }
 
     func getJobsDetail(approachID: String, completion: @escaping (()->Void)){
         
         isloading = true
         NetworkManager.shared.getJobsDetails(approachID: approachID) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.jobDetailModel = data.data
+                    self?.startDate = self?.jobDetailModel?.startDate.components(separatedBy: "T").first ?? ""
+                    self?.otherDiseaseType = self?.jobDetailModel?.otherDiseaseType == "" ? "-" : self?.jobDetailModel?.otherDiseaseType ?? ""
+                    completion()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func getJobsDetailForCustomer(approachID: String, completion: @escaping (()->Void)){
+        
+        isloading = true
+        NetworkManager.shared.getJobsDetailsForCustomer(approachID: approachID) { [weak self] result in
             DispatchQueue.main.async() {
                 switch result{
                 case .success(let data):

@@ -8,22 +8,24 @@
 import SwiftUI
 import SwiftfulUI
 import CorePayments
+import Combine
 import PayPalWebPayments
 
 struct PaymentListView: View {
     
     @StateObject var viewModel = PaymentListViewModel()
 
+    @State var bankTypeShow: Bool = false
     var body: some View {
         ZStack{
             VStack(spacing:0) {
                 HeaderView(showBackButton: true)
                 if AppConstants.GiveCare == Defaults().userType{
-//                    SegmentView
-                    Text("Payment History")
-                        .font(.custom(FontContent.besMedium, size: 20))
-                        .foregroundStyle(.appMain)
-                        .padding(.top,30)
+                    SegmentView
+//                    Text("Payment History")
+//                        .font(.custom(FontContent.besMedium, size: 20))
+//                        .foregroundStyle(.appMain)
+//                        .padding(.top,30)
                 }else{
                     Text("Payment History")
                         .font(.custom(FontContent.besMedium, size: 20))
@@ -94,6 +96,7 @@ struct PaymentListView: View {
                         }
                 }
             }
+            .modifier(DismissingKeyboard())
             .onAppear{
                 viewModel.getBankList()
                 viewModel.getOrderList()
@@ -170,7 +173,7 @@ struct PaymentListView: View {
     
     private var BankView: some View{
         VStack (spacing: 15){
-            TextField("Bank Name", text: $viewModel.bankName)
+            TextField("Full Name", text: $viewModel.fullName)
                 .frame(height: 48)
                 .padding(.horizontal, 10)
                 .overlay(
@@ -181,16 +184,27 @@ struct PaymentListView: View {
                 .padding(.horizontal, 24)
                 .keyboardType(.asciiCapable)
             
-            TextField("Routing Number", text: $viewModel.routingNumber)
-                .frame(height: 48)
-                .padding(.horizontal, 10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .inset(by: 1)
-                        .stroke(.D_1_D_1_D_6, lineWidth: 1)
-                )
+//            TextField("Bank Name", text: $viewModel.bankName)
+//                .frame(height: 48)
+//                .padding(.horizontal, 10)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .inset(by: 1)
+//                        .stroke(.D_1_D_1_D_6, lineWidth: 1)
+//                )
+//                .padding(.horizontal, 24)
+//                .keyboardType(.asciiCapable)
+            
+            DropDownView(
+                selectedValue: viewModel.typeAccount,
+                placeHolder: "Type",
+                showDropDown: bankTypeShow,
+                values: AppConstants.bankAccountType) { value in
+                    viewModel.typeAccount = value
+                }onShowValue: {
+                    bankTypeShow = !bankTypeShow
+                }
                 .padding(.horizontal, 24)
-                .keyboardType(.numberPad)
             
             TextField("Account Number", text: $viewModel.accountNumber)
                 .frame(height: 48)
@@ -202,6 +216,43 @@ struct PaymentListView: View {
                 )
                 .padding(.horizontal, 24)
                 .keyboardType(.numberPad)
+                .onReceive(Just(viewModel.accountNumber)) { _ in
+                    if viewModel.accountNumber.count > 12 {
+                        viewModel.accountNumber = String(viewModel.accountNumber.prefix(12))
+                    }
+                }
+            
+            TextField("Routing Number", text: $viewModel.routingNumber)
+                .frame(height: 48)
+                .padding(.horizontal, 10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .inset(by: 1)
+                        .stroke(.D_1_D_1_D_6, lineWidth: 1)
+                )
+                .padding(.horizontal, 24)
+                .keyboardType(.numberPad)
+                .onReceive(Just(viewModel.routingNumber)) { _ in
+                    if viewModel.routingNumber.count > 9 {
+                        viewModel.routingNumber = String(viewModel.routingNumber.prefix(9))
+                    }
+                }
+            
+            TextField("Last 4 digits of SSN Number", text: $viewModel.ssnNumber)
+                .frame(height: 48)
+                .padding(.horizontal, 10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .inset(by: 1)
+                        .stroke(.D_1_D_1_D_6, lineWidth: 1)
+                )
+                .padding(.horizontal, 24)
+                .keyboardType(.numberPad)
+                .onReceive(Just(viewModel.ssnNumber)) { _ in
+                    if viewModel.ssnNumber.count > 4 {
+                        viewModel.ssnNumber = String(viewModel.ssnNumber.prefix(4))
+                    }
+                }
             
             Text("Add Bank Account")
                 .font(.custom(FontContent.plusRegular, size: 16))
@@ -213,14 +264,27 @@ struct PaymentListView: View {
                 }
                 .padding(.top, 15)
                 .asButton(.press) {
-                    if viewModel.bankName.isEmpty{
-                        presentAlert(title: "Kryupa", subTitle: "Please Enter Bank Name")
-                    }else if viewModel.routingNumber.isEmpty{
-                        presentAlert(title: "Kryupa", subTitle: "Please Enter Routing Number")
+                    viewModel.fullName = viewModel.fullName.removingWhitespaces()
+                    if viewModel.fullName.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Full Name")
+                    }else if viewModel.typeAccount.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Select Account Type")
                     }else if viewModel.accountNumber.isEmpty{
                         presentAlert(title: "Kryupa", subTitle: "Please Enter Account Number")
+                    }else if !viewModel.accountNumber.validateBankAccount(){
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Valid Account Number")
+                    }else if viewModel.routingNumber.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Routing Number")
+                    }else if !viewModel.routingNumber.validateRoutingBankAccount(){
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Valid Routing Number")
+                    }else if viewModel.ssnNumber.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter SSN Number")
+                    }else if !viewModel.ssnNumber.validateSSN(){
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Valid SSN Number")
                     }else{
-                        self.viewModel.AddBankAccount()
+                        self.viewModel.AddBankAccount { error in
+                            presentAlert(title: "Kryupa", subTitle: error)
+                        }
                     }
                 }
             
@@ -236,7 +300,8 @@ struct PaymentListView: View {
                 )
                 .asButton(.press) {
                     self.viewModel.showAddBankView = false
-                    self.viewModel.bankName = ""
+                    self.viewModel.fullName = ""
+                    self.viewModel.ssnNumber = ""
                     self.viewModel.routingNumber = ""
                     self.viewModel.accountNumber = ""
                 }

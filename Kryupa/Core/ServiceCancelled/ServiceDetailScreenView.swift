@@ -211,9 +211,11 @@ struct ServiceDetailScreenView: View {
                 Text(viewModel.bookingsListData?.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                 
-                Text("\(viewModel.cancelSeriveDetailData?.yearsOfExprienceInNo ?? "") years experienced")
-                    .font(.custom(FontContent.plusRegular, size: 12))
-                    .foregroundStyle(._444446)
+                if Defaults().userType == AppConstants.SeekCare{
+                    Text("\(viewModel.cancelSeriveDetailData?.yearsOfExprienceInNo ?? "") years experienced")
+                        .font(.custom(FontContent.plusRegular, size: 12))
+                        .foregroundStyle(._444446)
+                }
                 
                 Text("$\((viewModel.bookingsListData?.price ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 12))

@@ -39,7 +39,11 @@ struct DeactivateAccountView: View {
                     }
                 }
                 .onTapGesture {
-                    viewModel.selectedOption = title
+                    if viewModel.selectedOption == title{
+                        viewModel.selectedOption = ""
+                    }else{
+                        viewModel.selectedOption = title
+                    }
                 }
                         
             Text(title)
@@ -59,7 +63,7 @@ struct DeactivateAccountView: View {
                     .foregroundStyle(._444446)
                 
                 ForEach(Array(viewModel.arrcheckList.enumerated()), id: \.offset) { index, model in
-                    getCheckboxCell(title: model.title, toggleState: viewModel.selectedOption == model.title,index: index)
+                    getCheckboxCell(title: model.title, toggleState: viewModel.selectedOption == model.title, index: index)
                 }
                 
             }
@@ -75,13 +79,15 @@ struct DeactivateAccountView: View {
                     RoundedRectangle(cornerRadius: 48)
                 }
                 .asButton(.press) {
-                    viewModel.deleteAccount()
-                    router.dismissScreenStack()
+                    if viewModel.selectedOption.isEmpty{
+                        presentAlert(title: "Kryupa", subTitle: "Please select an option")
+                    }else{
+                        viewModel.deleteAccount()
+                        router.dismissScreenStack()
+                    }
                 }
                 .padding(.top, 20)
-            
         }
-
     }
 }
 

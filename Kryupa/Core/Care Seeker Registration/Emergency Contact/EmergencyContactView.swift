@@ -28,7 +28,7 @@ struct EmergencyContactView: View {
             .padding(.top,20)
             
             
-            Text("Emergency Contact")
+            Text("Emergency Contact for Care Seeker")
                 .font(.custom(FontContent.besMedium, size: 22))
                 .frame(height: 28)
                 .padding(.top,30)

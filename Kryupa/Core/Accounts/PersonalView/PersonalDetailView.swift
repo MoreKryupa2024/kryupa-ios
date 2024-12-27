@@ -153,7 +153,7 @@ struct PersonalDetailView: View {
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Preferred Language Of Customer")
+                Text("Languages You know")
             }
             .font(.custom(FontContent.plusMedium, size: 17))
             

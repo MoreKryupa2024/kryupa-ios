@@ -22,10 +22,9 @@ class PaymentViewModel: ObservableObject{
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
     
-    func getPaymentOrderDetails(){
-        
+    func getServiceId(serviceId: String){
         isloading = true
-        let param = ["approch_id":paySpecialMessageData?.approchId ?? ""]
+        let param = ["serviceId":serviceId]
         NetworkManager.shared.getOrderInvoice(params: param) { [weak self]result in
             DispatchQueue.main.async {
                 guard let self else{
@@ -79,6 +78,31 @@ class PaymentViewModel: ObservableObject{
                 case .success(let data):
                     self.orderId = data.data.paymentOrderID
                     action()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func applePayPaymentConfirm(transactionID: String){
+        let amount = (Double(amount) ?? 0).removeZerosFromEnd(num: 2)
+        let param = [
+            "amount": amount,
+            "isSuccess": true,
+            "transactionid": transactionID,
+        ] as [String : Any]
+        isloading = true
+        NetworkManager.shared.applePayPaymentConfirm(params: param) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self else{
+                    self?.isloading = false
+                    return
+                }
+                self.isloading = false
+                switch result{
+                case .success(let data):
+                    print("")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

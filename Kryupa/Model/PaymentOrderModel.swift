@@ -20,6 +20,20 @@ struct PaymentOrderModel {
     }
 }
 
+// MARK: - Datum
+struct Datum: Codable {
+    let amountPerDayCaregiver: Int
+    let amountPerDayCustomer: Double
+    let amountPerHourCaregiver, amountPerHourCustomer: String
+
+    enum CodingKeys: String, CodingKey {
+        case amountPerDayCaregiver = "amount_per_day_caregiver"
+        case amountPerDayCustomer = "amount_per_day_customer"
+        case amountPerHourCaregiver = "amount_per_hour_caregiver"
+        case amountPerHourCustomer = "amount_per_hour_customer"
+    }
+}
+
 // MARK: - DataClass
 struct PaymentOrderData {
     let name: String
@@ -27,35 +41,23 @@ struct PaymentOrderData {
     let bookingPricingForCustomer: Double
     let approchID, fulladdress, bookingID: String
     let pricePerHour: Double
-    let diffrenceAmount: Double
-    let createdAt, updatedAt, updatedBy, createdBy: String
-    let bookingPricing: Int
-    let startDate, endDate, startTime, endTime: String
+    let startDate, startTime, endTime: String
     let hours: Double
-    let walletBalance: Double
-    let areasOfExpertise: [String]
+    let areasOfExpertise: String
 
     init(jsonData:[String:Any]){
         name = jsonData["name"] as? String ?? ""
-        walletBalance = (jsonData["wallet_balance"] as? Double ?? Double(jsonData["wallet_balance"] as? Int ?? Int(jsonData["wallet_balance"] as? String ?? "") ?? 0))
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
-        bookingPricingForCustomer = (jsonData["booking_pricing_for_customer"] as? Double ?? Double(jsonData["booking_pricing_for_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
+        bookingPricingForCustomer = (jsonData["amount_per_day_customer"] as? Double ?? Double(jsonData["amount_per_day_customer"] as? Int ?? Int(jsonData["booking_pricing_for_customer"] as? String ?? "") ?? 0))
         approchID = jsonData["approch_id"] as? String ?? ""
-        fulladdress = jsonData["fulladdress"] as? String ?? ""
+        fulladdress = jsonData["address"] as? String ?? ""
         bookingID = jsonData["booking_id"] as? String ?? ""
-        pricePerHour = Double(jsonData["price_per_hour"] as? Int ?? 0)
-        createdAt = jsonData["created_at"] as? String ?? ""
-        updatedAt = jsonData["updated_at"] as? String ?? ""
-        updatedBy = jsonData["updated_by"] as? String ?? ""
-        createdBy = jsonData["created_by"] as? String ?? ""
-        bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
-        startDate = jsonData["start_date"] as? String ?? ""
-        endDate = jsonData["end_date"] as? String ?? ""
-        startTime = jsonData["start_time"] as? String ?? ""
-        endTime = jsonData["end_time"] as? String ?? ""
-        hours = Double(jsonData["hours"] as? String ?? "") ?? 0
-        diffrenceAmount = bookingPricingForCustomer - walletBalance
-        areasOfExpertise = jsonData["areas_of_expertise"] as? [String] ?? []
+        pricePerHour = Double(jsonData["amount_per_hour_customer"] as? String ?? "") ?? 0.0
+        startDate = jsonData["serviceDate"] as? String ?? ""
+        startTime = jsonData["service_start_time"] as? String ?? ""
+        endTime = jsonData["service_end_time"] as? String ?? ""
+        hours = Double(jsonData["number_of_hours"] as? String ?? "") ?? 0
+        areasOfExpertise = jsonData["area_of_experties"] as? String ?? ""
     }
 }
 
@@ -75,10 +77,9 @@ struct BankListModel {
 // MARK: - Datum
 struct BankListData {
     let id, userID, userType, routingNumber: String
-    let accountNumber, bankName: String
-    let isPrimary, isActive, isDeleted: Bool
-    let updatedBy: String?
-    let createdAt, updatedAt: String
+        let accountNumber, bankName: String
+        let isPrimary, isActive, isDeleted: Bool
+        let createdAt, updatedAt, stripACNo, stripeBankNo: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -90,12 +91,14 @@ struct BankListData {
         isPrimary = jsonData["is_primary"] as? Bool ?? false
         isActive = jsonData["is_active"] as? Bool ?? false
         isDeleted = jsonData["is_deleted"] as? Bool ?? false
-        updatedBy = jsonData["updated_by"] as? String ?? ""
         createdAt = jsonData["created_at"] as? String ?? ""
         updatedAt = jsonData["updated_at"] as? String ?? ""
+        stripACNo = jsonData["strip_ac_no"] as? String ?? ""
+        stripeBankNo = jsonData["stripe_bank_no"] as? String ?? ""
     }
 }
 
+/* {"id":"91d70d97-ac60-4334-a1db-c20c4260d2d0","user_id":"a923a440-a841-4f4c-9c54-fd7610165f2a","user_type":"caregiver","routing_number":"110000000","account_number":"000999999991","bank_name":"hh","is_primary":true,"is_active":true,"is_deleted":false,"updated_by":null,"created_at":"2024-12-18 06:24:03.648904+00","updated_at":"2024-12-18 06:24:03.648904+00","strip_ac_no":"acct_1QXGfsGdx3etm3oR","stripe_bank_no":"ba_1QXGfuGdx3etm3oRyBrmiUy2"}*/
 
 
 // MARK: - Welcome

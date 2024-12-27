@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PaymentConfirmScreenView: View {
     @Environment(\.router) var router
+    var paymentConfirmAction: (()->Void)? = nil
     
     @StateObject var viewModel = PaymentViewModel()
     var body: some View {
@@ -24,7 +25,7 @@ struct PaymentConfirmScreenView: View {
                         .font(.custom(FontContent.plusRegular, size: 12))
                         
                     
-                    Text("Your Booking for \((viewModel.paymentOrderData?.createdAt.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "MMMM d")) ?? "") has\nbeen Confirmed")
+                    Text("Your Booking for \((viewModel.paymentOrderData?.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", afterFormat: "MMMM d")) ?? "") has\nbeen Confirmed")
                         
                         .font(.custom(FontContent.plusRegular, size: 12))
                         
@@ -41,7 +42,7 @@ struct PaymentConfirmScreenView: View {
                 
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                router.dismissScreenStack()
+                paymentConfirmAction?()
             }
         }
         .toolbar(.hidden, for: .navigationBar)

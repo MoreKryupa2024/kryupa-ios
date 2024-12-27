@@ -41,10 +41,10 @@ struct WeakDayView: View {
                         
                     }
                     .onTapGesture {
-                        if value.id < selectionCount{
+//                        if value.id < selectionCount{
                             onSelectedValue?(value)
                             selectedValue = value
-                        }
+//                        }
                     }
                 
                 if values.last?.day != value.day{

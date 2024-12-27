@@ -33,7 +33,7 @@ struct ReviewListView: View {
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 17))
                     
-                    Text("5 Years Expirenced")
+                    Text("5 Years Experienced")
                         .font(.custom(FontContent.plusRegular, size: 12))
                         .padding(.bottom,5)
                     

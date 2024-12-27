@@ -113,32 +113,19 @@ struct PersonalInformationScreenView: View {
                         VStack(alignment:.leading,spacing:5){
                             HStack{
                                 textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
-                                    .disabled(true)
+                                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? false : true)
                                     .background{
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundStyle(.D_1_D_1_D_6)
+                                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
                                             .frame(height: 48)
                                             .offset(y:5)
                                     }
-                                //                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
-                                //                                        if (viewModel.personalInfoData.postalCode ?? "").count > 5{
-                                //                                            viewModel.personalInfoData.postalCode = "\((viewModel.personalInfoData.postalCode ?? "").prefix(5))"
-                                //                                        }else{
-                                //                                            if (viewModel.personalInfoData.postalCode ?? "").count == 5{
-                                //                                                viewModel.getAddress()
-                                //                                            }else{
-                                //                                                viewModel.personalInfoData.city = ""
-                                //                                                viewModel.personalInfoData.state = ""
-                                //                                                viewModel.personalInfoData.country = ""
-                                //                                                viewModel.personalInfoData.zipError = ""
-                                //                                            }
-                                //                                        }
-                                //                                    }
+                                
                                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                                    .disabled(true)
+                                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? false : true)
                                     .background{
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundStyle(.D_1_D_1_D_6)
+                                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
                                             .frame(height: 48)
                                             .offset(y:5)
                                     }
@@ -152,19 +139,19 @@ struct PersonalInformationScreenView: View {
                         
                         HStack{
                             textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
-                                .disabled(true)
+                                .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? false : true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle(.D_1_D_1_D_6)
+                                        .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
                                         .frame(height: 48)
                                         .offset(y:5)
                                 }
                             
                             textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
-                                .disabled(true)
+                                .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? false : true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle(.D_1_D_1_D_6)
+                                        .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
                                         .frame(height: 48)
                                         .offset(y:5)
                                 }

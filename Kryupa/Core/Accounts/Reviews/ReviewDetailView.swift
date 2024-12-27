@@ -85,14 +85,14 @@ struct ReviewDetailView: View {
                     .stroke(.E_5_E_5_EA, lineWidth: 1)
             )
             
-            Text(viewModel.reviewDetail?.name ?? "Alex")
+            Text(viewModel.reviewDetail?.name ?? "")
                 .font(.custom(FontContent.besMedium, size: 20))
                 .foregroundStyle(.appMain)
-            
+        
             HStack {
-                StarsView(rating: Double(viewModel.reviewDetail?.averageRating.getFullRateVal() ?? 0), maxRating: 5, size: 12)
+                StarsView(rating: Double(viewModel.reviewDetail?.averageRating ?? "") ?? 0, maxRating: 5, size: 12)
                 
-                Text("(\(viewModel.reviewDetail?.averageRating ?? "0"))")
+                Text("(\(viewModel.reviewDetail?.averageRating ?? ""))")
                     .font(.custom(FontContent.plusRegular, size: 11))
                     .foregroundStyle(.appMain)
             }

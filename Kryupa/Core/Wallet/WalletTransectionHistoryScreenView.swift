@@ -19,11 +19,22 @@ struct WalletTransectionHistoryScreenView: View {
                         Text("Transactions")
                             .padding(.vertical,24)
                             .font(.custom(FontContent.besMedium, size: 20))
-                        
-                        ForEach(viewModel.transectionListData, id: \.id) { data in
-                            WalletHistoryView(transectionListData: data)
-                                .padding(.horizontal,24)
-                                .padding(.bottom,15)
+                        if viewModel.transectionListData.count == 0{
+                            VStack(spacing:20){
+                                Spacer(minLength: 80)
+                                Image("PaymentEmpty")
+                                    .resizable()
+                                    .aspectRatio(283/268, contentMode: .fit)
+                                    .padding(.horizontal,46)
+                                Text("Your Wallet Transaction List Looks Empty")
+                                Spacer()
+                            }
+                        }else{
+                            ForEach(viewModel.transectionListData, id: \.id) { data in
+                                WalletHistoryView(transectionListData: data)
+                                    .padding(.horizontal,24)
+                                    .padding(.bottom,15)
+                            }
                         }
                     }
                 }

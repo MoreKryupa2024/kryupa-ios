@@ -127,11 +127,11 @@ struct CareGiverHomeScreenView: View {
                 .padding(.top,30)
             
             
-            ShareLink(item: imageToShare,
-                      preview: SharePreview("Kryupa", image: imageToShare)) {
+//            ShareLink(item: imageToShare,
+//                      preview: SharePreview("Kryupa", image: imageToShare)) {
                 nextButton
                     .padding(.vertical,30)
-            }
+//            }
 
         }
     }

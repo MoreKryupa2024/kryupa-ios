@@ -18,10 +18,10 @@ class SettingViewModel: ObservableObject{
         NotificationAlertData(title: "Subscribe to our newsletter:", toggleState: false),
         NotificationAlertData(title: "WhatsApp notification:", toggleState: false)
     ]
-    @Published var selectedOption = "No, Deactivate my account till next login"
+    @Published var selectedOption = ""
     @Published var arrcheckList: [NotificationAlertData] = [
-        NotificationAlertData(title: "Yes, I am sure", toggleState: false),
-//        NotificationAlertData(title: "No, Deactivate my account till next login", toggleState: false)
+//        NotificationAlertData(title: "Yes, I am sure", toggleState: false),
+        NotificationAlertData(title: "Yes, Deactivate my account till next login", toggleState: false)
     ]
     
     func getNotificationSetting(){
@@ -65,10 +65,7 @@ class SettingViewModel: ObservableObject{
     
     func deleteAccount(){
         isloading = true
-        let param = [//"is_deleted":arrcheckList[0].title == selectedOption,
-                     "is_inactive":arrcheckList[0].title == selectedOption]
-        
-        NetworkManager.shared.deleteAccount(params:param) { [weak self] result in
+        NetworkManager.shared.deactivateAccount() { [weak self] result in
             DispatchQueue.main.async() {
                 self?.isloading = false
                 switch result{

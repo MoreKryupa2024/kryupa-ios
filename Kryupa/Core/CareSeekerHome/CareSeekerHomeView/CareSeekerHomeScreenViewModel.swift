@@ -113,13 +113,32 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
         let param = [
             "approch_id": approch_id
         ]
-        isloading = true
         NetworkManager.shared.customerConfirmStartService(params: param) { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(_):
+                    self?.getRecommandationList()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    func payForService(serviceStartData:ServiceStartData){
+        let approch_id = serviceStartData.id
+        let param = [
+            "serviceId": approch_id
+        ]
+        isloading = true
+        NetworkManager.shared.payForService(params: param) { [weak self] result in
             DispatchQueue.main.async() {
                 self?.isloading = false
                 switch result{
                 case .success(_):
-                    self?.getRecommandationList()
+                    self?.customerConfirmStartService(serviceStartData: serviceStartData)
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

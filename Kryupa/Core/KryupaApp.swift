@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import FirebaseMessaging
 import AVFoundation
 import GooglePlaces
+import Firebase
 
 @main
 struct KryupaApp: App {
@@ -38,7 +39,7 @@ class AppDelegate: NSObject, UIApplicationDelegate{
         let authOptions: UNAuthorizationOptions = [.alert,.badge,.sound,.criticalAlert]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
         application.registerForRemoteNotifications()
-        GMSPlacesClient.provideAPIKey("AIzaSyBmsDbF6QGlBADL9kz5ablsmmj4v66wpas")
+        GMSPlacesClient.provideAPIKey("AIzaSyBgRHr43-B_JRcrBifDqtOrRWWK51Vh_oo")
         Messaging.messaging().token { token, error in
             if let error{
                 print("Notifications----------------------Firebase Message error:-\(error)")

@@ -72,6 +72,7 @@ struct BookingView: View {
                                 RoundedRectangle(cornerRadius: 12).fill(statusBackColor)
                             )
                     }
+                    .padding(.bottom,7)
                     if status != "Draft"{
                         Text("$\((bookingData?.price ?? 0).removeZerosFromEnd(num: 2))")
                             .font(.custom(FontContent.plusMedium, size: 12))
@@ -81,7 +82,7 @@ struct BookingView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 3){
                             if let startDate = bookingData?.startDate, let endDate = bookingData?.endDate{
-                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
+                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMM d yyyy"))")
                                     .font(.custom(FontContent.plusRegular, size: 12))
                                     .foregroundStyle(._444446)
                                     .lineLimit(1)
@@ -106,7 +107,7 @@ struct BookingView: View {
                         if status == "Draft" {
                             Image("DeleteButton")
                                 .frame(width: 25,height: 25)
-                                .offset(y: 10)
+                                .offset(y: 5)
                                 .asButton {
                                     guard let bookingData else {return}
                                     deleteAction?(bookingData)

@@ -715,18 +715,12 @@ class NetworkManager{
         task.resume()
     }
     
-    func deleteAccount(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+    func deactivateAccount(completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
         
-        guard let urlStr = URL(string:APIConstant.deleteAccount) else {
+        guard let urlStr = URL(string:APIConstant.deactivateAccount) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
-    
-        if let parameters = params{
-            print(parameters)
-            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-            request.httpBody = jsonData
-        }
         
         request.allHTTPHeaderFields = commonHeaders
         request.httpMethod = "POST"
@@ -1086,7 +1080,107 @@ class NetworkManager{
     
     func addBank(params:[String:Any]?,completionHandler :  @escaping (Results<TransectionListModel, NetworkError>) -> Void){
         
-        guard let urlStr = URL(string:APIConstant.addBank) else {
+        guard let urlStr = URL(string:APIConstant.createBankAccount) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = TransectionListModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func transferAmountToStripe(params:[String:Any]?,completionHandler :  @escaping (Results<TransectionListModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.transferAmountToStripe) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = TransectionListModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func transferAmountToAccount(params:[String:Any]?,completionHandler :  @escaping (Results<TransectionListModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.transferAmountToAccount) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
@@ -1281,7 +1375,7 @@ class NetworkManager{
     
     func getOrderInvoice(params:[String:Any]?,completionHandler :  @escaping (Results<PaymentOrderModel, NetworkError>) -> Void){
         
-        guard let urlStr = URL(string:APIConstant.getOrderInvoice) else {
+        guard let urlStr = URL(string:APIConstant.serviceInvoice) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
@@ -1582,6 +1676,56 @@ class NetworkManager{
     func confirmPaypalOrderID(params:[String:Any]?,completionHandler :  @escaping (Results<PaymentModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.confirmPaypalOrderID) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = PaymentModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func applePayPaymentConfirm(params:[String:Any]?,completionHandler :  @escaping (Results<PaymentModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.applePayPayment) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
@@ -2257,6 +2401,57 @@ class NetworkManager{
         task.resume()
     }
     
+    func payForService(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.payForService) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        print(params)
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = ServiceStartModel(jsonData: parsedData)
+                if apiData.success{
+                    print(apiData)
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
     func giverConfirmStartService(params:[String:Any]? = nil,completionHandler :  @escaping (Results<ServiceStartModel, NetworkError>) -> Void){
         
         guard let urlStr = URL(string:APIConstant.giverConfirmStartService) else {
@@ -2410,9 +2605,54 @@ class NetworkManager{
         task.resume()
     }
     
-    func sendPaymentMethodId(params:[String:Any]?,completionHandler :  @escaping (Results<SendOTPModel, NetworkError>) -> Void){
+    
+    func stripeCardList(completionHandler :  @escaping (Results<StripeCardListModel, NetworkError>) -> Void){
         
-        guard let urlStr = URL(string:APIConstant.sendStripePaymentMethodId) else {
+        guard let urlStr = URL(string:APIConstant.stripeCardList) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = StripeCardListModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteStripeCard(params:[String:Any]?,completionHandler :  @escaping (Results<StripeCustomerModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.deleteStripeCard) else {
             return completionHandler(.failure(NetworkError.invalidURL))
         }
         var request = URLRequest(url: urlStr)
@@ -2446,7 +2686,157 @@ class NetworkManager{
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
                 let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
-                let apiData = SendOTPModel(jsonData: parsedData)
+                let apiData = StripeCustomerModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func stripeCharge(params:[String:Any]?,completionHandler :  @escaping (Results<StripeCustomerModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.stripeCharge) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = StripeCustomerModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func stripeCreateCustomer(params:[String:Any]?,completionHandler :  @escaping (Results<StripeCustomerModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.stripeCreateCustomer) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = StripeCustomerModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.custom(apiData.message)))
+                }
+                
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    func stripeCreateSetupIntent(params:[String:Any]?,completionHandler :  @escaping (Results<StripeClientSecretModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:APIConstant.stripeCreateSetupIntent) else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+    
+        if let parameters = params{
+            print(parameters)
+            let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = jsonData
+        }
+        
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = StripeClientSecretModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{
@@ -3728,6 +4118,51 @@ class NetworkManager{
                     completionHandler(.failure(.custom(apiData.message)))
 
                 }
+            }catch{
+                completionHandler(.failure(.somethingWentWrong))
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func getJobsDetailsForCustomer(approachID: String,completionHandler :  @escaping (Results<JobDetailModel, NetworkError>) -> Void){
+        
+        guard let urlStr = URL(string:"\(APIConstant.bookingDetailsForCustomer)?approch_id=\(approachID)") else {
+            return completionHandler(.failure(NetworkError.invalidURL))
+        }
+        var request = URLRequest(url: urlStr)
+
+        request.allHTTPHeaderFields = commonHeaders
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) {[weak self](data, response, error) in
+            
+            if let error = error{
+                print(error)
+                completionHandler(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            print(response as? HTTPURLResponse ?? HTTPURLResponse())
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode >= 200,response.statusCode < 400 else {
+                return completionHandler(.failure(NetworkError.invalidResponse))
+            }
+            
+            guard  let data = data else {
+                completionHandler(.failure(.invalidResponse))
+                return
+            }
+            print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
+            do {
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = JobDetailModel(jsonData: parsedData)
+                if apiData.success{
+                    completionHandler(.success(apiData))
+                }else{
+                    completionHandler(.failure(.somethingWentWrong))
+                }
+                
             }catch{
                 completionHandler(.failure(.somethingWentWrong))
             }

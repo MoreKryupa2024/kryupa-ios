@@ -248,7 +248,7 @@ struct BookingFormScreenView: View {
     
     private var DurationTimeContentView: some View{
         HStack{
-            Text("Duration")
+            Text("Duration Hours")
                 .font(.custom(FontContent.plusRegular, size: 16))
                 .padding(.leading,24)
             Spacer()
@@ -266,7 +266,9 @@ struct BookingFormScreenView: View {
                     .font(.custom(FontContent.plusRegular, size: 16))
                 Image("plus")
                     .asButton(.press) {
-                        viewModel.duration = viewModel.duration + 1
+                        if viewModel.duration != 24{
+                            viewModel.duration = viewModel.duration + 1
+                        }
                     }
             }
             .padding(.horizontal, 15)

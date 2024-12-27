@@ -34,7 +34,7 @@ struct AboutUsView: View {
 
     var body: some View {
         VStack {
-            HeaderView(title: "About Caregiver",showBackButton: true)
+            HeaderView(title: Defaults().userType == AppConstants.SeekCare ? "About Kryupa" : "About Caregiver",showBackButton: true)
             ScrollView {
                     ForEach(Array(arrAboutUs.enumerated()), id: \.offset) { index, model in
                         getParaView(title: model.title, desc: model.desc)

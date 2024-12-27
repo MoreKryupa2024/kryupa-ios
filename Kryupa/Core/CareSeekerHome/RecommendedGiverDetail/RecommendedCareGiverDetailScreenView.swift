@@ -16,7 +16,10 @@ struct RecommendedCareGiverDetailScreenView: View {
     @State var bookingID: String = String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
+    @StateObject var viewInboxModel = InboxScreenViewModel()
     let paymentHandler = PaymentHandler()
+    @State var showPaymentMethodScreen = false
+    @StateObject var paymentViewModel = PaymentViewModel()
     
     var body: some View {
         ZStack{
@@ -47,9 +50,19 @@ struct RecommendedCareGiverDetailScreenView: View {
             if viewModel.isloading{
                 LoadingView()
             }
+            
+            if showPaymentMethodScreen{
+                PaymentMethodsScreenView(viewModel: paymentViewModel,paymentConfirmAction: {
+                    viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                    presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
+                    showPaymentMethodScreen = false
+                })
+                .background(.white)
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
         .task{
+            viewInboxModel.connect()
             viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "", bookingId: bookingID)
         }
     }
@@ -113,9 +126,9 @@ struct RecommendedCareGiverDetailScreenView: View {
                 Text("\(viewModel.giverDetail?.yearOfExperience ?? 0) years experienced")
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .foregroundStyle(._444446)
-//                Text("$\(viewModel.giverDetail?.pricePerHour ?? 0)")
-//                    .font(.custom(FontContent.plusRegular, size: 12))
-//                    .foregroundStyle(._444446)
+                //                Text("$\(viewModel.giverDetail?.pricePerHour ?? 0)")
+                //                    .font(.custom(FontContent.plusRegular, size: 12))
+                //                    .foregroundStyle(._444446)
                 HStack{
                     StarsView(rating: (viewModel.giverDetail?.avgRating ?? 0.0), maxRating: 5,size: 12)
                     
@@ -150,7 +163,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                 MessageButton
                     .asButton(.press){
                         viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
-                            let chatViewModel = ChatScreenViewModel()
+                            let chatViewModel = viewInboxModel.viewModelChat
                             chatViewModel.selectedChat = viewModel.chatData
                             chatViewModel.isRecommended = viewModel.isRecommended
                             chatViewModel.normalBooking = viewModel.isRecommended ? false : (viewModel.giverDetail?.showBookNow ?? false)
@@ -176,27 +189,13 @@ struct RecommendedCareGiverDetailScreenView: View {
                                     BookingFormScreenView(viewModel: bookingViewModel)
                                 }
                             }else{
-                                viewModel.getCardVerificationDetails { status in
-                                    if !status {
-                                        self.paymentHandler.startPayment(amount: "0.5") { (success, token) in
-                                            if success {
-                                                print("Success+++++++",token)
-                                                
-                                                viewModel.setCardVerificationDetails()
-                                                
-                                                viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
-                                                presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
-
-                                            } else {
-                                                print("Failed")
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
-                                        presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
-
-                                    }
+                                if (viewModel.walletAmountData?.mainAmount ?? 0.0) < 20.40 {
+                                    paymentViewModel.amount = "20.40"
+                                    showPaymentMethodScreen = true
+                                } else {
+                                    viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
+                                    presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
+                                    
                                 }
                             }
                         }
@@ -245,6 +244,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
                         router.dismissScreen()
+                        viewInboxModel.disconnect()
                     }
                 Spacer()
 //                Image("NotificationBellIcon")

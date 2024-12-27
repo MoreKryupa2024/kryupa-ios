@@ -11,6 +11,10 @@ struct MoneyAddedScreenView: View {
     @Environment(\.router) var router
     @StateObject var viewModel = PaymentViewModel()
     let notificatioShowWalletScreen = NotificationCenter.default
+    
+    var paymentConfirmAction: (()->Void)? = nil
+    
+    
     var body: some View {
         ZStack{
             VStack{
@@ -32,8 +36,7 @@ struct MoneyAddedScreenView: View {
         }
         .task{
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                router.dismissScreenStack()
-                notificatioShowWalletScreen.post(name: .showWalletScreen, object: nil)
+                paymentConfirmAction?()
             }
         }
         .toolbar(.hidden, for: .navigationBar)

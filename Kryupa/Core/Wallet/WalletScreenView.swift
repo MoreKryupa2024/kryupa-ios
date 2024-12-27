@@ -31,7 +31,7 @@ struct WalletScreenView: View {
                             .foregroundStyle(._018_ABE)
                             .padding(.top,5)
                         
-                        Text("AddMoney")
+                        Text(Defaults().userType == AppConstants.SeekCare ? "AddMoney" : "Withdraw Money")
                             .font(.custom(FontContent.plusRegular, size: 16))
                             .foregroundStyle(.white)
                             .padding(.horizontal,26)
@@ -40,10 +40,18 @@ struct WalletScreenView: View {
                                 RoundedRectangle(cornerRadius: 48)
                             }
                             .asButton(.press) {
-                                let addMoneyViewModel = PaymentViewModel()
-                                addMoneyViewModel.walletAmountData = viewModel.walletAmountData
-                                router.showScreen(.push) { rout in
-                                    AddMoneyScreenView(viewModel: addMoneyViewModel)
+                                if Defaults().userType == AppConstants.SeekCare{
+                                    let addMoneyViewModel = PaymentViewModel()
+                                    addMoneyViewModel.walletAmountData = viewModel.walletAmountData
+                                    router.showScreen(.push) { rout in
+                                        AddMoneyScreenView(viewModel: addMoneyViewModel)
+                                    }
+                                }else{
+                                    let addMoneyViewModel = PaymentListViewModel()
+                                    addMoneyViewModel.walletAmountData = viewModel.walletAmountData
+                                    router.showScreen(.push) { rout in
+                                        WithdrawMoneyScreenView(viewModel: addMoneyViewModel)
+                                    }
                                 }
                             }
                             .padding(.top,30)
@@ -84,15 +92,7 @@ struct WalletScreenView: View {
                         .background {
                             Rectangle()
                                 .foregroundStyle(.white)
-                                .clipShape(
-                                    .rect(
-                                        topLeadingRadius: 30,
-                                        bottomLeadingRadius: 0,
-                                        bottomTrailingRadius: 0,
-                                        topTrailingRadius: 30
-                                    )
-                                )
-                                
+                                .cornerRadius(30, corners: [.topLeft, .topRight])
                         }
                         .padding(.top,30)
                     }
