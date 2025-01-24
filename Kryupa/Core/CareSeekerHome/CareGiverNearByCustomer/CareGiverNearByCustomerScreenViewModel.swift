@@ -9,6 +9,7 @@ import Foundation
 @MainActor
 class CareGiverNearByCustomerScreenViewModel: ObservableObject{
     @Published var serachGiver: String = String()
+    @Published var amount: String = String()
     @Published var isloading: Bool = true
     @Published var pagination: Bool = true
     @Published var pageNumber = 1

@@ -39,20 +39,26 @@ struct FAQView: View {
                     Spacer()
                 }
                 else {
-                    ScrollView {
-                        VStack(spacing: 20){
-                            if let faqModelData = viewModel.faqModelData{
-                                ForEach(faqModelData.allConversation.reversed(), id:\.id) { data in
-                                    FAQChatView(conversationData: data,senderId: faqModelData.userId)
-                                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-                                 }
+                    ScrollViewReader { value in
+                        ScrollView {
+                            VStack(spacing: 20){
+                                if let faqModelData = viewModel.faqModelData{
+                                    ForEach(faqModelData.allConversation.reversed(), id:\.id) { data in
+                                        FAQChatView(conversationData: data,senderId: faqModelData.userId)
+                                            .id(data.id)
+                                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                                    }
+                                }
                             }
+                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                         }
-                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+//                        .defaultScrollAnchor(.bottom)
+                        .padding(.horizontal, 10)
+                        .scrollIndicators(.hidden)
+                        .onChange(of: viewModel.faqModelData?.allConversation.count) { _,_ in
+                            value.scrollTo(viewModel.faqModelData?.allConversation.last?.id)
+                        }
                     }
-                    .defaultScrollAnchor(.bottom)
-                    .padding(.horizontal, 10)
-                    .scrollIndicators(.hidden)
                     
                     sendMessageView
                         .padding(.top,15)
@@ -67,32 +73,27 @@ struct FAQView: View {
             )
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
+            .modifier(DismissingKeyboard())
             .task{
                 viewModel.pageNumber = 1
                 viewModel.conversationWithAdmin()
                 viewModel.receiveMessage()
-                IQKeyboardManager.shared.enable = false
             }
-            .onDisappear(perform: {
-                IQKeyboardManager.shared.enable = true
-            })
-            .modifier(DismissingKeyboard())
-            
             if viewModel.isLoading{
                 LoadingView()
             }
         }
+        .task{
+            IQKeyboardManager.shared.enable = false
+        }
+        .onDisappear(perform: {
+            IQKeyboardManager.shared.enable = true
+        })
     }
     
     private var sendMessageView: some View{
         
         return HStack {
-            //            Image("camera")
-            //                .resizable()
-            //                .frame(width: 39,height: 29)
-            //                .asButton(.press) {
-            //                    print("Camera")
-            //            }
             
             HStack {
                 TextField("Hello!", text:$viewModel.sendMsgText, axis: .vertical)
@@ -105,12 +106,6 @@ struct FAQView: View {
                 
                 
                 HStack(spacing:5) {
-                    
-                    //Image("audio")
-                    //.dynamicTypeSize(.medium)
-                    //.frame(width: 28,height: 28)
-                    //.asButton(.press) {
-                    //}
                     
                     Image("sendbutton")
                         .dynamicTypeSize(.medium)
@@ -152,6 +147,7 @@ struct FAQView: View {
         .padding(.horizontal, 24)
         .padding(.top, 30)
         .onChange(of: viewModel.selectedSection) { oldValue, newValue in
+            keyboardHeight = 0
             if viewModel.selectedSection == 1{
                 viewModel.disconnect()
                 viewModel.connect()
@@ -159,7 +155,6 @@ struct FAQView: View {
             }else{
                 viewModel.disconnect()
             }
-            
         }
     }
 }

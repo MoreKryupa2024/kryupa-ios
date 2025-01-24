@@ -27,12 +27,14 @@ class InboxScreenViewModel: ObservableObject{
     }
     
     func setUpSocket(){
-        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
+        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(false), .compress])
         self.socket = self.manager.defaultSocket
+        self.connect()
     }
     
     func connect() {
         socket.on(clientEvent: .connect) {data, ack in
+            print("*********************socket Connected")
             self.updateInboxListSockit()
             //Call your first socket here
         }
@@ -42,9 +44,11 @@ class InboxScreenViewModel: ObservableObject{
     
     func updateInboxListSockit(){
         socket?.on("update_inbox_list") { [weak self] data, _ in
+            print("********************* socket inbox Connected")
             self?.getInboxList()
         }
     }
+    
     deinit{
         disconnect()
     }

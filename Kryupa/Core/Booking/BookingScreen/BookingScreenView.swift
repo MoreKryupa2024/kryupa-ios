@@ -122,9 +122,16 @@ struct BookingScreenView: View {
             case 0:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
                     BookingView(status: "Draft",bookingData: data,deleteAction: { data in
-                        viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
-                            presentAlert(title: "Kryupa", subTitle: errorStr)
+                        
+                        let primaryAction = UIAlertAction(title: "OK", style: .default) { _ in 
+                            viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
+                                presentAlert(title: "Kryupa", subTitle: errorStr)
+                            }
                         }
+                        
+                        let secondaryAction = UIAlertAction(title: "Cancel", style: .default)
+                        
+                        presentAlert(title: "Kryupa", subTitle: "Are you sure you want to delete this booking?", primaryAction: primaryAction, secondaryAction: secondaryAction)
                     })
                     .asButton(.press) {
                         Defaults().bookingId = data.bookingID
@@ -182,7 +189,7 @@ struct BookingScreenView: View {
                 }
             case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : "Completed"),bookingData: data)
+                    BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
                             viewModelReview.bookingsListData = data

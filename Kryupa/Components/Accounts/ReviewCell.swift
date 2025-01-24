@@ -14,8 +14,6 @@ struct ReviewCell: View {
         VStack(alignment: .leading) {
             HStack(spacing: 15) {
                 
-                
-                
                 ImageLoadingView(imageURL: reviewData?.profilePictureUrl ?? "")
                     .frame(width: 60, height: 60)
                     .cornerRadius(30)
@@ -27,7 +25,7 @@ struct ReviewCell: View {
                         .foregroundStyle(.appMain)
                         .padding(.bottom, 1)
                     let createdDate = reviewData?.createdAt.split(separator: " ").first ?? ""
-                    Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd"))
+                    Text(String(createdDate).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd, yy"))
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .foregroundStyle(._444446)
                     HStack {

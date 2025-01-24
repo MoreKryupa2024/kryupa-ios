@@ -33,7 +33,7 @@ struct PaymentOrderScreenView: View {
                             Image("warningRed")
                                 .resizable()
                                 .frame(width: 24,height: 24)
-                            Text("Your current wallet balance is $\((viewModel.walletAmountData?.mainAmount ?? 0.0).removeZerosFromEnd(num: 2))")
+                            Text("Your current Kryupa Cash balance is $\((viewModel.walletAmountData?.mainAmount ?? 0.0).removeZerosFromEnd(num: 2))")
                                 .font(.custom(FontContent.plusMedium, size: 15))
                         }
                         .padding(.top,15)

@@ -55,6 +55,7 @@ class ChatScreenViewModel: ObservableObject{
     }
 
     func connect() {
+        updateInboxListSockit()
         chatWindowFocus()
         self.receiveMessage { msgData, str in
             self.messageList = [msgData] + self.messageList
@@ -65,9 +66,17 @@ class ChatScreenViewModel: ObservableObject{
         chatWindowUnfocus()
     }
     
+    func updateInboxListSockit(){
+        socket?.on("update_inbox_list") { [weak self] data, _ in
+            print("********************* socket inbox Connected")
+        }
+    }
+    
     func chatWindowFocus(){
         let param = ["contactId":selectedChat?.id ?? ""]
-        self.socket?.emit("chat_window_focus", with: [param]){}
+        self.socket?.emit("chat_window_focus", with: [param]){
+            print("********************* chat_window_focus Connected")
+        }
     }
     
     func chatWindowUnfocus(){

@@ -16,7 +16,9 @@ struct BookingView: View {
         if status == "Cancelled"{
             return .D_3180_C
         }else if status == "Rejected"{
-                return .D_3180_C
+            return .D_3180_C
+        }else if status == "Ignore By Caregiver"{
+            return .D_3180_C
         }else if status == "Pending" {
             return .FFB_323
         }else if status == "Draft" {
@@ -32,6 +34,8 @@ struct BookingView: View {
         if status == "Cancelled"{
             return .FFE_3_E_3
         }else if status == "Rejected"{
+            return .FFE_3_E_3
+        }else if status == "Ignore By Caregiver"{
             return .FFE_3_E_3
         }else if status == "Draft" {
             return .E_5_E_5_EA
@@ -93,7 +97,7 @@ struct BookingView: View {
                                 .font(.custom(FontContent.plusRegular, size: 12))
                                 .foregroundStyle(._444446)
                             if status == "Pending" && (bookingData?.status ?? "") != "Payment Pending"{
-                                Text("Awaiting confirmation from caregiver")
+                                Text(Defaults().userType == AppConstants.SeekCare ? "Awaiting confirmation from caregiver" : "Seeker is waiting for your confirmation.")
                                     .font(.custom(FontContent.plusRegular, size: 12))
                                     .foregroundStyle(.FFB_323)
                             }

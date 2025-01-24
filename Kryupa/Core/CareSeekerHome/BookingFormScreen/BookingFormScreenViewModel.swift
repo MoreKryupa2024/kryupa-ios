@@ -15,7 +15,7 @@ class BookingFormScreenViewModel: ObservableObject{
     var dateArray:[String] = []
     @Published var startDateValue: Date = Date()
     @Published var startDateSValue: Set<DateComponents> = []
-    @Published var startTimeValue: Date = Date()
+    @Published var startTimeValue: Date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
     
     @Published var bookingFor: String = String()
     @Published var giverName: String = String()
@@ -85,20 +85,24 @@ class BookingFormScreenViewModel: ObservableObject{
     func getBookingForRelativeList(errorAlert: @escaping ((String)-> Void)){
         let param = ["caregiver_id":giverId]
         isloading = true
-        NetworkManager.shared.getRelativeList(params: param) { [weak self] result in
+        NetworkManager.shared.getRelativeList(params: param) { [weak self]
+            result in
+            
+            guard let self else{ return }
             DispatchQueue.main.async {
                 switch result{
                 case .success(let data):
-                    self?.isloading = false
-                    self?.bookingForList = data.data.relationArray
-                    self?.needServiceInArray = data.data.pricingArray
-                    if (self?.bookingID != "") {
-                        self?.getBookingDetailsById(errorAlert: { errorStr in
+                    self.isloading = false
+                    self.bookingForList = data.data.relationArray
+                    self.bookingFor = self.bookingForList.count > 1 ? "" : self.bookingForList.first?.name ?? ""
+                    self.needServiceInArray = data.data.pricingArray
+                    if (self.bookingID != "") {
+                        self.getBookingDetailsById(errorAlert: { errorStr in
                             errorAlert(errorStr)
                         })
                     }
                 case .failure(let error):
-                    self?.isloading = false
+                    self.isloading = false
                     errorAlert(error.getMessage())
                 }
             }
@@ -125,6 +129,8 @@ class BookingFormScreenViewModel: ObservableObject{
     
     func createBooking(action:(@escaping(String)->Void),alert:(@escaping(String)->Void)){
         dateArray = dateArray.sorted{$0 < $1}
+        
+        let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 15, to: Date(), options: [])!
         if bookingFor.isEmpty{
          return alert("Please Select Person for this Booking.")
         }else if needServiceInSelected.count == 0{
@@ -141,6 +147,8 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select Preferred Language.")
         }else if yearsOfExperienceSelected.isEmpty{
             return alert("Please Select Year of Experience.")
+        }else if startTimeValue < date{
+            return alert("Ensure the booking time is at least 15 minutes from now.")
         }
         
         var param: [String: Any] = [

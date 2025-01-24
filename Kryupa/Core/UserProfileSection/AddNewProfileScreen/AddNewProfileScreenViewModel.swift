@@ -21,7 +21,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
     @Published var profileID: String = String()
     @Published var medicalID: String = String()
 
-    var date: Date = Date()
+    var date: Date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -16, to: Date(), options: [])!
     @Published var showDatePicker: Bool = Bool()
     var dateOfBirthSelected: Bool = Bool()
     @Published var personalInfoData: PersonalInfo = PersonalInfo()

@@ -116,6 +116,7 @@ struct OrderListModel {
 
 // MARK: - Datum
 struct OrderListData {
+    let idCustom = UUID()
     let id: String
     let bookingPricing: Double
     let bookingPricingForCustomer: Double
@@ -129,7 +130,7 @@ struct OrderListData {
     let updatedAt: String
     let status: Bool
     let caregiverID, customerID, profileID, startDate: String
-    let endDate, startTime, endTime: String
+    let endDate, startTime, endTime,areaOfExperties,bookingType: String
 
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -156,5 +157,7 @@ struct OrderListData {
         endDate = jsonData["end_date"] as? String ?? ""
         startTime = jsonData["start_time"] as? String ?? ""
         endTime = jsonData["end_time"] as? String ?? ""
+        areaOfExperties = jsonData["area_of_experties"] as? String ?? ""
+        bookingType = jsonData["booking_type"] as? String ?? ""
     }
 }

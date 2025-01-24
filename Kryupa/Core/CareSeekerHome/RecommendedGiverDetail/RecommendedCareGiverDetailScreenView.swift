@@ -189,8 +189,8 @@ struct RecommendedCareGiverDetailScreenView: View {
                                     BookingFormScreenView(viewModel: bookingViewModel)
                                 }
                             }else{
-                                if (viewModel.walletAmountData?.mainAmount ?? 0.0) < 20.40 {
-                                    paymentViewModel.amount = "20.40"
+                                if (viewModel.walletAmountData?.mainAmount ?? 0.0) < Double(viewModel.amount) ?? 0.0 {
+                                    paymentViewModel.amount = viewModel.amount
                                     showPaymentMethodScreen = true
                                 } else {
                                     viewModel.sendRequestForBookCaregiver(bookingId: bookingID)

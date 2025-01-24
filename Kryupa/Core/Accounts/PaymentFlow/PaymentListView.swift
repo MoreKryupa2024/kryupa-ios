@@ -46,11 +46,26 @@ struct PaymentListView: View {
                         }else{
                             ScrollView {
                                 VStack(spacing: 15) {
-                                    ForEach(viewModel.orderListData,id: \.id) { msg in
+                                    ForEach(Array(viewModel.orderListData.enumerated()), id: \.element.idCustom) { index, data in
+                                        
                                         if AppConstants.GiveCare == Defaults().userType{
-                                            PaymentHistoryCell(orderListData: msg)
+                                            PaymentHistoryCell(orderListData: data, isSelected: viewModel.isSelectedCell == index)
+                                                .asButton {
+                                                    if viewModel.isSelectedCell == index{
+                                                        self.viewModel.isSelectedCell = -1
+                                                    }else{
+                                                        self.viewModel.isSelectedCell = index
+                                                    }
+                                                }
                                         }else{
-                                            seekerPayedView(orderData: msg)
+                                            seekerPayedView(orderData: data,isSelected: viewModel.isSelectedCell == index)
+                                                .asButton {
+                                                    if viewModel.isSelectedCell == index{
+                                                        self.viewModel.isSelectedCell = -1
+                                                    }else{
+                                                        self.viewModel.isSelectedCell = index
+                                                    }
+                                                }
                                         }
                                     }
                                 }
@@ -110,19 +125,9 @@ struct PaymentListView: View {
         }
     }
     
-    private func showSeekerPaymentHistoryList()-> some View{
-        return ScrollView{
-            VStack(spacing: 15) {
-                ForEach(viewModel.orderListData,id: \.id) { msg in
-                    PaymentHistoryCell(orderListData: msg)
-                }
-            }
-            .padding(.top, 20)
-        }
-    }
-    
-    private func seekerPayedView(orderData:OrderListData)-> some View{
-        return HStack(spacing:15){
+    private func seekerPayedView(orderData:OrderListData,isSelected: Bool)-> some View{
+        return VStack(spacing:10){
+            HStack(spacing:15){
                 
                 ImageLoadingView(imageURL:orderData.profilePictureURL)
                     .frame(width: 64,height: 64)
@@ -147,28 +152,67 @@ struct PaymentListView: View {
                     let startDate = orderData.startDate.components(separatedBy: " ").first ?? ""
                     let endDate = orderData.endDate.components(separatedBy: " ").first ?? ""
                     
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM dd -"))\(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM dd yyyy"))")
+                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd -"))\(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM dd yyyy"))")
                         .font(.custom(FontContent.plusRegular, size: 15))
                         .padding(.bottom,5)
                         .foregroundStyle(._7_C_7_C_80)
                     
-                    Text("$\(orderData.bookingPricingForCustomer.removeZerosFromEnd(num: 2))")
-                        .font(.custom(FontContent.plusRegular, size: 15))
-                        .padding(.bottom,5)
-                        .foregroundStyle(._7_C_7_C_80)
+                    HStack{
+                        Text("$\(orderData.bookingPricingForCustomer.removeZerosFromEnd(num: 2))")
+                            .font(.custom(FontContent.plusRegular, size: 15))
+                            .padding(.bottom,5)
+                            .foregroundStyle(._7_C_7_C_80)
+                        Spacer()
+                        if isSelected{
+                            Image("chevron-up")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading,5)
-        
+                
             }
-            .padding(.vertical,9)
-            .padding(.horizontal,10)
-            .background{
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 1.0)
+            if isSelected{
+                Rectangle()
+                    .frame(height: 1)
                     .foregroundStyle(.E_5_E_5_EA)
+                    .padding(.vertical,5)
+                let startTime = orderData.startTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")
+                let endTime = orderData.endTime.convertDateFormater(beforeFormat: "HH:mm:ss", afterFormat: "h:mm a")
+                HStack{
+                    Text("Time:")
+                    Spacer()
+                    Text("\(startTime) - \(endTime)")
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .font(.custom(FontContent.plusRegular, size: 15))
+                
+                HStack{
+                    Text("Type:")
+                    Spacer()
+                    Text(orderData.bookingType)
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .font(.custom(FontContent.plusRegular, size: 15))
+                HStack{
+                    Text("Service:")
+                    Spacer()
+                    Text(orderData.areaOfExperties)
+                        .foregroundStyle(._7_C_7_C_80)
+                }
+                .font(.custom(FontContent.plusRegular, size: 15))
             }
-            .padding(.horizontal,24)
+        }
+        .padding(.vertical,9)
+        .padding(.horizontal,10)
+        .background{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(lineWidth: 1.0)
+                .foregroundStyle(.E_5_E_5_EA)
+        }
+        .padding(.horizontal,24)
     }
     
     private var BankView: some View{

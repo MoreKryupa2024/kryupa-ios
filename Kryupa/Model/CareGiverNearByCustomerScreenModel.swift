@@ -27,11 +27,14 @@ struct  CareGiverNearByCustomerScreenData {
     let price: Int
     let yearsOfExprience: Int
     let providertype, role, status, fcmToken: String
-    let updatedBy: String
+    let updatedBy,totalReviews,averageRating: String
     let createdAt, updatedAt: String
+    
     
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
+        totalReviews = jsonData["total_reviews"] as? String ?? ""
+        averageRating = jsonData["average_rating"] as? String ?? ""
         profile = jsonData["profile_picture_url"] as? String ?? ""
         email = jsonData["email"] as? String ?? ""
         price = jsonData["price_per_hour"] as? Int ?? 0

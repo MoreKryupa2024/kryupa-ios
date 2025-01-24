@@ -29,6 +29,7 @@ struct JobDetailData {
     let status, name: String
     let profilePictureURL: String
     let bookingPricing: Int
+    let bookingPricingForCustomer: Double
     let allergies, mobilityLevel, otherDiseaseType, contactID: String
     let caregiversID: String
     let approchStatus: String
@@ -57,6 +58,7 @@ struct JobDetailData {
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
         bookingPricing = jsonData["booking_pricing"] as? Int ?? 0
         totalhours = jsonData["totalhours"] as? Int ?? 0
+        bookingPricingForCustomer = jsonData["booking_pricing_for_customer"] as? Double ?? 0
         allergies = jsonData["allergies"] as? String ?? ""
         mobilityLevel = jsonData["mobility_level"] as? String ?? ""
         otherDiseaseType = jsonData["other_disease_type"] as? String ?? ""

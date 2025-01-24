@@ -26,7 +26,7 @@ struct WalletTransectionHistoryScreenView: View {
                                     .resizable()
                                     .aspectRatio(283/268, contentMode: .fit)
                                     .padding(.horizontal,46)
-                                Text("Your Wallet Transaction List Looks Empty")
+                                Text("Your Kryupa Cash Transaction List Looks Empty")
                                 Spacer()
                             }
                         }else{

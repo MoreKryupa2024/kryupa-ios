@@ -48,7 +48,7 @@ class SocialLoginScreenViewModel: ObservableObject{
     }
     
     
-    func signCall(param:[String:Any],completionHandler :  @escaping (DataClass) -> Void){
+    func signCall(param:[String:Any],completionHandler :  @escaping (DataClass) -> Void,errorCompletionHandler :  @escaping (String) -> Void){
         isLoading = true
         NetworkManager.shared.postGoogleSignup(params: param) { [weak self]result in
             DispatchQueue.main.async {
@@ -58,6 +58,7 @@ class SocialLoginScreenViewModel: ObservableObject{
                     completionHandler(data.data)
                 case .failure(let error):
                     self?.isLoading = false
+                    errorCompletionHandler(error.getMessage())
                     print(error)
                 }
             }

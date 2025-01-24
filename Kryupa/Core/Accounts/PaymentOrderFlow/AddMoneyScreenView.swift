@@ -18,7 +18,7 @@ struct AddMoneyScreenView: View {
         ZStack{
             VStack(spacing:0){
                 HeaderView(showBackButton: true)
-                Text("Your Wallet Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
+                Text("Your Kryupa Cash Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
                     .padding(.top,45)

@@ -14,6 +14,7 @@ class PaymentListViewModel: ObservableObject{
     @Published var selectedPaymentMethod: Int = 0
     @Published var selectedSection = 0
     @Published var showAddBankView = false
+    @Published var isSelectedCell: Int = -1
     @Published var fullName: String = ""
     @Published var ssnNumber: String = ""
     @Published var typeAccount: String = ""

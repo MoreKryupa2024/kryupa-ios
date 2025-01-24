@@ -35,6 +35,7 @@ struct GiveReviewView: View {
                 .onAppear{
                     viewModel.cancelBookingData()
                     viewModel.getReview()
+                    
                     NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
                                                          using: self.setChatScreen)
                 }
@@ -54,12 +55,12 @@ struct GiveReviewView: View {
         
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                HStack {
-                    Text("Review:")
-                        .font(.custom(FontContent.plusRegular, size: 17))
-                        .foregroundStyle(.appMain)
-                    
-                    Spacer()
+                Text("Review:")
+                    .font(.custom(FontContent.plusRegular, size: 17))
+                    .foregroundStyle(.appMain)
+                Spacer()
+                /*
+                HStack(spacing:0){
                     if viewModel.txtReview == ""{
                         if !viewModel.isEditReview {
                             Image("edit-two")
@@ -73,7 +74,7 @@ struct GiveReviewView: View {
                 }
                 .asButton(.press) {
                     viewModel.isEditReview = true
-                }
+                }*/
             }
             
             RatingView(rating: viewModel.ratingValue,action: { rating in
@@ -247,14 +248,14 @@ struct GiveReviewView: View {
             
             Spacer()
             Spacer()
-            Text((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? "Cancelled" : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? "Expired" : (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver" ? "Rejected" : "Completed"))
+            Text((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" ? "Cancelled" : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? "Expired" : (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver" ? "Rejected" : (viewModel.bookingsListData?.status ?? "") == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"))
                 .padding()
                 .frame(height: 31)
                 .font(.custom(FontContent.plusRegular, size: 16))
-                .foregroundStyle(((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" || (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver") ? .red : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? Color.gray : ._23_C_16_B))
+                .foregroundStyle(((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" || (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver" || (viewModel.bookingsListData?.status ?? "") == "Ignore_By_Caregiver") ? .red : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? Color.gray : ._23_C_16_B))
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" || (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver") ? .red.opacity(0.2) : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? .F_2_F_2_F_7 : .E_0_FFEE))
+                        .fill(((viewModel.bookingsListData?.status ?? "") == "Job Cancelled" || (viewModel.bookingsListData?.status ?? "") == "Rejected By Caregiver" || (viewModel.bookingsListData?.status ?? "") == "Ignore_By_Caregiver") ? .red.opacity(0.2) : ((viewModel.bookingsListData?.status ?? "") == "Depreciated" ? .F_2_F_2_F_7 : .E_0_FFEE))
                 )
         }
     }

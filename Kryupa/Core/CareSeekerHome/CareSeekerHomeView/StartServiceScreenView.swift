@@ -32,7 +32,7 @@ struct StartServiceScreenView: View {
                             TabView(selection:$isSelectedView){
                                 ForEach(serviceStartData.indices, id: \.self) { index in
                                     VStack(spacing:0){
-                                        Text(Defaults().userType == AppConstants.SeekCare ? serviceStartData[index].customerName : serviceStartData[index].caregiverName)
+                                        Text(serviceStartData[index].customerName)
                                             .font(.custom(FontContent.besMedium, size: 28))
                                             .padding(.top,15)
                                             .padding(.bottom,20)
@@ -52,13 +52,21 @@ struct StartServiceScreenView: View {
                                         )
                                         .padding(.vertical,20)
                                         
-                                        Text(Defaults().userType != AppConstants.SeekCare ? serviceStartData[index].customerName : serviceStartData[index].caregiverName)
+                                        Text(serviceStartData[index].caregiverName)
                                             .font(.custom(FontContent.besMedium, size: 17))
                                             .padding(.bottom,5)
-                                        Text(serviceStartData[index].areaOfExperties)
+                                        Text(serviceStartData[index].areaOfExperties.components(separatedBy: "(").first ?? "")
                                             .font(.custom(FontContent.plusMedium, size: 15))
                                             .foregroundStyle(._018_ABE)
                                             .padding(.bottom,20)
+                                            .padding(.horizontal,40)
+                                        if serviceStartData[index].areaOfExperties.contains("("){
+                                            Text(serviceStartData[index].serviceStr)
+                                                .font(.custom(FontContent.plusRegular, size: 11))
+                                                .foregroundStyle(.gray)
+                                                .padding(.bottom,20)
+                                                .padding(.horizontal,40)
+                                        }
                                     }
                                 }
                             }

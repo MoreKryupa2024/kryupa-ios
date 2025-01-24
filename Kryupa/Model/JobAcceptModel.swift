@@ -54,7 +54,7 @@ struct ServiceStartModel {
 
 // MARK: - DataClass
 struct ServiceStartData {
-    let id, serviceStatus,caregiverName,profilePictureUrl,areaOfExperties,customerName: String
+    var id, serviceStatus,caregiverName,profilePictureUrl,areaOfExperties,serviceStr,customerName: String
     let amount: Double
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
@@ -64,6 +64,10 @@ struct ServiceStartData {
         areaOfExperties = jsonData["area_of_experties"] as? String ?? ""
         customerName = jsonData["customer_name"] as? String ?? ""
         amount = jsonData["amount"] as? Double ?? 0.0
+        serviceStr = (areaOfExperties.components(separatedBy: "(").last ?? "")
+        if areaOfExperties.contains("("){
+            serviceStr = String(serviceStr.removeLast())
+        }
     }
 }
 

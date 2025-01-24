@@ -86,7 +86,7 @@ class PaymentViewModel: ObservableObject{
     }
     
     func applePayPaymentConfirm(transactionID: String){
-        let amount = (Double(amount) ?? 0).removeZerosFromEnd(num: 2)
+        let amount = Double(amount) ?? 0
         let param = [
             "amount": amount,
             "isSuccess": true,

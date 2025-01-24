@@ -15,6 +15,11 @@ struct PersonalInformationSeekerView: View {
     @State var genderDropShow = Bool()
     @State var languageDropShow = Bool()
     
+    @State var zipCodeCanEdit: Bool = false
+    @State var cityCanEdit: Bool = false
+    @State var stateCanEdit: Bool = false
+    @State var CountryCanEdit: Bool = false
+    
     var body: some View {
         ZStack{
             VStack(spacing:0){
@@ -32,6 +37,7 @@ struct PersonalInformationSeekerView: View {
                     .font(.custom(FontContent.besMedium, size: 22))
                     .frame(height: 28)
                     .padding(.top,30)
+                    .lineLimit(2)
                 
                 ScrollView {
                     VStack(spacing: 25,
@@ -78,21 +84,31 @@ struct PersonalInformationSeekerView: View {
                         VStack(alignment:.leading,spacing:5){
                             HStack{
                                 textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode,keyboard: .numberPad)
-                                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? false : true)
+                                    .disabled( zipCodeCanEdit ? false : true)
                                     .background{
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                            .foregroundStyle(zipCodeCanEdit ? .white : .D_1_D_1_D_6)
                                             .frame(height: 48)
                                             .offset(y:5)
                                     }
+                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                        if !zipCodeCanEdit{
+                                            self.zipCodeCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty)
+                                        }
+                                    }
                                 
                                 textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city,keyboard: .asciiCapable)
-                                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? false : true)
+                                    .disabled(cityCanEdit ? false : true)
                                     .background{
                                         RoundedRectangle(cornerRadius: 8)
-                                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                            .foregroundStyle(cityCanEdit ? .white : .D_1_D_1_D_6)
                                         .frame(height: 48)
                                         .offset(y:5)
+                                    }
+                                    .onChange(of: viewModel.personalInfoData.city) { oldValue, newValue in
+                                        if !cityCanEdit{
+                                            self.cityCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty)
+                                        }
                                     }
                             }
                             if let zipError = viewModel.personalInfoData.zipError, !(zipError.isEmpty){
@@ -104,21 +120,31 @@ struct PersonalInformationSeekerView: View {
                         
                         HStack{
                             textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state,keyboard: .asciiCapable)
-                                .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? false : true)
+                                .disabled(stateCanEdit ? false : true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                        .foregroundStyle(stateCanEdit ? .white : .D_1_D_1_D_6)
                                     .frame(height: 48)
                                     .offset(y:5)
                                 }
+                                .onChange(of: viewModel.personalInfoData.state) { oldValue, newValue in
+                                    if !stateCanEdit{
+                                        self.stateCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty)
+                                    }
+                                }
                             
                             textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country,keyboard: .asciiCapable)
-                                .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? false : true)
+                                .disabled(CountryCanEdit ? false : true)
                                 .background{
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                        .foregroundStyle(CountryCanEdit ? .white : .D_1_D_1_D_6)
                                     .frame(height: 48)
                                     .offset(y:5)
+                                }
+                                .onChange(of: viewModel.personalInfoData.country) { oldValue, newValue in
+                                    if !CountryCanEdit{
+                                        self.CountryCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty)
+                                    }
                                 }
                         }
                         
@@ -291,10 +317,13 @@ struct PersonalInformationSeekerView: View {
     }
     
     private func dateOfBirthPicker()-> some View{
-        DateTimePickerScreenView(
+        let date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -16, to: Date(), options: [])!
+        
+        return DateTimePickerScreenView(
+            givenDate: date,
             formate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
             range: nil,
-            rangeThrough: ...Date(),
+            rangeThrough: ...date,
             valueStr: { value in
                 viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker

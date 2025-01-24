@@ -32,9 +32,9 @@ struct BookingCareGiverListView: View {
                     .font(.custom(FontContent.plusRegular, size: 12))
                     .padding(.bottom,5)
                 HStack{
-                    StarsView(rating: 3.5, maxRating: 5, size: 12)
+                    StarsView(rating: Double(giver.averageRating) ?? 0.0, maxRating: 5, size: 12)
                     
-                    Text("(100)")
+                    Text("(\(giver.totalReviews))")
                         .font(.custom(FontContent.plusRegular, size: 11))
                 }
             }

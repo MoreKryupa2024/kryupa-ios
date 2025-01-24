@@ -30,8 +30,11 @@ struct EmergencyContactView: View {
             
             Text("Emergency Contact for Care Seeker")
                 .font(.custom(FontContent.besMedium, size: 22))
-                .frame(height: 28)
                 .padding(.top,30)
+                .lineLimit(2)
+                .padding(.horizontal,24)
+                .multilineTextAlignment(.center)
+            
             ScrollView{
                 VStack(spacing: 25,
                        content: {

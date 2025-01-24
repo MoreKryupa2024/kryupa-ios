@@ -115,7 +115,7 @@ struct OTPVerificationScreenView: View {
     }
     
     func startTimer() {
-        timeRemaining = 30
+        timeRemaining = 60
         timerActive = true
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {  timer in
             if self.timeRemaining > 1 {

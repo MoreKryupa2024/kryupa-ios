@@ -18,7 +18,7 @@ struct WithdrawMoneyScreenView: View {
         ZStack{
             VStack(spacing:0){
                 HeaderView(showBackButton: true)
-                Text("Your Wallet Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
+                Text("Your Kryupa Cash Current Balance is $\((viewModel.walletAmountData?.mainAmount ?? 0).removeZerosFromEnd(num: 2))")
                     .font(.custom(FontContent.plusRegular, size: 17))
                     .foregroundStyle(._7_C_7_C_80)
                     .padding(.top,45)
@@ -87,7 +87,7 @@ struct WithdrawMoneyScreenView: View {
                     .padding(.horizontal,25)
                     .asButton(.press) {
                         if (Int(viewModel.amount) ?? 0 ) > Int((viewModel.walletAmountData?.mainAmount ?? 0)){
-                            presentAlert(title: "Kryupa", subTitle: "Enterd Amount is Greater than Wallet Amount")
+                            presentAlert(title: "Kryupa", subTitle: "Enterd Amount is Greater than Kryupa Cash Amount")
                         }else if viewModel.bankListData.count == 0{
                             presentAlert(title: "Kryupa", subTitle: "You Have to Add Bank Details First in Payment section")
                         }else if viewModel.selectedbankData == nil{

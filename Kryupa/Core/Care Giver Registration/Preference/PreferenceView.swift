@@ -96,7 +96,7 @@ struct PreferenceView: View {
                         Image("GiverInfoDetails")
                             .resizable()
                             .frame(width: 300,height: 55)
-                            .offset(x: 5,y:55)
+                            .offset(x: 5,y:76)
                     }
                 }
             }

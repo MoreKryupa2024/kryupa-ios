@@ -11,6 +11,7 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
     var options: [String] = ["Summary","Reviews"]
     @Published var selection: String = "Summary"
+    @Published var amount: String = ""
     @Published var isloading: Bool = true
     @Published var isRecommended: Bool = false
     @Published var isNormalBooking: Bool = false

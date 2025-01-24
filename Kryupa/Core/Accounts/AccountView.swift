@@ -92,7 +92,7 @@ struct AccountView: View {
                 PaymentListView()
             }
             
-        case "Wallet":
+        case "Kryupa Cash":
             router.showScreen(.push) { rout in
                 WalletScreenView()
             }

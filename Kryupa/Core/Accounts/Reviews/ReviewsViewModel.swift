@@ -110,6 +110,7 @@ class ReviewsViewModel: ObservableObject{
                     self?.averageRating = data.data.averageRating
                     self?.totalReviews = data.data.totalReviews
                     self?.reviewDetailData = data.data
+                    self?.isEditReview = (self?.txtReview == "")
                 case .failure(let error):
                     self?.isloading = false
                     print(error)

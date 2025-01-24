@@ -30,7 +30,7 @@ class AppConstants{
     static let AudioCall = "Audio Call"
     static let canHelpInArray = ["Bathing", "Dressing", "Eating/cutting up food", "Toileting", "Walking/Transferring",]
     
-    static let medicalConditionArray = ["Arthritis","Asthma","Chronic Kidney Disease","Depression","Diabetes","Heart Disease","Hypertension","Obesity","Osteoporosis","Obesity","Other","None"]
+    static let medicalConditionArray = ["None","Arthritis","Asthma","Chronic Kidney Disease","Depression","Diabetes","Heart Disease","Hypertension","Obesity","Osteoporosis","Other"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
     
     static let cancelGiverReasons = ["Personal Reasons","Health Issues","Miscommunication/Disagreement","Unable to Meet Care Requirements","Other"]
@@ -50,7 +50,7 @@ class AppConstants{
         AccountListData(title: "Personal Details & Preferences", image: "personalDetail"),
         AccountListData(title: "My Services", image: "myservice"),
         AccountListData(title: "Payments", image: "payments"),
-        AccountListData(title: "Wallet", image: "wallet"),
+        AccountListData(title: "Kryupa Cash", image: "wallet"),
         AccountListData(title: "Reviews", image: "reviews"),
         AccountListData(title: "Help & FAQ", image: "help"),
 //        AccountListData(title: "Settings", image: "settings"),
@@ -62,7 +62,7 @@ class AppConstants{
     static let seekerAccountSectionItems = [
         AccountListData(title: "Personal Details", image: "personalDetail"),
         AccountListData(title: "Payments", image: "payments"),
-        AccountListData(title: "Wallet", image: "wallet"),
+        AccountListData(title: "Kryupa Cash", image: "wallet"),
         AccountListData(title: "Reviews", image: "reviewsSeeker"),
         AccountListData(title: "Help & FAQ", image: "help"),
 //        AccountListData(title: "Settings", image: "settings"),

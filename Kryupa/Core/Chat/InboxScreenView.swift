@@ -49,7 +49,6 @@ struct InboxScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
-            viewModel.connect()
             viewModel.getInboxList()
         }
         .onChange(of: viewModel.showChatView) { oldValue, newValue in

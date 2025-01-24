@@ -3,7 +3,7 @@
 //  Kryupa
 //
 //  Created by Nirmal Singh Rajput on 16/07/24.
-//
+// 5124288812
 
 import SwiftUI
 import SwiftfulUI
@@ -21,7 +21,7 @@ struct WalletScreenView: View {
 //                ScrollView {
                     VStack(spacing:0){
                         
-                        Text("Your Wallet Balance")
+                        Text("Your Kryupa Cash Balance")
                             .font(.custom(FontContent.plusRegular, size: 12))
                             .foregroundStyle(._7_C_7_C_80)
                             .padding(.top,30)
@@ -60,7 +60,7 @@ struct WalletScreenView: View {
                             HStack(content: {
                                 Text("Transactions")
                                 Spacer()
-                                Text("See All")
+                                Text("Previous Transactions")
                                     .underline(true)
                                     .asButton {
                                         router.showScreen(.push) { rout in
@@ -73,21 +73,32 @@ struct WalletScreenView: View {
                             .padding(.horizontal,24)
                             .padding(.bottom,15)
                             .padding(.top,30)
-                            
-                            if viewModel.transectionListData.count > 6{
-                                ForEach(0...5, id: \.self) { (data) in
-                                    WalletHistoryView(transectionListData: viewModel.transectionListData[data])
-                                        .padding(.horizontal,24)
-                                        .padding(.bottom,15)
+                            if viewModel.transectionListData.isEmpty{
+                                VStack(spacing:20){
+                                    Spacer()
+                                    Image("EmptyWallet")
+                                        .resizable()
+                                        .aspectRatio(237/225, contentMode: .fit)
+                                        .padding(.horizontal,46)
+                                    Text("No Transactions History!")
+                                    Spacer()
                                 }
                             }else{
-                                ForEach(Array(viewModel.transectionListData.enumerated()), id: \.offset) { (index,data) in
-                                    WalletHistoryView(transectionListData: data)
-                                        .padding(.horizontal,24)
-                                        .padding(.bottom,15)
+                                if viewModel.transectionListData.count > 6{
+                                    ForEach(0...5, id: \.self) { (data) in
+                                        WalletHistoryView(transectionListData: viewModel.transectionListData[data])
+                                            .padding(.horizontal,24)
+                                            .padding(.bottom,15)
+                                    }
+                                }else{
+                                    ForEach(Array(viewModel.transectionListData.enumerated()), id: \.offset) { (index,data) in
+                                        WalletHistoryView(transectionListData: data)
+                                            .padding(.horizontal,24)
+                                            .padding(.bottom,15)
+                                    }
                                 }
+                                Spacer()
                             }
-                            Spacer()
                         }
                         .background {
                             Rectangle()

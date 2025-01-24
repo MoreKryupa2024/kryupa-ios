@@ -36,33 +36,38 @@ struct ChatView: View {
 //                        bookNowView
 //                    }
                 }
-                
-                ScrollView(.vertical) {
-                    VStack {
-                        ForEach(Array(viewModel.messageList.enumerated()), id:\.element.id) {
-                            (index,msg) in
-                            
-                            ChatBoxView(msgData: msg, selectedChat: viewModel.selectedChat,onSelectedValue: { SpecialMessageData in
-                                let viewModelJob = JobsViewModel()
-                                viewModelJob.isComingfromChat = true
-                                router.showScreen(.push) { rout in
-                                    JobDetailView(viewModel:viewModelJob,jobID: SpecialMessageData.approchId)
-                                }
-                            },onPaySelectedValue: { SpecialMessageData in
-                                let paymentViewModel = PaymentViewModel()
-                                paymentViewModel.paySpecialMessageData = SpecialMessageData
-                                router.showScreen(.push) { rout in
-                                    PaymentOrderScreenView(viewModel: paymentViewModel)
-                                }
-                            })
-                            .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                ScrollViewReader { value in
+                    ScrollView(.vertical) {
+                        VStack {
+                            ForEach(Array(viewModel.messageList.enumerated()), id:\.element.id) {
+                                (index,msg) in
+                                
+                                ChatBoxView(msgData: msg, selectedChat: viewModel.selectedChat,onSelectedValue: { SpecialMessageData in
+                                    let viewModelJob = JobsViewModel()
+                                    viewModelJob.isComingfromChat = true
+                                    router.showScreen(.push) { rout in
+                                        JobDetailView(viewModel:viewModelJob,jobID: SpecialMessageData.approchId)
+                                    }
+                                },onPaySelectedValue: { SpecialMessageData in
+                                    let paymentViewModel = PaymentViewModel()
+                                    paymentViewModel.paySpecialMessageData = SpecialMessageData
+                                    router.showScreen(.push) { rout in
+                                        PaymentOrderScreenView(viewModel: paymentViewModel)
+                                    }
+                                })
+                                .id(msg.id)
+                                .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                            }
                         }
+                        .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
                     }
-                    .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+//                    .defaultScrollAnchor(.bottom)
+                    .padding(.horizontal, 10)
+                    .scrollIndicators(.hidden)
+                    .onChange(of: viewModel.messageList.count) { _,_ in
+                        value.scrollTo(viewModel.messageList.first?.id)
+                    }
                 }
-                .defaultScrollAnchor(.bottom)
-                .padding(.horizontal, 10)
-                .scrollIndicators(.hidden)
                 sendMessageView
                     .padding(.bottom, keyboardHeight == 0 ? 0 : (keyboardHeight-32))
                     .onReceive(Publishers.keyboardHeight) { self.keyboardHeight = $0 }
@@ -121,7 +126,7 @@ struct ChatView: View {
             viewModel.getChatHistory()
             viewModel.VideoCallData()
             viewModel.messageList = []
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 viewModel.connect()
             }
             NotificationCenter.default.addObserver(forName: .showInboxScreen, object: nil, queue: nil,
@@ -199,12 +204,6 @@ struct ChatView: View {
     private var sendMessageView: some View{
         
         return HStack {
-            //            Image("camera")
-            //                .resizable()
-            //                .frame(width: 39,height: 29)
-            //                .asButton(.press) {
-            //                    print("Camera")
-            //            }
             
             HStack {
                 TextField("Hello!", text:$sendMsgText, axis: .vertical)
@@ -215,15 +214,7 @@ struct ChatView: View {
                     .font(.custom(FontContent.plusRegular, size: 20))
                     .frame(minHeight: 44)
                 
-                
                 HStack(spacing:5) {
-                    
-                    //Image("audio")
-                    //.dynamicTypeSize(.medium)
-                    //.frame(width: 28,height: 28)
-                    //.asButton(.press) {
-                    //}
-                    
                     Image("sendbutton")
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)

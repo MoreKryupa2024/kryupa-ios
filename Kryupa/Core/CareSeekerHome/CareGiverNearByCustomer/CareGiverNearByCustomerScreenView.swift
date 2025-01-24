@@ -11,7 +11,7 @@ import SwiftfulUI
 struct CareGiverNearByCustomerScreenView: View {
     @Environment(\.router) var router
     
-    var bookingID: String = "90279ed1-9347-4e3d-a9ae-49e69b6c143b"//String()
+    var bookingID: String = String()
     
     @StateObject var viewModel = CareGiverNearByCustomerScreenViewModel()
     
@@ -65,6 +65,7 @@ struct CareGiverNearByCustomerScreenView: View {
                             .asButton(.press) {
                                 let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
                                 RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
+                                RecommendedCareGiverDetailScreenViewModel.amount = viewModel.amount
                                 router.showScreen(.push) { rout in
                                     RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
                                 }

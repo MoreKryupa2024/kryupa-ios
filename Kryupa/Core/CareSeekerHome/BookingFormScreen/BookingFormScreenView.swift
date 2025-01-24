@@ -156,7 +156,8 @@ struct BookingFormScreenView: View {
                                 let startDate = (dateFormatChange(dateFormat: "yyyy-MM-dd", dates: viewModel.startDateValue))
                                 let currentDate = (dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date()))
                                 if (startDate == currentDate){
-                                    viewModel.startTimeValue = Date()
+                                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
+                                    viewModel.startTimeValue = date
                                 }
                                 viewModel.showDatePicker = false
                             }
@@ -208,7 +209,7 @@ struct BookingFormScreenView: View {
                 
                 VStack(spacing:0){
                     
-                    
+                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
                     if (Date() < viewModel.startDateValue) && viewModel.segSelected == "One Time"{
                         DatePicker(selection:$viewModel.startTimeValue, displayedComponents: .hourAndMinute) {}
                             .datePickerStyle(.wheel)
@@ -216,7 +217,7 @@ struct BookingFormScreenView: View {
                         DatePicker(selection:$viewModel.startTimeValue, displayedComponents: .hourAndMinute) {}
                             .datePickerStyle(.wheel)
                     }else{
-                        DatePicker(selection:$viewModel.startTimeValue, in: Date()..., displayedComponents: .hourAndMinute) {}
+                        DatePicker(selection:$viewModel.startTimeValue, in: date..., displayedComponents: .hourAndMinute) {}
                             .datePickerStyle(.wheel)
                     }
                     
@@ -301,7 +302,8 @@ struct BookingFormScreenView: View {
                     }
                 }
                 if viewModel.dateArray.contains(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())){
-                    viewModel.startTimeValue = Date()
+                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
+                    viewModel.startTimeValue = date
                 }
             })
             .background(
@@ -323,8 +325,10 @@ struct BookingFormScreenView: View {
                 .foregroundStyle(viewModel.segSelected == "One Time" ? .appMain : ._7_C_7_C_80)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .asButton(.press) {
+                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
+                    
                     viewModel.segSelected = "One Time"
-                    viewModel.startTimeValue = Date()
+                    viewModel.startTimeValue = date
                     viewModel.startDateValue = Date()
                     viewModel.startDateSValue = []
                 }
@@ -599,9 +603,9 @@ struct BookingFormScreenView: View {
             return false
         }else if viewModel.yearsOfExperienceSelected != recommendedUserBookingData.yearOfExperience{
             return false
-        }else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
+        }/*else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
             return false
-        }/*else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
+        }else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
             return false
         }*/else{
             return true
@@ -629,8 +633,12 @@ struct BookingFormScreenView: View {
                                                                             object: nil, userInfo: bookingDict)
                         }else{
                             viewModel.bookingID = bookingId
+                            
+                            let careGiverNearByCustomerScreenViewModel = CareGiverNearByCustomerScreenViewModel()
+                            let needServiceInSelected = viewModel.needServiceInArray.filter{$0.service == viewModel.needServiceInSelected.first!}.first!
+                            careGiverNearByCustomerScreenViewModel.amount = needServiceInSelected.amount
                             router.showScreen(.push) { rout in
-                                CareGiverNearByCustomerScreenView(bookingID: bookingId)
+                                CareGiverNearByCustomerScreenView(bookingID: bookingId,viewModel:careGiverNearByCustomerScreenViewModel)
                             }
                         }
                     } alert: { error in
@@ -649,8 +657,9 @@ struct BookingFormScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
+                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
                     viewModel.startDateValue = Date()
-                    viewModel.startTimeValue = Date()
+                    viewModel.startTimeValue = date
                     viewModel.duration = 1
                     viewModel.startDateSValue = []
                     viewModel.dateArray = []

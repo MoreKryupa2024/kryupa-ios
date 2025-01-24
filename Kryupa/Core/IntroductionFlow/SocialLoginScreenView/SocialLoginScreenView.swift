@@ -71,6 +71,8 @@ struct SocialLoginScreenView: View {
                                 viewModel.signUpWithGoogle { param in
                                     viewModel.signCall(param: param){ userInfo in
                                         navigateToMobileNumberView(userInfo: userInfo)
+                                    } errorCompletionHandler: { errorStr in
+                                        presentAlert(title: "Kryupa", subTitle: errorStr)
                                     }
                                 }
                             } else {
@@ -102,6 +104,8 @@ struct SocialLoginScreenView: View {
                         showTCView = false
                         viewModel.signCall(param: param){ userInfo in
                             navigateToMobileNumberView(userInfo: userInfo)
+                        } errorCompletionHandler: { errorStr in
+                            presentAlert(title: "Kryupa", subTitle: errorStr)
                         }
                     }
                 }
@@ -152,6 +156,8 @@ struct SocialLoginScreenView: View {
             if let email{
                 viewModel.signCall(param: param){ userInfo in
                     navigateToMobileNumberView(userInfo: userInfo)
+                } errorCompletionHandler: { errorStr in
+                    presentAlert(title: "Kryupa", subTitle: errorStr)
                 }
             }else{
                 withAnimation(.easeIn(duration: 0.5)) {
@@ -195,7 +201,7 @@ struct SocialLoginScreenView: View {
             router.showScreen(.push) { _ in
                 MobileNumberScreenView()
             }
-        case "Waitting at lobby":
+        case "Waiting at lobby":
             
             NotificationCenter.default.post(name: .setLobbyScreen,
                                             object: nil, userInfo: nil)

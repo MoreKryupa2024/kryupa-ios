@@ -24,7 +24,7 @@ struct MoneyAddedScreenView: View {
                     .padding(.horizontal,20)
                     .frame(height: 325)
                 VStack(spacing:20){
-                    Text("Money has been successfully added\nto your wallet!")
+                    Text("Money has been successfully added\nto your Kryupa Cash!")
                         .font(.custom(FontContent.plusRegular, size: 12))
                 }
                 .multilineTextAlignment(.center)

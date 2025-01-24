@@ -22,6 +22,11 @@ struct AddNewProfileScreenView: View {
     @State var relationDownShow:Bool = Bool()
     @State var medicalConditionDownShow:Bool = Bool()
     
+    @State var zipCodeCanEdit: Bool = false
+    @State var cityCanEdit: Bool = false
+    @State var stateCanEdit: Bool = false
+    @State var CountryCanEdit: Bool = false
+    
     var body: some View {
         ZStack{
             VStack{
@@ -252,11 +257,13 @@ struct AddNewProfileScreenView: View {
     }
     
     private func dateOfBirthPicker()-> some View{
-        DateTimePickerScreenView(
+        let date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -16, to: Date(), options: [])!
+        
+        return DateTimePickerScreenView(
             givenDate: viewModel.date,
             formate: "yyyy-MM-dd",
             range: nil,
-            rangeThrough: ...Date(),
+            rangeThrough: ...date,
             valueStr: { value in
                 viewModel.personalInfoData.dob = value
                 viewModel.showDatePicker = !viewModel.showDatePicker
@@ -538,24 +545,36 @@ struct AddNewProfileScreenView: View {
                                 postalCode: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),
                                 longitude: $viewModel.personalInfoData.longitude.toUnwrapped(defaultValue: 0.0))
                 }
+            
             VStack(alignment:.leading,spacing:5){
                 HStack{
+                    
                     textFieldViewWithHeader(title: nil, placeHolder: "Zip Code",value: $viewModel.personalInfoData.postalCode.toUnwrapped(defaultValue: ""),keyboard: .numberPad, showRed: true)
-                        .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? false : true)
+                        .disabled( zipCodeCanEdit ? false : true)
                         .background{
                             RoundedRectangle(cornerRadius: 8)
-                                .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                .foregroundStyle(zipCodeCanEdit ? .white : .D_1_D_1_D_6)
                                 .frame(height: 48)
                                 .offset(y:5)
                         }
+                        .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                            if !zipCodeCanEdit{
+                                self.zipCodeCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty)
+                            }
+                        }
                     
                     textFieldViewWithHeader(title: nil, placeHolder: "City",value: $viewModel.personalInfoData.city.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
-                        .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? false : true)
+                        .disabled(cityCanEdit ? false : true)
                         .background{
                             RoundedRectangle(cornerRadius: 8)
-                                .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                                .foregroundStyle(cityCanEdit ? .white : .D_1_D_1_D_6)
                             .frame(height: 48)
                             .offset(y:5)
+                        }
+                        .onChange(of: viewModel.personalInfoData.city) { oldValue, newValue in
+                            if !cityCanEdit{
+                                self.cityCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty)
+                            }
                         }
                     
                 }
@@ -568,21 +587,31 @@ struct AddNewProfileScreenView: View {
             
             HStack{
                 textFieldViewWithHeader(title: nil, placeHolder: "State",value: $viewModel.personalInfoData.state.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
-                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? false : true)
+                    .disabled(stateCanEdit ? false : true)
                     .background{
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                            .foregroundStyle(stateCanEdit ? .white : .D_1_D_1_D_6)
                         .frame(height: 48)
                         .offset(y:5)
                     }
+                    .onChange(of: viewModel.personalInfoData.state) { oldValue, newValue in
+                        if !stateCanEdit{
+                            self.stateCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty)
+                        }
+                    }
                 
                 textFieldViewWithHeader(title: nil, placeHolder: "Country",value: $viewModel.personalInfoData.country.toUnwrapped(defaultValue: ""),keyboard: .asciiCapable, showRed: true)
-                    .disabled((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? false : true)
+                    .disabled(CountryCanEdit ? false : true)
                     .background{
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundStyle((!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty) ? .white : .D_1_D_1_D_6)
+                            .foregroundStyle(CountryCanEdit ? .white : .D_1_D_1_D_6)
                         .frame(height: 48)
                         .offset(y:5)
+                    }
+                    .onChange(of: viewModel.personalInfoData.country) { oldValue, newValue in
+                        if !CountryCanEdit{
+                            self.CountryCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty)
+                        }
                     }
                 
             }
