@@ -311,6 +311,8 @@ struct PaymentListView: View {
                     viewModel.fullName = viewModel.fullName.removingWhitespaces()
                     if viewModel.fullName.isEmpty{
                         presentAlert(title: "Kryupa", subTitle: "Please Enter Full Name")
+                    }else if !viewModel.fullName.isValidName{
+                        presentAlert(title: "Kryupa", subTitle: "Please Enter Valid Name")
                     }else if viewModel.typeAccount.isEmpty{
                         presentAlert(title: "Kryupa", subTitle: "Please Select Account Type")
                     }else if viewModel.accountNumber.isEmpty{

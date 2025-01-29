@@ -14,6 +14,7 @@ struct ContentView: View {
     var setCareGiverHomeScreen = NotificationCenter.default
     var setCareSeekerHomeScreen = NotificationCenter.default
     var logout = NotificationCenter.default
+    var checkLobby = NotificationCenter.default
     
     var body: some View {
         RouterView() { _ in
@@ -44,6 +45,8 @@ struct ContentView: View {
             
             logout.addObserver(forName: .logout, object: nil, queue: nil,
                                 using: self.logout)
+            checkLobby.addObserver(forName: .checkLobby, object: nil, queue: nil,
+                                using: self.checkLobby)
 
         }
     }
@@ -95,6 +98,62 @@ struct ContentView: View {
         getUserStatus()
     }
     
+    private func checkLobby(_ notification: Notification) {
+        NetworkManager.shared.getUserStatus { result in
+            switch result{
+            case .success(let data):
+                if data.data.role == AppConstants.SeekCare{
+                    switch data.data.status{
+//                        case "Personal information":
+//                            showScreen = 5
+//                            Defaults().showScreen = 5
+//
+//                        case "Take photo":
+//                            showScreen = 8
+//                            Defaults().showScreen = 8
+                        
+                    case "Onboarding done":
+                        showScreen = 4
+                        Defaults().showScreen = 4
+                    default:
+                        showScreen = 1
+                        Defaults().showScreen = 1
+                    }
+                    
+                }else{
+                    switch data.data.status{
+//                        case "Mobile Verification":
+//                            showScreen = 7
+//                            Defaults().showScreen = 7
+//
+//                        case "Personal information":
+//                            showScreen = 6
+//                            Defaults().showScreen = 6
+//
+//                        case "Take photo":
+//                            showScreen = 8
+//                            Defaults().showScreen = 8
+                        
+                    case "Waiting at lobby":
+                        showScreen = 2
+                        Defaults().showScreen = 2
+                        
+                    case "Onboarding done":
+                        showScreen = 3
+                        Defaults().showScreen = 3
+                    default:
+                        showScreen = 1
+                        Defaults().showScreen = 1
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    showScreen = Defaults().showScreen == 0 ? 1 : Defaults().showScreen
+                }
+            }
+        }
+    }
+    
     func getUserStatus(){
         if Defaults().accessToken != ""{
             NetworkManager.shared.getUserStatus { result in
@@ -132,7 +191,7 @@ struct ContentView: View {
 //                            showScreen = 8
 //                            Defaults().showScreen = 8
                             
-                        case "Waitting at lobby":
+                        case "Waiting at lobby":
                             showScreen = 2
                             Defaults().showScreen = 2
                             

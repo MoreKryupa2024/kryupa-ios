@@ -47,6 +47,21 @@ class SocialLoginScreenViewModel: ObservableObject{
         }
     }
     
+    func activateAccount(param:[String:Any],successAction: @escaping () -> Void,errorAction: @escaping (String) -> Void){
+        isLoading = true
+        NetworkManager.shared.activateAccount(params: param) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result{
+                case.success(let data):
+                    successAction()
+                case .failure(let error):
+                    errorAction(error.getMessage())
+                    
+                }
+            }
+        }
+    }
     
     func signCall(param:[String:Any],completionHandler :  @escaping (DataClass) -> Void,errorCompletionHandler :  @escaping (String) -> Void){
         isLoading = true

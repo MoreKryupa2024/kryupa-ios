@@ -39,6 +39,7 @@ struct DataClass {
     let accessToken, refrenceToken: String
     let userInfo: UserInfo
     let userTypes, verificationStatus: String
+    let is_active: Bool
 
     init(jsonData:[String:Any]){
         accessToken = jsonData["accessToken"] as? String ?? ""
@@ -46,6 +47,7 @@ struct DataClass {
         userInfo = UserInfo(jsonData: jsonData["userInfo"] as? [String:Any] ?? [String:Any]())
         userTypes = jsonData["UserTypes"] as? String ?? ""
         verificationStatus = jsonData["verificationStatus"] as? String ?? ""
+        is_active = jsonData["is_active"] as? Bool ?? false
     }
 }
 

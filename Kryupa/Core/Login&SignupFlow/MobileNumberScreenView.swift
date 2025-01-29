@@ -54,7 +54,7 @@ struct MobileNumberScreenView: View {
                                     presentAlert(title: "Kruypa", subTitle: error)
                                 }
                             }else{
-                                presentAlert(title: "Kruypa", subTitle: "Please Enter 10-Digit Mobile No.")
+                                presentAlert(title: "Kruypa", subTitle: "Please Enter Vaild Mobile No.")
                             }
                         }
                     

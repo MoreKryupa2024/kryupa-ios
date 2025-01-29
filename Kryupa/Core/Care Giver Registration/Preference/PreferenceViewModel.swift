@@ -7,13 +7,30 @@
 
 import Foundation
 import SwiftUI
-@MainActor
+
 class PreferenceViewModel: ObservableObject{
     
     @Published var languageSpeakingSelected: [String] = [String]()
+    @Published var distanceList: [String] = [String]()
     @Published var preferenceListData: PreferenceList = PreferenceList()
     @Published var isLoading:Bool = false
     @Published var showPreference:Bool = false
+    
+    
+    func getDistanceArray(){
+        isLoading = true
+        NetworkManager.shared.getDistanceArray { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result{
+                case .success(let data):
+                    self?.distanceList = data.data.map{"Within \($0.distanceInMiles) mile"}
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
    
     func dataChecks(parameters:[String:Any],alert:@escaping((String)->Void),next:@escaping(()->Void)){
         

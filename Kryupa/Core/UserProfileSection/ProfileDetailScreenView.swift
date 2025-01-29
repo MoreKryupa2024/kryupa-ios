@@ -40,8 +40,12 @@ struct ProfileDetailScreenView: View {
                         .id(viewModel.selecedProfile)
                         AddNewButton
                             .asButton(.press) {
-                                router.showScreen(.push) { rout in
-                                    AddNewProfileScreenView()
+                                if viewModel.profileList.count < 5{
+                                    router.showScreen(.push) { rout in
+                                        AddNewProfileScreenView()
+                                    }
+                                }else{
+                                    presentAlert(title: "Kryupa", subTitle: "You can add only 5 profiles")
                                 }
                             }
                             .padding(.top,5)

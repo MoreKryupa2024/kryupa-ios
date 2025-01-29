@@ -24,13 +24,15 @@ class LobbyScreenViewModel: ObservableObject{
                 self?.isloading = false
                 switch result{
                 case .success(let data):
-                    
+                    var interviewEndTime = data.data.interviewDateTime.formattedNoTimeZoneDateString(format: "MM/dd/yyyy, h:mm a")
+                    interviewEndTime = interviewEndTime.addingTimeInterval(30*60)
+                    let interviewEndTimeString = interviewEndTime.formattedNoTimeZoneDateString(format: "MM/dd/yyyy, h:mm a")
                     let formattedNoTimeZoneDateString = Date().formattedNoTimeZoneDateString(format: "MM/dd/yyyy, h:mm a")
                     if data.data.interviewStatus == "pending"{
                         self?.slotTitle = "Schedule Your\nBGV Interview!"
                         self?.slotButton = "Schedule Now"
                         self?.slotTime = "Complete Interview & begin\nyour caregiving services"
-                    }else if data.data.interviewDateTime < formattedNoTimeZoneDateString{
+                    }else if interviewEndTimeString < formattedNoTimeZoneDateString{
                         self?.slotTitle = "Schedule Your\nBGV Interview!"
                         self?.slotButton = "Re-Schedule Now"
                         self?.slotTime = "Complete Interview & begin\nyour caregiving services"

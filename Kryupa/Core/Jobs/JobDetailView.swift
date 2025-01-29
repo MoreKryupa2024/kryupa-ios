@@ -28,7 +28,7 @@ struct JobDetailView: View {
                     JobDescView(startDate:viewModel.startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd", 
                                                                                   afterFormat: "MMM dd yyyy"),
                                 hours: "\(viewModel.jobDetailModel?.totalhours ?? 0)",
-                                price: Defaults().userType == AppConstants.SeekCare ? "\(viewModel.jobDetailModel?.bookingPricingForCustomer ?? 0)" : "\(viewModel.jobDetailModel?.bookingPricing ?? 0)",
+                                price: Defaults().userType == AppConstants.SeekCare ? "\((viewModel.jobDetailModel?.bookingPricingForCustomer ?? 0).removeZerosFromEnd(num: 2))" : "\((viewModel.jobDetailModel?.bookingPricing ?? 0).removeZerosFromEnd(num: 2))",
                                 startTime: viewModel.jobDetailModel?.startTime.convertDateFormater(beforeFormat: "HH:mm:ss",
                                                                                                    afterFormat: "h:mm a") ?? "",
                                 endTime: viewModel.jobDetailModel?.endTime.convertDateFormater(beforeFormat: "HH:mm:ss",

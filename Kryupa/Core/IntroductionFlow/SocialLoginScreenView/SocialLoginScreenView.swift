@@ -70,7 +70,11 @@ struct SocialLoginScreenView: View {
                             if checkbox{
                                 viewModel.signUpWithGoogle { param in
                                     viewModel.signCall(param: param){ userInfo in
-                                        navigateToMobileNumberView(userInfo: userInfo)
+                                        if userInfo.is_active {
+                                            navigateToMobileNumberView(userInfo: userInfo)
+                                        }else{
+                                            showAccountActiveAlert(param: param,userInfo: userInfo)
+                                        }
                                     } errorCompletionHandler: { errorStr in
                                         presentAlert(title: "Kryupa", subTitle: errorStr)
                                     }
@@ -103,7 +107,12 @@ struct SocialLoginScreenView: View {
                     withAnimation(.easeOut(duration: 0.5)) {
                         showTCView = false
                         viewModel.signCall(param: param){ userInfo in
-                            navigateToMobileNumberView(userInfo: userInfo)
+                            if userInfo.is_active {
+                                navigateToMobileNumberView(userInfo: userInfo)
+                            }else{
+                                showAccountActiveAlert(param: param,userInfo: userInfo)
+                            }
+                            
                         } errorCompletionHandler: { errorStr in
                             presentAlert(title: "Kryupa", subTitle: errorStr)
                         }
@@ -116,6 +125,24 @@ struct SocialLoginScreenView: View {
                 LoadingView()
             }
         }
+    }
+    
+    func showAccountActiveAlert(param:[String:Any],userInfo:DataClass) {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let activateAction = UIAlertAction(title: "Activate", style: .default) { action in
+            let activeParam = ["status":true,"id":userInfo.userInfo.id,"role":userInfo.userInfo.role.uppercased()]
+            viewModel.activateAccount(param: activeParam) {
+                viewModel.signCall(param: param){ userInfo in
+                    navigateToMobileNumberView(userInfo: userInfo)
+                } errorCompletionHandler: { errorStr in
+                    presentAlert(title: "Kryupa", subTitle: errorStr)
+                }
+            } errorAction: { errorStr in
+                presentAlert(title: "Kryupa", subTitle: errorStr)
+            }
+            
+        }
+        presentAlert(title: "Kryupa", subTitle: "Your Account is deactived",primaryAction: cancelAction,secondaryAction: activateAction)
     }
     
     private var AppleButton: some View{
@@ -155,7 +182,11 @@ struct SocialLoginScreenView: View {
             ]
             if let email{
                 viewModel.signCall(param: param){ userInfo in
-                    navigateToMobileNumberView(userInfo: userInfo)
+                    if userInfo.is_active {
+                        navigateToMobileNumberView(userInfo: userInfo)
+                    }else{
+                        showAccountActiveAlert(param: param,userInfo: userInfo)
+                    }
                 } errorCompletionHandler: { errorStr in
                     presentAlert(title: "Kryupa", subTitle: errorStr)
                 }

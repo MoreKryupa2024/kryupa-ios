@@ -50,6 +50,7 @@ struct HealthInformationSeekerView: View {
                     if viewModel.medicalConditionDropDownSelected.contains("Other"){
                         textFieldViewWithHeader(
                             title: "Other",
+                            redText: true,
                             placeHolder: "(Max 100 words)",
                             value: $viewModel.medicalConditionSelected,
                             keyboard: .asciiCapable
@@ -97,7 +98,7 @@ struct HealthInformationSeekerView: View {
         .scrollIndicators(.hidden)
         .toolbar(.hidden, for: .navigationBar)
         .modifier(DismissingKeyboard())
-        .task {
+        .onAppear {
             viewModel.allergiesValue = Defaults().healthInfo["allergies"] as? String ?? ""
             viewModel.canHelpInSelect = Defaults().healthInfo["mobility_level"] as? [String] ?? []
             viewModel.medicalConditionSelected = Defaults().healthInfo["other_disease_type"] as? String ?? ""
@@ -128,11 +129,15 @@ struct HealthInformationSeekerView: View {
         }
     }
     
-    private func textFieldViewWithHeader(title:String?, placeHolder: String, value: Binding<String>,keyboard: UIKeyboardType)-> some View{
+    private func textFieldViewWithHeader(title:String?,redText:Bool? = false, placeHolder: String, value: Binding<String>,keyboard: UIKeyboardType)-> some View{
         VStack(alignment: .leading, content: {
             if let title{
                 HStack(spacing:0){
                     Text(title)
+                    if (redText ?? false){
+                        Text("*")
+                            .foregroundStyle(.red)
+                    }
                 }
                 .font(.custom(FontContent.plusMedium, size: 17))
             }

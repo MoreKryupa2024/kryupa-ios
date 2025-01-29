@@ -79,6 +79,7 @@ struct PersonalDetailView: View {
                     intExp = viewModel.personalDetail?.expertise.exprience ?? 0
                     viewModel.additionalInfoSelected = viewModel.personalDetail?.additionalRequirements ?? []
                 }
+                viewModel.getDistanceArray()
             }
             if viewModel.isloading{
                 LoadingView()
@@ -298,7 +299,7 @@ struct PersonalDetailView: View {
                 selectedValue: viewModel.distance,
                 placeHolder: "Select",
                 showDropDown: distanceDropDownShow,
-                values: AppConstants.distanceArray) { value in
+                values: viewModel.distanceList) { value in
                     viewModel.distance = value
                 }onShowValue: {
                     distanceDropDownShow = !distanceDropDownShow

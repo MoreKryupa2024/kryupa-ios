@@ -137,7 +137,7 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select at list One Service.")
         }else if segSelected != "One Time" && startDateSValue.count == 0{
             return alert("Please Select Recurring Dates.")
-        }else if showDatePicker{
+        }else if showDatePicker && segSelected == "One Time"{
             return alert("Please Confirm the Selected Date.")
         }else if showTimePicker{
             return alert("Please Confirm the Selected Time.")
@@ -147,7 +147,9 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select Preferred Language.")
         }else if yearsOfExperienceSelected.isEmpty{
             return alert("Please Select Year of Experience.")
-        }else if startTimeValue < date{
+        }else if startTimeValue < date && !(Date() < startDateValue) && segSelected == "One Time" {
+            return alert("Ensure the booking time is at least 15 minutes from now.")
+        }else if segSelected != "One Time" && dateArray.contains(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())) && startTimeValue < date{
             return alert("Ensure the booking time is at least 15 minutes from now.")
         }
         

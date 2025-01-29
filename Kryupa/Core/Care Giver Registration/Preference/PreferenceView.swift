@@ -91,6 +91,7 @@ struct PreferenceView: View {
                         viewModel.preferenceListData.canHelpIn = Defaults().prefereInfo["mobility_level"] as? [String] ?? []
                         viewModel.languageSpeakingSelected = Defaults().prefereInfo["language"] as? [String] ?? []
                         viewModel.preferenceListData.distance = Defaults().prefereInfo["distance"] as? String ?? ""
+                        viewModel.getDistanceArray()
                     }
                     if viewModel.showPreference{
                         Image("GiverInfoDetails")
@@ -239,7 +240,7 @@ struct PreferenceView: View {
                 selectedValue: viewModel.preferenceListData.distance,
                 placeHolder: "Select",
                 showDropDown: distanceShow,
-                values: AppConstants.distanceArray) { value in
+                values: viewModel.distanceList) { value in
                     viewModel.preferenceListData.distance = value
                 }onShowValue: {
                     distanceShow = !distanceShow

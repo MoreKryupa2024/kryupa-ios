@@ -34,6 +34,10 @@ struct LobbyScreenView: View {
                     BannerContentView
                 }
             }
+            .refreshable {
+                NotificationCenter.default.post(name: .checkLobby,
+                                                                object: nil, userInfo: nil)
+            }
             if isPresented {
                 ZoomScreenView(
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,

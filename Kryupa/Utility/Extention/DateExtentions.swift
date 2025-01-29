@@ -79,3 +79,7 @@ func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,
 
     return timeStamp
 }
+
+func calculatePercentage(of totalAmount: Double, percentage: Double) -> Double {
+    return  (totalAmount + ((totalAmount * percentage) / 100))
+}

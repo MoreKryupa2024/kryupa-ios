@@ -12,6 +12,7 @@ class PersonalDetailViewModel: ObservableObject{
     @Published var canHelpInSelected: [String] = [String]()
     @Published var additionalInfoSelected: [String] = [String]()
     @Published var education: String = String()
+    @Published var distanceList: [String] = [String]()
     @Published var language: String = String()
     @Published var distance: String = String()
     @Published var educationList = ["Degree 1", "Degree 2", "Degree 3"]
@@ -83,6 +84,21 @@ class PersonalDetailViewModel: ObservableObject{
                  "preferred_languages": languageDropDownSelected]
         
         next(param)
+    }
+    
+    func getDistanceArray(){
+        isloading = true
+        NetworkManager.shared.getDistanceArray { [weak self] result in
+            DispatchQueue.main.async() {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    self?.distanceList = data.data.map{"Within \($0.distanceInMiles) mile"}
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
     
     func updateProfile(param: [String:Any], next: @escaping (()->Void)){

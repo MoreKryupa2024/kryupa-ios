@@ -19,12 +19,14 @@ class EmergencyContactViewModel: ObservableObject{
         name = name.removingWhitespaces()
         if name.isEmpty {
             return alert("Please Enter Name")
+        }else if !name.isValidName{
+            return alert("Please Enter Valid Name")
         }else if relation.isEmpty{
             return alert("Please Select Your Relation")
         }else if !email.isValidEmail() {
             return alert("Please Enter Email")
         }else if !number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#").validateMobile(){
-            return alert("Please Enter 10-Digit Mobile No.")
+            return alert("Please Enter Vaild Mobile No.")
         }else{
              var param = [String:Any]()
              param = [

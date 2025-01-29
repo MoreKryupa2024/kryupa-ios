@@ -91,12 +91,14 @@ class AddNewProfileScreenViewModel: ObservableObject{
         email = email.removingWhitespaces()
         if name.isEmpty {
             return alert("Please Enter Name")
+        }else if !name.isValidName{
+            return alert("Please Enter Valid Name")
         }else if relation.isEmpty{
             return alert("Please Select Your Relation")
         }else if !email.isValidEmail() {
             return alert("Please Enter Email")
         }else if !number.applyPatternOnNumbers(pattern: "##########", replacementCharacter: "#").validateMobile(){
-            return alert("Please Enter 10-Digit Mobile No.")
+            return alert("Please Enter Valid Mobile No.")
         }else{
              var param = [String:Any]()
              param = [
@@ -118,9 +120,16 @@ class AddNewProfileScreenViewModel: ObservableObject{
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
+        if !name.isValidName{
+            return alert("Please Enter Valid First Name")
+        }
         personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
+        }
+        
+        if !lastName.isValidName{
+            return alert("Please Enter Valid Last Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -182,7 +191,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
         }
     }
     
-    func updateProfile(next: @escaping (()->Void)){
+    func updateProfile(next: @escaping (()->Void), errorMsg: @escaping ((String)->Void)){
         
         param["profileId"] = profileID
         isLoading = true
@@ -194,6 +203,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
                     next()
                 case .failure(let error):
                     self?.isLoading = false
+                    errorMsg(error.getMessage())
                 }
             }
         }

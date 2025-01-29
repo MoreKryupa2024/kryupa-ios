@@ -36,9 +36,18 @@ class PersonalInformationScreenViewModel: ObservableObject{
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
+        
+        if !name.isValidName{
+            return alert("Please Enter Valid First Name")
+        }
+        
         personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
+        }
+        
+        if !lastName.isValidName{
+            return alert("Please Enter Valid Last Name")
         }
         
         guard let dob = personalInfoData.dob, dob != "" else {
@@ -97,12 +106,17 @@ class PersonalInformationScreenViewModel: ObservableObject{
         guard let name = personalInfoData.name, name != "" else {
             return alert("Please Enter First Name")
         }
+        if !name.isValidName{
+            return alert("Please Enter Valid First Name")
+        }
         
         personalInfoData.lastName = (personalInfoData.lastName ?? "").removingWhitespaces()
         guard let lastName = personalInfoData.lastName, lastName != "" else {
             return alert("Please Enter Last Name")
         }
-        
+        if !lastName.isValidName{
+            return alert("Please Enter Valid Last Name")
+        }
         guard let dob = personalInfoData.dob, dob != "" else {
             return alert("Please Enter Date Of Birth")
         }

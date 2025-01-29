@@ -49,6 +49,7 @@ struct MyServiceData {
     let areaOfExperties: [String]
     let additionalrequirement: [String]
     let preferences: MyPreferencesData
+    
     init(jsonData:[String:Any]){
         skilles = jsonData["skilles"] as? [String] ?? []
         areaOfExperties = jsonData["area_of_experties"] as? [String] ?? []
@@ -56,6 +57,38 @@ struct MyServiceData {
         preferences = MyPreferencesData(jsonData: jsonData["preferences"] as? [String:Any] ?? [String:Any]())
     }
 }
+
+
+
+struct DistanceModel: Codable {
+    let success: Bool
+    let data: [DistanceData]
+    let message: String
+    
+    init(jsonData:[String:Any]){
+        message = jsonData["message"] as? String ?? ""
+        success = jsonData["success"] as? Bool ?? false
+        data = (jsonData["data"] as? [[String:Any]] ?? []).map{DistanceData(jsonData: $0)}
+    }
+    
+}
+
+
+struct DistanceData: Codable {
+    let id, adminID, distanceInMiles: String
+    let isActive: Bool
+    let createdAt, updatedAt: String
+
+    init(jsonData:[String:Any]){
+        self.id = jsonData["id"] as? String ?? ""
+        self.adminID = jsonData["admin_id"] as? String ?? ""
+        self.distanceInMiles = jsonData["distance_in_miles"] as? String ?? ""
+        self.isActive = jsonData["is_active"] as? Bool ?? false
+        self.createdAt = jsonData["created_at"] as? String ?? ""
+        self.updatedAt = jsonData["updated_at"] as? String ?? ""
+    }
+}
+
 
 struct MyPreferencesData {
     let mobilityLevel: String

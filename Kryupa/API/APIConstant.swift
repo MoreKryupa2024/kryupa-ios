@@ -35,6 +35,7 @@ class APIConstant{
     
     static let sendOTP = "\(authBaseURL)/send_otp"
     static let googleSignup = "\(authBaseURL)/authenticate"
+    static let activateAccount = "\(authBaseURL)/authenticate/activate"
     
     static let getAddress = "\(userBaseURL)/zp"
     static let caregiverSvcAct = "\(userBaseURL)/home/caregiverSvcAct"
@@ -121,6 +122,7 @@ class APIConstant{
     static let chatVideoCallRecieve = "\(communicationBaseURL)/vido_call/recieve"
     
     static let getBannerUrls = "\(adminBaseURL)/get_banner_urls"
+    static let getDistanceArray = "\(adminBaseURL)/distance/get"
     static let logout = "\(authBaseURL)/authenticate/logout"
     
     //Stripe

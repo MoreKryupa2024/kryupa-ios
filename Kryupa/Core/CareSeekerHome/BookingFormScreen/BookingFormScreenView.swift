@@ -13,7 +13,7 @@ struct BookingFormScreenView: View {
     @Environment(\.router) var router
     
     @StateObject var viewModel = BookingFormScreenViewModel()
-    var notificatioSsetBookingId = NotificationCenter.default
+    var delegate:RecommendedCareGiverDetailScreenViewModelProtocol?
     @State var bookingForDropShow:Bool = Bool()
     
     var body: some View {
@@ -603,9 +603,9 @@ struct BookingFormScreenView: View {
             return false
         }else if viewModel.yearsOfExperienceSelected != recommendedUserBookingData.yearOfExperience{
             return false
-        }/*else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
+        }else if viewModel.languageSpeakingSelected != recommendedUserBookingData.preferredLang{
             return false
-        }else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
+        }/*else if viewModel.needServiceInSelected != recommendedUserBookingData.preferredServiceType{
             return false
         }*/else{
             return true
@@ -627,16 +627,17 @@ struct BookingFormScreenView: View {
                 .asButton(.press) {
                     viewModel.createBooking { bookingId in
                         if viewModel.isRecommended && recommnededCheck() {
-                            let bookingDict:[String: String] = ["bookingId": bookingId]
+
+                            
+                            delegate?.setBookingId(bookingId: bookingId)
                             router.dismissScreen()
-                            notificatioSsetBookingId.post(name: .setBookingId,
-                                                                            object: nil, userInfo: bookingDict)
                         }else{
                             viewModel.bookingID = bookingId
                             
                             let careGiverNearByCustomerScreenViewModel = CareGiverNearByCustomerScreenViewModel()
                             let needServiceInSelected = viewModel.needServiceInArray.filter{$0.service == viewModel.needServiceInSelected.first!}.first!
-                            careGiverNearByCustomerScreenViewModel.amount = needServiceInSelected.amount
+                            let amount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
+                            careGiverNearByCustomerScreenViewModel.amount = "\(amount)"
                             router.showScreen(.push) { rout in
                                 CareGiverNearByCustomerScreenView(bookingID: bookingId,viewModel:careGiverNearByCustomerScreenViewModel)
                             }

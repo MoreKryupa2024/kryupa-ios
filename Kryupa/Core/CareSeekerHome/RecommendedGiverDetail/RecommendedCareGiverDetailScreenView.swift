@@ -186,7 +186,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                                 bookingViewModel.giverName = careGiverDetail?.name ?? ""
                                 
                                 router.showScreen(.push) { route in
-                                    BookingFormScreenView(viewModel: bookingViewModel)
+                                    BookingFormScreenView(viewModel: bookingViewModel,delegate: viewModel.self)
                                 }
                             }else{
                                 if (viewModel.walletAmountData?.mainAmount ?? 0.0) < Double(viewModel.amount) ?? 0.0 {

@@ -110,7 +110,7 @@ struct BookingScreenView: View {
                 }
             case 3:
                 ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : "Completed"),bookingData: data)
+                    BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
                         .asButton(.press) {
                             let viewModelReview = ReviewsViewModel()
                             viewModelReview.bookingsListData = data

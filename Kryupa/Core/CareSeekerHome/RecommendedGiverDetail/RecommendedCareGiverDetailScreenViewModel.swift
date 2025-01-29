@@ -7,6 +7,19 @@
 
 import Foundation
 
+protocol RecommendedCareGiverDetailScreenViewModelProtocol: AnyObject{
+    func setBookingId(bookingId: String)
+}
+
+extension RecommendedCareGiverDetailScreenViewModel:RecommendedCareGiverDetailScreenViewModelProtocol{
+    func setBookingId(bookingId: String) {
+        self.isRecommended = false
+        self.sendRequestForBookCaregiver(bookingId: bookingId)
+    }
+     
+}
+
+
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
     var options: [String] = ["Summary","Reviews"]
@@ -18,12 +31,6 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var giverDetail: CareGiverDetailData?
     @Published var walletAmountData: WalletAmountData?
     @Published var chatData: ChatListData?
-    let notificatioSsetBookingId = NotificationCenter.default
-    
-    init(){
-        notificatioSsetBookingId.addObserver(forName: .setBookingId, object: nil, queue: nil,
-                                                     using: self.setBookingIds)
-    }
     
     private func setBookingIds(_ notification: Notification) {
         if let bookingid = notification.userInfo?["bookingId"] as? String {

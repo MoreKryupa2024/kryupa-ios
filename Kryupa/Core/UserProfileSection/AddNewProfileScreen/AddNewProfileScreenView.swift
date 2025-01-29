@@ -215,6 +215,8 @@ struct AddNewProfileScreenView: View {
                     viewModel.param["mediaclInfo"] = newParam
                     viewModel.updateProfile {
                         router.dismissScreen()
+                    } errorMsg: { error in
+                        presentAlert(title: "Kryupa", subTitle: error)
                     }
                 }
             })

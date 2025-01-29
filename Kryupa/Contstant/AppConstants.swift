@@ -18,6 +18,7 @@ class AppConstants{
     
     static let config = CoreConfig(clientID: "Acsfr2dcilBLBuXe5FYHkJ68qi2w8JXQMPlWuD-qNjMVrTUPIOYPutpHRquOPZ_rv67J1YgAkDOQ8zP4", environment: .sandbox)
     static let DeviceType = "IOS"
+    static let platformFee = 2
     
     static let SocialApple = "APPLE"
     static let SocialGoogle = "GOOGLE"

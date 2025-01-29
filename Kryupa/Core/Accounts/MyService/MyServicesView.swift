@@ -156,7 +156,7 @@ struct MyServicesView: View {
                 }
         })
     }
-    
+    //no need to add distance api here
     
     private var SegmentView: some View{
         

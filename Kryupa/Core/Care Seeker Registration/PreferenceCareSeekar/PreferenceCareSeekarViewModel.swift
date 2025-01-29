@@ -30,8 +30,9 @@ class PreferenceCareSeekarViewModel: ObservableObject{
         }*/else{
             isLoading = true
             var param = parameters
+            let language = parameters["personalInfo"] as? [String:Any] ?? [String:Any]()
             param["preferences"] = [
-//                "preferredLanguageType": languageSpeakingSelected,
+                "preferredLanguageType": [language["language"] as? String ?? "English"],
                 "gender": genderSelected,
                 "year_of_experience": yearsOfExperienceSelected,
                 "preferredServiceType":needServiceInSelected
