@@ -11,8 +11,6 @@ import SocketIO
 
 class ChatScreenViewModel: ObservableObject{
     
-    var manager: SocketManager?
-    var socket: SocketIOClient?
     var selectedChat: ChatListData?
     
     @Published var messageList = [MessageData]()
@@ -55,9 +53,8 @@ class ChatScreenViewModel: ObservableObject{
     }
 
     func connect() {
-        updateInboxListSockit()
         chatWindowFocus()
-        self.receiveMessage { msgData, str in
+        self.receiveMessage { msgData in
             self.messageList = [msgData] + self.messageList
         }
     }
@@ -66,22 +63,13 @@ class ChatScreenViewModel: ObservableObject{
         chatWindowUnfocus()
     }
     
-    func updateInboxListSockit(){
-        socket?.on("update_inbox_list") { [weak self] data, _ in
-            print("********************* socket inbox Connected")
-        }
-    }
     
     func chatWindowFocus(){
-        let param = ["contactId":selectedChat?.id ?? ""]
-        self.socket?.emit("chat_window_focus", with: [param]){
-            print("********************* chat_window_focus Connected")
-        }
+        SocketSingleClass.shared.chatWindowFocus(contactId: selectedChat?.id ?? "")
     }
     
     func chatWindowUnfocus(){
-        let param = ["contactId":selectedChat?.id ?? ""]
-        self.socket?.emit("chat_window_unfocus", with: [param]){}
+        SocketSingleClass.shared.chatWindowUnfocus(contactId: selectedChat?.id ?? "")
     }
     
     func getChatHistory(){
@@ -215,67 +203,19 @@ class ChatScreenViewModel: ObservableObject{
     }
 
     func sendMessage(_ message: String) {
-        var senderId = String()
-        var recipientId = String()
-        if Defaults().userType == AppConstants.GiveCare{
-            senderId = selectedChat?.giverId ?? ""
-            recipientId = selectedChat?.seekerId ?? ""
-        }else{
-            recipientId = selectedChat?.giverId ?? ""
-            senderId = selectedChat?.seekerId ?? ""
-        }
-        let id  = "\(UUID())"
-        
-        let msgData = MessageData(jsonData: [
-            "id": id,
-            "message": message,
-            "sender":senderId,
-            "recipient":recipientId
-        ])
-        let param = ["contact_Id":selectedChat?.id ?? "",
-                     "id": id,
-                     "sender_id":senderId,
-                     "recipient_id":recipientId,
-                     "Authorization": "bearer \(Defaults().accessToken)",
-                     "message":message]
-        print("---message_send Called")
-        socket?.emit("message_send", with: [param]) {
+        guard let selectedChat else {return}
+        SocketSingleClass.shared.sendMessage(message, selectedChat: selectedChat, completion: { msgData in
             self.messageList = [msgData] + self.messageList
-        }
+        })
     }
 
-    func receiveMessage(_ completion: @escaping (MessageData, String) -> Void) {
-        print("---message_receive Called")
-        socket?.on("message_receive") { [weak self] data, _ in
-            guard let self else { return }
-            if let typeDict = data[0] as? NSDictionary {
-                print(typeDict)
-                var senderId = String()
-                var recipientId = String()
-                if Defaults().userType == AppConstants.GiveCare{
-                    recipientId = self.selectedChat?.giverId ?? ""
-                    senderId = self.selectedChat?.seekerId ?? ""
-                }else{
-                    senderId = self.selectedChat?.giverId ?? ""
-                    recipientId = self.selectedChat?.seekerId ?? ""
-                }
-                let message = typeDict.value(forKey: "message") as? String ?? ""
-                let id = typeDict.value(forKey: "id") as? String ?? ""
-                let actionButton = typeDict.value(forKey: "is_action_btn") as? Bool ?? false
-                HapticManager.sharde.impact(style: .heavy)
-                let msgData = MessageData(jsonData: [
-                    "id": id,
-                    "message": message,
-                    "sender":senderId,
-                    "recipient":recipientId,
-                    "is_action_btn":actionButton,
-                    "created_at": Date().formattedDateString(format: "yyyy-MM-dd HH:mm:ss.SSS")
-                ])
-                let messcount = self.messageList.filter{$0.id == id}
-                if messcount.count == 0{
-                    completion(msgData, "")
-                }
+    func receiveMessage(_ completion: @escaping (MessageData) -> Void) {
+        guard let selectedChat else {return}
+        SocketSingleClass.shared.receiveMessage({ msgData in
+            let messcount = self.messageList.filter{$0.id == msgData.id}
+            if messcount.count == 0{
+                completion(msgData)
             }
-        }
+        }, selectedChat: selectedChat)
     }
 }

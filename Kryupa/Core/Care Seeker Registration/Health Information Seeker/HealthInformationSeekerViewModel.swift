@@ -14,8 +14,11 @@ class HealthInformationSeekerViewModel: ObservableObject{
     @Published var medicalConditionDropDownSelected: [String] = [String]()
     @Published var canHelpInSelect: [String] = []
     @Published var allergiesValue: String = String()
+    @Published var isLoading: Bool = false
     
-    func dataChecks(alert:((String)->Void),next:(([String:Any])->Void)){
+    func dataChecks(parameters:[String:Any],alert:@escaping((String)->Void),next:@escaping (()->Void)){
+        var params = parameters
+        
         medicalConditionSelected = medicalConditionSelected.removingWhitespaces()
         allergiesValue = allergiesValue.removingWhitespaces()
         if medicalConditionDropDownSelected.isEmpty {
@@ -30,7 +33,21 @@ class HealthInformationSeekerViewModel: ObservableObject{
                  "other_disease_type": medicalConditionSelected,
                  "disease_type": medicalConditionDropDownSelected
              ]
-            next(param)
+            params["medicalInfo"] = param
+            self.isLoading = true
+            NetworkManager.shared.postCareSeekerCreateProfile(params: params) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result{
+                    case .success(_):
+                        self?.isLoading = false
+                        next()
+                    case .failure(let error):
+                        self?.isLoading = false
+                        alert(error.getMessage())
+                        print(error)
+                    }
+                }
+            }
         }
     }
 }

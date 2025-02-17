@@ -30,7 +30,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
             return alert("Please Enter Bio")
         }
         
-        if yearsOfExprience == 0 {
+        if yearsOfExprience < -1 {
             return alert("Please Select Years Of Exprience")
         }
         guard let areaOfExpertise = exprienceAndSkillsData.areaOfExpertise, areaOfExpertise.count != 0 else {

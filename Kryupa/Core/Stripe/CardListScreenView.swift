@@ -21,7 +21,7 @@ struct CardListScreenView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                HeaderView(title: "Stripe Card List", showBackButton: true) {
+                HeaderViewWithRouter(title: "Stripe Card List", showBackButton: true) {
                     backAction?()
                 }
                 ScrollView {

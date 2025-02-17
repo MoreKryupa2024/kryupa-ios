@@ -11,7 +11,7 @@ import SwiftfulUI
 struct CareSeekerHomeScreenView: View {
     
     @Environment(\.router) var router
-    @StateObject private var viewModel = CareSeekerHomeScreenViewModel()
+    @StateObject var viewModel = CareSeekerHomeScreenViewModel()
     var showBookingsHistoryScreen = NotificationCenter.default
     @State var serviceStart: ServiceStartData?
     let paymentHandler = PaymentHandler()
@@ -140,16 +140,23 @@ struct CareSeekerHomeScreenView: View {
             }
             .padding(.horizontal,24)
             RecommendedCaregiverView(recommendedCaregiver: viewModel.recommendedCaregiver) { giverData in
-                let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
-                RecommendedCareGiverDetailScreenViewModel.isRecommended = true
+                let recommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
+                recommendedCareGiverDetailScreenViewModel.isRecommended = true
+                
+                let inboxScreenViewModel = InboxScreenViewModel()
+//                inboxScreenViewModel.socket = viewModel.socket
+//                inboxScreenViewModel.manager = viewModel.manager
                 
                 let careGiverDetails = CareGiverNearByCustomerScreenData(jsonData: [
                     "id":giverData.id,
                     "profile_picture_url":giverData.profileURL,
                     "name": giverData.name])
                 
+                
                 router.showScreen(.push) { rout in
-                    RecommendedCareGiverDetailScreenView(careGiverDetail: careGiverDetails,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                    RecommendedCareGiverDetailScreenView(careGiverDetail: careGiverDetails,
+                                                         viewModel: recommendedCareGiverDetailScreenViewModel,
+                                                         viewInboxModel: inboxScreenViewModel)
                 }
             }
         }

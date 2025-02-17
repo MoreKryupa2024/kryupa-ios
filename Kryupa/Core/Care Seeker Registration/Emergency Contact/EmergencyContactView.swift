@@ -78,7 +78,8 @@ struct EmergencyContactView: View {
                                     parameter["emergencyContact"] = param
                                     saveDefaultsData()
                                     router.showScreen(.push) { rout in
-                                        HealthInformationSeekerView(parameters: parameter)
+                                        PreferenceCareSeekarView(parameters: parameter)
+//                                        HealthInformationSeekerView(parameters: parameter)
                                     }
                                 })
                             }

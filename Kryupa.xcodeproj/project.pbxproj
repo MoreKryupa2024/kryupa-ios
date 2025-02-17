@@ -173,6 +173,7 @@
 		BE6BA4792C086DEF005361C3 /* BGVInterviewSlotsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BA4782C086DEF005361C3 /* BGVInterviewSlotsListModel.swift */; };
 		BE6BA47B2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BA47A2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift */; };
 		BE6BA47E2C08A245005361C3 /* CareGiverHomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */; };
+		BE6D522E2D52427B00962CC5 /* InternetCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D522D2D52427B00962CC5 /* InternetCheck.swift */; };
 		BE7B2C532BF79F53005CFD66 /* PersonalInformationScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */; };
 		BE7B2C582BF7A41B005CFD66 /* OTPTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */; };
 		BE7DDDAE2C181D0300A71632 /* ZoomScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */; };
@@ -196,6 +197,7 @@
 		BEA4C1182CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = BEA4C1172CEB6CA700E2F712 /* ZoomVideoSDKUIToolkit-iOS */; };
 		BEA4C11B2CEB6FF500E2F712 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4C11A2CEB6FF500E2F712 /* VideoToolbox.framework */; };
 		BEA4C11D2CEB700900E2F712 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA4C11C2CEB700800E2F712 /* CoreMedia.framework */; };
+		BEA4C4DA2D54CB1C00AD7C8B /* SocketFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4C4D92D54CB1C00AD7C8B /* SocketFile.swift */; };
 		BEA63BA52BFDC73A00B6A7B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA42BFDC73A00B6A7B0 /* FirebaseAuth */; };
 		BEA63BA82BFDC81900B6A7B0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA72BFDC81900B6A7B0 /* GoogleSignIn */; };
 		BEA63BAA2BFDC81900B6A7B0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEA63BA92BFDC81900B6A7B0 /* GoogleSignInSwift */; };
@@ -388,6 +390,7 @@
 		BE6BA4782C086DEF005361C3 /* BGVInterviewSlotsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGVInterviewSlotsListModel.swift; sourceTree = "<group>"; };
 		BE6BA47A2C086E7C005361C3 /* BGVTimeSlotScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGVTimeSlotScreenViewModel.swift; sourceTree = "<group>"; };
 		BE6BA47D2C08A245005361C3 /* CareGiverHomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareGiverHomeScreenView.swift; sourceTree = "<group>"; };
+		BE6D522D2D52427B00962CC5 /* InternetCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetCheck.swift; sourceTree = "<group>"; };
 		BE7B2C522BF79F52005CFD66 /* PersonalInformationScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationScreenViewModel.swift; sourceTree = "<group>"; };
 		BE7B2C572BF7A41B005CFD66 /* OTPTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPTextFieldView.swift; sourceTree = "<group>"; };
 		BE7DDDAD2C181D0300A71632 /* ZoomScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomScreenView.swift; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 		BE96B8AD2CEE155900CD0231 /* CardListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListScreenView.swift; sourceTree = "<group>"; };
 		BEA4C11A2CEB6FF500E2F712 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		BEA4C11C2CEB700800E2F712 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BEA4C4D92D54CB1C00AD7C8B /* SocketFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketFile.swift; sourceTree = "<group>"; };
 		BEB68A3A2C00611000DCB9BE /* ExperienceandSkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceandSkillsViewModel.swift; sourceTree = "<group>"; };
 		BEB68A3C2C0082BB00DCB9BE /* PreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewModel.swift; sourceTree = "<group>"; };
 		BEBE49D92C92D8410065A816 /* GooglePlaceScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlaceScreenView.swift; sourceTree = "<group>"; };
@@ -655,6 +659,8 @@
 				BE50EC072BFDD88C00175566 /* Defaults.swift */,
 				BEC5E9D52C355653000BC2A1 /* HapticManager.swift */,
 				BE5752742CE20037002DBFBB /* ApplePAy.swift */,
+				BE6D522D2D52427B00962CC5 /* InternetCheck.swift */,
+				BEA4C4D92D54CB1C00AD7C8B /* SocketFile.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1466,6 +1472,7 @@
 				BE92FD202C09E10800EDF49C /* BookingFormScreenModel.swift in Sources */,
 				BE0948742C199B2300FC2DE0 /* AppointmentsView.swift in Sources */,
 				BE4FBDA02BFB1E76003442BB /* CheckBoxView.swift in Sources */,
+				BE6D522E2D52427B00962CC5 /* InternetCheck.swift in Sources */,
 				BECD509A2C5CE4BF004DD43D /* FAQModel.swift in Sources */,
 				A3FEF61A2C2ABC2100EFC3C2 /* PersonalGiverModel.swift in Sources */,
 				A3BB879F2C1717B500C604DD /* CreateBookingModel.swift in Sources */,
@@ -1483,6 +1490,7 @@
 				BE4FBDAC2BFB6496003442BB /* PreferenceCareSeekarView.swift in Sources */,
 				BE11D51A2C5A5076004FCC34 /* SettingViewModel.swift in Sources */,
 				BE644E412BF49CEA00A6781F /* APIConstant.swift in Sources */,
+				BEA4C4DA2D54CB1C00AD7C8B /* SocketFile.swift in Sources */,
 				A36BC38A2C187A0B005616A5 /* PaymentListViewModel.swift in Sources */,
 				A36BC39B2C1AC7DB005616A5 /* FAQExpandView.swift in Sources */,
 				A3FEF6222C2C480C00EFC3C2 /* ReviewDetailModel.swift in Sources */,

@@ -34,7 +34,12 @@ struct OTPTextFieldView: View {
                         }
                         
                         // Ensure the field contains only one character
-                        if newValue.count > 1 {
+                        if newValue.count == 5{
+                            enterValue.removeAll()
+                            for i in newValue {
+                                enterValue.append(String(i))
+                            }
+                        } else if newValue.count > 1 {
                             let firstCharacter = newValue.first
                             if firstCharacter == oldValue.first {
                                 enterValue[index] = String(newValue.suffix(1)) // Keep the last character

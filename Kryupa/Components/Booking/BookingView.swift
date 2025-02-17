@@ -85,8 +85,8 @@ struct BookingView: View {
                     }
                     HStack {
                         VStack(alignment: .leading, spacing: 3){
-                            if let startDate = bookingData?.startDate, let endDate = bookingData?.endDate{
-                                Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMM d yyyy"))")
+                            if let startDate = bookingData?.startDate,let startDateFirst = startDate.split(separator: "T").first, let endDate = bookingData?.endDate, let endDateFirst = endDate.split(separator: "T").first{
+                                Text("\(String(startDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")) - \(String(endDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d yyyy"))")
                                     .font(.custom(FontContent.plusRegular, size: 12))
                                     .foregroundStyle(._444446)
                                     .lineLimit(1)

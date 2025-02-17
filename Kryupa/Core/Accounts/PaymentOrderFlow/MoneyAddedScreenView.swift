@@ -18,7 +18,7 @@ struct MoneyAddedScreenView: View {
     var body: some View {
         ZStack{
             VStack{
-                HeaderView(title: "Money Added")
+                HeaderViewWithRouter(title: "Money Added")
                 ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)

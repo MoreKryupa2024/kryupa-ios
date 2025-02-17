@@ -29,7 +29,7 @@ class AppConstants{
     static let VideoCall = "Video Call"
     static let Chat = "Chat"
     static let AudioCall = "Audio Call"
-    static let canHelpInArray = ["Bathing", "Dressing", "Eating/cutting up food", "Toileting", "Walking/Transferring",]
+    static let canHelpInArray = ["Bathing", "Dressing", "Eating", "Toileting", "Walking/Transferring",]
     
     static let medicalConditionArray = ["None","Arthritis","Asthma","Chronic Kidney Disease","Depression","Diabetes","Heart Disease","Hypertension","Obesity","Osteoporosis","Other"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]

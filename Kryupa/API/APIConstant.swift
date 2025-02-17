@@ -15,22 +15,25 @@ struct APIConstants {
 }
 
 class APIConstant{
+    
+    static let baseURL = "https://staging.wahinnovations.in"//
+//    static let baseURL = ""https://newapi.wahinnovations.in""
     //MARK: Server URL's Strat
-    static let authBaseURL = "https://newapi.wahinnovations.in/apis/auth"
+    static let authBaseURL = "\(baseURL)/apis/auth"
     
-    static let communicationBaseURL = "https://newapi.wahinnovations.in/apis/communication"
+    static let communicationBaseURL = "\(baseURL)/apis/communication"
     
-    static let chatURL = "https://newapi.wahinnovations.in/"
+    static let chatURL = "\(baseURL)/"
     
-    static let paymentBaseURL = "https://newapi.wahinnovations.in/apis/payment"
+    static let paymentBaseURL = "\(baseURL)/apis/payment"
     
-    static let bookingBaseURL = "https://newapi.wahinnovations.in/apis/booking"
+    static let bookingBaseURL = "\(baseURL)/apis/booking"
     
-    static let userBaseURL = "https://newapi.wahinnovations.in/apis/user"
+    static let userBaseURL = "\(baseURL)/apis/user"
     
-    static let adminBaseURL = "https://newapi.wahinnovations.in/apis/admin"
+    static let adminBaseURL = "\(baseURL)/apis/admin"
     
-    static let payment = "https://newapi.wahinnovations.in/apis/payment"
+    static let payment = "\(baseURL)/apis/payment"
     //MARK: Server URL's End
     
     static let sendOTP = "\(authBaseURL)/send_otp"
@@ -90,6 +93,7 @@ class APIConstant{
     static let updateApprochStatus = "\(bookingBaseURL)/update_approch_status"
     static let bookingDetailsForCaregiver = "\(bookingBaseURL)/BookingDetailsForCaregiver"
     static let bookingDetailsForCustomer = "\(bookingBaseURL)/BookingDetailsForCustomer"
+    static let createDraftBooking = "\(bookingBaseURL)/draft/create"
     static let sendRequestForBookCaregiver = "\(bookingBaseURL)/caregiver_approch"
     static let giverConfirmStartService = "\(bookingBaseURL)/confirm-booking"
     static let cancelStartService = "\(bookingBaseURL)/cancel/caregiverservice"

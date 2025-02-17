@@ -18,17 +18,6 @@ class JobsViewModel: ObservableObject {
     @Published var otherDiseaseType = String()
     @Published var chatData: ChatListData?
     @Published var jobPost = [JobPost]()
-    var manager: SocketManager!
-    var socket: SocketIOClient!
-    
-    init(){
-        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
-        self.socket = self.manager.defaultSocket
-    }
-    
-    deinit {
-        disconnect()
-    }
     
     func createConversation(giverId:String,bookingId:String,action:(@escaping()->Void),alert: ((String)->Void)?){
         let param = ["caregiver_id":giverId,
@@ -46,18 +35,6 @@ class JobsViewModel: ObservableObject {
                 }
             }
         }
-    }
-    
-    func disconnect() {
-        socket.disconnect()
-    }
-    
-    func connect() {
-        socket.on(clientEvent: .connect) {data, ack in
-            //Call your first socket here
-        }
-        let param = ["Authorization": "bearer \(Defaults().accessToken)"]
-        socket.connect(withPayload: param)
     }
 
     func getJobsDetail(approachID: String, completion: @escaping (()->Void)){

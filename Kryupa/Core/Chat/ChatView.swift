@@ -60,6 +60,7 @@ struct ChatView: View {
                             }
                         }
                         .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                        .padding(.top,15)
                     }
 //                    .defaultScrollAnchor(.bottom)
                     .padding(.horizontal, 10)
@@ -74,7 +75,7 @@ struct ChatView: View {
                     .animation(.easeInOut, value: 0.6)
             }
             .background(
-                Image("ChatBackground")
+//                Image("ChatBackground")
             )
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
@@ -206,32 +207,33 @@ struct ChatView: View {
         return HStack {
             
             HStack {
-                TextField("Hello!", text:$sendMsgText, axis: .vertical)
+                TextField("Please type here...", text:$sendMsgText, axis: .vertical)
                     .lineLimit(3)
                     .padding(.leading, 15)
                     .padding(.vertical, 10)
                     .foregroundStyle(.gray)
                     .font(.custom(FontContent.plusRegular, size: 20))
                     .frame(minHeight: 44)
+                    .autocorrectionDisabled()
                 
                 HStack(spacing:5) {
                     Image("sendbutton")
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            sendMsgText = sendMsgText.removingWhitespaces()
-                            let text = sendMsgText.removingWhitespaces()
-                            if !text.isEmpty{
-                                DispatchQueue.main.async {
-                                    viewModel.sendMessage(text)
+                            let empty = sendMsgText.removingWhitespaces()
+                            if !empty.isEmpty{
+                                let text = sendMsgText.removeFrontSpaces()
+                                if !text.isEmpty{
+                                    DispatchQueue.main.async {
+                                        viewModel.sendMessage(text)
+                                    }
                                 }
                                 sendMsgText = ""
                             }
-                            sendMsgText = ""
                         }
                 }
                 .padding(.trailing, 10)
-                
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 18)

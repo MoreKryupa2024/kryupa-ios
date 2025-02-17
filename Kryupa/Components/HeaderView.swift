@@ -54,6 +54,49 @@ struct HeaderView: View {
     }
 }
 
+struct HeaderViewWithRouter: View {
+    
+    var title = ""
+    var showBackButton = false
+    var closeAction:(()->Void)? = nil
+    
+    var body: some View {
+        
+        VStack(spacing: 24) {
+            ZStack{
+                Image("KryupaLobby")
+                    .resizable()
+                    .frame(width: 124,height: 20)
+                    .padding(.vertical,5)
+                
+                HStack{
+                    if showBackButton {
+                        Image("navBack")
+                            .resizable()
+                            .frame(width: 30,height: 30)
+                            .asButton(.press) {
+                                closeAction?()
+                            }
+                    }
+                    
+                    Spacer()
+//                    Image("NotificationBellIcon")
+//                        .frame(width: 25,height: 25)
+                }
+                .padding(.horizontal,24)
+            }
+            
+            if title != "" {
+                Text(title)
+                    .font(.custom(FontContent.besMedium, size: 20))
+                    .foregroundStyle(.appMain)
+            }
+        }
+//        .padding(.top, 10)
+        
+    }
+}
+
 #Preview {
     HeaderView()
 }

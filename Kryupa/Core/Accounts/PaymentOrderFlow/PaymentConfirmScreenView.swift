@@ -15,7 +15,7 @@ struct PaymentConfirmScreenView: View {
     var body: some View {
         ZStack{
             VStack{
-                HeaderView(title: "Payment Confirmed")
+                HeaderViewWithRouter(title: "Payment Confirmed")
                 ////LottieView(animationFileName: "SuccessLottie", loopMode: .loop)
                 GifImageView("Success")
                     .padding(.horizontal,20)

@@ -50,6 +50,7 @@ struct InboxScreenView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear{
             viewModel.getInboxList()
+            viewModel.updateInboxListSockit()
         }
         .onChange(of: viewModel.showChatView) { oldValue, newValue in
             if viewModel.showChatView{
@@ -102,8 +103,7 @@ struct InboxScreenView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.leading,12)
-//            Text(\((profile.lastActionAt.components(separatedBy: " ").first ?? "").convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "dd-MM"))
-                 Text("\((profile.lastActionAt.components(separatedBy: " ").last ?? "").convertDateFormaterTimeZone(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
+                 Text("\(profile.lastActionAt.convertDateFormaterTimeZone(beforeFormat: "EEE, dd MMM yyyy HH:mm:ss zzz", afterFormat: "h:mm a"))")
                 .font(.custom(FontContent.plusRegular, size: 13))
                 .padding(.top,10)
                 .frame(maxHeight: .infinity,alignment: .top)

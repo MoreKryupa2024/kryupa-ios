@@ -66,8 +66,9 @@ struct CareGiverNearByCustomerScreenView: View {
                                 let RecommendedCareGiverDetailScreenViewModel = RecommendedCareGiverDetailScreenViewModel()
                                 RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
                                 RecommendedCareGiverDetailScreenViewModel.amount = viewModel.amount
+                                RecommendedCareGiverDetailScreenViewModel.bookingID = self.bookingID
                                 router.showScreen(.push) { rout in
-                                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,bookingID: self.bookingID,viewModel: RecommendedCareGiverDetailScreenViewModel)
+                                    RecommendedCareGiverDetailScreenView(careGiverDetail: giver,viewModel: RecommendedCareGiverDetailScreenViewModel)
                                 }
                             }
                     }

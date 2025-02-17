@@ -10,8 +10,6 @@ import SocketIO
 
 class FAQViewModel: ObservableObject{
     
-    private var manager: SocketManager!
-    private var socket: SocketIOClient!
     @Published var selectedSection = 0
     @Published var faqModelData: FAQModelData?
     @Published var sendMsgText: String = ""
@@ -46,69 +44,28 @@ class FAQViewModel: ObservableObject{
         }
     }
     
-    init(){
-        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(true), .compress])
-        self.socket = self.manager.defaultSocket
-    }
-    
-    func connect() {
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-            //Call your first socket here
-        }
-        let param = ["Authorization": "bearer \(Defaults().accessToken)"]
-        socket.connect(withPayload: param)
-    }
-
-    func disconnect() {
-        socket.disconnect()
-    }
     
     func sendMessage(_ message: String) {
-        let id  = "\(UUID())"
-        let msgData = AllConversationData(jsonData: [
-            "id": id,
-            "message": message,
-            "sender":faqModelData?.userId ?? "",
-            "recipient":faqModelData?.adminId ?? ""
-        ])
-        let param = ["contact_Id":faqModelData?.contactID ?? "",
-                     "id": id,
-                     "sender_id":faqModelData?.userId ?? "",
-                     "recipient_id":faqModelData?.adminId ?? "",
-                     "Authorization": "bearer \(Defaults().accessToken)",
-                     "message":message]
-        
-        socket.emit("help_chat", with: [param]) {
-            DispatchQueue.main.async {
-                self.faqModelData?.allConversation.append(msgData)
-            }
-        }
+        guard var faqModelData else {return}
+        SocketSingleClass.shared.sendMessageFAQ(message, faqModelData: faqModelData, completion: { [weak self] msgData in
+            guard let self else {return}
+            self.faqModelData?.allConversation.append(msgData)
+        })
     }
     
     func receiveMessage() {
-        socket.on("message_receive") { [weak self] data, _ in
+        guard var faqModelData else {return}
+        SocketSingleClass.shared.receiveMessageFAQ(faqModelData: faqModelData) { [weak self] msgData in
             guard let self else {return}
-            if let typeDict = data[0] as? NSDictionary {
-                
-                let message = typeDict.value(forKey: "message") as? String ?? ""
-                let id = typeDict.value(forKey: "id") as? String ?? ""
-                HapticManager.sharde.impact(style: .heavy)
-                let msgData = AllConversationData(jsonData: [
-                    "id": id,
-                    "message": message,
-                    "sender":faqModelData?.adminId ?? "",
-                    "recipient":faqModelData?.userId ?? "",
-                ])
-                let messcount = self.faqModelData?.allConversation.filter{$0.id == id}
-                if messcount?.count == 0 {
-                    DispatchQueue.main.async {
-                        self.faqModelData?.allConversation = [msgData] + (self.faqModelData?.allConversation ?? [])
-                    }
+            let messcount = faqModelData.allConversation.filter{$0.id == msgData.id }
+            if messcount.count == 0 {
+                DispatchQueue.main.async {
+                    self.faqModelData?.allConversation = [msgData] + (faqModelData.allConversation)
                 }
             }
         }
     }
+    
     
     func conversationWithAdmin(){
 //        let param = ["pageNumber":pageNumber,

@@ -35,13 +35,12 @@ struct LobbyScreenView: View {
                 }
             }
             .refreshable {
-                NotificationCenter.default.post(name: .checkLobby,
-                                                                object: nil, userInfo: nil)
+                viewModel.checkLobbyStatus()
             }
             if isPresented {
                 ZoomScreenView(
                     jwt:viewModel.meetingTokenData?.sessionToken ?? "" ,
-                    sessionName: viewModel.meetingTokenData?.topic ?? "",
+                    sessionName: "BGV Call",//viewModel.meetingTokenData?.topic ?? "",
                     sessionPassword:viewModel.meetingTokenData?.sessionKey ?? "",
                     username: viewModel.meetingTokenData?.userIdentity ?? "",
                     callType: "video"
@@ -63,7 +62,7 @@ struct LobbyScreenView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: {
             viewModel.getLobbyStatus()
-//            viewModel.getBannerData(screenName: AppConstants.lobbyScreenBanner)
+            viewModel.checkLobbyStatus()
         })
     }
     

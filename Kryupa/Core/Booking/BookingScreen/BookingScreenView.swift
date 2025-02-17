@@ -81,67 +81,69 @@ struct BookingScreenView: View {
     }
     private var SeekerBookingView: some View{
         ScrollView{
-            switch viewModel.selectedSection{
-            case 1:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: "Pending",bookingData: data,payNowAction: { data in
-                        let paymentViewModel = PaymentViewModel()
-                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
-                        router.showScreen(.push) { rout in
-                            PaymentOrderScreenView(viewModel: paymentViewModel)
-                        }
-                    })
-                    .asButton(.press) {
-                        router.showScreen(.push) { rout in
-                            JobDetailView(jobID: data.id,bookingData: data)
+            VStack (spacing:0){
+                switch viewModel.selectedSection{
+                case 1:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: "Pending",bookingData: data,payNowAction: { data in
+                            let paymentViewModel = PaymentViewModel()
+                            paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
+                            router.showScreen(.push) { rout in
+                                PaymentOrderScreenView(viewModel: paymentViewModel)
+                            }
+                        })
+                        .asButton(.press) {
+                            router.showScreen(.push) { rout in
+                                JobDetailView(jobID: data.id,bookingData: data)
+                            }
                         }
                     }
-                }
-            case 2:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
-                        .asButton(.press) {
-                            let viewModelReview = ServiceDetailScreenViewModel()
-                            viewModelReview.bookingsListData = data
-                            router.showScreen(.push) { rout in
-                                ServiceDetailScreenView(viewModel:viewModelReview)
+                case 2:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
+                            .asButton(.press) {
+                                let viewModelReview = ServiceDetailScreenViewModel()
+                                viewModelReview.bookingsListData = data
+                                router.showScreen(.push) { rout in
+                                    ServiceDetailScreenView(viewModel:viewModelReview)
+                                }
                             }
-                        }
-                }
-            case 3:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
-                        .asButton(.press) {
-                            let viewModelReview = ReviewsViewModel()
-                            viewModelReview.bookingsListData = data
-                            router.showScreen(.push) { rout in
-                                GiveReviewView(viewModel:viewModelReview)
-                            }
-                        }
-                }
-            case 0:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: "Draft",bookingData: data,deleteAction: { data in
-                        
-                        let primaryAction = UIAlertAction(title: "OK", style: .default) { _ in 
-                            viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
-                                presentAlert(title: "Kryupa", subTitle: errorStr)
-                            }
-                        }
-                        
-                        let secondaryAction = UIAlertAction(title: "Cancel", style: .default)
-                        
-                        presentAlert(title: "Kryupa", subTitle: "Are you sure you want to delete this booking?", primaryAction: primaryAction, secondaryAction: secondaryAction)
-                    })
-                    .asButton(.press) {
-                        Defaults().bookingId = data.bookingID
-                        NotificationCenter.default.post(name: .showBookingScreen,
-                                                        object: nil, userInfo: nil)
                     }
+                case 3:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
+                            .asButton(.press) {
+                                let viewModelReview = ReviewsViewModel()
+                                viewModelReview.bookingsListData = data
+                                router.showScreen(.push) { rout in
+                                    GiveReviewView(viewModel:viewModelReview)
+                                }
+                            }
+                    }
+                case 0:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
+                        BookingView(status: "Draft",bookingData: data,deleteAction: { data in
+                            
+                            let primaryAction = UIAlertAction(title: "OK", style: .default) { _ in
+                                viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
+                                    presentAlert(title: "Kryupa", subTitle: errorStr)
+                                }
+                            }
+                            
+                            let secondaryAction = UIAlertAction(title: "Cancel", style: .default)
+                            
+                            presentAlert(title: "Kryupa", subTitle: "Are you sure you want to delete this booking?", primaryAction: primaryAction, secondaryAction: secondaryAction)
+                        })
+                        .asButton(.press) {
+                            Defaults().bookingId = data.bookingID
+                            NotificationCenter.default.post(name: .showBookingScreen,
+                                                            object: nil, userInfo: nil)
+                        }
+                    }
+                    
+                default:
+                    EmptyView()
                 }
-                
-            default:
-                EmptyView()
             }
         }
         .scrollIndicators(.hidden)
@@ -149,58 +151,60 @@ struct BookingScreenView: View {
     
     private var GiverBookingView: some View{
         ScrollView{
-            switch viewModel.selectedSection{
-            case 0:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
-                        .asButton(.press) {
-                            let viewModelReview = ServiceDetailScreenViewModel()
-                            viewModelReview.bookingsListData = data
-                            router.showScreen(.push) { rout in
-                                ServiceDetailScreenView(viewModel:viewModelReview)
+            VStack (spacing:0){
+                switch viewModel.selectedSection{
+                case 0:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: data.status == "Job Schedule" ? "Scheduled" : "Active",bookingData: data)
+                            .asButton(.press) {
+                                let viewModelReview = ServiceDetailScreenViewModel()
+                                viewModelReview.bookingsListData = data
+                                router.showScreen(.push) { rout in
+                                    ServiceDetailScreenView(viewModel:viewModelReview)
+                                }
                             }
-                        }
-                }
-            case 1:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: "Pending",bookingData: data,payNowAction: { data in
-                        let paymentViewModel = PaymentViewModel()
-                        paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
-                        router.showScreen(.push) { rout in
-                            PaymentOrderScreenView(viewModel: paymentViewModel)
-                        }
-                    })
-                    .asButton(.press) {
-                        router.showScreen(.push) { rout in
-                            JobDetailView(jobID: data.id,bookingData: data)
+                    }
+                case 1:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: "Pending",bookingData: data,payNowAction: { data in
+                            let paymentViewModel = PaymentViewModel()
+                            paymentViewModel.paySpecialMessageData = SpecialMessageData(jsonData: ["approch_id" : data.id])
+                            router.showScreen(.push) { rout in
+                                PaymentOrderScreenView(viewModel: paymentViewModel)
+                            }
+                        })
+                        .asButton(.press) {
+                            router.showScreen(.push) { rout in
+                                JobDetailView(jobID: data.id,bookingData: data)
+                            }
                         }
                     }
-                }
-            case 2:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status: "Completed",bookingData: data)
-                        .asButton(.press) {
-                            let viewModelReview = ReviewsViewModel()
-                            viewModelReview.bookingsListData = data
-                            router.showScreen(.push) { rout in
-                                GiveReviewView(viewModel:viewModelReview)
+                case 2:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status: "Completed",bookingData: data)
+                            .asButton(.press) {
+                                let viewModelReview = ReviewsViewModel()
+                                viewModelReview.bookingsListData = data
+                                router.showScreen(.push) { rout in
+                                    GiveReviewView(viewModel:viewModelReview)
+                                }
                             }
-                        }
-                }
-            case 3:
-                ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
-                    BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
-                        .asButton(.press) {
-                            let viewModelReview = ReviewsViewModel()
-                            viewModelReview.bookingsListData = data
-                            router.showScreen(.push) { rout in
-                                GiveReviewView(viewModel:viewModelReview)
+                    }
+                case 3:
+                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
+                        BookingView(status:  data.status == "Job Cancelled" ? "Cancelled" : (data.status == "Depreciated" ? "Expired" : data.status == "Rejected By Caregiver" ? "Rejected" : data.status == "Ignore_By_Caregiver" ? "Ignore By Caregiver" : "Completed"),bookingData: data)
+                            .asButton(.press) {
+                                let viewModelReview = ReviewsViewModel()
+                                viewModelReview.bookingsListData = data
+                                router.showScreen(.push) { rout in
+                                    GiveReviewView(viewModel:viewModelReview)
+                                }
                             }
-                        }
+                    }
+                    
+                default:
+                    EmptyView()
                 }
-                
-            default:
-                EmptyView()
             }
         }
         .scrollIndicators(.hidden)

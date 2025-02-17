@@ -77,10 +77,10 @@ struct PreferenceCareSeekarView: View {
                                             .asButton(.press) {
                                                 viewModel.dataChecks(parameters: parameters) { alertStr in
                                                     presentAlert(title: "Kryupa", subTitle: alertStr)
-                                                } next: {
+                                                } next: { param in
                                                     saveDefaultsData()
                                                     router.showScreen(.push) { rout in
-                                                        SelectProfileImageView()
+                                                        HealthInformationSeekerView(parameters: param)
                                                     }
                                                 }
                                             }
@@ -128,7 +128,7 @@ struct PreferenceCareSeekarView: View {
         
         VStack(alignment: .leading){
             HStack(spacing:0){
-                Text("Years of Experience")
+                Text("Caregiver's Experience")
                 Text("*")
                     .foregroundStyle(.red)
             }

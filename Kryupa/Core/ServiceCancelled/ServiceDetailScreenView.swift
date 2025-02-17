@@ -44,8 +44,8 @@ struct ServiceDetailScreenView: View {
     private var DetailView: some View{
         VStack(spacing:0){
             VStack(alignment:.leading, spacing:5){
-                if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
+                if let startDate = viewModel.bookingsListData?.startDate,let startDateFirst = startDate.split(separator: "T").first, let endDate = viewModel.bookingsListData?.endDate,let endDateFirst = endDate.split(separator: "T").first{
+                    Text("\(String(startDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEE, MMMM d")) - \(String(endDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM d yyyy"))")
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 16))
                 }
@@ -165,9 +165,9 @@ struct ServiceDetailScreenView: View {
                         .padding(.vertical,20)
                         .asButton(.press) {
                             if viewModel.rating == 0{
-                                presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
+                                presentAlert(title: "Kryupa", subTitle: "Please Provide Service Rating in Star")
                             }else if viewModel.review.isEmpty{
-                                presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
+                                presentAlert(title: "Kryupa", subTitle: "Please Provide Service Rating in Description")
                             }else{
                                 viewModel.addReview()
                             }

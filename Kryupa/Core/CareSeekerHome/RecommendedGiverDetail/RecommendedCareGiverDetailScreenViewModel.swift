@@ -8,21 +8,32 @@
 import Foundation
 
 protocol RecommendedCareGiverDetailScreenViewModelProtocol: AnyObject{
-    func setBookingId(bookingId: String)
+    func setBookingId(bookingId: String, amount: String)
 }
 
 extension RecommendedCareGiverDetailScreenViewModel:RecommendedCareGiverDetailScreenViewModelProtocol{
-    func setBookingId(bookingId: String) {
-        self.isRecommended = false
-        self.sendRequestForBookCaregiver(bookingId: bookingId)
+    func setBookingId(bookingId: String,amount:String) {
+        bookingID = bookingId
+        let mainAmount = walletAmountData?.mainAmount ?? 0
+        let amount = Double(amount) ?? 0
+        
+        if mainAmount < amount{
+            paymentViewModel.amount = "\((amount - mainAmount).removeZerosFromEnd(num: 2))"
+            paymentViewModel.showNudgeText = true
+            self.showPaymentMethodScreen = true
+        }else{
+            self.isRecommended = false
+            self.sendRequestForBookCaregiver(bookingId: bookingId)
+        }
     }
-     
 }
 
 
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
-    
+    @Published var bookingID: String = String()
+    @Published var showPaymentMethodScreen = false
     var options: [String] = ["Summary","Reviews"]
+    var paymentViewModel = PaymentViewModel()
     @Published var selection: String = "Summary"
     @Published var amount: String = ""
     @Published var isloading: Bool = true

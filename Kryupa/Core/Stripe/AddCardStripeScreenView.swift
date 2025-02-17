@@ -16,10 +16,11 @@ struct AddCardStripeScreenView: View {
     @StateObject var viewModel = AddCardStripeScreenViewModel()
     var moneyAddedAction: (()->Void)? = nil
     var backAction: (()->Void)? = nil
+    
     var body: some View {
         ZStack{
             VStack(spacing:0){
-                HeaderView(showBackButton: true) {
+                HeaderViewWithRouter(showBackButton: true) {
                     backAction?()
                 }
                 

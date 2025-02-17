@@ -506,6 +506,7 @@ class NetworkManager{
                     self?.defaults.refreshToken = apiData.data.refrenceToken
                     self?.defaults.userType = apiData.data.userTypes
                     self?.defaults.firstName = apiData.data.userInfo.name
+                    self?.defaults.userId = apiData.data.userInfo.id
                     completionHandler(.success(apiData))
                 }else{
                     completionHandler(.failure(.custom(apiData.message)))
@@ -3455,9 +3456,8 @@ class NetworkManager{
             }
             print(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let apiData = try decoder.decode(BookingModel.self, from: data)
+                let parsedData = try JSONSerialization.jsonObject(with: data) as? [String:Any] ?? [String:Any]()
+                let apiData = BookingModel(jsonData: parsedData)
                 if apiData.success{
                     completionHandler(.success(apiData))
                 }else{

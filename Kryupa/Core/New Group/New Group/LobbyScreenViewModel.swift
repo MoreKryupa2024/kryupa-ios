@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@MainActor
 class LobbyScreenViewModel: ObservableObject{
  
     @Published var isloading: Bool = Bool()
@@ -16,6 +15,13 @@ class LobbyScreenViewModel: ObservableObject{
     @Published var topBanner: [BannerDataModel] = [BannerDataModel]()
     var meetingTokenData: BGVInterviewMeetingTokenData?
     
+    func reloadLobby() {
+        NotificationCenter.default.post(name: .checkLobby, object: nil, userInfo: nil)
+    }
+    
+    func checkLobbyStatus(){
+        SocketSingleClass.shared.checkLobbyStatus()
+    }
     
     func getLobbyStatus(){
         isloading = true

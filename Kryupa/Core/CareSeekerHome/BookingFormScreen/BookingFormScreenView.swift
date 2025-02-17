@@ -615,7 +615,45 @@ struct BookingFormScreenView: View {
     
     private var BottomButtonView: some View{
         
-        HStack(alignment: .center,spacing: 40){
+        VStack{
+            HStack(alignment: .center,spacing: 40){
+                Text("Save As Draft")
+                    .foregroundStyle(.appMain)
+                    .padding(.horizontal,20)
+                    .padding(.vertical,8)
+                    .background{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(lineWidth: 1)
+                    }
+                    .padding(.top,5)
+                    .asButton(.press) {
+                        
+                    }
+                Text("Reset")
+                    .foregroundStyle(.appMain)
+                    .padding(.horizontal,20)
+                    .padding(.vertical,8)
+                    .background{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(lineWidth: 1)
+                    }
+                    .padding(.top,5)
+                    .asButton(.press) {
+                        let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
+                        viewModel.startDateValue = Date()
+                        viewModel.startTimeValue = date
+                        viewModel.duration = 1
+                        viewModel.startDateSValue = []
+                        viewModel.dateArray = []
+                        viewModel.bookingFor = ""
+                        viewModel.genderSelected = ""
+                        viewModel.languageSpeakingSelected = ["English"]
+                        viewModel.needServiceInSelected = []
+                        viewModel.additionalInfoSelected = []
+                        viewModel.additionalSkillsSelected = []
+                        viewModel.yearsOfExperienceSelected = "Any"
+                    }
+            }
             Text("Confirm")
                 .foregroundStyle(.white)
                 .padding(.horizontal,20)
@@ -627,9 +665,10 @@ struct BookingFormScreenView: View {
                 .asButton(.press) {
                     viewModel.createBooking { bookingId in
                         if viewModel.isRecommended && recommnededCheck() {
-
+                            let needServiceInSelected = viewModel.needServiceInArray.filter{$0.service == viewModel.needServiceInSelected.first!}.first!
+                            let amount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
                             
-                            delegate?.setBookingId(bookingId: bookingId)
+                            delegate?.setBookingId(bookingId: bookingId, amount: "\(amount)")
                             router.dismissScreen()
                         }else{
                             viewModel.bookingID = bookingId
@@ -646,31 +685,6 @@ struct BookingFormScreenView: View {
                         presentAlert(title: "Kryupa", subTitle: error)
                     }
 
-                }
-            
-            Text("Reset")
-                .foregroundStyle(.appMain)
-                .padding(.horizontal,20)
-                .padding(.vertical,8)
-                .background{
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(lineWidth: 1)
-                }
-                .padding(.top,5)
-                .asButton(.press) {
-                    let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
-                    viewModel.startDateValue = Date()
-                    viewModel.startTimeValue = date
-                    viewModel.duration = 1
-                    viewModel.startDateSValue = []
-                    viewModel.dateArray = []
-                    viewModel.bookingFor = ""
-                    viewModel.genderSelected = ""
-                    viewModel.languageSpeakingSelected = ["English"]
-                    viewModel.needServiceInSelected = []
-                    viewModel.additionalInfoSelected = []
-                    viewModel.additionalSkillsSelected = []
-                    viewModel.yearsOfExperienceSelected = "Any"
                 }
         }
         .padding(.vertical,5)

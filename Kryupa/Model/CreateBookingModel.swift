@@ -9,19 +9,22 @@ import Foundation
 
 
 // MARK: - Empty
-struct BookingModel: Codable {
+struct BookingModel {
     let data: BookingData
     let success: Bool
     let message: String
+    
+    init(jsonData:[String:Any]){
+        success = jsonData["success"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = BookingData(jsonData: (jsonData["data"] as? [String:Any] ?? [String:Any]()))
+    }
 }
 
 // MARK: - DataClass
-struct BookingData: Codable {
+struct BookingData {
     let id : String
-//    let startDate, endDate, startTime, endTime: String
-//    let gender, updatedBy: String
-//    let isActive, isDeleted: Bool
-//    let createdAt, updatedAt: String
-    
-    
+    init(jsonData:[String:Any]){
+        id = jsonData["id"] as? String ?? ""
+    }
 }

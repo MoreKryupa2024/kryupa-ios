@@ -32,10 +32,11 @@ struct ReviewListView: View {
                     Text(reviewData.reviewedByName)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .font(.custom(FontContent.besMedium, size: 17))
-                    
-                    Text("5 Years Experienced")
-                        .font(.custom(FontContent.plusRegular, size: 12))
-                        .padding(.bottom,5)
+                    if Defaults().userType == AppConstants.GiveCare{
+                        Text("5 Years Experienced")
+                            .font(.custom(FontContent.plusRegular, size: 12))
+                            .padding(.bottom,5)
+                    }
                     
                     StarsView(rating: reviewData.rating, maxRating: 5, size: 12)
                         

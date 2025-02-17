@@ -24,10 +24,27 @@ struct PaymentMethodsScreenView: View {
     var body: some View {
         ZStack{
             VStack{
-                HeaderView(title: "Payment", showBackButton: true) {
+                HeaderViewWithRouter(title: "Payment", showBackButton: true) {
                     backAction?()
                 }
                 VStack(spacing:15){
+                    if viewModel.showNudgeText {
+                        Group {
+                            Text("To proceed, add ")
+                                .font(.custom(FontContent.plusRegular, size: 14))
+                            +
+                            Text("$\(viewModel.amount)")
+                                .font(.custom(FontContent.plusBold, size: 14))
+                            +
+                            Text(" to your wallet.")
+                                .font(.custom(FontContent.plusRegular, size: 14))
+                        }
+                        .padding(.horizontal,24)
+                        
+                        Text("This amount will be stored and only deducted when the service starts. \n\n(2% platform fee will apply at the time of booking)")
+                            .padding(.horizontal,24)
+                            .font(.custom(FontContent.plusRegular, size: 12))
+                    }
                     PaypalView
                         .asButton(.press) {
                             viewModel.getPaypalOrderID()
@@ -51,6 +68,7 @@ struct PaymentMethodsScreenView: View {
                         }
                     Spacer()
                 }
+                
             }
             
             if showCardListScreen{

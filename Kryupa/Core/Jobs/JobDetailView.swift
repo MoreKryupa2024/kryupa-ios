@@ -19,7 +19,7 @@ struct JobDetailView: View {
         ZStack{
             VStack(spacing:0){
                 HeaderView(showBackButton: true) {
-                    viewModel.disconnect()
+                    
                 }
                 ScrollView {
                     UserView
@@ -95,7 +95,6 @@ struct JobDetailView: View {
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .task {
-                    viewModel.connect()
                     if Defaults().userType == AppConstants.SeekCare{
                         viewModel.getJobsDetailForCustomer(approachID: jobID) {}
                     }else{
@@ -329,8 +328,6 @@ struct JobDetailView: View {
                         guard let jobDetailModel = viewModel.jobDetailModel else {
                             return
                         }
-                        ChatScreenViewModel.manager = viewModel.manager
-                        ChatScreenViewModel.socket = viewModel.socket
                         if Defaults().userType == AppConstants.SeekCare{
                             viewModel.createConversation(giverId: jobDetailModel.caregiversID, bookingId: "") {
                                 ChatScreenViewModel.selectedChat = viewModel.chatData

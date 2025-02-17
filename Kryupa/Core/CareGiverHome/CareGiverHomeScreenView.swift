@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulUI
 
 struct CareGiverHomeScreenView: View {
-    @StateObject private var viewModel = CareGiverHomeScreenViewModel()
+    @StateObject var viewModel = CareGiverHomeScreenViewModel()
     @State var showNoContent: Bool = true
     @State private var isSelectedView = 4
     @Environment(\.router) var router

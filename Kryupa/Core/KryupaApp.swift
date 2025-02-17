@@ -19,10 +19,12 @@ import Firebase
 struct KryupaApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+    @StateObject private var networkMonitor = NetworkMonitor()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(networkMonitor)
         }
     }
 }

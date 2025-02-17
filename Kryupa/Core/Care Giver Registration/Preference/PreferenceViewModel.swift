@@ -44,6 +44,7 @@ class PreferenceViewModel: ObservableObject{
         
         isLoading = true
         var param = parameters
+        let personalInfo = parameters["personalInfo"] as? [String:Any] ?? [String:Any]()
         param["preferenceList"] = [
             "can_help_in": preferenceListData.canHelpIn ?? [],
             "language": languageSpeakingSelected,
@@ -55,6 +56,8 @@ class PreferenceViewModel: ObservableObject{
                 switch result{
                 case .success(_):
                     self?.isLoading = false
+                    Defaults().firstName = personalInfo["firstname"] as? String ?? ""
+                    Defaults().lastName = personalInfo["lastname"] as? String ?? ""
                     next()
                 case .failure(let error):
                     self?.isLoading = false

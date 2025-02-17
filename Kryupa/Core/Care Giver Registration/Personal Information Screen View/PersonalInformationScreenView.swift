@@ -102,6 +102,10 @@ struct PersonalInformationScreenView: View {
                             .id(viewModel.personalInfoData.language)
                         
                         AddressView(value: $viewModel.personalInfoData.address.toUnwrapped(defaultValue: ""))
+                            .overlay {
+                                Rectangle()
+                                    .foregroundStyle(.white.opacity(0.01))
+                            }
                             .asButton {
                                 openPlacePicker = true
                             }
@@ -267,7 +271,7 @@ struct PersonalInformationScreenView: View {
     }
     
     private func dateOfBirthPicker()-> some View{
-        let date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -16, to: Date(), options: [])!
+        let date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -17, to: Date(), options: [])!
         
         return DateTimePickerScreenView(
             givenDate: date,

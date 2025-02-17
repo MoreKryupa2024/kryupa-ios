@@ -147,7 +147,7 @@ struct ChatBoxView: View {
                 
                 Text("\(msg)")
                     .frame(alignment: .trailing)
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusBold, size: 15))
                     .foregroundColor(Color.white)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
@@ -164,21 +164,20 @@ struct ChatBoxView: View {
                     }
             }
             .padding(.horizontal, 20)
-            Text("\((msgData?.createdAt.components(separatedBy: " ").first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")), \((msgData?.createdAt.components(separatedBy: " ").last ?? "").convertDateFormaterTimeZone(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
+            Text("\((msgData?.createdAt ?? "").convertDateFormaterTimeZone(beforeFormat: "EEE, dd MMM yyyy HH:mm:ss zzz", afterFormat: "MMM d")), \((msgData?.createdAt ?? "").convertDateFormaterTimeZone(beforeFormat: "EEE, dd MMM yyyy HH:mm:ss zzz", afterFormat: "h:mm a"))")
            .font(.custom(FontContent.plusRegular, size: 13))
            .padding(.top,10)
            .frame(maxWidth:.infinity,alignment: .trailing)
            .foregroundStyle(._7_C_7_C_80)
            .padding(.horizontal, 7)
         }
-        
     }
     //UTC
     func reciverMsg(msg: String)-> some View{
         VStack(spacing:-5){
             HStack {
                 Text("\(msg)")
-                    .font(.custom(FontContent.plusRegular, size: 13))
+                    .font(.custom(FontContent.plusBold, size: 15))
                     .foregroundStyle(.appMain)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
@@ -196,7 +195,7 @@ struct ChatBoxView: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-            Text("\((msgData?.createdAt.components(separatedBy: " ").first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")), \((msgData?.createdAt.components(separatedBy: " ").last ?? "").convertDateFormaterTimeZone(beforeFormat: "HH:mm:ss.SSS", afterFormat: "h:mm a"))")
+            Text("\((msgData?.createdAt ?? "").convertDateFormaterTimeZone(beforeFormat: "EEE, dd MMM yyyy HH:mm:ss zzz", afterFormat: "MMM d")), \((msgData?.createdAt ?? "").convertDateFormaterTimeZone(beforeFormat: "EEE, dd MMM yyyy HH:mm:ss zzz", afterFormat: "h:mm a"))")
            .font(.custom(FontContent.plusRegular, size: 13))
            .padding(.top,10)
            .frame(maxWidth: .infinity, alignment: .leading)

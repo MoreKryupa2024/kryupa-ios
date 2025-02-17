@@ -59,7 +59,7 @@ struct ChatListData {
         cpID = jsonData["cp_id"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
         profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
-        lastActionAt = jsonData["last_action_at"] as? String ?? ""
+        lastActionAt = jsonData["last_action_string"] as? String ?? ""
         lastMessage = jsonData["last_message"] as? String ?? ""
         sessionKey = jsonData["session_key"] as? String ?? ""
         sessionTopic = jsonData["session_topic"] as? String ?? ""
@@ -101,7 +101,7 @@ struct MessageData {
         recipient = jsonData["recipient"] as? String ?? ""
         message = jsonData["message"] as? String ?? ""
         status = jsonData["status"] as? String ?? ""
-        createdAt = jsonData["created_at"] as? String ?? ""
+        createdAt = jsonData["date_time"] as? String ?? ""
         updatedAt = jsonData["updated_at"] as? String ?? ""
         isActionBtn = jsonData["is_action_btn"] as? Bool ?? false
     }

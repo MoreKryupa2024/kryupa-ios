@@ -13,13 +13,10 @@ struct RecommendedCareGiverDetailScreenView: View {
     @Environment(\.router) var router
     
     var careGiverDetail: CareGiverNearByCustomerScreenData?
-    @State var bookingID: String = String()
     @Namespace private var namespace
     @StateObject var viewModel = RecommendedCareGiverDetailScreenViewModel()
     @StateObject var viewInboxModel = InboxScreenViewModel()
     let paymentHandler = PaymentHandler()
-    @State var showPaymentMethodScreen = false
-    @StateObject var paymentViewModel = PaymentViewModel()
     
     var body: some View {
         ZStack{
@@ -51,19 +48,21 @@ struct RecommendedCareGiverDetailScreenView: View {
                 LoadingView()
             }
             
-            if showPaymentMethodScreen{
-                PaymentMethodsScreenView(viewModel: paymentViewModel,paymentConfirmAction: {
-                    viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
-                    presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
-                    showPaymentMethodScreen = false
+            if viewModel.showPaymentMethodScreen{
+                PaymentMethodsScreenView(viewModel: viewModel.paymentViewModel,
+                                         paymentConfirmAction: {
+                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID)
+                    presentAlert(title: "Kryupa", subTitle: "Booking Request Sent Successfully")
+                    viewModel.showPaymentMethodScreen = false
+                },backAction:{
+                    viewModel.showPaymentMethodScreen = false
                 })
                 .background(.white)
             }
         }
         .toolbar(.hidden, for: .navigationBar)
         .task{
-            viewInboxModel.connect()
-            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "", bookingId: bookingID)
+            viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "", bookingId: viewModel.bookingID)
         }
     }
 
@@ -162,12 +161,12 @@ struct RecommendedCareGiverDetailScreenView: View {
             HStack(spacing:30){
                 MessageButton
                     .asButton(.press){
-                        viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: bookingID) {
+                        viewModel.createConversation(giverId: careGiverDetail?.id ?? "", bookingId: viewModel.bookingID) {
                             let chatViewModel = viewInboxModel.viewModelChat
                             chatViewModel.selectedChat = viewModel.chatData
                             chatViewModel.isRecommended = viewModel.isRecommended
                             chatViewModel.normalBooking = viewModel.isRecommended ? false : (viewModel.giverDetail?.showBookNow ?? false)
-                            chatViewModel.bookingId = bookingID
+                            chatViewModel.bookingId = viewModel.bookingID
                             router.showScreen(.push) { route in
                                 ChatView(userName: careGiverDetail?.name ?? "",viewModel: chatViewModel)
                             }
@@ -189,13 +188,15 @@ struct RecommendedCareGiverDetailScreenView: View {
                                     BookingFormScreenView(viewModel: bookingViewModel,delegate: viewModel.self)
                                 }
                             }else{
-                                if (viewModel.walletAmountData?.mainAmount ?? 0.0) < Double(viewModel.amount) ?? 0.0 {
-                                    paymentViewModel.amount = viewModel.amount
-                                    showPaymentMethodScreen = true
+                                let mainAmount = (viewModel.walletAmountData?.mainAmount ?? 0.0)
+                                let amount = Double(viewModel.amount) ?? 0.0
+                                if mainAmount < amount {
+                                    viewModel.paymentViewModel.amount = "\((amount - mainAmount).removeZerosFromEnd(num: 2))"
+                                    viewModel.paymentViewModel.showNudgeText = true
+                                    viewModel.showPaymentMethodScreen = true
                                 } else {
-                                    viewModel.sendRequestForBookCaregiver(bookingId: bookingID)
-                                    presentAlert(title: "Kryupa", subTitle: "Booking Request Send Successfully")
-                                    
+                                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID)
+                                    presentAlert(title: "Kryupa", subTitle: "Booking Request Sent Successfully")
                                 }
                             }
                         }
@@ -244,7 +245,6 @@ struct RecommendedCareGiverDetailScreenView: View {
                     .frame(width: 30,height: 30)
                     .asButton(.press) {
                         router.dismissScreen()
-                        viewInboxModel.disconnect()
                     }
                 Spacer()
 //                Image("NotificationBellIcon")

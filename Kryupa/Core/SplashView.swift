@@ -33,7 +33,7 @@ struct ContentView: View {
         }
         .task {
             delayText()
-            
+            //12345
             setLobbyScreen.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,
                                 using: self.setCareGiverLobbyScreen)
             

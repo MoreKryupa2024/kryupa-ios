@@ -10,6 +10,14 @@ import SwiftUI
 
 extension String{
     
+    func removeFrontSpaces() -> String {
+        var string = self
+        while string.hasPrefix(" ") {
+            string.removeFirst()
+        }
+        return string
+    }
+    
     func formattedNoTimeZoneDateString(format: String? = "MMM d, h:mm a") -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -71,6 +79,7 @@ extension String{
     }
     
     func convertDateFormater(beforeFormat: String, afterFormat: String) -> String {
+        print("\(self)--------------------------------server Date")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = beforeFormat
 
@@ -83,17 +92,17 @@ extension String{
 
         dateFormatter.dateFormat = afterFormat
         let timeStamp = dateFormatter.string(from: date)
-
+        print("\(timeStamp)--------------------------------converted Date")
         return timeStamp
     }
     
     func convertDateFormaterTimeZone(beforeFormat: String, afterFormat: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = beforeFormat
-        formatter.timeZone = TimeZone(secondsFromGMT:0) // UTC
+//        formatter.timeZone = TimeZone(secondsFromGMT:0) // UTC
         let defaultTimeZoneStr = formatter.date(from: self) ?? Date()
         let dateFormatter = DateFormatter()
-        formatter.timeZone = TimeZone.current // Local
+//        formatter.timeZone = TimeZone.current // Local
         dateFormatter.dateFormat = afterFormat
         return dateFormatter.string(from:defaultTimeZoneStr)
     }

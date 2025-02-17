@@ -31,7 +31,7 @@ struct WalletScreenView: View {
                             .foregroundStyle(._018_ABE)
                             .padding(.top,5)
                         
-                        Text(Defaults().userType == AppConstants.SeekCare ? "AddMoney" : "Withdraw Money")
+                        Text(Defaults().userType == AppConstants.SeekCare ? "Add Money" : "Withdraw Money")
                             .font(.custom(FontContent.plusRegular, size: 16))
                             .foregroundStyle(.white)
                             .padding(.horizontal,26)
@@ -59,16 +59,17 @@ struct WalletScreenView: View {
                         VStack(spacing:0){
                             HStack(content: {
                                 Text("Transactions")
+                                    .font(.custom(FontContent.plusMedium, size: 16))
                                 Spacer()
                                 Text("Previous Transactions")
                                     .underline(true)
+                                    .font(.custom(FontContent.plusMedium, size: 14))
                                     .asButton {
                                         router.showScreen(.push) { rout in
                                             WalletTransectionHistoryScreenView()
                                         }
                                     }
                             })
-                            .font(.custom(FontContent.plusMedium, size: 12))
                             .foregroundStyle(._7_C_7_C_80)
                             .padding(.horizontal,24)
                             .padding(.bottom,15)

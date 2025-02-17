@@ -18,7 +18,6 @@ struct FAQView: View {
         ZStack{
             VStack(spacing:0){
                 HeaderView(showBackButton: true) {
-                    viewModel.disconnect()
                 }
                 .background(.white)
                 
@@ -51,6 +50,7 @@ struct FAQView: View {
                                 }
                             }
                             .rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+                            .padding(.top,15)
                         }
 //                        .defaultScrollAnchor(.bottom)
                         .padding(.horizontal, 10)
@@ -69,7 +69,7 @@ struct FAQView: View {
                 }
             }
             .background(
-                Image("ChatBackground").opacity(viewModel.selectedSection == 1 ? 1 : 0)
+//                Image("ChatBackground").opacity(viewModel.selectedSection == 1 ? 1 : 0)
             )
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar(.hidden, for: .navigationBar)
@@ -96,14 +96,14 @@ struct FAQView: View {
         return HStack {
             
             HStack {
-                TextField("Hello!", text:$viewModel.sendMsgText, axis: .vertical)
+                TextField("Please type here...", text:$viewModel.sendMsgText, axis: .vertical)
                     .lineLimit(3)
                     .padding(.leading, 15)
                     .padding(.vertical, 4)
                     .foregroundStyle(.gray)
                     .font(.custom(FontContent.plusRegular, size: 17))
                     .frame(minHeight: 36)
-                
+                    .autocorrectionDisabled()
                 
                 HStack(spacing:5) {
                     
@@ -111,12 +111,14 @@ struct FAQView: View {
                         .dynamicTypeSize(.medium)
                         .frame(width: 28,height: 28)
                         .asButton(.press) {
-                            viewModel.sendMsgText = viewModel.sendMsgText.removingWhitespaces()
-                            let text = viewModel.sendMsgText.removingWhitespaces()
-                            if !text.isEmpty{
-                                viewModel.sendMessage(text)
+                            let empty = viewModel.sendMsgText.removingWhitespaces()
+                            if !empty.isEmpty{
+                                let text = viewModel.sendMsgText.removeFrontSpaces()
+                                if !text.isEmpty{
+                                    viewModel.sendMessage(text)
+                                }
+                                viewModel.sendMsgText = ""
                             }
-                            viewModel.sendMsgText = ""
                         }
                 }
                 .padding(.trailing, 5)
@@ -149,11 +151,7 @@ struct FAQView: View {
         .onChange(of: viewModel.selectedSection) { oldValue, newValue in
             keyboardHeight = 0
             if viewModel.selectedSection == 1{
-                viewModel.disconnect()
-                viewModel.connect()
                 viewModel.receiveMessage()
-            }else{
-                viewModel.disconnect()
             }
         }
     }

@@ -18,7 +18,8 @@ struct HealthInformationSeekerView: View {
     @State var mobilityLevelDownShow:Bool = Bool()
     
     var body: some View {
-        
+        ZStack{
+            
             VStack(spacing:0){
                 ZStack(alignment:.leading){
                     RoundedRectangle(cornerRadius: 4)
@@ -41,58 +42,61 @@ struct HealthInformationSeekerView: View {
                     medicalConditionView
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading,.trailing,.top],24)
-                
-                VStack(spacing: 25,
-                       content: {
                     
-                    medicalConditionDropdownView
-                    
-                    if viewModel.medicalConditionDropDownSelected.contains("Other"){
+                    VStack(spacing: 25,
+                           content: {
+                        
+                        medicalConditionDropdownView
+                        
+                        if viewModel.medicalConditionDropDownSelected.contains("Other"){
+                            textFieldViewWithHeader(
+                                title: "Other",
+                                redText: true,
+                                placeHolder: "(Max 100 words)",
+                                value: $viewModel.medicalConditionSelected,
+                                keyboard: .asciiCapable
+                            )
+                            .onTapGesture {
+                                medicalConditionDownShow = false
+                            }
+                        }
+                        
                         textFieldViewWithHeader(
-                            title: "Other",
-                            redText: true,
-                            placeHolder: "(Max 100 words)",
-                            value: $viewModel.medicalConditionSelected,
+                            title: "Allergies",
+                            placeHolder: "Enter allergies (if you have any)",
+                            value: $viewModel.allergiesValue,
                             keyboard: .asciiCapable
                         )
-                        .onTapGesture {
-                            medicalConditionDownShow = false
-                        }
-                    }
-                    
-                    textFieldViewWithHeader(
-                        title: "Allergies",
-                        placeHolder: "Enter allergies (if you have any)",
-                        value: $viewModel.allergiesValue,
-                        keyboard: .asciiCapable
-                    )
-                    
-                    NeedHelpInView
-                    
-                    HStack{
-                        previousButton
-                            .asButton(.press) {
-                                saveDefaultsData()
-                                router.dismissScreen()
-                            }
-                        Spacer()
-                        nextButton
-                            .asButton(.press) {
-                                viewModel.dataChecks { alertStr in
-                                    presentAlert(title: "Kryupa", subTitle: alertStr)
-                                } next: { param in
-                                    var params = parameters
-                                    params["medicalInfo"] = param
+                        
+                        NeedHelpInView
+                        
+                        HStack{
+                            previousButton
+                                .asButton(.press) {
                                     saveDefaultsData()
-                                    router.showScreen(.push) { rout in
-                                        PreferenceCareSeekarView(parameters: params)
+                                    router.dismissScreen()
+                                }
+                            Spacer()
+                            nextButton
+                                .asButton(.press) {
+                                    viewModel.dataChecks(parameters:self.parameters) { alertStr in
+                                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                                    } next: {
+                                        saveDefaultsData()
+                                        router.showScreen(.push) { rout in
+                                            SelectProfileImageView()
+                                        }
                                     }
                                 }
-                            }
-                    }
-                })
-                .padding(.top,10)
-                .padding(.horizontal,24)
+                        }
+                    })
+                    .padding(.top,10)
+                    .padding(.horizontal,24)
+                }
+            }
+            
+            if viewModel.isLoading{
+                LoadingView()
             }
         }
         .scrollIndicators(.hidden)

@@ -32,7 +32,7 @@ extension Date {
     func formattedDateString(format: String? = "MMM d, h:mm a") -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT:0) // UTC
+//        dateFormatter.timeZone = TimeZone(secondsFromGMT:0) // UTC
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
         
@@ -66,7 +66,7 @@ func dateFormatChangeToDate(dates: String)-> Date?{
 func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,beforeZone: String, afterZone: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = beforeFormat
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
+//    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
 
     guard let date = dateFormatter.date(from: date) else {
         assert(false, "no date from string")
@@ -74,7 +74,7 @@ func convertDateFormater(date: String,beforeFormat: String, afterFormat: String,
     }
 
     dateFormatter.dateFormat = afterFormat
-    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
+//    dateFormatter.timeZone = NSTimeZone(name: "UTC") as? TimeZone
     let timeStamp = dateFormatter.string(from: date)
 
     return timeStamp

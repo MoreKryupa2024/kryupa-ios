@@ -13,48 +13,20 @@ class InboxScreenViewModel: ObservableObject{
     @Published var inboxList = [ChatListData]()
     @Published var isLoading = Bool()
     @Published var showChatView = Bool()
-    private var manager: SocketManager!
-    private var socket: SocketIOClient!
     let notificatioSetChatScreen = NotificationCenter.default
     let viewModelChat = ChatScreenViewModel()
     
     init(){
         notificatioSetChatScreen.addObserver(forName: .setChatScreen, object: nil, queue: nil,using: self.setChatScreen)
-        notificatioSetChatScreen.addObserver(forName: .disconnectSockit, object: nil, queue: nil,using: self.disconnectSockit)
-        setUpSocket()
-        viewModelChat.manager = self.manager
-        viewModelChat.socket = self.socket
+//        notificatioSetChatScreen.addObserver(forName: .disconnectSockit, object: nil, queue: nil,using: self.disconnectSockit)
+        
     }
     
-    func setUpSocket(){
-        self.manager = SocketManager(socketURL: URL(string: APIConstant.chatURL)!, config: [.log(false), .compress])
-        self.socket = self.manager.defaultSocket
-        self.connect()
-    }
-    
-    func connect() {
-        socket.on(clientEvent: .connect) {data, ack in
-            print("*********************socket Connected")
-            self.updateInboxListSockit()
-            //Call your first socket here
-        }
-        let param = ["Authorization": "bearer \(Defaults().accessToken)"]
-        socket.connect(withPayload: param)
-    }
     
     func updateInboxListSockit(){
-        socket?.on("update_inbox_list") { [weak self] data, _ in
-            print("********************* socket inbox Connected")
+        SocketSingleClass.shared.updateInboxListSockit { [weak self] in
             self?.getInboxList()
         }
-    }
-    
-    deinit{
-        disconnect()
-    }
-    
-    func disconnect() {
-        socket.disconnect()
     }
     
     private func setChatScreen(_ notification: Notification){
@@ -62,10 +34,6 @@ class InboxScreenViewModel: ObservableObject{
             viewModelChat.selectedChat = ChatListData(jsonData: dataDict)
             showChatView = true
         }
-    }
-    
-    private func disconnectSockit(_ notification: Notification){
-        socket.disconnect()
     }
     
     func getInboxList(){

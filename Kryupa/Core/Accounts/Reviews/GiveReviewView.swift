@@ -106,9 +106,9 @@ struct GiveReviewView: View {
                     }
                     .asButton(.press) {
                         if viewModel.ratingValue == 0{
-                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Star")
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Service Rating in Star")
                         }else if viewModel.txtReview.isEmpty{
-                            presentAlert(title: "Kryupa", subTitle: "Please Provide Serive Rating in Description")
+                            presentAlert(title: "Kryupa", subTitle: "Please Provide Service Rating in Description")
                         }else{
                             viewModel.addReview()
                         }
@@ -157,8 +157,8 @@ struct GiveReviewView: View {
     private var DateTimeView: some View{
         VStack(alignment: .leading) {
             HStack {
-                if let startDate = viewModel.bookingsListData?.startDate, let endDate = viewModel.bookingsListData?.endDate{
-                    Text("\(startDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "EEE, MMMM d")) - \(endDate.convertDateFormater(beforeFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", afterFormat: "MMMM d yyyy"))")
+                if let startDate = viewModel.bookingsListData?.startDate,let startDateFirst = startDate.split(separator: "T").first, let endDate = viewModel.bookingsListData?.endDate,let endDateFirst = endDate.split(separator: "T").first{
+                    Text("\(String(startDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "EEE, MMMM d")) - \(String(endDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMMM d yyyy"))")
                         .font(.custom(FontContent.besMedium, size: 16))
                         .foregroundStyle(.appMain)
                         .padding(.horizontal, 24)

@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 class PaymentViewModel: ObservableObject{
     
     @Published var paySpecialMessageData: SpecialMessageData?
@@ -20,6 +19,7 @@ class PaymentViewModel: ObservableObject{
     @Published var orderId: String = ""
     @Published var amount: String = "0.00"
     @Published var pagination: Bool = true
+    @Published var showNudgeText: Bool = false
     @Published var pageNumber = 1
     
     func getServiceId(serviceId: String){

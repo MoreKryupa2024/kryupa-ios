@@ -24,6 +24,7 @@ struct CameraPickerView: UIViewControllerRepresentable {
         
         if isCam {
             picker.sourceType = .camera
+            picker.cameraDevice = .front
         }
         else {
             picker.sourceType = .photoLibrary
