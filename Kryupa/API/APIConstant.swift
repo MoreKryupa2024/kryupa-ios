@@ -16,8 +16,8 @@ struct APIConstants {
 
 class APIConstant{
     
-    static let baseURL = "https://staging.wahinnovations.in"//
-//    static let baseURL = ""https://newapi.wahinnovations.in""
+    static let stagingbaseURL = "https://staging.wahinnovations.in"//
+    static let baseURL = "https://newapi.wahinnovations.in"
     //MARK: Server URL's Strat
     static let authBaseURL = "\(baseURL)/apis/auth"
     
@@ -94,6 +94,8 @@ class APIConstant{
     static let bookingDetailsForCaregiver = "\(bookingBaseURL)/BookingDetailsForCaregiver"
     static let bookingDetailsForCustomer = "\(bookingBaseURL)/BookingDetailsForCustomer"
     static let createDraftBooking = "\(bookingBaseURL)/draft/create"
+    static let getDraftList = "\(bookingBaseURL)/draft/get"
+    static let getDraftDetails = "\(bookingBaseURL)/draft/getbyid"
     static let sendRequestForBookCaregiver = "\(bookingBaseURL)/caregiver_approch"
     static let giverConfirmStartService = "\(bookingBaseURL)/confirm-booking"
     static let cancelStartService = "\(bookingBaseURL)/cancel/caregiverservice"
@@ -102,7 +104,7 @@ class APIConstant{
     static let bookingCancel = "\(bookingBaseURL)/booking_cancel"
     static let getCardVerificationInfo = "\(bookingBaseURL)/appleinfo/get"
     static let setCardVerificationInfo = "\(bookingBaseURL)/appleinfo/set"
-    static let deletebooking = "\(bookingBaseURL)/deletebooking"
+    static let deletebooking = "\(bookingBaseURL)/draft/deletebooking"
     static let serviceInvoice = "\(bookingBaseURL)/service-invoice"
     
     static let getPaypalOrderID = "\(paymentBaseURL)/paypal/create_order_for_wallet"

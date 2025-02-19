@@ -615,11 +615,11 @@ struct BookingFormScreenView: View {
     
     private var BottomButtonView: some View{
         
-        VStack{
-            HStack(alignment: .center,spacing: 40){
+        VStack(spacing:7){
+            HStack(alignment: .center){
                 Text("Save As Draft")
                     .foregroundStyle(.appMain)
-                    .padding(.horizontal,20)
+                    .frame(width: 142)
                     .padding(.vertical,8)
                     .background{
                         RoundedRectangle(cornerRadius: 16)
@@ -627,11 +627,21 @@ struct BookingFormScreenView: View {
                     }
                     .padding(.top,5)
                     .asButton(.press) {
-                        
+                        viewModel.saveToDraft { draftId in
+                            self.viewModel.draftId = draftId
+                            presentAlert(title: "Kryupa", subTitle: "Booking Saved in Draft")
+                            router.dismissScreenStack()
+                            NotificationCenter.default.post(name: .showDraftScreen,
+                                                                            object: nil, userInfo: nil)
+
+                        } alert: { error in
+                            presentAlert(title: "Kryupa", subTitle: error)
+                        }
                     }
+                Spacer()
                 Text("Reset")
                     .foregroundStyle(.appMain)
-                    .padding(.horizontal,20)
+                    .frame(width: 142)
                     .padding(.vertical,8)
                     .background{
                         RoundedRectangle(cornerRadius: 16)
@@ -647,14 +657,16 @@ struct BookingFormScreenView: View {
                         viewModel.dateArray = []
                         viewModel.bookingFor = ""
                         viewModel.genderSelected = ""
-                        viewModel.languageSpeakingSelected = ["English"]
+                        viewModel.languageSpeakingSelected = []
                         viewModel.needServiceInSelected = []
                         viewModel.additionalInfoSelected = []
                         viewModel.additionalSkillsSelected = []
-                        viewModel.yearsOfExperienceSelected = "Any"
+                        viewModel.yearsOfExperienceSelected = ""//"Any"
                     }
             }
+            .padding(.horizontal,20)
             Text("Confirm")
+                .frame(maxWidth:.infinity)
                 .foregroundStyle(.white)
                 .padding(.horizontal,20)
                 .padding(.vertical,8)
@@ -662,6 +674,7 @@ struct BookingFormScreenView: View {
                     RoundedRectangle(cornerRadius: 16)
                 }
                 .padding(.top,5)
+                .padding(.horizontal,20)
                 .asButton(.press) {
                     viewModel.createBooking { bookingId in
                         if viewModel.isRecommended && recommnededCheck() {

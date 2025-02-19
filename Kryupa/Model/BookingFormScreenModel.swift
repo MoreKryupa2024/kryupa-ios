@@ -246,3 +246,68 @@ struct CancelSeriveDetailData {
         yearsOfExprienceInNo = jsonData["years_of_exprience_in_no"] as? String ?? ""
     }
 }
+
+
+// MARK: - Welcome
+struct DraftListModel {
+    let data: [DraftListData]
+    let message: String
+    let status: Bool
+    
+    init(jsondata:[String:Any]) {
+        message = jsondata["message"] as? String ?? ""
+        status = jsondata["status"] as? Bool ?? false
+        data =  (jsondata["data"] as? [[String:Any]] ?? [[String:Any]]()).map{DraftListData(jsonData: $0)}
+    }
+}
+
+// MARK: - Datum
+struct DraftListData {
+    let customerID, draftID, yearOfExp, gender: String
+    let startTime, hours, bookingType, needServiceIn: String
+    let profileID: String
+    let additionalInfo, additionalSkills, dates, lang: [String]
+    let profile: DraftListProfileData
+
+    init(jsonData:[String:Any]) {
+        customerID = jsonData["customer_id"] as? String ?? ""
+        draftID = jsonData["draft_id"] as? String ?? ""
+        yearOfExp = jsonData["year_of_exp"] as? String ?? ""
+        gender = jsonData["gender"] as? String ?? ""
+        startTime = jsonData["start_time"] as? String ?? ""
+        hours = jsonData["hours"] as? String ?? ""
+        bookingType = jsonData["booking_type"] as? String ?? ""
+        needServiceIn = jsonData["need_service_in"] as? String ?? ""
+        profileID = jsonData["profile_id"] as? String ?? ""
+        additionalInfo = jsonData["additional_info"] as? [String] ?? []
+        additionalSkills = jsonData["additional_skills"] as? [String] ?? []
+        dates = (jsonData["dates"] as? [String] ?? []).sorted{$0 < $1}
+        lang = jsonData["lang"] as? [String] ?? []
+        profile = DraftListProfileData(jsonData: jsonData["profile"] as? [String:Any] ?? [String:Any]())
+    }
+}
+
+// MARK: - Profile
+struct DraftListProfileData {
+    let name: String
+    let profilePicture: String
+
+    init(jsonData:[String:Any]) {
+        name = jsonData["name"] as? String ?? ""
+        profilePicture = jsonData["profile_picture"] as? String ?? ""
+    }
+}
+
+
+// MARK: - Welcome
+struct DraftDetailModel {
+    let data: DraftListData
+    let message: String
+    let status: Bool
+    
+    init(jsonData:[String:Any]) {
+        message = jsonData["message"] as? String ?? ""
+        status = jsonData["status"] as? Bool ?? false
+        data =  DraftListData(jsonData: jsonData["data"] as? [String:Any] ?? [String:Any]())
+    }
+}

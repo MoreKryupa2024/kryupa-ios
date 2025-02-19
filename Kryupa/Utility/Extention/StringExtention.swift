@@ -79,7 +79,7 @@ extension String{
     }
     
     func convertDateFormater(beforeFormat: String, afterFormat: String) -> String {
-        print("\(self)--------------------------------server Date")
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = beforeFormat
 
@@ -92,7 +92,7 @@ extension String{
 
         dateFormatter.dateFormat = afterFormat
         let timeStamp = dateFormatter.string(from: date)
-        print("\(timeStamp)--------------------------------converted Date")
+        
         return timeStamp
     }
     

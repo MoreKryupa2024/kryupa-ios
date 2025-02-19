@@ -12,6 +12,7 @@ struct BookingView: View {
     
     var status: String = "Active"
     var bookingData: BookingsListData?
+    var draftListData: DraftListData?
     var statusColor: Color {
         if status == "Cancelled"{
             return .D_3180_C
@@ -47,11 +48,19 @@ struct BookingView: View {
             return .E_0_FFEE
         }
     }
-    var deleteAction:((BookingsListData)->Void)? = nil
+    var deleteAction:((DraftListData)->Void)? = nil
     var payNowAction:((BookingsListData)->Void)? = nil
     
     
     var body: some View {
+        if let bookingData{
+            NormalBookingView
+        } else {
+            DraftView
+        }
+    }
+    
+    private var NormalBookingView: some View{
         VStack(spacing:10){
             HStack(alignment: .top, spacing: 20){
                 ImageLoadingView(imageURL: bookingData?.profilePictureURL ?? "")
@@ -108,24 +117,82 @@ struct BookingView: View {
                             }
                         }
                         Spacer()
+                    }
+                }
+            }
+        }
+        .padding([.vertical,.horizontal],10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .inset(by: 1)
+                .stroke(.E_5_E_5_EA, lineWidth: 1)
+        )
+        .padding(.horizontal, 24)
+    }
+    
+    private var DraftView: some View {
+        VStack(spacing:10){
+            HStack(alignment: .top, spacing: 20){
+                ImageLoadingView(imageURL: draftListData?.profile.profilePicture ?? "")
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(30)
+                    .clipped()
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack {
+                        Text(draftListData?.profile.name ?? "")
+                            .font(.custom(FontContent.besMedium, size: 15))
+                            .foregroundStyle(.appMain)
+                            .lineLimit(1)
+                        
+                        Spacer()
+                        
+                        Text(status)
+                            .padding()
+                            .frame(height: 23)
+                            .font(.custom(FontContent.plusMedium, size: 11))
+                            .foregroundStyle(statusColor)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12).fill(statusBackColor)
+                            )
+                    }
+                    .padding(.bottom,7)
+                    
+                    HStack {
+                        VStack(alignment: .leading, spacing: 3){
+                            if let startDates = draftListData?.dates,let startDateFirst = startDates.first, let endDateFirst = startDates.last{
+                                Text("\(String(startDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d")) - \(String(endDateFirst).convertDateFormater(beforeFormat: "yyyy-MM-dd", afterFormat: "MMM d yyyy"))")
+                                    .font(.custom(FontContent.plusRegular, size: 12))
+                                    .foregroundStyle(._444446)
+                                    .lineLimit(1)
+                            }
+                            
+                            Text("\(draftListData?.needServiceIn ?? "")")
+//                                .lineLimit(status == "Draft" ? 2 : 1)
+                                .font(.custom(FontContent.plusRegular, size: 12))
+                                .foregroundStyle(._444446)
+                            if status == "Pending" && (bookingData?.status ?? "") != "Payment Pending"{
+                                Text(Defaults().userType == AppConstants.SeekCare ? "Awaiting confirmation from caregiver" : "Seeker is waiting for your confirmation.")
+                                    .font(.custom(FontContent.plusRegular, size: 12))
+                                    .foregroundStyle(.FFB_323)
+                            }
+                            if status == "Pending" && (bookingData?.status ?? "") == "Payment Pending" && Defaults().userType == AppConstants.GiveCare{
+                                Text("Awaiting confirmation from careseeker")
+                                    .font(.custom(FontContent.plusRegular, size: 12))
+                                    .foregroundStyle(.FFB_323)
+                            }
+                        }
+                        Spacer()
                         if status == "Draft" {
                             Image("DeleteButton")
                                 .frame(width: 25,height: 25)
                                 .offset(y: 5)
                                 .asButton {
-                                    guard let bookingData else {return}
-                                    deleteAction?(bookingData)
+                                    guard let draftListData else {return}
+                                    deleteAction?(draftListData)
                                 }
                         }
                     }
                 }
-            }
-            if status == "Pending" && (bookingData?.status ?? "") == "Payment Pending" && Defaults().userType == AppConstants.SeekCare{
-                PayNowButton
-                    .asButton {
-                        guard let bookingData else {return}
-                        payNowAction?(bookingData)
-                    }
             }
             
         }

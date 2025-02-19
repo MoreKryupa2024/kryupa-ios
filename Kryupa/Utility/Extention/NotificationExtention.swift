@@ -19,5 +19,6 @@ extension Notification.Name {
     static let setBookingId = Notification.Name("SetBookingId")
     static let setChatScreen = Notification.Name("SetChatScreen")
     static let showWalletScreen = Notification.Name("ShowWalletScreen")
+    static let showDraftScreen = Notification.Name("ShowDraftScreen")
     static let disconnectSockit = Notification.Name("DisconnectSockit")
 }

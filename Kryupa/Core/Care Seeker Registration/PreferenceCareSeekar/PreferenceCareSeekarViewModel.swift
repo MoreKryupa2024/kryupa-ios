@@ -28,7 +28,6 @@ class PreferenceCareSeekarViewModel: ObservableObject{
         }/*else if languageSpeakingSelected.isEmpty{
             return alert("Please Select Speaking Language")
         }*/else{
-            isLoading = true
             var param = parameters
             let personalInfo = parameters["personalInfo"] as? [String:Any] ?? [String:Any]()
             param["preferences"] = [

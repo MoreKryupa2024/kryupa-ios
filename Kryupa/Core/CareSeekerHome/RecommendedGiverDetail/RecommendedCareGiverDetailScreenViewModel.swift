@@ -122,7 +122,8 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     
     func sendRequestForBookCaregiver(bookingId: String){
         let param = ["caregiver_id":giverDetail?.id ?? "",
-                     "booking_id":bookingId]
+                     "booking_id":bookingId,
+                     "draft_id":Defaults().draftId]
         isloading = true
         NetworkManager.shared.sendRequestForBookCaregiver(params:param) { [weak self] result in
             DispatchQueue.main.async {

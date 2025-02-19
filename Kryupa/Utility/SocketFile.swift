@@ -121,7 +121,7 @@ final class SocketSingleClass{
                     "sender":senderId,
                     "recipient":recipientId,
                     "is_action_btn":actionButton,
-                    "date_time": Date().formattedDateString(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    "date_time": Date().formattedDateString(format: "EEE, dd MMM yyyy HH:mm:ss zzz")
                 ])
                 completion(msgData)
             }
@@ -144,7 +144,8 @@ final class SocketSingleClass{
             "id": id,
             "message": message,
             "sender":senderId,
-            "recipient":recipientId
+            "recipient":recipientId,
+            "date_time": Date().formattedDateString(format: "EEE, dd MMM yyyy HH:mm:ss zzz")
         ])
         let param = ["contact_Id":selectedChat.id,
                      "id": id,

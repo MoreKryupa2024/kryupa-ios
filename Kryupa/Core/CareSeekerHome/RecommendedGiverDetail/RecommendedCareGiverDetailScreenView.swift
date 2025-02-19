@@ -62,6 +62,7 @@ struct RecommendedCareGiverDetailScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .task{
+            SocketSingleClass.shared.updateInboxListSockit {}
             viewModel.getCareGiverDetails(giverId: careGiverDetail?.id ?? "", bookingId: viewModel.bookingID)
         }
     }

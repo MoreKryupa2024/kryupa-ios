@@ -9,10 +9,30 @@ import Foundation
 
 class BookingViewModel: ObservableObject{
     @Published var bookingList = [BookingsListData]()
+    @Published var draftList = [DraftListData]()
     @Published var selectedSection = 0
     @Published var isLoading = Bool()
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
+    
+    func getDraftList(){
+        isLoading = true
+        var param : [String : Any] = ["pageNumber":1,
+                                      "pageSize":20]
+        
+        NetworkManager.shared.getDraftList(params: param) { [weak self] result in
+            
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result{
+                case .success(let data):
+                    self?.draftList = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
     
     func getBookings(){
         isLoading = true
@@ -87,13 +107,13 @@ class BookingViewModel: ObservableObject{
     
     func deleteBooking(bookingId:String,alert: @escaping ((String)->Void)){
         isLoading = true
-        let param = ["booking_id":bookingId]
+        let param = ["draft_id":bookingId]
         NetworkManager.shared.deletebooking(params: param) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result{
                 case .success(_):
-                    self?.getBookings()
+                    self?.getDraftList()
                     alert("Draft Deleted Successfully")
                 case .failure(let error):
                     alert(error.getMessage())

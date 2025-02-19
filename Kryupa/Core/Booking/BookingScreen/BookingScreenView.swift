@@ -20,7 +20,7 @@ struct BookingScreenView: View {
                 if Defaults().userType == AppConstants.SeekCare{
                     SegmentView
                         .padding(.bottom,20)
-                    if viewModel.bookingList.isEmpty{
+                    if (viewModel.bookingList.isEmpty && viewModel.selectedSection != 0) || (viewModel.draftList.isEmpty && viewModel.selectedSection == 0) {
                         VStack{
                             Spacer()
                             Image("BookingEmpty")
@@ -75,13 +75,17 @@ struct BookingScreenView: View {
             }
         }
         .task{
-//            viewModel.pageNumber = 1
-            viewModel.getBookings()
+            if viewModel.selectedSection == 0 && Defaults().userType == AppConstants.SeekCare {
+                viewModel.getDraftList()
+//                viewModel.getBookings()
+            } else {
+                viewModel.getBookings()
+            }
         }
     }
     private var SeekerBookingView: some View{
         ScrollView{
-            VStack (spacing:0){
+            VStack (spacing:8){
                 switch viewModel.selectedSection{
                 case 1:
                     ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
@@ -121,11 +125,11 @@ struct BookingScreenView: View {
                             }
                     }
                 case 0:
-                    ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.bookingID) { (index,data) in
-                        BookingView(status: "Draft",bookingData: data,deleteAction: { data in
+                    ForEach(Array(viewModel.draftList.enumerated()),id: \.element.draftID) { (index,data) in
+                        BookingView(status: "Draft",draftListData: data,deleteAction: { data in
                             
                             let primaryAction = UIAlertAction(title: "OK", style: .default) { _ in
-                                viewModel.deleteBooking(bookingId: data.bookingID) { errorStr in
+                                viewModel.deleteBooking(bookingId: data.draftID) { errorStr in
                                     presentAlert(title: "Kryupa", subTitle: errorStr)
                                 }
                             }
@@ -135,7 +139,7 @@ struct BookingScreenView: View {
                             presentAlert(title: "Kryupa", subTitle: "Are you sure you want to delete this booking?", primaryAction: primaryAction, secondaryAction: secondaryAction)
                         })
                         .asButton(.press) {
-                            Defaults().bookingId = data.bookingID
+                            Defaults().draftId = data.draftID
                             NotificationCenter.default.post(name: .showBookingScreen,
                                                             object: nil, userInfo: nil)
                         }
@@ -151,7 +155,7 @@ struct BookingScreenView: View {
     
     private var GiverBookingView: some View{
         ScrollView{
-            VStack (spacing:0){
+            VStack (spacing:8){
                 switch viewModel.selectedSection{
                 case 0:
                     ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
@@ -234,8 +238,13 @@ struct BookingScreenView: View {
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .onChange(of: viewModel.selectedSection, { oldValue, newValue in
-            viewModel.bookingList = []
-            viewModel.getBookings()
+            if newValue == 0 {
+                viewModel.bookingList = []
+                viewModel.getDraftList()
+            }else{
+                viewModel.bookingList = []
+                viewModel.getBookings()
+            }
         })
     }
     

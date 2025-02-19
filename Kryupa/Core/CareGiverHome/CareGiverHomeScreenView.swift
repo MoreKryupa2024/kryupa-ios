@@ -64,6 +64,7 @@ struct CareGiverHomeScreenView: View {
                     //                }
                 }
                 .onAppear{
+                    SocketSingleClass.shared.updateInboxListSockit {}
                     viewModel.getBannerTopData(screenName: AppConstants.CAREGIVERHOMETOPScreenBanner)
                     viewModel.getJobsNearYouList() {
                         if viewModel.jobsNearYou.count == 0 {

@@ -37,7 +37,8 @@ class ChatScreenViewModel: ObservableObject{
     
     func sendRequestForBookCaregiver(){
         let param = ["caregiver_id":selectedChat?.giverId ?? "",
-                     "booking_id":bookingId]
+                     "booking_id":bookingId,
+                     "draft_id":Defaults().draftId]
         isLoading = true
         NetworkManager.shared.sendRequestForBookCaregiver(params:param) { [weak self] result in
             DispatchQueue.main.async {

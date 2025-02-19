@@ -95,6 +95,7 @@ struct JobDetailView: View {
                 }
                 .toolbar(.hidden, for: .navigationBar)
                 .task {
+                    SocketSingleClass.shared.updateInboxListSockit {}
                     if Defaults().userType == AppConstants.SeekCare{
                         viewModel.getJobsDetailForCustomer(approachID: jobID) {}
                     }else{

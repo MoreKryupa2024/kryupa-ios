@@ -28,3 +28,24 @@ struct BookingData {
         id = jsonData["id"] as? String ?? ""
     }
 }
+
+// MARK: - Empty
+struct CreateDraftModel {
+    let data: CreateDraftData
+    let status: Bool
+    let message: String
+    
+    init(jsonData:[String:Any]){
+        status = jsonData["status"] as? Bool ?? false
+        message = jsonData["message"] as? String ?? ""
+        data = CreateDraftData(jsonData: (jsonData["data"] as? [String:Any] ?? [String:Any]()))
+    }
+}
+
+// MARK: - DataClass
+struct CreateDraftData {
+    let id : String
+    init(jsonData:[String:Any]){
+        id = jsonData["draft_id"] as? String ?? ""
+    }
+}

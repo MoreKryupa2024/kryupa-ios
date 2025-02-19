@@ -26,8 +26,10 @@ class BookingFormScreenViewModel: ObservableObject{
     
     @Published var genderSelected: String = String()
     
-    var bookingID: String = Defaults().bookingId
+    var bookingID: String = String()
+    var draftId: String = Defaults().draftId
     @Published var bookingIDData: BookingIDData?
+    @Published var draftDetailData: DraftListData?
     
     @Published var languageSpeakingSelected: [String] = ["English"]
     @Published var needServiceInSelected: [String] = [String]()
@@ -82,6 +84,33 @@ class BookingFormScreenViewModel: ObservableObject{
         }
     }
     
+    func setPrefieldDraftData(){
+        guard let draftDetailData else {
+            return
+        }
+        duration = Int(draftDetailData.hours) ?? 1
+        bookingFor = bookingForList.filter{$0.id == draftDetailData.profileID}.first?.name ?? ""
+        segSelected = draftDetailData.bookingType
+        additionalSkillsSelected = draftDetailData.additionalSkills
+        additionalInfoSelected = draftDetailData.additionalInfo
+        genderSelected = draftDetailData.gender
+        yearsOfExperienceSelected = draftDetailData.yearOfExp
+        languageSpeakingSelected = draftDetailData.lang
+        startTimeValue = dateFormatChangeToDate(dateFormat: "HH:mm:ss",dates: draftDetailData.startTime) ?? Date()
+        needServiceInSelected = [draftDetailData.needServiceIn]
+        if segSelected == "One Time"{
+            let strDate = (draftDetailData.dates.first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            startDateValue = dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",dates: strDate) ?? Date()
+        }else{
+            for i in draftDetailData.dates{
+                let strDate = i.convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                let date = (dateFormatChangeToDate(dateFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", dates: strDate) ?? Date())
+                let comps = Calendar.current.dateComponents([.calendar,.era,.year, .month, .day,.isLeapMonth], from: date)
+                startDateSValue.insert(comps)
+            }
+        }
+    }
+    
     func getBookingForRelativeList(errorAlert: @escaping ((String)-> Void)){
         let param = ["caregiver_id":giverId]
         isloading = true
@@ -94,10 +123,14 @@ class BookingFormScreenViewModel: ObservableObject{
                 case .success(let data):
                     self.isloading = false
                     self.bookingForList = data.data.relationArray
-                    self.bookingFor = self.bookingForList.count > 1 ? "" : self.bookingForList.first?.name ?? ""
+                    self.bookingFor = (self.bookingForList.filter{$0.name == "\(Defaults().firstName) \(Defaults().lastName)".lowercased().capitalized.removingWhitespaces()}).first?.name ?? ""
                     self.needServiceInArray = data.data.pricingArray
                     if (self.bookingID != "") {
                         self.getBookingDetailsById(errorAlert: { errorStr in
+                            errorAlert(errorStr)
+                        })
+                    } else if (self.draftId != "") {
+                        self.getDraftDetailsById(errorAlert: { errorStr in
                             errorAlert(errorStr)
                         })
                     }
@@ -121,6 +154,83 @@ class BookingFormScreenViewModel: ObservableObject{
                 case .failure(let error):
                     self?.isloading = false
                     errorAlert(error.getMessage())
+                }
+            }
+        }
+    }
+    
+    func getDraftDetailsById(errorAlert: @escaping ((String)-> Void)){
+        isloading = true
+        NetworkManager.shared.getDraftDetails(draftId: draftId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.isloading = false
+                    self?.draftDetailData = data.data
+                    self?.setPrefieldDraftData()
+                case .failure(let error):
+                    self?.isloading = false
+                    errorAlert(error.getMessage())
+                }
+            }
+        }
+    }
+    
+    func saveToDraft(action:(@escaping(String)->Void),alert:(@escaping(String)->Void)){
+        
+        dateArray = dateArray.sorted{$0 < $1}
+        
+        let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 15, to: Date(), options: [])!
+        if bookingFor.isEmpty{
+         return alert("Please Select Person for this Booking.")
+        }else if needServiceInSelected.count == 0{
+            return alert("Please Select at list One Service.")
+        }else if segSelected != "One Time" && startDateSValue.count == 0{
+            return alert("Please Select Recurring Dates.")
+        }else if showDatePicker && segSelected == "One Time"{
+            return alert("Please Confirm the Selected Date.")
+        }else if showTimePicker{
+            return alert("Please Confirm the Selected Time.")
+        }else if genderSelected.isEmpty{
+            return alert("Please Select Preferred Service Provider Gender.")
+        }else if languageSpeakingSelected.count == 0{
+            return alert("Please Select Preferred Language.")
+        }else if yearsOfExperienceSelected.isEmpty{
+            return alert("Please Select Year of Experience.")
+        }else if startTimeValue < date && !(Date() < startDateValue) && segSelected == "One Time" {
+            return alert("Ensure the booking time is at least 15 minutes from now.")
+        }else if segSelected != "One Time" && dateArray.contains(dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())) && startTimeValue < date{
+            return alert("Ensure the booking time is at least 15 minutes from now.")
+        }
+        
+        var param: [String: Any] = [
+            "profile_id": bookingForList.filter{$0.name == bookingFor}.first?.id ?? "",
+            "need_service_in": needServiceInSelected.first ?? "",
+            "booking_type": segSelected,
+            "hours": duration,
+            "start_time": dateFormatChange(dateFormat: "HH:mm:ss", dates: startTimeValue),
+            "gender": genderSelected,
+            "year_of_exp": yearsOfExperienceSelected,
+            "language": languageSpeakingSelected,
+            "dates": segSelected == "One Time" ? [dateFormatChange(dateFormat: "yyyy-MM-dd", dates: startDateValue)] : dateArray,
+            "additional_skills": additionalSkillsSelected,
+            "additional_info": additionalInfoSelected,
+            ]
+        
+        if draftId != ""{
+            param["draft_id"] = draftId
+        }
+        
+        
+        isloading = true
+        NetworkManager.shared.createDraftBooking(params:param) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isloading = false
+                switch result{
+                case .success(let data):
+                    action(data.data.id)
+                case .failure(let error):
+                    alert(error.getMessage())
                 }
             }
         }
@@ -174,6 +284,10 @@ class BookingFormScreenViewModel: ObservableObject{
         
         if giverId != ""{
             param["caregiver_id"] = giverId
+        }
+        
+        if draftId != ""{
+            param["draft_id"] = draftId
         }
         
         isloading = true

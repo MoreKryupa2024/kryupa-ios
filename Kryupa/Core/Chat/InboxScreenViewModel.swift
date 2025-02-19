@@ -30,7 +30,10 @@ class InboxScreenViewModel: ObservableObject{
     }
     
     private func setChatScreen(_ notification: Notification){
-        if let data = notification.userInfo, let dataDict = data as? [String:Any] {
+        if let data = notification.userInfo, var dataDict = data as? [String:Any] {
+            let aps = dataDict["aps"] as? [String:Any] ?? [String:Any]()
+            let alert = aps["alert"] as? [String:Any] ?? [String:Any]()
+            dataDict["name"] = alert["title"] as? String ?? ""
             viewModelChat.selectedChat = ChatListData(jsonData: dataDict)
             showChatView = true
         }

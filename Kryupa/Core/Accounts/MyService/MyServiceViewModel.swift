@@ -41,7 +41,7 @@ class MyServiceViewModel: ObservableObject{
         }
     }
     
-    func updateMyService(error: @escaping (String)-> Void){
+    func updateMyService(error: @escaping (String)-> Void,successAction: @escaping (String)-> Void){
         
             if self.areaOfExpertiseSelected.count == 0 {
                 error("Please select at list one area of Expertise")
@@ -57,7 +57,7 @@ class MyServiceViewModel: ObservableObject{
                 self?.isLoading = false
                 switch result{
                 case .success(_):
-                    error("Your Service Updated Successfully")
+                    successAction("Your Service Updated Successfully")
                 case .failure(let errors):
                     error(errors.getMessage())
                 }

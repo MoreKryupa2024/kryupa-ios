@@ -12,7 +12,7 @@ struct ConsumerTabBarScreenView: View {
     
     
     @StateObject var consumerTabBarScreenViewModel = ConsumerTabBarScreenViewModel()
-    let notificatioShowWalletScreen = NotificationCenter.default
+    let notificatioShowDraftListScreen = NotificationCenter.default
     @Environment(\.router) var router
     @State var navWallet:Bool = true
 
@@ -42,8 +42,9 @@ struct ConsumerTabBarScreenView: View {
         }
         
         .task {
-            notificatioShowWalletScreen.addObserver(forName: .showWalletScreen, object: nil, queue: nil,
-                                                    using: self.showWalletScreen)
+            
+            notificatioShowDraftListScreen.addObserver(forName: .showDraftScreen, object: nil, queue: nil,
+                                                    using: self.showDraftScreen)
         }
         .onChange(of: consumerTabBarScreenViewModel.isPresented) { oldValue, newValue in
             if consumerTabBarScreenViewModel.isPresented{
@@ -55,13 +56,9 @@ struct ConsumerTabBarScreenView: View {
         }
     }
     
-    private func showWalletScreen(_ notification: Notification){
-        if navWallet{
-            navWallet = false
-            router.showScreen(.push) { rout in
-                WalletScreenView()
-            }
-        }
+    private func showDraftScreen(_ notification: Notification){
+        consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
+        consumerTabBarScreenViewModel.selectedIndex = 1
     }
     
     private var TabView: some View{
@@ -71,7 +68,7 @@ struct ConsumerTabBarScreenView: View {
             tabbarItem(image: "Home", text: "Home", selected: consumerTabBarScreenViewModel.selectedIndex == 0)
                 .asButton(.press) {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
-                    Defaults().bookingId = ""
+                    Defaults().draftId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 0
 //                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
@@ -80,7 +77,7 @@ struct ConsumerTabBarScreenView: View {
             tabbarItem(image: "Bookings", text: "Bookings", selected: consumerTabBarScreenViewModel.selectedIndex == 1)
                 .asButton(.press) {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
-                    Defaults().bookingId = ""
+                    Defaults().draftId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 1
 //                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
@@ -89,7 +86,7 @@ struct ConsumerTabBarScreenView: View {
             tabbarItem(image: "Jobs", text: "Book now", selected: consumerTabBarScreenViewModel.selectedIndex == 2)
                 .asButton(.press) {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
-                    Defaults().bookingId = ""
+                    Defaults().draftId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 2
 //                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
@@ -97,7 +94,7 @@ struct ConsumerTabBarScreenView: View {
             tabbarItem(image: "Inbox", text: "Inbox", selected: consumerTabBarScreenViewModel.selectedIndex == 3)
                 .asButton(.press) {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
-                    Defaults().bookingId = ""
+                    Defaults().draftId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 3
                 }
             
@@ -105,7 +102,7 @@ struct ConsumerTabBarScreenView: View {
             tabbarItem(image: "account", text: "Account", selected: consumerTabBarScreenViewModel.selectedIndex == 4)
                 .asButton(.press) {
                     consumerTabBarScreenViewModel.bookingViewModel.selectedSection = 0
-                    Defaults().bookingId = ""
+                    Defaults().draftId = ""
                     consumerTabBarScreenViewModel.selectedIndex = 4
 //                    NotificationCenter.default.post(name: .disconnectSockit, object: nil)
                 }
