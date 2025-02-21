@@ -106,7 +106,7 @@ struct HealthInformationSeekerView: View {
             viewModel.allergiesValue = Defaults().healthInfo["allergies"] as? String ?? ""
             viewModel.canHelpInSelect = Defaults().healthInfo["mobility_level"] as? [String] ?? []
             viewModel.medicalConditionSelected = Defaults().healthInfo["other_disease_type"] as? String ?? ""
-            viewModel.medicalConditionDropDownSelected = Defaults().healthInfo["disease_type"] as? [String] ?? []
+//            viewModel.medicalConditionDropDownSelected = Defaults().healthInfo["disease_type"] as? [String] ?? []
         }
     }
     

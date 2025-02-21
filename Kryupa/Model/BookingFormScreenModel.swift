@@ -263,7 +263,7 @@ struct DraftListModel {
 
 // MARK: - Datum
 struct DraftListData {
-    let customerID, draftID, yearOfExp, gender: String
+    let customerID, draftID,caregiverId, yearOfExp, gender: String
     let startTime, hours, bookingType, needServiceIn: String
     let profileID: String
     let additionalInfo, additionalSkills, dates, lang: [String]
@@ -271,6 +271,7 @@ struct DraftListData {
 
     init(jsonData:[String:Any]) {
         customerID = jsonData["customer_id"] as? String ?? ""
+        caregiverId = jsonData["caregiver_id"] as? String ?? ""
         draftID = jsonData["draft_id"] as? String ?? ""
         yearOfExp = jsonData["year_of_exp"] as? String ?? ""
         gender = jsonData["gender"] as? String ?? ""

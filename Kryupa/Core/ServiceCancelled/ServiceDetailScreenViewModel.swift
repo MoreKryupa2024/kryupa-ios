@@ -69,7 +69,7 @@ class ServiceDetailScreenViewModel: ObservableObject{
         }/*else if selectedReasonTwo.isEmpty && selectedReason == "Other"{
             alert("Please Enter Other Reason.")
             return
-        }*/else if reasonDescription.isEmpty && selectedReason == "Other"{
+        }*/else if reasonDescription.isEmpty {
             alert("Please Enter Reason Description.")
             return
         }

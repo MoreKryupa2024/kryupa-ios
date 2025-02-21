@@ -85,7 +85,7 @@ struct BookingScreenView: View {
     }
     private var SeekerBookingView: some View{
         ScrollView{
-            VStack (spacing:8){
+            VStack (spacing:15){
                 switch viewModel.selectedSection{
                 case 1:
                     ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in
@@ -155,7 +155,7 @@ struct BookingScreenView: View {
     
     private var GiverBookingView: some View{
         ScrollView{
-            VStack (spacing:8){
+            VStack (spacing:15){
                 switch viewModel.selectedSection{
                 case 0:
                     ForEach(Array(viewModel.bookingList.enumerated()),id: \.element.id) { (index,data) in

@@ -16,7 +16,7 @@ struct ServiceCancelScreenView: View {
     var body: some View {
         ZStack{
             VStack(spacing:15){
-             HeaderView(title: "Personal Information",showBackButton: true)
+             HeaderView(title: "Cancel Booking",showBackButton: true)
                 ScrollView{
                     ReasonDropdownView
                         .padding(.horizontal,24)
@@ -82,8 +82,12 @@ struct ServiceCancelScreenView: View {
     private var DescriptionView: some View{
         VStack(alignment: .leading, spacing:0,
                content: {
-            Text("Description")
-                .font(.custom(FontContent.plusMedium, size: 17))
+            HStack(spacing:0){
+                Text("Description")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
             
             TextEditor(text: $viewModel.reasonDescription)
                 .frame(height: 120)

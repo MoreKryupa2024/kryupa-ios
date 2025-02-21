@@ -128,6 +128,11 @@ struct BookingFormScreenView: View {
                     .asButton {
                         withAnimation(.bouncy) {
                             viewModel.showDatePicker = true
+                            let date = dateFormatChange(dateFormat: "d MMM", dates: Date())
+                            let selectedDate = dateFormatChange(dateFormat: "d MMM", dates: viewModel.startDateValue)
+                            if date > selectedDate{
+                                viewModel.startDateValue = Date()
+                            }
                         }
                     }
             }
@@ -194,6 +199,11 @@ struct BookingFormScreenView: View {
                     .asButton {
                         withAnimation(.bouncy) {
                             viewModel.showTimePicker = true
+                            
+                            let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 16, to: Date(), options: [])!
+                            if date > viewModel.startTimeValue{
+                                viewModel.startTimeValue = date
+                            }
                         }
                     }
             }

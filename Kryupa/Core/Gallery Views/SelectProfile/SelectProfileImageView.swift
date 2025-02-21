@@ -42,14 +42,14 @@ struct SelectProfileImageView: View {
                             .padding(.top,30)
                             .padding(.horizontal,24)
                         
-                        Image("navBack")
-                            .resizable()
-                            .frame(width: 30,height: 30)
-                            .padding(.top,30)
-                            .padding(.horizontal,24)
-                            .asButton(.press) {
-                                router.dismissScreen()
-                            }
+//                        Image("navBack")
+//                            .resizable()
+//                            .frame(width: 30,height: 30)
+//                            .padding(.top,30)
+//                            .padding(.horizontal,24)
+//                            .asButton(.press) {
+//                                router.dismissScreen()
+//                            }
                     }
                     
                     if let profilePicture = viewModel.profilePicture{

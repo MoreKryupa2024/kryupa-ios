@@ -96,7 +96,7 @@ class BookingFormScreenViewModel: ObservableObject{
         genderSelected = draftDetailData.gender
         yearsOfExperienceSelected = draftDetailData.yearOfExp
         languageSpeakingSelected = draftDetailData.lang
-        startTimeValue = dateFormatChangeToDate(dateFormat: "HH:mm:ss",dates: draftDetailData.startTime) ?? Date()
+        startTimeValue = dateFormatChangeToDate(dateFormat: "yyyy-MM-ddHH:mm:ss",dates: "\(draftDetailData.dates.first ?? "")\(draftDetailData.startTime)") ?? Date()
         needServiceInSelected = [draftDetailData.needServiceIn]
         if segSelected == "One Time"{
             let strDate = (draftDetailData.dates.first ?? "").convertDateFormaterTimeZone(beforeFormat: "yyyy-MM-dd", afterFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -179,7 +179,8 @@ class BookingFormScreenViewModel: ObservableObject{
     func saveToDraft(action:(@escaping(String)->Void),alert:(@escaping(String)->Void)){
         
         dateArray = dateArray.sorted{$0 < $1}
-        
+        let selectedDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: startDateValue)
+        let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
         let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 15, to: Date(), options: [])!
         if bookingFor.isEmpty{
          return alert("Please Select Person for this Booking.")
@@ -187,6 +188,8 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select at list One Service.")
         }else if segSelected != "One Time" && startDateSValue.count == 0{
             return alert("Please Select Recurring Dates.")
+        }else if currentDate > selectedDate && segSelected == "One Time"{
+            return alert("The selected date has already passed. Please choose a future/Current date.")
         }else if showDatePicker && segSelected == "One Time"{
             return alert("Please Confirm the Selected Date.")
         }else if showTimePicker{
@@ -221,6 +224,9 @@ class BookingFormScreenViewModel: ObservableObject{
             param["draft_id"] = draftId
         }
         
+        if giverId != ""{
+            param["caregiver_id"] = giverId
+        }
         
         isloading = true
         NetworkManager.shared.createDraftBooking(params:param) { [weak self] result in
@@ -241,6 +247,8 @@ class BookingFormScreenViewModel: ObservableObject{
         dateArray = dateArray.sorted{$0 < $1}
         
         let date = (Calendar.current as NSCalendar).date(byAdding: .minute, value: 15, to: Date(), options: [])!
+        let selectedDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: startDateValue)
+        let currentDate = dateFormatChange(dateFormat: "yyyy-MM-dd", dates: Date())
         if bookingFor.isEmpty{
          return alert("Please Select Person for this Booking.")
         }else if needServiceInSelected.count == 0{
@@ -249,6 +257,8 @@ class BookingFormScreenViewModel: ObservableObject{
             return alert("Please Select Recurring Dates.")
         }else if showDatePicker && segSelected == "One Time"{
             return alert("Please Confirm the Selected Date.")
+        }else if currentDate > selectedDate && segSelected == "One Time"{
+            return alert("The selected date has already passed. Please choose a future/Current date.")
         }else if showTimePicker{
             return alert("Please Confirm the Selected Time.")
         }else if genderSelected.isEmpty{

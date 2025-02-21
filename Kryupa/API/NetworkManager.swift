@@ -33,7 +33,6 @@ struct APIClient {
         }
         print("URL:- \(endpoint)\n")
         print("Type:- \(method.rawValue)\n")
-        print("parameters:- \(parameters)\n")
         print("Bearer: \(Defaults().accessToken)\n")
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
@@ -43,7 +42,7 @@ struct APIClient {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
 //                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
+                print("parameters:- \(params)\n")
             } catch {
                 completion(.failure(.custom("Failed to encode parameters")))
                 return

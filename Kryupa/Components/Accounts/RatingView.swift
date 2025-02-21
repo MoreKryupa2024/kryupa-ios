@@ -40,7 +40,7 @@ struct RatingView: View {
             Spacer()
         }
         .onAppear{
-            if rating > 1{
+            if rating > 0{
                 for i in 0...(rating-1){
                     starList[i] = true
                 }
