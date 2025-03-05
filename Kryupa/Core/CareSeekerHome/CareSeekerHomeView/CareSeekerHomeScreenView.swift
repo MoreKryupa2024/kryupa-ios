@@ -10,6 +10,7 @@ import SwiftfulUI
 
 struct CareSeekerHomeScreenView: View {
     
+    @State var profilesDownShow = false
     @Environment(\.router) var router
     @StateObject var viewModel = CareSeekerHomeScreenViewModel()
     var showBookingsHistoryScreen = NotificationCenter.default
@@ -34,6 +35,21 @@ struct CareSeekerHomeScreenView: View {
                 VStack(spacing:15){
                     HeaderView()
                     ScrollView {
+                        
+                        let nameArray = viewModel.profileList.map{ $0.name}
+                        DropDownView(selectedValue: viewModel.selecedProfile,
+                                     showDropDown: profilesDownShow,
+                                     values: nameArray) { value in
+                            viewModel.selecedProfile = value
+                            Defaults().profileId = viewModel.profileList.filter{ $0.name == value}.first?.profileId ?? ""
+                            Defaults().profileId2 = viewModel.profileList.filter{ $0.name == value}.first?.id ?? ""
+                            self.viewModel.getRecommandationList()
+                        }onShowValue: {
+                            profilesDownShow = !profilesDownShow
+                        }
+                        .id(viewModel.selecedProfile)
+                        .padding(.horizontal,24)
+                        
                         BannerView(assetsImage: ["customer home top","payBanner"],//,"customer home top 2"],
                                    showIndecator: false,
                                    fromAssets: true,
@@ -97,7 +113,7 @@ struct CareSeekerHomeScreenView: View {
         }
         .onAppear{
             viewModel.pageNumber = 1
-            viewModel.getRecommandationList()
+            viewModel.getProfileList()
 //            viewModel.getBannerBottomData(screenName: AppConstants.CUSTOMERHOMEBOTTOMScreenBanner)
         }
         
@@ -162,7 +178,7 @@ struct CareSeekerHomeScreenView: View {
         }
     }
     
-    private var UpcomingAppointmentsView:some View{
+    private var UpcomingAppointmentsView: some View {
         VStack(spacing:10){
             HStack{
                 Text("Upcoming Appointments")
@@ -236,8 +252,10 @@ struct CareSeekerHomeScreenView: View {
                 }
                 .padding(.top,5)
                 .asButton(.press) {
-                    NotificationCenter.default.post(name: .showBookingScreen,
-                                                                    object: nil, userInfo: nil)
+                    NotificationCenter.default.post(
+                        name: .showBookingScreen,
+                        object: nil,
+                        userInfo: nil)
                 }
         }
     }

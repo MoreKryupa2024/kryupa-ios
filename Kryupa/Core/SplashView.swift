@@ -32,7 +32,6 @@ struct ContentView: View {
             }
         }
         .task {
-            SocketSingleClass.shared.updateInboxListSockit {}
             delayText()
             //12345
             setLobbyScreen.addObserver(forName: .setLobbyScreen, object: nil, queue: nil,

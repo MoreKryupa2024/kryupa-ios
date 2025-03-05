@@ -8,12 +8,13 @@
 import Foundation
 
 protocol RecommendedCareGiverDetailScreenViewModelProtocol: AnyObject{
-    func setBookingId(bookingId: String, amount: String)
+    func setBookingId(bookingId: String,profileId:String, amount: String)
 }
 
 extension RecommendedCareGiverDetailScreenViewModel:RecommendedCareGiverDetailScreenViewModelProtocol{
-    func setBookingId(bookingId: String,amount:String) {
+    func setBookingId(bookingId: String,profileId: String,amount:String) {
         bookingID = bookingId
+        profileID = profileId
         let mainAmount = walletAmountData?.mainAmount ?? 0
         let amount = Double(amount) ?? 0
         
@@ -23,7 +24,7 @@ extension RecommendedCareGiverDetailScreenViewModel:RecommendedCareGiverDetailSc
             self.showPaymentMethodScreen = true
         }else{
             self.isRecommended = false
-            self.sendRequestForBookCaregiver(bookingId: bookingId)
+            self.sendRequestForBookCaregiver(bookingId: bookingId,profileId: profileId)
         }
     }
 }
@@ -31,6 +32,7 @@ extension RecommendedCareGiverDetailScreenViewModel:RecommendedCareGiverDetailSc
 
 class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var bookingID: String = String()
+    @Published var profileID: String = String()
     @Published var showPaymentMethodScreen = false
     var options: [String] = ["Summary","Reviews"]
     var paymentViewModel = PaymentViewModel()
@@ -42,13 +44,6 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
     @Published var giverDetail: CareGiverDetailData?
     @Published var walletAmountData: WalletAmountData?
     @Published var chatData: ChatListData?
-    
-    private func setBookingIds(_ notification: Notification) {
-        if let bookingid = notification.userInfo?["bookingId"] as? String {
-            isRecommended = false
-            sendRequestForBookCaregiver(bookingId: bookingid)
-        }
-    }
     
     func getWalletBalance(){
         NetworkManager.shared.getWallet { [weak self] result in
@@ -120,10 +115,11 @@ class RecommendedCareGiverDetailScreenViewModel: ObservableObject{
         }
     }
     
-    func sendRequestForBookCaregiver(bookingId: String){
-        let param = ["caregiver_id":giverDetail?.id ?? "",
-                     "booking_id":bookingId,
-                     "draft_id":Defaults().draftId]
+    func sendRequestForBookCaregiver(bookingId: String,profileId: String){
+        let param = ["caregiver_id": giverDetail?.id ?? "",
+                     "profile_id": profileId,
+                     "booking_id": bookingId,
+                     "draft_id": Defaults().draftId]
         isloading = true
         NetworkManager.shared.sendRequestForBookCaregiver(params:param) { [weak self] result in
             DispatchQueue.main.async {

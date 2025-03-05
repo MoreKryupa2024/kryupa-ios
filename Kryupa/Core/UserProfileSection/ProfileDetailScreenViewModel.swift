@@ -27,6 +27,7 @@ class ProfileDetailScreenViewModel: ObservableObject {
                     guard let self else{return}
                     self.isloading = false
                     self.profileList = data.data
+//                    self.selecedProfile = self.profileList.filter{ $0.profileId == Defaults().profileId }.first?.name ?? ""
                     if self.profileList.contains(where: { pro in
                         pro.name == (self.selecedProfile)
                     }){
@@ -46,7 +47,7 @@ class ProfileDetailScreenViewModel: ObservableObject {
     
     func deleteProfile(next: @escaping (()->Void)){
         isloading = true
-        NetworkManager.shared.deleteProfile(params: ["profileId": personalDetail?.profileid ?? ""]) { [weak self] result in
+        NetworkManager.shared.deleteProfile(params: ["profileId": personalDetail?.personalinfo.data.profileID ?? ""]) { [weak self] result in
             DispatchQueue.main.async() {
                 switch result{
                 case .success(_):
@@ -61,10 +62,14 @@ class ProfileDetailScreenViewModel: ObservableObject {
     }
     
     func getPersonalDetails(profileName: String){
-        let profileId = profileList.filter{$0.name == selecedProfile}.first?.id ?? ""
+        let profileId = profileList.filter{$0.name == selecedProfile}.first?.profileId ?? ""
         isloading = true
-        NetworkManager.shared.getPersonalDetails(params: ["profileName": profileName,"profileId":profileId]) { [weak self] result in
-            
+        
+        NetworkManager.shared.getPersonalDetails(
+            params:["profile_id": profileId,
+                    "profiledata": "all",
+                    "opraton": "get"]
+        ) { [weak self] result in
             DispatchQueue.main.async() {
                 switch result{
                 case .success(let data):
@@ -75,7 +80,6 @@ class ProfileDetailScreenViewModel: ObservableObject {
                     print(error)
                 }
             }
-            
         }
     }
     

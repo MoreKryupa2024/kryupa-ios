@@ -61,11 +61,19 @@ struct PreferenceCareSeekarView: View {
                                     genderView
                                         .padding([.leading,.trailing],24)
                                     
-                                    /*sepratorView
+                                    sepratorView
                                     
                                     languageSpeakingView
                                         .padding([.leading,.trailing],24)
-                                    */
+                                    
+                                    sepratorView
+                                    
+                                    AdditionalSkillsView
+                                    
+                                    sepratorView
+                                    
+                                    AdditionalInfoView
+                                    
                                     HStack{
                                         previousButton
                                             .asButton(.press) {
@@ -99,6 +107,8 @@ struct PreferenceCareSeekarView: View {
                         viewModel.genderSelected = Defaults().prefereInfo["gender"] as? String ?? ""
                         viewModel.yearsOfExperienceSelected = Defaults().prefereInfo["year_of_experience"] as? String ?? "Any"
                         viewModel.needServiceInSelected = Defaults().prefereInfo["preferredServiceType"] as? [String] ?? []
+                        viewModel.additionalSkillsSelected = Defaults().prefereInfo["preferredSkillType"] as? [String] ?? []
+                        viewModel.additionalInfoSelected = Defaults().prefereInfo["preferredInfoType"] as? [String] ?? []
                     }
                     
                     if viewModel.showPreference{
@@ -115,12 +125,82 @@ struct PreferenceCareSeekarView: View {
         }
     }
     
+    private var AdditionalSkillsView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional Skills")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalSkillsAraay) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalSkillsSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                                if viewModel.additionalSkillsSelected.contains(service){
+                                    viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.additionalSkillsSelected.append(service)
+                                }
+                            viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
+    }
+    
+    private var AdditionalInfoView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional info")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalInfoArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalInfoSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if viewModel.additionalInfoSelected.contains(service){
+                                viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
+                            }else{
+                                viewModel.additionalInfoSelected.append(service)
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
+        .padding(.top,10)
+    }
+    
     func saveDefaultsData(){
         Defaults().prefereInfo = [
             "preferredLanguageType": viewModel.languageSpeakingSelected,
             "gender": viewModel.genderSelected,
             "year_of_experience": viewModel.yearsOfExperienceSelected,
-            "preferredServiceType": viewModel.needServiceInSelected
+            "preferredServiceType": viewModel.needServiceInSelected,
+            "preferredSkillType": viewModel.additionalSkillsSelected,
+            "preferredInfoType": viewModel.additionalInfoSelected,
         ]
     }
     

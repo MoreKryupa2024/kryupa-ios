@@ -44,6 +44,11 @@ struct AddNewProfileScreenView: View {
                             .padding(.horizontal,24)
                             .padding(.top,24)
                         
+                    case 3:
+                        PreferenceView
+                            .padding(.horizontal,24)
+                            .padding(.top,24)
+                        
                     default :
                         PersonalInfoView
                             .padding(.horizontal,24)
@@ -68,6 +73,270 @@ struct AddNewProfileScreenView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
     }
+    
+    private var PreferenceView: some View{
+        VStack(spacing:20){
+            needService
+            
+            yearsofExperienceView
+                .frame(maxWidth: .infinity,alignment: .leading)
+            
+            genderView
+            
+            languageSpeakingView
+            
+            AdditionalSkillsView
+            
+            AdditionalInfoView
+            
+            HStack{
+                Spacer()
+                SaveButton
+                    .asButton(.press) {
+                        viewModel.customerDataChecks { alertStr in
+                            presentAlert(title: "Kryupa", subTitle: alertStr)
+                            selectedSection = 0
+                        } next: { param in
+                            viewModel.param["personalInfo"] = param
+                            viewModel.dataEmergancyChecks(alert: { alertStr in
+                                presentAlert(title: "Kryupa", subTitle: alertStr)
+                                selectedSection = 1
+                            }, next: { param in
+                                viewModel.param["emergencyContact"] = param
+                                viewModel.dataMedicalChecks { alertStr in
+                                    presentAlert(title: "Kryupa", subTitle: alertStr)
+                                    selectedSection = 2
+                                } next: { param in
+                                    var newParam = param
+//                                    newParam["medicalInfoId"] = viewModel.medicalID
+                                    viewModel.param["medicalInfo"] = newParam
+                                    viewModel.preferenceDataCheck { alertStr in
+                                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                                        selectedSection = 3
+                                    } next: { param in
+                                        viewModel.param["preferences"] = param
+                                        if viewModel.profileID == "" {
+                                            viewModel.createProfile {
+                                                router.dismissScreen()
+                                            } errorMsg: { msg in
+                                                presentAlert(title: "Kryupa", subTitle: msg)
+                                            }
+                                        }else{
+                                            updateData()
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                    }
+            }
+        }
+        
+    }
+    
+    private var AdditionalSkillsView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional Skills")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalSkillsAraay) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalSkillsSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                                if viewModel.additionalSkillsSelected.contains(service){
+                                    viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.additionalSkillsSelected.append(service)
+                                }
+                            viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+    }
+    
+    private var AdditionalInfoView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional info")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalInfoArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalInfoSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if viewModel.additionalInfoSelected.contains(service){
+                                viewModel.additionalInfoSelected = viewModel.additionalInfoSelected.filter{ $0 != service}
+                            }else{
+                                viewModel.additionalInfoSelected.append(service)
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.top,10)
+    }
+    
+    
+    private var languageSpeakingView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Language Preference")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.languageSpeakingArray) { languageSpeakingArray in
+                    
+                    if let languageSpeakingArray{
+                        HStack(spacing:0){
+                            CheckBoxView(
+                                isSelected: !viewModel.languageSpeakingSelected.contains(languageSpeakingArray),
+                                name: languageSpeakingArray
+                            )
+                            .opacity(AppConstants.languageSpeakingArray.last == languageSpeakingArray ? 0 : 1)
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                            .asButton(.press) {
+                                if viewModel.languageSpeakingSelected.contains(languageSpeakingArray){
+                                    viewModel.languageSpeakingSelected = viewModel.languageSpeakingSelected.filter{ $0 != languageSpeakingArray}
+                                }else{
+                                    if viewModel.languageSpeakingSelected.count < 5{
+                                        viewModel.languageSpeakingSelected.append(languageSpeakingArray)
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        
+    }
+    private var genderView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Gender Preference")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.genderArray) { gender in
+                    if let gender{
+                        CircleCheckBoxView(
+                            isSelected: gender != viewModel.genderSelected,
+                            name: gender
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            viewModel.genderSelected = gender
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    private var yearsofExperienceView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Caregiver's Experience")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            ZStack{
+                NonLazyVGrid(columns: 3, alignment: .leading, spacing: 10, items: AppConstants.yearsOfExperienceArray) { experience in
+                    if let experience{
+                    
+                        CircleCheckBoxView(
+                            isSelected: viewModel.yearsOfExperienceSelected != experience,
+                            name: experience
+                        )
+                        .asButton(.press) {
+                            
+                            viewModel.yearsOfExperienceSelected = experience
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+    }
+    
+    private var needService: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Need Service In")
+                Text("*")
+                    .foregroundStyle(.red)
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 1, alignment: .leading, spacing: 5, items: AppConstants.needServiceInArray) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.needServiceInSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                            if viewModel.needServiceInSelected.contains(service){
+                                viewModel.needServiceInSelected = viewModel.needServiceInSelected.filter{ $0 != service}
+                            }else{
+                                viewModel.needServiceInSelected.append(service)
+                            }
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        
+    }
+    
     private func setChatScreen(_ notification: Notification){
         router.dismissScreenStack()
     }
@@ -86,7 +355,7 @@ struct AddNewProfileScreenView: View {
     }
     
     
-    private var mobilityLevelView: some View{
+    /*private var mobilityLevelView: some View{
         VStack(alignment: .leading){
             HStack(spacing:0){
                 Text("Need Help In")
@@ -115,7 +384,7 @@ struct AddNewProfileScreenView: View {
                 }
             }
         }
-    }
+    }*/
     
     private var medicalConditionDropdownView: some View{
         VStack(alignment: .leading, spacing:0,
@@ -140,7 +409,6 @@ struct AddNewProfileScreenView: View {
                 
         })
         .padding(.bottom,-10)
-//        .padding(.top,10)
     }
     
     private var MedicalInfoView: some View{
@@ -169,31 +437,26 @@ struct AddNewProfileScreenView: View {
                 showRed: false
             )
             
-            mobilityLevelView
-            
+//            mobilityLevelView
             
             HStack{
-                
                 Spacer()
-                SaveButton
-                    .asButton(.press) {
-                        viewModel.dataMedicalChecks { alertStr in
-                            presentAlert(title: "Kryupa", subTitle: alertStr)
-                        } next: { param in
-                            
-                            if viewModel.profileID == "" {
-                                viewModel.param["mediaclInfo"] = param
-                                viewModel.createProfile {
-                                    router.dismissScreen()
-                                } errorMsg: { msg in
-                                    presentAlert(title: "Kryupa", subTitle: msg)
-                                }
-                            }
-                            else {
-                                updateData()
+                if viewModel.profileID == "" {
+                    NextButton
+                        .asButton(.press) {
+                            viewModel.dataMedicalChecks { alertStr in
+                                presentAlert(title: "Kryupa", subTitle: alertStr)
+                            } next: { param in
+                                viewModel.param["medicalInfo"] = param
+                                selectedSection = selectedSection + 1
                             }
                         }
-                    }
+                }else{
+                    SaveButton
+                        .asButton(.press) {
+                            updateData()
+                        }
+                }
             }
         })
     }
@@ -201,22 +464,31 @@ struct AddNewProfileScreenView: View {
     func updateData(){
         viewModel.customerDataChecks { alertStr in
             presentAlert(title: "Kryupa", subTitle: alertStr)
+            selectedSection = 0
         } next: { param in
             viewModel.param["personalInfo"] = param
             viewModel.dataEmergancyChecks(alert: { alertStr in
                 presentAlert(title: "Kryupa", subTitle: alertStr)
+                selectedSection = 1
             }, next: { param in
                 viewModel.param["emergencyContact"] = param
                 viewModel.dataMedicalChecks { alertStr in
                     presentAlert(title: "Kryupa", subTitle: alertStr)
+                    selectedSection = 2
                 } next: { param in
                     var newParam = param
                     newParam["medicalInfoId"] = viewModel.medicalID
-                    viewModel.param["mediaclInfo"] = newParam
-                    viewModel.updateProfile {
-                        router.dismissScreen()
-                    } errorMsg: { error in
-                        presentAlert(title: "Kryupa", subTitle: error)
+                    viewModel.param["medicalInfo"] = newParam
+                    viewModel.preferenceDataCheck { alertStr in
+                        presentAlert(title: "Kryupa", subTitle: alertStr)
+                        selectedSection = 4
+                    } next: { param in
+                        viewModel.param["preferences"] = param
+                        viewModel.updateProfile {
+                            router.dismissScreen()
+                        } errorMsg: { error in
+                            presentAlert(title: "Kryupa", subTitle: error)
+                        }
                     }
                 }
             })
@@ -563,9 +835,11 @@ struct AddNewProfileScreenView: View {
                                 .frame(height: 48)
                                 .offset(y:5)
                         }
-                        .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                        .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                             if !zipCodeCanEdit{
                                 self.zipCodeCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty)
+                            }else{
+                                zipCodeCanEdit = false
                             }
                         }
                     
@@ -577,9 +851,11 @@ struct AddNewProfileScreenView: View {
                             .frame(height: 48)
                             .offset(y:5)
                         }
-                        .onChange(of: viewModel.personalInfoData.city) { oldValue, newValue in
+                        .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                             if !cityCanEdit{
                                 self.cityCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty)
+                            }else{
+                                cityCanEdit = false
                             }
                         }
                     
@@ -600,9 +876,11 @@ struct AddNewProfileScreenView: View {
                         .frame(height: 48)
                         .offset(y:5)
                     }
-                    .onChange(of: viewModel.personalInfoData.state) { oldValue, newValue in
+                    .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                         if !stateCanEdit{
                             self.stateCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty)
+                        }else{
+                            stateCanEdit = false
                         }
                     }
                 
@@ -614,9 +892,11 @@ struct AddNewProfileScreenView: View {
                         .frame(height: 48)
                         .offset(y:5)
                     }
-                    .onChange(of: viewModel.personalInfoData.country) { oldValue, newValue in
+                    .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                         if !CountryCanEdit{
                             self.CountryCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty)
+                        }else{
+                            CountryCanEdit = false
                         }
                     }
                 
@@ -773,6 +1053,11 @@ struct AddNewProfileScreenView: View {
             SegmentTextView(title: "Medical", select: selectedSection == 2)
                 .asButton {
                     selectedSection = 2
+                }
+            
+            SegmentTextView(title: "Preference", select: selectedSection == 3)
+                .asButton {
+                    selectedSection = 3
                 }
         }
         .padding(2)

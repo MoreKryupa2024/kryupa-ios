@@ -13,6 +13,7 @@ struct ReviewModel: Codable {
     let message: String?
     let data: [ReviewData]
     let pageNumber, pageLimit: Int?
+    
 }
 
 // MARK: - Datum

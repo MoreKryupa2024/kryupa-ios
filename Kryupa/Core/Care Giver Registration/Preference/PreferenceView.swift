@@ -52,7 +52,7 @@ struct PreferenceView: View {
                                 VStack(spacing: 20,
                                        content: {
                                     
-                                    CanHelpInView
+//                                    CanHelpInView
                                     
                                     distanceView
                                     
@@ -88,7 +88,7 @@ struct PreferenceView: View {
                         .toolbar(.hidden, for: .navigationBar)
                     }
                     .task {
-                        viewModel.preferenceListData.canHelpIn = Defaults().prefereInfo["mobility_level"] as? [String] ?? []
+//                        viewModel.preferenceListData.canHelpIn = Defaults().prefereInfo["mobility_level"] as? [String] ?? []
                         viewModel.languageSpeakingSelected = Defaults().prefereInfo["language"] as? [String] ?? []
                         viewModel.preferenceListData.distance = Defaults().prefereInfo["distance"] as? String ?? ""
                         viewModel.getDistanceArray()
@@ -109,7 +109,7 @@ struct PreferenceView: View {
     
     func saveDefaultsData(){
         Defaults().prefereInfo = [
-            "mobility_level": viewModel.preferenceListData.canHelpIn,
+//            "mobility_level": viewModel.preferenceListData.canHelpIn,
             "language": viewModel.languageSpeakingSelected,
             "distance": viewModel.preferenceListData.distance ?? ""
         ]
@@ -153,7 +153,7 @@ struct PreferenceView: View {
         
     }
     
-    private var CanHelpInView: some View{
+    /*private var CanHelpInView: some View{
         
         VStack(alignment: .leading){
             HStack(spacing:0){
@@ -183,7 +183,7 @@ struct PreferenceView: View {
                 }
             }
         }
-    }
+    }*/
     
     private var languageSpeakingView: some View{
         

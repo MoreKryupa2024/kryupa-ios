@@ -21,11 +21,12 @@ struct ProfileListModel {
 }
 
 struct Profile {
-    let id: String
+    let id,profileId: String
     let name: String
     
     init(jsonData:[String:Any]){
         id = jsonData["id"] as? String ?? ""
+        profileId = jsonData["profile_id"] as? String ?? ""
         name = jsonData["name"] as? String ?? ""
     }
 }

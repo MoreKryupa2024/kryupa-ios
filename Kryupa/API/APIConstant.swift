@@ -16,30 +16,34 @@ struct APIConstants {
 
 class APIConstant{
     
+    //MARK: Base URL's
     static let stagingbaseURL = "https://staging.wahinnovations.in"//
     static let baseURL = "https://newapi.wahinnovations.in"
+    
     //MARK: Server URL's Strat
-    static let authBaseURL = "\(baseURL)/apis/auth"
+    static let authBaseURL = "\(stagingbaseURL)/apis/auth"
     
-    static let communicationBaseURL = "\(baseURL)/apis/communication"
+    static let communicationBaseURL = "\(stagingbaseURL)/apis/communication"
     
-    static let chatURL = "\(baseURL)/"
+    static let chatURL = "\(stagingbaseURL)/"
     
-    static let paymentBaseURL = "\(baseURL)/apis/payment"
+    static let paymentBaseURL = "\(stagingbaseURL)/apis/payment"
     
-    static let bookingBaseURL = "\(baseURL)/apis/booking"
+    static let bookingBaseURL = "\(stagingbaseURL)/apis/booking"
     
-    static let userBaseURL = "\(baseURL)/apis/user"
+    static let userBaseURL = "\(stagingbaseURL)/apis/user"
     
-    static let adminBaseURL = "\(baseURL)/apis/admin"
-    
-    static let payment = "\(baseURL)/apis/payment"
+    static let adminBaseURL = "\(stagingbaseURL)/apis/admin"
     //MARK: Server URL's End
     
+    
+    //MARK: Auth API's
     static let sendOTP = "\(authBaseURL)/send_otp"
     static let googleSignup = "\(authBaseURL)/authenticate"
     static let activateAccount = "\(authBaseURL)/authenticate/activate"
     
+    //MARK: User API's
+    static let profileUpdate = "\(userBaseURL)/customer/profile/add_profile"
     static let getAddress = "\(userBaseURL)/zp"
     static let caregiverSvcAct = "\(userBaseURL)/home/caregiverSvcAct"
     static let customerSvcAct = "\(userBaseURL)/home/customerSvcAct"
@@ -49,7 +53,7 @@ class APIConstant{
     static let getProfile = "\(userBaseURL)/customer/account/get_profile"
     static let profileList = "\(userBaseURL)/customer/account/profile_list"
     static let createProfile = "\(userBaseURL)/customer/account/create_profile"
-    static let getPersonalDetails = "\(userBaseURL)/customer/account/get_personal_details"
+    static let getPersonalDetails = "\(userBaseURL)/customer/profile/id_opration"
     static let updateProfile = "\(userBaseURL)/customer/account/update_profile"
     static let deleteProfile = "\(userBaseURL)/customer/account/delete_profile"
     static let updateProfilePicSeeker = "\(userBaseURL)/customer/account/update_profile_pic"
@@ -82,6 +86,8 @@ class APIConstant{
     static let updateMyService = "\(userBaseURL)/caregiver/account/Update_my_service"
     static let deactivateAccount = "\(userBaseURL)/account/deactivate"
 
+    
+    //MARK: Booking API's
     static let getRelativeList = "\(bookingBaseURL)/booking_for_dropdown"
     static let createBooking = "\(bookingBaseURL)/createBooking"
     static let findCareGiverBookingID = "\(bookingBaseURL)/find_caregiver"
@@ -107,6 +113,7 @@ class APIConstant{
     static let deletebooking = "\(bookingBaseURL)/draft/deletebooking"
     static let serviceInvoice = "\(bookingBaseURL)/service-invoice"
     
+    //MARK: Payment API's
     static let getPaypalOrderID = "\(paymentBaseURL)/paypal/create_order_for_wallet"
     static let confirmPaypalOrderID = "\(paymentBaseURL)/paypal/capture_order"
     static let getAllTransaction = "\(paymentBaseURL)/transaction/get_all_transaction"
@@ -116,8 +123,18 @@ class APIConstant{
     static let getOrderInvoice = "\(paymentBaseURL)/paypal/order_invoice"
     static let OrderList = "\(paymentBaseURL)/payment_history/Order_list"
     static let applePayPayment = "\(paymentBaseURL)/apple/applepay"
+    //Stripe
+    static let stripeCreateSetupIntent = "\(paymentBaseURL)/stripe/create-setup-intent"
+    static let stripeCreateCustomer = "\(paymentBaseURL)/stripe/create-customer"
+    static let stripeCharge = "\(paymentBaseURL)/stripe/charge"
+    static let stripeCardList = "\(paymentBaseURL)/stripe/cardDetails"
+    static let payForService = "\(paymentBaseURL)/service/pay-amount"
+    static let createBankAccount = "\(paymentBaseURL)/account/create"
+    static let transferAmountToAccount = "\(paymentBaseURL)/withdraw/tranferdata"
+    static let transferAmountToStripe = "\(paymentBaseURL)/withdraw/amount"
+    static let deleteStripeCard = "\(paymentBaseURL)/stripe/deleteCard"
     
-    
+    //MARK: Communication API's
     static let getMeetingToken = "\(communicationBaseURL)/meeting/zoom_session_token"
     static let getChatHistory = "\(communicationBaseURL)/chat/get_conversation"
     static let createConversation = "\(communicationBaseURL)/chat/create_conversation"
@@ -127,20 +144,10 @@ class APIConstant{
     static let chatVideoCall = "\(communicationBaseURL)/vido_call/start"
     static let chatVideoCallRecieve = "\(communicationBaseURL)/vido_call/recieve"
     
+    //MARK: Admin API's
     static let getBannerUrls = "\(adminBaseURL)/get_banner_urls"
     static let getDistanceArray = "\(adminBaseURL)/distance/get"
     static let logout = "\(authBaseURL)/authenticate/logout"
-    
-    //Stripe
-    static let stripeCreateSetupIntent = "\(payment)/stripe/create-setup-intent"
-    static let stripeCreateCustomer = "\(payment)/stripe/create-customer"
-    static let stripeCharge = "\(payment)/stripe/charge"
-    static let stripeCardList = "\(payment)/stripe/cardDetails"
-    static let payForService = "\(payment)/service/pay-amount"
-    static let createBankAccount = "\(payment)/account/create"
-    static let transferAmountToAccount = "\(payment)/withdraw/tranferdata"
-    static let transferAmountToStripe = "\(payment)/withdraw/amount"
-    static let deleteStripeCard = "\(payment)/stripe/deleteCard"
     
     //Apple pay
     static let setApplePayStatus = "https://v9hhx3kk-3000.inc1.devtunnels.ms/status/update"

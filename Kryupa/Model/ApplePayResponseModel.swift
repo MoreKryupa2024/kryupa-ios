@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApplePayModel: Codable {
+struct ApplePayModel {
     let success: Bool
     let message: String
     
@@ -17,7 +17,7 @@ struct ApplePayModel: Codable {
     }
 }
 
-struct CardVerificationModel: Codable {
+struct CardVerificationModel {
     let status: Bool
     let message: String
     let data: [String]

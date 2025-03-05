@@ -37,7 +37,8 @@ class BookingViewModel: ObservableObject{
     func getBookings(){
         isLoading = true
         var param : [String : Any] = ["pageNumber":1,
-                                      "pageSize":20]
+                                      "pageSize":20,
+                                      "profile_id":Defaults().profileId2]
        
         
         if Defaults().userType == AppConstants.SeekCare{

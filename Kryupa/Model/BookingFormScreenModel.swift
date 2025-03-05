@@ -51,11 +51,12 @@ struct PricingArray {
 
 // MARK: - Datum
 struct RelativeDataModel {
-    let id, name: String
+    let id,profileId, name: String
     
     init(jsonData:[String:Any]){
         name = jsonData["name"] as? String ?? ""
         id = jsonData["id"] as? String ?? ""
+        profileId = jsonData["profile_id"] as? String ?? ""
     }
 }
 

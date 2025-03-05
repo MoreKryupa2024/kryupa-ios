@@ -40,7 +40,7 @@ struct ProfileDetailScreenView: View {
                         .id(viewModel.selecedProfile)
                         AddNewButton
                             .asButton(.press) {
-                                if viewModel.profileList.count < 5{
+                                if viewModel.profileList.count < 50{
                                     router.showScreen(.push) { rout in
                                         AddNewProfileScreenView()
                                     }
@@ -95,36 +95,52 @@ struct ProfileDetailScreenView: View {
             .padding(.bottom,5)
             
 //            TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
-            TitleTextView(title: "Language:", value: viewModel.personalDetail?.language ?? "")
-            TitleTextView(title: "DOB:", value: viewModel.personalDetail?.dob!.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM,dd YYYY") ?? "")
+            TitleTextView(title: "Language:", value: viewModel.personalDetail?.personalinfo.data.language ?? "")
+            TitleTextView(title: "DOB:", value: viewModel.personalDetail?.personalinfo.data.dob.convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM-dd-YYYY") ?? "")
         }
     }
     
     func convertPersonalDetailModelToAddNewProfileModel() -> AddNewProfileScreenViewModel{
         let viewModelAddNewProfile = AddNewProfileScreenViewModel()
-        viewModelAddNewProfile.name = viewModel.personalDetail?.emergencycontact?.relativeName ?? ""
+        viewModelAddNewProfile.name = viewModel.personalDetail?.emergencyContact.data.relativeName ?? ""
         
-        viewModelAddNewProfile.email = viewModel.personalDetail?.emergencycontact?.relativeEmail ?? ""
+        viewModelAddNewProfile.email = viewModel.personalDetail?.emergencyContact.data.relativeEmail ?? ""
         
-        viewModelAddNewProfile.relation = viewModel.personalDetail?.emergencycontact?.relation ?? ""
+        viewModelAddNewProfile.relation = viewModel.personalDetail?.emergencyContact.data.relation ?? ""
 
-        viewModelAddNewProfile.number = viewModel.personalDetail?.emergencycontact?.relativeMobileNo ?? ""
+        viewModelAddNewProfile.number = viewModel.personalDetail?.emergencyContact.data.relativeMobileNo ?? ""
 
-        viewModelAddNewProfile.relationPersonal = viewModel.personalDetail?.relation ?? ""
+        viewModelAddNewProfile.relationPersonal = viewModel.personalDetail?.personalinfo.data.relation ?? ""
         
         viewModelAddNewProfile.dateOfBirthSelected = true
-        viewModelAddNewProfile.date = dateFormatChangeToDate(dateFormat: "YYYY-MM-dd", dates: (viewModel.personalDetail?.dob ?? "")) ?? Date()
+        viewModelAddNewProfile.date = dateFormatChangeToDate(dateFormat: "YYYY-MM-dd", dates: (viewModel.personalDetail?.personalinfo.data.dob ?? "")) ?? Date()
+        viewModelAddNewProfile.needServiceInSelected = viewModel.personalDetail?.preferences.data.preferredServiceType ?? []
+        viewModelAddNewProfile.yearsOfExperienceSelected = viewModel.personalDetail?.preferences.data.yearOfExperience ?? ""
+        viewModelAddNewProfile.genderSelected = viewModel.personalDetail?.preferences.data.gender ?? ""
+        viewModelAddNewProfile.languageSpeakingSelected = viewModel.personalDetail?.preferences.data.preferredLangType ?? []
+        viewModelAddNewProfile.additionalSkillsSelected = viewModel.personalDetail?.preferences.data.preferredSkillType ?? []
+        viewModelAddNewProfile.additionalInfoSelected = viewModel.personalDetail?.preferences.data.preferredInfoType ?? []
         
-        let personalInfo = PersonalInfo(name: viewModel.personalDetail?.firstname,lastName: viewModel.personalDetail?.lastname, language: viewModel.personalDetail?.language, dob: viewModel.personalDetail?.dob, gender: viewModel.personalDetail?.gender, address: viewModel.personalDetail?.address, city: viewModel.personalDetail?.city, state: viewModel.personalDetail?.state,postalCode: viewModel.personalDetail?.zipcode, country: viewModel.personalDetail?.country)
+        let personalInfo = PersonalInfo(
+            name: viewModel.personalDetail?.personalinfo.data.firstname,
+            lastName: viewModel.personalDetail?.personalinfo.data.lastname,
+            language: viewModel.personalDetail?.personalinfo.data.language,
+            dob: viewModel.personalDetail?.personalinfo.data.dob,
+            gender: viewModel.personalDetail?.personalinfo.data.gender,
+            address: viewModel.personalDetail?.personalinfo.data.address,
+            city: viewModel.personalDetail?.personalinfo.data.city,
+            state: viewModel.personalDetail?.personalinfo.data.state,
+            postalCode: viewModel.personalDetail?.personalinfo.data.zipcode,
+            country: viewModel.personalDetail?.personalinfo.data.country)
 
         viewModelAddNewProfile.personalInfoData = personalInfo
-        viewModelAddNewProfile.medicalConditionSelected = viewModel.personalDetail?.medicalinfo?.otherDisease ?? ""
-        viewModelAddNewProfile.medicalConditionDropDownSelected = viewModel.personalDetail?.medicalinfo?.diseaseTypes ?? [""]
-        viewModelAddNewProfile.canHelpInSelect = viewModel.personalDetail?.canHelpIn ?? []
-        viewModelAddNewProfile.allergiesValue = viewModel.personalDetail?.medicalinfo?.allergies ?? ""
+        viewModelAddNewProfile.medicalConditionSelected = viewModel.personalDetail?.medicalinfo.data.otherDiseaseType ?? ""
+        viewModelAddNewProfile.medicalConditionDropDownSelected = viewModel.personalDetail?.medicalinfo.data.diseaseType ?? [""]
+//        viewModelAddNewProfile.canHelpInSelect = viewModel.personalDetail?.medicalinfo.data.canHelpIn ?? []
+        viewModelAddNewProfile.allergiesValue = viewModel.personalDetail?.medicalinfo.data.allergies ?? ""
 
-        viewModelAddNewProfile.profileID = viewModel.personalDetail?.profileid ?? ""
-        viewModelAddNewProfile.medicalID = viewModel.personalDetail?.medicalinfo?.medicalID ?? ""
+        viewModelAddNewProfile.profileID = viewModel.personalDetail?.personalinfo.data.profileID ?? ""
+//        viewModelAddNewProfile.medicalID = viewModel.personalDetail?.medicalinfo.data.medicalID ?? ""
 
         return viewModelAddNewProfile
     }
@@ -160,9 +176,9 @@ struct ProfileDetailScreenView: View {
             .padding(.bottom,5)
             
             
-            TitleTextView(title: "Name:", value: viewModel.personalDetail?.emergencycontact?.relativeName ?? "")
-            TitleTextView(title: "Phone number:", value: "+1 \(viewModel.personalDetail?.emergencycontact?.relativeMobileNo ?? "")")
-            TitleTextView(title: "Relation:", value: viewModel.personalDetail?.emergencycontact?.relation ?? "")
+            TitleTextView(title: "Name:", value: viewModel.personalDetail?.emergencyContact.data.relativeName ?? "")
+            TitleTextView(title: "Phone number:", value: "+1 \(viewModel.personalDetail?.emergencyContact.data.relativeMobileNo ?? "")")
+            TitleTextView(title: "Relation:", value: viewModel.personalDetail?.emergencyContact.data.relation ?? "")
             
         }
     }
@@ -197,7 +213,7 @@ struct ProfileDetailScreenView: View {
                                 .stroke(.AEAEB_2, lineWidth: 1)
                         )
                 }else{
-                    ImageLoadingView(imageURL: viewModel.personalDetail?.profilePictureUrl ?? "")
+                    ImageLoadingView(imageURL: viewModel.personalDetail?.personalinfo.data.profilePictureURL ?? "")
                         .frame(width: 68, height: 68)
                         .clipShape(.rect(cornerRadius: 34))
                         .clipped()
@@ -234,7 +250,7 @@ struct ProfileDetailScreenView: View {
                     print(image)
                     
                     if let imageData = image.jpegData(compressionQuality: 0){
-                        viewModel.uploadProfilePic(profileID: viewModel.personalDetail?.profileid ?? "", file: imageData, fileName: "seeker_image.png") {
+                        viewModel.uploadProfilePic(profileID: viewModel.personalDetail?.personalinfo.data.profileID ?? "", file: imageData, fileName: "seeker_image.png") {
                             print("success")
                             selectedImage = image
                         }
@@ -243,7 +259,7 @@ struct ProfileDetailScreenView: View {
             }
             
             VStack(alignment: .leading, spacing:5){
-                Text(viewModel.personalDetail?.profileName ?? "")
+                Text(viewModel.personalDetail?.personalinfo.data.name ?? "")
                     .font(.custom(FontContent.besMedium, size: 20))
                     .foregroundStyle(.appMain)
                 

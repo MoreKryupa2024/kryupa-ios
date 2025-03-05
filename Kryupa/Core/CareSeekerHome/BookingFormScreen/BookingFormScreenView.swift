@@ -686,22 +686,30 @@ struct BookingFormScreenView: View {
                 .padding(.top,5)
                 .padding(.horizontal,20)
                 .asButton(.press) {
+                    let profileId = viewModel.bookingForList.filter{$0.name == viewModel.bookingFor}.first?.profileId ?? ""
                     viewModel.createBooking { bookingId in
                         if viewModel.isRecommended && recommnededCheck() {
                             let needServiceInSelected = viewModel.needServiceInArray.filter{$0.service == viewModel.needServiceInSelected.first!}.first!
-                            let amount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
-                            
-                            delegate?.setBookingId(bookingId: bookingId, amount: "\(amount)")
+                            let serviceAmount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
+                            let amount = (serviceAmount * Double(viewModel.duration))
+                            delegate?.setBookingId(
+                                bookingId: bookingId,
+                                profileId: profileId,
+                                amount: "\(amount)")
                             router.dismissScreen()
                         }else{
                             viewModel.bookingID = bookingId
                             
                             let careGiverNearByCustomerScreenViewModel = CareGiverNearByCustomerScreenViewModel()
                             let needServiceInSelected = viewModel.needServiceInArray.filter{$0.service == viewModel.needServiceInSelected.first!}.first!
-                            let amount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
+                            let serviceAmount = calculatePercentage(of: Double(needServiceInSelected.amount) ?? 0, percentage: 2)
+                            let amount = (serviceAmount * Double(viewModel.duration))
                             careGiverNearByCustomerScreenViewModel.amount = "\(amount)"
                             router.showScreen(.push) { rout in
-                                CareGiverNearByCustomerScreenView(bookingID: bookingId,viewModel:careGiverNearByCustomerScreenViewModel)
+                                CareGiverNearByCustomerScreenView(
+                                    bookingID: bookingId,
+                                    profileId:profileId,
+                                    viewModel:careGiverNearByCustomerScreenViewModel)
                             }
                         }
                     } alert: { error in

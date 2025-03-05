@@ -26,39 +26,15 @@ struct CustomerHomeData {
     let upcommingAppointments, pastAppointments: [BookingsListData]
 
     init(jsonData:[String:Any]) {
-        self.recommendedCaregiver = (jsonData["recommended_caregiver"] as? [[String:Any]] ?? [[String:Any]]()).map{RecommendedCaregiverData(jsonData: $0)}
-        self.upcommingAppointments = (jsonData["upcomming_appointments"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsonData: $0)}
-        self.pastAppointments = (jsonData["past_appointments"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsonData: $0)}
+        
+        let recomdedcaregiverListData = (jsonData["recomdedcaregiverList"] as? [String:Any] ?? [String:Any]())
+        let upcomingAppointmentData = (jsonData["upcomingAppointment"] as? [String:Any] ?? [String:Any]())
+        let pastAppointmentData = (jsonData["pastAppointment"] as? [String:Any] ?? [String:Any]())
+        self.recommendedCaregiver = (recomdedcaregiverListData["data"] as? [[String:Any]] ?? [[String:Any]]()).map{RecommendedCaregiverData(jsonData: $0)}
+        self.upcommingAppointments = (upcomingAppointmentData["data"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsonData: $0)}
+        self.pastAppointments = (pastAppointmentData["data"] as? [[String:Any]] ?? [[String:Any]]()).map{BookingsListData(jsonData: $0)}
     }
 }
-
-// MARK: - Appointment
-//struct AppointmentData {
-//    let id, caregiverID, startDate, endDate,customerID: String
-//    let startTime, endTime, bookingID, status: String
-//    let name: String
-//    let profilePictureURL: String
-//    let relation: String
-//    let price: Double
-//    let arrayAgg: [String]
-//
-//    init(jsonData:[String:Any]) {
-//        id = jsonData["id"] as? String ?? ""
-//        caregiverID = jsonData["caregiver_id"] as? String ?? ""
-//        customerID = jsonData["customer_id"] as? String ?? ""
-//        startDate = jsonData["start_date"] as? String ?? ""
-//        endDate = jsonData["end_date"] as? String ?? ""
-//        startTime = jsonData["start_time"] as? String ?? ""
-//        endTime = jsonData["end_time"] as? String ?? ""
-//        bookingID = jsonData["booking_id"] as? String ?? ""
-//        status = jsonData["status"] as? String ?? ""
-//        name = jsonData["name"] as? String ?? ""
-//        profilePictureURL = jsonData["profile_picture_url"] as? String ?? ""
-//        relation = jsonData["relation"] as? String ?? ""
-//        price = jsonData["price"] as? Double ?? 0.0
-//        arrayAgg = jsonData["array_agg"] as? [String] ?? []
-//    }
-//}
 
 // MARK: - RecommendedCaregiver
 struct RecommendedCaregiverData {

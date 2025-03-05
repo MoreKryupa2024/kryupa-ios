@@ -9,6 +9,8 @@ import Foundation
 
 @MainActor
 class CareSeekerHomeScreenViewModel: ObservableObject{
+    @Published var profileList: [Profile] = []
+    @Published var selecedProfile = ""
     @Published var isloading: Bool = Bool()
     @Published var pagination: Bool = true
     @Published var pageNumber = 1
@@ -20,13 +22,42 @@ class CareSeekerHomeScreenViewModel: ObservableObject{
     
     @Published var serviceStartData: [ServiceStartData] = []
     
+    func getProfileList(){
+        isloading = true
+        NetworkManager.shared.getProfileList() { [weak self] result in
+            DispatchQueue.main.async() {
+                switch result{
+                case .success(let data):
+                    guard let self else{return}
+                    self.isloading = false
+                    self.profileList = data.data
+                    self.getRecommandationList()
+                case .failure(let error):
+                    self?.isloading = false
+                    print(error)
+                }
+            }
+        }
+    }
+    
     func getRecommandationList(){
+        var selecedProfileId = Defaults().profileId
+        if selecedProfileId == ""{
+            Defaults().profileId = self.profileList.first?.profileId ?? ""
+            Defaults().profileId2 = self.profileList.first?.id ?? ""
+            
+            selecedProfileId = self.profileList.first?.profileId ?? ""
+            selecedProfile = self.profileList.first?.name ?? ""
+        }else{
+            selecedProfile = self.profileList.filter{$0.profileId == selecedProfileId}.first?.name ?? ""
+        }
         
         let param = [
             //"pageNumber":pageNumber,
+            "profile_id": selecedProfileId,
             "pageNumber":1,
             "pageSize":20
-        ]
+        ] as [String : Any]
         isloading = true
         NetworkManager.shared.getRecommandationList(params: param) { [weak self] result in
             DispatchQueue.main.async {

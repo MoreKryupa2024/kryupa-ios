@@ -6,241 +6,185 @@
 //
 
 import Foundation
-import CoreLocation
-import SwiftUI
-import Combine
-import MapKit
+import Network
 
-struct Test: View {
-    let locationProvider = LocationProvider()
-    @State var currentAddress = ""
-    @State var userTap = CLLocationCoordinate2D()
-    
-    let position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 22.736201, longitude: 75.899992),
-            span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
-        )
-    )
-    
-    var body: some View {
-        Text(currentAddress)
-        
-        VStack{
-            MapReader { proxy in
-                Map(initialPosition: position){
-                    Marker(coordinate: userTap) {
-                        Label("", systemImage: "star")
-                    }
-                }
-                    .onTapGesture { position in
-                        if let coordinate = proxy.convert(position, from: .local) {
-                            getAddress(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                        }
-                    }
-            }
-        }
-    }
-    
-    
-    func getAddress(latitude: Double, longitude: Double) {
-        // for testing  Tokyo
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        
-        locationProvider.getPlace(for: location) { plsmark in
-            guard let placemark = plsmark else { return }
-            if let streetNumber = placemark.subThoroughfare,
-               let street = placemark.subThoroughfare,
-               let city = placemark.locality,
-               let state = placemark.administrativeArea {
-                self.currentAddress = "\(streetNumber) \(street) \(city) \(state)"
-            } else if let city = placemark.locality, let state = placemark.administrativeArea {
-                self.currentAddress = "\(city) \(state)"
-            } else {
-                self.currentAddress = "Address Unknown"
-            }
-        }
-    }
-    
+enum HTTPMethod: String {
+    case GET, POST, PUT, DELETE
 }
 
-/**
- A Combine-based CoreLocation provider.
- 
- On every update of the device location from a wrapped `CLLocationManager`,
- it provides the latest location as a published `CLLocation` object and
- via a `PassthroughSubject<CLLocation, Never>` called `locationWillChange`.
- */
-public class LocationProvider: NSObject, ObservableObject {
+struct APIClient {
     
-    private let lm = CLLocationManager()
+    static let shared = APIClient()
     
-    /// Is emitted when the `location` property changes.
-    public let locationWillChange = PassthroughSubject<CLLocation, Never>()
+    private init() {}  // Singleton
     
-    /**
-     The latest location provided by the `CLLocationManager`.
-     
-     Updates of its value trigger both the `objectWillChange` and the `locationWillChange` PassthroughSubjects.
-     */
-    @Published public private(set) var location: CLLocation? {
-        willSet {
-            locationWillChange.send(newValue ?? CLLocation())
-        }
-    }
-    
-    /// The authorization status for CoreLocation.
-    @Published public var authorizationStatus: CLAuthorizationStatus?
-    
-    /// A function that is executed when the `CLAuthorizationStatus` changes to `Denied`.
-    public var onAuthorizationStatusDenied : ()->Void = {presentLocationSettingsAlert()}
-    
-    /// The LocationProvider intializer.
-    ///
-    /// Creates a CLLocationManager delegate and sets the CLLocationManager properties.
-    public override init() {
-        super.init()
-        self.lm.delegate = self
-        self.lm.desiredAccuracy = kCLLocationAccuracyBest
-        self.lm.activityType = .fitness
-        self.lm.distanceFilter = 10
-        self.lm.allowsBackgroundLocationUpdates = true
-        self.lm.pausesLocationUpdatesAutomatically = false
-        self.lm.showsBackgroundLocationIndicator = true
-    }
-    
-    /**
-     Request location access from user.
-     
-     In case, the access has already been denied, execute the `onAuthorizationDenied` closure.
-     The default behavior is to present an alert that suggests going to the settings page.
-     */
-    public func requestAuthorization() -> Void {
-        if self.authorizationStatus == CLAuthorizationStatus.denied {
-            onAuthorizationStatusDenied()
-        }
-        else {
-            self.lm.requestWhenInUseAuthorization()
-        }
-    }
-    
-    /// Start the Location Provider.
-    public func start() throws -> Void {
-        self.requestAuthorization()
-        
-        if let status = self.authorizationStatus {
-            guard status == .authorizedWhenInUse || status == .authorizedAlways else {
-                throw LocationProviderError.noAuthorization
-            }
-        }
-        else {
-            /// no authorization set by delegate yet
-#if DEBUG
-            print(#function, "No location authorization status set by delegate yet. Try to start updates anyhow.")
-#endif
-            /// In principle, this should throw an error.
-            /// However, this would prevent start() from running directly after the LocationProvider is initialized.
-            /// This is because the delegate method `didChangeAuthorization`,
-            /// setting `authorizationStatus` runs only after a brief delay after initialization.
-            //throw LocationProviderError.noAuthorization
-        }
-        self.lm.startUpdatingLocation()
-    }
-    
-    /// Stop the Location Provider.
-    public func stop() -> Void {
-        self.lm.stopUpdatingLocation()
-    }
-    
-    // todo deal with errors
-    public func getPlace(for location: CLLocation, completion: @escaping (CLPlacemark?) -> Void) {
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-            guard error == nil else {
-                print("=====> Error \(error!.localizedDescription)")
-                completion(nil)
-                return
-            }
-            guard let placemark = placemarks?.first else {
-                print("=====> Error placemark is nil")
-                completion(nil)
-                return
-            }
-            completion(placemark)
-        }
-    }
-    
-}
-
-/// Present an alert that suggests to go to the app settings screen.
-public func presentLocationSettingsAlert(alertText : String? = nil) -> Void {
-    let alertController = UIAlertController (title: "Enable Location Access", message: alertText ?? "The location access for this app is set to 'never'. Enable location access in the application settings. Go to Settings now?", preferredStyle: .alert)
-    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-        guard let settingsUrl = URL(string:UIApplication.openSettingsURLString) else {
+    func request(
+        endpoint: String,
+        method: HTTPMethod,
+        parameters: [String: Any]? = nil,
+        headers: [String: String] = [:],
+        completion: @escaping (Result<[String: Any], NetworkError>) -> Void
+    ) {
+        print("------------API Call Start\n")
+        guard let url = URL(string: endpoint) else {
+            completion(.failure(.invalidURL))
             return
         }
-        UIApplication.shared.open(settingsUrl)
-    }
-    alertController.addAction(settingsAction)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-    alertController.addAction(cancelAction)
-    UIApplication.shared.windows[0].rootViewController?.present(alertController, animated: true, completion: nil)
-}
+        print("URL:- \(endpoint)\n")
+        print("Type:- \(method.rawValue)\n")
+        print("Bearer: \(Defaults().accessToken)\n")
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headers
 
-
-/// Error which is thrown for lacking localization authorization.
-public enum LocationProviderError: Error {
-    case noAuthorization
-}
-
-extension LocationProvider: CLLocationManagerDelegate {
-    
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.authorizationStatus = status
-#if DEBUG
-        print(#function, status.name)
-#endif
-        //print()
-    }
-    
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        self.location = location
-    }
-    
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let clErr = error as? CLError {
-            switch clErr {
-            case CLError.denied : do {
-                print(#function, "Location access denied by user.")
-                self.stop()
-                self.requestAuthorization()
-            }
-            case CLError.locationUnknown : print(#function, "Location manager is unable to retrieve a location.")
-            default: print(#function, "Location manager failed with unknown CoreLocation error.")
+        if let params = parameters, method != .GET {
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+//                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                print("Parameters:- \(params)\n")
+            } catch {
+                completion(.failure(.custom("Failed to encode parameters")))
+                return
             }
         }
-        else {
-            print(#function, "Location manager failed with unknown error", error.localizedDescription)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(.custom(error.localizedDescription)))
+                return
+            }
+            
+            print("Response:- \(response as? HTTPURLResponse ?? HTTPURLResponse())\n")
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            print("Json:- \(String(data: data, encoding: String.Encoding.utf8) as String? ?? "Data not found")\n")
+            
+            print("------------API Call End\n")
+            do {
+                if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    completion(.success(jsonObject))
+                } else {
+                    completion(.failure(.somethingWentWrong))
+                }
+            } catch {
+                completion(.failure(.somethingWentWrong))
+            }
         }
+        
+        task.resume()
     }
 }
 
-extension CLAuthorizationStatus {
-    /// String representation of the CLAuthorizationStatus
-    var name: String {
+enum Results<T, F> {
+  case success(T)
+  case failure(F)
+}
+
+enum NetworkError:Error {
+    case invalidURL
+    case invalidHeaderValue
+    case encryptionFailure
+    case decryptionFailure
+    case invalidResponse
+    case noNetwork
+    case somethingWentWrong
+    case custom(String)
+    
+    func getMessage() -> String {
         switch self {
-        case .notDetermined: return "notDetermined"
-        case .authorizedWhenInUse: return "authorizedWhenInUse"
-        case .authorizedAlways: return "authorizedAlways"
-        case .restricted: return "restricted"
-        case .denied: return "denied"
-        default: return "unknown"
+        case .invalidURL: return "Invalid URL"
+        case .invalidHeaderValue: return "Header value is not string"
+        case .encryptionFailure: return "Encryption Failed"
+        case .decryptionFailure: return "Decryption Failed"
+        case .invalidResponse: return "Invalid Response"
+        case .noNetwork: return "Please Check Your Internet Connection."
+        case .somethingWentWrong: return "Something went wrong"
+        case let .custom(msg): return msg
         }
     }
-} // End Struct
+}
+
+struct MultipartFormDataRequest {
+    private let boundary: String = UUID().uuidString
+    var httpBody = NSMutableData()
+    let url: URL
+    private let defaults = Defaults()
+    
+    init(url: URL) {
+        self.url = url
+    }
+    
+    func addTextField(named name: String, value: String) {
+        httpBody.appendString(textFormField(named: name, value: value))
+    }
+    
+    private func textFormField(named name: String, value: String) -> String {
+        var fieldString = "--\(boundary)\r\n"
+        fieldString += "Content-Disposition: form-data; name=\"\(name)\"\r\n"
+        fieldString += "Content-Type: text/plain; charset=ISO-8859-1\r\n"
+        fieldString += "Content-Transfer-Encoding: 8bit\r\n"
+        fieldString += "\r\n"
+        fieldString += "\(value)\r\n"
+        
+        return fieldString
+    }
+    
+    
+    func addDataField(fieldName: String, fileName: String, data: Data, mimeType: String) {
+        httpBody.append(dataFormField(fieldName: fieldName,fileName:fileName,data: data, mimeType: mimeType))
+    }
+    
+    private func dataFormField(fieldName: String,
+                               fileName: String,
+                               data: Data,
+                               mimeType: String) -> Data {
+        let fieldData = NSMutableData()
+        
+        fieldData.appendString("--\(boundary)\r\n")
+        fieldData.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        fieldData.appendString("Content-Type: \(mimeType)\r\n")
+        fieldData.appendString("\r\n")
+        fieldData.append(data)
+        fieldData.appendString("\r\n")
+        return fieldData as Data
+    }
+    
+    func asURLRequest() -> URLRequest {
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        if !self.defaults.accessToken.isEmpty {
+            request.setValue("Bearer \(defaults.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        
+        httpBody.appendString("--\(boundary)--")
+        request.httpBody = httpBody as Data
+        return request
+    }
+}
+
+extension NSMutableData {
+    func appendString(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            self.append(data)
+        }
+    }
+}
 
 
-#Preview {
-    Test()
+extension URLSession {
+    func dataTask(with request: MultipartFormDataRequest,
+                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void)
+    -> URLSessionDataTask {
+        return dataTask(with: request.asURLRequest(), completionHandler: completionHandler)
+    }
 }

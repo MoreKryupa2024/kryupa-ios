@@ -154,7 +154,9 @@ class PersonalInformationScreenViewModel: ObservableObject{
                                  "zipcode": postalCode,
                                  "city": city,
                                  "state": state,
-                                 "country": country]
+                                 "country": country,
+                                 "relation":"Self",
+                                 "is_primary":true]
         
         next(param)
     }

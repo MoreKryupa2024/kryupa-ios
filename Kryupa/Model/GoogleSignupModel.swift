@@ -23,9 +23,14 @@ struct Empty{
 }
 
 // MARK: - Empty
-struct EmptyRegister: Codable {
+struct EmptyRegister {
     let success: Bool
     let message: String
+    
+    init(jsonData:[String:Any]){
+        self.success = jsonData["success"] as? Bool ?? false
+        self.message = jsonData["message"] as? String ?? ""
+    }
 }
 
 // MARK: - Empty

@@ -29,7 +29,7 @@ class AppConstants{
     static let VideoCall = "Video Call"
     static let Chat = "Chat"
     static let AudioCall = "Audio Call"
-    static let canHelpInArray = ["Bathing", "Dressing", "Eating", "Toileting", "Walking/Transferring",]
+//    static let canHelpInArray = ["Bathing", "Dressing", "Eating", "Toileting", "Walking/Transferring",]
     
     static let medicalConditionArray = ["None","Arthritis","Asthma","Chronic Kidney Disease","Depression","Diabetes","Heart Disease","Hypertension","Obesity","Osteoporosis","Other"]
     static let cancelSeekerReasons = ["Change in Schedule","Service No Longer Needed","Personal Reasons","Misunderstanding with Caregiver","Other"]
@@ -43,7 +43,7 @@ class AppConstants{
     static let languageSpeakingArray = ["English","French","German","Hindi","Mandarin","Russian","Spanish","Tagalog","Vietnamese",""]
     static let mobilityLevelArray = ["Full mobility","Moderate mobility","Limited mobility","Wheelchair-bound","Bedridden","No Preference"]
     static let distanceArray = ["Within 1 mile","Within 5 mile","Within 10 mile","Within 15 mile","Within 20 mile"]
-    static let relationArray = ["Child","Friend","Parent","Sibling","Spouse", "Other"]
+    static let relationArray = ["Self","Child","Friend","Parent","Sibling","Spouse", "Other"]
     static let additionalSkillsAraay = ["Respite Care","Heavy lifting","Live in home care","Dementia","Transportation","Bathing/dressing","Errands/shopping","Companionship","Light housecleaning","Feeding","Meal preparation","Mobility Assistance","Help with staying physically active","Medical Transportation"]
    static let additionalInfoArray = ["Have a car","Non Smoker","Comfortable with pets","Covid Vaccinated"]
     

@@ -15,6 +15,8 @@ enum DefaultKeys: String {
     case userType
     case bookingId
     case draftId
+    case profileId
+    case profileId2
     case apiKey
     case firstName
     case lastName
@@ -110,6 +112,21 @@ class Defaults {
             return getStringBannerValue(key: .draftId)
         } set {
             set(value: newValue, key: .draftId)
+        }
+    }
+    var profileId: String {
+        get {
+            return getStringBannerValue(key: .profileId)
+        } set {
+            set(value: newValue, key: .profileId)
+        }
+    }
+    
+    var profileId2: String {
+        get {
+            return getStringBannerValue(key: .profileId2)
+        } set {
+            set(value: newValue, key: .profileId2)
         }
     }
     

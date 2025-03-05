@@ -51,7 +51,7 @@ struct RecommendedCareGiverDetailScreenView: View {
             if viewModel.showPaymentMethodScreen{
                 PaymentMethodsScreenView(viewModel: viewModel.paymentViewModel,
                                          paymentConfirmAction: {
-                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID)
+                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID, profileId: viewModel.profileID)
                     presentAlert(title: "Kryupa", subTitle: "Booking Request Sent Successfully")
                     viewModel.showPaymentMethodScreen = false
                 },backAction:{
@@ -196,7 +196,7 @@ struct RecommendedCareGiverDetailScreenView: View {
                                     viewModel.paymentViewModel.showNudgeText = true
                                     viewModel.showPaymentMethodScreen = true
                                 } else {
-                                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID)
+                                    viewModel.sendRequestForBookCaregiver(bookingId: viewModel.bookingID,profileId: viewModel.profileID)
                                     presentAlert(title: "Kryupa", subTitle: "Booking Request Sent Successfully")
                                 }
                             }

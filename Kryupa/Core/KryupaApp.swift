@@ -97,6 +97,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         print(notiInfo)
         if let notiInfo = notiInfo as? [String:Any],let screenName = notiInfo["screenName"] as? String , screenName == "ChatScreen"  {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                SocketSingleClass.shared.updateInboxListSockit {}
                 NotificationCenter.default.post(name: .showInboxScreen,object: nil,userInfo: notiInfo)
             }
         }

@@ -68,7 +68,7 @@ struct HealthInformationSeekerView: View {
                             keyboard: .asciiCapable
                         )
                         
-                        NeedHelpInView
+//                        NeedHelpInView
                         
                         HStack{
                             previousButton
@@ -104,7 +104,7 @@ struct HealthInformationSeekerView: View {
         .modifier(DismissingKeyboard())
         .onAppear {
             viewModel.allergiesValue = Defaults().healthInfo["allergies"] as? String ?? ""
-            viewModel.canHelpInSelect = Defaults().healthInfo["mobility_level"] as? [String] ?? []
+//            viewModel.canHelpInSelect = Defaults().healthInfo["mobility_level"] as? [String] ?? []
             viewModel.medicalConditionSelected = Defaults().healthInfo["other_disease_type"] as? String ?? ""
 //            viewModel.medicalConditionDropDownSelected = Defaults().healthInfo["disease_type"] as? [String] ?? []
         }
@@ -113,7 +113,7 @@ struct HealthInformationSeekerView: View {
     func saveDefaultsData(){
         Defaults().healthInfo = [
             "allergies": viewModel.allergiesValue,
-            "mobility_level": viewModel.canHelpInSelect,
+//            "mobility_level": viewModel.canHelpInSelect,
             "other_disease_type": viewModel.medicalConditionSelected,
             "disease_type": viewModel.medicalConditionDropDownSelected
         ]
@@ -200,7 +200,7 @@ struct HealthInformationSeekerView: View {
         .foregroundColor(.appMain)
     }
     
-    private var NeedHelpInView: some View{
+    /*private var NeedHelpInView: some View{
         
         VStack(alignment: .leading){
             HStack(spacing:0){
@@ -230,7 +230,7 @@ struct HealthInformationSeekerView: View {
                 }
             }
         }
-    }
+    }*/
     
     private var medicalConditionDropdownView: some View{
         VStack(alignment: .leading, spacing:0,

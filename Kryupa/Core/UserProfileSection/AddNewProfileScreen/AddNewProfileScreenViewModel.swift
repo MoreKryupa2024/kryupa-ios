@@ -20,6 +20,13 @@ class AddNewProfileScreenViewModel: ObservableObject{
     @Published var relationPersonal: String = String()
     @Published var profileID: String = String()
     @Published var medicalID: String = String()
+    
+    @Published var needServiceInSelected: [String] = [String]()
+    @Published var yearsOfExperienceSelected: String = "Any"
+    @Published var genderSelected: String = String()
+    @Published var languageSpeakingSelected: [String] = ["English"]
+    @Published var additionalSkillsSelected: [String] = [String]()
+    @Published var additionalInfoSelected: [String] = [String]()
 
     var date: Date = (Calendar.current as NSCalendar).date(byAdding: .year, value: -16, to: Date(), options: [])!
     @Published var showDatePicker: Bool = Bool()
@@ -29,7 +36,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
     
     @Published var medicalConditionSelected: String = String()
     @Published var medicalConditionDropDownSelected: [String] = [String]()
-    @Published var canHelpInSelect: [String] = []
+//    @Published var canHelpInSelect: [String] = []
     @Published var allergiesValue: String = String()
     
     @Published var param = [String:Any]()
@@ -54,6 +61,30 @@ class AddNewProfileScreenViewModel: ObservableObject{
         }
     }
     
+    func preferenceDataCheck(alert: @escaping ((String)->Void),next: @escaping (([String:Any])->Void)){
+        
+        if yearsOfExperienceSelected.isEmpty {
+            return alert("Please Select Years Of Experience")
+        }else if genderSelected.isEmpty{
+            return alert("Please Select Gender")
+        }else if needServiceInSelected.isEmpty{
+            return alert("Please Select Service")
+        }else if languageSpeakingSelected.isEmpty{
+            return alert("Please Select Speaking Language")
+        }else{
+            let param = [
+                "preferredInfoType": additionalInfoSelected,
+                "preferredLanguageType": languageSpeakingSelected,
+                "gender": genderSelected,
+                "year_of_experience": yearsOfExperienceSelected,
+                "preferredServiceType": needServiceInSelected,
+                "preferredSkillType": additionalSkillsSelected
+            ] as [String : Any]
+            next(param)
+        }
+    }
+    
+    
     func dataMedicalChecks(alert:((String)->Void),next:(([String:Any])->Void)){
         medicalConditionSelected = medicalConditionSelected.removingWhitespaces()
         allergiesValue = allergiesValue.removingWhitespaces()
@@ -65,7 +96,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
              var param = [String:Any]()
              param = [
                  "allergies": allergiesValue,
-                 "can_help_in": canHelpInSelect,
+//                 "can_help_in": canHelpInSelect,
                  "other_disease_type": medicalConditionSelected,
                  "disease_type": medicalConditionDropDownSelected
              ]
@@ -193,7 +224,7 @@ class AddNewProfileScreenViewModel: ObservableObject{
     
     func updateProfile(next: @escaping (()->Void), errorMsg: @escaping ((String)->Void)){
         
-        param["profileId"] = profileID
+        param["profile_id"] = profileID
         isLoading = true
         NetworkManager.shared.updateProfile(params: param) { [weak self] result in
             DispatchQueue.main.async {

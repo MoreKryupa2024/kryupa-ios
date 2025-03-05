@@ -15,6 +15,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
     @Published var areaOfExpertiseSelected: [String] = [String]()
     @Published var additionalInfoSelected: [String] = [String]()
     @Published var isLoading:Bool = false
+    @Published var additionalSkillsSelected: [String] = [String]()
     var yearsOfExprience: Int = Int()
     
     func dataChecks(filesArray:[FileData],alert:((String)->Void),next:(([String:Any])->Void)){
@@ -46,6 +47,7 @@ class ExperienceandSkillsViewModel: ObservableObject{
             "bio": bio,
             "area_of_expertise": areaOfExpertise,
             "additional_requirements": additionalInfoSelected,
+            "additional_skills_requirements": additionalSkillsSelected,
             "certificate_and_documents": certificateAndDocuments,
             "years_of_exprience": yearsOfExprience,
         ]

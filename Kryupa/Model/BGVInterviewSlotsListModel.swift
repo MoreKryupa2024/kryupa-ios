@@ -17,12 +17,6 @@ struct BGVInterviewSlotsListModel {
     }
 }
 
-// MARK: - Empty
-struct BGVInterviewSlotStatusModel: Codable {
-    let success: Bool
-    let message: String
-}
-
 // MARK: - Datum
 struct BGVInterviewSlotsListDataModel {
     let id, startingTime, endTime, availabilityDate: String

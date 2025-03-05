@@ -55,8 +55,8 @@ struct PersonalDetailView: View {
                 .padding(.horizontal,24)
                 .padding(.top,15)
                 line
-                CanHelpInView.disabled(!editProfile)
-                    .padding(.vertical,15)
+//                CanHelpInView.disabled(!editProfile)
+//                    .padding(.vertical,15)
                 preferredLanguageView.disabled(!editProfile)
                     .padding(.bottom,15)
                 DistanceDropdownView.disabled(!editProfile)
@@ -113,11 +113,11 @@ struct PersonalDetailView: View {
             }
             .padding(.bottom,5)
             TitleTextView(title: "Email:", value: viewModel.personalDetail?.email ?? "")
-            TitleTextView(title: "DOB:", value: (viewModel.personalDetail?.dob ?? "").convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM,dd YYYY"))
+            TitleTextView(title: "DOB:", value: (viewModel.personalDetail?.dob ?? "").convertDateFormater(beforeFormat: "YYYY-MM-dd", afterFormat: "MMM-dd-YYYY"))
         }
     }
     
-    private var CanHelpInView: some View{
+    /*private var CanHelpInView: some View{
         
         VStack(alignment: .leading){
             HStack(spacing:0){
@@ -148,7 +148,7 @@ struct PersonalDetailView: View {
             }
         }
         .padding(.horizontal,24)
-    }
+    }*/
     
     private var preferredLanguageView: some View{
         

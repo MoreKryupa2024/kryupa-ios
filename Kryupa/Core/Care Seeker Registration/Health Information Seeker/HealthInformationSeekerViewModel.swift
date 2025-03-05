@@ -12,7 +12,7 @@ class HealthInformationSeekerViewModel: ObservableObject{
     
     @Published var medicalConditionSelected: String = String()
     @Published var medicalConditionDropDownSelected: [String] = [String]()
-    @Published var canHelpInSelect: [String] = []
+//    @Published var canHelpInSelect: [String] = []
     @Published var allergiesValue: String = String()
     @Published var isLoading: Bool = false
     
@@ -29,7 +29,7 @@ class HealthInformationSeekerViewModel: ObservableObject{
              var param = [String:Any]()
              param = [
                  "allergies": allergiesValue,
-                 "can_help_in": canHelpInSelect,
+//                 "can_help_in": canHelpInSelect,
                  "other_disease_type": medicalConditionSelected,
                  "disease_type": medicalConditionDropDownSelected
              ]

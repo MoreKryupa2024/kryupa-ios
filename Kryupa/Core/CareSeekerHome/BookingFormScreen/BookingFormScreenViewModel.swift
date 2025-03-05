@@ -41,8 +41,9 @@ class BookingFormScreenViewModel: ObservableObject{
     @Published var recommendedUserBookingData: RecommendedUserBookingData?
     
     func getCustomerRequirements(errorAlert: @escaping ((String)-> Void)){
+        let param = ["profile_id":Defaults().profileId]
         isloading = true
-        NetworkManager.shared.getCustomerRequirements() { [weak self] result in
+        NetworkManager.shared.getCustomerRequirements(param:param) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isloading = false
                 switch result{
@@ -123,7 +124,7 @@ class BookingFormScreenViewModel: ObservableObject{
                 case .success(let data):
                     self.isloading = false
                     self.bookingForList = data.data.relationArray
-                    self.bookingFor = (self.bookingForList.filter{$0.name == "\(Defaults().firstName) \(Defaults().lastName)".lowercased().capitalized.removingWhitespaces()}).first?.name ?? ""
+                    self.bookingFor = (self.bookingForList.filter{$0.profileId == Defaults().profileId}).first?.name ?? ""
                     self.needServiceInArray = data.data.pricingArray
                     if (self.bookingID != "") {
                         self.getBookingDetailsById(errorAlert: { errorStr in

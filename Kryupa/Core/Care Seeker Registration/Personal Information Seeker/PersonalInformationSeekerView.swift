@@ -95,9 +95,11 @@ struct PersonalInformationSeekerView: View {
                                             .frame(height: 48)
                                             .offset(y:5)
                                     }
-                                    .onChange(of: viewModel.personalInfoData.postalCode) { oldValue, newValue in
+                                    .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                                         if !zipCodeCanEdit{
                                             self.zipCodeCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.postalCode ?? "").isEmpty)
+                                        }else{
+                                            self.zipCodeCanEdit = false
                                         }
                                     }
                                 
@@ -109,9 +111,11 @@ struct PersonalInformationSeekerView: View {
                                         .frame(height: 48)
                                         .offset(y:5)
                                     }
-                                    .onChange(of: viewModel.personalInfoData.city) { oldValue, newValue in
+                                    .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                                         if !cityCanEdit{
                                             self.cityCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.city ?? "").isEmpty)
+                                        }else{
+                                            cityCanEdit = false
                                         }
                                     }
                             }
@@ -131,9 +135,11 @@ struct PersonalInformationSeekerView: View {
                                     .frame(height: 48)
                                     .offset(y:5)
                                 }
-                                .onChange(of: viewModel.personalInfoData.state) { oldValue, newValue in
+                                .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                                     if !stateCanEdit{
                                         self.stateCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.state ?? "").isEmpty)
+                                    }else{
+                                        stateCanEdit = false
                                     }
                                 }
                             
@@ -145,9 +151,11 @@ struct PersonalInformationSeekerView: View {
                                     .frame(height: 48)
                                     .offset(y:5)
                                 }
-                                .onChange(of: viewModel.personalInfoData.country) { oldValue, newValue in
+                                .onChange(of: viewModel.personalInfoData.address) { oldValue, newValue in
                                     if !CountryCanEdit{
                                         self.CountryCanEdit = (!(viewModel.personalInfoData.address ?? "").isEmpty && (viewModel.personalInfoData.country ?? "").isEmpty)
+                                    }else{
+                                        CountryCanEdit = false
                                     }
                                 }
                         }

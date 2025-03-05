@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class PersonalDetailViewModel: ObservableObject{
-    @Published var canHelpInSelected: [String] = [String]()
+//    @Published var canHelpInSelected: [String] = [String]()
     @Published var additionalInfoSelected: [String] = [String]()
     @Published var education: String = String()
     @Published var distanceList: [String] = [String]()
@@ -47,7 +47,7 @@ class PersonalDetailViewModel: ObservableObject{
                     self?.isloading = false
                     self?.personalDetail = data.data
                     self?.languageDropDownSelected = self?.personalDetail?.preferredLanguages ?? []
-                    self?.canHelpInSelected = self?.personalDetail?.canHelpIn ?? []
+//                    self?.canHelpInSelected = self?.personalDetail?.canHelpIn ?? []
                     self?.distance = self?.personalDetail?.distance ?? ""
                     self?.language = self?.personalDetail?.language ?? ""
                     completion()
@@ -80,7 +80,7 @@ class PersonalDetailViewModel: ObservableObject{
 //                 "additional_requirements": additionalInfoSelected,
                  "distance":distance,
                  "language":language,
-                 "can_help_in":canHelpInSelected,
+//                 "can_help_in":canHelpInSelected,
                  "preferred_languages": languageDropDownSelected]
         
         next(param)

@@ -14,6 +14,8 @@ class PreferenceCareSeekarViewModel: ObservableObject{
     @Published var genderSelected: String = String()
     @Published var needServiceInSelected: [String] = [String]()
     @Published var languageSpeakingSelected: [String] = ["English"]
+    @Published var additionalInfoSelected: [String] = [String]()
+    @Published var additionalSkillsSelected: [String] = [String]()
     @Published var isLoading:Bool = false
     @Published var showPreference:Bool = false
     
@@ -25,16 +27,18 @@ class PreferenceCareSeekarViewModel: ObservableObject{
             return alert("Please Select Gender")
         }else if needServiceInSelected.isEmpty{
             return alert("Please Select Service")
-        }/*else if languageSpeakingSelected.isEmpty{
+        }else if languageSpeakingSelected.isEmpty{
             return alert("Please Select Speaking Language")
-        }*/else{
+        }else{
             var param = parameters
             let personalInfo = parameters["personalInfo"] as? [String:Any] ?? [String:Any]()
             param["preferences"] = [
                 "preferredLanguageType": [personalInfo["language"] as? String ?? "English"],
                 "gender": genderSelected,
                 "year_of_experience": yearsOfExperienceSelected,
-                "preferredServiceType":needServiceInSelected
+                "preferredServiceType":needServiceInSelected,
+                "preferredSkillType": additionalSkillsSelected,
+                "preferredInfoType": additionalInfoSelected
             ]
             
             next(param)

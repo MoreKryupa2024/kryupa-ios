@@ -71,6 +71,8 @@ struct ExperienceandSkillsView: View {
                             .frame(maxWidth: .infinity,alignment: .leading)
                         
                         sepratorView
+                        AdditionalSkillsView
+                        sepratorView
                         AdditionalInfoView
                         sepratorView
                         
@@ -124,6 +126,40 @@ struct ExperienceandSkillsView: View {
             }
         }
         .modifier(DismissingKeyboard())
+    }
+    
+    private var AdditionalSkillsView: some View{
+        
+        VStack(alignment: .leading){
+            HStack(spacing:0){
+                Text("Additional Skills")
+            }
+            .font(.custom(FontContent.plusMedium, size: 17))
+            
+            
+            ZStack{
+                NonLazyVGrid(columns: 2, alignment: .leading, spacing: 10, items: AppConstants.additionalSkillsAraay) { service in
+                    if let service{
+                        CheckBoxView(
+                            isSelected: !viewModel.additionalSkillsSelected.contains(service),
+                            name: service
+                        )
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .asButton(.press) {
+                                if viewModel.additionalSkillsSelected.contains(service){
+                                    viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.filter{ $0 != service}
+                                }else{
+                                    viewModel.additionalSkillsSelected.append(service)
+                                }
+                            viewModel.additionalSkillsSelected = viewModel.additionalSkillsSelected.sorted(by: { $0 < $1 })
+                        }
+                    }else{
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal,24)
     }
     
     private var AdditionalInfoView: some View{

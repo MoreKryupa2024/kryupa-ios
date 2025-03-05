@@ -12,6 +12,7 @@ struct CareGiverNearByCustomerScreenView: View {
     @Environment(\.router) var router
     
     var bookingID: String = String()
+    var profileId: String = String()
     
     @StateObject var viewModel = CareGiverNearByCustomerScreenViewModel()
     
@@ -67,6 +68,7 @@ struct CareGiverNearByCustomerScreenView: View {
                                 RecommendedCareGiverDetailScreenViewModel.isNormalBooking = true
                                 RecommendedCareGiverDetailScreenViewModel.amount = viewModel.amount
                                 RecommendedCareGiverDetailScreenViewModel.bookingID = self.bookingID
+                                RecommendedCareGiverDetailScreenViewModel.profileID = self.profileId
                                 router.showScreen(.push) { rout in
                                     RecommendedCareGiverDetailScreenView(careGiverDetail: giver,viewModel: RecommendedCareGiverDetailScreenViewModel)
                                 }
