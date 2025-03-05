@@ -40,7 +40,7 @@ struct ProfileDetailScreenView: View {
                         .id(viewModel.selecedProfile)
                         AddNewButton
                             .asButton(.press) {
-                                if viewModel.profileList.count < 50{
+                                if viewModel.profileList.count < 5{
                                     router.showScreen(.push) { rout in
                                         AddNewProfileScreenView()
                                     }
